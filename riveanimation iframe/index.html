@@ -17,7 +17,6 @@ html, body {
             justify-content: center;
     height: 100%;
     max-width: 2560px;
-    align-items: start;
 }
   </style>
   <body>
@@ -26,14 +25,13 @@ html, body {
   </div>
     <script src="https://unpkg.com/@rive-app/canvas@1.0.47"></script>
     <script>
-        layout = new rive.Layout({
-        fit: rive.Fit.Contain,
-        alignment: rive.Alignment.FitHeight,
-    });
     new rive.Rive({
         src: "https://res.cloudinary.com/harole/raw/upload/v1654938705/harole_character_illustration_el5ogz.riv",
         canvas: document.getElementById("canvas"),
-        layout: layout,
+        layout: new rive.Layout({
+        fit: "FitHeight",
+        alignment: "Center",
+      }),
         autoplay: true,
       });
     </script>

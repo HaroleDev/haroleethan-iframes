@@ -8,21 +8,21 @@
   html,
   body {
     width: 100%;
-    overflow: hidden;
     height: 100%;
+    overflow: hidden;
   }
   #canvas {
     display: block;
     outline: none;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     height: 100%;
     width: 100%;
+    object-fit: contain;
   }
 </style>
 
 <body>
-  <div>
+  <div id="canvas-container">
     <canvas id="canvas" width="2560" height="1148"></canvas>
   </div>
   <script src="https://unpkg.com/@rive-app/canvas@1.0.65"></script>

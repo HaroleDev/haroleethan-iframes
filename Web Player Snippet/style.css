@@ -64,7 +64,7 @@ video {
 
 .video-container.hovered .video-controls-container,
 .video-container:focus-within .video-controls-container,
-.video-container.paused .video-controls-container {
+.video-container.paused .video-controls-container, .video-container.pip-player .video-controls-container {
     opacity: 1;
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }

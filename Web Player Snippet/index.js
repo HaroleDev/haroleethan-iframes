@@ -4,7 +4,8 @@ const video = document.querySelector('video')
 
 const currentTime = document.querySelector('.current-time')
 const totalTime = document.querySelector('.total-time')
-const seekTooltip = document.querySelector('.seek-tooltip');
+const cuetimeTooltip = document.querySelector('.cuetime-tooltip');
+const cuetime = document.querySelector('.cuetime');
 
 const captionButton = document.querySelector(".caption-button")
 
@@ -32,6 +33,11 @@ document.addEventListener('keydown', e => {
             activity()
             toggleCaptions()
             break
+        case 'i': case 'I':
+            videoContainer.classList.add('hovered')
+            activity()
+            togglePIPPlayerMode()
+            break
         case 'ArrowLeft':
             videoContainer.classList.add('hovered')
             activity()
@@ -49,16 +55,16 @@ function skip(duration) {
     video.currentTime += duration
 }
 
+let timeout = null;
 function activity() {
-    var timeout;
-    var duration = 1000;
-    videoContainer.addEventListener("mousemove", () => {
-        videoContainer.classList.add('hovered')
-        clearTimeout(timeout);
-    });
-    timeout = setTimeout(function () {
-        videoContainer.classList.remove('hovered')
-    }, duration)
+    clearTimeout(timeout);
+    video.classList.remove('inactive')
+    videoContainer.classList.add('hovered')
+    if (videoContainer.classList.contains("hovered"))
+        timeout = setTimeout(function () {
+            videoContainer.classList.remove('hovered')
+            video.classList.add('inactive')
+        }, 2000)
 }
 
 fullscreenButton.addEventListener('click', toggleFullScreen)
@@ -101,12 +107,16 @@ document.addEventListener("mouseup", e => {
 })
 
 document.addEventListener("mousemove", e => {
-    if (isScrubbing) handleTimelineUpdate(e)
+    updateCueTimeTooltip()
+    if (isScrubbing) {
+        handleTimelineUpdate(e)
+    }
 })
 
 let isScrubbing = false
 let wasPaused
 function toggleScrubbing(e) {
+    timelineContainer.style.setProperty("--preview-position", 0)
     const rect = timelineContainer.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
     isScrubbing = (e.buttons & 1) === 1
@@ -118,25 +128,35 @@ function toggleScrubbing(e) {
         video.currentTime = percent * video.duration
         if (!wasPaused) video.play()
     }
+
     handleTimelineUpdate(e)
 }
 
 function handleTimelineUpdate(e) {
     const rect = timelineContainer.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    timelineContainer.style.setProperty("--preview-position", percent)
     if (isScrubbing) {
         e.preventDefault()
         timelineContainer.style.setProperty("--progress-position", percent)
     }
 }
 
+function updateCueTimeTooltip(e) {
+    const skipTo = (e.offsetX / e.target.clientWidth) * parseInt(e.target.getAttribute('max'))
+    cuetimeTooltip.textContent = formatDuration(skipTo)
+}
+cuetime.addEventListener('mouseover', updateCueTimeTooltip);
+
 video.addEventListener('loadeddata', () => {
     totalTime.textContent = formatDuration(video.duration)
 })
 
 video.addEventListener("timeupdate", () => {
+    cuetime.setAttribute('max', video.duration);
     currentTime.textContent = formatDuration(video.currentTime)
     updatetime()
+    updateCueTimeTooltip()
 })
 
 function updatetime() {
@@ -179,14 +199,16 @@ function togglePlay() {
 }
 
 video.addEventListener("play", () => {
-    videoContainer.addEventListener("mouseover", activity);
+    videoContainer.addEventListener("mousemove", activity);
     videoContainer.addEventListener('mouseleave', () => {
         videoContainer.classList.remove('hovered')
+        video.classList.add('inactive')
     })
     videoContainer.classList.remove('paused')
 })
 
 video.addEventListener("pause", () => {
     video.classList.remove('inactive')
+    clearTimeout(timeout);
     videoContainer.classList.add('paused')
 })

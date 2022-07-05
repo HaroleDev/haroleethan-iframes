@@ -4,18 +4,49 @@ const video = document.querySelector('video')
 
 const currentTime = document.querySelector('.current-time')
 const totalTime = document.querySelector('.total-time')
-const cuetimeTooltip = document.querySelector('.cuetime-tooltip');
+const cuetimeTooltip = document.querySelector('.cuetime-tooltip')
 const cuetime = document.querySelector('.cuetime');
 
 const captionButton = document.querySelector(".caption-button")
+const settingsButton = document.querySelector('.settings-button')
+const settingsContextMenu = document.querySelector('.settings-context-menu')
 
 const fullscreenButton = document.querySelector('.full-screen-button')
 const pipPlayerButton = document.querySelector(".pip-button")
 
 const timelineContainer = document.querySelector(".timeline-container")
 
+//Context Menu
+const contextMenu = document.querySelector(".video-context-menu")
+
+function showContextMenu(show = true) {
+    show ? contextMenu.classList.add('show') : contextMenu.classList.remove('show')
+}
+videoContainer.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    showContextMenu()
+
+    contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight + 'px' : e.y + 'px';
+    contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth + 'px' : e.x + 'px';
+})
+
+videoContainer.addEventListener('click', (e) => {
+    showContextMenu(show = false)
+})
+
 playpauseButton.addEventListener('click', togglePlay)
 video.addEventListener('click', togglePlay)
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!('pictureInPictureEnabled' in document)) {
+        pipPlayerButton.classList.add('hidden');
+    }
+});
+
+settingsButton.addEventListener('click', () => {
+    settingsButton.classList.toggle('pressed')
+    settingsContextMenu.classList.toggle('pressed')
+})
 
 document.addEventListener('keydown', e => {
     switch (e.key) {
@@ -82,6 +113,20 @@ function togglePIPPlayerMode() {
         document.exitPictureInPicture()
     } else {
         video.requestPictureInPicture()
+    }
+}
+
+async function togglePIPPlayerMode() {
+    try {
+        if (videoContainer.classList.contains("pip-player")) {
+            videoContainer.classList.add("pip-player")
+            await document.exitPictureInPicture();
+        } else {
+            videoContainer.classList.remove("pip-player")
+            await video.requestPictureInPicture();
+        }
+    } catch (error) {
+        console.error(error)
     }
 }
 

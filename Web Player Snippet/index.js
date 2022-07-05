@@ -107,7 +107,6 @@ document.addEventListener("mouseup", e => {
 })
 
 document.addEventListener("mousemove", e => {
-    updateCueTimeTooltip()
     if (isScrubbing) {
         handleTimelineUpdate(e)
     }
@@ -146,17 +145,16 @@ function updateCueTimeTooltip(e) {
     const skipTo = (e.offsetX / e.target.clientWidth) * parseInt(e.target.getAttribute('max'))
     cuetimeTooltip.textContent = formatDuration(skipTo)
 }
-cuetime.addEventListener('mouseover', updateCueTimeTooltip);
+cuetime.addEventListener('mousemove', updateCueTimeTooltip);
 
 video.addEventListener('loadeddata', () => {
     totalTime.textContent = formatDuration(video.duration)
+    cuetime.setAttribute('max', video.duration);
 })
 
 video.addEventListener("timeupdate", () => {
-    cuetime.setAttribute('max', video.duration);
     currentTime.textContent = formatDuration(video.currentTime)
     updatetime()
-    updateCueTimeTooltip()
 })
 
 function updatetime() {

@@ -4,11 +4,12 @@ const video = document.querySelector('video')
 
 const currentTime = document.querySelector('.current-time')
 const totalTime = document.querySelector('.total-time')
-const seekTooltip = document.getElementById('seek-tooltip');
+const seekTooltip = document.querySelector('.seek-tooltip');
 
 const captionButton = document.querySelector(".caption-button")
 
 const fullscreenButton = document.querySelector('.full-screen-button')
+const pipPlayerButton = document.querySelector(".pip-button")
 
 const timelineContainer = document.querySelector(".timeline-container")
 
@@ -65,12 +66,32 @@ fullscreenButton.addEventListener('click', toggleFullScreen)
 function toggleFullScreen() {
     if (document.fullscreenElement == null) {
         videoContainer.requestFullscreen()
-        videoContainer.classList.add('full-screen')
     } else {
         document.exitFullscreen()
-        videoContainer.classList.remove('full-screen')
     }
 }
+
+function togglePIPPlayerMode() {
+    if (videoContainer.classList.contains("pip-player")) {
+        document.exitPictureInPicture()
+    } else {
+        video.requestPictureInPicture()
+    }
+}
+
+document.addEventListener("fullscreenchange", () => {
+    videoContainer.classList.toggle("full-screen", document.fullscreenElement)
+})
+
+video.addEventListener("enterpictureinpicture", () => {
+    videoContainer.classList.add("pip-player")
+})
+
+video.addEventListener("leavepictureinpicture", () => {
+    videoContainer.classList.remove("pip-player")
+})
+
+pipPlayerButton.addEventListener('click', togglePIPPlayerMode)
 
 timelineContainer.addEventListener("mousemove", handleTimelineUpdate)
 timelineContainer.addEventListener("mousedown", toggleScrubbing)

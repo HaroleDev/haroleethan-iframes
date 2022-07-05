@@ -190,7 +190,7 @@ video {
 .timeline-container {
     margin-inline: 48px;
     height: 20px;
-    cursor: pointer;
+    cursor: pointer !important;
     display: flex;
     align-items: flex-end;
     margin-bottom: 48px;
@@ -226,7 +226,6 @@ video {
     right: calc((1 - var(--preview-position)) * 100%);
     border-radius: 12px;
     background: #D1EFE64D;
-    
     opacity: 0;
     transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -243,14 +242,13 @@ video {
     border-radius: 16px 24px 8px 16px;
     background: #02DA9A;
     transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    pointer-events: none;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .cuetime-tooltip {
     position: absolute;
     padding: 6px 12px;
-    bottom: -78px;
+    bottom: -80px;
     transform: translate(-50%, -100%);
     left: calc(var(--preview-position) * 100%);
     border-radius: 24px;
@@ -259,6 +257,7 @@ video {
     color: #FFF;
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
+    cursor: pointer !important;
 }
 
 .video-container.scrubbing .timeline-scrubber,
@@ -384,4 +383,5 @@ video {
     background: #016F4E;
     height: 100%;
     opacity: 0;
+    z-index: 5;
 }

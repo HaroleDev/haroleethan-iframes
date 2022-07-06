@@ -215,7 +215,7 @@ function updateCueTimeTooltip(e) {
 }
 cuetime.addEventListener('mousemove', updateCueTimeTooltip);
 
-video.addEventListener('loadeddata', () => {
+video.addEventListener('loadedmetadata', () => {
     totalTime.textContent = formatDuration(video.duration)
     cuetime.setAttribute('max', video.duration);
 })

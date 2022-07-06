@@ -24,6 +24,10 @@ function showContextMenu(show = true) {
 }
 videoContainer.addEventListener('contextmenu', (e) => {
     e.preventDefault();
+    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
+        settingsButton.classList.remove('pressed')
+        settingsContextMenu.classList.remove('pressed')
+    }
     showContextMenu()
 
     contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight + 'px' : e.y + 'px';
@@ -32,6 +36,11 @@ videoContainer.addEventListener('contextmenu', (e) => {
 
 videoContainer.addEventListener('click', (e) => {
     showContextMenu(show = false)
+
+    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
+        settingsButton.classList.remove('pressed')
+        settingsContextMenu.classList.remove('pressed')
+    }
 })
 
 playpauseButton.addEventListener('click', togglePlay)
@@ -86,6 +95,14 @@ function skip(duration) {
     video.currentTime += duration
 }
 
+function LoopVideo() {
+    if (!videoContainer.classList.contains("loop-player")) {
+        video.loop = true;
+    } else {
+        video.loop = false;
+    }
+}
+
 let timeout = null;
 function activity() {
     clearTimeout(timeout);
@@ -105,14 +122,6 @@ function toggleFullScreen() {
         videoContainer.requestFullscreen()
     } else {
         document.exitFullscreen()
-    }
-}
-
-function togglePIPPlayerMode() {
-    if (videoContainer.classList.contains("pip-player")) {
-        document.exitPictureInPicture()
-    } else {
-        video.requestPictureInPicture()
     }
 }
 
@@ -238,6 +247,11 @@ function toggleCaptions() {
 }
 
 function togglePlay() {
+    if (contextMenu.classList.contains("show")) {
+        return
+    } if (settingsContextMenu.classList.contains("pressed")) {
+        return
+    }
     video.paused ? video.play() : video.pause()
 }
 

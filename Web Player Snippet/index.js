@@ -51,6 +51,7 @@ Item.addEventListener('click', () => {
     showContextMenu(show = false)
 })
 
+//Playback
 playpauseButton.addEventListener('click', togglePlay)
 video.addEventListener('click', togglePlay)
 
@@ -220,6 +221,7 @@ video.addEventListener('loadeddata', () => {
 })
 
 video.addEventListener("timeupdate", () => {
+    totalTime.textContent = formatDuration(video.duration)
     currentTime.textContent = formatDuration(video.currentTime)
     updatetime()
 })

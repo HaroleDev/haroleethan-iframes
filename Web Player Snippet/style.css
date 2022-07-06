@@ -415,6 +415,9 @@ video {
     padding: 8px 12px;
     width: 100%;
     border-radius: 4px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 100ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .video-context-menu span {
@@ -426,6 +429,17 @@ video {
 .video-context-menu svg {
     display: inline-block;
     vertical-align: middle;
+}
+
+.video-context-menu svg.check {
+    float: right;
+    vertical-align: middle;
+    opacity: 0;
+    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.video-context-menu .loop-item.enabled svg.check {
+    opacity: 1;
 }
 
 .video-context-menu.show {
@@ -459,5 +473,5 @@ video {
 }
 
 .video-context-menu .item:hover, .settings-context-menu .item:hover {
-    background: #165248;
+    background-color: rgba(219, 251, 241, 0.1);
 }

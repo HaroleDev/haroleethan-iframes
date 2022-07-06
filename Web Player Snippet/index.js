@@ -11,6 +11,9 @@ const captionButton = document.querySelector(".caption-button")
 const settingsButton = document.querySelector('.settings-button')
 const settingsContextMenu = document.querySelector('.settings-context-menu')
 
+const loopItem = document.querySelector('.loop-item')
+const Item = document.querySelector('.item')
+
 const fullscreenButton = document.querySelector('.full-screen-button')
 const pipPlayerButton = document.querySelector(".pip-button")
 
@@ -43,6 +46,10 @@ videoContainer.addEventListener('click', (e) => {
     }
 })
 
+Item.addEventListener('click', () => {
+    showContextMenu(show = false)
+})
+
 playpauseButton.addEventListener('click', togglePlay)
 video.addEventListener('click', togglePlay)
 
@@ -56,6 +63,19 @@ settingsButton.addEventListener('click', () => {
     settingsButton.classList.toggle('pressed')
     settingsContextMenu.classList.toggle('pressed')
 })
+
+
+function loopVideo() {
+    if (!loopItem.classList.contains("enabled")) {
+        video.loop = true;
+        loopItem.classList.add("enabled")
+    } else {
+        video.loop = false;
+        loopItem.classList.remove("enabled")
+    }
+}
+
+loopItem.addEventListener('click', loopVideo)
 
 document.addEventListener('keydown', e => {
     switch (e.key) {
@@ -93,14 +113,6 @@ document.addEventListener('keydown', e => {
 
 function skip(duration) {
     video.currentTime += duration
-}
-
-function LoopVideo() {
-    if (!videoContainer.classList.contains("loop-player")) {
-        video.loop = true;
-    } else {
-        video.loop = false;
-    }
 }
 
 let timeout = null;

@@ -25,7 +25,8 @@ const contextMenu = document.querySelector(".video-context-menu")
 function showContextMenu(show = true) {
     show ? contextMenu.classList.add('show') : contextMenu.classList.remove('show')
 }
-videoContainer.addEventListener('contextmenu', (e) => {
+
+videoContainer.addEventListener('contextmenu', e => {
     e.preventDefault();
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
         settingsButton.classList.remove('pressed')

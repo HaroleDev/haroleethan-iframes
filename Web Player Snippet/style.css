@@ -77,7 +77,7 @@ video {
 
 .video-controls-container .right-side {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     align-items: flex-end;
     justify-content: right;
 }
@@ -105,9 +105,9 @@ video {
 .video-controls-container .right-side button {
     background: transparent;
     border: none;
-    padding: 4px;
-    height: 40px;
-    width: 40px;
+    padding: 8px;
+    height: 48px;
+    width: 48px;
     cursor: pointer;
     transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }

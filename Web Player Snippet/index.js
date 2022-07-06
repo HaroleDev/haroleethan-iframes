@@ -19,7 +19,7 @@ const pipPlayerButton = document.querySelector(".pip-button")
 
 const timelineContainer = document.querySelector(".timeline-container")
 
-video.src = "https://res.cloudinary.com/harole/video/upload/v1656907985/HaroleLandingIllustration_nvviig.mp4"
+video.src = video.currentSrc
 
 //Context Menu
 const contextMenu = document.querySelector(".video-context-menu")
@@ -218,11 +218,11 @@ function updateCueTimeTooltip(e) {
 
 cuetime.addEventListener('mousemove', updateCueTimeTooltip);
 
-video.addEventListener('loadeddata', () => {
+window.addEventListener('loadedmetadata', () => {
     totalTime.textContent = formatDuration(video.duration)
     currentTime.textContent = formatDuration(video.currentTime)
     cuetime.setAttribute('max', video.duration);
-})
+}, true)
 
 video.addEventListener("timeupdate", () => {
     currentTime.textContent = formatDuration(video.currentTime)

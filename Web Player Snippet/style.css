@@ -174,7 +174,7 @@ video {
     margin-bottom: 8px;
 }
 
-.video-name p {
+.video-name h1 {
     font-family: 'Manrope';
     font-style: normal;
     font-weight: 800;
@@ -410,11 +410,11 @@ video {
     position: absolute;
     top: 50%;
     left: 50%;
-    background: rgba(22, 82, 72, 0.96);
+    background: rgba(8, 43, 33, 0.96);
     color: #FFF;
     padding: 12px 8px;
     width: 256px;
-    z-index: 999;
+    z-index: 6;
     border-radius: 8px;
     opacity: 0;
     pointer-events: none;
@@ -422,6 +422,7 @@ video {
 }
 
 .video-context-menu .item {
+    user-select: none;
     padding: 8px 12px;
     width: 100%;
     border-radius: 4px;
@@ -459,7 +460,7 @@ video {
 
 .settings-context-menu {
     position: absolute;
-    background: rgba(22, 82, 72, 0.96);
+    background: rgba(8, 43, 33, 0.96);
     color: #FFF;
     padding: 12px 8px;
     width: 256px;
@@ -487,4 +488,22 @@ video {
 
 .video-context-menu .item:hover, .settings-context-menu .item:hover {
     background-color: rgba(219, 251, 241, 0.1);
+}
+
+.dialog {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 16px;
+    background: #1C5947;
+    z-index: 7;
+    border-radius: 8px;
+}
+
+.dialog h1 {
+    line-height: 110%;
+    letter-spacing: -0.04em;
+    color: #FFF;
+    margin: 0 auto;
 }

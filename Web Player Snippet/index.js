@@ -52,6 +52,7 @@ videoContainer.addEventListener('contextmenu', e => {
 })
 
 videoContainer.addEventListener('click', (e) => {
+    volumeContainer.classList.remove('scrubbing')
     showContextMenu(show = false)
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
         settingsButton.classList.remove('pressed')
@@ -268,7 +269,6 @@ document.addEventListener("mouseup", e => {
         toggleScrubbing(e)
     } if (isVolumeScrubbing) {
         volumeUpdate(e)
-        volumeContainer.classList.remove('scrubbing')
     }
 })
 

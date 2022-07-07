@@ -16,6 +16,70 @@
 
 <body>
     <div class="video-container paused">
+        <div class="eq-dialog-container">
+            <div class="equalizer-dialog dialog">
+                <div class="contents">
+                    <h1>Equalizer</h1>
+                    <p>Work in progress...</p>
+                    <div class="equalizers">
+                        <div class="eq-control">
+                            <label>60Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 0);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>125Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 1);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>250Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 2);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>500Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 3);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>800Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 4);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>1000Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 5);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>2000Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 6);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>4000Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 7);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>8000Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 8);" />
+                        </div>
+                        <div class="eq-control">
+                            <label>16000Hz</label>
+                            <input type="range" class="slider" min="-20" max="20" step="1"
+                                oninput="changeGain(this.value, 9);" />
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-buttons">
+                    <button class="close-dialog">Close</button>
+                </div>
+            </div>
+            <div class="dialog-overlay"></div>
+        </div>
         <div class="video-context-menu">
             <div class="item loop-item">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +159,7 @@
                     </button>
                     <div class="video-information-container">
                         <div class="video-name">
-                            <p>Harole’s Landing Animation</p>
+                            <h1>Fresh coat paint</h1>
                         </div>
                         <div class="duration-container">
                             <span class="current-time">0:00</span>
@@ -173,7 +237,7 @@
             </div>
         </div>
         <video playsinline class="video" preload="metadata">
-            <source src="https://res.cloudinary.com/harole/video/upload/v1656907985/HaroleLandingIllustration_nvviig.mp4" type="video/mp4">
+            <source src="IMG_0980.mov" type="video/mp4">
             </source>
             <track kind="captions" srclang="en" src="sample.vtt">
         </video>

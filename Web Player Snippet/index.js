@@ -12,14 +12,22 @@ const settingsButton = document.querySelector('.settings-button')
 const settingsContextMenu = document.querySelector('.settings-context-menu')
 
 const loopItem = document.querySelector('.loop-item')
+const eqItem = document.querySelector('.eq-item')
+const eqContainer = document.querySelector('.eq-dialog-container')
+const dialog = document.querySelector('.dialog')
 const Item = document.querySelector('.item')
+const closeDialog = document.querySelector('.close-dialog')
+
+const dialogOverlay = document.querySelector('.dialog-overlay')
 
 const fullscreenButton = document.querySelector('.full-screen-button')
 const pipPlayerButton = document.querySelector(".pip-button")
 
 const timelineContainer = document.querySelector(".timeline-container")
 
-video.src = video.currentSrc
+window.addEventListener('load', () => {
+    video.src = video.currentSrc
+})
 
 //Context Menu
 const contextMenu = document.querySelector(".video-context-menu")
@@ -42,7 +50,6 @@ videoContainer.addEventListener('contextmenu', e => {
 
 videoContainer.addEventListener('click', (e) => {
     showContextMenu(show = false)
-
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
         settingsButton.classList.remove('pressed')
         settingsContextMenu.classList.remove('pressed')
@@ -68,7 +75,54 @@ settingsButton.addEventListener('click', () => {
     settingsContextMenu.classList.toggle('pressed')
 })
 
+//EQ
+var ctx = window.AudioContext || window.webkitAudioContext;
+var context = new ctx();
+var sourceNode = context.createMediaElementSource(document.querySelector('video'));
 
+var filters = [];
+
+[60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].forEach(function (freq, i) {
+    var eq = context.createBiquadFilter();
+    eq.frequency.value = freq;
+    eq.type = "peaking";
+    eq.gain.value = 0;
+    filters.push(eq);
+});
+
+sourceNode.connect(filters[0]);
+for (var i = 0; i < filters.length - 1; i++) {
+    filters[i].connect(filters[i + 1]);
+}
+
+filters[filters.length - 1].connect(context.destination);
+
+function changeGain(sliderVal, nbFilter) {
+    var value = parseFloat(sliderVal);
+    filters[nbFilter].gain.value = value;
+}
+
+//EQ dialog
+eqItem.addEventListener('click', () => {
+    eqContainer.classList.add("opened")
+})
+
+//Dialog
+function closedDialog() {
+    if (eqContainer.classList.contains('opened')) {
+        eqContainer.classList.remove("opened")
+    }
+}
+
+dialogOverlay.addEventListener('click', () => {
+    closedDialog()
+})
+
+closeDialog.addEventListener('click', () => {
+    closedDialog()
+})
+
+//Loop function
 function loopVideo() {
     if (!loopItem.classList.contains("enabled")) {
         video.loop = true;
@@ -81,6 +135,7 @@ function loopVideo() {
 
 loopItem.addEventListener('click', loopVideo)
 
+//Keyboard shortcuts
 document.addEventListener('keydown', e => {
     switch (e.key) {
         case ' ':
@@ -218,11 +273,15 @@ function updateCueTimeTooltip(e) {
 
 cuetime.addEventListener('mousemove', updateCueTimeTooltip);
 
-window.addEventListener('loadedmetadata', () => {
+function loadedMetadata() {
     totalTime.textContent = formatDuration(video.duration)
     currentTime.textContent = formatDuration(video.currentTime)
     cuetime.setAttribute('max', video.duration);
-}, true)
+}
+
+video.addEventListener("loadedmetadata", () => {
+    loadedMetadata()
+})
 
 video.addEventListener("timeupdate", () => {
     currentTime.textContent = formatDuration(video.currentTime)
@@ -265,6 +324,9 @@ function toggleCaptions() {
 }
 
 function togglePlay() {
+    if (context.state === 'suspended') {
+        context.resume();
+    }
     if (contextMenu.classList.contains("show")) {
         return
     } if (settingsContextMenu.classList.contains("pressed")) {

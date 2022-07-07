@@ -41,6 +41,7 @@ video {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -73,7 +74,8 @@ video {
 
 .video-container.hovered .video-controls-container,
 .video-container:focus-within .video-controls-container,
-.video-container.paused .video-controls-container, .video-container.pip-player .video-controls-container{
+.video-container.paused .video-controls-container,
+.video-container.pip-player .video-controls-container {
     opacity: 1;
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -283,7 +285,8 @@ video {
     opacity: 1;
 }
 
-.timeline-container:hover .cuetime-tooltip, .timeline-container:hover .timeline::after {
+.timeline-container:hover .cuetime-tooltip,
+.timeline-container:hover .timeline::after {
     opacity: 1;
 }
 
@@ -486,24 +489,118 @@ video {
     opacity: 1;
 }
 
-.video-context-menu .item:hover, .settings-context-menu .item:hover {
+.video-context-menu .item:hover,
+.settings-context-menu .item:hover {
     background-color: rgba(219, 251, 241, 0.1);
 }
 
 .dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin: auto;
+    background: #1C5947;
+    color: #FFF;
+    z-index: 7;
+    border-radius: 8px;
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.dialog-overlay {
     position: absolute;
     left: 0;
     right: 0;
-    margin: 0 auto;
-    padding: 16px;
-    background: #1C5947;
-    z-index: 7;
-    border-radius: 8px;
+    top: 0;
+    bottom: 0;
+    background: #00000099;
+    z-index: 6;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .dialog h1 {
     line-height: 110%;
     letter-spacing: -0.04em;
-    color: #FFF;
     margin: 0 auto;
+    margin-bottom: 8px;
+    font-size: 32px;
+}
+
+.dialog p {
+    line-height: 160%;
+    margin: 0 auto;
+    margin-bottom: 16px;
+}
+
+.dialog label {
+    color: #FFF;
+    display: inline-block;
+}
+
+.equalizer-dialog {
+    width: 512px;
+}
+
+.eq-dialog-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.eq-dialog-container.opened .dialog {
+    opacity: 1;
+    pointer-events: initial;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.eq-dialog-container.opened .dialog-overlay {
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.dialog .footer-buttons {
+    width: 100%;
+    background: #1C6550;
+    padding: 16px 24px 28px 24px;
+}
+
+.dialog .contents {
+    padding: 24px;
+}
+
+.dialog button.close-dialog {
+    font-family: Manrope, sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    font-kerning: normal;
+    color: #000;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    border-radius: 6px;
+    padding: 7px 36px 7px 34px;
+    height: 40px;
+    background-color: #02da9a;
+    line-height: 160%;
+    box-shadow: 0px 4px 0px #01a675;
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.dialog button.close-dialog:hover {
+    background-color: #0de4a4;
+    color: #1c6550
+}
+
+.dialog button.close-dialog:active {
+    background-color: #01A573;
+    color: #000;
+    box-shadow: 0px 0px 0px #01a675;
+    transform: translate(0px, 4px);
 }

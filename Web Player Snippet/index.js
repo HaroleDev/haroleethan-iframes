@@ -18,6 +18,9 @@ const dialog = document.querySelector('.dialog')
 const Item = document.querySelector('.item')
 const closeDialog = document.querySelector('.close-dialog')
 
+const volumeSliderContainer = document.querySelector('.volume-slider-container')
+const volumeContainer = document.querySelector('.volume-container')
+
 const dialogOverlay = document.querySelector('.dialog-overlay')
 
 const fullscreenButton = document.querySelector('.full-screen-button')
@@ -68,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!('pictureInPictureEnabled' in document)) {
         pipPlayerButton.classList.add('hidden');
     }
+    video.classList.remove('loading')
 });
 
 settingsButton.addEventListener('click', () => {
@@ -137,22 +141,27 @@ loopItem.addEventListener('click', loopVideo)
 
 //Keyboard shortcuts
 document.addEventListener('keydown', e => {
-    switch (e.key) {
+    const tagName = document.activeElement.tagName.toLowerCase()
+
+    if (tagName === 'input') return
+
+    switch (e.key.toLowerCase()) {
         case ' ':
-        case 'k': case 'K':
+            if (tagName === "button") return
+        case 'k':
             togglePlay()
             break
-        case 'f': case 'F':
+        case 'f':
             videoContainer.classList.add('hovered')
             activity()
             toggleFullScreen()
             break
-        case 'c': case 'C':
+        case 'c':
             videoContainer.classList.add('hovered')
             activity()
             toggleCaptions()
             break
-        case 'i': case 'I':
+        case 'i':
             videoContainer.classList.add('hovered')
             activity()
             togglePIPPlayerMode()
@@ -224,16 +233,52 @@ video.addEventListener("leavepictureinpicture", () => {
 
 pipPlayerButton.addEventListener('click', togglePIPPlayerMode)
 
+//Volume control
+let isVolumeScrubbing = false
+
+volumeSliderContainer.addEventListener('mouseup', handleVolumeUpdate)
+volumeSliderContainer.addEventListener("mousedown", volumeUpdate)
+function volumeUpdate(e) {
+    const rect = volumeSliderContainer.getBoundingClientRect()
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    isVolumeScrubbing = (e.buttons & 1) === 1
+    volumeContainer.classList.add('scrubbing')
+    if (isVolumeScrubbing) {
+        video.volume = percent
+        volumeSliderContainer.style.setProperty('--volume-position', percent)
+    }
+    handleVolumeUpdate(e)
+}
+
+function handleVolumeUpdate(e) {
+    const rect = volumeSliderContainer.getBoundingClientRect()
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    if (isVolumeScrubbing) {
+        e.preventDefault()
+        video.volume = percent
+        volumeSliderContainer.style.setProperty('--volume-position', percent)
+    }
+}
+
 timelineContainer.addEventListener("mousemove", handleTimelineUpdate)
 timelineContainer.addEventListener("mousedown", toggleScrubbing)
 
 document.addEventListener("mouseup", e => {
-    if (isScrubbing) toggleScrubbing(e)
+    if (isScrubbing) {
+        toggleScrubbing(e)
+    } if (isVolumeScrubbing) {
+        volumeUpdate(e)
+        volumeContainer.classList.remove('scrubbing')
+    }
 })
 
 document.addEventListener("mousemove", e => {
     if (isScrubbing) {
         handleTimelineUpdate(e)
+        updateCueTimeTooltip()
+    } if (isVolumeScrubbing) {
+        handleVolumeUpdate(e)
+        volumeContainer.classList.add('scrubbing')
     }
 })
 
@@ -262,6 +307,7 @@ function handleTimelineUpdate(e) {
     timelineContainer.style.setProperty("--preview-position", percent)
     if (isScrubbing) {
         e.preventDefault()
+        video.currentTime = percent * video.duration
         timelineContainer.style.setProperty("--progress-position", percent)
     }
 }
@@ -276,7 +322,7 @@ cuetime.addEventListener('mousemove', updateCueTimeTooltip);
 function loadedMetadata() {
     totalTime.textContent = formatDuration(video.duration)
     currentTime.textContent = formatDuration(video.currentTime)
-    cuetime.setAttribute('max', video.duration);
+    cuetime.setAttribute('max', video.duration + 1);
 }
 
 video.addEventListener("loadedmetadata", () => {

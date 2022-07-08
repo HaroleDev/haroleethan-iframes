@@ -193,7 +193,8 @@ video.loading {
 }
 
 .video-container.pip-player:not(.full-screen) .full-screen-button {
-    display: none;
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .full-screen-button.hidden {
@@ -662,7 +663,6 @@ video.loading {
     overflow: hidden;
     padding: 0;
     transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
-    ;
 }
 
 .volume-slider {
@@ -729,18 +729,78 @@ video.loading {
 
 [data-volume-level="full"] .mute-volume,
 [data-volume-level="mid"] .mute-volume,
-[data-volume-level="low"] .mute-volume {
-    opacity: 0;
-}
-
+[data-volume-level="low"] .mute-volume,
 [data-volume-level="mid"] .full-volume,
 [data-volume-level="low"] .full-volume,
-[data-volume-level="low"] .mid-volume {
-    opacity: 0;
-}
-
+[data-volume-level="low"] .mid-volume,
 [data-volume-level="mute"] .full-volume,
 [data-volume-level="mute"] .mid-volume,
 [data-volume-level="mute"] .low-volume {
     opacity: 0;
+}
+
+.tooltip-left::after {
+    content: attr(data-tooltip);
+    color: #FFF;
+    width: max-content;
+    padding: 6px 14px;
+    background: rgba(8, 43, 33, 0.96);
+    border-radius: 8px;
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    font-variant-ligatures: none;
+    pointer-events: none;
+}
+
+.tooltip-left:hover::after {
+    opacity: 1;
+}
+
+.tooltip-left:before, .tooltip-left:after {
+    position: absolute;
+    font-family: 'Manrope', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    top: 12px;
+    height: 36px;
+}
+
+div.tooltip-right::after {
+    content: attr(data-tooltip);
+    color: #FFF;
+    width: max-content;
+    padding: 6px 14px;
+    background: rgba(8, 43, 33, 0.96);
+    border-radius: 8px;
+    transform: translateX(-75%) translateY(-100%);
+    opacity: 0;
+    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none;
+    text-align: center;
+}
+
+div.tooltip-right:hover::after {
+    opacity: 1;
+}
+
+div.tooltip-right:before, div.tooltip-right:after {
+    position: absolute;
+    font-family: 'Manrope', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    top: 48px;
+    height: 36px;
+    font-variant-ligatures: none;
+}
+
+.volume-tooltip-container {
+    width: 48px;
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.volume-tooltip-container:hover {
+    width: 158px;
 }

@@ -20,6 +20,7 @@ const closeDialog = document.querySelector('.close-dialog')
 
 const volumeSliderContainer = document.querySelector('.volume-slider-container')
 const volumeContainer = document.querySelector('.volume-container')
+const volumeButton = document.querySelector('.volume-button')
 
 const dialogOverlay = document.querySelector('.dialog-overlay')
 
@@ -107,6 +108,8 @@ function changeGain(sliderVal, nbFilter) {
     filters[nbFilter].gain.value = value;
 }
 
+context.crossOrigin = "anonymous";
+
 //EQ dialog
 eqItem.addEventListener('click', () => {
     eqContainer.classList.add("opened")
@@ -145,7 +148,6 @@ document.addEventListener('keydown', e => {
     const tagName = document.activeElement.tagName.toLowerCase()
 
     if (tagName === 'input') return
-
     switch (e.key.toLowerCase()) {
         case ' ':
             if (tagName === "button") return
@@ -167,12 +169,12 @@ document.addEventListener('keydown', e => {
             activity()
             togglePIPPlayerMode()
             break
-        case 'ArrowLeft':
+        case 'arrowleft': case 'j':
             videoContainer.classList.add('hovered')
             activity()
             skip(-5)
             break
-        case 'ArrowRight':
+        case 'arrowright': case 'l':
             videoContainer.classList.add('hovered')
             activity()
             skip(5)
@@ -236,8 +238,7 @@ pipPlayerButton.addEventListener('click', togglePIPPlayerMode)
 
 //Volume control
 let isVolumeScrubbing = false
-
-volumeSliderContainer.addEventListener('mouseup', handleVolumeUpdate)
+volumeSliderContainer.addEventListener('mousemove', handleVolumeUpdate)
 volumeSliderContainer.addEventListener("mousedown", volumeUpdate)
 function volumeUpdate(e) {
     const rect = volumeSliderContainer.getBoundingClientRect()
@@ -246,6 +247,7 @@ function volumeUpdate(e) {
     volumeContainer.classList.add('scrubbing')
     if (isVolumeScrubbing) {
         video.volume = percent
+        video.muted = percent === 0
         volumeSliderContainer.style.setProperty('--volume-position', percent)
     }
     handleVolumeUpdate(e)
@@ -257,9 +259,30 @@ function handleVolumeUpdate(e) {
     if (isVolumeScrubbing) {
         e.preventDefault()
         video.volume = percent
+        video.muted = percent === 0
         volumeSliderContainer.style.setProperty('--volume-position', percent)
     }
 }
+volumeButton.addEventListener("click", toggleVolume)
+
+function toggleVolume() {
+    video.muted = !video.muted
+}
+
+video.addEventListener("volumechange", () => {
+    let volumeLevel
+    if (video.muted || video.volume === 0) {
+        volumeLevel = "mute"
+    } else if (video.volume >= 0.6) {
+        volumeLevel = "full"
+    } else if (video.volume >= 0.3) {
+        volumeLevel = "mid"
+    } else {
+        volumeLevel = "low"
+    }
+
+    videoContainer.dataset.volumeLevel = volumeLevel
+})
 
 timelineContainer.addEventListener("mousemove", handleTimelineUpdate)
 timelineContainer.addEventListener("mousedown", toggleScrubbing)
@@ -275,7 +298,6 @@ document.addEventListener("mouseup", e => {
 document.addEventListener("mousemove", e => {
     if (isScrubbing) {
         handleTimelineUpdate(e)
-        updateCueTimeTooltip()
     } if (isVolumeScrubbing) {
         handleVolumeUpdate(e)
         volumeContainer.classList.add('scrubbing')
@@ -308,6 +330,7 @@ function handleTimelineUpdate(e) {
     if (isScrubbing) {
         e.preventDefault()
         video.currentTime = percent * video.duration
+        cuetimeTooltip.textContent = formatDuration(video.currentTime)
         timelineContainer.style.setProperty("--progress-position", percent)
     }
 }

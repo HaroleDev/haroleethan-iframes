@@ -317,7 +317,8 @@ video.loading {
     opacity: 1;
 }
 
-.timeline-container:hover .cuetime-tooltip, .scrubbing .timeline-container .cuetime-tooltip,
+.timeline-container:hover .cuetime-tooltip,
+.scrubbing .timeline-container .cuetime-tooltip,
 .timeline-container:hover .timeline::after {
     opacity: 1;
 }
@@ -329,7 +330,8 @@ video.loading {
     transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.scrubbing .timeline-container .timeline-scrubber, .scrubbing:hover .timeline-container .timeline-scrubber {
+.scrubbing .timeline-container .timeline-scrubber,
+.scrubbing:hover .timeline-container .timeline-scrubber {
     border-radius: 32px 32px 8px 8px;
     height: 16px;
     top: -8px;
@@ -659,25 +661,29 @@ video.loading {
     width: 0%;
     overflow: hidden;
     padding: 0;
-    transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);;
+    transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
+    ;
 }
 
 .volume-slider {
     background: transparent;
-    height: 8px;
+    height: 12px;
     width: 0px;
     border-radius: 8px;
     position: relative;
-    transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);;
+    transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
+    ;
 }
 
-.volume-container:hover .volume-slider, .volume-container.scrubbing .volume-slider {
+.volume-container:hover .volume-slider,
+.volume-container.scrubbing .volume-slider {
     width: 128px;
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.volume-container:hover .volume-slider-container, .volume-container.scrubbing .volume-slider-container {
-    padding: 20px 10px;
+.volume-container:hover .volume-slider-container,
+.volume-container.scrubbing .volume-slider-container {
+    padding: 18px 10px;
     width: 100%;
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -688,9 +694,11 @@ video.loading {
     left: 0;
     top: 0;
     bottom: 0;
+    height: 12px;
     background: rgba(255, 255, 255, 1);
     border-radius: 8px;
-    right: calc(100% - var(--volume-position,1) * 100%)
+    right: calc(100% - var(--volume-position, 1) * 100%);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .volume-slider::after {
@@ -699,7 +707,40 @@ video.loading {
     right: 0;
     top: 0;
     bottom: 0;
+    margin: 4px 0px 0px 0px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    left: calc(var(--volume-position,0) * 100%)
+    left: calc(var(--volume-position, 0) * 100%);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.volume-container.scrubbing .volume-slider::before,
+.volume-container.scrubbing .volume-slider::after {
+    transition: none;
+}
+
+[data-volume-level="mute"] .volume-slider::before {
+    right: calc(100% - 0 * 100%)
+}
+
+[data-volume-level="mute"] .volume-slider::after {
+    left: calc(0 * 100%)
+}
+
+[data-volume-level="full"] .mute-volume,
+[data-volume-level="mid"] .mute-volume,
+[data-volume-level="low"] .mute-volume {
+    opacity: 0;
+}
+
+[data-volume-level="mid"] .full-volume,
+[data-volume-level="low"] .full-volume,
+[data-volume-level="low"] .mid-volume {
+    opacity: 0;
+}
+
+[data-volume-level="mute"] .full-volume,
+[data-volume-level="mute"] .mid-volume,
+[data-volume-level="mute"] .low-volume {
+    opacity: 0;
 }

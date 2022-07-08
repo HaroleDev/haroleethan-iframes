@@ -10,12 +10,14 @@ const cuetime = document.querySelector('.cuetime');
 const captionButton = document.querySelector(".caption-button");
 const settingsButton = document.querySelector('.settings-button');
 const settingsContextMenu = document.querySelector('.settings-context-menu');
+const settingsTooltipContainer = document.querySelector('.settings-tooltip-container');
 
+const eqContainer = document.querySelector('.eq-dialog-container');
 const loopItem = document.querySelector('.loop-item');
 const eqItem = document.querySelector('.eq-item');
-const eqContainer = document.querySelector('.eq-dialog-container');
-const dialog = document.querySelector('.dialog');
 const Item = document.querySelector('.item');
+
+const dialog = document.querySelector('.dialog');
 const closeDialog = document.querySelector('.close-dialog');
 
 const volumeSliderContainer = document.querySelector('.volume-slider-container');
@@ -46,6 +48,7 @@ videoContainer.addEventListener('contextmenu', e => {
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
+        settingsTooltipContainer.classList.add('tooltip-right');
     }
     showContextMenu();
 
@@ -59,6 +62,7 @@ videoContainer.addEventListener('click', (e) => {
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
+        settingsTooltipContainer.classList.add('tooltip-right');
     };
 });
 
@@ -80,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 settingsButton.addEventListener('click', () => {
     settingsButton.classList.toggle('pressed');
     settingsContextMenu.classList.toggle('pressed');
+    settingsTooltipContainer.classList.toggle('tooltip-right');
 });
 
 //EQ

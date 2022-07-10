@@ -575,7 +575,7 @@ video.loading {
 }
 
 .equalizer-dialog {
-    width: 570px;
+    width: 640px;
 }
 
 .eq-dialog-container {
@@ -587,6 +587,7 @@ video.loading {
 
 .equalizers {
     display: inline-flex;
+    margin: 0 auto;
 }
 
 .eq-dialog-container.opened .dialog {
@@ -601,11 +602,10 @@ video.loading {
 }
 
 .eq-control input {
-    transform: rotate(-90deg) translate(-100%, 180%);
+    transform: rotate(-90deg) translate(-100%, 200%);
     transform-origin: center left;
     width: 128px;
     margin: 0 auto;
-    height: 12px;
 }
 
 .eq-control label {
@@ -617,7 +617,7 @@ video.loading {
 }
 
 .eq-control {
-    width: 42px;
+    width: 48px;
 }
 
 .decibel-labels {

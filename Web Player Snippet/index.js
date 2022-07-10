@@ -7,6 +7,9 @@ const totalTime = document.querySelector('.total-time');
 const cuetimeTooltip = document.querySelector('.cuetime-tooltip');
 const cuetime = document.querySelector('.cuetime');
 
+const EQswitchToggle = document.querySelector('.eq-switch')
+const rangeEQControl = document.querySelectorAll('.dialog .eq-control input');
+
 const captionButton = document.querySelector(".caption-button");
 const settingsButton = document.querySelector('.settings-button');
 const settingsContextMenu = document.querySelector('.settings-context-menu');
@@ -31,6 +34,22 @@ const fullscreenButton = document.querySelector('.full-screen-button');
 const pipPlayerButton = document.querySelector(".pip-button");
 
 const timelineContainer = document.querySelector(".timeline-container");
+
+function handleInputChange(e) {
+    let target = e.target;
+    if (e.target.type !== 'range') {
+        target = rangeEQControl;
+    };
+    const min = target.min;
+    const max = target.max;
+    const val = target.value;
+
+    target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';
+};
+
+rangeEQControl.forEach(input => {
+    input.addEventListener('input', handleInputChange);
+});
 
 window.addEventListener('load', () => {
     video.src = video.currentSrc;
@@ -70,6 +89,22 @@ Item.addEventListener('click', () => {
     showContextMenu(show = false);
 });
 
+EQswitchToggle.addEventListener('click', () => {
+    if (!eqContainer.classList.contains('enabled')) {
+        eqContainer.classList.add('enabled');
+        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
+            element.disabled = false;
+        });
+    } else {
+        eqContainer.classList.remove('enabled')
+        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
+            element.disabled = true;
+            element.value = 0;
+            element.style.backgroundSize = '50% 100%'
+        });
+    };
+});
+
 //Playback
 playpauseButton.addEventListener('click', togglePlay);
 video.addEventListener('click', togglePlay);
@@ -94,18 +129,17 @@ var sourceNode = context.createMediaElementSource(document.querySelector('video'
 
 var filters = [];
 
-[60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].forEach(function (freq, i) {
+[30, 60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].forEach(function (freq, i) {
     var eq = context.createBiquadFilter();
     eq.frequency.value = freq;
     eq.type = "peaking";
     eq.gain.value = 0;
     filters.push(eq);
+    sourceNode.connect(filters[0]);
+    for (var i = 0; i < filters.length - 1; i++) {
+        filters[i].connect(filters[i + 1]);
+    };
 });
-
-sourceNode.connect(filters[0]);
-for (var i = 0; i < filters.length - 1; i++) {
-    filters[i].connect(filters[i + 1]);
-};
 
 filters[filters.length - 1].connect(context.destination);
 

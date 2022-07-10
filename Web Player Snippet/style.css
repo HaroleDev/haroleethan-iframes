@@ -88,6 +88,11 @@ video.loading {
     transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.video-container.full-screen .controls-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 .inactive {
     cursor: none;
 }
@@ -438,7 +443,7 @@ video.loading {
     background: rgba(8, 43, 33, 0.96);
     color: #FFF;
     padding: 12px 8px;
-    width: 256px;
+    min-width: 256px;
     z-index: 6;
     border-radius: 8px;
     opacity: 0;
@@ -448,7 +453,7 @@ video.loading {
 
 .video-context-menu .item {
     user-select: none;
-    padding: 8px 12px;
+    padding: 8px 24px 8px 12px;
     width: 100%;
     border-radius: 4px;
     cursor: pointer;
@@ -551,12 +556,12 @@ video.loading {
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.dialog h1 {
+.dialog h2 {
     line-height: 110%;
     letter-spacing: -0.04em;
     margin: 0 auto;
-    margin-bottom: 8px;
-    font-size: 32px;
+    margin-bottom: 16px;
+    font-size: 24px;
 }
 
 .dialog p {
@@ -570,7 +575,7 @@ video.loading {
 }
 
 .equalizer-dialog {
-    width: 512px;
+    width: 570px;
 }
 
 .eq-dialog-container {
@@ -582,7 +587,6 @@ video.loading {
 
 .equalizers {
     display: inline-flex;
-    align-items: center;
 }
 
 .eq-dialog-container.opened .dialog {
@@ -609,20 +613,38 @@ video.loading {
     margin-top: calc(128px - 8px);
     text-align: center;
     font-size: 12px;
+    opacity: 0.6;
 }
 
 .eq-control {
     width: 42px;
 }
 
+.decibel-labels {
+    display: flex;
+    height: 136px;
+    width: fit-content;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+    margin: 8px 8px 8px 4px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
 .dialog .footer-buttons {
     width: 100%;
     background: #1C6550;
-    padding: 16px 24px 28px 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 28px 28px 28px;
 }
 
 .dialog .contents {
-    padding: 24px;
+    padding: 28px;
+    margin: 0 auto;
 }
 
 .dialog button.close-dialog {
@@ -807,4 +829,95 @@ div.tooltip-right:after {
 
 .volume-tooltip-container:hover {
     width: 158px;
+}
+
+.switch .switch-knob {
+    transform: translateX(0);
+    fill: #DBFBF1;
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.switch .switch-bg {
+    fill: #016F4E;
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.enabled .switch .switch-knob {
+    transform: translateX(16px);
+    fill: #FFFFFF;
+}
+
+.enabled .switch .switch-bg {
+    fill: #02DA9A;
+}
+
+.dialog .switch {
+    float: right;
+    display: inline;
+    margin: 2px 0px;
+}
+
+.dialog .eq-control input {
+    height: 12px;
+    background: #016F4E;
+    background-image: linear-gradient(#02DA9A, #02DA9A);
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.dialog .eq-control input::-webkit-slider-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.dialog .eq-control input::-webkit-slider-runnable-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+.dialog .eq-control input:disabled {
+    background: #165248;
+    background-image: linear-gradient(#17785B, #17785B);
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+}
+
+.dialog .eq-control input:disabled::-webkit-slider-thumb {
+    background: #01A573;
+}
+
+.dialog .eq-control input::-webkit-slider-runnable-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+input[type=range],
+input[type=range]::-webkit-slider-runnable-track,
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type=range]::-ms-track {
+    color: transparent;
+}
+
+input[type=range]::-ms-fill-lower,
+input[type=range]::-ms-fill-upper,
+input[type=range]::-ms-tooltip {
+    display: none;
+}
+
+.dialog .equalizers {
+    pointer-events: none;
+    user-select: none;
+}
+
+.eq-dialog-container.enabled .equalizers {
+    pointer-events: initial;
 }

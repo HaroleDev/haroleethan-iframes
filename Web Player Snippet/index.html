@@ -27,7 +27,8 @@
                             <rect x="3" y="3" width="14" height="14" rx="8" fill="#DBFBF1" class="switch-knob" />
                         </svg>
                     </div>
-                    <p>So, you wanted to fine tune the sound from the video you're playing? Great! This is for you.<br>In
+                    <p>So, you wanted to fine tune the sound from the video you're playing? Great! This is for
+                        you.<br>In
                         layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of a specific
                         frequency.</p>
                     <div class="equalizers">
@@ -39,57 +40,57 @@
                             <span>-20 dB</span>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 0);" disabled />
                             <label>30 Hz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 1);" disabled />
                             <label>60 Hz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 2);" disabled />
                             <label>125 Hz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 3);" disabled />
                             <label>250 Hz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 4);" disabled />
                             <label>500 Hz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
-                                oninput="changeGain(this.value, 5);" disabled />
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
+                                oninput="changeGain(this.value, 5);"disabled />
                             <label>800 Hz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
-                                oninput="changeGain(this.value, 6);" disabled />
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
+                                oninput="changeGain(this.value, 6);"disabled />
                             <label>1 kHz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 7);" disabled />
                             <label>2 kHz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 8);" disabled />
                             <label>4 kHz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 9);" disabled />
                             <label>8 kHz</label>
                         </div>
                         <div class="eq-control">
-                            <input type="range" class="eq-slider" min="-20" max="20" step="1"
+                            <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
                                 oninput="changeGain(this.value, 10);" disabled />
                             <label>16 kHz</label>
                         </div>
@@ -299,7 +300,7 @@
                 </div>
             </div>
         </div>
-        <video playsinline class="video loading" preload="metadata" crossorigin="anonymous">
+        <video tabindex="-1" playsinline class="video loading" preload="metadata" crossorigin="anonymous">
             <source src="./IMG_0980.mov" type="video/mp4">
             </source>
             <track kind="captions" srclang="en" src="sample.vtt">

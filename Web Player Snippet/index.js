@@ -89,22 +89,6 @@ Item.addEventListener('click', () => {
     showContextMenu(show = false);
 });
 
-EQswitchToggle.addEventListener('click', () => {
-    if (!eqContainer.classList.contains('enabled')) {
-        eqContainer.classList.add('enabled');
-        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
-            element.disabled = false;
-        });
-    } else {
-        eqContainer.classList.remove('enabled')
-        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
-            element.disabled = true;
-            element.value = 0;
-            element.style.backgroundSize = '50% 100%'
-        });
-    };
-});
-
 //Playback
 playpauseButton.addEventListener('click', togglePlay);
 video.addEventListener('click', togglePlay);
@@ -122,14 +106,15 @@ settingsButton.addEventListener('click', () => {
     settingsTooltipContainer.classList.toggle('tooltip-right');
 });
 
-//EQ
+//AudioContext
 var ctx = window.AudioContext || window.webkitAudioContext;
 var context = new ctx();
 var sourceNode = context.createMediaElementSource(document.querySelector('video'));
 
+//EQ
 var filters = [];
 
-[30, 60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].forEach(function (freq, i) {
+[30, 60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].map(function (freq, i) {
     var eq = context.createBiquadFilter();
     eq.frequency.value = freq;
     eq.type = "peaking";
@@ -143,14 +128,34 @@ var filters = [];
 
 filters[filters.length - 1].connect(context.destination);
 
-function changeGain(sliderVal, nbFilter) {
-    var value = parseFloat(sliderVal);
+function changeGain(sliderValue, nbFilter) {
+    var value = parseFloat(sliderValue);
     filters[nbFilter].gain.value = value;
 };
 
 //EQ dialog
 eqItem.addEventListener('click', () => {
     eqContainer.classList.add("opened");
+});
+
+EQswitchToggle.addEventListener('click', () => {
+    if (!eqContainer.classList.contains('enabled')) {
+        eqContainer.classList.add('enabled');
+        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
+            element.disabled = false;
+            sourceNode.disconnect();
+            sourceNode.connect(filters[0]);
+            filters[filters.length - 1].connect(context.destination);
+        });
+    } else {
+        eqContainer.classList.remove('enabled')
+        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
+            element.disabled = true;
+            sourceNode.disconnect();
+            sourceNode.connect(context.destination);
+            filters[filters.length - 1].disconnect();
+        });
+    };
 });
 
 //Dialog

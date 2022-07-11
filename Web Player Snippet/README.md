@@ -1,4 +1,4 @@
-# Harole's Video Player
+# Playful Video
 A HTML5-based video player created by myself with some features you wouldn't normally see online.
 ## Attributes
 #### This folder of this repo includes modified code from the following source:

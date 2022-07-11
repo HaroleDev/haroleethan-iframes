@@ -68,6 +68,7 @@ videoContainer.addEventListener('contextmenu', e => {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
         settingsTooltipContainer.classList.add('tooltip-right');
+        closedDialog()
     }
     showContextMenu();
 

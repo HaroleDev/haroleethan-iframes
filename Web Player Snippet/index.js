@@ -35,6 +35,10 @@ const pipPlayerButton = document.querySelector(".pip-button");
 
 const timelineContainer = document.querySelector(".timeline-container");
 
+window.addEventListener('load', () => {
+    video.src = video.currentSrc;
+});
+
 function handleInputChange(e) {
     let target = e.target;
     if (e.target.type !== 'range') {
@@ -46,14 +50,6 @@ function handleInputChange(e) {
 
     target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';
 };
-
-rangeEQControl.forEach(input => {
-    input.addEventListener('input', handleInputChange);
-});
-
-window.addEventListener('load', () => {
-    video.src = video.currentSrc;
-});
 
 //Context Menu
 const contextMenu = document.querySelector(".video-context-menu");
@@ -108,8 +104,17 @@ settingsButton.addEventListener('click', () => {
 });
 
 //AudioContext
-var ctx = window.AudioContext || window.webkitAudioContext;
-var context = new ctx();
+var ctx = (window.AudioContext ||
+    window.webkitAudioContext ||
+    window.mozAudioContext ||
+    window.oAudioContext ||
+    window.msAudioContext);
+if (ctx) {
+    var context = new ctx();
+} else {
+    alert('Web Audio API is not supported.');
+    eqItem.classList.add('unsupported');
+}
 var sourceNode = context.createMediaElementSource(document.querySelector('video'));
 
 //EQ
@@ -144,6 +149,9 @@ EQswitchToggle.addEventListener('click', () => {
         eqContainer.classList.add('enabled');
         eqContainer.querySelectorAll('.eq-slider').forEach(element => {
             element.disabled = false;
+            rangeEQControl.forEach(input => {
+                input.addEventListener('input', handleInputChange);
+            });
             sourceNode.disconnect();
             sourceNode.connect(filters[0]);
             filters[filters.length - 1].connect(context.destination);

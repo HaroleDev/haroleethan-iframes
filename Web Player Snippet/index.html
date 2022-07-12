@@ -27,7 +27,9 @@
                             <rect x="3" y="3" width="14" height="14" rx="8" fill="#DBFBF1" class="switch-knob" />
                         </svg>
                     </div>
-                    <p>So, you wanted to fine tune the sound from the video you're playing? Great! This is for you.<br>In layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of a specific
+                    <p>So, you wanted to fine tune the sound from the video you're playing? Great! This is for
+                        you.<br>In layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of a
+                        specific
                         frequency.</p>
                     <div class="equalizers">
                         <div class="decibel-labels">
@@ -64,12 +66,12 @@
                         </div>
                         <div class="eq-control">
                             <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
-                                oninput="changeGain(this.value, 5);"disabled />
+                                oninput="changeGain(this.value, 5);" disabled />
                             <label>800 Hz</label>
                         </div>
                         <div class="eq-control">
                             <input type="range" class="eq-slider" min="-20" max="20" value="0" step="1"
-                                oninput="changeGain(this.value, 6);"disabled />
+                                oninput="changeGain(this.value, 6);" disabled />
                             <label>1 kHz</label>
                         </div>
                         <div class="eq-control">
@@ -209,6 +211,9 @@
                     <div class="right-side">
                         <div class="tooltip-right volume-tooltip-container" data-tooltip="Mute (m)">
                             <div class="volume-container" style="float: right">
+                                <div class="volume-slider-container">
+                                    <div class="volume-slider"></div>
+                                </div>
                                 <button class="volume-button">
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -228,9 +233,6 @@
                                             d="M10.39 3.87193C11.5331 2.3132 14 3.12173 14 5.05466V26.9454C14 28.8783 11.5331 29.6868 10.39 28.1281L6.99 23.5H3C1.89543 23.5 1 22.6046 1 21.5V10.5C1 9.39545 1.89543 8.50002 3 8.50002L6.99 8.50002L10.39 3.87193ZM12 5.05466L8.61 9.68274C8.23325 10.1965 7.62709 10.5 6.99 10.5H3V21.5H6.99C7.62709 21.5 8.23325 21.8035 8.61 22.3173L12 26.9454V5.05466Z" />
                                     </svg>
                                 </button>
-                                <div class="volume-slider-container">
-                                    <div class="volume-slider"></div>
-                                </div>
                             </div>
                         </div>
                         <div class="tooltip-right" data-tooltip="Picture-in-picture (i)">
@@ -302,7 +304,7 @@
         <video tabindex="-1" playsinline class="video loading" preload="metadata" crossorigin="anonymous">
             <source src="./IMG_0980.mov" type="video/mp4">
             </source>
-            <track kind="captions" srclang="en" src="sample.vtt">
+            <track label="English" kind="captions" srclang="en" src="sample.vtt">
         </video>
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mediainfo.js@0.1.7/dist/mediainfo.min.js"></script>

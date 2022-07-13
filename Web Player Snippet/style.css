@@ -21,7 +21,6 @@ body {
 }
 
 .video-container {
-    position: relative;
     width: 100%;
     height: 100%;
     background: #000;
@@ -38,6 +37,7 @@ body {
 }
 
 video {
+    position: relative;
     width: 100%;
     height: 100%;
     cursor: default;
@@ -131,11 +131,15 @@ video.loading {
     bottom: 0;
     left: 0;
     z-index: 3;
-    width: 100%;
+    width: calc(100% - 0px);
     opacity: 0;
-    -webkit-transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.transcript-opened .video-controls-container {
+    width: calc(100% - 400px);
 }
 
 .video-container.full-screen .controls-container {
@@ -164,9 +168,9 @@ video.loading {
 .video-container.paused .video-controls-container,
 .video-container.pip-player .video-controls-container {
     opacity: 1;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .video-controls-container .left-side {
@@ -813,7 +817,7 @@ video.loading {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding: 18px 28px 28px 28px;
+    padding: 18px 28px 28px;
 }
 
 .dialog .contents {
@@ -832,12 +836,12 @@ video.loading {
     border: none;
     text-align: center;
     border-radius: 6px;
-    padding: 7px 36px 7px 34px;
+    padding: 6px 32px;
     height: 40px;
     background-color: #17785B;
     line-height: 160%;
-    -webkit-box-shadow: 0px 4px 0px #1C5947;
-    box-shadow: 0px 4px 0px #1C5947;
+    -webkit-box-shadow: 0px 4px 0px #1C5947, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
+    box-shadow: 0px 4px 0px #1C5947, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -849,8 +853,8 @@ video.loading {
 
 .dialog button.close-dialog:active {
     background-color: #1C5947;
-    -webkit-box-shadow: 0px 0px 0px #1C5947;
-    box-shadow: 0px 0px 0px #1C5947;
+    -webkit-box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
     -webkit-transform: translate(0px, 4px);
     -ms-transform: translate(0px, 4px);
     transform: translate(0px, 4px);
@@ -1268,4 +1272,136 @@ input[type=range]::-ms-tooltip {
     opacity: 0.3;
     pointer-events: none;
     user-select: none;
+}
+
+.transcript-panel {
+    background: #1C5947;
+    min-width: 0px;
+    max-width: 0px;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    overflow: hidden;
+}
+
+.transcript-opened .transcript-panel {
+    min-width: 400px;
+    max-width: 400px;
+}
+
+.transcript-panel .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 30px;
+    background: #1C6550;
+    min-width: 400px;
+}
+
+.transcript-panel .header-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px
+}
+
+.transcript-panel h1 {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 110%;
+    letter-spacing: -0.04em;
+    color: #FFF;
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.transcript-panel span {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 160%;
+    color: #FFF;
+}
+
+.video-player {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.transcript-panel button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.transcript-panel button path {
+    fill: #fff;
+    -webkit-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.transcript-panel button:hover path {
+    fill: #02DA9A;
+}
+
+.transcript-panel button:active path {
+    fill: #01A573;
+}
+
+.transcript-panel .contents {
+    min-width: 400px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.transcript-panel .snackbar-sync-time {
+    width: 100%;
+    min-width: 400px;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    padding: 32px;
+    justify-content: center;
+}
+
+.transcript-panel button.sync-to-time {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 160%;
+    color: #FFF;
+    text-align: center;
+    background: #4B99E7;
+    box-shadow: 0px 4px 0px #1D78D1, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #165248, 0px 4px 16px 28px rgba(22, 82, 72, 0.6);
+    border-radius: 21px;
+    letter-spacing: -0.04em;
+    padding: 6px 18px;
+    transform: translateY(0px);
+    -webkit-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.transcript-panel button.sync-to-time:hover {
+    background: #398FE5;
+}
+
+.transcript-panel button.sync-to-time:active {
+    background: #1D78D1;
+    box-shadow: 0px 0px 0px #1D78D1, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 8px #165248, 0px 0px 16px 28px rgba(22, 82, 72, 0.6);
+    transform: translateY(4px);
 }

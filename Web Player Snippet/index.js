@@ -20,6 +20,11 @@ const loopItem = document.querySelector('.loop-item');
 const eqItem = document.querySelector('.eq-item');
 const Item = document.querySelector('.item');
 
+const transcriptItem = document.querySelector('.transcript-item');
+const transcriptPanel = document.querySelector('.transcript-panel');
+
+const videoPlayer = document.querySelector('.video-player');
+
 const dialog = document.querySelector('.dialog');
 const closeDialog = document.querySelector('.close-dialog');
 
@@ -60,7 +65,7 @@ function showContextMenu(show = true) {
 
 videoContainer.addEventListener('contextmenu', e => {
     e.preventDefault();
-    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
+    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
         settingsTooltipContainer.classList.add('tooltip-right');
@@ -72,10 +77,29 @@ videoContainer.addEventListener('contextmenu', e => {
     contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth + 'px' : e.x + 'px';
 });
 
-videoContainer.addEventListener('click', (e) => {
+transcriptPanel.addEventListener('contextmenu', e => {
+    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
+        settingsButton.classList.remove('pressed');
+        settingsContextMenu.classList.remove('pressed');
+        settingsTooltipContainer.classList.add('tooltip-right');
+        closedDialog()
+    }
+});
+
+videoPlayer.addEventListener('click', (e) => {
     volumeContainer.classList.remove('scrubbing');
     showContextMenu(show = false);
-    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
+    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
+        settingsButton.classList.remove('pressed');
+        settingsContextMenu.classList.remove('pressed');
+        settingsTooltipContainer.classList.add('tooltip-right');
+    };
+});
+
+transcriptPanel.addEventListener('click', (e) => {
+    volumeContainer.classList.remove('scrubbing');
+    showContextMenu(show = false);
+    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
         settingsTooltipContainer.classList.add('tooltip-right');
@@ -177,6 +201,15 @@ function closedDialog() {
 dialogOverlay.addEventListener('click', closedDialog);
 closeDialog.addEventListener('click', closedDialog);
 
+//Transcript
+transcriptItem.addEventListener('click', () => {
+    videoPlayer.classList.add("transcript-opened");
+});
+
+transcriptPanel.querySelector('.close-transcript-panel').addEventListener('click', () => {
+    videoPlayer.classList.remove("transcript-opened");
+});
+
 //Loop function
 function loopVideo() {
     if (!loopItem.classList.contains("enabled")) {
@@ -257,7 +290,7 @@ fullscreenButton.addEventListener('click', toggleFullScreen);
 
 function toggleFullScreen() {
     if (document.fullscreenElement == null) {
-        videoContainer.requestFullscreen();
+        videoPlayer.requestFullscreen();
     } else {
         document.exitFullscreen();
     };

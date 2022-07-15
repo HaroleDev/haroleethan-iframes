@@ -42,6 +42,12 @@ const timelineContainer = document.querySelector(".timeline-container");
 
 window.addEventListener('load', () => {
     video.src = video.currentSrc;
+    trackElems = document.querySelectorAll("track");
+    for (var i = 0; i < trackElems.length; i++) {
+        var currentTrackElem = trackElems[i];
+        tracksURLs[i] = currentTrackElem.src;
+    }
+    tracks = video.textTracks;
 });
 
 function handleInputChange(e) {
@@ -223,18 +229,9 @@ function loopVideo() {
 
 loopItem.addEventListener('click', loopVideo);
 
+//Transcript
 var tracks, trackElems, tracksURLs = [];
 var transcriptDiv = document.querySelector('.captions-contents');
-
-window.onload = function () {
-    trackElems = document.querySelectorAll("track");
-    for (var i = 0; i < trackElems.length; i++) {
-        var currentTrackElem = trackElems[i];
-        tracksURLs[i] = currentTrackElem.src;
-    }
-
-    tracks = video.textTracks;
-};
 
 function loadTranscript(lang) {
     clearTranscriptDiv();
@@ -272,16 +269,17 @@ function displayCues(track) {
 
     for (var i = 0, len = cues.length; i < len; i++) {
         var cue = cues[i];
+        addCueListeners(cue);
         var voices = getVoices(cue.text);
         var transcriptText = "";
         if (voices.length > 0) {
-            for (var j = 0; j < voices.length; j++) { 
+            for (var j = 0; j < voices.length; j++) {
                 transcriptText += voices[j].voice + ': ' + removeHTML(voices[j].text);
             }
         } else {
             transcriptText = cue.text;
         }
-        var clickableTranscriptText = "<li class=\"cues\" id=\"" + cue.id + "\" onclick='jumpToTranscript(" + cue.startTime + ");'" + ">" + transcriptText + "</li>";
+        var clickableTranscriptText = "<div class=\"cue-container\" id=\"" + `${i + 1}` + "\"" + " onclick='jumpToTranscript(" + cue.startTime + ");'" + "> <span class=\"cue-time\">" + formatDuration(cue.startTime) + "</span>" + "<span class=\"cues\">" + transcriptText + "</span></div>";
         addToTranscript(clickableTranscriptText);
     }
 }
@@ -325,6 +323,17 @@ function clearTranscriptDiv() {
 
 function addToTranscript(htmlText) {
     transcriptDiv.innerHTML += htmlText;
+}
+
+function addCueListeners(cue) {
+    cue.onenter = function () {
+        var transcriptText = document.getElementById(this.id);
+        transcriptText.classList.add("current");
+    };
+    cue.onexit = function () {
+        var transcriptText = document.getElementById(this.id);
+        transcriptText.classList.remove("current");
+    };
 }
 
 //Keyboard shortcuts

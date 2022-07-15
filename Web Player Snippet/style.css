@@ -1396,6 +1396,11 @@ input[type=range]::-ms-tooltip {
     transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.snackbar-sync-time.synced {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .transcript-panel button.sync-to-time:hover {
     background: #398FE5;
 }
@@ -1407,20 +1412,57 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel .captions-contents {
-    color: #FFF;
     padding: 16px 20px 128px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cue-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 9px 12px;
+    gap: 10px;
+    width: 360px;
+    background: transparent;
+    border-radius: 8px;
+    -webkit-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
 }
 
 .cues {
     color: #FFF;
+    font-family: 'Manrope';
+    font-style: normal;
     font-weight: 500;
-    list-style-type: none;
+    font-size: 16px;
+    line-height: 160%;
+    margin-top: 2px;
+    width: 100%;
 }
 
-.cues:hover {
-    text-decoration: underline;
+.cue-time {
+    padding: 2px 8px;
+    min-width: 54px;
+    background: rgba(75, 153, 231, 0.3);
+    border-radius: 4px;
+    text-align: center;
+    color: #CCE7FF !important;
+    font-weight: 800;
+    letter-spacing: -0.04em;
 }
 
-.cues.current {
+.cue-container:hover {
+    background: #1C6550;
+}
+
+.cue-container.current {
+    background: #016F4E;
+}
+
+.cue-container.current .cues {
     font-weight: 800;
 }

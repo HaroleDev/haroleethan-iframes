@@ -1326,6 +1326,7 @@ input[type=range]::-ms-tooltip {
     font-size: 16px;
     line-height: 160%;
     color: #FFF;
+    word-wrap: break-word;
 }
 
 .video-player {
@@ -1439,8 +1440,8 @@ input[type=range]::-ms-tooltip {
     font-weight: 500;
     font-size: 16px;
     line-height: 160%;
-    margin-top: 2px;
-    width: 100%;
+    word-wrap: break-word;
+    max-width: 264px;
 }
 
 .cue-time {

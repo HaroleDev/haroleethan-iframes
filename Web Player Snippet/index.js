@@ -236,14 +236,17 @@ var transcriptDiv = document.querySelector('.captions-contents');
 function loadTranscript(lang) {
     clearTranscriptDiv();
     disableAllTracks();
-
+    document.querySelector(".transcript-language").textContent = video.querySelector('track').getAttribute('label')
     for (var i = 0; i < tracks.length; i++) {
         var track = tracks[i];
         var trackAsHtmlElem = trackElems[i];
 
         if ((track.language === lang) && (track.kind !== "chapters")) {
-            track.mode = "showing";
-
+            if (videoContainer.classList.contains("caption")) {
+                track.mode = "showing";
+            } else {
+                track.mode = "hidden";
+            }
             if (trackAsHtmlElem.readyState === 2) {
                 displayCues(track);
             } else {
@@ -252,7 +255,6 @@ function loadTranscript(lang) {
         }
     }
 }
-
 
 function displayCuesAfterTrackLoaded(trackElem, track) {
     trackElem.addEventListener('load', function (e) {
@@ -391,11 +393,12 @@ function activity() {
     clearTimeout(timeout);
     video.classList.remove('inactive');
     videoContainer.classList.add('hovered');
-    if (videoContainer.classList.contains("hovered"))
+    if (videoContainer.classList.contains("hovered")) {
         timeout = setTimeout(function () {
             videoContainer.classList.remove('hovered');
             video.classList.add('inactive');
         }, 2000);
+    }
 };
 
 //Full screen and picture-in-picture

@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" />
 </head>
 
 <body>
@@ -135,7 +136,7 @@
                     </svg>
                     <span>Equalizer</span>
                 </div>
-                <div class="item transcript-item" onclick="loadTranscript('en')">
+                <div class="item transcript-item" onclick="loadTranscript(document.querySelector('track').getAttribute('srclang'))">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M12 6.75C12 6.33579 12.3358 6 12.75 6H20.25C20.6642 6 21 6.33579 21 6.75V17.25C21 17.6642 20.6642 18 20.25 18H12.75C12.3358 18 12 17.6642 12 17.25V6.75ZM14.25 7.5C13.8358 7.5 13.5 7.83579 13.5 8.25C13.5 8.66421 13.8358 9 14.25 9H15.75C16.1642 9 16.5 8.66421 16.5 8.25C16.5 7.83579 16.1642 7.5 15.75 7.5H14.25ZM18.75 7.5C18.3358 7.5 18 7.83579 18 8.25C18 8.66421 18.3358 9 18.75 9C19.1642 9 19.5 8.66421 19.5 8.25C19.5 7.83579 19.1642 7.5 18.75 7.5ZM13.5 15.75C13.5 15.3358 13.8358 15 14.25 15H15.75C16.1642 15 16.5 15.3358 16.5 15.75C16.5 16.1642 16.1642 16.5 15.75 16.5H14.25C13.8358 16.5 13.5 16.1642 13.5 15.75ZM18.75 15C18.3358 15 18 15.3358 18 15.75C18 16.1642 18.3358 16.5 18.75 16.5C19.1642 16.5 19.5 16.1642 19.5 15.75C19.5 15.3358 19.1642 15 18.75 15ZM16.5 12.75C16.5 12.3358 16.8358 12 17.25 12H18.75C19.1642 12 19.5 12.3358 19.5 12.75C19.5 13.1642 19.1642 13.5 18.75 13.5H17.25C16.8358 13.5 16.5 13.1642 16.5 12.75ZM14.25 12C13.8358 12 13.5 12.3358 13.5 12.75C13.5 13.1642 13.8358 13.5 14.25 13.5C14.6642 13.5 15 13.1642 15 12.75C15 12.3358 14.6642 12 14.25 12Z"
@@ -323,7 +324,7 @@
             <div class="header">
                 <div class="title">
                     <h1>Transcript</h1>
-                    <span>English</span>
+                    <span class="transcript-language"></span>
                 </div>
                 <div class="header-buttons">
                     <button>
@@ -349,14 +350,15 @@
                 </div>
             </div>
             <div class="contents">
-                <div class="captions-contents"></div>
+                <div class="captions-contents" data-simplebar data-simplebar-auto-hide="false"></div>
                 <div class="snackbar-sync-time">
                     <button class="sync-to-time">Sync to current video time</button>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mediainfo.js@0.1.7/dist/mediainfo.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mediainfo.js@0.1.7/dist/mediainfo.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js" defer></script>
 </body>
 
 </html>

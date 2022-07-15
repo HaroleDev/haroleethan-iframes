@@ -223,6 +223,110 @@ function loopVideo() {
 
 loopItem.addEventListener('click', loopVideo);
 
+var tracks, trackElems, tracksURLs = [];
+var transcriptDiv = document.querySelector('.captions-contents');
+
+window.onload = function () {
+    trackElems = document.querySelectorAll("track");
+    for (var i = 0; i < trackElems.length; i++) {
+        var currentTrackElem = trackElems[i];
+        tracksURLs[i] = currentTrackElem.src;
+    }
+
+    tracks = video.textTracks;
+};
+
+function loadTranscript(lang) {
+    clearTranscriptDiv();
+    disableAllTracks();
+
+    for (var i = 0; i < tracks.length; i++) {
+        var track = tracks[i];
+        var trackAsHtmlElem = trackElems[i];
+
+        if ((track.language === lang) && (track.kind !== "chapters")) {
+            track.mode = "showing";
+
+            if (trackAsHtmlElem.readyState === 2) {
+                displayCues(track);
+            } else {
+                displayCuesAfterTrackLoaded(trackAsHtmlElem, track);
+            }
+        }
+    }
+}
+
+
+function displayCuesAfterTrackLoaded(trackElem, track) {
+    trackElem.addEventListener('load', function (e) {
+        displayCues(track);
+    });
+}
+function disableAllTracks() {
+    for (var i = 0; i < tracks.length; i++)
+        tracks[i].mode = "disabled";
+}
+
+function displayCues(track) {
+    var cues = track.cues;
+
+    for (var i = 0, len = cues.length; i < len; i++) {
+        var cue = cues[i];
+        var voices = getVoices(cue.text);
+        var transcriptText = "";
+        if (voices.length > 0) {
+            for (var j = 0; j < voices.length; j++) { 
+                transcriptText += voices[j].voice + ': ' + removeHTML(voices[j].text);
+            }
+        } else {
+            transcriptText = cue.text;
+        }
+        var clickableTranscriptText = "<li class=\"cues\" id=\"" + cue.id + "\" onclick='jumpToTranscript(" + cue.startTime + ");'" + ">" + transcriptText + "</li>";
+        addToTranscript(clickableTranscriptText);
+    }
+}
+
+function getVoices(speech) {
+    var voices = [];
+    var pos = speech.indexOf('<v');
+    while (pos != -1) {
+        endVoice = speech.indexOf('>');
+        var voice = speech.substring(pos + 2, endVoice).trim();
+        var endSpeech = speech.indexOf('</v>');
+        var text = speech.substring(endVoice + 1, endSpeech);
+        voices.push({
+            'voice': voice,
+            'text': text
+        });
+        speech = speech.substring(endSpeech + 4);
+        pos = speech.indexOf('<v');
+    };
+    return voices;
+}
+
+function removeHTML(text) {
+    var div = document.createElement('div');
+    div.innerHTML = text;
+    return div.textContent || div.innerText || '';
+}
+
+function jumpToTranscript(time) {
+    video.currentTime = time;
+    if (!video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    };
+}
+
+function clearTranscriptDiv() {
+    transcriptDiv.innerHTML = "";
+}
+
+function addToTranscript(htmlText) {
+    transcriptDiv.innerHTML += htmlText;
+}
+
 //Keyboard shortcuts
 document.addEventListener('keydown', e => {
     const tagName = document.activeElement.tagName.toLowerCase();

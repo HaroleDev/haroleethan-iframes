@@ -1405,3 +1405,22 @@ input[type=range]::-ms-tooltip {
     box-shadow: 0px 0px 0px #1D78D1, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 8px #165248, 0px 0px 16px 28px rgba(22, 82, 72, 0.6);
     transform: translateY(4px);
 }
+
+.transcript-panel .captions-contents {
+    color: #FFF;
+    padding: 16px 20px 128px 20px;
+}
+
+.cues {
+    color: #FFF;
+    font-weight: 500;
+    list-style-type: none;
+}
+
+.cues:hover {
+    text-decoration: underline;
+}
+
+.cues.current {
+    font-weight: 800;
+}

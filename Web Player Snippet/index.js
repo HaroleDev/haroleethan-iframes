@@ -83,13 +83,21 @@ videoContainer.addEventListener('contextmenu', e => {
     contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth + 'px' : e.x + 'px';
 });
 
-transcriptPanel.addEventListener('contextmenu', e => {
-    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
+function closeSettingsMenu(e) {
+    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target)) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
         settingsTooltipContainer.classList.add('tooltip-right');
         closedDialog()
     }
+}
+
+transcriptPanel.addEventListener('contextmenu', e => {
+    closeSettingsMenu(e)
+});
+
+transcriptPanel.addEventListener('click', e => {
+    closeSettingsMenu(e)
 });
 
 videoPlayer.addEventListener('click', (e) => {
@@ -209,6 +217,7 @@ closeDialog.addEventListener('click', closedDialog);
 
 //Transcript
 transcriptItem.addEventListener('click', () => {
+    loadTranscript(document.getElementById('default-track').getAttribute('srclang'))
     videoPlayer.classList.add("transcript-opened");
 });
 

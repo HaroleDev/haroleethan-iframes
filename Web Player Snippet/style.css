@@ -711,7 +711,7 @@ video.loading {
     letter-spacing: -0.04em;
     margin: 0 auto;
     margin-bottom: 16px;
-    font-size: 24px;
+    font-size: 28px;
 }
 
 .dialog p {
@@ -1107,7 +1107,7 @@ div.tooltip-right:after {
 .dialog .switch {
     float: right;
     display: inline;
-    margin: 2px 0px;
+    margin: 0px 0px;
 }
 
 .dialog .eq-control input {

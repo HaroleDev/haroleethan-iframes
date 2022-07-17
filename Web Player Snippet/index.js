@@ -39,6 +39,7 @@ const fullscreenButton = document.querySelector('.full-screen-button');
 const pipPlayerButton = document.querySelector(".pip-button");
 
 const timelineContainer = document.querySelector(".timeline-container");
+const videoControlsContainer = document.querySelector(".video-controls-container");
 
 window.addEventListener('load', () => {
     video.src = video.currentSrc;
@@ -586,6 +587,9 @@ function loadedMetadata() {
 
 video.addEventListener("loadedmetadata", () => {
     loadedMetadata();
+    if(video.readyState >= 2) {
+        videoPlayer.classList.remove('loading')
+    }
 });
 
 video.addEventListener("timeupdate", () => {

@@ -266,7 +266,7 @@ function loadTranscript(lang) {
 }
 
 function displayCuesAfterTrackLoaded(trackElem, track) {
-    trackElem.addEventListener('load', function (e) {
+    trackElem.addEventListener('load', function () {
         displayCues(track);
     });
 }
@@ -290,7 +290,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text;
         }
-        var clickableTranscriptText = "<div class=\"cue-container\" id=\"" + `${i + 1}` + "\"" + " onclick='jumpToTranscript(" + cue.startTime + ");'" + "> <span class=\"cue-time\">" + formatDuration(cue.startTime) + "</span>" + "<span class=\"cues\">" + transcriptText + "</span></div>";
+        var clickableTranscriptText = "<div class=\"cue-container\" id=\"" + cue.startTime + "\"" + " onclick='jumpToTranscript(" + cue.startTime + ");'> <span class=\"cue-time\">" + formatDuration(cue.startTime) + "</span>" + "<span class=\"cues\">" + transcriptText + "</span></div>";
         addToTranscript(clickableTranscriptText);
     }
 }
@@ -338,11 +338,12 @@ function addToTranscript(htmlText) {
 
 function addCueListeners(cue) {
     cue.onenter = function () {
-        var transcriptText = document.getElementById(this.id);
+        var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.add("current");
+        transcriptText.parentNode.scrollTop = transcriptText.offsetTop - transcriptText.parentNode.offsetTop;
     };
     cue.onexit = function () {
-        var transcriptText = document.getElementById(this.id);
+        var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.remove("current");
     };
 }
@@ -352,43 +353,56 @@ document.addEventListener('keydown', e => {
     const tagName = document.activeElement.tagName.toLowerCase();
 
     if (tagName === 'input') return;
-    switch (e.key.toLowerCase()) {
-        case ' ':
-            if (tagName === "button") return;
-        case 'k':
-            togglePlay();
-            break;
-        case 'f':
-            videoContainer.classList.add('hovered');
-            activity();
-            toggleFullScreen();
-            break;
-        case 'c':
-            videoContainer.classList.add('hovered');
-            activity();
-            toggleCaptions();
-            break;
-        case 'i':
-            videoContainer.classList.add('hovered');
-            activity();
-            togglePIPPlayerMode();
-            break;
-        case 'm':
-            videoContainer.classList.add('hovered');
-            activity();
-            toggleVolume();
-            break;
-        case 'arrowleft': case 'j':
-            videoContainer.classList.add('hovered');
-            activity();
-            skip(-5);
-            break;
-        case 'arrowright': case 'l':
-            videoContainer.classList.add('hovered')
-            activity();
-            skip(5);
-            break
-    };
+    if (e.getModifierState("Fn") ||
+        e.getModifierState("Hyper") ||
+        e.getModifierState("OS") ||
+        e.getModifierState("Super") ||
+        e.getModifierState("Win")) {
+        return;
+    }
+    if (e.getModifierState("Control") +
+        e.getModifierState("Alt") +
+        e.getModifierState("Meta") > 1) {
+        return;
+    } else {
+        switch (e.key.toLowerCase()) {
+            case ' ':
+                if (tagName === "button") return;
+            case 'k':
+                togglePlay();
+                break;
+            case 'f':
+                videoContainer.classList.add('hovered');
+                activity();
+                toggleFullScreen();
+                break;
+            case 'c':
+                videoContainer.classList.add('hovered');
+                activity();
+                toggleCaptions();
+                break;
+            case 'i':
+                videoContainer.classList.add('hovered');
+                activity();
+                togglePIPPlayerMode();
+                break;
+            case 'm':
+                videoContainer.classList.add('hovered');
+                activity();
+                toggleVolume();
+                break;
+            case 'arrowleft': case 'j':
+                videoContainer.classList.add('hovered');
+                activity();
+                skip(-5);
+                break;
+            case 'arrowright': case 'l':
+                videoContainer.classList.add('hovered')
+                activity();
+                skip(5);
+                break
+        };
+    }
 });
 
 //Skip time
@@ -586,7 +600,7 @@ function loadedMetadata() {
 
 video.addEventListener("loadedmetadata", () => {
     loadedMetadata();
-    if(video.readyState >= 2) {
+    if (video.readyState >= 2) {
         videoPlayer.classList.remove('loading')
     }
 });

@@ -133,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!('pictureInPictureEnabled' in document)) {
         pipPlayerButton.classList.add('hidden');
     }
-    video.classList.remove('loading');
 });;
 
 settingsButton.addEventListener('click', () => {

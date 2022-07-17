@@ -9,3 +9,5 @@ Custom HTML5 Video: https://github.com/Freshman-tech/custom-html5-video
 Custom Context Menu: https://codepen.io/dcode-software/pen/dgpNKE
 
 Equalizer: https://codepen.io/rajwosa/pen/qBBXexE
+
+A player with a clickable transcript: http://masf-html5.blogspot.com/2016/04/html5-player-with-clickable-transcript.html

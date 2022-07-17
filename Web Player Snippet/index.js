@@ -396,6 +396,21 @@ function skip(duration) {
     video.currentTime += duration;
 };
 
+function spinnerDivider() {
+    const spinners = ['/', '--', '\\', '|']
+    let index = 0
+    var interval = setInterval(() => {
+        let line = spinners[index]
+        if (line == undefined) {
+            index = 0
+            line = spinners[index]
+        }
+        index = index > spinners.length ? 0 : index + 1
+        document.querySelector('.divider-time').textContent = `${line}`;
+        if (video.paused) clearInterval(interval)
+    }, 300)
+}
+
 //Activity check
 let timeout = null;
 function activity() {
@@ -628,6 +643,7 @@ function togglePlay() {
 
 //Playback
 video.addEventListener("play", () => {
+    spinnerDivider();
     videoContainer.addEventListener("mousemove", activity);
     videoContainer.addEventListener('mouseleave', () => {
         videoContainer.classList.remove('hovered');

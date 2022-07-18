@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Manrope Variable';
     src: url('./Manrope[wght].woff2');
+    font-display: block;
 }
 
 *,
@@ -1524,7 +1525,6 @@ input[type=range]::-ms-tooltip {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
     gap: 8px;

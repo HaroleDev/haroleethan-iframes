@@ -194,7 +194,7 @@ video {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    padding-right: 128px;
+    padding-right: 72px;
     gap: 24px;
     -webkit-box-align: end;
     -ms-flex-align: end;
@@ -1474,6 +1474,13 @@ input[type=range]::-ms-tooltip {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.transcript-panel .snackbar-sync-time.out-of-sync {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .transcript-panel button.sync-to-time {
@@ -1622,7 +1629,6 @@ input[type=range]::-ms-tooltip {
     box-shadow: inset 0 0 0 2px #4B99E7;
     background: #1C4D59;
 }
-
 
 .cue-container.current .cues {
     font-variation-settings: 'wght' 600;

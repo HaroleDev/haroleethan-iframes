@@ -18,10 +18,12 @@ const settingsTooltipContainer = document.querySelector('.settings-tooltip-conta
 const eqContainer = document.querySelector('.eq-dialog-container');
 const loopItem = document.querySelector('.loop-item');
 const eqItem = document.querySelector('.eq-item');
+const downloadItem = document.querySelector('.download-item');
 const Item = document.querySelector('.item');
 
 const transcriptItem = document.querySelector('.transcript-item');
 const transcriptPanel = document.querySelector('.transcript-panel');
+const transcriptDiv = document.querySelector('.captions-contents');
 
 const videoPlayer = document.querySelector('.video-player');
 
@@ -40,6 +42,8 @@ const pipPlayerButton = document.querySelector(".pip-button");
 
 const timelineContainer = document.querySelector(".timeline-container");
 const videoControlsContainer = document.querySelector(".video-controls-container");
+
+const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time')
 
 window.addEventListener('load', () => {
     video.src = video.currentSrc;
@@ -123,6 +127,13 @@ transcriptPanel.addEventListener('click', (e) => {
 
 Item.addEventListener('click', () => {
     showContextMenu(show = false);
+    settingsButton.classList.remove('pressed');
+    settingsContextMenu.classList.remove('pressed');
+    settingsTooltipContainer.classList.add('tooltip-right');
+});
+
+downloadItem.addEventListener('click', () => {
+    window.open('//res.cloudinary.com/harole/video/upload/fl_attachment/IMG_0980_xxrlit.mov')
 });
 
 //Playback
@@ -133,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!('pictureInPictureEnabled' in document)) {
         pipPlayerButton.classList.add('hidden');
     }
-});;
+});
 
 settingsButton.addEventListener('click', () => {
     settingsButton.classList.toggle('pressed');
@@ -240,7 +251,6 @@ loopItem.addEventListener('click', loopVideo);
 
 //Transcript
 var tracks, trackElems, tracksURLs = [];
-var transcriptDiv = document.querySelector('.captions-contents');
 
 function loadTranscript(lang) {
     clearTranscriptDiv();
@@ -610,11 +620,19 @@ video.addEventListener("timeupdate", () => {
     updatetime();
 });
 
+video.addEventListener("progress", () => {
+    if (video.duration) {
+        timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
+    };
+});
+
 function updatetime() {
     const percent = video.currentTime / video.duration;
     timelineContainer.style.setProperty("--progress-position", percent);
-    if (video.duration) {
-        timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
+    if (!video.paused) {
+        if (video.duration) {
+            timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
+        };
     };
     reqId = requestAnimationFrame(updatetime);
 };

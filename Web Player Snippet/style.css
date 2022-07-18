@@ -235,6 +235,9 @@ video {
     border-radius: 80px;
     font-size: 38px;
     cursor: pointer;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
     -webkit-transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -1026,19 +1029,19 @@ video {
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
-    padding: 6px 14px;
+    padding: 10px 14px 2px 14px;
+    line-height: 100%;
     background: rgba(8, 43, 33, 0.96);
     border-radius: 8px;
-    -webkit-transform: translateX(-50%) translateY(-100%);
-    -ms-transform: translateX(-50%) translateY(-100%);
-    transform: translateX(-50%) translateY(-100%);
+    -webkit-transform: translateX(-50%) translateY(-150%);
+    -ms-transform: translateX(-50%) translateY(-150%);
+    transform: translateX(-50%) translateY(-150%);
     opacity: 0;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-font-variant-ligatures: none;
-    font-variant-ligatures: none;
     pointer-events: none;
+    text-align: center;
 }
 
 .tooltip-left:hover::after {

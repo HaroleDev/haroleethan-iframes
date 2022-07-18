@@ -1,8 +1,20 @@
+@font-face {
+    font-family: 'Manrope Variable';
+    src: url('./Manrope[wght].woff2');
+}
+
 *,
 *::before,
 *::after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+:root {
+    --accent-color: #02DA9A;
+    --background: #1C5947;
+    --foreground: #1C6550;
+    --stroke-accent-color: #165248;
 }
 
 html,
@@ -12,8 +24,9 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
     font-style: normal;
+    font-variation-settings: 'wght' 500;
     font-weight: 500;
     font-size: 16px;
     line-height: 160%;
@@ -49,7 +62,11 @@ video {
     animation: 600ms cubic-bezier(0.19, 1, 0.22, 1) 0s 1 transition;
 }
 
-video.loading {
+.loading video {
+    opacity: 0;
+}
+
+.loading .video-controls-container {
     opacity: 0;
 }
 
@@ -146,7 +163,7 @@ video.loading {
     margin: 0 auto;
 }
 
-.inactive {
+:not(.pip-player).inactive {
     cursor: none;
 }
 
@@ -243,7 +260,7 @@ video.loading {
 }
 
 .video-controls-container .right-side button:hover path {
-    fill: #02DA9A;
+    fill: var(--accent-color);
 }
 
 .video-controls-container .right-side button:active path {
@@ -294,13 +311,14 @@ video.loading {
 }
 
 .video-name h1 {
-    font-family: 'Manrope';
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
     font-style: normal;
+    font-variation-settings: 'wght' 600;
     font-weight: 800;
     font-size: 48px;
     line-height: 115%;
     margin: 0;
-    letter-spacing: -0.04em;
+
     text-align: left;
     color: #FFFFFF
 }
@@ -308,6 +326,7 @@ video.loading {
 .duration-container {
     font-family: 'Manrope';
     font-style: normal;
+    font-variation-settings: 'wght' 500;
     font-weight: 500;
     font-size: 16px;
     line-height: 160%;
@@ -385,7 +404,7 @@ video.loading {
     bottom: 0;
     z-index: 2;
     border-radius: 16px 24px 8px 16px;
-    background: #02DA9A;
+    background: var(--accent-color);
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -496,7 +515,7 @@ video.loading {
     content: '';
     width: inherit;
     height: 4px;
-    background: #02DA9A;
+    background: var(--accent-color);
     position: absolute;
     display: block;
     border-radius: 4px;
@@ -562,7 +581,7 @@ video.loading {
     bottom: 0;
     right: 0;
     margin: 0;
-    background: #016F4E;
+    background: var(--foreground);
     height: 20px;
     opacity: 0;
     z-index: 2;
@@ -684,15 +703,15 @@ video.loading {
     left: 50%;
     position: absolute;
     margin: auto;
-    background: #1C5947;
+    background: var(--background);
     color: #FFF;
     z-index: 7;
     border-radius: 8px;
     -webkit-transform: translate(-50%, -50%) scale(1.06);
     -ms-transform: translate(-50%, -50%) scale(1.06);
     transform: translate(-50%, -50%) scale(1.06);
-    -webkit-box-shadow: 0px 4px 0px #1C5947;
-    box-shadow: 0px 4px 0px #1C5947;
+    -webkit-box-shadow: 0px 4px 0px var(--background);
+    box-shadow: 0px 4px 0px var(--background);
     opacity: 0;
     pointer-events: none;
     -webkit-user-select: none;
@@ -722,9 +741,9 @@ video.loading {
 
 .dialog h2 {
     line-height: 110%;
-    letter-spacing: -0.04em;
     margin: 0 auto;
-    margin-bottom: 16px;
+    font-variation-settings: 'wght' 600;
+    font-weight: 800;
     font-size: 28px;
 }
 
@@ -821,7 +840,7 @@ video.loading {
 
 .dialog .footer-buttons {
     width: 100%;
-    background: #1C6550;
+    background: var(--foreground);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -844,8 +863,8 @@ video.loading {
 }
 
 .dialog button.close-dialog {
-    font-family: Manrope, sans-serif;
     font-size: 1em;
+    font-variation-settings: 'wght' 500;
     font-weight: 500;
     -webkit-font-kerning: normal;
     font-kerning: normal;
@@ -858,8 +877,8 @@ video.loading {
     height: 40px;
     background-color: #17785B;
     line-height: 160%;
-    -webkit-box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px 4px #165248, 0px 8px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px 4px #165248, 0px 8px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 4px 0px var(--background), 0px 4px 0px 4px #165248, 0px 8px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 0px var(--background), 0px 4px 0px 4px #165248, 0px 8px 0px rgba(0, 0, 0, 0.1);
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -870,23 +889,23 @@ video.loading {
 }
 
 .dialog button.close-dialog:active {
-    background-color: #1C5947;
-    -webkit-box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px 4px #165248, 0px 0px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px 4px #165248, 0px 0px 0px rgba(0, 0, 0, 0.1);
+    background-color: var(--background);
+    -webkit-box-shadow: 0px 0px 0px var(--background), 0px 0px 0px 4px #165248, 0px 0px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 0px var(--background), 0px 0px 0px 4px #165248, 0px 0px 0px rgba(0, 0, 0, 0.1);
     -webkit-transform: translate(0px, 4px);
     -ms-transform: translate(0px, 4px);
     transform: translate(0px, 4px);
 }
 
 .dialog button.close-dialog.default {
-    background-color: #02da9a;
+    background-color: var(--accent-color);
     -webkit-box-shadow: 0px 4px 0px #01a675;
     box-shadow: 0px 4px 0px #01a675;
 }
 
 .dialog button.close-dialog.default:hover {
     background-color: #0de4a4;
-    color: #1c6550
+    color: var(--foreground)
 }
 
 .dialog button.close-dialog.default:active {
@@ -1029,8 +1048,8 @@ video.loading {
 .tooltip-left:before,
 .tooltip-left:after {
     position: absolute;
-    font-family: 'Manrope', sans-serif;
     font-style: normal;
+    font-variation-settings: 'wght' 500;
     font-weight: 500;
     font-size: 16px;
     top: 12px;
@@ -1071,8 +1090,8 @@ div.tooltip-right:hover::after {
 div.tooltip-right:before,
 div.tooltip-right:after {
     position: absolute;
-    font-family: 'Manrope', sans-serif;
     font-style: normal;
+    font-variation-settings: 'wght' 500;
     font-weight: 500;
     font-size: 16px;
     top: 48px;
@@ -1120,7 +1139,7 @@ div.tooltip-right:after {
 }
 
 .enabled .switch .switch-bg {
-    fill: #02DA9A;
+    fill: var(--accent-color);
     stroke: #016F4E;
 }
 
@@ -1134,9 +1153,9 @@ div.tooltip-right:after {
 .dialog .eq-control input {
     height: 12px;
     background-color: #016F4E;
-    background-image: -o-linear-gradient(#02DA9A, #02DA9A);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#02DA9A), to(#02DA9A));
-    background-image: linear-gradient(#02DA9A, #02DA9A);
+    background-image: -o-linear-gradient(var(--accent-color), var(--accent-color));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--accent-color)), to(var(--accent-color)));
+    background-image: linear-gradient(var(--accent-color), var(--accent-color));
     background-size: 50% 100%;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -1197,9 +1216,9 @@ div.tooltip-right:after {
 
 .dialog .eq-control input:hover {
     background-color: #17785B;
-    background-image: -o-linear-gradient(#02DA9A, #02DA9A);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#02DA9A), to(#02DA9A));
-    background-image: linear-gradient(#02DA9A, #02DA9A);
+    background-image: -o-linear-gradient(var(--accent-color), var(--accent-color));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--accent-color)), to(var(--accent-color)));
+    background-image: linear-gradient(var(--accent-color), var(--accent-color));
     background-size: 50% 100%;
     background-repeat: no-repeat;
 }
@@ -1264,9 +1283,9 @@ div.tooltip-right:after {
 
 .dialog .eq-control input:disabled {
     background: #165248;
-    background-image: -o-linear-gradient(#02DA9A, #02DA9A);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#02DA9A), to(#02DA9A));
-    background-image: linear-gradient(#02DA9A, #02DA9A);
+    background-image: -o-linear-gradient(var(--accent-color), var(--accent-color));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--accent-color)), to(var(--accent-color)));
+    background-image: linear-gradient(var(--accent-color), var(--accent-color));
     background-blend-mode: soft-light;
     background-size: 50% 100%;
     background-repeat: no-repeat;
@@ -1324,7 +1343,7 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel {
-    background: #1C5947;
+    background: var(--background);
     min-width: 0px;
     max-width: 0px;
     height: 100%;
@@ -1356,10 +1375,10 @@ input[type=range]::-ms-tooltip {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 28px 30px;
-    background: #1C6550;
+    background: var(--foreground);
     min-width: 400px;
-    -webkit-box-shadow: 0px 4px 0px #165248;
-    box-shadow: 0px 4px 0px #165248;
+    -webkit-box-shadow: inset 0px -4px 0px #165248;
+    box-shadow: inset 0px -4px 0px #165248;
 }
 
 .transcript-panel .header-buttons {
@@ -1377,19 +1396,18 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel h1 {
-    font-family: 'Manrope';
     font-style: normal;
+    font-variation-settings: 'wght' 600;
     font-weight: 800;
     font-size: 32px;
     line-height: 110%;
-    letter-spacing: -0.04em;
+
     color: #FFF;
     margin: 0;
     margin-bottom: 8px;
 }
 
 .transcript-panel span {
-    font-family: 'Manrope';
     font-style: normal;
     font-size: 16px;
     line-height: 160%;
@@ -1427,7 +1445,7 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel button:hover path {
-    fill: #02DA9A;
+    fill: var(--accent-color);
 }
 
 .transcript-panel button:active path {
@@ -1455,8 +1473,9 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel button.sync-to-time {
-    font-family: 'Manrope';
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
     font-style: normal;
+    font-variation-settings: 'wght' 600;
     font-weight: 800;
     font-size: 16px;
     line-height: 160%;
@@ -1466,7 +1485,6 @@ input[type=range]::-ms-tooltip {
     -webkit-box-shadow: 0px 4px 0px #1D78D1, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #165248, 0px 4px 16px 28px rgba(22, 82, 72, 0.6);
     box-shadow: 0px 4px 0px #1D78D1, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #165248, 0px 4px 16px 28px rgba(22, 82, 72, 0.6);
     border-radius: 21px;
-    letter-spacing: -0.04em;
     padding: 6px 18px;
     -webkit-transform: translateY(0px);
     -ms-transform: translateY(0px);
@@ -1503,7 +1521,34 @@ input[type=range]::-ms-tooltip {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
     gap: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--background);
+    height: calc(100% - 125px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.transcript-panel .captions-contents::-webkit-scrollbar {
+    width: 0px;
+}
+
+.transcript-panel .captions-contents:hover::-webkit-scrollbar {
+    width: 16px;
+}
+
+.transcript-panel .captions-contents::-webkit-scrollbar-track {
+    background: var(--stroke-accent-color);
+    border-radius: 8px 0px 0px 8px;
+}
+
+.transcript-panel .captions-contents::-webkit-scrollbar-thumb {
+    background-color: #17785B;
+    border-radius: 8px;
+    border: 4px solid var(--stroke-accent-color);
 }
 
 .cue-container {
@@ -1522,22 +1567,25 @@ input[type=range]::-ms-tooltip {
     width: 360px;
     background: transparent;
     border-radius: 8px;
-    -webkit-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     cursor: pointer;
 }
 
 .cues {
     color: #FFF;
-    font-family: 'Manrope';
     font-style: normal;
+    font-variation-settings: 'wght' 500;
     font-weight: 500;
     font-size: 16px;
     line-height: 160%;
     word-wrap: break-word;
     max-width: 264px;
     margin-top: 2px;
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .cue-time {
@@ -1550,15 +1598,16 @@ input[type=range]::-ms-tooltip {
     border-radius: 4px;
     text-align: center;
     color: #CCE7FF !important;
+    font-variation-settings: 'wght' 600;
     font-weight: 800;
-    letter-spacing: -0.04em;
+
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .cue-container:hover {
-    background: #1C6550;
+    background: var(--foreground);
 }
 
 .cue-container.current {
@@ -1571,6 +1620,9 @@ input[type=range]::-ms-tooltip {
     background: #1C4D59;
 }
 
+
 .cue-container.current .cues {
+    font-variation-settings: 'wght' 600;
     font-weight: 800;
+    letter-spacing: 0.02em;
 }

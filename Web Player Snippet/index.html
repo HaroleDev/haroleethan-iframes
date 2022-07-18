@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" />
 </head>
 
 <body>
@@ -314,7 +313,9 @@
                     </div>
                 </div>
             </div>
-            <video tabindex="-1" playsinline class="video" preload="metadata" crossorigin="anonymous" data-video-title="fresh coat" onloadedmetadata="document.querySelector('.video-name h1').textContent = document.querySelector('video').getAttribute('data-video-title')">
+            <video tabindex="-1" playsinline class="video" preload="metadata" crossorigin="anonymous"
+                data-video-title="fresh coat"
+                onloadedmetadata="document.querySelector('.video-name h1').textContent = document.querySelector('video').getAttribute('data-video-title')">
                 <source src="./IMG_0980.mov" type="video/mp4">
                 </source>
                 <track id="default-track" label="English" kind="captions" srclang="en" src="./sample.vtt" default>
@@ -350,7 +351,7 @@
                 </div>
             </div>
             <div class="contents">
-                <div class="captions-contents" data-simplebar data-simplebar-auto-hide="false"></div>
+                <div class="captions-contents"></div>
                 <div class="snackbar-sync-time">
                     <button class="sync-to-time">Sync to current video time</button>
                 </div>
@@ -359,7 +360,6 @@
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mediainfo.js@0.1.7/dist/mediainfo.min.js"
         defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js" defer></script>
 </body>
 
 </html>

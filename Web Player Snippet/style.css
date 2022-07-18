@@ -346,6 +346,12 @@ video {
     display: inline-block;
     text-align: center;
     width: 10px;
+    user-select: none;
+}
+
+.divider-time-copy {
+    opacity: 0;
+    position: absolute;
 }
 
 .timeline-container {

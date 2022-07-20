@@ -432,7 +432,7 @@ function spinnerDivider() {
         index = index > spinners.length ? 0 : index + 1
         document.querySelector('.divider-time').textContent = `${line}`;
         if (video.paused) clearInterval(interval)
-    }, 300)
+    }, 600)
 }
 
 //Activity check
@@ -454,9 +454,27 @@ fullscreenButton.addEventListener('click', toggleFullScreen);
 
 function toggleFullScreen() {
     if (document.fullscreenElement == null) {
-        videoPlayer.requestFullscreen();
+        if (videoPlayer.mozRequestFullScreen) {
+            videoPlayer.mozRequestFullScreen();
+        } else if (videoPlayer.webkitRequestFullScreen) {
+            videoPlayer.webkitRequestFullscreen();
+        } else if (videoPlayer.msRequestFullScreen) {
+            videoPlayer.msRequestFullscreen();
+        } else if (videoPlayer.requestFullscreen) {
+            videoPlayer.requestFullscreen();
+        };
     } else {
-        document.exitFullscreen();
+        if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
+            if (document.requestFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            } else if (document.msRequestFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            };
+        };
     };
 };
 
@@ -474,9 +492,14 @@ async function togglePIPPlayerMode() {
     };
 };
 
-document.addEventListener("fullscreenchange", () => {
+function fullScreenToggleChange() {
     videoContainer.classList.toggle("full-screen", document.fullscreenElement);
-});
+};
+
+document.addEventListener("fullscreenchange", fullScreenToggleChange);
+document.addEventListener("mozfullscreenchange", fullScreenToggleChange);
+document.addEventListener("webkitfullscreenchange", fullScreenToggleChange);
+document.addEventListener("msfullscreenchange", fullScreenToggleChange);
 
 function togglePIPClass() {
     videoContainer.classList.toggle("pip-player");
@@ -608,11 +631,21 @@ function loadedMetadata() {
     cuetime.setAttribute('max', video.duration + 1);
 };
 
-video.addEventListener("loadedmetadata", () => {
-    loadedMetadata();
-    if (video.readyState >= 2) {
-        videoPlayer.classList.remove('loading')
-    }
+video.addEventListener("loadedmetadata", loadedMetadata);
+
+video.addEventListener('loadstart', () => {
+    videoPlayer.classList.add('loading');
+    videoPlayer.querySelector('.video-name h1').textContent = videoPlayer.querySelector('video').getAttribute('data-video-title');
+});
+
+video.addEventListener('canplay', () => {
+    videoPlayer.classList.remove('loading');
+});
+
+video.addEventListener('canplaythrough', () => {
+    if (video.duration) {
+        timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
+    };
 });
 
 video.addEventListener("timeupdate", () => {
@@ -664,6 +697,7 @@ function toggleCaptions() {
     videoContainer.classList.toggle("caption", isHidden);
 };
 
+//Playback
 function togglePlay() {
     if (context.state === 'suspended') {
         context.resume();
@@ -675,8 +709,6 @@ function togglePlay() {
     video.paused ? video.play() : video.pause();
 };
 
-
-//Playback
 video.addEventListener("play", () => {
     spinnerDivider();
     videoContainer.addEventListener("mousemove", activity);

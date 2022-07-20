@@ -54,7 +54,6 @@ window.addEventListener('load', () => {
     }
     tracks = video.textTracks;
 });
-
 function handleInputChange(e) {
     let target = e.target;
     if (e.target.type !== 'range') {
@@ -651,6 +650,15 @@ video.addEventListener('canplaythrough', () => {
 video.addEventListener("timeupdate", () => {
     currentTime.textContent = formatDuration(video.currentTime);
     updatetime();
+    if (video.currentTime === video.duration) {
+        videoContainer.classList.add('ended');
+    } else {
+        videoContainer.classList.remove('ended');
+    };
+});
+
+video.addEventListener("durationchange", () => {
+    updatetime();
 });
 
 video.addEventListener("progress", () => {
@@ -699,12 +707,17 @@ function toggleCaptions() {
 
 //Playback
 function togglePlay() {
+    if (video.currentTime === video.duration && video.paused) {
+        if (contextMenu.classList.contains("show")) {
+            return;
+        } if (settingsContextMenu.classList.contains("pressed")) {
+            return;
+        };
+        videoContainer.classList.remove('ended');
+        video.currentTime = 0;
+    };
     if (context.state === 'suspended') {
         context.resume();
-    } if (contextMenu.classList.contains("show")) {
-        return;
-    } if (settingsContextMenu.classList.contains("pressed")) {
-        return;
     };
     video.paused ? video.play() : video.pause();
 };
@@ -723,4 +736,8 @@ video.addEventListener("pause", () => {
     video.classList.remove('inactive');
     clearTimeout(timeout);
     videoContainer.classList.add('paused');
+});
+
+video.addEventListener('ended', () => {
+    videoContainer.classList.add('ended');
 });

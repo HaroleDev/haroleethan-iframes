@@ -420,7 +420,7 @@ function skip(duration) {
 };
 
 function spinnerDivider() {
-    const spinners = ['/', '--', '\\', '|']
+    const spinners = ['/', '–', '\\', '|']
     let index = 0
     var interval = setInterval(() => {
         let line = spinners[index]

@@ -202,7 +202,7 @@ video {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    padding-right: 72px;
+    padding-right: 32px;
     gap: 24px;
     -webkit-box-align: end;
     -ms-flex-align: end;
@@ -244,6 +244,7 @@ video {
     border-radius: 80px;
     font-size: 38px;
     cursor: pointer;
+    z-index: 2;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
@@ -259,6 +260,7 @@ video {
     height: 48px;
     width: 48px;
     cursor: pointer;
+    position: relative;
     -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -321,9 +323,14 @@ video {
     display: none;
 }
 
+.video-information-container {
+    position: absolute;
+    padding-left: calc(88px + 12px);
+    z-index: 1;
+}
+
 .video-name {
     margin: 0;
-    width: 100%;
     word-wrap: break-word;
     margin-bottom: 8px;
 }
@@ -427,7 +434,7 @@ video {
     left: 0;
     top: 0;
     height: 8px;
-    right: calc(100% - var(--progress-position) * 100%);
+    width: calc(var(--progress-position) * 100%);
     bottom: 0;
     z-index: 2;
     border-radius: 16px 24px 8px 16px;
@@ -449,6 +456,7 @@ video {
     left: calc(var(--preview-position) * 100%);
     border-radius: 24px;
     opacity: 0;
+    z-index: -1;
     background: #016F4E;
     color: #FFF;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -458,6 +466,7 @@ video {
     -o-transition-delay: 60ms;
     transition-delay: 60ms;
     pointer-events: none;
+    user-select: none;
 }
 
 .video-container.scrubbing .timeline-scrubber,
@@ -1076,6 +1085,7 @@ video {
 .tooltip-left:after {
     position: absolute;
     font-style: normal;
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
     font-variation-settings: 'wght' 500;
     font-weight: 500;
     font-size: 16px;
@@ -1092,9 +1102,9 @@ div.tooltip-right::after {
     padding: 6px 14px;
     background: rgba(8, 43, 33, 0.96);
     border-radius: 8px;
-    -webkit-transform: translateX(-75%) translateY(-100%);
-    -ms-transform: translateX(-75%) translateY(-100%);
-    transform: translateX(-75%) translateY(-100%);
+    -webkit-transform: translateX(-75%) translateY(-125%);
+    -ms-transform: translateX(-75%) translateY(-125%);
+    transform: translateX(-75%) translateY(-125%);
     opacity: 0;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -1104,9 +1114,9 @@ div.tooltip-right::after {
 }
 
 div.tooltip-right.volume-tooltip-container::after {
-    -webkit-transform: translateX(75%) translateY(-100%);
-    -ms-transform: translateX(75%) translateY(-100%);
-    transform: translateX(75%) translateY(-100%);
+    -webkit-transform: translateX(75%) translateY(-125%);
+    -ms-transform: translateX(75%) translateY(-125%);
+    transform: translateX(75%) translateY(-125%);
     text-align: left;
 }
 

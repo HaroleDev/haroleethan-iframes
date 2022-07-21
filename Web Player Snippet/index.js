@@ -588,7 +588,6 @@ document.addEventListener("mousemove", e => {
 let isScrubbing = false;
 let wasPaused;
 function toggleScrubbing(e) {
-    timelineContainer.style.setProperty("--preview-position", 0);
     const rect = timelineContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     isScrubbing = (e.buttons & 1) === 1;
@@ -610,9 +609,9 @@ function handleTimelineUpdate(e) {
     timelineContainer.style.setProperty("--preview-position", percent);
     if (isScrubbing) {
         e.preventDefault();
-        video.currentTime = percent * video.duration;
-        cuetimeTooltip.textContent = formatDuration(video.currentTime);
         timelineContainer.style.setProperty("--progress-position", percent);
+        cuetimeTooltip.textContent = formatDuration(percent * video.duration);
+        currentTime.textContent = formatDuration(percent * video.duration);
     };
 };
 
@@ -669,11 +668,11 @@ video.addEventListener("progress", () => {
 
 function updatetime() {
     const percent = video.currentTime / video.duration;
-    timelineContainer.style.setProperty("--progress-position", percent);
     if (!video.paused) {
         if (video.duration) {
             timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
         };
+        timelineContainer.style.setProperty("--progress-position", percent);
     };
     reqId = requestAnimationFrame(updatetime);
 };

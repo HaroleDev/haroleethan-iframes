@@ -38,6 +38,7 @@ const volumeTooltipContainer = document.querySelector('.volume-tooltip-container
 const dialogOverlay = document.querySelector('.dialog-overlay');
 
 const fullscreenButton = document.querySelector('.full-screen-button');
+const fullscreenTooltip = document.querySelector('.full-screen-tooltip');
 const pipPlayerButton = document.querySelector(".pip-button");
 
 const timelineContainer = document.querySelector(".timeline-container");
@@ -462,21 +463,21 @@ function toggleFullScreen() {
         } else if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
         };
-    fullscreenButton.dataset.tooltip = 'Exit full screen' + ' (f)';
+    fullscreenTooltip.dataset.tooltip = 'Exit full screen' + ' (f)';
     } else {
         if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
             if (document.requestFullscreen) {
                 document.exitFullscreen();
-                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
+                fullscreenTooltip.dataset.tooltip = 'Full screen' + ' (f)';
             } else if (document.webkitCancelFullScreen) {
                 document.webkitCancelFullScreen();
-                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
+                fullscreenTooltip.dataset.tooltip = 'Full screen' + ' (f)';
             } else if (document.msRequestFullscreen) {
                 document.msExitFullscreen();
-                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
+                fullscreenTooltip.dataset.tooltip = 'Full screen' + ' (f)';
             } else if (document.mozCancelFullScreen) {
                 document.mozCancelFullScreen();
-                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
+                fullscreenTooltip.dataset.tooltip = 'Full screen' + ' (f)';
             };
         };
     };

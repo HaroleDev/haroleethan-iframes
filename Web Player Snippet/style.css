@@ -366,7 +366,7 @@ video {
 .divider-time {
     display: inline-block;
     text-align: center;
-    width: 10px;
+    width: 12px;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;

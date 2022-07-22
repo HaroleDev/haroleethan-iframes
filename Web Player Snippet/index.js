@@ -456,22 +456,27 @@ function toggleFullScreen() {
         if (videoPlayer.mozRequestFullScreen) {
             videoPlayer.mozRequestFullScreen();
         } else if (videoPlayer.webkitRequestFullScreen) {
-            videoPlayer.webkitRequestFullscreen();
+            videoPlayer.webkitRequestFullScreen();
         } else if (videoPlayer.msRequestFullScreen) {
             videoPlayer.msRequestFullscreen();
         } else if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
         };
+    fullscreenButton.dataset.tooltip = 'Exit full screen' + ' (f)';
     } else {
         if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
             if (document.requestFullscreen) {
                 document.exitFullscreen();
+                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
             } else if (document.webkitCancelFullScreen) {
                 document.webkitCancelFullScreen();
+                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
             } else if (document.msRequestFullscreen) {
                 document.msExitFullscreen();
+                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
             } else if (document.mozCancelFullScreen) {
                 document.mozCancelFullScreen();
+                fullscreenButton.dataset.tooltip = 'Full screen' + ' (f)';
             };
         };
     };

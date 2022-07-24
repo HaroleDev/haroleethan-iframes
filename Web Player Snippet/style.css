@@ -198,6 +198,10 @@ video {
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.video-container.pip-player .pip-enter, .video-container:not(.pip-player) .pip-exit{
+    display: none;
+}
+
 .video-controls-container .left-side {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -462,11 +466,11 @@ video {
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-transition-delay: 60ms;
-    -o-transition-delay: 60ms;
-    transition-delay: 60ms;
     pointer-events: none;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 .video-container.scrubbing .timeline-scrubber,
@@ -483,6 +487,9 @@ video {
 .scrubbing .timeline-container .cuetime-tooltip,
 .timeline-container:hover .timeline::after {
     opacity: 1;
+    -webkit-transition-delay: 100ms;
+    -o-transition-delay: 100ms;
+    transition-delay: 100ms;
 }
 
 .timeline-container:hover .timeline-scrubber {
@@ -825,7 +832,7 @@ video {
     pointer-events: all;
 }
 
-.eq-dialog-container.opened .dialog-overlay {
+.opened .dialog-overlay {
     opacity: 1;
     pointer-events: initial;
 }
@@ -913,8 +920,8 @@ video {
     height: 40px;
     background-color: #17785B;
     line-height: 160%;
-    -webkit-box-shadow: 0px 4px 0px var(--background), 0px 4px 0px 4px #165248, 0px 8px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 4px 0px var(--background), 0px 4px 0px 4px #165248, 0px 8px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px var(--background), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
+    box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px var(--background), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -926,8 +933,8 @@ video {
 
 .dialog button.close-dialog:active {
     background-color: var(--background);
-    -webkit-box-shadow: 0px 0px 0px var(--background), 0px 0px 0px 4px #165248, 0px 0px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 0px var(--background), 0px 0px 0px 4px #165248, 0px 0px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
     -webkit-transform: translate(0px, 4px);
     -ms-transform: translate(0px, 4px);
     transform: translate(0px, 4px);
@@ -935,8 +942,8 @@ video {
 
 .dialog button.close-dialog.default {
     background-color: var(--accent-color);
-    -webkit-box-shadow: 0px 4px 0px #01a675;
-    box-shadow: 0px 4px 0px #01a675;
+    -webkit-box-shadow: 0px 4px 0px #01A573, 0px 4px 0px #01a675, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
+    box-shadow: 0px 4px 0px #01A573, 0px 4px 0px #01a675, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
 }
 
 .dialog button.close-dialog.default:hover {
@@ -947,8 +954,8 @@ video {
 .dialog button.close-dialog.default:active {
     background-color: #01A573;
     color: #000;
-    -webkit-box-shadow: 0px 0px 0px #01a675;
-    box-shadow: 0px 0px 0px #01a675;
+    -webkit-box-shadow: 0px 0px 0px #01A573, 0px 0px 0px #01A573, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    box-shadow: 0px 0px 0px #01A573, 0px 0px 0px #01A573, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
     -webkit-transform: translate(0px, 4px);
     -ms-transform: translate(0px, 4px);
     transform: translate(0px, 4px);
@@ -1079,6 +1086,9 @@ video {
 
 .tooltip-left:hover::after {
     opacity: 1;
+    -webkit-transition-delay: 300ms;
+         -o-transition-delay: 300ms;
+            transition-delay: 300ms;
 }
 
 .tooltip-left:before,
@@ -1122,6 +1132,9 @@ div.tooltip-right.volume-tooltip-container::after {
 
 div.tooltip-right:hover::after {
     opacity: 1;
+    -webkit-transition-delay: 300ms;
+         -o-transition-delay: 300ms;
+            transition-delay: 300ms;
 }
 
 div.tooltip-right:before,

@@ -46,8 +46,20 @@ const videoControlsContainer = document.querySelector(".video-controls-container
 
 const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time')
 
+var videoSrc = './hls streams/IMG_1175_H264STREAM.m3u8';
+var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/IMG_1175_H264STREAM_cg5sho.mp4';
+
 window.addEventListener('load', () => {
-    video.src = video.currentSrc;
+    videoPlayer.querySelector('.video-name h1').textContent = videoPlayer.querySelector('video').getAttribute('data-video-title');
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    } else if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(document.querySelector('video source'));
+    } else if (!Hls.isSupported()) {
+        video.src = videoFallbackSrc;
+    }
     trackElems = document.querySelectorAll("track");
     for (var i = 0; i < trackElems.length; i++) {
         var currentTrackElem = trackElems[i];
@@ -133,7 +145,7 @@ Item.addEventListener('click', () => {
 });
 
 downloadItem.addEventListener('click', () => {
-    window.open('//res.cloudinary.com/harole/video/upload/fl_attachment/IMG_0980_xxrlit.mov')
+    window.open(`//res.cloudinary.com/harole/video/upload/fl_attachment/${videoFallbackSrc.substring(videoFallbackSrc.lastIndexOf("/") + 1, videoFallbackSrc.length)}`);
 });
 
 //Playback
@@ -639,7 +651,6 @@ video.addEventListener("loadedmetadata", loadedMetadata);
 
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
-    videoPlayer.querySelector('.video-name h1').textContent = videoPlayer.querySelector('video').getAttribute('data-video-title');
 });
 
 video.addEventListener('canplay', () => {
@@ -657,6 +668,7 @@ video.addEventListener("timeupdate", () => {
     updatetime();
     if (video.currentTime === video.duration) {
         videoContainer.classList.add('ended');
+        timelineContainer.style.setProperty("--progress-position", 1);
     } else {
         videoContainer.classList.remove('ended');
     };

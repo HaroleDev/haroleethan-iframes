@@ -237,10 +237,10 @@ video {
 }
 
 .video-controls-container .left-side button {
-    background: #FFF;
+    background: #0000004d;
+    -webkit-box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.06);
     border: none;
-    -webkit-box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.1);
     color: inherit;
     padding: 21px;
     height: 80px;
@@ -286,11 +286,11 @@ video {
 }
 
 .video-controls-container .left-side button:hover {
-    background: #E7FEF7;
+    background: #01A5734d;
 }
 
 .video-controls-container .left-side button:active {
-    background: #D1EFE6;
+    background: #02DA9A99;
     -webkit-transform: scale(0.96);
     -ms-transform: scale(0.96);
     transform: scale(0.96);

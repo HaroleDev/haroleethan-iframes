@@ -46,7 +46,7 @@ const videoControlsContainer = document.querySelector(".video-controls-container
 
 const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time')
 
-var videoSrc = './IMG_1175_H264STREAM.m3u8';
+var videoSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/IMG_1175_H264STREAM_cg5sho.m3u8';
 var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/IMG_1175_H264STREAM_cg5sho.mp4';
 
 window.addEventListener('load', () => {

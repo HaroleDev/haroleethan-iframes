@@ -46,7 +46,7 @@ const videoControlsContainer = document.querySelector(".video-controls-container
 
 const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time')
 
-var videoSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.m3u8';
+var videoSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.m3u8';
 var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.mp4';
 
 window.addEventListener('load', () => {
@@ -145,7 +145,7 @@ Item.addEventListener('click', () => {
 });
 
 downloadItem.addEventListener('click', () => {
-    window.open(`//res.cloudinary.com/harole/video/upload/fl_attachment/${videoFallbackSrc.substring(videoFallbackSrc.lastIndexOf("/") + 1, videoFallbackSrc.length)}`);
+    window.open(`//res.cloudinary.com/harole/video/upload/fl_attachment/${videoFallbackSrc.substring(videoFallbackSrc.IndexOf("v1658759272/") + 1, videoFallbackSrc.length)}`);
 });
 
 //Playback

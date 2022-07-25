@@ -145,7 +145,7 @@ Item.addEventListener('click', () => {
 });
 
 downloadItem.addEventListener('click', () => {
-    window.open(`//res.cloudinary.com/harole/video/upload/fl_attachment/${videoFallbackSrc.substring(videoFallbackSrc.IndexOf("v1658759272/") + 1, videoFallbackSrc.length)}`);
+    window.open(`//res.cloudinary.com/harole/video/upload/fl_attachment/${videoFallbackSrc.substring(videoFallbackSrc.indexOf("/v1658759272/") + 1, videoFallbackSrc.length)}`);
 });
 
 //Playback

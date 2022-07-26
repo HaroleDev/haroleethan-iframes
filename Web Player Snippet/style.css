@@ -328,6 +328,9 @@ video {
 .video-information-container {
     position: absolute;
     padding-left: calc(88px + 12px);
+    width: fit-content;
+    display: block;
+    width: calc(100% - 512px);
     z-index: 1;
 }
 
@@ -358,6 +361,7 @@ video {
     font-size: 16px;
     line-height: 160%;
     color: #FFFFFF;
+    width: fit-content;
 }
 
 .divider-time,

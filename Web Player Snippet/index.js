@@ -239,6 +239,16 @@ transcriptItem.addEventListener('click', () => {
     videoPlayer.classList.add("transcript-opened");
 });
 
+transcriptPanel.querySelector('.close-transcript-panel').addEventListener('mouseover', () => {
+    videoContainer.classList.add('hovered');
+    video.classList.remove('inactive');
+});
+
+transcriptPanel.querySelector('.close-transcript-panel').addEventListener('mouseleave', () => {
+    videoContainer.classList.remove('hovered');
+    video.classList.add('inactive');
+});
+
 transcriptPanel.querySelector('.close-transcript-panel').addEventListener('click', () => {
     videoPlayer.classList.remove("transcript-opened");
 });
@@ -454,10 +464,12 @@ let timeout = null;
 function activity() {
     clearTimeout(timeout);
     video.classList.remove('inactive');
+    videoControlsContainer.classList.remove('inactive');
     videoContainer.classList.add('hovered');
     if (videoContainer.classList.contains("hovered")) {
         timeout = setTimeout(function () {
             videoContainer.classList.remove('hovered');
+            videoControlsContainer.classList.add('inactive');
             video.classList.add('inactive');
         }, 2000);
     }

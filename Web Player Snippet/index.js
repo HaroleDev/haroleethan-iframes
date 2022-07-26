@@ -48,25 +48,19 @@ const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time')
 
 videoPlayer.querySelector('.video-name h1').textContent = document.querySelector("meta[property='og:title']").getAttribute("content");
 
-var videoSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.m3u8';
+var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.m3u8';
 var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.mp4';
 
 window.addEventListener('load', () => {
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
+        video.src = videoHLSSrc;
     } else if (Hls.isSupported()) {
-      var hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(document.querySelector('video source'));
+        var hls = new Hls();
+        hls.loadSource(videoHLSSrc);
+        hls.attachMedia(document.querySelector('video source'));
     } else if (!Hls.isSupported()) {
         video.src = videoFallbackSrc;
     }
-    trackElems = document.querySelectorAll("track");
-    for (var i = 0; i < trackElems.length; i++) {
-        var currentTrackElem = trackElems[i];
-        tracksURLs[i] = currentTrackElem.src;
-    }
-    tracks = video.textTracks;
 });
 function handleInputChange(e) {
     let target = e.target;
@@ -264,6 +258,13 @@ loopItem.addEventListener('click', loopVideo);
 
 //Transcript
 var tracks, trackElems, tracksURLs = [];
+
+trackElems = document.querySelectorAll("track");
+for (var i = 0; i < trackElems.length; i++) {
+    var currentTrackElem = trackElems[i];
+    tracksURLs[i] = currentTrackElem.src;
+}
+tracks = video.textTracks;
 
 function loadTranscript(lang) {
     clearTranscriptDiv();
@@ -476,7 +477,7 @@ function toggleFullScreen() {
         } else if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
         };
-    fullscreenTooltip.dataset.tooltip = 'Exit full screen' + ' (f)';
+        fullscreenTooltip.dataset.tooltip = 'Exit full screen' + ' (f)';
     } else {
         if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
             if (document.requestFullscreen) {
@@ -659,7 +660,7 @@ video.addEventListener('canplay', () => {
 });
 
 video.addEventListener('canplaythrough', () => {
-    if (video.duration) {
+    if (video.buffered.length > 0) {
         timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
     };
 });
@@ -680,7 +681,7 @@ video.addEventListener("durationchange", () => {
 });
 
 video.addEventListener("progress", () => {
-    if (video.duration) {
+    if (video.buffered.length > 0) {
         timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
     };
 });

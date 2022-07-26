@@ -330,7 +330,7 @@ video {
     padding-left: calc(88px + 12px);
     width: fit-content;
     display: block;
-    width: calc(100% - 512px);
+    width: calc(100% - 576px);
     z-index: 1;
 }
 
@@ -354,7 +354,7 @@ video {
 }
 
 .duration-container {
-    font-family: 'Manrope';
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
     font-style: normal;
     font-variation-settings: 'wght' 500;
     font-weight: 500;

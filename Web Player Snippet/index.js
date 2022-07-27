@@ -5,7 +5,6 @@ const video = document.querySelector('.video');
 const currentTime = document.querySelector('.current-time');
 const totalTime = document.querySelector('.total-time');
 const cuetimeTooltip = document.querySelector('.cuetime-tooltip');
-const cuetime = document.querySelector('.cuetime');
 
 const EQswitchToggle = document.querySelector('.eq-switch')
 const rangeEQControl = document.querySelectorAll('.dialog .eq-control input');
@@ -60,12 +59,13 @@ window.addEventListener('load', () => {
         hls.attachMedia(document.querySelector('.video source'));
     } else if (!Hls.isSupported()) {
         video.src = videoFallbackSrc;
-    }
+    };
     eqContainer.querySelectorAll('.eq-slider').forEach(element => {
         element.disabled = true;
         element.value = 0;
     });
 });
+
 function handleInputChange(e) {
     let target = e.target;
     if (e.target.type !== 'range') {
@@ -645,6 +645,7 @@ function handleTimelineUpdate(e) {
     const rect = timelineContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     timelineContainer.style.setProperty("--preview-position", percent);
+    cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
         timelineContainer.style.setProperty("--progress-position", percent);
@@ -653,18 +654,10 @@ function handleTimelineUpdate(e) {
     };
 };
 
-function updateCueTimeTooltip(e) {
-    const skipTo = (e.offsetX / e.target.clientWidth) * parseInt(e.target.getAttribute('max'));
-    cuetimeTooltip.textContent = formatDuration(skipTo);
-};
-
-cuetime.addEventListener('mousemove', updateCueTimeTooltip);
-
 //Load and update data
 function loadedMetadata() {
     totalTime.textContent = formatDuration(video.duration);
     currentTime.textContent = formatDuration(video.currentTime);
-    cuetime.setAttribute('max', video.duration + 1);
 };
 
 video.addEventListener("loadedmetadata", loadedMetadata);

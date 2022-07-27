@@ -69,7 +69,7 @@ window.addEventListener('load', () => {
         var hls = new Hls();
         hls.loadSource(videoHLSSrc);
         hls.attachMedia(document.querySelector('.video source'));
-    } else if (!Hls.isSupported()) {
+    } else {
         video.src = videoFallbackSrc;
     };
     eqContainer.querySelectorAll('.eq-slider').forEach(element => {

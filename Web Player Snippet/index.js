@@ -6,7 +6,7 @@ const currentTime = document.querySelector('.current-time');
 const totalTime = document.querySelector('.total-time');
 const cuetimeTooltip = document.querySelector('.cuetime-tooltip');
 
-const EQswitchToggle = document.querySelector('.eq-switch')
+const EQswitchToggle = document.querySelector('.eq-switch');
 const rangeEQControl = document.querySelectorAll('.dialog .eq-control input');
 
 const captionButton = document.querySelector(".caption-button");
@@ -39,11 +39,12 @@ const dialogOverlay = document.querySelector('.dialog-overlay');
 const fullscreenButton = document.querySelector('.full-screen-button');
 const fullscreenTooltip = document.querySelector('.full-screen-tooltip');
 const pipPlayerButton = document.querySelector(".pip-button");
+const pipTooltip = document.querySelector(".pip-tooltip");
 
 const timelineContainer = document.querySelector(".timeline-container");
 const videoControlsContainer = document.querySelector(".video-controls-container");
 
-const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time')
+const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
 
 videoPlayer.querySelector('.video-name h1').textContent = document.querySelector("meta[property='og:title']").getAttribute("content");
 
@@ -82,9 +83,11 @@ window.addEventListener('load', () => {
 
     if (!('pictureInPictureEnabled' in document)) {
         pipPlayerButton.classList.add('unsupported');
+        pipTooltip.dataset.tooltip = 'Picture in picture is unavailable.';
     };
     if (!canFullscreen) {
         fullscreenButton.classList.add('unsupported');
+        fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable.';
     };
 });
 
@@ -425,6 +428,9 @@ document.addEventListener('keydown', e => {
                 break;
             case 'f':
                 videoContainer.classList.add('hovered');
+                if (fullscreenButton.classList.contains('unsupported')) {
+                    break;
+                };
                 activity();
                 toggleFullScreen();
                 break;
@@ -435,6 +441,9 @@ document.addEventListener('keydown', e => {
                 break;
             case 'i':
                 videoContainer.classList.add('hovered');
+                if (pipPlayerButton.classList.contains('unsupported')) {
+                    break;
+                };
                 activity();
                 togglePIPPlayerMode();
                 break;
@@ -499,12 +508,14 @@ function activity() {
     videoControlsContainer.classList.remove('inactive');
     videoContainer.classList.add('hovered');
     if (videoContainer.classList.contains("hovered")) {
-        timeout = setTimeout(function () {
-            videoContainer.classList.remove('hovered');
-            videoControlsContainer.classList.add('inactive');
-            video.classList.add('inactive');
-        }, 2000);
-    }
+        if (!videoContainer.classList.contains("paused")) {
+            timeout = setTimeout(function () {
+                videoContainer.classList.remove('hovered');
+                videoControlsContainer.classList.add('inactive');
+                video.classList.add('inactive');
+            }, 3000);
+        };
+    };
 };
 
 //Full screen and picture-in-picture

@@ -57,10 +57,14 @@ window.addEventListener('load', () => {
     } else if (Hls.isSupported()) {
         var hls = new Hls();
         hls.loadSource(videoHLSSrc);
-        hls.attachMedia(document.querySelector('video source'));
+        hls.attachMedia(document.querySelector('.video source'));
     } else if (!Hls.isSupported()) {
         video.src = videoFallbackSrc;
     }
+    eqContainer.querySelectorAll('.eq-slider').forEach(element => {
+        element.disabled = true;
+        element.value = 0;
+    });
 });
 function handleInputChange(e) {
     let target = e.target;
@@ -149,7 +153,7 @@ video.addEventListener('click', togglePlay);
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!('pictureInPictureEnabled' in document)) {
-        pipPlayerButton.classList.add('hidden');
+        pipPlayerButton.classList.add('unsupported');
     }
 });
 
@@ -201,7 +205,15 @@ eqItem.addEventListener('click', () => {
 });
 
 EQswitchToggle.addEventListener('click', () => {
-    if (!eqContainer.classList.contains('enabled')) {
+    if (eqContainer.classList.contains('enabled')) {
+        eqContainer.classList.remove('enabled')
+        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
+            element.disabled = true;
+            sourceNode.disconnect();
+            sourceNode.connect(context.destination);
+            filters[filters.length - 1].disconnect();
+        });
+    } else {
         eqContainer.classList.add('enabled');
         eqContainer.querySelectorAll('.eq-slider').forEach(element => {
             element.disabled = false;
@@ -211,14 +223,6 @@ EQswitchToggle.addEventListener('click', () => {
             sourceNode.disconnect();
             sourceNode.connect(filters[0]);
             filters[filters.length - 1].connect(context.destination);
-        });
-    } else {
-        eqContainer.classList.remove('enabled')
-        eqContainer.querySelectorAll('.eq-slider').forEach(element => {
-            element.disabled = true;
-            sourceNode.disconnect();
-            sourceNode.connect(context.destination);
-            filters[filters.length - 1].disconnect();
         });
     };
 });
@@ -512,18 +516,19 @@ function toggleFullScreen() {
 
 async function togglePIPPlayerMode() {
     try {
-        if (videoContainer.classList.contains("pip-player")) {
-            videoContainer.classList.add("pip-player");
-            await document.exitPictureInPicture();
-        } else {
-            videoContainer.classList.remove("pip-player");
-            await video.requestPictureInPicture();
-        };
+        if (document.pictureInPictureEnabled && !video.disablePictureInPicture) {
+            if (videoContainer.classList.contains("pip-player") && video.pictureInPictureElement) {
+                videoContainer.classList.add("pip-player");
+                await document.exitPictureInPicture();
+            } else {
+                videoContainer.classList.remove("pip-player");
+                await video.requestPictureInPicture();
+            };
+        }
     } catch (error) {
         console.error(error);
     };
 };
-
 function fullScreenToggleChange() {
     videoContainer.classList.toggle("full-screen", document.fullscreenElement);
 };
@@ -670,6 +675,8 @@ video.addEventListener('loadstart', () => {
 
 video.addEventListener('canplay', () => {
     videoPlayer.classList.remove('loading');
+    if (totalTime.textContent === "0:00")
+        loadedMetadata();
 });
 
 video.addEventListener('canplaythrough', () => {

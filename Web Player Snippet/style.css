@@ -1,7 +1,8 @@
 @supports (font-variation-settings: normal) {
     @font-face {
         font-family: 'Manrope Variable';
-        src: url('./Manrope[wght].woff2') format('woff2 supports variations');
+        src: url('./Manrope[wght].woff2') format('woff2 supports variations')
+            url('./Manrope[wght].woff2') format('woff2 variations');
         font-display: block;
     }
 }
@@ -10,12 +11,14 @@
 *::before,
 *::after {
     touch-action: manipulation;
+    text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 :root {
+    --text-color: #FFFFFF;
     --soft-accent-color: #01A573;
     --accent-color: #02DA9A;
     --background: #1C5947;
@@ -473,7 +476,7 @@ video {
     opacity: 0;
     z-index: -1;
     background: #016F4E;
-    color: #FFF;
+    color: var(--text-color);
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -665,7 +668,7 @@ video {
     top: 50%;
     left: 50%;
     background: rgba(8, 43, 33, 0.96);
-    color: #FFF;
+    color: var(--text-color);
     padding: 12px 8px;
     min-width: 256px;
     z-index: 6;
@@ -724,7 +727,7 @@ video {
 .settings-context-menu {
     position: absolute;
     background: rgba(8, 43, 33, 0.96);
-    color: #FFF;
+    color: var(--text-color);
     padding: 12px 8px;
     width: 256px;
     z-index: 5;
@@ -770,13 +773,12 @@ video {
 }
 
 .dialog {
-    position: fixed;
     top: 50%;
     left: 50%;
     position: absolute;
     margin: auto;
     background: var(--background);
-    color: #FFF;
+    color: var(--text-color);
     z-index: 7;
     border-radius: 8px;
     -webkit-transform: translate(-50%, -50%) scale(1.06);
@@ -827,7 +829,7 @@ video {
 }
 
 .dialog label {
-    color: #FFF;
+    color: var(--text-color);
 }
 
 .equalizer-dialog {
@@ -937,11 +939,12 @@ video {
 
 .dialog button.close-dialog {
     font-size: 1em;
+    font-family: 'Manrope', sans-serif;
     font-variation-settings: 'wght' 500;
     font-weight: 500;
     -webkit-font-kerning: normal;
     font-kerning: normal;
-    color: #FFF;
+    color: var(--text-color);
     cursor: pointer;
     border: none;
     text-align: center;
@@ -1095,7 +1098,7 @@ video {
 
 .tooltip-left::after {
     content: attr(data-tooltip);
-    color: #FFF;
+    color: var(--text-color);
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
@@ -1135,7 +1138,7 @@ video {
 
 div.tooltip-right::after {
     content: attr(data-tooltip);
-    color: #FFF;
+    color: var(--text-color);
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
@@ -1377,6 +1380,19 @@ div.tooltip-right:after {
     box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
 }
 
+.dialog .eq-control input:disabled::-moz-range-thumb {
+    background: #01A573;
+    -webkit-box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.dialog .eq-control input:disabled::-ms-range-thumb {
+    background: #01A573;
+    -webkit-box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
+}
+
+
 .dialog .eq-control input::-webkit-slider-runnable-track {
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -1413,7 +1429,7 @@ input[type=range]::-ms-tooltip {
     pointer-events: initial;
 }
 
-.item.unsupported {
+.unsupported {
     opacity: 0.3;
     pointer-events: none;
     -webkit-user-select: none;
@@ -1433,13 +1449,11 @@ input[type=range]::-ms-tooltip {
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden;
-    transform: translate(0%, 100%);
 }
 
 .transcript-opened .transcript-panel {
     min-width: 400px;
     max-width: 400px;
-    transform: translate(0%, 0%);
 }
 
 .transcript-panel .header {
@@ -1485,7 +1499,7 @@ input[type=range]::-ms-tooltip {
     font-size: 32px;
     line-height: 110%;
 
-    color: #FFF;
+    color: var(--text-color);
     margin: 0;
     margin-bottom: 8px;
 }
@@ -1494,7 +1508,7 @@ input[type=range]::-ms-tooltip {
     font-style: normal;
     font-size: 16px;
     line-height: 160%;
-    color: #FFF;
+    color: var(--text-color);
     word-wrap: break-word;
 }
 
@@ -1515,16 +1529,16 @@ input[type=range]::-ms-tooltip {
     border: none;
     padding: 0;
     cursor: pointer;
-    -webkit-transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .transcript-panel button path {
     fill: #fff;
-    -webkit-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .transcript-panel button:hover path {
@@ -1539,6 +1553,16 @@ input[type=range]::-ms-tooltip {
     min-width: 400px;
     height: 100%;
     overflow: hidden;
+    transform: translateY(30%);
+    opacity: 0;
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.transcript-opened .transcript-panel .contents {
+    transform: translateY(0%);
+    opacity: 1;
 }
 
 .transcript-panel .snackbar-sync-time {
@@ -1570,7 +1594,7 @@ input[type=range]::-ms-tooltip {
     font-weight: 800;
     font-size: 16px;
     line-height: 160%;
-    color: #FFF;
+    color: var(--text-color);
     text-align: center;
     background: #4B99E7;
     -webkit-box-shadow: 0px 4px 0px #1D78D1, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #165248, 0px 4px 16px 28px rgba(22, 82, 72, 0.6);
@@ -1675,7 +1699,7 @@ input[type=range]::-ms-tooltip {
 }
 
 .cues {
-    color: #FFF;
+    color: var(--text-color);
     font-style: normal;
     font-variation-settings: 'wght' 500;
     font-weight: 500;

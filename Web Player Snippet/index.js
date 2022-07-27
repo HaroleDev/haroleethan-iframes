@@ -49,6 +49,7 @@ videoPlayer.querySelector('.video-name h1').textContent = document.querySelector
 
 var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.m3u8';
 var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_cg5sho.mp4';
+var mimeCodec = 'video/mp4; codecs="avc1.4D401E, mp4a.40.2"';
 
 function canFullscreen() {
     var element = document.body;
@@ -72,6 +73,8 @@ window.addEventListener('load', () => {
     } else {
         video.src = videoFallbackSrc;
     };
+    document.querySelector('.video source').setAttribute('type', mimeCodec);
+
     eqContainer.querySelectorAll('.eq-slider').forEach(element => {
         element.disabled = true;
         element.value = 0;
@@ -105,14 +108,14 @@ function showContextMenu(show = true) {
     show ? contextMenu.classList.add('show') : contextMenu.classList.remove('show');
 };
 
-videoContainer.addEventListener('contextmenu', e => {
+videoContainer.addEventListener('contextmenu', (e) => {
     e.preventDefault();
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
         settingsTooltipContainer.classList.add('tooltip-right');
-        closedDialog()
-    }
+        closedDialog();
+    };
     showContextMenu();
 
     contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight + 'px' : e.y + 'px';
@@ -124,9 +127,9 @@ function closeSettingsMenu(e) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
         settingsTooltipContainer.classList.add('tooltip-right');
-        closedDialog()
-    }
-}
+        closedDialog();
+    };
+};
 
 videoPlayer.addEventListener('click', (e) => {
     volumeContainer.classList.remove('scrubbing');
@@ -170,7 +173,7 @@ if (ctx) {
 } else {
     alert('Web Audio API is not supported.');
     eqItem.classList.add('unsupported');
-}
+};
 var sourceNode = context.createMediaElementSource(document.querySelector('video'));
 
 //EQ
@@ -272,7 +275,7 @@ trackElems = document.querySelectorAll("track");
 for (var i = 0; i < trackElems.length; i++) {
     var currentTrackElem = trackElems[i];
     tracksURLs[i] = currentTrackElem.src;
-}
+};
 tracks = video.textTracks;
 
 function loadTranscript(lang) {
@@ -288,25 +291,26 @@ function loadTranscript(lang) {
                 track.mode = "showing";
             } else {
                 track.mode = "hidden";
-            }
+            };
+
             if (trackAsHtmlElem.readyState === 2) {
                 displayCues(track);
             } else {
                 displayCuesAfterTrackLoaded(trackAsHtmlElem, track);
-            }
-        }
-    }
-}
+            };
+        };
+    };
+};
 
 function displayCuesAfterTrackLoaded(trackElem, track) {
     trackElem.addEventListener('load', function () {
         displayCues(track);
     });
-}
+};
 function disableAllTracks() {
     for (var i = 0; i < tracks.length; i++)
         tracks[i].mode = "disabled";
-}
+};
 
 function displayCues(track) {
     var cues = track.cues;
@@ -322,11 +326,11 @@ function displayCues(track) {
             }
         } else {
             transcriptText = cue.text;
-        }
+        };
         var clickableTranscriptText = "<div class=\"cue-container\" id=\"" + cue.startTime + "\"" + " onclick='jumpToTranscript(" + cue.startTime + ");'> <span class=\"cue-time\">" + formatDuration(cue.startTime) + "</span>" + "<span class=\"cues\">" + transcriptText + "</span></div>";
         addToTranscript(clickableTranscriptText);
-    }
-}
+    };
+};
 
 function getVoices(speech) {
     var voices = [];
@@ -344,13 +348,13 @@ function getVoices(speech) {
         pos = speech.indexOf('<v');
     };
     return voices;
-}
+};
 
 function removeHTML(text) {
     var div = document.createElement('div');
     div.innerHTML = text;
     return div.textContent || div.innerText || '';
-}
+};
 
 function jumpToTranscript(time) {
     video.currentTime = time;
@@ -360,15 +364,15 @@ function jumpToTranscript(time) {
         video.pause();
         timelineContainer.style.setProperty("--progress-position", video.currentTime / video.duration);
     };
-}
+};
 
 function clearTranscriptDiv() {
     transcriptDiv.innerHTML = "";
-}
+};
 
 function addToTranscript(htmlText) {
     transcriptDiv.innerHTML += htmlText;
-}
+};
 
 function addCueListeners(cue) {
     cue.onenter = function () {
@@ -380,7 +384,7 @@ function addCueListeners(cue) {
         var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.remove("current");
     };
-}
+};
 
 transcriptPanel.addEventListener('click', (e) => {
     volumeContainer.classList.remove('scrubbing');
@@ -392,13 +396,9 @@ transcriptPanel.addEventListener('click', (e) => {
     };
 });
 
-transcriptPanel.addEventListener('contextmenu', e => {
-    closeSettingsMenu(e)
-});
+transcriptPanel.addEventListener('contextmenu', e => { closeSettingsMenu(e); });
 
-transcriptPanel.addEventListener('click', e => {
-    closeSettingsMenu(e)
-});
+transcriptPanel.addEventListener('click', e => { closeSettingsMenu(e); });
 
 //Keyboard shortcuts
 document.addEventListener('keydown', e => {
@@ -411,7 +411,7 @@ document.addEventListener('keydown', e => {
         e.getModifierState("Super") ||
         e.getModifierState("Win")) {
         return;
-    }
+    };
     if (e.getModifierState("Control") +
         e.getModifierState("Alt") +
         e.getModifierState("Meta") > 1) {
@@ -454,7 +454,7 @@ document.addEventListener('keydown', e => {
                 skip(5);
                 break
         };
-    }
+    };
 });
 
 //Loop function
@@ -465,8 +465,8 @@ function loopVideo() {
     } else {
         video.loop = false;
         loopItem.classList.remove("enabled");
-    }
-}
+    };
+};
 
 loopItem.addEventListener('click', loopVideo);
 
@@ -475,20 +475,21 @@ function skip(duration) {
     video.currentTime += duration;
 };
 
+//Time divider animation
 function spinnerDivider() {
-    const spinners = ['/', '–', '\\', '|']
-    let index = 0
+    const spinners = ['/', '–', '\\', '|'];
+    let index = 0;
     var interval = setInterval(() => {
-        let line = spinners[index]
+        if (video.paused) clearInterval(interval);
+        let line = spinners[index];
         if (line == undefined) {
-            index = 0
-            line = spinners[index]
-        }
-        index = index > spinners.length ? 0 : index + 1
+            index = 0;
+            line = spinners[index];
+        };
+        index = index > spinners.length ? 0 : index + 1;
         document.querySelector('.divider-time').textContent = `${line}`;
-        if (video.paused) clearInterval(interval)
-    }, 600)
-}
+    }, 600);
+};
 
 //Activity check
 let timeout = null;
@@ -726,17 +727,13 @@ video.addEventListener("progress", () => {
 function updatetime() {
     const percent = video.currentTime / video.duration;
     if (!video.paused) {
-        if (video.duration) {
-            timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
-        };
+        timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
         timelineContainer.style.setProperty("--progress-position", percent);
     };
     reqId = requestAnimationFrame(updatetime);
 };
 
-const leading0Formatter = new Intl.NumberFormat(undefined, {
-    minimumIntegerDigits: 2,
-});
+const leading0Formatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
 
 function formatDuration(time) {
     const seconds = Math.floor(time % 60);

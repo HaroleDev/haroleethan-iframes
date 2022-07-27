@@ -359,6 +359,7 @@ function jumpToTranscript(time) {
         video.play();
     } else {
         video.pause();
+        timelineContainer.style.setProperty("--progress-position", video.currentTime / video.duration);
     };
 }
 

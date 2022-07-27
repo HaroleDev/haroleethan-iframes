@@ -1,6 +1,6 @@
 const playpauseButton = document.querySelector('.play-pause-button');
 const videoContainer = document.querySelector('.video-container');
-const video = document.querySelector('video');
+const video = document.querySelector('.video');
 
 const currentTime = document.querySelector('.current-time');
 const totalTime = document.querySelector('.total-time');

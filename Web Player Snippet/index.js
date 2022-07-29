@@ -685,7 +685,7 @@ function handleTimelineUpdate(e) {
     const rect = timelineContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     timelineContainer.style.setProperty("--preview-position", percent);
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < 256 + 48 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth ? window.innerWidth - seekingPreview.offsetWidth + 64 + 'px' : e.x + 'px');
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < 256 + 48 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 64 ? window.innerWidth - seekingPreview.offsetWidth + 64 + 'px' : e.x + 'px');
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();

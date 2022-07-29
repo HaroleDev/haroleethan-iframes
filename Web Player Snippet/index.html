@@ -18,8 +18,8 @@
     <meta name="theme-color" content="#02DA9A">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="style.css" media="all">
-    <script type="text/javascript" src="//polyfill.io/v3/polyfill.min.js" async></script>
-    <script type="text/javascript" src="index.js" async></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
+    <script type="text/javascript" src="index.js" defer></script>
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
     <link href="//fonts.googleapis.com/css2?family=Manrope:wght@500;800&display=fallback" rel="stylesheet">
@@ -341,8 +341,8 @@
             </div>
             <div class="video-fit-contain">
                 <video tabindex="-1" playsinline class="video" preload="metadata" crossorigin="anonymous"
-                    poster="//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_auto:eco,w_1280/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_agnomz.jpg">
-                    <source src="//res.cloudinary.com/harole/video/upload/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.mp4">
+                    poster="//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_auto:eco,w_1280/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg">
+                    <source>
                     <track id="default-track" label="English" kind="captions" srclang="en" src="./sample.vtt" default>
                 </video>
             </div>
@@ -381,7 +381,10 @@
         </div>
     </div>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/mediainfo.js@0.1.7/dist/mediainfo.min.js" defer></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
+    <script type="text/javascript" defer>
+        document.querySelector('.video-name h1').textContent = document.querySelector("meta[property='og:title']").getAttribute("content");
+        document.querySelector(".seeking-preview").style.setProperty("--thumbnail-seek-position", 159 + 'px');
+    </script>
 </body>
 
 </html>

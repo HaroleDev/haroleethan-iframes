@@ -1,3 +1,5 @@
+var hls = new Hls();
+
 const playpauseButton = document.querySelector('.play-pause-button');
 const videoContainer = document.querySelector('.video-container');
 const video = document.querySelector('.video');
@@ -48,9 +50,6 @@ const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 
 const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
 
-videoPlayer.querySelector('.video-name h1').textContent = document.querySelector("meta[property='og:title']").getAttribute("content");
-seekingPreview.style.setProperty("--thumbnail-seek-position", 159 + 'px');
-
 var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
 var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.mp4';
 var HLSCodec = 'application/x-mpegURL';
@@ -69,16 +68,29 @@ function canFullscreen() {
 };
 
 window.addEventListener('load', () => {
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = videoHLSSrc;
-        document.querySelector('.video source').setAttribute('type', HLSCodec);
-    } else if (Hls.isSupported()) {
-        var hls = new Hls();
+    if (Hls.isSupported()) {
         hls.loadSource(videoHLSSrc);
-        hls.attachMedia(document.querySelector('.video source'));
-        document.querySelector('.video source').setAttribute('type', HLSCodec);
+        hls.attachMedia(video);
+        video.querySelector('source').setAttribute('type', HLSCodec);
+        //For HLS container
+        hls.on(Hls.Events.LEVEL_LOADED, function () {
+            loadedMetadata();
+        });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.querySelector('source').setAttribute('src', videoHLSSrc);
+        video.querySelector('source').setAttribute('type', HLSCodec);
+        hls.on(Hls.Events.LEVEL_LOADED, function () {
+            loadedMetadata();
+        });
     } else {
-        document.querySelector('.video source').setAttribute('type', FallbackCodec);
+        video.querySelector('source').setAttribute('src', videoFallbackSrc);
+        video.querySelector('source').setAttribute('type', FallbackCodec);
+        video.load();
+        //For MP4 container
+        video.addEventListener("durationchange", () => {
+            updatetime();
+            timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+        });
     };
 
     eqContainer.querySelectorAll('.eq-slider').forEach(element => {
@@ -158,6 +170,9 @@ Item.addEventListener('click', () => {
 
 downloadItem.addEventListener('click', () => {
     window.open(`//res.cloudinary.com/harole/video/upload/fl_attachment/${videoFallbackSrc.substring(videoFallbackSrc.indexOf("/v1658759272/") + 13, videoFallbackSrc.length)}`);
+    settingsButton.classList.remove('pressed');
+    settingsContextMenu.classList.remove('pressed');
+    settingsTooltipContainer.classList.add('tooltip-right');
 });
 
 //Playback
@@ -683,10 +698,10 @@ function toggleScrubbing(e) {
 };
 
 function handleTimelineUpdate(e) {
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < 256 + 64 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 64 ? window.innerWidth - seekingPreview.offsetWidth + 64 + 'px' : e.x + 'px');
     const rect = timelineContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     timelineContainer.style.setProperty("--preview-position", percent);
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < 256 + 64 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 64 ? window.innerWidth - seekingPreview.offsetWidth + 64 + 'px' : e.x + 'px');
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
@@ -702,20 +717,6 @@ function loadedMetadata() {
     currentTime.textContent = formatDuration(video.currentTime);
 };
 
-//For HLS container
-video.addEventListener("loadedmetadata", () => {
-    if (video.canPlayType('application/vnd.apple.mpegurl') || video.src === videoHLSSrc)
-        loadedMetadata();
-    timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
-});
-
-//For MP4 container
-video.addEventListener("durationchange", () => {
-    if (!video.canPlayType('application/vnd.apple.mpegurl') || video.src === videoFallbackSrc)
-        updatetime();
-    timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
-});
-
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
 });
@@ -724,6 +725,10 @@ video.addEventListener('canplay', () => {
     videoPlayer.classList.remove('loading');
     if (totalTime.textContent === "0:00")
         loadedMetadata();
+});
+
+video.addEventListener('loadedmetadata', () => {
+    timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
 });
 
 video.addEventListener('canplaythrough', () => {
@@ -789,6 +794,8 @@ function togglePlay() {
 
 video.addEventListener("play", () => {
     spinnerDivider();
+    if (Hls.isSupported() || video.canPlayType('application/vnd.apple.mpegurl'))
+        hls.startLoad();
     videoContainer.addEventListener("mousemove", activity);
     videoContainer.addEventListener('mouseleave', () => {
         videoContainer.classList.remove('hovered');

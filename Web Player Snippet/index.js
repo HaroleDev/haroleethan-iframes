@@ -79,9 +79,6 @@ window.addEventListener('load', () => {
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.querySelector('source').setAttribute('src', videoHLSSrc);
         video.querySelector('source').setAttribute('type', HLSCodec);
-        hls.on(Hls.Events.LEVEL_LOADED, function () {
-            loadedMetadata();
-        });
     } else {
         video.querySelector('source').setAttribute('src', videoFallbackSrc);
         video.querySelector('source').setAttribute('type', FallbackCodec);
@@ -729,6 +726,7 @@ video.addEventListener('canplay', () => {
 
 video.addEventListener('loadedmetadata', () => {
     timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+    loadedMetadata();
 });
 
 video.addEventListener('canplaythrough', () => {

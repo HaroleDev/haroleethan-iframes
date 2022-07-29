@@ -76,6 +76,9 @@ window.addEventListener('load', () => {
         hls.on(Hls.Events.LEVEL_LOADED, function () {
             loadedMetadata();
         });
+        hls.on(hls.Events.MEDIA_ATTACHED, function () {
+            hls.stopLoad();
+        });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.querySelector('source').setAttribute('src', videoHLSSrc);
         video.querySelector('source').setAttribute('type', HLSCodec);

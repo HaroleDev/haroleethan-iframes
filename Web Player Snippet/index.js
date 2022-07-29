@@ -49,6 +49,7 @@ const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
 
 videoPlayer.querySelector('.video-name h1').textContent = document.querySelector("meta[property='og:title']").getAttribute("content");
+seekingPreview.style.setProperty("--thumbnail-seek-position", 159 + 'px');
 
 var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
 var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.mp4';
@@ -685,7 +686,7 @@ function handleTimelineUpdate(e) {
     const rect = timelineContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     timelineContainer.style.setProperty("--preview-position", percent);
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < 256 + 48 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 64 ? window.innerWidth - seekingPreview.offsetWidth + 64 + 'px' : e.x + 'px');
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < 256 + 64 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 64 ? window.innerWidth - seekingPreview.offsetWidth + 64 + 'px' : e.x + 'px');
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();

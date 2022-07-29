@@ -1,4 +1,7 @@
-var hls = new Hls();
+var config = {
+    startPosition: -1,
+};
+var hls = new Hls(config);
 
 const playpauseButton = document.querySelector('.play-pause-button');
 const videoContainer = document.querySelector('.video-container');
@@ -75,9 +78,6 @@ window.addEventListener('load', () => {
         //For HLS container
         hls.on(Hls.Events.LEVEL_LOADED, function () {
             loadedMetadata();
-        });
-        hls.on(hls.Events.MEDIA_ATTACHED, function () {
-            hls.stopLoad();
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.querySelector('source').setAttribute('src', videoHLSSrc);
@@ -800,8 +800,8 @@ function togglePlay() {
 
 video.addEventListener("play", () => {
     spinnerDivider();
-    if (Hls.isSupported() || video.canPlayType('application/vnd.apple.mpegurl'))
-        hls.startLoad();
+    if (Hls.isSupported() && video.currentTime === 0)
+        hls.startLoad(startPosition = -1);
     videoContainer.addEventListener("mousemove", activity);
     videoContainer.addEventListener('mouseleave', () => {
         videoContainer.classList.remove('hovered');

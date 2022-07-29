@@ -82,6 +82,11 @@ window.addEventListener('load', () => {
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.querySelector('source').setAttribute('src', videoHLSSrc);
         video.querySelector('source').setAttribute('type', HLSCodec);
+        video.load();
+        video.addEventListener("durationchange", () => {
+            updatetime();
+            timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+        });
     } else {
         video.querySelector('source').setAttribute('src', videoFallbackSrc);
         video.querySelector('source').setAttribute('type', FallbackCodec);

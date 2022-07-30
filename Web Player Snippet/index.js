@@ -55,7 +55,7 @@ const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
 
 var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
-var videoFallbackSrc = '//link.storjshare.io/jvxlp4chrrq6usnc4p7fpxgbfg3q/harole-video%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
+var videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
 var HLSCodec = 'application/x-mpegURL';
 var FallbackCodec = 'video/mp4';
 

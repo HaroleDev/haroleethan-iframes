@@ -531,7 +531,9 @@ function activity() {
     videoControlsContainer.classList.remove('inactive');
     videoContainer.classList.add('hovered');
     if (videoContainer.classList.contains("hovered")) {
-        if (!videoContainer.classList.contains("paused")) {
+        if (video.paused) {
+            return;
+        } else if (!video.paused) {
             timeout = setTimeout(function () {
                 videoContainer.classList.remove('hovered');
                 videoControlsContainer.classList.add('inactive');

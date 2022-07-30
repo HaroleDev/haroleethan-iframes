@@ -55,7 +55,7 @@ const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
 
 var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
-var videoFallbackSrc = '//res.cloudinary.com/harole/video/upload/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.mp4';
+var videoFallbackSrc = '//link.storjshare.io/jvxlp4chrrq6usnc4p7fpxgbfg3q/harole-video%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
 var HLSCodec = 'application/x-mpegURL';
 var FallbackCodec = 'video/mp4';
 
@@ -72,7 +72,7 @@ function canFullscreen() {
 };
 
 window.addEventListener('load', () => {
-    if (Hls.isSupported()) {
+    if (!Hls.isSupported()) {
         hls.loadSource(videoHLSSrc);
         hls.attachMedia(video);
         video.querySelector('source').setAttribute('type', HLSCodec);
@@ -175,7 +175,7 @@ Item.addEventListener('click', () => {
 });
 
 downloadItem.addEventListener('click', () => {
-    window.open(`//res.cloudinary.com/harole/video/upload/fl_attachment/${videoFallbackSrc.substring(videoFallbackSrc.indexOf("/v1658759272/") + 13, videoFallbackSrc.length)}`);
+    window.open(videoFallbackSrc);
     settingsButton.classList.remove('pressed');
     settingsContextMenu.classList.remove('pressed');
     settingsTooltipContainer.classList.add('tooltip-right');
@@ -715,7 +715,8 @@ function toggleScrubbing(e) {
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < seekingThumbnail.offsetWidth + 96 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
+    const seek = seekingPreview.getBoundingClientRect();
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > window.innerWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);

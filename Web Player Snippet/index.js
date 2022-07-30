@@ -47,6 +47,7 @@ const pipPlayerButton = document.querySelector(".pip-button");
 const pipTooltip = document.querySelector(".pip-tooltip");
 
 const timelineContainer = document.querySelector(".timeline-container");
+const timelineInner = document.querySelector(".timeline");
 const videoControlsContainer = document.querySelector(".video-controls-container");
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
@@ -390,7 +391,7 @@ function jumpToTranscript(time) {
         video.play();
     } else {
         video.pause();
-        timelineContainer.style.setProperty("--progress-position", video.currentTime / video.duration);
+        timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration);
     };
 };
 
@@ -664,10 +665,18 @@ video.addEventListener("volumechange", () => {
 });
 
 //Timeline
-timelineContainer.addEventListener("mousemove", e => {
+timelineInner.addEventListener("mousemove", e => {
     handleTimelineUpdate(e);
+    seekingPreview.classList.add('hovered');
 });
-timelineContainer.addEventListener("mousedown", toggleScrubbing);
+
+timelineInner.addEventListener("mouseleave", () => {
+    seekingPreview.classList.remove('hovered');
+})
+
+timelineInner.addEventListener("mousedown", e => {
+    toggleScrubbing(e);
+});
 
 document.addEventListener("mouseup", e => {
     if (isScrubbing) {
@@ -689,7 +698,7 @@ document.addEventListener("mousemove", e => {
 let isScrubbing = false;
 let wasPaused;
 function toggleScrubbing(e) {
-    const rect = timelineContainer.getBoundingClientRect();
+    const rect = timelineInner.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     isScrubbing = (e.buttons & 1) === 1;
     videoContainer.classList.toggle("scrubbing", isScrubbing);
@@ -705,14 +714,14 @@ function toggleScrubbing(e) {
 };
 
 function handleTimelineUpdate(e) {
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < 256 + 64 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 64 ? window.innerWidth - seekingPreview.offsetWidth + 64 + 'px' : e.x + 'px');
-    const rect = timelineContainer.getBoundingClientRect();
+    const rect = timelineInner.getBoundingClientRect();
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seekingPreview.offsetLeft < seekingThumbnail.offsetWidth + 96 ? seekingPreview.offsetLeft + 'px' : e.x + seekingPreview.offsetWidth > window.innerWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-    timelineContainer.style.setProperty("--preview-position", percent);
+    timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
-        timelineContainer.style.setProperty("--progress-position", percent);
+        timelineInner.style.setProperty("--progress-position", percent);
         cuetimeTooltip.textContent = formatDuration(percent * video.duration);
         currentTime.textContent = formatDuration(percent * video.duration);
     };
@@ -730,8 +739,7 @@ video.addEventListener('loadstart', () => {
 
 video.addEventListener('canplay', () => {
     videoPlayer.classList.remove('loading');
-    if (totalTime.textContent === "0:00")
-        loadedMetadata();
+    seekingPreview.classList.remove('loading');
 });
 
 video.addEventListener('loadedmetadata', () => {
@@ -741,7 +749,7 @@ video.addEventListener('loadedmetadata', () => {
 
 video.addEventListener('canplaythrough', () => {
     if (video.buffered.length > 0)
-        timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
+        timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
 });
 
 video.addEventListener("timeupdate", () => {
@@ -749,23 +757,22 @@ video.addEventListener("timeupdate", () => {
     updatetime();
     if (video.currentTime === video.duration) {
         videoContainer.classList.add('ended');
-        timelineContainer.style.setProperty("--progress-position", 1);
+        timelineInner.style.setProperty("--progress-position", 1);
     } else {
         videoContainer.classList.remove('ended');
     };
 });
 
 video.addEventListener("progress", () => {
-    if (video.buffered.length > 0) {
-        timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
-    };
+    if (video.buffered.length > 0)
+        timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
 });
 
 function updatetime() {
     const percent = video.currentTime / video.duration;
     if (!video.paused) {
-        timelineContainer.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
-        timelineContainer.style.setProperty("--progress-position", percent);
+        timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
+        timelineInner.style.setProperty("--progress-position", percent);
     };
     reqId = requestAnimationFrame(updatetime);
 };

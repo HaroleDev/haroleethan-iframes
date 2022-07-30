@@ -90,6 +90,13 @@ video {
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.loading.seeking-preview {
+    opacity: 0 !important;
+    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
 .loading .video-controls-container {
     opacity: 0;
     -webkit-transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -367,7 +374,7 @@ video {
     letter-spacing: -0.04em;
     font-weight: 800;
     font-size: 48px;
-    line-height: 115%;
+    line-height: 110%;
     margin: 0;
 
     text-align: left;
@@ -375,6 +382,7 @@ video {
 }
 
 .duration-container {
+    clear: both;
     font-family: 'Manrope Variable', 'Manrope', sans-serif;
     font-style: normal;
     font-variation-settings: 'wght' 500;
@@ -387,6 +395,16 @@ video {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+}
+
+.author-name {
+    font-family: 'Manrope Variable', 'Manrope', sans-serif;
+    font-style: normal;
+    font-variation-settings: 'wght' 500;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 160%;
+    color: #FFFFFF;
 }
 
 .divider-time,
@@ -411,15 +429,7 @@ video {
 
 .timeline-container {
     margin-inline: 48px;
-    height: 20px;
-    cursor: pointer;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: end;
-    -ms-flex-align: end;
-    align-items: flex-end;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
 .timeline {
@@ -428,6 +438,9 @@ video {
     width: 100%;
     height: 8px;
     position: relative;
+    margin: 12px 0px;
+    display: flex;
+    cursor: pointer;
 }
 
 .timeline::before {
@@ -486,31 +499,42 @@ video {
 
 .seeking-preview {
     position: absolute;
-    height: 128px;
-    width: calc(128px * var(--aspect-ratio-size));
-    background: var(--stroke-accent-color);
-    opacity: 0;
+    display: block;
     -webkit-transform: translate(-50%, -100%);
     -ms-transform: translate(-50%, -100%);
     transform: translate(-50%, -100%);
-    left: var(--thumbnail-seek-position);
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    left: var(--thumbnail-seek-position);
+}
+
+.seeking-thumbnail {
+    height: 128px;
+    width: calc(128px * var(--aspect-ratio-size));
+    background: var(--stroke-accent-color);
     border-radius: 8px;
     border: 4px solid #FFF;
 }
 
+.seeking-preview.hovered,
+.scrubbing .timeline-container .seeking-preview {
+    opacity: 1;
+}
+
 .cuetime-tooltip {
     position: absolute;
+    display: block;
     padding: 6px 12px;
     bottom: -80px;
-    -webkit-transform: translate(-50%, -100%);
-    -ms-transform: translate(-50%, -100%);
-    transform: translate(-50%, -100%);
-    left: calc(var(--preview-position) * 100%);
+    -webkit-transform: translate(150%, -100%);
+    -ms-transform: translate(150%, -100%);
+    transform: translate(150%, -100%);
+    left: calc(var(--thumbnail-seek-position) * 100%);
     border-radius: 24px;
-    opacity: 0;
     z-index: -1;
     background: #016F4E;
     color: var(--text-color);
@@ -525,7 +549,7 @@ video {
 }
 
 .video-container.scrubbing .timeline-scrubber,
-.timeline-container:hover .timeline-scrubber {
+.timeline:hover .timeline-scrubber {
     display: block;
 }
 
@@ -534,18 +558,16 @@ video {
     opacity: 1;
 }
 
-.timeline-container:hover .cuetime-tooltip,
+.timeline:hover .cuetime-tooltip,
 .video-container.scrubbing .timeline-container .cuetime-tooltip,
-.timeline-container:hover .timeline::after,
-.timeline-container:hover .seeking-preview,
-.scrubbing .timeline-container .seeking-preview {
+.timeline:hover::after {
     opacity: 1;
     -webkit-transition-delay: 100ms;
     -o-transition-delay: 100ms;
     transition-delay: 100ms;
 }
 
-.timeline-container:hover .timeline-scrubber {
+.timeline:hover .timeline-scrubber {
     border-radius: 32px 32px 8px 8px;
     height: 16px;
     top: -8px;
@@ -554,8 +576,8 @@ video {
     transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.scrubbing .timeline-container .timeline-scrubber,
-.scrubbing:hover .timeline-container .timeline-scrubber {
+.scrubbing .timeline .timeline-scrubber,
+.scrubbing:hover .timeline .timeline-scrubber {
     border-radius: 32px 32px 8px 8px;
     height: 16px;
     top: -8px;

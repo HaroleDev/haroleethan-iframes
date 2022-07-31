@@ -56,6 +56,7 @@ const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
 
 var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
 var videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
+var videoThumbs = '//link.storjshare.io/jvlmy6tcvabz5ka4kuwwy66yr6qq/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_THUMBNAILS.png?wrap=0';
 var HLSCodec = 'application/x-mpegURL';
 var FallbackCodec = 'video/mp4';
 
@@ -746,10 +747,10 @@ function handleTimelineUpdate(e) {
     const seek = seekingPreview.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
 
-    var xywh = Math.round(percent * video.duration + 0.5) * (114 * 2);
-    seekingThumbnail.style.backgroundPosition = '-' + xywh + 'px -' + 0 + 'px';
+    var xywh = Math.round(percent * video.duration + 0.5) * (64 * 2);
+    seekingThumbnail.style.backgroundPosition = '-' + 0 + 'px -' + xywh + 'px';
 
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > window.innerWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
@@ -768,7 +769,7 @@ function loadedMetadata() {
 
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
-    seekingThumbnail.style.backgroundImage = "url('//link.storjshare.io/jwni4hto4hi4s6zhhba4tkm63dua/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_THUMBS.png?wrap=0')";
+    seekingThumbnail.style.backgroundImage = `url('${videoThumbs}')`;
 });
 
 video.addEventListener('loadedmetadata', () => {

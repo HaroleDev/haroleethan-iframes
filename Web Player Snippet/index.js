@@ -134,7 +134,7 @@ function showContextMenu(show = true) {
     show ? contextMenu.classList.add('show') : contextMenu.classList.remove('show');
 };
 
-videoContainer.addEventListener('contextmenu', (e) => {
+videoContainer.addEventListener('contextmenu', e => {
     e.preventDefault();
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove('pressed');
@@ -157,7 +157,7 @@ function closeSettingsMenu(e) {
     };
 };
 
-videoPlayer.addEventListener('click', (e) => {
+videoPlayer.addEventListener('click', e => {
     volumeContainer.classList.remove('scrubbing');
     showContextMenu(show = false);
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
@@ -415,7 +415,7 @@ function addCueListeners(cue) {
     };
 };
 
-transcriptPanel.addEventListener('click', (e) => {
+transcriptPanel.addEventListener('click', e => {
     volumeContainer.classList.remove('scrubbing');
     showContextMenu(show = false);
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
@@ -670,6 +670,34 @@ timelineInner.addEventListener("mousemove", e => {
     seekingPreview.classList.add('hovered');
 });
 
+
+async function thumbnailSeekPreview() {
+    var videoThumb = document.createElement('video');
+    for (let i = 0; i <= videoThumb.duration; i = i + 1) {
+        const thumbs = []
+
+        const canvas = document.createElement("canvas")
+        var thumbnail = seekingThumbnail.getBoundingClientRect();
+        canvas.width = thumbnail.width
+        canvas.height = thumbnail.height
+
+        const context = canvas.getContext("2d")
+        videoThumb.currentTime = i
+
+        await new Promise(function (rsv) {
+            const event = function () {
+                context?.drawImage(video, 0, 0, thumbnail.width, thumbnail.height);
+                const url = canvas.toDataURL("image/jpeg");
+                thumbs.push({ sec: i, url });
+                videoThumb.removeEventListener("canplay", event);
+                rsv(null);
+            }
+            videoThumb.addEventListener("canplay", event)
+        })
+    }
+    setTimeout(() => document.body.removeChild(videoThumb));
+};
+
 timelineInner.addEventListener("mouseleave", () => {
     seekingPreview.classList.remove('hovered');
 })
@@ -716,8 +744,12 @@ function toggleScrubbing(e) {
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
     const seek = seekingPreview.getBoundingClientRect();
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > window.innerWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+
+    var xywh = Math.round(percent * video.duration + 0.5) * (114 * 2);
+    seekingThumbnail.style.backgroundPosition = '-' + xywh + 'px -' + 0 + 'px';
+
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > window.innerWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
@@ -736,14 +768,12 @@ function loadedMetadata() {
 
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
-});
-
-video.addEventListener('canplay', () => {
-    videoPlayer.classList.remove('loading');
-    seekingPreview.classList.remove('loading');
+    seekingThumbnail.style.backgroundImage = "url('//link.storjshare.io/jwni4hto4hi4s6zhhba4tkm63dua/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_THUMBS.png?wrap=0')";
 });
 
 video.addEventListener('loadedmetadata', () => {
+    videoPlayer.classList.remove('loading');
+    seekingPreview.classList.remove('loading');
     timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
     loadedMetadata();
 });

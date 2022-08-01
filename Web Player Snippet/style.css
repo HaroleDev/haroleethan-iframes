@@ -559,8 +559,8 @@ body {
 }
 
 .seeking-thumbnail {
-    height: 256px;
-    width: calc(256px * var(--aspect-ratio-size-inverse));
+    width: 256px;
+    height: calc(256px * var(--aspect-ratio-size-inverse));
     background: var(--stroke-accent-color);
     border-radius: 8px;
     border: 3px solid #FFF;

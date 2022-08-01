@@ -288,12 +288,17 @@ body {
     transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.play-pause-tooltip-container {
+    z-index: 1;
+}
+
 .video-controls-container .right-side button {
     background: transparent;
     border: none;
     padding: 8px;
     height: 48px;
     width: 48px;
+    border-radius: 50%;
     cursor: pointer;
     position: relative;
     -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -380,7 +385,7 @@ body {
     width: fit-content;
     display: block;
     width: calc(100% - 576px);
-    z-index: 1;
+    z-index: 0;
 }
 
 .video-name {
@@ -559,6 +564,7 @@ body {
     background: var(--stroke-accent-color);
     border-radius: 8px;
     border: 3px solid #FFF;
+    -webkit-box-shadow: inset 0 0 0 1px #FFF;
     box-shadow: inset 0 0 0 1px #FFF;
     margin-bottom: 8px;
 }
@@ -571,6 +577,8 @@ body {
     aspect-ratio: var(--aspect-ratio-size) / 1;
     background-size: 100%;
     left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -1232,15 +1240,21 @@ body {
     line-height: 100%;
     background: rgba(8, 43, 33, 0.96);
     border-radius: 8px;
-    -webkit-transform: translateX(-65%) translateY(-150%);
-    -ms-transform: translateX(-65%) translateY(-150%);
-    transform: translateX(-65%) translateY(-150%);
+    -webkit-transform: translateX(-85%) translateY(-150%);
+    -ms-transform: translateX(-85%) translateY(-150%);
+    transform: translateX(-85%) translateY(-150%);
     opacity: 0;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
     text-align: left;
+}
+
+.paused .tooltip-left::after {
+    -webkit-transform: translateX(-100%) translateY(-150%);
+    -ms-transform: translateX(-100%) translateY(-150%);
+    transform: translateX(-100%) translateY(-150%);
 }
 
 .tooltip-left:hover::after {

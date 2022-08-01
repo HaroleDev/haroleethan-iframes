@@ -4,6 +4,7 @@ var config = {
 var hls = new Hls(config);
 
 const playpauseButton = document.querySelector('.play-pause-button');
+const playpauseTooltipContainer = document.querySelector('.play-pause-tooltip-container');
 const videoContainer = document.querySelector('.video-container');
 const video = document.querySelector('.video');
 
@@ -842,7 +843,7 @@ function togglePlay() {
 };
 
 video.addEventListener("play", () => {
-    playpauseButton.dataset.tooltip = 'Pause' + ' (k)';
+    playpauseTooltipContainer.dataset.tooltip = 'Pause' + ' (k)';
     spinnerDivider();
     if (Hls.isSupported() && video.currentTime === 0)
         hls.startLoad();
@@ -855,7 +856,7 @@ video.addEventListener("play", () => {
 });
 
 video.addEventListener("pause", () => {
-    playpauseButton.dataset.tooltip = 'Play' + ' (k)';
+    playpauseTooltipContainer.dataset.tooltip = 'Play' + ' (k)';
     video.classList.remove('inactive');
     clearTimeout(timeout);
     videoContainer.classList.add('paused');

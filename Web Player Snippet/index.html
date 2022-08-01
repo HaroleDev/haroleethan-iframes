@@ -210,22 +210,24 @@
                     </div>
                     <div class="controls">
                         <div class="left-side">
-                            <button class="play-pause-button tooltip-left" data-tooltip="Play (k)">
-                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="play-icon">
-                                    <path
-                                        d="M34.9896 17.2668C36.3257 18.036 36.3257 19.964 34.9896 20.7332L7.99793 36.2739C6.6646 37.0416 5 36.0792 5 34.5407L5 3.45932C5 1.92079 6.6646 0.958404 7.99793 1.72608L34.9896 17.2668Z"
-                                        fill="#FFF" />
-                                </svg>
-                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="pause-icon">
-                                    <rect x="3" width="12" height="38" rx="2" fill="#FFF" />
-                                    <rect x="23" width="12" height="38" rx="2" fill="#FFF" />
-                                </svg>
-                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="replay-icon">
-                                    <path
-                                        d="M20 4.8284L18.8284 5.99997H19C27.2843 5.99997 34 12.7157 34 21C34 29.2842 27.2843 36 19 36C10.7157 36 4 29.2842 4 21C4 19.3431 5.34315 18 7 18C8.65685 18 10 19.3431 10 21C10 25.9706 14.0294 30 19 30C23.9706 30 28 25.9705 28 21C28 16.0294 23.9706 12 19 12H18.8284L20 13.1715C20.7811 13.9526 20.781 15.2189 20 16C19.219 16.781 17.9526 16.781 17.1716 16L11.5858 10.4142C10.8047 9.63311 10.8047 8.36678 11.5858 7.58573L17.1716 1.99997C17.9526 1.21892 19.219 1.21892 20 1.99997C20.781 2.78102 20.781 4.04735 20 4.8284Z"
-                                        fill="#FFF" />
-                                </svg>
-                            </button>
+                            <div class="tooltip-left play-pause-tooltip-container" data-tooltip="Pause (k)">
+                                <button class="play-pause-button">
+                                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="play-icon">
+                                        <path
+                                            d="M34.9896 17.2668C36.3257 18.036 36.3257 19.964 34.9896 20.7332L7.99793 36.2739C6.6646 37.0416 5 36.0792 5 34.5407L5 3.45932C5 1.92079 6.6646 0.958404 7.99793 1.72608L34.9896 17.2668Z"
+                                            fill="#FFF" />
+                                    </svg>
+                                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="pause-icon">
+                                        <rect x="3" width="12" height="38" rx="2" fill="#FFF" />
+                                        <rect x="23" width="12" height="38" rx="2" fill="#FFF" />
+                                    </svg>
+                                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="replay-icon">
+                                        <path
+                                            d="M20 4.8284L18.8284 5.99997H19C27.2843 5.99997 34 12.7157 34 21C34 29.2842 27.2843 36 19 36C10.7157 36 4 29.2842 4 21C4 19.3431 5.34315 18 7 18C8.65685 18 10 19.3431 10 21C10 25.9706 14.0294 30 19 30C23.9706 30 28 25.9705 28 21C28 16.0294 23.9706 12 19 12H18.8284L20 13.1715C20.7811 13.9526 20.781 15.2189 20 16C19.219 16.781 17.9526 16.781 17.1716 16L11.5858 10.4142C10.8047 9.63311 10.8047 8.36678 11.5858 7.58573L17.1716 1.99997C17.9526 1.21892 19.219 1.21892 20 1.99997C20.781 2.78102 20.781 4.04735 20 4.8284Z"
+                                            fill="#FFF" />
+                                    </svg>
+                                </button>
+                            </div>
                             <div class="video-information-container">
                                 <div class="video-name">
                                     <h1></h1>

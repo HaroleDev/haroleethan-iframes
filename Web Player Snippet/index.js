@@ -743,7 +743,7 @@ function handleTimelineUpdate(e) {
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
-        var thumbPreviewPosition = Math.floor(percent * video.duration) / (45 - 1);
+        var thumbPreviewPosition = Math.floor(percent * video.duration) / (Math.floor(video.duration) - 1);
         videoThumbPreview.style.backgroundPositionY = 'calc(' + thumbPreviewPosition + '* 100%)';
         seekingPreviewPosition(e);
         timelineInner.style.setProperty("--progress-position", percent);

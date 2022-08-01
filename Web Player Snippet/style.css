@@ -455,9 +455,9 @@ video {
     right: calc((1 - var(--buffered-position)) * 100%);
     border-radius: 12px;
     background: #01a5734d;
-    -webkit-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .timeline::after {
@@ -470,9 +470,9 @@ video {
     border-radius: 12px;
     background: #D1EFE64D;
     opacity: 0;
-    -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .timeline-scrubber {
@@ -1158,15 +1158,15 @@ video {
     line-height: 100%;
     background: rgba(8, 43, 33, 0.96);
     border-radius: 8px;
-    -webkit-transform: translateX(-50%) translateY(-150%);
-    -ms-transform: translateX(-50%) translateY(-150%);
-    transform: translateX(-50%) translateY(-150%);
+    -webkit-transform: translateX(-65%) translateY(-150%);
+    -ms-transform: translateX(-65%) translateY(-150%);
+    transform: translateX(-65%) translateY(-150%);
     opacity: 0;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
-    text-align: center;
+    text-align: left;
 }
 
 .tooltip-left:hover::after {

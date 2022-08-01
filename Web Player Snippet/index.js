@@ -19,6 +19,7 @@ const settingsButton = document.querySelector('.settings-button');
 const settingsContextMenu = document.querySelector('.settings-context-menu');
 const settingsTooltipContainer = document.querySelector('.settings-tooltip-container');
 
+const contextMenu = document.querySelector(".video-context-menu");
 const eqContainer = document.querySelector('.eq-dialog-container');
 const loopItem = document.querySelector('.loop-item');
 const eqItem = document.querySelector('.eq-item');
@@ -28,11 +29,13 @@ const Item = document.querySelector('.item');
 const transcriptItem = document.querySelector('.transcript-item');
 const transcriptPanel = document.querySelector('.transcript-panel');
 const transcriptDiv = document.querySelector('.captions-contents');
+const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
 
 const videoPlayer = document.querySelector('.video-player');
 
 const dialog = document.querySelector('.dialog');
 const closeDialog = document.querySelector('.close-dialog');
+const closeTranscriptPanel = document.querySelector('.close-transcript-panel');
 
 const volumeSliderContainer = document.querySelector('.volume-slider-container');
 const volumeContainer = document.querySelector('.volume-container');
@@ -52,23 +55,20 @@ const videoControlsContainer = document.querySelector(".video-controls-container
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 
-const snackbarSyncTranscript = document.querySelector('.snackbar-sync-time');
-
-var videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
-var videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
-var videoThumbs = '//link.storjshare.io/jvlmy6tcvabz5ka4kuwwy66yr6qq/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_THUMBNAILS.png?wrap=0';
-var HLSCodec = 'application/x-mpegURL';
-var FallbackCodec = 'video/mp4';
+const videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
+const videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
+const videoThumbs = '//link.storjshare.io/jvlmy6tcvabz5ka4kuwwy66yr6qq/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_THUMBNAILS.png?wrap=0';
+const HLSCodec = 'application/x-mpegURL';
+const FallbackCodec = 'video/mp4';
 
 function canFullscreen() {
-    var element = document.body;
-    var check = typeof element.requestFullscreen !== 'undefined' ||
-        typeof element.mozRequestFullScreen !== 'undefined' ||
-        typeof element.webkitRequestFullscreen !== 'undefined' ||
-        typeof element.msRequestFullscreen !== 'undefined' ||
-        typeof document.exitFullscreen !== 'undefined' ||
-        typeof document.mozCancelFullScreen !== 'undefined' ||
-        typeof document.webkitExitFullscreen !== 'undefined';
+    var check = typeof document.body.requestFullscreen !== 'undefined' ||
+        typeof document.body.mozRequestFullScreen !== 'undefined' ||
+        typeof document.body.webkitRequestFullscreen !== 'undefined' ||
+        typeof document.body.msRequestFullscreen !== 'undefined' ||
+        typeof document.body.exitFullscreen !== 'undefined' ||
+        typeof document.body.mozCancelFullScreen !== 'undefined' ||
+        typeof document.body.webkitExitFullscreen !== 'undefined';
     return check;
 };
 
@@ -115,7 +115,7 @@ window.addEventListener('load', () => {
     };
 });
 
-//Range Slider Track
+//Range slider track
 function handleInputChange(e) {
     let target = e.target;
     if (e.target.type !== 'range') {
@@ -128,9 +128,7 @@ function handleInputChange(e) {
     target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%';
 };
 
-//Context Menu
-const contextMenu = document.querySelector(".video-context-menu");
-
+//Context menu
 function showContextMenu(show = true) {
     show ? contextMenu.classList.add('show') : contextMenu.classList.remove('show');
 };
@@ -182,9 +180,7 @@ downloadItem.addEventListener('click', () => {
     settingsTooltipContainer.classList.add('tooltip-right');
 });
 
-//Playback
-playpauseButton.addEventListener('click', togglePlay);
-video.addEventListener('click', togglePlay);
+
 
 settingsButton.addEventListener('click', () => {
     settingsButton.classList.toggle('pressed');
@@ -201,10 +197,9 @@ var ctx = (window.AudioContext ||
 if (ctx) {
     var context = new ctx();
 } else {
-    alert('Web Audio API is not supported.');
     eqItem.classList.add('unsupported');
 };
-var sourceNode = context.createMediaElementSource(document.querySelector('video'));
+var sourceNode = context.createMediaElementSource(video);
 
 //EQ
 var filters = [];
@@ -260,6 +255,8 @@ EQswitchToggle.addEventListener('click', () => {
 function closedDialog() {
     if (eqContainer.classList.contains('opened')) {
         eqContainer.classList.remove("opened");
+    } else {
+        return;
     };
 };
 
@@ -272,17 +269,17 @@ transcriptItem.addEventListener('click', () => {
     videoPlayer.classList.add("transcript-opened");
 });
 
-transcriptPanel.querySelector('.close-transcript-panel').addEventListener('mouseover', () => {
+closeTranscriptPanel.addEventListener('mouseover', () => {
     videoContainer.classList.add('hovered');
     video.classList.remove('inactive');
 });
 
-transcriptPanel.querySelector('.close-transcript-panel').addEventListener('mouseleave', () => {
+closeTranscriptPanel.addEventListener('mouseleave', () => {
     videoContainer.classList.remove('hovered');
     video.classList.add('inactive');
 });
 
-transcriptPanel.querySelector('.close-transcript-panel').addEventListener('click', () => {
+closeTranscriptPanel.addEventListener('click', () => {
     videoPlayer.classList.remove("transcript-opened");
 });
 
@@ -431,7 +428,7 @@ transcriptPanel.addEventListener('contextmenu', e => { closeSettingsMenu(e); });
 transcriptPanel.addEventListener('click', e => { closeSettingsMenu(e); });
 
 //Keyboard shortcuts
-document.addEventListener('keydown', e => {
+videoContainer.addEventListener('keydown', e => {
     const tagName = document.activeElement.tagName.toLowerCase();
 
     if (tagName === 'input') return;
@@ -449,7 +446,7 @@ document.addEventListener('keydown', e => {
     } else {
         switch (e.key.toLowerCase()) {
             case ' ':
-                if (tagName === "button") return;
+                if (tagName === "button") break;
             case 'k':
                 togglePlay();
                 break;
@@ -483,10 +480,10 @@ document.addEventListener('keydown', e => {
                 skip(-5);
                 break;
             case 'arrowright': case 'l':
-                videoContainer.classList.add('hovered')
+                videoContainer.classList.add('hovered');
                 activity();
                 skip(5);
-                break
+                break;
         };
     };
 });
@@ -529,6 +526,7 @@ function spinnerDivider() {
 let timeout = null;
 function activity() {
     clearTimeout(timeout);
+    currentTime.textContent = formatDuration(video.currentTime);
     video.classList.remove('inactive');
     videoControlsContainer.classList.remove('inactive');
     videoContainer.classList.add('hovered');
@@ -579,14 +577,12 @@ function toggleFullScreen() {
 async function togglePIPPlayerMode() {
     try {
         if (document.pictureInPictureEnabled && !video.disablePictureInPicture) {
-            if (videoContainer.classList.contains("pip-player") && video.pictureInPictureElement) {
-                videoContainer.classList.add("pip-player");
+            if (videoContainer.classList.contains("pip-player") && !video.pictureInPictureElement) {
                 await document.exitPictureInPicture();
             } else {
-                videoContainer.classList.remove("pip-player");
                 await video.requestPictureInPicture();
             };
-        }
+        };
     } catch (error) {
         console.error(error);
     };
@@ -602,7 +598,11 @@ document.addEventListener("webkitfullscreenchange", fullScreenToggleChange);
 document.addEventListener("msfullscreenchange", fullScreenToggleChange);
 
 function togglePIPClass() {
-    videoContainer.classList.toggle("pip-player");
+    if (videoContainer.classList.contains("pip-player")) {
+        videoContainer.classList.remove("pip-player");
+    } else {
+        videoContainer.classList.add("pip-player");
+    };
 };
 
 video.addEventListener("enterpictureinpicture", togglePIPClass);
@@ -617,7 +617,7 @@ volumeSliderContainer.addEventListener("mousedown", volumeUpdate);
 function volumeUpdate(e) {
     const rect = volumeSliderContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-    isVolumeScrubbing = (e.buttons & 1) === 1;
+    isVolumeScrubbing = (e.buttons && 1) === 1;
     volumeContainer.classList.add('scrubbing');
     if (isVolumeScrubbing) {
         video.volume = percent;
@@ -671,34 +671,6 @@ timelineInner.addEventListener("mousemove", e => {
     seekingPreview.classList.add('hovered');
 });
 
-
-async function thumbnailSeekPreview() {
-    var videoThumb = document.createElement('video');
-    for (let i = 0; i <= videoThumb.duration; i = i + 1) {
-        const thumbs = []
-
-        const canvas = document.createElement("canvas")
-        var thumbnail = seekingThumbnail.getBoundingClientRect();
-        canvas.width = thumbnail.width
-        canvas.height = thumbnail.height
-
-        const context = canvas.getContext("2d")
-        videoThumb.currentTime = i
-
-        await new Promise(function (rsv) {
-            const event = function () {
-                context?.drawImage(video, 0, 0, thumbnail.width, thumbnail.height);
-                const url = canvas.toDataURL("image/jpeg");
-                thumbs.push({ sec: i, url });
-                videoThumb.removeEventListener("canplay", event);
-                rsv(null);
-            }
-            videoThumb.addEventListener("canplay", event)
-        })
-    }
-    setTimeout(() => document.body.removeChild(videoThumb));
-};
-
 timelineInner.addEventListener("mouseleave", () => {
     seekingPreview.classList.remove('hovered');
 })
@@ -747,10 +719,10 @@ function handleTimelineUpdate(e) {
     const seek = seekingPreview.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
 
-    var xywh = Math.round(percent * video.duration + 0.5) * (64 * 2);
-    seekingThumbnail.style.backgroundPosition = '-' + 0 + 'px -' + xywh + 'px';
+    var thumbPosition = Math.floor(percent * video.duration) * (64 * 2);
+    seekingThumbnail.style.backgroundPosition = '-' + 0 + 'px -' + thumbPosition + 'px';
 
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width - 10 ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
@@ -779,14 +751,19 @@ video.addEventListener('loadedmetadata', () => {
     loadedMetadata();
 });
 
-video.addEventListener('canplaythrough', () => {
+video.addEventListener('canplay', () => {
     if (video.buffered.length > 0)
         timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
 });
 
 video.addEventListener("timeupdate", () => {
-    currentTime.textContent = formatDuration(video.currentTime);
-    updatetime();
+    if (videoContainer.classList.contains('hovered')) {
+        updatetime();
+        currentTime.textContent = formatDuration(video.currentTime);
+    } else {
+        return;
+    };
+    
     if (video.currentTime === video.duration) {
         videoContainer.classList.add('ended');
         timelineInner.style.setProperty("--progress-position", 1);
@@ -800,13 +777,14 @@ video.addEventListener("progress", () => {
         timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
 });
 
-function updatetime() {
+async function updatetime() {
     const percent = video.currentTime / video.duration;
     if (!video.paused) {
         timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", percent);
     };
-    reqId = requestAnimationFrame(updatetime);
+    const reqId = requestAnimationFrame(updatetime);
+    return reqId;
 };
 
 const leading0Formatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
@@ -823,6 +801,9 @@ function formatDuration(time) {
 };
 
 //Playback
+playpauseButton.addEventListener('click', togglePlay);
+video.addEventListener('click', togglePlay);
+
 function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
         if (contextMenu.classList.contains("show")) {
@@ -840,9 +821,10 @@ function togglePlay() {
 };
 
 video.addEventListener("play", () => {
+    playpauseButton.dataset.tooltip = 'Pause' + ' (k)';
     spinnerDivider();
     if (Hls.isSupported() && video.currentTime === 0)
-        hls.startLoad(startPosition = -1);
+        hls.startLoad();
     videoContainer.addEventListener("mousemove", activity);
     videoContainer.addEventListener('mouseleave', () => {
         videoContainer.classList.remove('hovered');
@@ -852,6 +834,7 @@ video.addEventListener("play", () => {
 });
 
 video.addEventListener("pause", () => {
+    playpauseButton.dataset.tooltip = 'Play' + ' (k)';
     video.classList.remove('inactive');
     clearTimeout(timeout);
     videoContainer.classList.add('paused');

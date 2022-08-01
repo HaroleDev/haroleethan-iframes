@@ -141,14 +141,19 @@ function showContextMenu(show = true) {
 };
 
 videoContainer.addEventListener('contextmenu', e => {
-    e.preventDefault();
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove('pressed');
         settingsContextMenu.classList.remove('pressed');
         settingsTooltipContainer.classList.add('tooltip-right');
         closedDialog();
     };
-    showContextMenu();
+    
+    if (contextMenu.classList.contains('show')) {
+        showContextMenu(show = false);
+    } else {
+        e.preventDefault();
+        showContextMenu();
+    };
 
     contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight + 'px' : e.y + 'px';
     contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth + 'px' : e.x + 'px';

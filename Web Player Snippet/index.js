@@ -116,6 +116,7 @@ window.addEventListener('load', () => {
         fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable.';
     };
 
+    //Disable features when the user is on mobile
     let isMobile = /Mobi/.test(window.navigator.userAgent);
     if (isMobile) {
         volumeTooltipContainer.classList.add('hidden');
@@ -153,10 +154,9 @@ videoContainer.addEventListener('contextmenu', e => {
     } else {
         e.preventDefault();
         showContextMenu();
+        contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight + 'px' : e.y + 'px';
+        contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth + 'px' : e.x + 'px';
     };
-
-    contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight + 'px' : e.y + 'px';
-    contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth + 'px' : e.x + 'px';
 });
 
 function closeSettingsMenu(e) {

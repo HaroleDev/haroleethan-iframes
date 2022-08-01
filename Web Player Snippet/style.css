@@ -270,6 +270,7 @@ video {
 .video-controls-container .left-side button {
     background-color: #FFFFFF1a;
     border: none;
+    -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
     color: inherit;
     padding: 21px;
@@ -316,11 +317,13 @@ video {
 }
 
 .video-controls-container .left-side button:hover {
+    -webkit-box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
     box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
     background-color: #01A5734d;
 }
 
 .video-controls-container .left-side button:active {
+    -webkit-box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
     box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
     background: #02DA9A99;
     -webkit-transform: scale(0.96);
@@ -458,6 +461,8 @@ video {
     height: 8px;
     position: relative;
     margin: 8px 0px 8px 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     cursor: pointer;
 }
@@ -518,10 +523,19 @@ video {
 
 .seeking-preview {
     position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -ms-flex-line-pack: center;
     align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -529,6 +543,10 @@ video {
     top: 0;
     opacity: 0;
     pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -556,6 +574,7 @@ video {
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-backdrop-filter: blur(1vh);
     backdrop-filter: blur(1vh);
 }
 
@@ -573,6 +592,8 @@ video {
     display: block;
     padding: 6px 12px;
     text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     font-variant-numeric: tabular-nums;
     font-variant: normal;

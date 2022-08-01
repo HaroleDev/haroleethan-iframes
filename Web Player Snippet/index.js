@@ -51,13 +51,16 @@ const pipTooltip = document.querySelector(".pip-tooltip");
 
 const timelineContainer = document.querySelector(".timeline-container");
 const timelineInner = document.querySelector(".timeline");
+
 const videoControlsContainer = document.querySelector(".video-controls-container");
+const videoControls = document.querySelector(".controls");
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
+const videoSeekingPreview = document.querySelector(".video-preview-seeking");
 
 const videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
 const videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
-const videoThumbs = '//link.storjshare.io/jvlmy6tcvabz5ka4kuwwy66yr6qq/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_THUMBNAILS.png?wrap=0';
+const videoThumbs = '//res.cloudinary.com/harole/image/upload/q_72:420/v1659342003/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_tmwzhi.jpg';
 const HLSCodec = 'application/x-mpegURL';
 const FallbackCodec = 'video/mp4';
 
@@ -87,7 +90,6 @@ window.addEventListener('load', () => {
         video.load();
         video.addEventListener("durationchange", () => {
             updatetime();
-            timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
         });
     } else {
         video.querySelector('source').setAttribute('src', videoFallbackSrc);
@@ -96,7 +98,6 @@ window.addEventListener('load', () => {
         //For MP4 container
         video.addEventListener("durationchange", () => {
             updatetime();
-            timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
         });
     };
 
@@ -114,7 +115,7 @@ window.addEventListener('load', () => {
         fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable.';
     };
 
-    let isMobile = /Mobi/.test(window.navigator.userAgent)
+    let isMobile = /Mobi/.test(window.navigator.userAgent);
     if (isMobile) {
         volumeTooltipContainer.classList.add('hidden');
     };
@@ -673,13 +674,21 @@ video.addEventListener("volumechange", () => {
 });
 
 //Timeline
+function seekingPreviewPosition(e) {
+    const seek = seekingPreview.getBoundingClientRect();
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 12 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
+}
+
 timelineInner.addEventListener("mousemove", e => {
     handleTimelineUpdate(e);
     seekingPreview.classList.add('hovered');
+    videoControls.classList.add('hidden');
+    seekingPreviewPosition(e);
 });
 
 timelineInner.addEventListener("mouseleave", () => {
     seekingPreview.classList.remove('hovered');
+    videoControls.classList.remove('hidden');
 })
 
 timelineInner.addEventListener("mousedown", e => {
@@ -723,17 +732,17 @@ function toggleScrubbing(e) {
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
-    const seek = seekingPreview.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
 
-    var thumbPosition = Math.floor(percent * video.duration) * (64 * 2);
+    var thumbPosition = Math.floor(percent * video.duration) * 144;
     seekingThumbnail.style.backgroundPosition = '-' + 0 + 'px -' + thumbPosition + 'px';
 
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width - 10 ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 16 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
+    seekingPreviewPosition(e);
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
+        seekingPreviewPosition(e);
         timelineInner.style.setProperty("--progress-position", percent);
         cuetimeTooltip.textContent = formatDuration(percent * video.duration);
         currentTime.textContent = formatDuration(percent * video.duration);
@@ -749,12 +758,14 @@ function loadedMetadata() {
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
     seekingThumbnail.style.backgroundImage = `url('${videoThumbs}')`;
+    videoSeekingPreview.style.backgroundImage = `url('${videoThumbs}')`;
 });
 
 video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
     seekingPreview.classList.remove('loading');
     timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+    timelineContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     loadedMetadata();
 });
 

@@ -56,11 +56,11 @@ const videoControlsContainer = document.querySelector(".video-controls-container
 const videoControls = document.querySelector(".controls");
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
-const videoSeekingPreview = document.querySelector(".video-preview-seeking");
+const videoBackdropSeeking = document.querySelector(".video-backdrop-seeking");
 
 const videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
 const videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
-const videoThumbs = '//res.cloudinary.com/harole/image/upload/q_72:420/v1659342003/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_tmwzhi.jpg';
+const videoThumbs = '//res.cloudinary.com/harole/image/upload/q_60:420/v1659342003/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_tmwzhi.jpg';
 const HLSCodec = 'application/x-mpegURL';
 const FallbackCodec = 'video/mp4';
 
@@ -679,6 +679,7 @@ function seekingPreviewPosition(e) {
     seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 12 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
 }
 
+
 timelineInner.addEventListener("mousemove", e => {
     handleTimelineUpdate(e);
     seekingPreview.classList.add('hovered');
@@ -736,7 +737,6 @@ function handleTimelineUpdate(e) {
 
     var thumbPosition = Math.floor(percent * video.duration) * 144;
     seekingThumbnail.style.backgroundPosition = '-' + 0 + 'px -' + thumbPosition + 'px';
-
     seekingPreviewPosition(e);
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
@@ -758,7 +758,6 @@ function loadedMetadata() {
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
     seekingThumbnail.style.backgroundImage = `url('${videoThumbs}')`;
-    videoSeekingPreview.style.backgroundImage = `url('${videoThumbs}')`;
 });
 
 video.addEventListener('loadedmetadata', () => {

@@ -56,7 +56,7 @@ const videoControlsContainer = document.querySelector(".video-controls-container
 const videoControls = document.querySelector(".controls");
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
-const videoBackdropSeeking = document.querySelector(".video-backdrop-seeking");
+const videoThumbPreview = document.querySelector(".video-thumb-preview");
 
 const videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
 const videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
@@ -737,11 +737,14 @@ function handleTimelineUpdate(e) {
 
     var thumbPosition = Math.floor(percent * video.duration) * 144;
     seekingThumbnail.style.backgroundPosition = '-' + 0 + 'px -' + thumbPosition + 'px';
+
     seekingPreviewPosition(e);
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
+        var thumbPreviewPosition = Math.floor(percent * video.duration) / (45 - 1);
+        videoThumbPreview.style.backgroundPositionY = 'calc(' + thumbPreviewPosition + '* 100%)';
         seekingPreviewPosition(e);
         timelineInner.style.setProperty("--progress-position", percent);
         cuetimeTooltip.textContent = formatDuration(percent * video.duration);
@@ -758,13 +761,14 @@ function loadedMetadata() {
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
     seekingThumbnail.style.backgroundImage = `url('${videoThumbs}')`;
+    videoThumbPreview.style.backgroundImage = `url('${videoThumbs}')`;
 });
 
 video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
     seekingPreview.classList.remove('loading');
-    timelineContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
-    timelineContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
+    videoContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+    videoContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     loadedMetadata();
 });
 

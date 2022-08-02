@@ -613,6 +613,8 @@ function togglePIPClass() {
     if (videoContainer.classList.contains("pip-player")) {
         videoContainer.classList.remove("pip-player");
         fullscreenTooltip.dataset.tooltip = 'Full screen' + ' (f)';
+        if (!video.paused)
+            video.play();
     } else {
         videoContainer.classList.add("pip-player");
         fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable.';

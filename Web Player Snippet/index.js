@@ -147,7 +147,7 @@ videoContainer.addEventListener('contextmenu', e => {
         settingsTooltipContainer.classList.add('tooltip-right');
         closedDialog();
     };
-    
+
     if (contextMenu.classList.contains('show')) {
         showContextMenu(show = false);
     } else {
@@ -366,7 +366,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text;
         };
-        var clickableTranscriptText = "<div class=\"cue-container\" id=\"" + cue.startTime + "\"" + " onclick='jumpToTranscript(" + cue.startTime + ");'> <span class=\"cue-time\">" + formatDuration(cue.startTime) + "</span>" + "<span class=\"cues\">" + transcriptText + "</span></div>";
+        var clickableTranscriptText = `<div class="cue-container" id="${cue.startTime}" onclick='jumpToTranscript(${cue.startTime});'> <span class="cue-time">${formatDuration(cue.startTime)}</span> <span class="cues">${transcriptText}</span> </div>`;
         addToTranscript(clickableTranscriptText);
     };
 };
@@ -750,7 +750,7 @@ function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
 
-    var thumbPosition = Math.floor(percent * video.duration) / Math.floor(video.duration) * 100 
+    var thumbPosition = Math.floor(percent * video.duration) / Math.floor(video.duration) * 100
     seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`;
 
     seekingPreviewPosition(e);

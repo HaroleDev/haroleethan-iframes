@@ -705,6 +705,7 @@ timelineInner.addEventListener("mousedown", e => {
 document.addEventListener("mouseup", e => {
     if (isScrubbing) {
         toggleScrubbing(e);
+        seekingPreview.classList.add('loading');
     } if (isVolumeScrubbing) {
         volumeUpdate(e);
     };
@@ -725,7 +726,8 @@ function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     isScrubbing = (e.buttons & 1) === 1;
-    videoContainer.classList.toggle("scrubbing", isScrubbing);
+    seekingPreviewPosition(e);
+    videoContainer.classList.add("scrubbing", isScrubbing);
     if (isScrubbing) {
         wasPaused = video.paused;
         video.pause();
@@ -736,6 +738,11 @@ function toggleScrubbing(e) {
 
     handleTimelineUpdate(e);
 };
+
+video.addEventListener('seeked', () => {
+    videoContainer.classList.remove("scrubbing");
+    seekingPreview.classList.remove('loading');
+})
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
@@ -749,6 +756,7 @@ function handleTimelineUpdate(e) {
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
+        videoThumbPreview.style.backgroundImage = `url('${videoThumbs}')`;
         var thumbPreviewPosition = Math.floor(percent * video.duration) / (Math.floor(video.duration) - 1);
         videoThumbPreview.style.backgroundPositionY = 'calc(' + thumbPreviewPosition + '* 100%)';
         seekingPreviewPosition(e);
@@ -766,13 +774,12 @@ function loadedMetadata() {
 
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
-    seekingThumbnail.style.backgroundImage = `url('${videoThumbs}')`;
-    videoThumbPreview.style.backgroundImage = `url('${videoThumbs}')`;
 });
 
 video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
     seekingPreview.classList.remove('loading');
+    seekingThumbnail.style.backgroundImage = `url('${videoThumbs}')`;
     videoContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
     videoContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     loadedMetadata();

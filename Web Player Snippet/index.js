@@ -516,6 +516,8 @@ loopItem.addEventListener('click', loopVideo);
 //Skip time
 function skip(duration) {
     video.currentTime += duration;
+    const percent = video.currentTime / video.duration;
+    timelineInner.style.setProperty("--progress-position", percent);
 };
 
 //Time divider animation
@@ -692,7 +694,6 @@ timelineInner.addEventListener("mousemove", e => {
     handleTimelineUpdate(e);
     seekingPreview.classList.add('hovered');
     videoControls.classList.add('hidden');
-    seekingPreviewPosition(e);
 });
 
 timelineInner.addEventListener("mouseleave", () => {
@@ -714,6 +715,7 @@ document.addEventListener("mouseup", e => {
 });
 
 document.addEventListener("mousemove", e => {
+    seekingPreviewPosition(e);
     if (isScrubbing) {
         handleTimelineUpdate(e);
     } if (isVolumeScrubbing) {
@@ -760,7 +762,6 @@ function handleTimelineUpdate(e) {
         e.preventDefault();
         videoThumbPreview.style.backgroundImage = `url('${videoThumbs}')`;
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`;
-        seekingPreviewPosition(e);
         timelineInner.style.setProperty("--progress-position", percent);
         cuetimeTooltip.textContent = formatDuration(percent * video.duration);
         currentTime.textContent = formatDuration(percent * video.duration);
@@ -801,7 +802,6 @@ video.addEventListener("timeupdate", () => {
 
     if (video.currentTime === video.duration) {
         videoContainer.classList.add('ended');
-        timelineInner.style.setProperty("--progress-position", 1);
     } else {
         videoContainer.classList.remove('ended');
     };
@@ -877,4 +877,12 @@ video.addEventListener("pause", () => {
 
 video.addEventListener('ended', () => {
     videoContainer.classList.add('ended');
+});
+
+video.addEventListener('waiting', () => {
+    videoContainer.classList.add('buffering');
+});
+
+video.addEventListener('playing', () => {
+    videoContainer.classList.remove('buffering');
 });

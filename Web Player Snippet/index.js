@@ -152,11 +152,11 @@ videoContainer.addEventListener('contextmenu', e => {
         showContextMenu(show = false);
     } else {
         e.preventDefault();
-        contextMenu.style.top = e.y + contextMenu.offsetHeight > window.innerHeight ? window.innerHeight - contextMenu.offsetHeight + 'px' : e.y + 'px';
-        contextMenu.style.left = e.x + contextMenu.offsetWidth > window.innerWidth ? window.innerWidth - contextMenu.offsetWidth + 'px' : e.x + 'px';
+        var marginCon = document.querySelector(".video-player-container").currentStyle || window.getComputedStyle(document.querySelector(".video-player-container"));
+        contextMenu.style.top = e.y + contextMenu.offsetHeight > videoPlayer.clientHeight + parseInt(marginCon.margin) ? videoPlayer.clientHeight - contextMenu.offsetHeight + parseInt(marginCon.margin) + 'px' : e.y + 'px';
+        contextMenu.style.left = e.x + contextMenu.offsetWidth > videoPlayer.clientWidth + parseInt(marginCon.margin) ? videoPlayer.clientWidth - contextMenu.offsetWidth + parseInt(marginCon.margin) + 'px' : e.x + 'px';
         showContextMenu();
     };
-
 });
 
 function closeSettingsMenu(e) {
@@ -168,7 +168,7 @@ function closeSettingsMenu(e) {
     };
 };
 
-videoPlayer.addEventListener('click', e => {
+document.addEventListener('click', e => {
     volumeContainer.classList.remove('scrubbing');
     showContextMenu(show = false);
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
@@ -677,7 +677,7 @@ async function togglePIPPlayerMode() {
 };
 
 function fullScreenToggleChange() {
-    videoContainer.classList.toggle("full-screen", document.fullscreenElement);
+    videoPlayer.classList.toggle("full-screen", document.fullscreenElement);
 };
 
 document.addEventListener("fullscreenchange", fullScreenToggleChange);
@@ -760,9 +760,8 @@ video.addEventListener("volumechange", () => {
 //Timeline
 function seekingPreviewPosition(e) {
     const seek = seekingPreview.getBoundingClientRect();
-    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 12 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
+    seekingPreview.style.setProperty("--thumbnail-seek-position", e.x + seek.left < seek.width + 48 ? seekingPreview.offsetLeft + 'px' : e.x + seek.width > videoContainer.offsetWidth + 48 + 24 ? seekingPreview.offsetLeft + 'px' : e.x + 'px');
 }
-
 
 timelineInner.addEventListener("mousemove", e => {
     handleTimelineUpdate(e);
@@ -859,8 +858,8 @@ video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
     seekingPreview.classList.remove('loading');
     seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
-    videoContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
-    videoContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
+    videoPlayer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+    videoPlayer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     loadedMetadata();
 });
 

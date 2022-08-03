@@ -49,7 +49,6 @@ body {
 .video-container {
     width: 100%;
     height: 100%;
-    background: #000;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -211,7 +210,7 @@ body {
     margin: 0 auto;
 }
 
-:not(.pip-player).inactive {
+:not(.paused):not(.pip-player).inactive {
     cursor: none;
 }
 
@@ -1784,6 +1783,7 @@ input[type=range]::-ms-tooltip {
 }
 
 .video-player {
+    aspect-ratio: 1 / var(--aspect-ratio-size-inverse);
     width: 100%;
     height: calc(100% * var(--aspect-ratio-size-inverse));
     max-width: 1440px;

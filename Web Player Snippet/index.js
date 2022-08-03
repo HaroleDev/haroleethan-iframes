@@ -80,7 +80,7 @@ function canFullscreen() {
 };
 
 window.addEventListener('load', () => {
-    if (!Hls.isSupported()) {
+    /*if (!Hls.isSupported()) {
         hls.loadSource(videoMetadata.HLS_src);
         hls.attachMedia(video);
         video.querySelector('source').setAttribute('type', videoMetadata.HLS_codec);
@@ -88,18 +88,23 @@ window.addEventListener('load', () => {
         hls.on(Hls.Events.LEVEL_LOADED, function () {
             loadedMetadata();
         });
-    /*} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.querySelector('source').setAttribute('src', videoMetadata.HLS_src);
         video.querySelector('source').setAttribute('type', videoMetadata.HLS_codec);
         video.load();
-        video.addEventListener("durationchange", updatetime);*/
+        video.addEventListener("durationchange", updatetime);
     } else {
         video.querySelector('source').setAttribute('src', videoMetadata.Fallback_src);
         video.querySelector('source').setAttribute('type', videoMetadata.Fallback_codec);
         video.load();
         //For MP4 container
         video.addEventListener("durationchange", updatetime);
-    };
+    };*/
+
+        video.querySelector('source').setAttribute('src', videoMetadata.Fallback_src);
+        video.querySelector('source').setAttribute('type', videoMetadata.Fallback_codec);
+        video.load();
+        video.addEventListener("durationchange", updatetime);
 
     eqContainer.querySelectorAll('.eq-slider').forEach(element => {
         element.disabled = true;

@@ -89,17 +89,13 @@ window.addEventListener('load', () => {
         video.querySelector('source').setAttribute('src', videoHLSSrc);
         video.querySelector('source').setAttribute('type', HLSCodec);
         video.load();
-        video.addEventListener("durationchange", () => {
-            updatetime();
-        });
+        video.addEventListener("durationchange", updatetime);
     } else {
         video.querySelector('source').setAttribute('src', videoFallbackSrc);
         video.querySelector('source').setAttribute('type', FallbackCodec);
         video.load();
         //For MP4 container
-        video.addEventListener("durationchange", () => {
-            updatetime();
-        });
+        video.addEventListener("durationchange", updatetime);
     };
 
     eqContainer.querySelectorAll('.eq-slider').forEach(element => {
@@ -116,6 +112,7 @@ window.addEventListener('load', () => {
         fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable.';
     };
 
+    //Disable features for mobile users
     let isMobile = /Mobi/.test(window.navigator.userAgent);
     if (isMobile) {
         volumeTooltipContainer.classList.add('hidden');
@@ -192,8 +189,6 @@ downloadItem.addEventListener('click', () => {
     settingsTooltipContainer.classList.add('tooltip-right');
 });
 
-
-
 settingsButton.addEventListener('click', () => {
     settingsButton.classList.toggle('pressed');
     settingsContextMenu.classList.toggle('pressed');
@@ -236,9 +231,7 @@ function changeGain(sliderValue, nbFilter) {
 };
 
 //EQ dialog
-eqItem.addEventListener('click', () => {
-    eqContainer.classList.add("opened");
-});
+eqItem.addEventListener('click', () => eqContainer.classList.add("opened"));
 
 EQswitchToggle.addEventListener('click', () => {
     if (eqContainer.classList.contains('enabled')) {
@@ -701,9 +694,7 @@ timelineInner.addEventListener("mouseleave", () => {
     videoControls.classList.remove('hidden');
 })
 
-timelineInner.addEventListener("mousedown", e => {
-    toggleScrubbing(e);
-});
+timelineInner.addEventListener("mousedown", e => toggleScrubbing(e));
 
 document.addEventListener("mouseup", e => {
     if (isScrubbing) {
@@ -715,7 +706,6 @@ document.addEventListener("mouseup", e => {
 });
 
 document.addEventListener("mousemove", e => {
-    seekingPreviewPosition(e);
     if (isScrubbing) {
         handleTimelineUpdate(e);
     } if (isVolumeScrubbing) {
@@ -723,6 +713,8 @@ document.addEventListener("mousemove", e => {
         volumeContainer.classList.add('scrubbing');
     };
 });
+
+videoControlsContainer.addEventListener("mousemove", e => seekingPreviewPosition(e))
 
 let isScrubbing = false;
 let wasPaused;
@@ -774,9 +766,7 @@ function loadedMetadata() {
     currentTime.textContent = formatDuration(video.currentTime);
 };
 
-video.addEventListener('loadstart', () => {
-    videoPlayer.classList.add('loading');
-});
+video.addEventListener('loadstart', videoPlayer.classList.add('loading'));
 
 video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
@@ -875,14 +865,8 @@ video.addEventListener("pause", () => {
     videoContainer.classList.add('paused');
 });
 
-video.addEventListener('ended', () => {
-    videoContainer.classList.add('ended');
-});
+video.addEventListener('ended', () => videoContainer.classList.add('ended'));
 
-video.addEventListener('waiting', () => {
-    videoContainer.classList.add('buffering');
-});
+video.addEventListener('waiting', () => videoContainer.classList.add('buffering'));
 
-video.addEventListener('playing', () => {
-    videoContainer.classList.remove('buffering');
-});
+video.addEventListener('playing', () => videoContainer.classList.remove('buffering'));

@@ -88,11 +88,11 @@ window.addEventListener('load', () => {
         hls.on(Hls.Events.LEVEL_LOADED, function () {
             loadedMetadata();
         });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    /*} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.querySelector('source').setAttribute('src', videoMetadata.HLS_src);
         video.querySelector('source').setAttribute('type', videoMetadata.HLS_codec);
         video.load();
-        video.addEventListener("durationchange", updatetime);
+        video.addEventListener("durationchange", updatetime);*/
     } else {
         video.querySelector('source').setAttribute('src', videoMetadata.Fallback_src);
         video.querySelector('source').setAttribute('type', videoMetadata.Fallback_codec);

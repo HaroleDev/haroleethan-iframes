@@ -588,7 +588,7 @@ body {
 }
 
 .buffering .timeline-scrubber {
-    animation: buffer 1000ms infinite linear;
+    animation: buffer 2000ms infinite linear;
 }
 
 @keyframes buffer {

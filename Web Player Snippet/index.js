@@ -108,11 +108,11 @@ window.addEventListener('load', () => {
 
     if (!('pictureInPictureEnabled' in document)) {
         pipPlayerButton.classList.add('unsupported');
-        pipTooltip.dataset.tooltip = 'Picture in picture is unavailable.';
+        pipTooltip.dataset.tooltip = 'Picture in picture is unavailable';
     };
     if (!canFullscreen) {
         fullscreenButton.classList.add('unsupported');
-        fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable.';
+        fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable';
     };
 
     //Disable features for mobile users
@@ -693,7 +693,7 @@ function togglePIPClass() {
             video.play();
     } else {
         videoContainer.classList.add("pip-player");
-        fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable.';
+        fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable';
     };
 };
 

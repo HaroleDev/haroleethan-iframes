@@ -1,3 +1,12 @@
+const videoMetadata = {
+    video_thumbs: '//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg',
+    HLS_src: '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8',
+    HLS_codec: 'application/x-mpegURL',
+    Fallback_src: '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0',
+    Fallback_codec: 'video/mp4',
+    video_FPS: '59.940',
+};
+
 var config = {
     startPosition: -1,
 };
@@ -58,15 +67,6 @@ const videoControls = document.querySelector(".controls");
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 const videoThumbPreview = document.querySelector(".video-thumb-preview");
-
-const videoMetadata = {
-    video_thumbs: '//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg',
-    HLS_src: '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8',
-    HLS_codec: 'application/x-mpegURL',
-    Fallback_src: '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0',
-    Fallback_codec: 'video/mp4',
-    video_FPS: '59.940',
-};
 
 function canFullscreen() {
     var check = typeof document.body.requestFullscreen !== 'undefined' ||
@@ -431,9 +431,9 @@ transcriptPanel.addEventListener('click', e => {
     };
 });
 
-transcriptPanel.addEventListener('contextmenu', e => { closeSettingsMenu(e); });
+transcriptPanel.addEventListener('contextmenu', e => closeSettingsMenu(e));
 
-transcriptPanel.addEventListener('click', e => { closeSettingsMenu(e); });
+transcriptPanel.addEventListener('click', e => closeSettingsMenu(e));
 
 //Keyboard shortcuts
 videoPlayer.addEventListener('keydown', e => {
@@ -542,6 +542,16 @@ videoPlayer.addEventListener('keydown', e => {
                 activity();
                 skip(5);
                 break;
+            case '.':
+                videoContainer.classList.add('hovered');
+                activity();
+                frameSeeking();
+                break;
+            case ',':
+                videoContainer.classList.add('hovered');
+                activity();
+                frameBackSeeking();
+                break;
         };
     };
 });
@@ -568,6 +578,18 @@ function skip(duration) {
 
 function skipPercent(number) {
     video.currentTime = video.duration * number;
+    const percent = video.currentTime / video.duration;
+    timelineInner.style.setProperty("--progress-position", percent);
+};
+
+function frameSeeking() {
+    video.currentTime += 1 / videoMetadata.videoFPS;
+    const percent = video.currentTime / video.duration;
+    timelineInner.style.setProperty("--progress-position", percent);
+};
+
+function frameBackSeeking() {
+    video.currentTime += -1 / videoMetadata.videoFPS;
     const percent = video.currentTime / video.duration;
     timelineInner.style.setProperty("--progress-position", percent);
 };

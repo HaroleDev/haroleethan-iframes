@@ -59,11 +59,14 @@ const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 const videoThumbPreview = document.querySelector(".video-thumb-preview");
 
-const videoHLSSrc = '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8';
-const videoFallbackSrc = '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0';
-const videoThumbs = '//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg';
-const HLSCodec = 'application/x-mpegURL';
-const FallbackCodec = 'video/mp4';
+const videoMetadata = {
+    video_thumbs: '//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg',
+    HLS_src: '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8',
+    HLS_codec: 'application/x-mpegURL',
+    Fallback_src: '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0',
+    Fallback_codec: 'video/mp4',
+    video_FPS: '59.940',
+};
 
 function canFullscreen() {
     var check = typeof document.body.requestFullscreen !== 'undefined' ||
@@ -78,21 +81,21 @@ function canFullscreen() {
 
 window.addEventListener('load', () => {
     if (!Hls.isSupported()) {
-        hls.loadSource(videoHLSSrc);
+        hls.loadSource(videoMetadata.HLS_src);
         hls.attachMedia(video);
-        video.querySelector('source').setAttribute('type', HLSCodec);
+        video.querySelector('source').setAttribute('type', videoMetadata.HLS_codec);
         //For HLS container
         hls.on(Hls.Events.LEVEL_LOADED, function () {
             loadedMetadata();
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.querySelector('source').setAttribute('src', videoHLSSrc);
-        video.querySelector('source').setAttribute('type', HLSCodec);
+        video.querySelector('source').setAttribute('src', videoMetadata.HLS_src);
+        video.querySelector('source').setAttribute('type', videoMetadata.HLS_codec);
         video.load();
         video.addEventListener("durationchange", updatetime);
     } else {
-        video.querySelector('source').setAttribute('src', videoFallbackSrc);
-        video.querySelector('source').setAttribute('type', FallbackCodec);
+        video.querySelector('source').setAttribute('src', videoMetadata.Fallback_src);
+        video.querySelector('source').setAttribute('type', videoMetadata.Fallback_codec);
         video.load();
         //For MP4 container
         video.addEventListener("durationchange", updatetime);
@@ -433,7 +436,7 @@ transcriptPanel.addEventListener('contextmenu', e => { closeSettingsMenu(e); });
 transcriptPanel.addEventListener('click', e => { closeSettingsMenu(e); });
 
 //Keyboard shortcuts
-videoContainer.addEventListener('keydown', e => {
+videoPlayer.addEventListener('keydown', e => {
     const tagName = document.activeElement.tagName.toLowerCase();
 
     if (tagName === 'input') return;
@@ -452,6 +455,56 @@ videoContainer.addEventListener('keydown', e => {
         switch (e.key.toLowerCase()) {
             case ' ':
                 if (tagName === "button") break;
+            case '0':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0);
+                break;
+            case '1':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.1);
+                break;
+            case '2':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.2);
+                break;
+            case '3':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.3);
+                break;
+            case '4':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.4);
+                break;
+            case '5':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.5);
+                break;
+            case '6':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.6);
+                break;
+            case '7':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.7);
+                break;
+            case '8':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.8);
+                break;
+            case '9':
+                videoContainer.classList.add('hovered');
+                activity();
+                skipPercent(0.9);
+                break;
             case 'k':
                 togglePlay();
                 break;
@@ -509,6 +562,12 @@ loopItem.addEventListener('click', loopVideo);
 //Skip time
 function skip(duration) {
     video.currentTime += duration;
+    const percent = video.currentTime / video.duration;
+    timelineInner.style.setProperty("--progress-position", percent);
+};
+
+function skipPercent(number) {
+    video.currentTime = video.duration * number;
     const percent = video.currentTime / video.duration;
     timelineInner.style.setProperty("--progress-position", percent);
 };
@@ -714,7 +773,13 @@ document.addEventListener("mousemove", e => {
     };
 });
 
-videoControlsContainer.addEventListener("mousemove", e => seekingPreviewPosition(e))
+videoContainer.addEventListener("mousemove", e => {
+    if (videoContainer.classList.contains('hovered')) {
+        seekingPreviewPosition(e);
+    } else {
+        return;
+    };
+});
 
 let isScrubbing = false;
 let wasPaused;
@@ -752,7 +817,7 @@ function handleTimelineUpdate(e) {
     cuetimeTooltip.textContent = formatDuration(percent * video.duration);
     if (isScrubbing) {
         e.preventDefault();
-        videoThumbPreview.style.backgroundImage = `url('${videoThumbs}')`;
+        videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`;
         timelineInner.style.setProperty("--progress-position", percent);
         cuetimeTooltip.textContent = formatDuration(percent * video.duration);
@@ -771,7 +836,7 @@ video.addEventListener('loadstart', videoPlayer.classList.add('loading'));
 video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
     seekingPreview.classList.remove('loading');
-    seekingThumbnail.style.backgroundImage = `url('${videoThumbs}')`;
+    seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
     videoContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
     videoContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     loadedMetadata();

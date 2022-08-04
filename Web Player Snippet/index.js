@@ -797,7 +797,7 @@ video.addEventListener("volumechange", () => {
 //Timeline
 function clamp(input = 0, min = 0, max = 255) {
     return Math.min(Math.max(input, min), max);
-}
+};
 function seekingPreviewPosition(e) {
     /*var rect = e.target.getBoundingClientRect();
     var eventX = e.clientX - rect.left;
@@ -817,24 +817,17 @@ function seekingPreviewPosition(e) {
     const clamped = clamp(position, min, max);
 
     seekingPreview.style.setProperty("--thumbnail-seek-position", `${clamped}px`);*/
-    let percent = 0;
-    const clientRect = timelineInner.getBoundingClientRect();
 
-    if (e.target) {
-      percent = (100 / clientRect.width) * (e.pageX - clientRect.left);
-    } else if (seekingPreview.classList.contains('hovered')) {
-      percent = parseFloat(seekingPreview.style.left, 10);
-    } else {
-      return;
-    }
+    const scrubberRect = timelineInner.getBoundingClientRect();
+    const containerRect = videoContainer.getBoundingClientRect();
 
-    if (percent < 0) {
-      percent = 0;
-    } else if (percent > 100) {
-      percent = 100;
-    }
+    const min = containerRect.left + scrubberRect.left - 10;
+    const max = containerRect.right - seekingPreview.clientWidth + 10;
 
-    seekingPreview.style.setProperty("--thumbnail-seek-position", `${percent}%`);
+    const position = e.x - (containerRect.left / containerRect.right) - seekingPreview.clientWidth / 4 - 8;
+    const clamped = clamp(position, min, max);
+
+    seekingPreview.style.setProperty("--thumbnail-seek-position", `${clamped}px`);
 };
 
 timelineInner.addEventListener("mousemove", e => {

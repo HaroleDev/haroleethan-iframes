@@ -807,43 +807,51 @@ function seekingPreviewPosition(e) {
     var rect = e.target.getBoundingClientRect();
     var eventX = e.clientX - rect.left;
     seekingPreview.style.setProperty("--thumbnail-seek-position", eventX + seek.left < videoContainer.offsetWidth + 48 ? seekingPreview.offsetLeft + 'px' : eventX + seek.width > videoContainer.offsetWidth ? seekingPreview.offsetLeft + 'px' : e.x + 'px');*/
+
     /*const scrubberRect = timelineInner.getBoundingClientRect();
-    const containerRect = seekingPreview.getBoundingClientRect();
+    const containerRect = videoPlayer.getBoundingClientRect();
 
-    const min = containerRect.left - scrubberRect.left + 10;
-    const max = containerRect.right - scrubberRect.left - seekingPreview.clientWidth - 10;
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
 
-    const position = e.pageX - scrubberRect.left - seekingPreview.clientWidth / 2;
+    const min = containerRect.left + seekingPreview.clientWidth - 10;
+    const max = containerRect.right - seekingPreview.clientWidth + 10;
+
+
+    const position = x - (containerRect.left / containerRect.right) - seekingPreview.clientWidth / 4 - 8;
     const clamped = clamp(position, min, max);
 
     seekingPreview.style.setProperty("--thumbnail-seek-position", `${clamped}px`);*/
 
-    const scrubberRect = timelineInner.getBoundingClientRect();
-    const containerRect = videoContainer.getBoundingClientRect();
-
-    const min = containerRect.left + scrubberRect.left - 10;
-    const max = containerRect.right - seekingPreview.clientWidth + 10;
-
-    const position = e.x - (containerRect.left / containerRect.right) - seekingPreview.clientWidth / 4 - 8;
-    const clamped = clamp(position, min, max);
-
-    seekingPreview.style.setProperty("--thumbnail-seek-position", `${clamped}px`);
-};
-
-timelineInner.addEventListener("mousemove", e => {
-    if (e.button === 0) {
-        handleTimelineUpdate(e);
-        seekingPreview.classList.add('hovered');
-        videoControls.classList.add('hidden');
+    let percent = 0;
+    const clientRect = timelineInner.getBoundingClientRect();
+    if (e.target) {
+        percent = (100 / clientRect.width) * (e.clientX - clientRect.left);
+    } else if (seekingPreview.classList.contains('hovered')) {
+        percent = parseFloat(seekingPreview.style.left, 10);
     } else {
         return;
     };
+
+    if (percent < 0) {
+        percent = 0;
+    } else if (percent > 100) {
+        percent = 100;
+    };
+
+    seekingPreview.style.setProperty("--thumbnail-seek-position", `${percent}%`);
+};
+
+timelineInner.addEventListener("mousemove", e => {
+    handleTimelineUpdate(e);
+    seekingPreview.classList.add('hovered');
+    videoControls.classList.add('hidden');
 });
 
 timelineInner.addEventListener("mouseleave", () => {
     seekingPreview.classList.remove('hovered');
     videoControls.classList.remove('hidden');
-})
+});
 
 timelineInner.addEventListener("mousedown", e => {
     if (e.button === 0)
@@ -870,7 +878,7 @@ document.addEventListener("mousemove", e => {
         };
 });
 
-videoContainer.addEventListener("mousemove", e => {
+document.addEventListener("mousemove", e => {
     if (videoContainer.classList.contains('hovered')) {
         seekingPreviewPosition(e);
     } else {

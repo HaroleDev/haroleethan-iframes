@@ -311,6 +311,7 @@ body {
     left: 0;
     top: 0;
     margin: -2px;
+    stroke-linecap: round;
     stroke-dasharray: 0 360;
     stroke-dashoffset: 360;
     stroke-width: 4px;

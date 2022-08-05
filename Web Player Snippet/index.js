@@ -898,6 +898,7 @@ function toggleScrubbing(e) {
 };
 
 video.addEventListener('seeked', () => {
+    videoPoster.classList.add('played');
     videoContainer.classList.remove("scrubbing");
     seekingPreview.classList.remove('loading');
 });
@@ -981,7 +982,6 @@ video.addEventListener("progress", () => {
 });
 
 async function updatetime() {
-    videoPoster.classList.add('played');
     const percent = video.currentTime / video.duration;
     if (!video.paused) {
         timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
@@ -1025,6 +1025,7 @@ function togglePlay() {
 };
 
 video.addEventListener("play", () => {
+    videoPoster.classList.add('played');
     playpauseTooltipContainer.dataset.tooltip = 'Pause' + ' (k)';
     spinnerDivider();
     if (Hls.isSupported() && video.currentTime === 0)

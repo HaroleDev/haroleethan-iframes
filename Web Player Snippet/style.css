@@ -82,8 +82,6 @@ body {
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-animation: transition 600ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
-    animation: transition 600ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
     will-change: width, height;
 }
 
@@ -93,6 +91,8 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
+    -webkit-animation: transition 600ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    animation: transition 600ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 .loading .video {
@@ -717,7 +717,8 @@ body {
     pointer-events: none;
     height: 100%;
     width: calc(100% * var(--aspect-ratio-size));
-    background-size: 100%;
+    background-size: calc(100% * var(--aspect-ratio-size-inverse));
+    background-position-x: calc(100% * var(--aspect-ratio-size));
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -733,8 +734,8 @@ body {
     z-index: 1;
     opacity: 1;
     pointer-events: none;
-    height: 100%;
-    width: calc(100% * var(--aspect-ratio-size));
+    width: 100%;
+    aspect-ratio: var(--aspect-ratio-size) / 1;
     -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);

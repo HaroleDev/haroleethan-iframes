@@ -105,6 +105,7 @@ window.addEventListener('load', () => {
 
     video.querySelector('source').setAttribute('src', videoMetadata.Fallback_src);
     video.querySelector('source').setAttribute('type', videoMetadata.Fallback_codec);
+    videoPoster.src = videoMetadata.video_poster;
     video.load();
     video.addEventListener("durationchange", updatetime);
 
@@ -940,14 +941,13 @@ function loadedMetadata() {
 
 video.addEventListener('loadstart', () => {
     videoPlayer.classList.add('loading');
-    videoPoster.style.backgroundImage = `url('${videoMetadata.video_poster}')`;
+    if (videoPoster.completed) videoPoster.style.opacity = 1; 
 });
 
 video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
     seekingPreview.classList.remove('loading');
 
-    seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
     seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
     videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
 

@@ -1,5 +1,6 @@
 const videoMetadata = {
     video_thumbs: '//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg',
+    video_poster: '//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_auto:eco,w_1280/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
     HLS_src: '//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8',
     HLS_codec: 'application/x-mpegURL',
     Fallback_src: '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0',
@@ -15,6 +16,7 @@ var hls = new Hls(config);
 const playpauseButton = document.querySelector('.play-pause-button');
 const playpauseTooltipContainer = document.querySelector('.play-pause-tooltip-container');
 const videoContainer = document.querySelector('.video-container');
+const videoPoster = document.querySelector('.video-poster');
 const video = document.querySelector('.video');
 
 const currentTime = document.querySelector('.current-time');
@@ -877,14 +879,6 @@ document.addEventListener("pointermove", e => {
     };
 });
 
-document.addEventListener("pointermove", e => {
-    if (videoContainer.classList.contains('hovered')) {
-        seekingPreviewPosition(e);
-    } else {
-        return;
-    };
-});
-
 let isScrubbing = false;
 let wasPaused;
 function toggleScrubbing(e) {
@@ -943,12 +937,16 @@ function loadedMetadata() {
     currentTime.textContent = formatDuration(video.currentTime);
 };
 
-video.addEventListener('loadstart', videoPlayer.classList.add('loading'));
+video.addEventListener('loadstart', () => {
+    videoPlayer.classList.add('loading');
+    videoPoster.style.backgroundImage = `url('${videoMetadata.video_poster}')`;
+});
 
 video.addEventListener('loadedmetadata', () => {
     videoPlayer.classList.remove('loading');
     seekingPreview.classList.remove('loading');
 
+    seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
     seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
     videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`;
 
@@ -983,6 +981,7 @@ video.addEventListener("progress", () => {
 });
 
 async function updatetime() {
+    videoPoster.classList.add('played');
     const percent = video.currentTime / video.duration;
     if (!video.paused) {
         timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0));
@@ -1025,7 +1024,7 @@ function togglePlay() {
     video.paused ? video.play() : video.pause();
 };
 
-video.addEventListener("play", (e) => {
+video.addEventListener("play", () => {
     playpauseTooltipContainer.dataset.tooltip = 'Pause' + ' (k)';
     spinnerDivider();
     if (Hls.isSupported() && video.currentTime === 0)

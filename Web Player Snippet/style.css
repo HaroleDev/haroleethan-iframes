@@ -729,6 +729,22 @@ body {
     position: absolute;
 }
 
+.video-poster {
+    z-index: 1;
+    opacity: 1;
+    pointer-events: none;
+    height: 100%;
+    width: calc(100% * var(--aspect-ratio-size));
+    -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    position: absolute;
+}
+
+.video-poster.played {
+    opacity: 0;
+}
+
 .video-backdrop-seeking {
     position: absolute;
     display: block;

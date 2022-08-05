@@ -753,7 +753,7 @@ function volumeUpdate(e) {
     const rect = volumeSliderContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     isVolumeScrubbing = (e.buttons && 1) === 1;
-    volumeContainer.classList.add("scrubbing");
+    volumeContainer.classList.toggle("scrubbing", isVolumeScrubbing);
     if (isVolumeScrubbing) {
         video.volume = percent;
         video.muted = percent === 0;

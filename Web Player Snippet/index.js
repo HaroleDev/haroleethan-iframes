@@ -9,7 +9,7 @@ const videoMetadata = {
 };
 
 const mediaSessionMetadata = {
-    thumb_512: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_512,h_512/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
+    thumb_512: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_512,h_512/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
     thumb_256: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_384,h_384/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
     thumb_256: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_256,h_256/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
     thumb_192: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_192,h_192/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",

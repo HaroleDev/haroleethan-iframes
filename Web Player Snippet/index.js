@@ -107,6 +107,7 @@ window.addEventListener("load", () => {
 
     video.querySelector("source").setAttribute("src", videoMetadata.Fallback_src);
     video.querySelector("source").setAttribute("type", videoMetadata.Fallback_codec);
+    
     video.load();
     video.addEventListener("durationchange", updatetime);
 
@@ -667,27 +668,17 @@ fullscreenButton.addEventListener("click", toggleFullScreen);
 
 function toggleFullScreen() {
     if (document.fullscreenElement == null) {
-        if (videoPlayer.mozRequestFullScreen) {
-            videoPlayer.mozRequestFullScreen();
-        } else if (videoPlayer.webkitRequestFullScreen) {
-            videoPlayer.webkitRequestFullScreen();
-        } else if (videoPlayer.msRequestFullScreen) {
-            videoPlayer.msRequestFullscreen();
-        } else if (videoPlayer.requestFullscreen) {
-            videoPlayer.requestFullscreen();
-        };
+        if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
+        if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();
+        if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen();
+        if (videoPlayer.requestFullscreen) videoPlayer.requestFullscreen();
         fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
     } else {
         if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
-            if (document.requestFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitCancelFullScreen) {
-                document.webkitCancelFullScreen();
-            } else if (document.msRequestFullscreen) {
-                document.msExitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            };
+            if (document.requestFullscreen) document.exitFullscreen();
+            if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
+            if (document.msRequestFullscreen) document.msExitFullscreen();
+            if (document.mozCancelFullScreen) document.mozCancelFullScreen();
             fullscreenTooltip.dataset.tooltip = "Full screen" + " (f)";
         };
     };
@@ -838,11 +829,8 @@ function seekingPreviewPosition(e) {
         return;
     };
 
-    if (percent < 0) {
-        percent = 0;
-    } else if (percent > 100) {
-        percent = 100;
-    };
+    if (percent < 0) percent = 0;
+    if (percent > 100) percent = 100;
 
     const seekRect = seekingPreview.getBoundingClientRect();
 
@@ -910,13 +898,9 @@ function handleTimelineUpdate(e) {
     timelineInner.style.setProperty("--preview-position", percent);
     cuetimeTooltip.textContent = formatDuration(seekTime);
 
-    if (seekTime < 0) {
-        seekTime = 0;
-    };
+    if (seekTime < 0) seekTime = 0;
 
-    if (seekTime > video.duration - 1) {
-        seekTime = video.duration - 1;
-    };
+    if (seekTime > video.duration - 1) seekTime = video.duration - 1;
 
     if (isScrubbing) {
         e.preventDefault();
@@ -944,8 +928,7 @@ video.addEventListener("loadedmetadata", () => {
 });
 
 video.addEventListener("canplay", () => {
-    if (video.buffered.length > 0)
-        timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
+    if (video.buffered.length > 0) timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
 });
 
 video.addEventListener("timeupdate", () => {
@@ -1036,5 +1019,4 @@ video.addEventListener("pause", () => {
 video.addEventListener("ended", () => videoContainer.classList.add("ended"));
 
 video.addEventListener("waiting", () => videoContainer.classList.add("buffering"));
-
 video.addEventListener("playing", () => videoContainer.classList.remove("buffering"));

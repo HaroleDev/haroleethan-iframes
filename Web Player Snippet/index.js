@@ -900,7 +900,7 @@ function toggleScrubbing(e) {
 video.addEventListener('seeked', () => {
     videoContainer.classList.remove("scrubbing");
     seekingPreview.classList.remove('loading');
-})
+});
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
@@ -916,7 +916,7 @@ function handleTimelineUpdate(e) {
 
     if (seekTime < 0) {
         seekTime = 0;
-    }
+    };
 
     if (seekTime > video.duration - 1) {
         seekTime = video.duration - 1;
@@ -926,8 +926,8 @@ function handleTimelineUpdate(e) {
         e.preventDefault();
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`;
         timelineInner.style.setProperty("--progress-position", percent);
-        cuetimeTooltip.textContent = formatDuration(percent * video.duration);
-        currentTime.textContent = formatDuration(percent * video.duration);
+        cuetimeTooltip.textContent = formatDuration(seekTime);
+        currentTime.textContent = formatDuration(seekTime);
     };
 };
 

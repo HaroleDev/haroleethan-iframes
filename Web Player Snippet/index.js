@@ -1,11 +1,20 @@
 const videoMetadata = {
     video_thumbs: "//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
     video_poster: "//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_auto:eco,w_1280/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    HLS_src: "//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
+    //HLS_src: "//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
     HLS_codec: "application/x-mpegURL",
     Fallback_src: "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
     Fallback_codec: "video/mp4",
     video_FPS: "59.940",
+};
+
+const mediaSessionMetadata = {
+    thumb_512: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_512,h_512/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
+    thumb_256: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_384,h_384/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_256: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_256,h_256/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_192: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_192,h_192/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_128: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_128,h_128/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_96: "//res.cloudinary.com/harole/image/upload/c_fill,q_auto:eco,w_96,h_96/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
 };
 
 var config = {
@@ -107,8 +116,9 @@ window.addEventListener("load", () => {
 
     video.querySelector("source").setAttribute("src", videoMetadata.Fallback_src);
     video.querySelector("source").setAttribute("type", videoMetadata.Fallback_codec);
-    
-    video.load();
+
+    video.load()
+
     video.addEventListener("durationchange", updatetime);
 
     eqContainer.querySelectorAll(".eq-slider").forEach(element => {
@@ -977,6 +987,10 @@ function formatDuration(time) {
 playpauseButton.addEventListener("click", togglePlay);
 video.addEventListener("click", togglePlay);
 
+var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
+var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
+var description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
+
 function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
         if (contextMenu.classList.contains("show")) {
@@ -990,11 +1004,30 @@ function togglePlay() {
     if (context.state === "suspended") {
         context.resume();
     };
-    video.paused ? video.play() : video.pause();
+    video.paused ?
+        video.play().then(_ => {
+            if ("mediaSession" in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: title,
+                    artist: author,
+                    artwork: [
+                        { src: `${mediaSessionMetadata.thumb_96}`, sizes: "96x96", type: "image/jpeg" },
+                        { src: `${mediaSessionMetadata.thumb_128}`, sizes: "128x128", type: "image/jpeg" },
+                        { src: `${mediaSessionMetadata.thumb_192}`, sizes: "192x192", type: "image/jpeg" },
+                        { src: `${mediaSessionMetadata.thumb_256}`, sizes: "256x256", type: "image/jpeg" },
+                        { src: `${mediaSessionMetadata.thumb_384}`, sizes: "384x384", type: "image/jpeg" },
+                        { src: `${mediaSessionMetadata.thumb_512}`, sizes: "512x512", type: "image/jpeg" },
+                    ]
+                });
+            };
+        })
+            .catch(error => { console.log(error) })
+        : video.pause();
+
 };
 
 video.addEventListener("play", () => {
-    videoPoster.classList.add("played");
+    videoPoster.classList.add("played")
     playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
     spinnerDivider();
     if (Hls.isSupported() && video.currentTime === 0)

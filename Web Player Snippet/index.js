@@ -82,6 +82,8 @@ function canFullscreen() {
 };
 
 window.addEventListener("load", () => {
+    videoPoster.src = videoMetadata.video_poster;
+
     /*if (!Hls.isSupported()) {
         hls.loadSource(videoMetadata.HLS_src);
         hls.attachMedia(video);
@@ -105,7 +107,6 @@ window.addEventListener("load", () => {
 
     video.querySelector("source").setAttribute("src", videoMetadata.Fallback_src);
     video.querySelector("source").setAttribute("type", videoMetadata.Fallback_codec);
-    videoPoster.src = videoMetadata.video_poster;
     video.load();
     video.addEventListener("durationchange", updatetime);
 
@@ -932,15 +933,8 @@ function loadedMetadata() {
     currentTime.textContent = formatDuration(video.currentTime);
 };
 
-video.addEventListener("loadstart", () => {
-    videoPlayer.classList.add("loading");
-    if (videoPoster.completed) videoPoster.style.opacity = 1;
-});
-
 video.addEventListener("loadedmetadata", () => {
     videoPlayer.classList.remove("loading");
-    seekingPreview.classList.remove("loading");
-
     seekingThumbnail.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
     videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
 

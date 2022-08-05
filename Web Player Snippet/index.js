@@ -162,7 +162,6 @@ videoContainer.addEventListener('contextmenu', e => {
         const { normalizedX, normalizedY } = ctxmenuPosition(mouseX, mouseY);
         contextMenu.style.top = `${normalizedY}px`;
         contextMenu.style.left = `${normalizedX}px`;
-        console.log(normalizedX, normalizedY)
         showContextMenu();
     };
 });
@@ -309,12 +308,12 @@ transcriptItem.addEventListener('click', () => {
     videoPlayer.classList.add("transcript-opened");
 });
 
-closeTranscriptPanel.addEventListener('mouseover', () => {
+closeTranscriptPanel.addEventListener('pointerover', () => {
     videoContainer.classList.add('hovered');
     video.classList.remove('inactive');
 });
 
-closeTranscriptPanel.addEventListener('mouseleave', () => {
+closeTranscriptPanel.addEventListener('pointerleave', () => {
     videoContainer.classList.remove('hovered');
     video.classList.add('inactive');
 });
@@ -733,12 +732,12 @@ pipPlayerButton.addEventListener('click', togglePIPPlayerMode);
 
 //Volume control
 let isVolumeScrubbing = false;
-volumeSliderContainer.addEventListener('mousemove', e => {
+volumeSliderContainer.addEventListener('pointermove', e => {
     if (e.button === 0)
         handleVolumeUpdate(e);
 });
 
-volumeSliderContainer.addEventListener("mousedown", e => {
+volumeSliderContainer.addEventListener("pointerdown", e => {
     if (e.button === 0)
         volumeUpdate(e);
 });
@@ -839,46 +838,46 @@ function seekingPreviewPosition(e) {
         percent = 100;
     };
 
-    seekingPreview.style.setProperty("--thumbnail-seek-position", `${percent}%`);
+    const seekRect = seekingPreview.getBoundingClientRect();
+
+    seekingPreview.style.setProperty("--thumbnail-seek-position", `calc(${percent}% - ${(seekRect.width * (percent / 100)) / 2 + (40 * (1 - percent / 100))}px + ${(seekRect.width * (1 - percent / 100)) / 2 - (40 * (percent / 100))}px + ${(40 * 2) * (1 - percent / 100)}px)`);
 };
 
-timelineInner.addEventListener("mousemove", e => {
+timelineInner.addEventListener("pointermove", e => {
     handleTimelineUpdate(e);
     seekingPreview.classList.add('hovered');
     videoControls.classList.add('hidden');
 });
 
-timelineInner.addEventListener("mouseleave", () => {
+timelineInner.addEventListener("pointerleave", () => {
     seekingPreview.classList.remove('hovered');
     videoControls.classList.remove('hidden');
 });
 
-timelineInner.addEventListener("mousedown", e => {
+timelineInner.addEventListener("pointerdown", e => {
     if (e.button === 0)
         toggleScrubbing(e);
 });
 
-document.addEventListener("mouseup", e => {
-    if (e.button === 0)
-        if (isScrubbing) {
-            toggleScrubbing(e);
-            seekingPreview.classList.add('loading');
-        } if (isVolumeScrubbing) {
-            volumeUpdate(e);
-        };
+document.addEventListener("pointerup", e => {
+    if (isScrubbing) {
+        toggleScrubbing(e);
+        seekingPreview.classList.add('loading');
+    } if (isVolumeScrubbing) {
+        volumeUpdate(e);
+    };
 });
 
-document.addEventListener("mousemove", e => {
-    if (e.button === 0)
-        if (isScrubbing) {
-            handleTimelineUpdate(e);
-        } if (isVolumeScrubbing) {
-            handleVolumeUpdate(e);
-            volumeContainer.classList.add('scrubbing');
-        };
+document.addEventListener("pointermove", e => {
+    if (isScrubbing) {
+        handleTimelineUpdate(e);
+    } if (isVolumeScrubbing) {
+        handleVolumeUpdate(e);
+        volumeContainer.classList.add('scrubbing');
+    };
 });
 
-document.addEventListener("mousemove", e => {
+document.addEventListener("pointermove", e => {
     if (videoContainer.classList.contains('hovered')) {
         seekingPreviewPosition(e);
     } else {
@@ -1031,9 +1030,9 @@ video.addEventListener("play", (e) => {
     spinnerDivider();
     if (Hls.isSupported() && video.currentTime === 0)
         hls.startLoad();
-    videoContainer.addEventListener("mouseover", activity);
-    videoContainer.addEventListener("mousemove", activity);
-    videoContainer.addEventListener('mouseleave', () => {
+    videoContainer.addEventListener("pointerover", activity);
+    videoContainer.addEventListener("pointermove", activity);
+    videoContainer.addEventListener('pointerleave', () => {
         videoContainer.classList.remove('hovered');
         video.classList.add('inactive');
     });

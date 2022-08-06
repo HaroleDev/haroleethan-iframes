@@ -356,11 +356,11 @@ function toggleCaptions() {
 };
 
 //Transcript
-var tracks, trackElems, tracksURLs = [];
+var tracks, trackElements, tracksURLs = [];
 
-trackElems = document.querySelectorAll("track");
-for (var i = 0; i < trackElems.length; i++) {
-    var currentTrackElem = trackElems[i];
+trackElements = document.querySelectorAll("track");
+for (var i = 0; i < trackElements.length; i++) {
+    var currentTrackElem = trackElements[i];
     tracksURLs[i] = currentTrackElem.src;
 };
 tracks = video.textTracks;
@@ -371,7 +371,7 @@ function loadTranscript(lang) {
     document.querySelector(".transcript-language").textContent = video.querySelector("track").getAttribute("label")
     for (var i = 0; i < tracks.length; i++) {
         var track = tracks[i];
-        var trackAsHtmlElem = trackElems[i];
+        var trackAsHtmlElement = trackElements[i];
 
         if ((track.language === lang) && (track.kind !== "chapters")) {
             if (videoContainer.classList.contains("caption")) {
@@ -380,10 +380,10 @@ function loadTranscript(lang) {
                 track.mode = "hidden";
             };
 
-            if (trackAsHtmlElem.readyState === 2) {
+            if (trackAsHtmlElement.readyState === 2) {
                 displayCues(track);
             } else {
-                displayCuesAfterTrackLoaded(trackAsHtmlElem, track);
+                displayCuesAfterTrackLoaded(trackAsHtmlElement, track);
             };
         };
     };
@@ -666,7 +666,7 @@ function spinnerDivider() {
         };
         index = index > spinners.length ? 0 : index + 1;
         document.querySelector(".divider-time").textContent = `${line}`;
-    }, 600);
+    }, 1000);
 };
 
 //Activity check
@@ -943,9 +943,11 @@ function formatDuration(time) {
     const hours = Math.floor(time / 3600);
     if (hours === 0) {
         return `${minutes}:${leading0Formatter.format(seconds)}`;
-    } else {
+    } else if (hours > 0) {
         return `${hours}:${leading0Formatter.format(minutes)}:${leading0Formatter.format(seconds)}`;
-    };
+    } else {
+        return `0:00`;
+    }
 };
 
 //Playback and Media Session
@@ -984,8 +986,8 @@ async function mediaSessionToggle() {
     };
 
     const actionHandlers = [
-        ["play", async function () { await video.play(); }],
-        ["pause", async function () { await video.pause(); }],
+        ["play", async function () { await togglePlay(); }],
+        ["pause", async function () { await togglePlay(); }],
         ["stop", function () {
             if (!video.paused) video.pause();
             video.currentTime = 0;
@@ -1014,6 +1016,8 @@ async function mediaSessionToggle() {
     for (const [action, handler] of actionHandlers) {
         try {
             navigator.mediaSession.setActionHandler(action, handler);
+            updatetime();
+            currentTime.textContent = formatDuration(video.currentTime);
             updatePositionState();
         } catch (error) {
             console.log(`The media session action "${action}" is unavailable.`);
@@ -1031,18 +1035,16 @@ function togglePlay() {
         videoContainer.classList.remove("ended");
         video.currentTime = 0;
     };
-    if (context.state === "suspended") {
-        context.resume();
-    };
+    if (context.state === "suspended") context.resume();
     video.paused ? video.play() : video.pause();
 };
 
 const eventListeners = [
     ["play", () => {
         navigator.mediaSession.playbackState = "playing";
-        playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
+        playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
 
-        mediaSessionToggle();
+        video.addEventListener("timeupdate", mediaSessionToggle);
         videoPoster.classList.add("played");
         spinnerDivider();
         if (Hls.isSupported() && video.currentTime === 0)
@@ -1057,7 +1059,7 @@ const eventListeners = [
     }],
     ["pause", () => {
         navigator.mediaSession.playbackState = "paused";
-        playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
+        playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
 
         video.classList.remove("inactive");
         clearTimeout(timeout);
@@ -1088,7 +1090,6 @@ const eventListeners = [
     ["timeupdate", () => {
         if (videoContainer.classList.contains("hovered")) {
             updatetime();
-            currentTime.textContent = formatDuration(video.currentTime);
         } else {
             return;
         };

@@ -977,26 +977,26 @@ async function mediaSessionToggle() {
     };
 
     const actionHandlers = [
-        ['play', () => { video.play(); }],
-        ['pause', () => { video.pause(); }],
-        ['stop', () => {
+        ["play", () => { video.play(); }],
+        ["pause", () => { video.pause(); }],
+        ["stop", () => {
             if (!video.paused) video.pause();
             video.currentTime = 0;
         }],
-        ['seekbackward', (d) => {
+        ["seekbackward", (d) => {
             video.currentTime -= d.seekOffset || 10;
             const percent = video.currentTime / video.duration;
             timelineInner.style.setProperty("--progress-position", percent);
             currentTime.textContent = formatDuration(video.currentTime);
         }],
-        ['seekforward', (d) => {
+        ["seekforward", (d) => {
             video.currentTime += d.seekOffset || 10;
             const percent = video.currentTime / video.duration;
             timelineInner.style.setProperty("--progress-position", percent);
             currentTime.textContent = formatDuration(video.currentTime);
         }],
-        ['seekto', (d) => {
-            if (d.fastSeek && 'fastSeek' in video) {
+        ["seekto", (d) => {
+            if (d.fastSeek && "fastSeek" in video) {
                 video.fastSeek(d.seekTime);
                 return;
             };
@@ -1028,14 +1028,14 @@ function togglePlay() {
         context.resume();
     };
     video.paused ? video.play() : video.pause();
+    video.paused ? navigator.mediaSession.playbackState = "playing" : navigator.mediaSession.playbackState = "paused";
+    video.paused ? playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)" : playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
 };
 
 const eventListeners = [
-    ['play', () => {
+    ["play", () => {
         mediaSessionToggle();
-        navigator.mediaSession.playbackState = "playing";
         videoPoster.classList.add("played");
-        playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
         spinnerDivider();
         if (Hls.isSupported() && video.currentTime === 0)
             hls.startLoad();
@@ -1047,36 +1047,34 @@ const eventListeners = [
         });
         videoContainer.classList.remove("paused");
     }],
-    ['pause', () => {
-        navigator.mediaSession.playbackState = "paused";
-        playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
+    ["pause", () => {
         video.classList.remove("inactive");
         clearTimeout(timeout);
         videoContainer.classList.add("paused");
     }],
-    ['ended', () => {
+    ["ended", () => {
         videoContainer.classList.add("ended");
     }],
-    ['progress', () => {
+    ["progress", () => {
         if (video.buffered.length > 0) timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
     }],
-    ['canplay', () => {
+    ["canplay", () => {
         if (video.buffered.length > 0) timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
     }],
-    ['waiting', () => {
+    ["waiting", () => {
         videoContainer.classList.add("buffering");
     }],
-    ['playing', () => {
+    ["playing", () => {
         videoContainer.classList.remove("buffering");
     }],
-    ['seeked', () => {
+    ["seeked", () => {
         videoPoster.classList.add("played");
         videoContainer.classList.remove("scrubbing");
         seekingPreview.classList.remove("loading");
         updatetime();
         currentTime.textContent = formatDuration(video.currentTime);
     }],
-    ['timeupdate', () => {
+    ["timeupdate", () => {
         if (videoContainer.classList.contains("hovered")) {
             updatetime();
             currentTime.textContent = formatDuration(video.currentTime);
@@ -1099,7 +1097,7 @@ const eventListeners = [
         videoPlayer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
         loadedMetadata();
     }],
-    ['volumechange', () => {
+    ["volumechange", () => {
         let volumeLevel;
         if (video.muted || video.volume === 0) {
             volumeLevel = "mute";

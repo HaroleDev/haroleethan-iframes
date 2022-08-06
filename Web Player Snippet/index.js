@@ -977,9 +977,9 @@ async function mediaSessionToggle() {
     };
 
     const actionHandlers = [
-        ["play", () => { video.play(); }],
-        ["pause", () => { video.pause(); }],
-        ["stop", () => {
+        ["play", async function() { await video.play(); }],
+        ["pause", function() { video.pause(); }],
+        ["stop", function() {
             if (!video.paused) video.pause();
             video.currentTime = 0;
         }],

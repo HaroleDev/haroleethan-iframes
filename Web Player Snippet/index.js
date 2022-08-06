@@ -6,6 +6,8 @@ const videoMetadata = {
     Fallback_src: "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
     Fallback_codec: "video/mp4",
     video_FPS: "59.940",
+
+    video_Viewport: "1280",
 };
 
 const mediaSessionMetadata = {
@@ -91,7 +93,11 @@ function canFullscreen() {
     return check;
 };
 
-window.addEventListener("load", () => {
+window.addEventListener("load", function () {
+    document.body.classList.remove('preload');
+}, { once: true });
+
+window.addEventListener("DOMContentLoaded", () => {
     videoPoster.src = videoMetadata.video_poster;
 
     /*if (!Hls.isSupported()) {
@@ -850,7 +856,6 @@ timelineInner.addEventListener("pointermove", e => {
     seekingPreview.classList.add("hovered");
     handleTimelineUpdate(e);
     if (isScrubbing) {
-        seekingPreview.classList.add("hovered");
         videoControls.classList.add("hidden");
     };
     timelineInner.addEventListener("pointerleave", () => {
@@ -916,6 +921,8 @@ function handleTimelineUpdate(e) {
 function loadedMetadata() {
     totalTime.textContent = formatDuration(video.duration);
     currentTime.textContent = formatDuration(video.currentTime);
+    video.width = videoMetadata.video_Viewport;
+    video.height = videoMetadata.video_Viewport / (video.videoWidth / video.videoHeight);
 };
 
 async function updatetime() {
@@ -947,7 +954,6 @@ video.addEventListener("click", togglePlay);
 
 var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
 var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
-var description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
 
 function updatePositionState() {
     navigator.mediaSession.setPositionState({

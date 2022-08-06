@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Video Player</title>
+    <title>Harole's Videos</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="robots" content="noindex,follow" />
-    <meta property="og:site_name" content="Harole, a quirky hobbyist.">
+    <meta property="og:site_name" content="Harole's Videos">
     <meta property="og:author" content="Harole Ethan" />
     <meta property="og:title" content="Feeding fish in Hue" />
     <meta property="og:type" content="video.other" />
@@ -18,14 +18,16 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="style.css">
     <script crossorigin type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
-    <script crossorigin type="text/javascript" src="//polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en" defer></script>
+    <script crossorigin type="text/javascript"
+        src="//polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en"
+        defer></script>
     <script type="text/javascript" src="index.js" defer></script>
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
     <link href="//fonts.googleapis.com/css2?family=Manrope:wght@500;800&display=fallback" rel="stylesheet">
 </head>
 
-<body>
+<body class="preload">
     <div class="header">
         <img src="./media/Haroles Videos.svg" class="logo">
     </div>
@@ -206,6 +208,10 @@
                     <div class="dialog-overlay"></div>
                 </div>
                 <div class="video-container paused" data-volume-level="full" data-start="0">
+                    <div class="error-dialog">
+                        <h3>Error</h3>
+                        <p id="error-log">An unknown error occurred.</p>
+                    </div>
                     <div class="video-controls-container">
                         <div class="controls-container">
                             <div class="settings-context-menu">
@@ -417,16 +423,50 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" defer>
+    <script type="text/javascript" async>
         var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
         var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
         var description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
+
+        const videoEl = document.querySelector(".video");
+
         document.querySelector(".video-name h1").textContent = title;
         document.querySelector(".video-information h1").textContent = title;
         document.querySelector(".author-name span").textContent = author;
         document.querySelector(".video-information .author-info span").textContent = author;
         document.querySelector(".video-information .description p").textContent = description;
-        document.querySelector(".seeking-preview").style.setProperty("--thumbnail-seek-position", 192 + "px");
+        videoEl.addEventListener("error", function () {
+            let technical = "";
+            let error = videoEl.error;
+
+            videoEl.classList.add('error-occured');
+
+            switch (error.code) {
+                case MediaError.MEDIA_ERR_ABORTED:
+                    technical += "The user stopped loading the video.";
+                    break;
+                case MediaError.MEDIA_ERR_NETWORK:
+                    technical += "A network error occurred while fetching the video.";
+                    break;
+                case MediaError.MEDIA_ERR_DECODE:
+                    technical += "An error occurred while decoding the video.";
+                    break;
+                case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                    technical += "The video is missing or is in a format not supported by your browser.";
+                    break;
+                default:
+                    technical += "An unknown error occurred.";
+                    break;
+            };
+
+            let message = error.message;
+
+            if (message && message.length) {
+                technical += ` ${message}`;
+            };
+
+            document.getElementById("error-log").textContent = error.code;
+        });
     </script>
 </body>
 

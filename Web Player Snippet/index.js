@@ -963,13 +963,13 @@ async function mediaSessionToggle() {
                 title: title,
                 artist: author,
                 artwork: [
-                    { src: `${mediaSessionMetadata.thumb_96}`, sizes: "96x96", type: "image/jpeg" },
-                    { src: `${mediaSessionMetadata.thumb_128}`, sizes: "128x128", type: "image/jpeg" },
-                    { src: `${mediaSessionMetadata.thumb_192}`, sizes: "192x192", type: "image/jpeg" },
-                    { src: `${mediaSessionMetadata.thumb_256}`, sizes: "256x256", type: "image/jpeg" },
-                    { src: `${mediaSessionMetadata.thumb_384}`, sizes: "384x384", type: "image/jpeg" },
-                    { src: `${mediaSessionMetadata.thumb_512}`, sizes: "512x512", type: "image/jpeg" },
-                ]
+                    { src: `${mediaSessionMetadata.thumb_96}`, sizes: "96x96", type: "image/jpeg", },
+                    { src: `${mediaSessionMetadata.thumb_128}`, sizes: "128x128", type: "image/jpeg", },
+                    { src: `${mediaSessionMetadata.thumb_192}`, sizes: "192x192", type: "image/jpeg", },
+                    { src: `${mediaSessionMetadata.thumb_256}`, sizes: "256x256", type: "image/jpeg", },
+                    { src: `${mediaSessionMetadata.thumb_384}`, sizes: "384x384", type: "image/jpeg", },
+                    { src: `${mediaSessionMetadata.thumb_512}`, sizes: "512x512", type: "image/jpeg", },
+                ],
             });
         };
     } catch (error) {
@@ -978,7 +978,7 @@ async function mediaSessionToggle() {
 
     const actionHandlers = [
         ["play", async function () { await video.play(); }],
-        ["pause", function () { video.pause(); }],
+        ["pause", async function () { await video.pause(); }],
         ["stop", function () {
             if (!video.paused) video.pause();
             video.currentTime = 0;

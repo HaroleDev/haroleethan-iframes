@@ -15,6 +15,7 @@ const mediaSessionMetadata = {
     thumb_192: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_192,h_192/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
     thumb_128: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_128,h_128/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
     thumb_96: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_96,h_96/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    type: "image/jpeg",
 };
 
 var config = {
@@ -171,7 +172,7 @@ videoContainer.addEventListener("contextmenu", e => {
     const { clientX: mouseX, clientY: mouseY } = e;
 
     if (contextMenu.classList.contains("show")) {
-        showContextMenu(show = false);
+        showContextMenu(false);
     } else {
         e.preventDefault();
         const { normalizedX, normalizedY } = ctxmenuPosition(mouseX, mouseY);
@@ -216,7 +217,7 @@ function closeSettingsMenu(e) {
 
 document.addEventListener("click", e => {
     volumeContainer.classList.remove("scrubbing");
-    showContextMenu(show = false);
+    showContextMenu(false);
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove("pressed");
         settingsContextMenu.classList.remove("pressed");
@@ -225,7 +226,7 @@ document.addEventListener("click", e => {
 });
 
 Item.addEventListener("click", () => {
-    showContextMenu(show = false);
+    showContextMenu(false);
     settingsButton.classList.remove("pressed");
     settingsContextMenu.classList.remove("pressed");
     settingsTooltipContainer.classList.add("tooltip-right");
@@ -455,15 +456,15 @@ function addToTranscript(htmlText) {
 };
 
 function addCueListeners(cue) {
-    cue.onenter = function () {
+    cue.addEventListener('enter', function () {
         var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.add("current");
         transcriptText.parentNode.scrollTop = transcriptText.offsetTop - transcriptText.parentNode.offsetTop;
-    };
-    cue.onexit = function () {
+    });
+    cue.addEventListener('exit', function () {
         var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.remove("current");
-    };
+    });
 };
 
 transcriptPanel.addEventListener("click", e => {
@@ -963,12 +964,12 @@ async function mediaSessionToggle() {
                 title: title,
                 artist: author,
                 artwork: [
-                    { src: `${mediaSessionMetadata.thumb_96}`, sizes: "96x96", type: "image/jpeg", },
-                    { src: `${mediaSessionMetadata.thumb_128}`, sizes: "128x128", type: "image/jpeg", },
-                    { src: `${mediaSessionMetadata.thumb_192}`, sizes: "192x192", type: "image/jpeg", },
-                    { src: `${mediaSessionMetadata.thumb_256}`, sizes: "256x256", type: "image/jpeg", },
-                    { src: `${mediaSessionMetadata.thumb_384}`, sizes: "384x384", type: "image/jpeg", },
-                    { src: `${mediaSessionMetadata.thumb_512}`, sizes: "512x512", type: "image/jpeg", },
+                    { src: `${mediaSessionMetadata.thumb_96}`, sizes: "96x96", type: mediaSessionMetadata.type, },
+                    { src: `${mediaSessionMetadata.thumb_128}`, sizes: "128x128", type: mediaSessionMetadata.type, },
+                    { src: `${mediaSessionMetadata.thumb_192}`, sizes: "192x192", type: mediaSessionMetadata.type, },
+                    { src: `${mediaSessionMetadata.thumb_256}`, sizes: "256x256", type: mediaSessionMetadata.type, },
+                    { src: `${mediaSessionMetadata.thumb_384}`, sizes: "384x384", type: mediaSessionMetadata.type, },
+                    { src: `${mediaSessionMetadata.thumb_512}`, sizes: "512x512", type: mediaSessionMetadata.type, },
                 ],
             });
         };

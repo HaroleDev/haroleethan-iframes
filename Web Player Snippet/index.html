@@ -14,6 +14,8 @@
     <meta property="og:description" content="A sample video from Harole feeding fish while vacating in Hue." />
     <meta property="og:image"
         content="//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_1200,h_630/g_south_west,l_Harole%27s%20Portfolio%20Site:Watermarks:harole_watermark_jeukdh.png/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <link rel="canonical" href="//haroleethan-iframes.netlify.app/web%20player%20snippet/" />
     <meta name="theme-color" content="#02DA9A">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="style.css">
@@ -439,8 +441,6 @@
             let technical = "";
             let error = videoEl.error;
 
-            videoEl.classList.add('error-occured');
-
             switch (error.code) {
                 case MediaError.MEDIA_ERR_ABORTED:
                     technical += "The user stopped loading the video.";
@@ -466,6 +466,7 @@
             };
 
             document.getElementById("error-log").textContent = error.code;
+            document.getElementsByClassName("error-dialog").classList.add("error-occured");
         });
     </script>
 </body>

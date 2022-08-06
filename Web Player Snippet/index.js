@@ -977,9 +977,9 @@ async function mediaSessionToggle() {
     };
 
     const actionHandlers = [
-        ["play", async function() { await video.play(); }],
-        ["pause", function() { video.pause(); }],
-        ["stop", function() {
+        ["play", async function () { await video.play(); }],
+        ["pause", function () { video.pause(); }],
+        ["stop", function () {
             if (!video.paused) video.pause();
             video.currentTime = 0;
         }],
@@ -1028,12 +1028,13 @@ function togglePlay() {
         context.resume();
     };
     video.paused ? video.play() : video.pause();
-    video.paused ? navigator.mediaSession.playbackState = "playing" : navigator.mediaSession.playbackState = "paused";
-    video.paused ? playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)" : playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
 };
 
 const eventListeners = [
     ["play", () => {
+        navigator.mediaSession.playbackState = "playing";
+        playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
+
         mediaSessionToggle();
         videoPoster.classList.add("played");
         spinnerDivider();
@@ -1048,6 +1049,9 @@ const eventListeners = [
         videoContainer.classList.remove("paused");
     }],
     ["pause", () => {
+        navigator.mediaSession.playbackState = "paused";
+        playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
+
         video.classList.remove("inactive");
         clearTimeout(timeout);
         videoContainer.classList.add("paused");

@@ -1078,12 +1078,15 @@ const eventListeners = [
     ["playing", () => {
         videoContainer.classList.remove("buffering");
         videoControls.classList.remove("hidden");
-        videoContainer.classList.remove("scrubbing");
+
+    }],
+    ["seeking", () => {
+        videoContainer.classList.add("buffering-scrubbing");
     }],
     ["seeked", () => {
         videoPoster.classList.add("played");
-        videoContainer.classList.remove("scrubbing");
         seekingPreview.classList.remove("loading");
+        videoContainer.classList.remove("buffering-scrubbing");
         updatetime();
         currentTime.textContent = formatDuration(video.currentTime);
     }],

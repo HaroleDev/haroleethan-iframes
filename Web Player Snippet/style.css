@@ -515,8 +515,6 @@ body.preload * {
 
 .scrubbing .controls,
 .scrubbing .video-information-overlay,
-.buffering .controls,
-.buffering .video-information-overlay,
 .buffering-scrubbing .controls,
 .buffering-scrubbing .video-information-overlay {
     opacity: 0.6 !important;

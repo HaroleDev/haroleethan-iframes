@@ -93,11 +93,9 @@ function canFullscreen() {
     return check;
 };
 
-window.addEventListener("load", function () {
-    document.body.classList.remove('preload');
-}, { once: true });
-
 window.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.remove('preload');
+
     videoPoster.src = videoMetadata.video_poster;
 
     /*if (!Hls.isSupported()) {
@@ -439,7 +437,7 @@ function getVoices(speech) {
 
 function removeHTML(text) {
     var div = document.createElement("div");
-    div.innerHTML = text;
+    div.textContent = text;
     return div.textContent || div.innerText || "";
 };
 
@@ -454,7 +452,7 @@ function jumpToTranscript(time) {
 };
 
 function clearTranscriptDiv() {
-    transcriptDiv.innerHTML = "";
+    transcriptDiv.textContent = "";
 };
 
 function addToTranscript(htmlText) {
@@ -854,6 +852,7 @@ function seekingPreviewPosition(e) {
 timelineInner.addEventListener("pointermove", e => {
     timelineInner.setPointerCapture(e.pointerId);
     seekingPreview.classList.add("hovered");
+    videoControls.classList.add("hidden");
     handleTimelineUpdate(e);
     if (isScrubbing) {
         videoControls.classList.add("hidden");
@@ -1017,7 +1016,6 @@ async function mediaSessionToggle() {
         try {
             navigator.mediaSession.setActionHandler(action, handler);
             updatetime();
-            currentTime.textContent = formatDuration(video.currentTime);
             updatePositionState();
         } catch (error) {
             console.log(`The media session action "${action}" is unavailable.`);
@@ -1079,6 +1077,8 @@ const eventListeners = [
     }],
     ["playing", () => {
         videoContainer.classList.remove("buffering");
+        videoControls.classList.remove("hidden");
+        videoContainer.classList.remove("scrubbing");
     }],
     ["seeked", () => {
         videoPoster.classList.add("played");
@@ -1090,6 +1090,7 @@ const eventListeners = [
     ["timeupdate", () => {
         if (videoContainer.classList.contains("hovered")) {
             updatetime();
+            currentTime.textContent = formatDuration(video.currentTime);
         } else {
             return;
         };

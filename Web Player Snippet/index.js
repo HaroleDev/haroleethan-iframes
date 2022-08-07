@@ -879,7 +879,7 @@ function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     isScrubbing = (e.buttons & 1) === 1;
-    videoContainer.classList.add("scrubbing", isScrubbing);
+    videoContainer.classList.toggle("scrubbing", isScrubbing);
     if (isScrubbing) {
         wasPaused = video.paused;
         video.pause();

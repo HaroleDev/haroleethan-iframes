@@ -555,7 +555,7 @@ body.preload * {
     pointer-events: none;
 }
 
-.video-information-overlay:before {
+.video-information-overlay::before {
     content: "";
     position: absolute;
     left: 0;
@@ -747,7 +747,7 @@ body.preload * {
     z-index: 2;
     opacity: 1;
     border-radius: 16px 24px 8px 16px;
-    background: var(--accent-color);
+    background-color: var(--accent-color);
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     transform: translate(0, 0);
@@ -760,7 +760,7 @@ body.preload * {
     overflow: hidden;
 }
 
-.timeline-scrubber:after {
+.timeline-scrubber::after {
     content: "";
     display: block;
     position: absolute;
@@ -777,12 +777,12 @@ body.preload * {
     transform: translateX(-100%);
     -webkit-animation: buffer 2s infinite linear;
     animation: buffer 2s infinite linear;
-    background: -webkit-gradient(linear, left top, right top, from(#02da9a), color-stop(#02d093), color-stop(#01c68b), color-stop(#01bc84), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01bc84), color-stop(#01c68b), color-stop(#02d093), to(#02da9a));
-    background: -o-linear-gradient(left, #02da9a, #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, #02da9a);
-    background: linear-gradient(to right, #02da9a, #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, #02da9a);
+    background-image: -webkit-gradient(linear, left top, right top, from(#02da9a), color-stop(#02d093), color-stop(#01c68b), color-stop(#01bc84), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01bc84), color-stop(#01c68b), color-stop(#02d093), to(#02da9a));
+    background-image: -o-linear-gradient(left, #02da9a, #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, #02da9a);
+    background-image: linear-gradient(to right, #02da9a, #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, #02da9a);
 }
 
-.buffering .timeline-scrubber:after {
+.buffering .timeline-scrubber::after {
     opacity: 1;
     -webkit-animation: buffer 2000ms infinite linear;
     animation: buffer 2000ms infinite linear;
@@ -993,12 +993,20 @@ body.preload * {
 
 .scrubbing .timeline .timeline-scrubber,
 .scrubbing:hover .timeline .timeline-scrubber {
-    border-radius: 8px 8px 8px 8px;
+    border-radius: 12px;
     height: 16px;
     margin-top: 0px;
-    -webkit-transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    background-color: #23FDBC;
+    transform: translateY(-4px);
+    box-shadow: 0px 4px 0px #02DA9A, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
+    -webkit-transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.scrubbing .timeline .timeline-scrubber::after,
+.scrubbing:hover .timeline .timeline-scrubber::after {
+    background-image: linear-gradient(to right, #23fdbc, #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, #23fdbc);
 }
 
 .full-screen-button .enter .top-corner {
@@ -1590,7 +1598,7 @@ body.preload * {
 }
 
 .tooltip-left:before,
-.tooltip-left:after {
+.tooltip-left::after {
     position: absolute;
     font-style: normal;
     font-family: "Manrope Variable", "Manrope", sans-serif;
@@ -1635,8 +1643,8 @@ div.tooltip-right:hover::after {
     transition-delay: 300ms;
 }
 
-div.tooltip-right:before,
-div.tooltip-right:after {
+div.tooltip-right::before,
+div.tooltip-right::after {
     position: absolute;
     font-style: normal;
     font-variation-settings: "wght" 500;

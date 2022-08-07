@@ -93,6 +93,9 @@ function canFullscreen() {
     return check;
 };
 
+let lastKnownScrollPosition = 0;
+let ticking = false;
+
 window.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove('preload');
 

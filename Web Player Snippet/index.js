@@ -176,39 +176,28 @@ videoContainer.addEventListener("contextmenu", e => {
         closedDialog();
     };
 
-    const { clientX: mouseX, clientY: mouseY } = e;
-
     if (contextMenu.classList.contains("show")) {
         showContextMenu(false);
     } else {
         e.preventDefault();
-        const { normalizedX, normalizedY } = ctxmenuPosition(mouseX, mouseY);
-        contextMenu.style.top = `${normalizedY}px`;
+        const { normalizedX, normalizedY } = ctxmenuPosition(e);
         contextMenu.style.left = `${normalizedX}px`;
+        contextMenu.style.top = `${normalizedY}px`;
         showContextMenu();
     };
 });
 
-function ctxmenuPosition(mouseX, mouseY) {
-    const scope = document.querySelector("body");
-    let { left: scopeOffsetX, top: scopeOffsetY, } = scope.getBoundingClientRect();
+function ctxmenuPosition(eventPos) {
+    const scope = document.querySelector(".video-player");
+    let x = eventPos.offsetX,
+        y = eventPos.offsetY,
+        winWidth = scope.innerWidth,
+        winHeight = scope.innerHeight,
+        cmWidth = contextMenu.offsetWidth,
+        cmHeight = contextMenu.offsetHeight;
 
-    scopeOffsetX = scopeOffsetX < 0 ? 0 : scopeOffsetX;
-    scopeOffsetY = scopeOffsetY < 0 ? 0 : scopeOffsetY;
-
-    const scopeX = mouseX - scopeOffsetX;
-    const scopeY = mouseY - scopeOffsetY;
-
-    let normalizedX = mouseX;
-    let normalizedY = mouseY;
-
-    if (scopeX + contextMenu.clientWidth > scope.clientWidth) {
-        normalizedX = scopeOffsetX + scope.clientWidth - contextMenu.clientWidth;
-    }
-
-    if (scopeY + contextMenu.clientHeight > scope.clientHeight) {
-        normalizedY = scopeOffsetY + scope.clientHeight - contextMenu.clientHeight;
-    }
+    normalizedX = x + cmWidth > winWidth ? winWidth - cmWidth : x;
+    normalizedY = y + cmHeight > winHeight ? winHeight - cmHeight : y;
 
     return { normalizedX, normalizedY };
 };

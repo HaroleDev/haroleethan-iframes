@@ -27,6 +27,7 @@
     --text-color: #F0F0F0;
     --soft-accent-color: #01A573;
     --accent-color: #02DA9A;
+    --bright-accent-color: #23FDBC;
     --background: #1C5947;
     --foreground: #1C6550;
     --stroke-accent-color: #165248;
@@ -35,13 +36,16 @@
 }
 
 @media (color-gamut: p3) {
-    :root {
-        --soft-accent-color: color(display-p3 calc(1/255) calc(165/255) calc(115/255));
-        --accent-color: color(display-p3 calc(2/255) calc(218/255) calc(154/255));
-        --background: color(display-p3 calc(28/255) calc(89/255) calc(71/255));
-        --foreground: color(display-p3 calc(28/255) calc(101/255) calc(80/255));
-        --stroke-accent-color: color(display-p3 calc(22/255) calc(82/255) calc(72/255));
-        --page-background: color(display-p3 calc(231/255) calc(254/255) calc(247/255));
+    @supports (color: color(display-p3 1 1 1)) {
+        :root {
+            --soft-accent-color: color(display-p3 calc(1/255) calc(165/255) calc(115/255));
+            --accent-color: color(display-p3 calc(2/255) calc(218/255) calc(154/255));
+            --bright-accent-color: color(display-p3 calc(35/255), calc(253/255), calc(188/255));
+            --background: color(display-p3 calc(28/255) calc(89/255) calc(71/255));
+            --foreground: color(display-p3 calc(28/255) calc(101/255) calc(80/255));
+            --stroke-accent-color: color(display-p3 calc(22/255) calc(82/255) calc(72/255));
+            --page-background: color(display-p3 calc(231/255) calc(254/255) calc(247/255));
+        }
     }
 }
 
@@ -1043,7 +1047,7 @@ body.preload * {
     border-radius: 12px;
     height: 16px;
     margin-top: 0px;
-    background-color: #23FDBC;
+    background-color: var(--bright-accent-color);
     -webkit-transform: translateY(-4px);
     -ms-transform: translateY(-4px);
     transform: translateY(-4px);
@@ -1059,9 +1063,9 @@ body.preload * {
 
 .scrubbing .timeline .timeline-scrubber::after,
 .scrubbing:hover .timeline .timeline-scrubber::after {
-    background-image: -o-linear-gradient(left, #23fdbc, #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, #23fdbc);
-    background-image: -webkit-gradient(linear, left top, right top, from(#23fdbc), color-stop(#1eecae), color-stop(#19db9f), color-stop(#13ca92), color-stop(#0cba84), color-stop(#0cba84), color-stop(#0cba84), color-stop(#0cba84), color-stop(#13ca92), color-stop(#19db9f), color-stop(#1eecae), to(#23fdbc));
-    background-image: linear-gradient(to right, #23fdbc, #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, #23fdbc);
+    background-image: -o-linear-gradient(left, var(--bright-accent-color), #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, var(--bright-accent-color));
+    background-image: -webkit-gradient(linear, left top, right top, from(var(--bright-accent-color)), color-stop(#1eecae), color-stop(#19db9f), color-stop(#13ca92), color-stop(#0cba84), color-stop(#0cba84), color-stop(#0cba84), color-stop(#0cba84), color-stop(#13ca92), color-stop(#19db9f), color-stop(#1eecae), to(var(--bright-accent-color)));
+    background-image: linear-gradient(to right, var(--bright-accent-color), #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, var(--bright-accent-color));
 }
 
 .full-screen-button .enter .top-corner {

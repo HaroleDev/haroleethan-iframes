@@ -97,7 +97,7 @@ let lastKnownScrollPosition = 0;
 let ticking = false;
 
 window.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.remove('preload');
+    document.body.classList.remove("preload");
 
     videoPoster.src = videoMetadata.video_poster;
 
@@ -455,7 +455,7 @@ function jumpToTranscript(time) {
 };
 
 function clearTranscriptDiv() {
-    transcriptDiv.textContent = "";
+    transcriptDiv.innerHTML = "";
 };
 
 function addToTranscript(htmlText) {
@@ -463,12 +463,12 @@ function addToTranscript(htmlText) {
 };
 
 function addCueListeners(cue) {
-    cue.addEventListener('enter', function () {
+    cue.addEventListener("enter", function () {
         var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.add("current");
         transcriptText.parentNode.scrollTop = transcriptText.offsetTop - transcriptText.parentNode.offsetTop;
     });
-    cue.addEventListener('exit', function () {
+    cue.addEventListener("exit", function () {
         var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.remove("current");
     });
@@ -681,7 +681,7 @@ function activity() {
     if (videoContainer.classList.contains("hovered")) {
         if (video.paused) {
             return;
-        } else if (!video.paused) {
+        } else {
             timeout = setTimeout(function () {
                 videoContainer.classList.remove("hovered");
                 videoControlsContainer.classList.add("inactive");
@@ -988,10 +988,10 @@ async function mediaSessionToggle() {
     };
 
     const actionHandlers = [
-        ["play", async function () { await togglePlay(); }],
-        ["pause", async function () { await togglePlay(); }],
+        ["play", async function () { if (video.paused) await togglePlay(); }],
+        ["pause", async function () { if (!video.paused) await togglePlay(); }],
         ["stop", function () {
-            if (!video.paused) video.pause();
+            if (!video.paused) togglePlay();
             video.currentTime = 0;
         }],
         ["seekbackward", (d) => {
@@ -1028,11 +1028,9 @@ async function mediaSessionToggle() {
 
 function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
-        if (contextMenu.classList.contains("show")) {
-            return;
-        } if (settingsContextMenu.classList.contains("pressed")) {
-            return;
-        };
+        if (contextMenu.classList.contains("show")) return;
+        if (settingsContextMenu.classList.contains("pressed")) return;
+
         videoContainer.classList.remove("ended");
         video.currentTime = 0;
     };
@@ -1123,8 +1121,10 @@ const eventListeners = [
             volumeTooltipContainer.dataset.tooltip = "Unmute" + " (m)";
         } else if (video.volume >= 0.6) {
             volumeLevel = "full";
+            volumeTooltipContainer.dataset.tooltip = "Mute" + " (m)";
         } else if (video.volume >= 0.3) {
             volumeLevel = "mid";
+            volumeTooltipContainer.dataset.tooltip = "Mute" + " (m)";
         } else {
             volumeLevel = "low";
             volumeTooltipContainer.dataset.tooltip = "Mute" + " (m)";

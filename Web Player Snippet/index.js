@@ -672,6 +672,7 @@ function activity() {
             return;
         } else {
             timeout = setTimeout(function () {
+                window.cancelAnimationFrame(reqId);
                 videoContainer.classList.remove("hovered");
                 videoControlsContainer.classList.add("inactive");
                 video.classList.add("inactive");
@@ -922,8 +923,7 @@ async function updatetime() {
         timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", percent);
     };
-    const reqId = requestAnimationFrame(updatetime);
-    return reqId;
+    reqId = await window.requestAnimationFrame(updatetime);
 };
 
 const leading0Formatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
@@ -1046,9 +1046,9 @@ const eventListeners = [
         videoContainer.classList.remove("paused");
     }],
     ["pause", () => {
+        window.cancelAnimationFrame(reqId);
         navigator.mediaSession.playbackState = "paused";
         playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
-
         video.classList.remove("inactive");
         clearTimeout(timeout);
         videoContainer.classList.add("paused");

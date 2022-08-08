@@ -690,7 +690,7 @@ function toggleFullScreen() {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
         } else {
-            if (videoPlayer.webkitEnterFullScreen) videoPlayer.webkitEnterFullScreen();
+            if (video.webkitEnterFullScreen) video.webkitEnterFullScreen();
             if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();
             if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
             if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen();

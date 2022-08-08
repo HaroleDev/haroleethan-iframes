@@ -50,7 +50,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
     html,
     body {
         background: var(--background) !important;
@@ -548,24 +547,7 @@ body.preload * {
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
-    padding: 36px 48px 64px 48px;
-    opacity: 0;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    will-change: width;
-    pointer-events: none;
-}
-
-.video-information-overlay {
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-    padding: 36px 48px 64px 48px;
+    padding: 36px 40px 64px 40px;
     opacity: 0;
     -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);

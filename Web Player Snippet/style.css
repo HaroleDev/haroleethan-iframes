@@ -411,6 +411,7 @@ body.preload * {
 .buffering-scrubbing .buffering-circle {
     -webkit-animation: buffer-ring 3s infinite ease;
     animation: buffer-ring 3s infinite ease;
+    animation-delay: 1s;
     -webkit-animation-play-state: running;
     animation-play-state: running;
     opacity: 1;
@@ -926,6 +927,10 @@ body.preload * {
     opacity: 1;
     pointer-events: none;
     width: 100%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     height: calc(var(--aspect-ratio-size-inverse) / 100%);
     -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);

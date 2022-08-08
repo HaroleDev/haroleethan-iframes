@@ -34,6 +34,17 @@
     font-size: 16px;
 }
 
+@media (color-gamut: p3) {
+    :root {
+        --soft-accent-color: color(display-p3 calc(1/255) calc(165/255) calc(115/255));
+        --accent-color: color(display-p3 calc(2/255) calc(218/255) calc(154/255));
+        --background: color(display-p3 calc(28/255) calc(89/255) calc(71/255));
+        --foreground: color(display-p3 calc(28/255) calc(101/255) calc(80/255));
+        --stroke-accent-color: color(display-p3 calc(22/255) calc(82/255) calc(72/255));
+        --page-background: color(display-p3 calc(231/255) calc(254/255) calc(247/255));
+    }
+}
+
 @media (prefers-color-scheme: dark) {
 
     html,

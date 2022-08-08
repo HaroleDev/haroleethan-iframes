@@ -694,8 +694,9 @@ function toggleFullScreen() {
             if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();
             if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
             if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen();
+            fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
         }
-        fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
+
     } else {
         if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
             if (document.requestFullscreen) document.exitFullscreen();
@@ -729,7 +730,7 @@ document.addEventListener("fullscreenchange", fullScreenToggleChange);
 document.addEventListener("mozfullscreenchange", fullScreenToggleChange);
 document.addEventListener("webkitfullscreenchange", fullScreenToggleChange);
 document.addEventListener("msfullscreenchange", fullScreenToggleChange);
-
+video.addEventListener("webkitendfullscreen", fullScreenToggleChange);
 function togglePIPClass() {
     if (videoContainer.classList.contains("pip-player")) {
         videoContainer.classList.remove("pip-player");

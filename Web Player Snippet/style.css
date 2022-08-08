@@ -2076,6 +2076,19 @@ input[type=range]::-ms-tooltip {
     box-shadow: none;
 }
 
+.video-player:fullscreen {
+    animation: fullscreenPlayer 600ms 1 cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes fullscreenPlayer {
+    0% {
+        transform: scale(105%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}
+
 .transcript-opened.video-player {
     width: clamp(256px + 25rem, 100%, 1440px + 25rem);
     height: clamp(256px * var(--aspect-ratio-size-inverse) + 25rem, 100% * var(--aspect-ratio-size-inverse) + 25rem, 1440px * var(--aspect-ratio-size-inverse) + 25rem);

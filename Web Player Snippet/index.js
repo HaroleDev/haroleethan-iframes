@@ -86,6 +86,7 @@ function canFullscreen() {
     var check = typeof document.body.requestFullscreen !== "undefined" ||
         typeof document.body.mozRequestFullScreen !== "undefined" ||
         typeof document.body.webkitRequestFullscreen !== "undefined" ||
+        typeof document.body.webkitEnterFullscreen !== "undefined" ||
         typeof document.body.msRequestFullscreen !== "undefined" ||
         typeof document.body.exitFullscreen !== "undefined" ||
         typeof document.body.mozCancelFullScreen !== "undefined" ||
@@ -689,6 +690,7 @@ function toggleFullScreen() {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
         } else {
+            if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitEnterFullScreen();
             if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();
             if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
             if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen();

@@ -73,7 +73,6 @@
 }
 
 @media (prefers-color-scheme: light) {
-
     .logo.dark {
         display: none;
     }
@@ -411,6 +410,7 @@ body.preload * {
 .buffering-scrubbing .buffering-circle {
     -webkit-animation: buffer-ring 3s infinite ease;
     animation: buffer-ring 3s infinite ease;
+    -webkit-animation-delay: 1s;
     animation-delay: 1s;
     -webkit-animation-play-state: running;
     animation-play-state: running;
@@ -799,6 +799,8 @@ body.preload * {
     cursor: pointer;
     will-change: width, height;
     overflow: hidden;
+    -webkit-box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
 }
 
 .timeline-scrubber::after {
@@ -825,6 +827,9 @@ body.preload * {
     animation: buffer 2s infinite linear;
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px);
 }
 
 .buffering .timeline-scrubber::after {
@@ -1042,6 +1047,8 @@ body.preload * {
     border-radius: 32px 32px 8px 8px;
     height: 16px;
     margin-top: -8px;
+    -webkit-box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -1058,12 +1065,7 @@ body.preload * {
     transform: translateY(-4px);
     -webkit-box-shadow: 0px 4px 0px #02DA9A, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 4px 0px #02DA9A, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
-    -webkit-transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .scrubbing .timeline .timeline-scrubber::after,

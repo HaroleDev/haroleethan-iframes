@@ -1232,10 +1232,8 @@ function rejoinCastSession() {
 
 window['__onGCastApiAvailable'] = function (isAvailable) {
     if (isAvailable) {
-        setTimeout(function(){
-            initializeCastApi();
-            CastTooltip.classList.remove("hidden");
-        }, 1000);
+        initializeCastApi();
+        CastTooltip.classList.remove("hidden");
     };
 };
 

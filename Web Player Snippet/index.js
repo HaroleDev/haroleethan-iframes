@@ -1,7 +1,7 @@
 const videoMetadata = {
     video_thumbs: "//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
     video_poster: "//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_auto:eco,w_1280/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    //HLS_src: "//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
+    HLS_src: "//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
     HLS_codec: "application/x-mpegURL",
     Fallback_src: "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
     Fallback_codec: "video/mp4",
@@ -86,6 +86,8 @@ const videoThumbPreview = document.querySelector(".video-thumb-preview");
 
 const AirPlayTooltip = document.querySelector(".airplay-tooltip");
 const AirPlayButton = document.querySelector(".airplay-button");
+const CastButton = document.querySelector("google-cast-launcher");
+const CastTooltip = document.querySelector(".gcast-tooltip");
 
 function canFullscreen() {
     var check = typeof document.body.requestFullscreen !== "undefined" ||
@@ -154,27 +156,8 @@ window.addEventListener("DOMContentLoaded", () => {
     if (isMobile) {
         volumeTooltipContainer.classList.add("hidden");
     };
+
 });
-
-if (window.WebKitPlaybackTargetAvailabilityEvent) {
-    video.addEventListener('webkitplaybacktargetavailabilitychanged', function (e) {
-        switch (e.availability) {
-            case "available":
-                video.setAttribute("x-webkit-airplay", "allow");
-                AirPlayTooltip.classList.remove("hidden");
-                break;
-
-            default:
-                break;
-        };
-
-        AirPlayButton.addEventListener('click', function () {
-            video.webkitShowPlaybackTargetPicker();
-        });
-    });
-} else {
-    AirPlayTooltip.classList.add("hidden");
-};
 
 /*var initializeCastApi = function () {
     console.log('initializeCastApi');
@@ -1220,3 +1203,117 @@ for (const [action, event] of eventListeners) {
         console.log(`The video event listener action "${action}" is unavailable.`);
     };
 };
+
+if (window.WebKitPlaybackTargetAvailabilityEvent) {
+    video.addEventListener('webkitplaybacktargetavailabilitychanged', function (e) {
+        switch (e.availability) {
+            case "available":
+                video.setAttribute("x-webkit-airplay", "allow");
+                AirPlayTooltip.classList.remove("hidden");
+                break;
+
+            default:
+                break;
+        };
+
+        AirPlayButton.addEventListener('click', function () {
+            video.webkitShowPlaybackTargetPicker();
+        });
+    });
+} else {
+    AirPlayTooltip.classList.add("hidden");
+};
+
+let sessionId;
+
+function rejoinCastSession() {
+    chrome.cast.requestSessionById(sessionId);
+};
+
+window['__onGCastApiAvailable'] = function (isAvailable) {
+    if (isAvailable) {
+        setTimeout(function(){
+            initializeCastApi();
+            CastTooltip.classList.remove("hidden");
+        }, 1000);
+    };
+};
+
+CastButton.addEventListener('click', function () {
+    castSession.loadMedia(request)
+        .then(function () { console.log('Load succeed'); })
+        .catch(function (errorCode) { console.log('Error code: ' + errorCode) });
+});
+
+initializeCastApi = function () {
+    cast.framework.CastContext.getInstance().setOptions({
+        receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
+    });
+};
+
+var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+var mediaInfo = new chrome.cast.media.MediaInfo(`${video.currentSrc}`);
+
+function mimeType() {
+    if (video.currentSrc = videoMetadata.HLS_src) {
+        return videoMetadata.HLS_codec;
+    } else if (video.currentSrc = videoMetadata.Fallback_src) {
+        return videoMetadata.Fallback_codec;
+    } else {
+        return;
+    };
+};
+
+mediaInfo.contentType = mimeType;
+mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
+mediaInfo.streamType = chrome.cast.media.StreamType.BUFFERED;
+mediaInfo.metadata.metadataType = chrome.cast.media.MetadataType.GENERIC;
+mediaInfo.metadata.title = title;
+mediaInfo.metadata.subtitle = author;
+mediaInfo.duration = video.duration;
+var request = new chrome.cast.media.LoadRequest(mediaInfo);
+request.autoplay = true;
+request.currentTime = startTime;
+
+var player = new cast.framework.RemotePlayer();
+var playerController = new cast.framework.RemotePlayerController(player);
+
+playerController.addEventListener(
+    cast.framework.RemotePlayerEventType.MEDIA_INFO_CHANGED, function () {
+        let session = cast.framework.CastContext.getInstance().getCurrentSession();
+
+        if (!session) {
+            return;
+        }
+
+        let mediaStatus = session.getMediaSession();
+        if (!mediaStatus) {
+            return;
+        }
+
+        let mediaInfo = mediaStatus.media;
+    });
+
+var context = cast.framework.CastContext.getInstance();
+context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
+    function (e) {
+        switch (e.sessionState) {
+            case cast.framework.SessionState.SESSION_STARTED:
+            case cast.framework.SessionState.SESSION_RESUMED:
+                break;
+            case cast.framework.SessionState.SESSION_ENDED:
+                console.log('CastContext: CastSession disconnected');
+                break;
+        }
+    })
+
+playerController.addEventListener(cast.framework.RemotePlayerEventType.IS_CONNECTED_CHANGED, function () {
+    if (!player.isConnected) {
+        console.log('RemotePlayerController: Player disconnected');
+    }
+});
+
+function stopCasting() {
+    var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+    castSession.endSession(true);
+}

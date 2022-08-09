@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <script crossorigin type="text/javascript"
     src="//polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en"
     defer></script>
@@ -22,8 +23,11 @@
     <meta name="theme-color" content="#02DA9A">
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <script crossorigin type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
-    <script src="//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" defer></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
+
+    <script type="text/javascript" src="///gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js" defer></script>
+    <script type="text/javascript" src="//gstatic.com/cv/js/sender/v1/cast_sender.js" defer></script>
+
     <script type="text/javascript" src="index.js" defer></script>
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
@@ -32,9 +36,15 @@
 </head>
 
 <body class="preload">
-    <div class="header">
-        <img src="./media/Playful%20Video_Dark.svg" class="logo dark">
-        <img src="./media/Playful%20Video_Light.svg" class="logo light">
+    <div class="website-header">
+        <div class="logo-container">
+            <img src="./media/Playful%20Video_Dark.svg" class="logo dark">
+            <img src="./media/Playful%20Video_Light.svg" class="logo light">
+        </div>
+        <div class="version">
+            <p>Rolling Progress Release</p>
+            <p><b>NOTE:</b> This video player is a work in progress, so expect the features to bug out.</p>
+        </div>
     </div>
     <div class="column">
         <div class="video-player-container">
@@ -326,6 +336,11 @@
                                             </svg>
                                         </button>
                                     </div>
+                                    <div class="tooltip-right gcast-tooltip hidden" data-tooltip="Cast to TV">
+                                        <google-cast-launcher id="castbutton" class="gcast-button"
+                                            aria-label="Cast to TV">
+                                        </google-cast-launcher>
+                                    </div>
                                     <div class="tooltip-right" data-tooltip="Subtitles/closed captions (c)">
                                         <button class="caption-button" aria-label="Toggle subtitles or closed captions">
                                             <svg width="32" height="27" viewBox="0 0 32 27" fill="none"
@@ -448,6 +463,9 @@
             <div class="description">
                 <p></p>
             </div>
+        </div>
+        <div class="bugs">
+            <p><b>KNOWN BUGS:</b><br>The "Cast to TV" button is nonfunctional.</p>
         </div>
     </div>
     <script type="text/javascript" async>

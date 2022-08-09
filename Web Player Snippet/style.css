@@ -97,6 +97,7 @@
 }
 
 :focus-visible {
+    -webkit-box-shadow: 0 0 0 2px var(--link-and-focus-color);
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
@@ -396,10 +397,14 @@ body.preload * {
     transform: scale(1);
     -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .video-controls-container .left-side button:focus-visible {
+    -webkit-box-shadow: 0 0 0 2px #ffffff33, 0 0 0 2px var(--link-and-focus-color);
     box-shadow: 0 0 0 2px #ffffff33, 0 0 0 2px var(--link-and-focus-color);
 }
 
@@ -470,7 +475,8 @@ body.preload * {
     border-radius: 50%;
 }
 
-.video-controls-container .right-side button {
+.video-controls-container .right-side button,
+.video-controls-container .right-side google-cast-launcher {
     background: transparent;
     border: none;
     padding: 8px;
@@ -481,37 +487,32 @@ body.preload * {
     position: relative;
     -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.video-controls-container .right-side button path {
-    fill: #eee;
+.video-controls-container .right-side button path,
+google-cast-launcher {
+    fill: var(--text-color);
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.video-controls-container .right-side button:hover path {
+.video-controls-container .right-side button:hover path,
+google-cast-launcher:hover {
     fill: var(--accent-color);
 }
 
-.video-controls-container .right-side button:active path {
+.video-controls-container .right-side button:active path,
+google-cast-launcher:active {
     fill: var(--soft-accent-color);
 }
 
-.video-controls-container .left-side button:hover {
-    -webkit-box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
-    box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
-    background-color: #01A5734d;
-}
-
-.video-controls-container .left-side button:active {
-    -webkit-box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
-    box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
-    background: #02DA9A99;
-    -webkit-transform: scale(0.96);
-    -ms-transform: scale(0.96);
-    transform: scale(0.96);
+google-cast-launcher {
+    display: inline-block !important;
 }
 
 .video-container.paused .pause-icon,
@@ -948,12 +949,16 @@ body.preload * {
     height: calc(var(--aspect-ratio-size-inverse) / 100%);
     -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 150ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 150ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 150ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 150ms cubic-bezier(0.19, 1, 0.22, 1);
     position: absolute;
     display: block;
 }
 
 .pip-player .video-poster {
+    -webkit-filter: blur(1vh) brightness(60%);
     filter: blur(1vh) brightness(60%);
 }
 
@@ -1157,7 +1162,8 @@ body.preload * {
 }
 
 .video-container.caption .caption-button::after,
-.video-container.pip-player .pip-button::after {
+.video-container.pip-player .pip-button::after,
+.video-container.casted-session .pip-button::after {
     content: "";
     width: inherit;
     height: 4px;
@@ -1171,7 +1177,8 @@ body.preload * {
 }
 
 .video-container .caption-button::after,
-.video-container .pip-button::after {
+.video-container .pip-button::after,
+.video-container .gcast-button::after {
     content: "";
     width: inherit;
     height: 4px;
@@ -2435,7 +2442,7 @@ input[type=range]::-ms-tooltip {
     padding: 0px 32px;
 }
 
-.header {
+.website-header {
     width: 100%;
     padding: 64px 32px 32px 32px;
     display: -webkit-box;
@@ -2444,9 +2451,36 @@ input[type=range]::-ms-tooltip {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
 }
 
-.header .logo {
+.website-header p,
+.bugs p {
+    margin: 4px 0px;
+}
+
+.website-header b,
+.bugs b {
+    font-variation-settings: "wght" 800;
+    font-weight: 800;
+}
+
+.bugs {
+    margin-top: 32px;
+}
+
+.website-header .logo {
     height: 64px;
 }
 
@@ -2473,6 +2507,7 @@ input[type=range]::-ms-tooltip {
     font-size: 1rem;
     line-height: 160%;
     letter-spacing: -0.02em;
+    margin: 4px 0px;
 }
 
 .video-information .description p {
@@ -2480,6 +2515,7 @@ input[type=range]::-ms-tooltip {
     font-weight: 500;
     font-size: 1rem;
     line-height: 160%;
+    margin: 8px 0px;
     word-wrap: break-word;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;

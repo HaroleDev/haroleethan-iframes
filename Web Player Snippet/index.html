@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script crossorigin type="text/javascript"
-        src="//polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en"
-        defer></script>
+<script crossorigin type="text/javascript"
+    src="//polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en"
+    defer></script>
+
 <head>
     <meta charset="utf-8">
     <title>Harole's Videos</title>
@@ -307,6 +308,24 @@
                                             </svg>
                                         </button>
                                     </div>
+                                    <div class="tooltip-right airplay-tooltip hidden" data-tooltip="AirPlay">
+                                        <button class="airplay-button" aria-label="AirPlay">
+                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <g clip-path="url(#clip0_636_10)">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M15.9996 18.0969C16.2025 18.0969 16.4062 18.1833 16.5532 18.3552L26.0145 29.4211C26.3758 29.8431 26.0853 30.5091 25.5388 30.5091H6.46041C5.91391 30.5091 5.62428 29.8431 5.98477 29.4211L15.4452 18.3552C15.5922 18.1833 15.7959 18.0969 15.9996 18.0969Z" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M4.55825 2H27.4418C29.0275 2 29.6017 2.16448 30.1814 2.47552C30.7609 2.78488 31.2151 3.24003 31.5252 3.81865C31.8348 4.39825 32 4.97245 32 6.55825V18.7751C32 20.36 31.8348 20.9351 31.5252 21.5148C31.2151 22.0933 30.7609 22.5485 30.1814 22.8586C29.6017 23.1689 29.0275 23.3333 27.4418 23.3333H23.7973L22.2747 21.5555H27.944C28.735 21.5555 29.0232 21.4729 29.313 21.3173C29.6027 21.1635 29.8294 20.936 29.985 20.6453C30.1395 20.3565 30.2222 20.0685 30.2222 19.2764V6.0569C30.2222 5.26487 30.1395 4.97687 29.985 4.68711C29.8294 4.39734 29.6027 4.17065 29.313 4.01513C29.0232 3.85953 28.735 3.77778 27.944 3.77778H4.0569C3.26487 3.77778 2.97687 3.85953 2.68711 4.01513C2.39734 4.17065 2.17065 4.39734 2.01513 4.68711C1.85953 4.97687 1.77778 5.26487 1.77778 6.0569V19.2764C1.77778 20.0685 1.85953 20.3565 2.01513 20.6453C2.17065 20.936 2.39734 21.1635 2.68711 21.3173C2.97687 21.4729 3.26487 21.5555 4.0569 21.5555H9.72536L8.20269 23.3333H4.55825C2.97245 23.3333 2.39825 23.1689 1.81865 22.8586C1.24003 22.5485 0.784882 22.0933 0.47552 21.5148C0.164479 20.9351 0 20.36 0 18.7751V6.55825C0 4.97245 0.164479 4.39825 0.47552 3.81865C0.784882 3.24003 1.24003 2.78488 1.81865 2.47552C2.39825 2.16448 2.97245 2 4.55825 2Z" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_636_10">
+                                                        <rect width="32" height="28.5091" transform="translate(0 2)" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </button>
+                                    </div>
                                     <div class="tooltip-right" data-tooltip="Subtitles/closed captions (c)">
                                         <button class="caption-button" aria-label="Toggle subtitles or closed captions">
                                             <svg width="32" height="27" viewBox="0 0 32 27" fill="none"
@@ -376,6 +395,8 @@
                         <img class="video-thumb-preview">
                         <img class="video-poster">
                         <video tabindex="-1" playsinline class="video" preload="metadata" crossorigin="anonymous"
+                            webkit-playsinline="true" x5-playsinline="true" x5-video-player-type="h5"
+                            x5-video-player-fullscreen="true" x5-video-orientation="landscape|portrait"
                             poster="//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_70,w_1280,e_blur:2048/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg">
                             <source>
                             <track id="default-track" label="English" kind="captions" srclang="en" src="./sample.vtt"

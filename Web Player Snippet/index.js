@@ -78,9 +78,14 @@ const timelineInner = document.querySelector(".timeline");
 
 const videoControlsContainer = document.querySelector(".video-controls-container");
 const videoControls = document.querySelector(".controls");
+const rightVideoControls = document.querySelector(".right-side");
+
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
 const videoThumbPreview = document.querySelector(".video-thumb-preview");
+
+const AirPlayTooltip = document.querySelector(".airplay-tooltip");
+const AirPlayButton = document.querySelector(".airplay-button");
 
 function canFullscreen() {
     var check = typeof document.body.requestFullscreen !== "undefined" ||
@@ -150,6 +155,78 @@ window.addEventListener("DOMContentLoaded", () => {
         volumeTooltipContainer.classList.add("hidden");
     };
 });
+
+if (window.WebKitPlaybackTargetAvailabilityEvent) {
+    video.addEventListener('webkitplaybacktargetavailabilitychanged', function (e) {
+        switch (e.availability) {
+            case "available":
+                video.setAttribute("x-webkit-airplay", "allow");
+                AirPlayTooltip.classList.remove("hidden");
+                break;
+
+            default:
+                break;
+        };
+
+        AirPlayButton.addEventListener('click', function () {
+            video.webkitShowPlaybackTargetPicker();
+        });
+    });
+} else {
+    AirPlayTooltip.classList.add("hidden");
+};
+
+/*var initializeCastApi = function () {
+    console.log('initializeCastApi');
+
+    var sessionRequest = new chrome.cast.SessionRequest(
+        chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
+    var apiConfig = new chrome.cast.ApiConfig(
+        sessionRequest, sessionListener, receiverListener);
+    chrome.cast.initialize(apiConfig, onInitSuccess, onError);
+};
+
+if (!chrome.cast || !chrome.cast.isAvailable) {
+    setTimeout(initializeCastApi, 1000);
+}
+
+function onInitSuccess() {
+    console.log('onInitSuccess');
+}
+
+function onError(e) {
+    console.log('onError', e);
+}
+
+function sessionListener(e) {
+    console.log('sessionListener', e);
+}
+
+function receiverListener(availability) {
+    console.log('receiverListener', availability);
+
+    if (availability === chrome.cast.ReceiverAvailability.AVAILABLE) {
+        $(".button").removeAttr("disabled").text("Start");
+    }
+}
+
+function onSessionRequestSuccess(session) {
+    console.log('onSessionRequestSuccess', session);
+
+    var mediaInfo = new chrome.cast.media.MediaInfo(
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "video/mp4");
+    var request = new chrome.cast.media.LoadRequest(mediaInfo);
+    session.loadMedia(request, onMediaLoadSuccess, onError);
+}
+
+function onMediaLoadSuccess(e) {
+    console.log('onMediaLoadSuccess', e);
+}
+
+$(".button").click(function () {
+    chrome.cast.requestSession(onSessionRequestSuccess, onError);
+}); */
 
 //Range slider track
 function handleInputChange(e) {
@@ -728,10 +805,10 @@ function fullScreenToggleChange() {
     videoPlayer.classList.toggle("full-screen", document.fullscreenElement);
 };
 
-document.addEventListener("fullscreenchange", fullScreenToggleChange);
-document.addEventListener("mozfullscreenchange", fullScreenToggleChange);
-document.addEventListener("webkitfullscreenchange", fullScreenToggleChange);
-document.addEventListener("msfullscreenchange", fullScreenToggleChange);
+document.addEventListener("fullscreenchange", fullScreenToggleChange, false);
+document.addEventListener("mozfullscreenchange", fullScreenToggleChange, false);
+document.addEventListener("webkitfullscreenchange", fullScreenToggleChange, false);
+document.addEventListener("msfullscreenchange", fullScreenToggleChange, false);
 
 video.addEventListener('webkitenterfullscreen', () => {
     videoPlayer.classList.add("full-screen");

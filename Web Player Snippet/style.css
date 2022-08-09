@@ -2498,7 +2498,8 @@ input[type=range]::-ms-tooltip {
     line-height: 110%;
     letter-spacing: -0.04em;
     font-size: 2rem;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    margin-top: 8px;
 }
 
 .video-information .author-info span {

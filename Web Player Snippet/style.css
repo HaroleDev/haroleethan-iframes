@@ -56,7 +56,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
     html,
     body {
         background: var(--background) !important;
@@ -415,6 +414,7 @@ body.preload * {
     box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
     background-color: #01A5734d;
 }
+
 .video-controls-container .left-side button:active {
     -webkit-box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
     box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);

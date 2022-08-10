@@ -86,7 +86,7 @@ const videoThumbPreview = document.querySelector(".video-thumb-preview");
 
 const AirPlayTooltip = document.querySelector(".airplay-tooltip");
 const AirPlayButton = document.querySelector(".airplay-button");
-const CastButton = document.querySelector("google-cast-launcher");
+const CastButton = document.querySelector(".gcast-button");
 const CastTooltip = document.querySelector(".gcast-tooltip");
 
 function canFullscreen() {
@@ -609,15 +609,14 @@ videoPlayer.addEventListener("keydown", e => {
                 skipPercent(0.9);
                 break;
             case "k": case " ":
+                e.preventDefault();
                 videoContainer.classList.add("hovered");
                 activity();
                 togglePlay();
                 break;
             case "f":
                 videoContainer.classList.add("hovered");
-                if (fullscreenButton.classList.contains("unsupported")) {
-                    break;
-                };
+                if (fullscreenButton.classList.contains("unsupported")) break;
                 activity();
                 toggleFullScreen();
                 break;
@@ -628,7 +627,7 @@ videoPlayer.addEventListener("keydown", e => {
                 break;
             case "i":
                 videoContainer.classList.add("hovered");
-                if (pipPlayerButton.classList.contains("unsupported")) { break; };
+                if (pipPlayerButton.classList.contains("unsupported")) break;
                 activity();
                 togglePIPPlayerMode();
                 break;
@@ -1217,6 +1216,7 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
         };
 
         AirPlayButton.addEventListener('click', function () {
+            mediaSessionToggle();
             video.webkitShowPlaybackTargetPicker();
         });
     });
@@ -1224,94 +1224,95 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
     AirPlayTooltip.classList.add("hidden");
 };
 
-let sessionId;
 
-function rejoinCastSession() {
-    chrome.cast.requestSessionById(sessionId);
-};
-
-window['__onGCastApiAvailable'] = function (isAvailable) {
-    if (isAvailable) {
-        initializeCastApi();
-        CastTooltip.classList.remove("hidden");
+if (window.chrome && !window.chrome.cast) {
+    window['__onGCastApiAvailable'] = function (isAvailable) {
+        if (isAvailable) {
+            initializeCastApi();
+            CastTooltip.classList.remove("hidden");
+        };
     };
-};
 
-CastButton.addEventListener('click', function () {
-    castSession.loadMedia(request)
-        .then(function () { console.log('Load succeed'); })
-        .catch(function (errorCode) { console.log('Error code: ' + errorCode) });
-});
-
-initializeCastApi = function () {
-    cast.framework.CastContext.getInstance().setOptions({
-        receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
-    });
-};
-
-var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-var mediaInfo = new chrome.cast.media.MediaInfo(`${video.currentSrc}`);
-
-function mimeType() {
-    if (video.currentSrc = videoMetadata.HLS_src) {
-        return videoMetadata.HLS_codec;
-    } else if (video.currentSrc = videoMetadata.Fallback_src) {
-        return videoMetadata.Fallback_codec;
-    } else {
-        return;
+    initializeCastApi = function () {
+        cast.framework.CastContext.getInstance().setOptions({
+            autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
+            receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+            resumeSavedSession: false,
+        });
     };
-};
 
-mediaInfo.contentType = mimeType;
-mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
-mediaInfo.streamType = chrome.cast.media.StreamType.BUFFERED;
-mediaInfo.metadata.metadataType = chrome.cast.media.MetadataType.GENERIC;
-mediaInfo.metadata.title = title;
-mediaInfo.metadata.subtitle = author;
-mediaInfo.duration = video.duration;
-var request = new chrome.cast.media.LoadRequest(mediaInfo);
-request.autoplay = true;
-request.currentTime = startTime;
-
-var player = new cast.framework.RemotePlayer();
-var playerController = new cast.framework.RemotePlayerController(player);
-
-playerController.addEventListener(
-    cast.framework.RemotePlayerEventType.MEDIA_INFO_CHANGED, function () {
-        let session = cast.framework.CastContext.getInstance().getCurrentSession();
-
-        if (!session) {
+    function mimeType() {
+        if (video.currentSrc = videoMetadata.HLS_src) {
+            return videoMetadata.HLS_codec;
+        } else if (video.currentSrc = videoMetadata.Fallback_src) {
+            return videoMetadata.Fallback_codec;
+        } else {
             return;
-        }
+        };
+    };
 
-        let mediaStatus = session.getMediaSession();
-        if (!mediaStatus) {
-            return;
-        }
-
-        let mediaInfo = mediaStatus.media;
-    });
-
-var context = cast.framework.CastContext.getInstance();
-context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
-    function (e) {
-        switch (e.sessionState) {
-            case cast.framework.SessionState.SESSION_STARTED:
-            case cast.framework.SessionState.SESSION_RESUMED:
-                break;
-            case cast.framework.SessionState.SESSION_ENDED:
-                console.log('CastContext: CastSession disconnected');
-                break;
-        }
-    })
-
-playerController.addEventListener(cast.framework.RemotePlayerEventType.IS_CONNECTED_CHANGED, function () {
-    if (!player.isConnected) {
-        console.log('RemotePlayerController: Player disconnected');
-    }
-});
-
-function stopCasting() {
     var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-    castSession.endSession(true);
+    var mediaInfo = new chrome.cast.media.MediaInfo(video.currentSrc, mimeType);
+
+    mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
+    mediaInfo.streamType = chrome.cast.media.StreamType.BUFFERED;
+    mediaInfo.metadata.metadataType = chrome.cast.media.MetadataType.GENERIC;
+    mediaInfo.metadata.title = title;
+    mediaInfo.metadata.subtitle = author;
+    mediaInfo.duration = video.duration;
+
+    CastButton.addEventListener('click', function () {
+        mediaSessionToggle();
+    });
+
+    var request = new chrome.cast.media.LoadRequest(mediaInfo);
+    request.autoplay = true;
+    request.currentTime = startTime;
+
+    castSession.loadMedia(request)
+        .then(function () { console.log('Load succeed'); },
+            function (errorCode) { console.log('Error code: ' + errorCode) });
+
+    var player = new cast.framework.RemotePlayer();
+    var playerController = new cast.framework.RemotePlayerController(player);
+
+    playerController.addEventListener(
+        cast.framework.RemotePlayerEventType.MEDIA_INFO_CHANGED, function () {
+            let session = cast.framework.CastContext.getInstance().getCurrentSession();
+
+            if (!session) {
+                return;
+            }
+
+            let mediaStatus = session.getMediaSession();
+            if (!mediaStatus) {
+                return;
+            }
+
+            let mediaInfo = mediaStatus.media;
+        });
+
+    var context = cast.framework.CastContext.getInstance();
+    context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
+        function (e) {
+            switch (e.sessionState) {
+                case cast.framework.SessionState.SESSION_STARTED:
+                case cast.framework.SessionState.SESSION_RESUMED:
+                    break;
+                case cast.framework.SessionState.SESSION_ENDED:
+                    console.log('CastContext: CastSession disconnected');
+                    break;
+            }
+        })
+
+    playerController.addEventListener(cast.framework.RemotePlayerEventType.IS_CONNECTED_CHANGED, function () {
+        if (!player.isConnected) {
+            console.log('RemotePlayerController: Player disconnected');
+        }
+    });
+
+    function stopCasting() {
+        var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+        castSession.endSession(true);
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-cast-api-enabled="true">
 
 <script crossorigin type="text/javascript"
     src="//polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en"
@@ -24,10 +24,7 @@
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
-
-    <script type="text/javascript" src="///gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js" defer></script>
-    <script type="text/javascript" src="//gstatic.com/cv/js/sender/v1/cast_sender.js" defer></script>
-
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" defer></script>
     <script type="text/javascript" src="index.js" defer></script>
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
@@ -255,18 +252,18 @@
                                                 class="play-icon" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M34.9896 17.2668C36.3257 18.036 36.3257 19.964 34.9896 20.7332L7.99793 36.2739C6.6646 37.0416 5 36.0792 5 34.5407L5 3.45932C5 1.92079 6.6646 0.958404 7.99793 1.72608L34.9896 17.2668Z"
-                                                    fill="#EEE" />
+                                                    fill="var(--text-color)" />
                                             </svg>
                                             <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
                                                 class="pause-icon" xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="3" width="12" height="38" rx="2" fill="#EEE" />
-                                                <rect x="23" width="12" height="38" rx="2" fill="#EEE" />
+                                                <rect x="3" width="12" height="38" rx="2" fill="var(--text-color)" />
+                                                <rect x="23" width="12" height="38" rx="2" fill="var(--text-color)" />
                                             </svg>
                                             <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
                                                 class="replay-icon" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M20 4.8284L18.8284 5.99997H19C27.2843 5.99997 34 12.7157 34 21C34 29.2842 27.2843 36 19 36C10.7157 36 4 29.2842 4 21C4 19.3431 5.34315 18 7 18C8.65685 18 10 19.3431 10 21C10 25.9706 14.0294 30 19 30C23.9706 30 28 25.9705 28 21C28 16.0294 23.9706 12 19 12H18.8284L20 13.1715C20.7811 13.9526 20.781 15.2189 20 16C19.219 16.781 17.9526 16.781 17.1716 16L11.5858 10.4142C10.8047 9.63311 10.8047 8.36678 11.5858 7.58573L17.1716 1.99997C17.9526 1.21892 19.219 1.21892 20 1.99997C20.781 2.78102 20.781 4.04735 20 4.8284Z"
-                                                    fill="#EEE" />
+                                                    fill="var(--text-color)" />
                                             </svg>
                                             <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
                                                 class="buffering-circle" xmlns="http://www.w3.org/2000/svg">
@@ -337,9 +334,8 @@
                                         </button>
                                     </div>
                                     <div class="tooltip-right gcast-tooltip hidden" data-tooltip="Cast to TV">
-                                        <google-cast-launcher id="castbutton" class="gcast-button"
-                                            aria-label="Cast to TV">
-                                        </google-cast-launcher>
+                                        <button is="google-cast-button" class="gcast-button" aria-label="Cast to TV">
+                                        </button>
                                     </div>
                                     <div class="tooltip-right" data-tooltip="Subtitles/closed captions (c)">
                                         <button class="caption-button" aria-label="Toggle subtitles or closed captions">
@@ -511,6 +507,7 @@
             document.getElementById("error-log").textContent = error.code;
             document.getElementsByClassName("error-dialog").classList.add("error-occurred");
         });
+
     </script>
 </body>
 

@@ -63,7 +63,7 @@
         color: var(--text-color) !important;
     }
 
-    .logo.light {
+    .logo.dark {
         display: none;
     }
 
@@ -79,7 +79,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-    .logo.dark {
+    .logo.light {
         display: none;
     }
 

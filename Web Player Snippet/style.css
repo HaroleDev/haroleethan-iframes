@@ -599,6 +599,7 @@ button[is="google-cast-button"] {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
+    text-align: right;
 }
 
 .video-information-overlay::before {

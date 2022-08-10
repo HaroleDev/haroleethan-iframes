@@ -992,20 +992,24 @@ timelineInner.addEventListener("pointermove", e => {
     if (isScrubbing) {
         videoControls.classList.add("hidden");
     };
-    timelineInner.addEventListener("pointerleave", () => {
-        seekingPreview.classList.remove("hovered");
-        videoControls.classList.remove("hidden");
-    }, { once: true });
+});
+
+timelineInner.addEventListener("pointerleave", () => {
+    seekingPreview.classList.remove("hovered");
+    videoControls.classList.remove("hidden");
 });
 
 timelineInner.addEventListener("pointerdown", e => {
     if (e.button === 0) toggleScrubbing(e);
-    timelineInner.addEventListener("pointerup", e => {
-        timelineInner.releasePointerCapture(e.pointerId);
-        if (isScrubbing) {
-            toggleScrubbing(e);
-        };
-    });
+});
+
+timelineInner.addEventListener("pointerup", e => {
+    timelineInner.releasePointerCapture(e.pointerId);
+    if (isScrubbing) {
+        toggleScrubbing(e);
+        seekingPreview.classList.remove("hovered");
+        videoControls.classList.remove("hidden");
+    };
 });
 
 let isScrubbing = false;

@@ -817,7 +817,7 @@ function toggleFullScreen() {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
             fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
-        } if (video.webkitEnterFullScreen) {
+        } if (video.webkitEnterFullScreen && videoPlayer.getAttribute("data-device") != "iPadOS") {
             video.webkitEnterFullScreen();
         } else {
             if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();

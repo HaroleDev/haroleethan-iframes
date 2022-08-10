@@ -79,6 +79,7 @@ const timelineInner = document.querySelector(".timeline");
 const videoControlsContainer = document.querySelector(".video-controls-container");
 const videoControls = document.querySelector(".controls");
 const rightVideoControls = document.querySelector(".right-side");
+const videoInformationOverlay = document.querySelector(".video-information-overlay");
 
 const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-thumbnail");
@@ -88,6 +89,21 @@ const AirPlayTooltip = document.querySelector(".airplay-tooltip");
 const AirPlayButton = document.querySelector(".airplay-button");
 const CastButton = document.querySelector(".gcast-button");
 const CastTooltip = document.querySelector(".gcast-tooltip");
+
+async function init() {
+    document.body.classList.remove("preload");
+    if (video.hasAttribute("controls")) {
+        videoControlsContainer.classList.remove("hidden");
+        videoInformationOverlay.classList.remove("hidden");
+        video.removeAttribute("controls");
+    } else {
+        videoControlsContainer.classList.add("hidden");
+        videoInformationOverlay.classList.add("hidden");
+        video.removeAttribute("controls");
+    };
+}
+
+init();
 
 function canFullscreen() {
     var check = typeof document.body.requestFullscreen !== "undefined" ||
@@ -101,12 +117,42 @@ function canFullscreen() {
     return check;
 };
 
+video.addEventListener("error", function () {
+    let technical = "";
+    let error = video.error;
+
+    switch (error.code) {
+        case MediaError.MEDIA_ERR_ABORTED:
+            technical += "The user stopped loading the video.";
+            break;
+        case MediaError.MEDIA_ERR_NETWORK:
+            technical += "A network error occurred while fetching the video.";
+            break;
+        case MediaError.MEDIA_ERR_DECODE:
+            technical += "An error occurred while decoding the video.";
+            break;
+        case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+            technical += "The video is missing or is in a format not supported by your browser.";
+            break;
+        default:
+            technical += "An unknown error occurred.";
+            break;
+    };
+
+    let message = error.message;
+
+    if (message && message.length) {
+        technical += message;
+    };
+
+    document.getElementById("error-log").textContent = error.code;
+    document.getElementsByClassName("error-dialog").classList.add("error-occurred");
+});
+
 let lastKnownScrollPosition = 0;
 let ticking = false;
 
 window.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.remove("preload");
-
     videoPoster.src = videoMetadata.video_poster;
 
     /*if (!Hls.isSupported()) {

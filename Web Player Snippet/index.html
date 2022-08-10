@@ -405,7 +405,7 @@
                         <div class="video-backdrop-seeking"></div>
                         <img class="video-thumb-preview">
                         <img class="video-poster">
-                        <video tabindex="-1" playsinline class="video" preload="metadata" crossorigin="anonymous"
+                        <video controls tabindex="-1" playsinline class="video" preload="metadata" crossorigin="anonymous"
                             webkit-playsinline="true" x5-playsinline="true" x5-video-player-type="h5"
                             x5-video-player-fullscreen="true" x5-video-orientation="landscape|portrait"
                             poster="//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_70,w_1280,e_blur:2048/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg">
@@ -476,39 +476,6 @@
         document.querySelector(".author-name span").textContent = author;
         document.querySelector(".video-information .author-info span").textContent = author;
         document.querySelector(".video-information .description p").textContent = description;
-        
-        videoEl.addEventListener("error", function () {
-            let technical = "";
-            let error = videoEl.error;
-
-            switch (error.code) {
-                case MediaError.MEDIA_ERR_ABORTED:
-                    technical += "The user stopped loading the video.";
-                    break;
-                case MediaError.MEDIA_ERR_NETWORK:
-                    technical += "A network error occurred while fetching the video.";
-                    break;
-                case MediaError.MEDIA_ERR_DECODE:
-                    technical += "An error occurred while decoding the video.";
-                    break;
-                case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-                    technical += "The video is missing or is in a format not supported by your browser.";
-                    break;
-                default:
-                    technical += "An unknown error occurred.";
-                    break;
-            };
-
-            let message = error.message;
-
-            if (message && message.length) {
-                technical += message;
-            };
-
-            document.getElementById("error-log").textContent = error.code;
-            document.getElementsByClassName("error-dialog").classList.add("error-occurred");
-        });
-
     </script>
 </body>
 

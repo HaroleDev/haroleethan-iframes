@@ -720,9 +720,24 @@ videoPlayer.addEventListener("keydown", e => {
 function loopVideo() {
     if (!loopItem.classList.contains("enabled")) {
         video.loop = true;
+        if (typeof video.loop == 'boolean') {
+            video.loop = true;
+        } else {
+            video.addEventListener('ended', function () {
+                video.currentTime = 0;
+                video.play();
+            }, false);
+        };
         loopItem.classList.add("enabled");
     } else {
-        video.loop = false;
+        if (typeof video.loop == 'boolean') {
+            video.loop = false;
+        } else {
+            video.removeEventListener('ended', function () {
+                video.currentTime = 0;
+                video.play();
+            }, false);
+        };
         loopItem.classList.remove("enabled");
     };
 };
@@ -820,8 +835,10 @@ async function togglePIPPlayerMode() {
         if (document.pictureInPictureEnabled && !video.disablePictureInPicture) {
             if (videoContainer.classList.contains("pip-player") && !video.pictureInPictureElement) {
                 await document.exitPictureInPicture();
+                pipTooltip.dataset.tooltip = "Picture in picture" + " (i)";
             } else {
                 await video.requestPictureInPicture();
+                pipTooltip.dataset.tooltip = "Exit Picture in picture" + " (i)";
             };
         };
     } catch (error) {
@@ -1134,7 +1151,7 @@ async function mediaSessionToggle() {
     };
 };
 
-function togglePlay() {
+async function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
         if (contextMenu.classList.contains("show")) return;
         if (settingsContextMenu.classList.contains("pressed")) return;
@@ -1143,7 +1160,7 @@ function togglePlay() {
         video.currentTime = 0;
     };
     if (context.state === "suspended") context.resume();
-    video.paused ? video.play() : video.pause();
+    video.paused ? await video.play() : await video.pause();
 };
 
 const eventListeners = [
@@ -1215,6 +1232,7 @@ const eventListeners = [
     }],
     ["loadedmetadata", () => {
         videoPlayer.classList.remove("loading");
+        video.textTracks[0].mode = "hidden";
         seekingThumbnail.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
         videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
 

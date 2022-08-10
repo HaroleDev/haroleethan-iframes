@@ -90,7 +90,10 @@ const AirPlayButton = document.querySelector(".airplay-button");
 const CastButton = document.querySelector(".gcast-button");
 const CastTooltip = document.querySelector(".gcast-tooltip");
 
-async function init() {
+var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
+var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
+
+function init() {
     document.body.classList.remove("preload");
     if (video.hasAttribute("controls")) {
         videoControlsContainer.classList.remove("hidden");
@@ -202,7 +205,10 @@ window.addEventListener("DOMContentLoaded", () => {
     if (isMobile) {
         volumeTooltipContainer.classList.add("hidden");
     };
-
+    if (navigator.userAgent.match(/Mac/) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2) {
+        videoPlayer.dataset.device = "iPadOS";
+        volumeTooltipContainer.classList.add("hidden");
+    };
 });
 
 /*var initializeCastApi = function () {
@@ -974,8 +980,8 @@ function seekingPreviewPosition(e) {
     if (percent > 100) percent = 100;
 
     const seekRect = seekingPreview.getBoundingClientRect();
-
-    seekingPreview.style.setProperty("--thumbnail-seek-position", `calc(${percent}% - ${(seekRect.width * (percent / 100)) / 2 + (40 * (1 - percent / 100))}px + ${(seekRect.width * (1 - percent / 100)) / 2 - (40 * (percent / 100))}px + ${(40 * 2) * (1 - percent / 100)}px)`);
+    var seekPos = `calc(${percent}% - ${(seekRect.width * (percent / 100)) / 2 + (40 * (1 - percent / 100))}px + ${(seekRect.width * (1 - percent / 100)) / 2 - (40 * (percent / 100))}px + ${(40 * 2) * (1 - percent / 100)}px)`;
+    seekingPreview.style.setProperty("--thumbnail-seek-position", seekPos);
 };
 
 timelineInner.addEventListener("pointermove", e => {
@@ -1081,8 +1087,6 @@ function formatDuration(time) {
 playpauseButton.addEventListener("click", togglePlay);
 video.addEventListener("click", togglePlay);
 
-var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
-var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
 
 function updatePositionState() {
     navigator.mediaSession.setPositionState({

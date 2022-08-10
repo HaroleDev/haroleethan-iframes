@@ -817,10 +817,11 @@ function toggleFullScreen() {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
             fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
-        } if (video.webkitEnterFullScreen && videoPlayer.getAttribute("data-device") === !"iPadOS") {
+        } if (videoPlayer.webkitRequestFullscreen) {
+            videoPlayer.webkitRequestFullScreen();
+        } if (video.webkitEnterFullScreen) {
             video.webkitEnterFullScreen();
         } else {
-            if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();
             if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
             if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen();
             fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";

@@ -476,6 +476,7 @@
         document.querySelector(".author-name span").textContent = author;
         document.querySelector(".video-information .author-info span").textContent = author;
         document.querySelector(".video-information .description p").textContent = description;
+        
         videoEl.addEventListener("error", function () {
             let technical = "";
             let error = videoEl.error;
@@ -501,7 +502,7 @@
             let message = error.message;
 
             if (message && message.length) {
-                technical += ` ${message}`;
+                technical += message;
             };
 
             document.getElementById("error-log").textContent = error.code;

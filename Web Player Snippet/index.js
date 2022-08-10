@@ -1212,6 +1212,7 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
                 break;
 
             default:
+                AirPlayTooltip.classList.add("hidden");
                 break;
         };
 
@@ -1230,7 +1231,9 @@ if (window.chrome && !window.chrome.cast) {
         if (isAvailable) {
             initializeCastApi();
             CastTooltip.classList.remove("hidden");
-        };
+        } else {
+            return false;
+        }
     };
 
     initializeCastApi = function () {
@@ -1261,10 +1264,6 @@ if (window.chrome && !window.chrome.cast) {
     mediaInfo.metadata.subtitle = author;
     mediaInfo.duration = video.duration;
 
-    CastButton.addEventListener('click', function () {
-        mediaSessionToggle();
-    });
-
     var request = new chrome.cast.media.LoadRequest(mediaInfo);
     request.autoplay = true;
     request.currentTime = startTime;
@@ -1272,6 +1271,10 @@ if (window.chrome && !window.chrome.cast) {
     castSession.loadMedia(request)
         .then(function () { console.log('Load succeed'); },
             function (errorCode) { console.log('Error code: ' + errorCode) });
+
+    CastButton.addEventListener('click', function () {
+        mediaSessionToggle();
+    });
 
     var player = new cast.framework.RemotePlayer();
     var playerController = new cast.framework.RemotePlayerController(player);

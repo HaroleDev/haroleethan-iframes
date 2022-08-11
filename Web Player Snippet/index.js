@@ -844,7 +844,7 @@ async function togglePIPPlayerMode() {
                 pipTooltip.dataset.tooltip = "Picture in picture" + " (i)";
             } else {
                 await video.requestPictureInPicture();
-                pipTooltip.dataset.tooltip = "Exit Picture in picture" + " (i)";
+                pipTooltip.dataset.tooltip = "Exit picture in picture" + " (i)";
             };
         };
     } catch (error) {

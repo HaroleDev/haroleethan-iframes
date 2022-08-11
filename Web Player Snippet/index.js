@@ -293,26 +293,32 @@ videoContainer.addEventListener("contextmenu", e => {
         showContextMenu(false);
     } else {
         e.preventDefault();
-        const { normalizedX, normalizedY } = ctxmenuPosition(e);
-        contextMenu.style.left = `${normalizedX}px`;
-        contextMenu.style.top = `${normalizedY}px`;
+        const { x, y } = ctxmenuPosition(e);
+        contextMenu.style.left = `${x}px`;
+        contextMenu.style.top = `${y}px`;
         showContextMenu();
     };
 });
 
+let menuOffset = 8;
 function ctxmenuPosition(eventPos) {
     const scope = document.querySelector(".video-player");
-    let x = eventPos.offsetX,
-        y = eventPos.offsetY,
+    let x = eventPos.offsetX + menuOffset,
+        y = eventPos.offsetY + menuOffset,
         winWidth = scope.innerWidth,
         winHeight = scope.innerHeight,
         cmWidth = contextMenu.offsetWidth,
         cmHeight = contextMenu.offsetHeight;
 
-    normalizedX = x + cmWidth > winWidth ? winWidth - cmWidth : x;
-    normalizedY = y + cmHeight > winHeight ? winHeight - cmHeight : y;
+    if (x + cmWidth > winWidth - 8) {
+        x = eventPos.offsetX - cmWidth;
+    }
 
-    return { normalizedX, normalizedY };
+    if (y + cmHeight > winHeight - 8) {
+        y = winHeight - cmHeight - 8;
+    }
+
+    return { x, y };
 };
 
 function closeSettingsMenu(e) {
@@ -748,7 +754,22 @@ function loopVideo() {
     };
 };
 
+function checkLoop() {
+    if (video.loop === true) {
+        loopItem.classList.add("enabled");
+    } else if (video.loop === false) {
+        loopItem.classList.remove("enabled");
+    } else {
+        return;
+    };
+};
+
 loopItem.addEventListener("click", loopVideo);
+
+videoPlayer.addEventListener("pointermove", checkLoop);
+videoPlayer.addEventListener("pointerover", checkLoop);
+videoPlayer.addEventListener("pointerdown", checkLoop);
+videoPlayer.addEventListener("pointerleave", checkLoop);
 
 //Skip time
 function skip(duration) {

@@ -1226,6 +1226,7 @@ screen and (max-height: 600px) {
     display: block;
     border-radius: 4px;
     width: 32px;
+    bottom: 0px;
     margin-left: 0px;
 }
 
@@ -1239,7 +1240,7 @@ screen and (max-height: 600px) {
     position: absolute;
     display: block;
     border-radius: 4px;
-    margin-top: 5px;
+    bottom: 0px;
     width: 0px;
     margin-left: 16px;
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -1250,92 +1251,6 @@ screen and (max-height: 600px) {
 .video-container .pip-button::after,
 .video-container.pip-player .pip-button::after {
     margin-top: 1px;
-}
-
-@media (-ms-high-contrast: active),
-(forced-colors: active) {
-
-    .video-controls-container .left-side button path,
-    .video-controls-container .left-side button rect {
-        fill: #000;
-    }
-
-    .video-controls-container .left-side button {
-        background-color: #FFF;
-        border: none;
-        -webkit-box-shadow: 0 0 0 2px var(--soft-accent-color);
-        box-shadow: 0 0 0 2px var(--soft-accent-color);
-        forced-color-adjust: none;
-    }
-
-    .video-controls-container .left-side button:focus-visible {
-        -webkit-box-shadow: 0 0 0 4px var(--link-and-focus-color), 0 0 0 4px var(--link-and-focus-color);
-        box-shadow: 0 0 0 4px var(--link-and-focus-color), 0 0 0 4px var(--link-and-focus-color);
-        outline: none;
-    }
-
-    .video-controls-container .left-side button:hover {
-        -webkit-box-shadow: 0 0 0 2px var(--soft-accent-color);
-        box-shadow: 0 0 0 2px var(--soft-accent-color);
-        background: var(--page-background);
-    }
-
-    .video-controls-container .left-side button:active {
-        -webkit-box-shadow: 0 0 0 2px var(--stroke-accent-color);
-        box-shadow: 0 0 0 2px var(--stroke-accent-color);
-        background: var(--bright-accent-color);
-        -webkit-transform: scale(0.96);
-        -ms-transform: scale(0.96);
-        transform: scale(0.96);
-    }
-
-    .buffering-circle {
-        stroke: var(--background);
-        stroke-width: 12px;
-        stroke-linecap: butt;
-    }
-
-    .video-controls-container .right-side button {
-        background: #FFF;
-        forced-color-adjust: none;
-    }
-
-    .video-controls-container .right-side button:hover {
-        background: var(--page-background);
-    }
-
-    .video-controls-container .right-side button:active {
-        background: var(--bright-accent-color);
-    }
-
-    .video-controls-container .right-side button path {
-        fill: #000;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .video-controls-container .right-side button:hover path {
-        fill: var(--background);
-    }
-
-    .video-controls-container .right-side button:active path {
-        fill: var(--stroke-accent-color);
-    }
-
-    .video-container.caption .caption-button::after,
-    .video-container.pip-player .pip-button::after,
-    .video-container.casted-session .gcast-button::after {
-        content: "";
-        width: inherit;
-        height: 4px;
-        background: var(--soft-accent-color);
-        position: absolute;
-        display: block;
-        border-radius: 0px 0px 4px 4px;
-        width: 48px;
-        margin-left: -8px;
-    }
 }
 
 .video-container .settings-button path {
@@ -1394,9 +1309,10 @@ screen and (max-height: 600px) {
     border-radius: 4px;
     cursor: pointer;
     background-color: transparent;
-    -webkit-transition: background-color 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: background-color 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: background-color 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 0 0 0px transparent;
 }
 
 .video-context-menu span {
@@ -1449,9 +1365,10 @@ screen and (max-height: 600px) {
     width: 100%;
     border-radius: 4px;
     background-color: transparent;
-    -webkit-transition: background-color 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: background-color 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: background-color 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -o-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 0 0 0px transparent;
     cursor: pointer;
 }
 
@@ -1463,6 +1380,141 @@ screen and (max-height: 600px) {
 .video-context-menu .item:hover,
 .settings-context-menu .item:hover {
     background-color: rgba(219, 251, 241, 0.1);
+}
+
+.video-context-menu .item:active,
+.settings-context-menu .item:active {
+    background-color: var(--stroke-accent-color);
+}
+
+@media (-ms-high-contrast: active),
+(forced-colors: active) {
+
+    .video-controls-container .left-side button path,
+    .video-controls-container .left-side button rect {
+        fill: #000;
+    }
+
+    .video-controls-container .left-side button {
+        background-color: #FFF;
+        border: none;
+        -webkit-box-shadow: 0 0 0 2px #000;
+        box-shadow: 0 0 0 2px #000;
+        forced-color-adjust: none;
+    }
+
+    .video-controls-container .left-side button:focus-visible {
+        -webkit-box-shadow: 0 0 0 4px var(--link-and-focus-color), 0 0 0 4px var(--link-and-focus-color);
+        box-shadow: 0 0 0 4px var(--link-and-focus-color), 0 0 0 4px var(--link-and-focus-color);
+        outline: none;
+    }
+
+    .video-controls-container .left-side button:hover {
+        -webkit-box-shadow: 0 0 0 2px var(--soft-accent-color);
+        box-shadow: 0 0 0 2px var(--soft-accent-color);
+        background: var(--page-background);
+    }
+
+    .video-controls-container .left-side button:active {
+        -webkit-box-shadow: 0 0 0 2px var(--stroke-accent-color);
+        box-shadow: 0 0 0 2px var(--stroke-accent-color);
+        background: var(--bright-accent-color);
+        -webkit-transform: scale(0.96);
+        -ms-transform: scale(0.96);
+        transform: scale(0.96);
+    }
+
+    .buffering-circle {
+        stroke: var(--background);
+        stroke-width: 12px;
+        stroke-linecap: butt;
+    }
+
+    .video-controls-container .right-side button {
+        background: #FFF;
+        forced-color-adjust: none;
+    }
+
+    .video-controls-container .right-side button:hover {
+        background: var(--page-background);
+    }
+
+    .video-controls-container .right-side button:active {
+        background: var(--bright-accent-color);
+    }
+
+    .video-controls-container .right-side button path {
+        fill: #000;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .video-controls-container .right-side button:hover path {
+        fill: var(--background);
+    }
+
+    .video-controls-container .right-side button:active path {
+        fill: var(--stroke-accent-color);
+    }
+
+    .video-container .caption-button::after,
+    .video-container .pip-button::after,
+    .video-container .gcast-button::after {
+        content: "";
+        width: inherit;
+        height: 4px;
+        background: var(--bright-accent-color);
+        position: absolute;
+        display: block;
+        border-radius: 4px;
+        bottom: 2px;
+        width: 0px;
+        margin-left: 16px;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .video-container.caption .caption-button::after,
+    .video-container.pip-player .pip-button::after,
+    .video-container.casted-session .gcast-button::after {
+        content: "";
+        width: inherit;
+        height: 4px;
+        background: var(--soft-accent-color);
+        position: absolute;
+        display: block;
+        border-radius: 4px;
+        width: 32px;
+        bottom: 2px;
+        margin-left: 0px;
+    }
+
+    .video-context-menu,
+    .settings-context-menu {
+        background-color: #FFF;
+        color: #000;
+    }
+
+    .video-context-menu svg path,
+    .settings-context-menu svg path {
+        fill: #000;
+    }
+
+    .video-context-menu .item:hover,
+    .settings-context-menu .item:hover {
+        background-color: var(--page-background);
+        box-shadow: 0 0 0 2px #000;
+        forced-color-adjust: none;
+    }
+
+    .video-context-menu .item:active,
+    .settings-context-menu .item:active {
+        background-color: var(--bright-accent-color);
+        box-shadow: 0 0 0 2px #000;
+        forced-color-adjust: none;
+    }
 }
 
 .volume-container {

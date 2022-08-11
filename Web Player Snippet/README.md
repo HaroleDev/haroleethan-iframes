@@ -4,12 +4,14 @@ A HTML5-based video player created by myself with some features you wouldn't nor
 #### This folder of this repo includes modified/borrowed code from the following source:
 YouTube Video Player Clone: https://github.com/WebDevSimplified/youtube-video-player-clone
 
-Custom HTML5 Video: https://github.com/Freshman-tech/custom-html5-video
+[Custom HTML5 Video](https://github.com/Freshman-tech/custom-html5-video)
 
-Custom Context Menu: https://codepen.io/dcode-software/pen/dgpNKE
+[Custom Context Menu](https://codepen.io/dcode-software/pen/dgpNKE)
 
-Equalizer: https://codepen.io/rajwosa/pen/qBBXexE
+[Equalizer](https://codepen.io/rajwosa/pen/qBBXexE)
 
-A player with a clickable transcript: http://masf-html5.blogspot.com/2016/04/html5-player-with-clickable-transcript.html
+[Web Audio Peak Meters](https://esonderegger.github.io/web-audio-peak-meter)
 
-Plyr: https://github.com/sampotts/plyr
+[A player with a clickable transcript](http://masf-html5.blogspot.com/2016/04/html5-player-with-clickable-transcript.html)
+
+[Plyr](https://github.com/sampotts/plyr)

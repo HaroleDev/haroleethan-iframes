@@ -212,7 +212,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /*var initializeCastApi = function () {
-    console.log('initializeCastApi');
+    console.log("initializeCastApi");
 
     var sessionRequest = new chrome.cast.SessionRequest(
         chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
@@ -226,19 +226,19 @@ if (!chrome.cast || !chrome.cast.isAvailable) {
 }
 
 function onInitSuccess() {
-    console.log('onInitSuccess');
+    console.log("onInitSuccess");
 }
 
 function onError(e) {
-    console.log('onError', e);
+    console.log("onError", e);
 }
 
 function sessionListener(e) {
-    console.log('sessionListener', e);
+    console.log("sessionListener", e);
 }
 
 function receiverListener(availability) {
-    console.log('receiverListener', availability);
+    console.log("receiverListener", availability);
 
     if (availability === chrome.cast.ReceiverAvailability.AVAILABLE) {
         $(".button").removeAttr("disabled").text("Start");
@@ -246,7 +246,7 @@ function receiverListener(availability) {
 }
 
 function onSessionRequestSuccess(session) {
-    console.log('onSessionRequestSuccess', session);
+    console.log("onSessionRequestSuccess", session);
 
     var mediaInfo = new chrome.cast.media.MediaInfo(
         "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -256,7 +256,7 @@ function onSessionRequestSuccess(session) {
 }
 
 function onMediaLoadSuccess(e) {
-    console.log('onMediaLoadSuccess', e);
+    console.log("onMediaLoadSuccess", e);
 }
 
 $(".button").click(function () {
@@ -726,20 +726,20 @@ videoPlayer.addEventListener("keydown", e => {
 function loopVideo() {
     if (!loopItem.classList.contains("enabled")) {
         video.loop = true;
-        if (typeof video.loop == 'boolean') {
+        if (typeof video.loop == "boolean") {
             video.loop = true;
         } else {
-            video.addEventListener('ended', function () {
+            video.addEventListener("ended", function () {
                 video.currentTime = 0;
                 video.play();
             }, false);
         };
         loopItem.classList.add("enabled");
     } else {
-        if (typeof video.loop == 'boolean') {
+        if (typeof video.loop == "boolean") {
             video.loop = false;
         } else {
-            video.removeEventListener('ended', function () {
+            video.removeEventListener("ended", function () {
                 video.currentTime = 0;
                 video.play();
             }, false);
@@ -817,11 +817,10 @@ function toggleFullScreen() {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
             fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
-        } if (videoPlayer.webkitRequestFullscreen) {
-            videoPlayer.webkitRequestFullScreen();
-        } if (video.webkitEnterFullScreen) {
+        } if (video.webkitEnterFullScreen && videoPlayer.getAttribute("data-device") != "iPadOS") {
             video.webkitEnterFullScreen();
         } else {
+            if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();
             if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
             if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen();
             fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
@@ -862,7 +861,7 @@ document.addEventListener("mozfullscreenchange", fullScreenToggleChange, false);
 document.addEventListener("webkitfullscreenchange", fullScreenToggleChange, false);
 document.addEventListener("msfullscreenchange", fullScreenToggleChange, false);
 
-video.addEventListener('webkitenterfullscreen', () => {
+video.addEventListener("webkitenterfullscreen", () => {
     videoPlayer.classList.add("full-screen");
 });
 
@@ -1277,7 +1276,7 @@ for (const [action, event] of eventListeners) {
 };
 
 if (window.WebKitPlaybackTargetAvailabilityEvent) {
-    video.addEventListener('webkitplaybacktargetavailabilitychanged', function (e) {
+    video.addEventListener("webkitplaybacktargetavailabilitychanged", function (e) {
         switch (e.availability) {
             case "available":
                 video.setAttribute("x-webkit-airplay", "allow");
@@ -1289,7 +1288,7 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
                 break;
         };
 
-        AirPlayButton.addEventListener('click', function () {
+        AirPlayButton.addEventListener("click", function () {
             mediaSessionToggle();
             video.webkitShowPlaybackTargetPicker();
         });
@@ -1300,7 +1299,7 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
 
 
 if (window.chrome && !window.chrome.cast) {
-    window['__onGCastApiAvailable'] = function (isAvailable) {
+    window["__onGCastApiAvailable"] = function (isAvailable) {
         if (isAvailable) {
             initializeCastApi();
             CastTooltip.classList.remove("hidden");
@@ -1341,16 +1340,50 @@ if (window.chrome && !window.chrome.cast) {
     request.autoplay = true;
     request.currentTime = startTime;
 
-    castSession.loadMedia(request)
-        .then(function () { console.log('Load succeed'); },
-            function (errorCode) { console.log('Error code: ' + errorCode) });
+    var textTrackStyle = new chrome.cast.media.TextTrackStyle();
+    var tracksInfoRequest = new chrome.cast.media.EditTracksInfoRequest(textTrackStyle);
+    media.editTracksInfo(tracksInfoRequest, successCallback, errorCallback);
+    var textTrackStyle = new chrome.cast.media.TextTrackStyle();
+    textTrackStyle.foregroundColor = "#FFFFFF";
+    textTrackStyle.backgroundColor = "#00000099";
+    textTrackStyle.fontStyle = "NORMAL";
 
-    CastButton.addEventListener('click', function () {
+    castSession.loadMedia(request)
+        .then(function () { console.log("Load succeed"); },
+            function (errorCode) { console.log("Error code: " + errorCode) });
+
+
+    let sessionId;
+
+    function rejoinCastSession() {
+        chrome.cast.requestSessionById(sessionId);
+    }
+    CastButton.addEventListener("click", function () {
         mediaSessionToggle();
+        if (sessionId == null) {
+            let castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+            if (castSession) {
+                let mediaInfo = createMediaInfo();
+                let request = new chrome.cast.media.LoadRequest(mediaInfo);
+                castSession.loadMedia(request)
+
+                sessionId = CastSession.getSessionId();
+            } else {
+                console.log("Error: Attempting to play media without a Cast Session");
+            }
+        } else {
+            rejoinCastSession();
+        }
     });
 
     var player = new cast.framework.RemotePlayer();
     var playerController = new cast.framework.RemotePlayerController(player);
+
+    function changeVolume(newVolume) {
+        player.volumeLevel = newVolume;
+        playerController.setVolume();
+
+    }
 
     playerController.addEventListener(
         cast.framework.RemotePlayerEventType.MEDIA_INFO_CHANGED, function () {
@@ -1376,14 +1409,14 @@ if (window.chrome && !window.chrome.cast) {
                 case cast.framework.SessionState.SESSION_RESUMED:
                     break;
                 case cast.framework.SessionState.SESSION_ENDED:
-                    console.log('CastContext: CastSession disconnected');
+                    console.log("CastContext: CastSession disconnected");
                     break;
             }
         })
 
     playerController.addEventListener(cast.framework.RemotePlayerEventType.IS_CONNECTED_CHANGED, function () {
         if (!player.isConnected) {
-            console.log('RemotePlayerController: Player disconnected');
+            console.log("RemotePlayerController: Player disconnected");
         }
     });
 

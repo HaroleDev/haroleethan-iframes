@@ -941,6 +941,7 @@ button[is="google-cast-button"] {
     border-radius: 8px;
     -webkit-box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
     box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
+    background-size: calc(100%);
     border: none;
     padding: 2px;
     margin-bottom: 8px;
@@ -1032,6 +1033,32 @@ button[is="google-cast-button"] {
 .video-container.buffering-scrubbing .video-backdrop-seeking {
     -webkit-backdrop-filter: blur(1vh);
     backdrop-filter: blur(1vh);
+}
+
+@media screen and (max-width: 1024px),
+screen and (max-height: 600px) {
+    .seeking-thumbnail {
+        width: calc(108px * var(--aspect-ratio-size));
+        height: 108px;
+    }
+
+    .seeking-preview {
+        -webkit-transform: translate(-50%, -60%);
+        -ms-transform: translate(-50%, -60%);
+        transform: translate(-50%, -60%);
+    }
+
+    .video-container.scrubbing .video-backdrop-seeking,
+    .video-container.buffering-scrubbing .video-backdrop-seeking {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .pip-player .video-poster {
+        -webkit-filter: brightness(60%);
+        filter: brightness(60%);
+    }
+
 }
 
 .video-container.buffering .video-backdrop-seeking,

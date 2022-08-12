@@ -523,7 +523,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text;
         };
-        var clickableTranscriptText = `<div class="cue-container" id="${cue.startTime}" onclick="jumpToTranscript(${cue.startTime});"> <div class="span" class="cue-time">${formatDuration(cue.startTime)}</div> <div class="span" class="cues">${transcriptText}</div> </div>`;
+        var clickableTranscriptText = `<div class="cue-container" id="${cue.startTime}" role="button" aria-pressed="false" tabindex="0" onclick="jumpToTranscript(${cue.startTime});"> <div class="cue-time span">${formatDuration(cue.startTime)}</div> <div class="cues span">${transcriptText}</div> </div>`;
         addToTranscript(clickableTranscriptText);
     };
 };
@@ -580,6 +580,16 @@ function addCueListeners(cue) {
         var transcriptText = document.getElementById(this.startTime);
         transcriptText.classList.remove("current");
     });
+};
+
+transcriptDiv.addEventListener("keydown", e => {
+    if (e.key === " " || e.key === "Enter" || e.key === "Spacebar") {
+        toggleBtn(e.target);
+    };
+});
+
+function toggleBtn(e) {
+    e.setAttribute("aria-pressed",e.getAttribute("aria-pressed") === "true" ? "false" : "true");
 };
 
 transcriptPanel.addEventListener("click", e => {

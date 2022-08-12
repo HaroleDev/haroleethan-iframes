@@ -821,7 +821,6 @@ function spinnerDivider() {
 let timeout = null;
 function activity() {
     clearTimeout(timeout);
-    currentTime.textContent = formatDuration(video.currentTime);
     video.classList.remove("inactive");
     videoControlsContainer.classList.remove("inactive");
     videoContainer.classList.add("hovered");
@@ -1263,12 +1262,8 @@ const eventListeners = [
         currentTime.textContent = formatDuration(video.currentTime);
     }],
     ["timeupdate", () => {
-        if (videoContainer.classList.contains("hovered")) {
-            updatetime();
-            currentTime.textContent = formatDuration(video.currentTime);
-        } else {
-            return;
-        };
+        updatetime();
+        currentTime.textContent = formatDuration(video.currentTime);
 
         if (video.currentTime === video.duration) {
             videoContainer.classList.add("ended");

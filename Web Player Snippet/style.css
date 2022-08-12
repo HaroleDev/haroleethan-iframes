@@ -2677,7 +2677,6 @@ input[type=range]::-ms-tooltip {
     .video-controls-container .left-side button {
         background-color: ButtonFace;
         outline: 2px solid ButtonText;
-        forced-color-adjust: none;
     }
 
     .video-controls-container .left-side button:focus-visible {
@@ -2707,7 +2706,6 @@ input[type=range]::-ms-tooltip {
     .video-controls-container .right-side button {
         background: ButtonFace;
         outline: 2px solid ButtonText;
-        forced-color-adjust: none;
         -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
         -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
         transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -2783,7 +2781,7 @@ input[type=range]::-ms-tooltip {
         background: HighlightText;
     }
 
-    .video-container .settings-button.pressed  {
+    .video-container .settings-button.pressed {
         outline-color: LinkText;
     }
 
@@ -2831,7 +2829,7 @@ input[type=range]::-ms-tooltip {
     .settings-context-menu .item:active svg path {
         fill: LinkText;
     }
-    
+
     .timeline-scrubber::after {
         display: none;
     }
@@ -2846,7 +2844,9 @@ input[type=range]::-ms-tooltip {
         -webkit-transform: translateY(-4px);
         -ms-transform: translateY(-4px);
         transform: translateY(-4px);
+        -webkit-box-sizing: content-box;
         box-sizing: content-box;
+        -webkit-filter: drop-shadow(0px 4px 0px #00000099) drop-shadow(0px 4px 0px Highlight);
         filter: drop-shadow(0px 4px 0px #00000099) drop-shadow(0px 4px 0px Highlight);
     }
 }

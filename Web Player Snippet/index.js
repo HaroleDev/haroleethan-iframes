@@ -477,7 +477,7 @@ tracks = video.textTracks;
 function loadTranscript(lang) {
     clearTranscriptDiv();
     disableAllTracks();
-    document.querySelector(".transcript-language").textContent = video.querySelector("track").getAttribute("label")
+    document.querySelector(".transcript-language").textContent = video.querySelector("track").getAttribute("label");
     for (var i = 0; i < tracks.length; i++) {
         var track = tracks[i];
         var trackAsHtmlElement = trackElements[i];
@@ -523,7 +523,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text;
         };
-        var clickableTranscriptText = `<div class="cue-container" id="${cue.startTime}" onclick="jumpToTranscript(${cue.startTime});"> <span class="cue-time">${formatDuration(cue.startTime)}</span> <span class="cues">${transcriptText}</span> </div>`;
+        var clickableTranscriptText = `<div class="cue-container" id="${cue.startTime}" onclick="jumpToTranscript(${cue.startTime});"> <div class="span" class="cue-time">${formatDuration(cue.startTime)}</div> <div class="span" class="cues">${transcriptText}</div> </div>`;
         addToTranscript(clickableTranscriptText);
     };
 };

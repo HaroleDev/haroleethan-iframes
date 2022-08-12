@@ -2263,6 +2263,9 @@ input[type=range]::-ms-tooltip {
 .transcript-panel button {
     background: transparent;
     border: none;
+    border-radius: 8px;
+    width: fit-content;
+    height: 48px;
     padding: 0;
     cursor: pointer;
     -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -2683,6 +2686,9 @@ input[type=range]::-ms-tooltip {
     .video-controls-container .left-side button {
         background-color: ButtonFace;
         outline: 2px solid ButtonText;
+        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     .video-controls-container .left-side button:focus-visible {
@@ -2696,8 +2702,7 @@ input[type=range]::-ms-tooltip {
 
     .video-controls-container .left-side button:active {
         background: Highlight;
-        -webkit-box-shadow: 0 0 0 2px HighlightText;
-        box-shadow: 0 0 0 2px HighlightText;
+        outline: 2px solid HighlightText;
         -webkit-transform: scale(0.96);
         -ms-transform: scale(0.96);
         transform: scale(0.96);
@@ -2799,6 +2804,7 @@ input[type=range]::-ms-tooltip {
     .video-context-menu,
     .settings-context-menu {
         background: Canvas;
+        outline: 4px solid CanvasText;
     }
 
     .video-context-menu svg path,
@@ -2810,9 +2816,9 @@ input[type=range]::-ms-tooltip {
     .settings-context-menu .item {
         background: Canvas;
         color: CanvasText;
-        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 0s;
+        -o-transition: all 0s;
+        transition: all 0s;
     }
 
     .video-context-menu .item:hover,
@@ -2839,6 +2845,10 @@ input[type=range]::-ms-tooltip {
         fill: LinkText;
     }
 
+    .timeline-scrubber {
+        outline: 2px solid Canvas;
+    }
+
     .timeline-scrubber::after {
         display: none;
     }
@@ -2855,8 +2865,29 @@ input[type=range]::-ms-tooltip {
         transform: translateY(-4px);
         -webkit-box-sizing: content-box;
         box-sizing: content-box;
-        -webkit-filter: drop-shadow(0px 4px 0px #0000004D) drop-shadow(0px 4px 0px Highlight);
-        filter: drop-shadow(0px 4px 0px #0000004D) drop-shadow(0px 4px 0px Highlight);
+        -webkit-filter: drop-shadow(0px 4px 0px #0000001a) drop-shadow(4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px Highlight);
+        filter: drop-shadow(0px 4px 0px #0000001a) drop-shadow(4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px #0000001a) drop-shadow(0px 4px 0px Highlight);
+    }
+
+    .timeline {
+        background: Canvas;
+        outline: 2px solid CanvasText;
+    }
+
+    .timeline::before {
+        background: Highlight;
+        opacity: 0.5 !important;
+    }
+
+    .timeline::after {
+        background: Highlight;
+    }
+
+    .timeline:hover::after {
+        opacity: 0.5;
+        -webkit-transition-delay: 100ms;
+        -o-transition-delay: 100ms;
+        transition-delay: 100ms;
     }
 
     .video-information-container {
@@ -2876,5 +2907,107 @@ input[type=range]::-ms-tooltip {
         background: Canvas;
         color: CanvasText;
         outline: 2px solid CanvasText;
+    }
+
+    .cuetime-tooltip {
+        background: Canvas;
+        color: var(--text-color);
+        outline: 2px solid CanvasText;
+    }
+
+    .seeking-thumbnail {
+        background: Highlight;
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: CanvasText;
+        -webkit-transition: outline-width 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -o-transition: outline-width 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        transition: outline-width 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+    }
+
+    .scrubbing .timeline-container .seeking-thumbnail {
+        outline-width: 4px;
+        outline-style: solid;
+        outline-color: Highlight;
+    }
+
+    .video-player {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: CanvasText;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+    }
+
+    .video-player:hover {
+        outline-width: 8px;
+        outline-color: Highlight;
+    }
+
+    .transcript-panel .captions-contents::-webkit-scrollbar {
+        width: 16px;
+    }
+
+    .transcript-panel .captions-contents::-webkit-scrollbar-track {
+        background: Canvas;
+        border-radius: 0px 0px 0px 8px;
+    }
+
+    .transcript-panel .captions-contents::-webkit-scrollbar-thumb {
+        background-color: CanvasText;
+        border-radius: 8px;
+        background-clip: content-box;
+        border: 2px solid CanvasText;
+    }
+
+    .transcript-panel .captions-contents::-webkit-scrollbar-track-piece {
+        background-color: Canvas;
+        border: 2px solid CanvasText;
+        border-radius: 8px;
+    }
+
+    .transcript-panel .captions-contents::-webkit-scrollbar-thumb:hover {
+        background-color: Highlight;
+        border: 2px solid Highlight;
+    }
+
+    .transcript-panel .captions-contents::-webkit-scrollbar-thumb:active {
+        background-color: LinkText;
+        border: 2px solid LinkText;
+    }
+
+    .transcript-panel button {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: ButtonText;
+        -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+    }
+
+    .transcript-panel button:hover {
+        background: HighlightText;
+        outline-color: Highlight;
+    }
+
+    .transcript-panel button:active {
+        background: HighlightText;
+        outline-color: LinkText;
+    }
+
+    .transcript-panel button path {
+        fill: CanvasText;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .transcript-panel button:hover path {
+        fill: Highlight;
+    }
+
+    .transcript-panel button:active path {
+        fill: LinkText;
     }
 }

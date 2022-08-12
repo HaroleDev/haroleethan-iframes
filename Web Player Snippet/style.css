@@ -649,6 +649,8 @@ button[is="google-cast-button"] {
     z-index: 0;
     top: 0;
     padding: 8px 12px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -987,7 +989,9 @@ button[is="google-cast-button"] {
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    height: calc(var(--aspect-ratio-size-inverse) / 100%);
+    height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
     -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -2153,7 +2157,8 @@ input[type=range]::-ms-tooltip {
     margin-bottom: 8px;
 }
 
-.transcript-panel .span {
+.transcript-panel .span,
+.transcript-panel .transcript-language {
     font-style: normal;
     font-size: 1rem;
     line-height: 160%;
@@ -2264,6 +2269,8 @@ input[type=range]::-ms-tooltip {
     background: transparent;
     border: none;
     border-radius: 8px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     height: 48px;
     padding: 0;
@@ -2688,7 +2695,10 @@ input[type=range]::-ms-tooltip {
         outline: 2px solid ButtonText;
         -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
         -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
         transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     .video-controls-container .left-side button:focus-visible {
@@ -2981,9 +2991,9 @@ input[type=range]::-ms-tooltip {
         outline-width: 2px;
         outline-style: solid;
         outline-color: ButtonText;
-        -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     .transcript-panel button:hover {
@@ -2992,8 +3002,8 @@ input[type=range]::-ms-tooltip {
     }
 
     .transcript-panel button:active {
-        background: HighlightText;
-        outline-color: LinkText;
+        outline-color: HighlightText;
+        background: Highlight;
     }
 
     .transcript-panel button path {
@@ -3008,6 +3018,90 @@ input[type=range]::-ms-tooltip {
     }
 
     .transcript-panel button:active path {
-        fill: LinkText;
+        fill: HighlightText;
+    }
+
+    .transcript-panel {
+        border-bottom: 0px solid Highlight;
+        border-left: 0px solid Highlight;
+        border-right: 0px solid Highlight;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+    .transcript-opened .transcript-panel {
+        border-bottom: 8px solid Highlight;
+        border-left: 8px solid Highlight;
+        border-right: 8px solid Highlight;
+        margin-bottom: 0px;
+        margin-left: -8px;
+        margin-right: 0px;
+    }
+
+    .transcript-panel .header {
+        background: Canvas;
+        border-bottom: 2px solid CanvasText;
+        margin-bottom: -2px;
+    }
+
+    .cues {
+        -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s;
+        -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s;
+        transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s;
+    }
+
+    .cue-container {
+        background: Canvas;
+        outline-width: 0px;
+        outline-style: solid;
+        outline-color: CanvasText;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s;
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s;
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s;
+    }
+
+    .cue-time {
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: LinkText;
+        background: Canvas;
+        color: LinkText !important;
+        text-decoration: underline;
+        letter-spacing: -0.04em;
+
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+    }
+
+    .cue-container:hover {
+        background: HighlightText;
+        outline-width: 2px;
+        outline-color: LinkText;
+    }
+
+    .cue-container:active {
+        background: HighlightText;
+        outline-width: 2px;
+        outline-color: Highlight;
+    }
+
+    .cue-container.current {
+        background: HighlightText;
+        outline-width: 2px;
+        outline-color: Highlight;
+    }
+
+    .cue-container.current .cues {
+        color: Highlight !important;
+    }
+
+    .cue-container.current .cue-time {
+        outline-width: 4px;
+        background: HighlightText;
+        color: LinkText !important;
     }
 }

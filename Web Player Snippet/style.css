@@ -30,11 +30,13 @@
     --soft-accent-color: #01A573;
     --accent-color: #02DA9A;
     --bright-accent-color: #23FDBC;
+    --buffer-scrubber-accent: linear-gradient(to right, var(--accent-color), #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, var(--accent-color));
+    --buffer-scrubber-bright-accent: linear-gradient(to right, var(--bright-accent-color), #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, var(--bright-accent-color));
     --background: #1C5947;
     --foreground: #1C6550;
     --stroke-accent-color: #165248;
     --page-background: #E7FEF7;
-    --context-menu-bg: #082b21f5;
+    --flyout-bg: #082b21f5;
     --link-and-focus-color: #4B99E7;
     font-size: 16px;
 }
@@ -74,12 +76,14 @@ body {
         :root {
             --soft-accent-color: color(display-p3 calc(1/255) calc(165/255) calc(115/255));
             --accent-color: color(display-p3 calc(2/255) calc(218/255) calc(154/255));
-            --bright-accent-color: color(display-p3 calc(35/255), calc(253/255), calc(188/255));
+            --bright-accent-color: color(display-p3 calc(35/255) calc(253/255) calc(188/255));
+            --buffer-scrubber-accent: linear-gradient(to right, var(--accent-color), color(display-p3 calc(2/255) calc(208/255) calc(147/255)), color(display-p3 calc(1/255) calc(198/255) calc(139/255)), color(display-p3 calc(1/255) calc(188/255) calc(132/255)), color(display-p3 calc(1/255) calc(178/255) calc(125/255)), color(display-p3 calc(1/255) calc(178/255) calc(125/255)), color(display-p3 calc(1/255) calc(178/255) calc(125/255)), color(display-p3 calc(1/255) calc(178/255) calc(125/255)), color(display-p3 calc(1/255) calc(188/255) calc(132/255)), color(display-p3 calc(1/255) calc(198/255) calc(139/255)), color(display-p3 calc(1/255) calc(208/255) calc(147/255)), var(--accent-color));
+            --buffer-scrubber-bright-accent: linear-gradient(to right, var(--bright-accent-color), color(display-p3 calc(30/255) calc(236/255) calc(174/255)), color(display-p3 calc(25/255) calc(219/255) calc(159/255)), color(display-p3 calc(19/255) calc(202/255) calc(146/255)), color(display-p3 calc(12/255) calc(186/255) calc(132/255)), color(display-p3 calc(12/255) calc(186/255) calc(132/255)), color(display-p3 calc(12/255) calc(186/255) calc(132/255)), color(display-p3 calc(12/255) calc(186/255) calc(132/255)), color(display-p3 calc(19/255) calc(202/255) calc(146/255)), color(display-p3 calc(25/255) calc(219/255) calc(159/255)), color(display-p3 calc(30/255) calc(236/255) calc(174/255)), var(--bright-accent-color));
             --background: color(display-p3 calc(28/255) calc(89/255) calc(71/255));
             --foreground: color(display-p3 calc(28/255) calc(101/255) calc(80/255));
             --stroke-accent-color: color(display-p3 calc(22/255) calc(82/255) calc(72/255));
             --page-background: color(display-p3 calc(231/255) calc(254/255) calc(247/255));
-            --context-menu-bg: color(display-p3 calc(8/255) calc(43/255) calc(33/255) / 0.961);
+            --flyout-bg: color(display-p3 calc(8/255) calc(43/255) calc(33/255) / 0.961);
             --link-and-focus-color: color(display-p3 calc(75/255) calc(153/255) calc(231/255));
         }
     }
@@ -424,7 +428,7 @@ body.preload * {
 .video-controls-container .left-side button:active {
     -webkit-box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
     box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
-    background: #02DA9A99;
+    background: var(--accent-color)99;
     -webkit-transform: scale(0.96);
     -ms-transform: scale(0.96);
     transform: scale(0.96);
@@ -831,8 +835,8 @@ button[is="google-cast-button"] {
     cursor: pointer;
     will-change: width, height;
     overflow: hidden;
-    -webkit-box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
-    box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
 }
 
 .timeline-scrubber::after {
@@ -852,9 +856,7 @@ button[is="google-cast-button"] {
     transform: translateX(-100%);
     -webkit-animation: buffer 2s infinite linear;
     animation: buffer 2s infinite linear;
-    background-image: -o-linear-gradient(left, #02da9a, #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, #02da9a);
-    background-image: -webkit-gradient(linear, left top, right top, from(#02da9a), color-stop(#02d093), color-stop(#01c68b), color-stop(#01bc84), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01b27d), color-stop(#01bc84), color-stop(#01c68b), color-stop(#02d093), to(#02da9a));
-    background-image: linear-gradient(to right, #02da9a, #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, #02da9a);
+    background-image: var(--buffer-scrubber-accent);
     -webkit-animation: buffer 2s infinite linear;
     animation: buffer 2s infinite linear;
     -webkit-animation-play-state: paused;
@@ -1132,8 +1134,8 @@ screen and (max-height: 600px) {
     border-radius: 32px 32px 8px 8px;
     height: 16px;
     margin-top: -8px;
-    -webkit-box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px #02DA9A, 0px 0px 0px #02DA9A, 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
-    box-shadow: 0px 0px 0px #02DA9A, 0px 0px 0px #02DA9A, 0px 0px 0px #02DA9A, 0px 0px 0px #02DA9A, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -1148,16 +1150,14 @@ screen and (max-height: 600px) {
     -webkit-transform: translateY(-4px);
     -ms-transform: translateY(-4px);
     transform: translateY(-4px);
-    -webkit-box-shadow: 0px 1px 0px #02DA9A, 0px 2px 0px #02DA9A, 0px 3px 0px #02DA9A, 0px 4px 0px #02DA9A, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
-    box-shadow: 0px 1px 0px #02DA9A, 0px 2px 0px #02DA9A, 0px 3px 0px #02DA9A, 0px 4px 0px #02DA9A, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
-    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-box-shadow: 0px 1px 0px var(--accent-color), 0px 2px 0px var(--accent-color), 0px 3px 0px var(--accent-color), 0px 4px 0px var(--accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
+    box-shadow: 0px 1px 0px var(--accent-color), 0px 2px 0px var(--accent-color), 0px 3px 0px var(--accent-color), 0px 4px 0px var(--accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
+    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .scrubbing .timeline .timeline-scrubber::after,
 .scrubbing:hover .timeline .timeline-scrubber::after {
-    background-image: -o-linear-gradient(left, var(--bright-accent-color), #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, var(--bright-accent-color));
-    background-image: -webkit-gradient(linear, left top, right top, from(var(--bright-accent-color)), color-stop(#1eecae), color-stop(#19db9f), color-stop(#13ca92), color-stop(#0cba84), color-stop(#0cba84), color-stop(#0cba84), color-stop(#0cba84), color-stop(#13ca92), color-stop(#19db9f), color-stop(#1eecae), to(var(--bright-accent-color)));
-    background-image: linear-gradient(to right, var(--bright-accent-color), #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, var(--bright-accent-color));
+    background-image: var(--buffer-scrubber-bright-accent);
 }
 
 .full-screen-button .enter .top-corner {
@@ -1291,7 +1291,7 @@ screen and (max-height: 600px) {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: var(--context-menu-bg);
+    background-color: var(--flyout-bg);
     color: var(--text-color);
     padding: 12px 8px;
     min-width: 256px;
@@ -1317,6 +1317,7 @@ screen and (max-height: 600px) {
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-box-shadow: 0 0 0 0px transparent;
     box-shadow: 0 0 0 0px transparent;
 }
 
@@ -1349,7 +1350,7 @@ screen and (max-height: 600px) {
 
 .settings-context-menu {
     position: absolute;
-    background: var(--context-menu-bg);
+    background: var(--flyout-bg);
     color: var(--text-color);
     padding: 12px 8px;
     width: 256px;
@@ -1373,6 +1374,7 @@ screen and (max-height: 600px) {
     -webkit-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-box-shadow: 0 0 0 0px transparent;
     box-shadow: 0 0 0 0px transparent;
     cursor: pointer;
 }
@@ -1390,216 +1392,6 @@ screen and (max-height: 600px) {
 .video-context-menu .item:active,
 .settings-context-menu .item:active {
     background-color: var(--stroke-accent-color);
-}
-
-@media (-ms-high-contrast: active),
-(forced-colors: active) {
-
-    :root {
-        --text-color: CanvasText;
-        --soft-accent-color: Highlight;
-        --accent-color: Highlight;
-        --bright-accent-color: Highlight;
-        --context-menu-bg: Canvas;
-        --link-and-focus-color: Highlight;
-        font-size: 16px;
-    }
-
-    @property --result-color {
-        syntax: "<color>";
-        initial-value: transparent;
-        inherits: false;
-    }
-
-    @keyframes bg-color-mix {
-        0% {
-            --result-color: ButtonFace;
-        }
-
-        100% {
-            --result-color: Highlight;
-        }
-    }
-
-    .video-controls-container .left-side button path,
-    .video-controls-container .left-side button rect {
-        fill: ButtonText;
-    }
-
-    .video-controls-container .left-side button:hover path,
-    .video-controls-container .left-side button:hover rect {
-        fill: Highlight;
-    }
-
-    .video-controls-container .left-side button:active path,
-    .video-controls-container .left-side button:active rect {
-        fill: HighlightText;
-    }
-
-    .video-controls-container .left-side button {
-        animation: bg-color-mix 1s 0s cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        border: none;
-        -webkit-box-shadow: 0 0 0 2px ButtonText;
-        box-shadow: 0 0 0 2px ButtonText;
-        forced-color-adjust: none;
-    }
-
-    .video-controls-container .left-side button:focus-visible {
-        -webkit-box-shadow: 0 0 0 4px Highlight, 0 0 0 4px Highlight;
-        box-shadow: 0 0 0 4px Highlight, 0 0 0 4px Highlight;
-        outline: none;
-    }
-
-    .video-controls-container .left-side button:hover {
-        animation: bg-color-mix 1s calc(-1s * 0.02) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        -webkit-box-shadow: 0 0 0 2px Highlight;
-        box-shadow: 0 0 0 2px Highlight;
-    }
-
-    .video-controls-container .left-side button:active {
-        animation: bg-color-mix 1s calc(-1s * 1) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        -webkit-box-shadow: 0 0 0 2px HighlightText;
-        box-shadow: 0 0 0 2px HighlightText;
-        -webkit-transform: scale(0.96);
-        -ms-transform: scale(0.96);
-        transform: scale(0.96);
-    }
-
-    .buffering-circle {
-        stroke: Highlight;
-        stroke-width: 12px;
-        stroke-linecap: butt;
-    }
-
-    .video-controls-container .right-side button {
-        animation: bg-color-mix 1s 0s cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        box-shadow: inset 0 0 0 2px ButtonText;
-        forced-color-adjust: none;
-    }
-
-    :focus-visible {
-        outline: 4px solid Highlight;
-        forced-color-adjust: none;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .video-controls-container .right-side button:hover {
-        animation: bg-color-mix 1s calc(-1s * 0.02) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        box-shadow: inset 0 0 0 2px Highlight;
-    }
-
-    .video-controls-container .right-side button:active {
-        animation: bg-color-mix 1s calc(-1s * 1) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        box-shadow: inset 0 0 0 2px HighlightText;
-        background: var(--result-color);
-    }
-
-    .video-controls-container .right-side button path {
-        fill: ButtonText;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .video-controls-container .right-side button:hover path {
-        fill: Highlight;
-    }
-
-    .video-controls-container .right-side button:active path {
-        fill: HighlightText;
-    }
-
-    .video-container .caption-button::after,
-    .video-container .pip-button::after,
-    .video-container .gcast-button::after {
-        content: "";
-        width: inherit;
-        height: 4px;
-        background: Highlight;
-        position: absolute;
-        display: block;
-        border-radius: 4px;
-        bottom: 4px;
-        width: 0px;
-        margin-left: 16px;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .video-container.caption .caption-button::after,
-    .video-container.pip-player .pip-button::after,
-    .video-container.casted-session .gcast-button::after {
-        content: "";
-        width: inherit;
-        height: 4px;
-        background: Highlight;
-        position: absolute;
-        display: block;
-        border-radius: 4px;
-        width: 32px;
-        bottom: 4px;
-        margin-left: 0px;
-    }
-
-    .video-container.caption .video-controls-container .right-side button:active.caption-button::after,
-    .video-container.pip-player .video-controls-container .right-side button:active.pip-button::after,
-    .video-container.casted-session .video-controls-container .right-side button:active.gcast-button::after {
-        background: HighlightText;
-    }
-
-    .video-context-menu,
-    .settings-context-menu {
-        background-color: Canvas;
-        color: CanvasText;
-    }
-
-    .video-context-menu svg path,
-    .settings-context-menu svg path {
-        fill: CanvasText;
-    }
-
-    .video-context-menu .item,
-    .settings-context-menu .item {
-        animation: bg-color-mix 1s 0s cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        color: CanvasText;
-        box-shadow: inset 0 0 0 0px transparent;
-        forced-color-adjust: none;
-    }
-
-    .video-context-menu .item:hover,
-    .settings-context-menu .item:hover {
-        animation: bg-color-mix 1s calc(-1s * 0.02) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        color: Highlight;
-        box-shadow: inset 0 0 0 2px Highlight;
-    }
-
-    .video-context-menu .item:hover svg path,
-    .settings-context-menu .item:hover svg path {
-        fill: Highlight;
-    }
-
-    .video-context-menu .item:active,
-    .settings-context-menu .item:active {
-        animation: bg-color-mix 1s calc(-1s * 1) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
-        background: var(--result-color);
-        box-shadow: inset 0 0 0 2px Highlight;
-        color: HighlightText;
-    }
-
-    .video-context-menu .item:active svg path,
-    .settings-context-menu .item:active svg path {
-        fill: HighlightText;
-    }
 }
 
 .volume-container {
@@ -1943,7 +1735,7 @@ screen and (max-height: 600px) {
     width: max-content;
     padding: 10px 14px 2px 14px;
     line-height: 100%;
-    background: var(--context-menu-bg);
+    background: var(--flyout-bg);
     border-radius: 8px;
     -webkit-transform: translateX(-85%) translateY(-150%);
     -ms-transform: translateX(-85%) translateY(-150%);
@@ -1988,7 +1780,7 @@ div.tooltip-right::after {
     width: -moz-max-content;
     width: max-content;
     padding: 6px 14px;
-    background: var(--context-menu-bg);
+    background: var(--flyout-bg);
     border-radius: 8px;
     -webkit-transform: translateX(-75%) translateY(-125%);
     -ms-transform: translateX(-75%) translateY(-125%);
@@ -2853,4 +2645,208 @@ input[type=range]::-ms-tooltip {
     letter-spacing: -0.04em;
     font-weight: 800;
     font-size: 1rem;
+}
+
+@media (-ms-high-contrast: active),
+(forced-colors: active) {
+
+    :root {
+        --text-color: CanvasText;
+        --soft-accent-color: Highlight;
+        --accent-color: Highlight;
+        --bright-accent-color: Highlight;
+        --flyout-bg: Canvas;
+        font-size: 16px;
+    }
+
+    .video-controls-container .left-side button path,
+    .video-controls-container .left-side button rect {
+        fill: ButtonText;
+    }
+
+    .video-controls-container .left-side button:hover path,
+    .video-controls-container .left-side button:hover rect {
+        fill: Highlight;
+    }
+
+    .video-controls-container .left-side button:active path,
+    .video-controls-container .left-side button:active rect {
+        fill: HighlightText;
+    }
+
+    .video-controls-container .left-side button {
+        background-color: ButtonFace;
+        outline: 2px solid ButtonText;
+        forced-color-adjust: none;
+    }
+
+    .video-controls-container .left-side button:focus-visible {
+        outline: 6px solid Highlight;
+    }
+
+    .video-controls-container .left-side button:hover {
+        background-color: ButtonFace;
+        outline: 2px solid Highlight;
+    }
+
+    .video-controls-container .left-side button:active {
+        background: Highlight;
+        -webkit-box-shadow: 0 0 0 2px HighlightText;
+        box-shadow: 0 0 0 2px HighlightText;
+        -webkit-transform: scale(0.96);
+        -ms-transform: scale(0.96);
+        transform: scale(0.96);
+    }
+
+    .buffering-circle {
+        stroke: Highlight;
+        stroke-width: 12px;
+        stroke-linecap: butt;
+    }
+
+    .video-controls-container .right-side button {
+        background: ButtonFace;
+        outline: 2px solid ButtonText;
+        forced-color-adjust: none;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    :focus-visible {
+        outline: 6px solid Highlight !important;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .video-controls-container .right-side button:hover {
+        outline: 2px solid Highlight;
+    }
+
+    .video-controls-container .right-side button:active {
+        outline: 2px solid HighlightText;
+        background: Highlight;
+    }
+
+    .video-controls-container .right-side button path {
+        fill: ButtonText;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .video-controls-container .right-side button:hover path {
+        fill: Highlight;
+    }
+
+    .video-controls-container .right-side button:active path {
+        fill: HighlightText;
+    }
+
+    .video-container .caption-button::after,
+    .video-container .pip-button::after,
+    .video-container .gcast-button::after {
+        content: "";
+        width: inherit;
+        height: 4px;
+        background: Highlight;
+        position: absolute;
+        display: block;
+        border-radius: 4px;
+        bottom: 2px;
+        width: 0px;
+        margin-left: 16px;
+        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .video-container.caption .caption-button::after,
+    .video-container.pip-player .pip-button::after,
+    .video-container.casted-session .gcast-button::after {
+        content: "";
+        width: inherit;
+        height: 4px;
+        background: Highlight;
+        position: absolute;
+        display: block;
+        border-radius: 4px;
+        width: 32px;
+        bottom: 2px;
+        margin-left: 0px;
+    }
+
+    .video-container.caption .video-controls-container .right-side button:active.caption-button::after,
+    .video-container.pip-player .video-controls-container .right-side button:active.pip-button::after,
+    .video-container.casted-session .video-controls-container .right-side button:active.gcast-button::after {
+        background: HighlightText;
+    }
+
+    .video-container .settings-button.pressed  {
+        outline-color: LinkText;
+    }
+
+    .video-container .settings-button.pressed path {
+        fill: LinkText;
+    }
+
+    .video-context-menu,
+    .settings-context-menu {
+        background: Canvas;
+    }
+
+    .video-context-menu svg path,
+    .settings-context-menu svg path {
+        fill: CanvasText;
+    }
+
+    .video-context-menu .item,
+    .settings-context-menu .item {
+        background: Canvas;
+        color: CanvasText;
+        -webkit-transition: background-color 0s cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: background-color 0s cubic-bezier(0.19, 1, 0.22, 1);
+        transition: background-color 0s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .video-context-menu .item:hover,
+    .settings-context-menu .item:hover {
+        color: Highlight;
+        outline: 2px solid Highlight;
+    }
+
+    .video-context-menu .item:hover svg path,
+    .settings-context-menu .item:hover svg path {
+        fill: Highlight;
+    }
+
+    .video-context-menu .item:active,
+    .settings-context-menu .item:active {
+        color: LinkText;
+        outline: 2px solid LinkText;
+    }
+
+    .video-context-menu .item:active svg path,
+    .settings-context-menu .item:active svg path {
+        fill: LinkText;
+    }
+    
+    .timeline-scrubber::after {
+        display: none;
+    }
+
+    .timeline:hover .timeline-scrubber {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .scrubbing .timeline .timeline-scrubber,
+    .scrubbing:hover .timeline .timeline-scrubber {
+        -webkit-transform: translateY(-4px);
+        -ms-transform: translateY(-4px);
+        transform: translateY(-4px);
+        box-sizing: content-box;
+        filter: drop-shadow(0px 4px 0px #00000099) drop-shadow(0px 4px 0px Highlight);
+    }
 }

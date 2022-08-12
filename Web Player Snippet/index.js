@@ -815,7 +815,7 @@ function activity() {
     video.classList.remove("inactive");
     videoControlsContainer.classList.remove("inactive");
     videoContainer.classList.add("hovered");
-    if (videoContainer.classList.contains("hovered")) {
+    if (videoContainer.classList.contains("hovered") && !settingsContextMenu.classList.contains("pressed")) {
         if (video.paused) {
             return;
         } else {
@@ -837,21 +837,25 @@ function toggleFullScreen() {
     if (document.fullscreenElement == null) {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
-            fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
-        } if (video.webkitEnterFullScreen && videoPlayer.getAttribute("data-device") != "iPadOS") {
+        } if (videoPlayer.webkitRequestFullScreen) {
+            videoPlayer.webkitRequestFullScreen();
+        } if (video.webkitEnterFullScreen) {
             video.webkitEnterFullScreen();
         } else {
-            if (videoPlayer.webkitRequestFullScreen) videoPlayer.webkitRequestFullScreen();
             if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
             if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen();
-            fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
         }
+        fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
     } else {
         if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
-            if (document.requestFullscreen) document.exitFullscreen();
-            if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
-            if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-            if (document.msRequestFullscreen) document.msExitFullscreen();
+            if (document.requestFullscreen) {
+                document.exitFullscreen()
+            } if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            } else {
+                if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+                if (document.msRequestFullscreen) document.msExitFullscreen();
+            };
             fullscreenTooltip.dataset.tooltip = "Full screen" + " (f)";
         };
     };
@@ -884,10 +888,12 @@ document.addEventListener("msfullscreenchange", fullScreenToggleChange, false);
 
 video.addEventListener("webkitenterfullscreen", () => {
     videoPlayer.classList.add("full-screen");
+    fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
 });
 
 video.addEventListener("webkitendfullscreen", () => {
     videoPlayer.classList.remove("full-screen");
+    fullscreenTooltip.dataset.tooltip = "Full screen" + " (f)";
     if (!video.paused) video.play();
 });
 
@@ -1205,6 +1211,7 @@ const eventListeners = [
         videoContainer.addEventListener("pointerover", activity);
         videoContainer.addEventListener("pointermove", activity);
         videoContainer.addEventListener("pointerleave", () => {
+            if (settingsContextMenu.classList.contains("pressed")) return;
             videoContainer.classList.remove("hovered");
             video.classList.add("inactive");
         });

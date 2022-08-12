@@ -2712,9 +2712,9 @@ input[type=range]::-ms-tooltip {
     .video-controls-container .right-side button {
         background: ButtonFace;
         outline: 2px solid ButtonText;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
+        -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
+        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
     :focus-visible {
@@ -2726,6 +2726,7 @@ input[type=range]::-ms-tooltip {
 
     .video-controls-container .right-side button:hover {
         outline: 2px solid Highlight;
+        background: HighlightText;
     }
 
     .video-controls-container .right-side button:active {

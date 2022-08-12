@@ -1566,23 +1566,39 @@ screen and (max-height: 600px) {
         fill: CanvasText;
     }
 
+    .video-context-menu .item,
+    .settings-context-menu .item {
+        animation: bg-color-mix 1s 0s cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
+        background: var(--result-color);
+        color: CanvasText;
+        box-shadow: inset 0 0 0 0px transparent;
+        forced-color-adjust: none;
+    }
+
     .video-context-menu .item:hover,
     .settings-context-menu .item:hover {
-        background-color: Highlight;
-        color: HighlightText;
-        box-shadow: 0 0 0 2px Highlight;
-        forced-color-adjust: none;
+        animation: bg-color-mix 1s calc(-1s * 0.02) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
+        background: var(--result-color);
+        color: Highlight;
+        box-shadow: inset 0 0 0 2px Highlight;
     }
 
     .video-context-menu .item:hover svg path,
     .settings-context-menu .item:hover svg path {
-        fill: HighlightText;
+        fill: Highlight;
     }
 
     .video-context-menu .item:active,
     .settings-context-menu .item:active {
-        background-color: Highlight;
-        box-shadow: 0 0 0 2px Highlight;
+        animation: bg-color-mix 1s calc(-1s * 1) cubic-bezier(0.19, 1, 0.22, 1) forwards paused;
+        background: var(--result-color);
+        box-shadow: inset 0 0 0 2px Highlight;
+        color: HighlightText;
+    }
+
+    .video-context-menu .item:active svg path,
+    .settings-context-menu .item:active svg path {
+        fill: HighlightText;
     }
 }
 

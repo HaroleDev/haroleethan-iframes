@@ -703,6 +703,10 @@ button[is="google-cast-button"] {
     width: fit-content;
 }
 
+.duration-container .span {
+    display: inline;
+}
+
 .author-name {
     font-family: "Manrope Variable", "Manrope", sans-serif;
     font-style: normal;
@@ -1321,7 +1325,7 @@ screen and (max-height: 600px) {
     box-shadow: 0 0 0 0px transparent;
 }
 
-.video-context-menu span {
+.video-context-menu .span {
     padding: 1px 0px 1px 8px;
     display: inline-block;
 }
@@ -2147,7 +2151,7 @@ input[type=range]::-ms-tooltip {
     margin-bottom: 8px;
 }
 
-.transcript-panel span {
+.transcript-panel .span {
     font-style: normal;
     font-size: 1rem;
     line-height: 160%;
@@ -2571,7 +2575,7 @@ input[type=range]::-ms-tooltip {
     margin-top: 8px;
 }
 
-.video-information .author-info span {
+.video-information .author-info .span {
     font-variation-settings: "wght" 800;
     font-weight: 800;
     font-size: 1rem;
@@ -2810,6 +2814,7 @@ input[type=range]::-ms-tooltip {
 
     .video-context-menu .item:hover,
     .settings-context-menu .item:hover {
+        background: HighlightText;
         color: Highlight;
         outline: 2px solid Highlight;
     }
@@ -2822,6 +2827,7 @@ input[type=range]::-ms-tooltip {
     .video-context-menu .item:active,
     .settings-context-menu .item:active {
         color: LinkText;
+        background: HighlightText;
         outline: 2px solid LinkText;
     }
 

@@ -2,7 +2,7 @@
     @font-face {
         font-family: "Manrope Variable";
         src: url("./Manrope[wght].woff2") format("woff2 supports variations") url("./Manrope[wght].woff2") format("woff2 variations");
-        font-display: block;
+        font-display: optional;
     }
 }
 
@@ -2604,6 +2604,7 @@ input[type=range]::-ms-tooltip {
 
 .website-header .logo {
     height: 64px;
+    width: auto;
 }
 
 .video-information {

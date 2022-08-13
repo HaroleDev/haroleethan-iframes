@@ -1,7 +1,7 @@
 const videoMetadata = {
-    video_thumbs: "//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
-    video_poster: "//res.cloudinary.com/harole/video/upload/c_fill,h_720,q_auto:eco,w_1280/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    HLS_src: "//res.cloudinary.com/harole/video/upload/sp_auto/v1658759272/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
+    video_thumbs: "//res.cloudinary.com/harole/image/upload/s--3AQUSV56--/q_auto:low/v1659426432/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
+    video_poster: "//res.cloudinary.com/harole/video/upload/s--p6nXm3qO--/c_fill,h_720,q_auto:low,w_1280/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    HLS_src: "//res.cloudinary.com/harole/video/upload/s--w9SNLopB--/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
     HLS_codec: "application/x-mpegURL",
     Fallback_src: "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
     Fallback_codec: "video/mp4",
@@ -11,12 +11,12 @@ const videoMetadata = {
 };
 
 const mediaSessionMetadata = {
-    thumb_512: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_512,h_512/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_256: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_384,h_384/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_256: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_256,h_256/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_192: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_192,h_192/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_128: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_128,h_128/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_96: "//res.cloudinary.com/harole/video/upload/c_fill,q_auto:eco,w_96,h_96/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_512: "//res.cloudinary.com/harole/video/upload/s--Vjfp8q3F--/c_fill,h_512,q_auto:eco,w_512/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_384: "//res.cloudinary.com/harole/video/upload/s--GSclQ4pU--/c_fill,h_384,q_auto:eco,w_384/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_256: "//res.cloudinary.com/harole/video/upload/s--Il1IjHMZ--/c_fill,h_256,q_auto:eco,w_256/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_192: "//res.cloudinary.com/harole/video/upload/s--XGk0fUrZ--/c_fill,h_192,q_auto:eco,w_192/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_128: "//res.cloudinary.com/harole/video/upload/s--G8UlljUd--/c_fill,h_128,q_auto:eco,w_128/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    thumb_96: "//res.cloudinary.com/harole/video/upload/s--d8U6mcP6--/c_fill,h_96,q_auto:eco,w_96/v1658949913/Harole's%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
     type: "image/jpeg",
 };
 
@@ -183,7 +183,6 @@ window.addEventListener("DOMContentLoaded", () => {
     video.querySelector("source").setAttribute("type", videoMetadata.Fallback_codec);
 
     video.load();
-
     video.addEventListener("durationchange", updatetime);
 
     eqContainer.querySelectorAll(".eq-slider").forEach(element => {
@@ -210,58 +209,6 @@ window.addEventListener("DOMContentLoaded", () => {
         volumeTooltipContainer.classList.add("hidden");
     };
 });
-
-/*var initializeCastApi = function () {
-    console.log("initializeCastApi");
-
-    var sessionRequest = new chrome.cast.SessionRequest(
-        chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID);
-    var apiConfig = new chrome.cast.ApiConfig(
-        sessionRequest, sessionListener, receiverListener);
-    chrome.cast.initialize(apiConfig, onInitSuccess, onError);
-};
-
-if (!chrome.cast || !chrome.cast.isAvailable) {
-    setTimeout(initializeCastApi, 1000);
-}
-
-function onInitSuccess() {
-    console.log("onInitSuccess");
-}
-
-function onError(e) {
-    console.log("onError", e);
-}
-
-function sessionListener(e) {
-    console.log("sessionListener", e);
-}
-
-function receiverListener(availability) {
-    console.log("receiverListener", availability);
-
-    if (availability === chrome.cast.ReceiverAvailability.AVAILABLE) {
-        $(".button").removeAttr("disabled").text("Start");
-    }
-}
-
-function onSessionRequestSuccess(session) {
-    console.log("onSessionRequestSuccess", session);
-
-    var mediaInfo = new chrome.cast.media.MediaInfo(
-        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        "video/mp4");
-    var request = new chrome.cast.media.LoadRequest(mediaInfo);
-    session.loadMedia(request, onMediaLoadSuccess, onError);
-}
-
-function onMediaLoadSuccess(e) {
-    console.log("onMediaLoadSuccess", e);
-}
-
-$(".button").click(function () {
-    chrome.cast.requestSession(onSessionRequestSuccess, onError);
-}); */
 
 //Range slider track
 function handleInputChange(e) {
@@ -589,7 +536,7 @@ transcriptDiv.addEventListener("keydown", e => {
 });
 
 function toggleBtn(e) {
-    e.setAttribute("aria-pressed",e.getAttribute("aria-pressed") === "true" ? "false" : "true");
+    e.setAttribute("aria-pressed", e.getAttribute("aria-pressed") === "true" ? "false" : "true");
 };
 
 transcriptPanel.addEventListener("click", e => {
@@ -817,6 +764,16 @@ function spinnerDivider() {
     }, 1000);
 };
 
+
+const requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
 //Activity check
 let timeout = null;
 function activity() {
@@ -829,7 +786,7 @@ function activity() {
             return;
         } else {
             timeout = setTimeout(function () {
-                window.cancelAnimationFrame(reqId);
+                window.cancelAnimationFrame(updatetime);
                 videoContainer.classList.remove("hovered");
                 videoControlsContainer.classList.add("inactive");
                 video.classList.add("inactive");
@@ -1021,31 +978,29 @@ function seekingPreviewPosition(e) {
 };
 
 timelineInner.addEventListener("pointermove", e => {
-    timelineInner.setPointerCapture(e.pointerId);
     seekingPreview.classList.add("hovered");
     videoControls.classList.add("hidden");
     handleTimelineUpdate(e);
+    timelineInner.addEventListener("pointerleave", () => {
+        timelineInner.releasePointerCapture(e.pointerId);
+        seekingPreview.classList.remove("hovered");
+        videoControls.classList.remove("hidden");
+    });
+    timelineInner.addEventListener("pointerdown", e => {
+        timelineInner.setPointerCapture(e.pointerId);
+        if (e.button === 0) toggleScrubbing(e);
+    });
     if (isScrubbing) {
         videoControls.classList.add("hidden");
     };
-});
-
-timelineInner.addEventListener("pointerleave", () => {
-    seekingPreview.classList.remove("hovered");
-    videoControls.classList.remove("hidden");
-});
-
-timelineInner.addEventListener("pointerdown", e => {
-    if (e.button === 0) toggleScrubbing(e);
-});
-
-timelineInner.addEventListener("pointerup", e => {
-    timelineInner.releasePointerCapture(e.pointerId);
-    if (isScrubbing) {
-        toggleScrubbing(e);
-        seekingPreview.classList.remove("hovered");
-        videoControls.classList.remove("hidden");
-    };
+            timelineInner.addEventListener("pointerup", e => {
+            timelineInner.releasePointerCapture(e.pointerId);
+            if (isScrubbing) {
+                toggleScrubbing(e);
+                seekingPreview.classList.remove("hovered");
+                videoControls.classList.remove("hidden");
+            };
+        });
 });
 
 let isScrubbing = false;
@@ -1099,13 +1054,13 @@ function loadedMetadata() {
     video.height = videoMetadata.video_Viewport / (video.videoWidth / video.videoHeight);
 };
 
-async function updatetime() {
+function updatetime() {
     const percent = video.currentTime / video.duration;
     if (!video.paused) {
         timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", percent);
     };
-    reqId = await window.requestAnimationFrame(updatetime);
+    requestAnimFrame(updatetime);
 };
 
 const leading0Formatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
@@ -1227,7 +1182,7 @@ const eventListeners = [
         videoContainer.classList.remove("paused");
     }],
     ["pause", () => {
-        window.cancelAnimationFrame(reqId);
+        window.cancelAnimationFrame(updatetime);
         navigator.mediaSession.playbackState = "paused";
         playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
         video.classList.remove("inactive");
@@ -1262,7 +1217,7 @@ const eventListeners = [
         currentTime.textContent = formatDuration(video.currentTime);
     }],
     ["timeupdate", () => {
-        updatetime();
+        requestAnimationFrame(updatetime);
         currentTime.textContent = formatDuration(video.currentTime);
 
         if (video.currentTime === video.duration) {
@@ -1277,8 +1232,8 @@ const eventListeners = [
         seekingThumbnail.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
         videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
 
-        videoPlayer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
-        videoPlayer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
+        document.body.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+        document.body.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
         loadedMetadata();
     }],
     ["volumechange", () => {

@@ -706,7 +706,8 @@ body.preload * {
 }
 
 .duration-container {
-    clear: both;
+    display: block;
+    height: fit-content;
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
     font-style: normal;
     font-variation-settings: "wght" 500;
@@ -719,10 +720,12 @@ body.preload * {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+    cursor: text;
 }
 
 .duration-container .span {
-    display: inline;
+    display: inline-block;
+    pointer-events: none;
 }
 
 .author-name {

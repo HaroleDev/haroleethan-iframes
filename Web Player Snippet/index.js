@@ -33,6 +33,7 @@ const video = document.querySelector(".video");
 
 const currentTime = document.querySelector(".current-time");
 const totalTime = document.querySelector(".total-time");
+const durationContainer = document.querySelector(".duration-container");
 const timeTooltip = document.querySelector(".seeking-preview__time-tooltip");
 
 const EQswitchToggle = document.querySelector(".eq-switch");
@@ -1081,13 +1082,24 @@ function formatDurationARIA(time) {
     const minutes = Math.floor(time / 60) % 60;
     const hours = Math.floor(time / 3600);
     if (minutes === 0) {
-        return `${seconds} seconds`;
+        if (seconds >= 1) return `${seconds} seconds`;
+        if (seconds < 1) return `${seconds} second`;
     } else if (minutes > 0 && hours === 0) {
-        return `${minutes} minutes ${seconds} seconds`;
+        if (minutes < 1 && seconds < 1) return `${minutes} minute ${seconds} second`;
+        if (minutes < 1 && seconds >= 1) return `${minutes} minute ${seconds} seconds`;
+        if (minutes >= 1 && seconds < 1) return `${minutes} minutes ${seconds} second`;
+        if (minutes >= 1 && seconds >= 1) return `${minutes} minutes ${seconds} seconds`;
     } else if (hours > 0) {
-        return `${hours}hours ${minutes} minutes ${seconds} seconds`;
+        if (hours < 1 && minutes < 1 && seconds < 1) return `${hours}hour ${minutes} minute ${seconds} second`;
+        if (hours < 1 && minutes < 1 && seconds >= 1) return `${hours}hour ${minutes} minute ${seconds} seconds`;
+        if (hours < 1 && minutes >= 1 && seconds < 1) return `${hours}hour ${minutes} minutes ${seconds} second`;
+        if (hours < 1 && minutes >= 1 && seconds > 1) return `${hours}hour ${minutes} minutes ${seconds} seconds`;
+        if (hours >= 1 && minutes < 1 && seconds < 1) return `${hours}hours ${minutes} minute ${seconds} second`;
+        if (hours >= 1 && minutes < 1 && seconds >= 1) return `${hours}hour ${minutes} minute ${seconds} seconds`;
+        if (hours >= 1 && minutes >= 1 && seconds < 1) return `${hours}hours ${minutes} minutes ${seconds} second`;
+        if (hours >= 1 && minutes >= 1 && seconds >= 1) return `${hours}hour ${minutes} minutes ${seconds} seconds`;
     } else {
-        return `0 seconds`;
+        return `0 second`;
     }
 };
 
@@ -1232,7 +1244,7 @@ const eventListeners = [
     ["timeupdate", () => {
         requestAnimationFrame(updatetime);
         currentTime.textContent = formatDuration(video.currentTime);
-
+        durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
         if (video.currentTime === video.duration) {
             videoContainer.classList.add("ended");
         } else {

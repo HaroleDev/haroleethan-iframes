@@ -154,6 +154,7 @@ let ticking = false;
 
 window.addEventListener("DOMContentLoaded", () => {
     videoPoster.src = videoMetadata.video_poster;
+    videoPoster.decoding = "async";
 
     /*if (!Hls.isSupported()) {
         hls.loadSource(videoMetadata.HLS_src);

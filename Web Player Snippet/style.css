@@ -537,10 +537,6 @@ body.preload * {
     fill: var(--soft-accent-color);
 }
 
-button[is="google-cast-button"] {
-    display: inline-block !important;
-}
-
 .video-container.paused .pause-icon,
 .video-container.ended .pause-icon {
     display: none;

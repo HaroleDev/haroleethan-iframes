@@ -993,14 +993,14 @@ timelineInner.addEventListener("pointermove", e => {
     if (isScrubbing) {
         videoControls.classList.add("hidden");
     };
-            timelineInner.addEventListener("pointerup", e => {
-            timelineInner.releasePointerCapture(e.pointerId);
-            if (isScrubbing) {
-                toggleScrubbing(e);
-                seekingPreview.classList.remove("hovered");
-                videoControls.classList.remove("hidden");
-            };
-        });
+    timelineInner.addEventListener("pointerup", e => {
+        timelineInner.releasePointerCapture(e.pointerId);
+        if (isScrubbing) {
+            toggleScrubbing(e);
+            seekingPreview.classList.remove("hovered");
+            videoControls.classList.remove("hidden");
+        };
+    });
 });
 
 let isScrubbing = false;
@@ -1285,12 +1285,10 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
     AirPlayTooltip.classList.add("hidden");
 };
 
-
 if (window.chrome && !window.chrome.cast) {
     window["__onGCastApiAvailable"] = function (isAvailable) {
         if (isAvailable) {
             initializeCastApi();
-            CastTooltip.classList.remove("hidden");
         } else {
             return false;
         }
@@ -1301,6 +1299,7 @@ if (window.chrome && !window.chrome.cast) {
             autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
             receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
             resumeSavedSession: false,
+            androidReceiverCompatible: true,
         });
     };
 
@@ -1339,7 +1338,6 @@ if (window.chrome && !window.chrome.cast) {
     castSession.loadMedia(request)
         .then(function () { console.log("Load succeed"); },
             function (errorCode) { console.log("Error code: " + errorCode) });
-
 
     let sessionId;
 
@@ -1390,6 +1388,20 @@ if (window.chrome && !window.chrome.cast) {
         });
 
     var context = cast.framework.CastContext.getInstance();
+    context.addEventListener(cast.framework,
+        function (e) {
+            switch (e.castState) {
+                case cast.framework.SessionState.NO_DEVICES_AVAILABLE:
+                    CastTooltip.classList.add("hidden");
+                    break;
+                case cast.framework.SessionState.NOT_CONNECTED:
+                    CastTooltip.classList.remove("hidden");
+                    break;
+                case cast.framework.SessionState.CONNECTED:
+                    videoContainer.classList.add("casted-session");
+                    break;
+            };
+        });
     context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
         function (e) {
             switch (e.sessionState) {
@@ -1397,10 +1409,10 @@ if (window.chrome && !window.chrome.cast) {
                 case cast.framework.SessionState.SESSION_RESUMED:
                     break;
                 case cast.framework.SessionState.SESSION_ENDED:
-                    console.log("CastContext: CastSession disconnected");
+                    videoContainer.classList.remove("casted-session");
                     break;
-            }
-        })
+            };
+        });
 
     playerController.addEventListener(cast.framework.RemotePlayerEventType.IS_CONNECTED_CHANGED, function () {
         if (!player.isConnected) {
@@ -1411,5 +1423,5 @@ if (window.chrome && !window.chrome.cast) {
     function stopCasting() {
         var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
         castSession.endSession(true);
-    }
-}
+    };
+};

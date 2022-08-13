@@ -33,7 +33,7 @@ const video = document.querySelector(".video");
 
 const currentTime = document.querySelector(".current-time");
 const totalTime = document.querySelector(".total-time");
-const cuetimeTooltip = document.querySelector(".cuetime-tooltip");
+const timeTooltip = document.querySelector(".seeking-preview__time-tooltip");
 
 const EQswitchToggle = document.querySelector(".eq-switch");
 const rangeEQControl = document.querySelectorAll(".dialog .eq-control input");
@@ -82,16 +82,13 @@ const rightVideoControls = document.querySelector(".right-side");
 const videoInformationOverlay = document.querySelector(".video-information-overlay");
 
 const seekingPreview = document.querySelector(".seeking-preview");
-const seekingThumbnail = document.querySelector(".seeking-thumbnail");
+const seekingThumbnail = document.querySelector(".seeking-preview__thumbnail");
 const videoThumbPreview = document.querySelector(".video-thumb-preview");
 
 const AirPlayTooltip = document.querySelector(".airplay-tooltip");
 const AirPlayButton = document.querySelector(".airplay-button");
 const CastButton = document.querySelector(".gcast-button");
 const CastTooltip = document.querySelector(".gcast-tooltip");
-
-var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
-var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
 
 function init() {
     document.body.classList.remove("preload");
@@ -1031,7 +1028,7 @@ function handleTimelineUpdate(e) {
     seekingPreviewPosition(e)
     let seekTime = percent * video.duration;
     timelineInner.style.setProperty("--preview-position", percent);
-    cuetimeTooltip.textContent = formatDuration(seekTime);
+    timeTooltip.textContent = formatDuration(seekTime);
 
     if (seekTime < 0) seekTime = 0;
 
@@ -1041,7 +1038,7 @@ function handleTimelineUpdate(e) {
         e.preventDefault();
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`;
         timelineInner.style.setProperty("--progress-position", percent);
-        cuetimeTooltip.textContent = formatDuration(seekTime);
+        timeTooltip.textContent = formatDuration(seekTime);
         currentTime.textContent = formatDuration(seekTime);
     };
 };
@@ -1075,6 +1072,21 @@ function formatDuration(time) {
         return `${hours}:${leading0Formatter.format(minutes)}:${leading0Formatter.format(seconds)}`;
     } else {
         return `0:00`;
+    }
+};
+
+function formatDurationARIA(time) {
+    const seconds = Math.floor(time % 60);
+    const minutes = Math.floor(time / 60) % 60;
+    const hours = Math.floor(time / 3600);
+    if (minutes === 0) {
+        return `${seconds} seconds`;
+    } else if (minutes > 0 && hours === 0) {
+        return `${minutes} minutes ${seconds} seconds`;
+    } else if (hours > 0) {
+        return `${hours}hours ${minutes} minutes ${seconds} seconds`;
+    } else {
+        return `0 seconds`;
     }
 };
 

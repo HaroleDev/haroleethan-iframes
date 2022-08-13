@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-cast-api-enabled="true">
 
-<script crossorigin type="text/javascript"
-    src="//polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en"
-    defer></script>
-
 <head>
     <meta charset="utf-8">
     <title>Harole's Videos</title>
@@ -24,10 +20,6 @@
     <meta name="theme-color" content="#02DA9A">
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
-    <script type="text/javascript" src="//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
-        defer></script>
-    <script type="text/javascript" src="index.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
@@ -398,12 +390,12 @@
                             </div>
                             <div class="timeline-container">
                                 <div class="seeking-preview">
-                                    <img class="seeking-thumbnail">
-                                    <div class="cuetime-tooltip">0:00</div>
+                                    <img class="seeking-preview__thumbnail">
+                                    <div class="seeking-preview__time-tooltip">0:00</div>
                                 </div>
                                 <div class="timeline">
                                     <div class="seek-filler"></div>
-                                    <div class="timeline-scrubber"></div>
+                                    <div class="timeline__progressbar"></div>
                                 </div>
                                 <div class="duration-container">
                                     <div class="current-time span">0:00</div>
@@ -415,16 +407,16 @@
                         </div>
                     </div>
                     <div class="video-fit-contain">
-                        <div class="video-backdrop-seeking"></div>
                         <div class="video-fit-content">
                             <div class="aspect-ratio-response">
+                                <div class="video-backdrop-seeking"></div>
                                 <img class="video-thumb-preview" alt="">
                                 <img class="video-poster" alt="">
                             </div>
                             <video controls tabindex="-1" playsinline class="video" preload="metadata"
                                 crossorigin="anonymous" webkit-playsinline="true" x5-playsinline="true"
                                 x5-video-player-type="h5" x5-video-player-fullscreen="true"
-                                x5-video-orientation="landscape|portrait">
+                                x5-video-orientation="landscape|portrait" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E">
                                 <source>
                                 <track id="default-track" label="English" kind="captions" srclang="en"
                                     src="./sample.vtt" default>
@@ -481,17 +473,31 @@
             <p><b>KNOWN BUGS:</b><br>The "Cast to TV" button is nonfunctional.</p>
         </div>
     </div>
-    <script type="text/javascript" async>
-        var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
-        var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
-        var description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
-
+    <script type="text/javascript" defer>
+        var title = document.head.querySelector("meta[property=\"og:title\"]").getAttribute("content");
+        var author = document.head.querySelector("meta[property=\"og:author\"]").getAttribute("content");
+        var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
+    
         document.querySelector(".video-name h1").textContent = title;
         document.querySelector(".video-information h1").textContent = title;
         document.querySelector(".author-name .span").textContent = author;
         document.querySelector(".video-information .author-info .span").textContent = author;
         document.querySelector(".video-information .description p").textContent = description;
-    </script>
-</body>
+        
+        var scripts = [
+            "//www.polyfill.app/api/polyfill?minify&sourcemap&features=es,esnext,requestanimationframe,pointer-event,class-list,queryselector,element,class-list,document,window|force,intl|locale=en",
+            "//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
+        ];
 
+        scripts.forEach(function (scriptUrl) {
+            var scriptTag = document.createElement('script');
+            scriptTag.type = "text/javascript";
+            scriptTag.src = scriptUrl;
+            scriptTag.defer = true;
+            document.body.insertAdjacentElement("afterend", scriptTag);
+        });
+    </script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
+    <script type="text/javascript" src="index.js" defer></script>    
+</body>
 </html>

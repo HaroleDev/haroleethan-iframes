@@ -833,7 +833,7 @@ body.preload * {
     transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.timeline-scrubber {
+.timeline__progressbar {
     content: "";
     position: absolute;
     left: 0;
@@ -860,7 +860,7 @@ body.preload * {
     box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
 }
 
-.timeline-scrubber::after {
+.timeline__progressbar::after {
     content: "";
     display: block;
     position: absolute;
@@ -887,7 +887,7 @@ body.preload * {
     transform: translateY(0px);
 }
 
-.buffering .timeline-scrubber::after {
+.buffering .timeline__progressbar::after {
     opacity: 1;
     -webkit-animation-play-state: running;
     animation-play-state: running;
@@ -961,7 +961,7 @@ body.preload * {
     will-change: left;
 }
 
-.seeking-thumbnail {
+.seeking-preview__thumbnail {
     width: calc(144px * var(--aspect-ratio-size));
     height: 144px;
     background: var(--background);
@@ -1008,9 +1008,6 @@ body.preload * {
     transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
     position: absolute;
     display: block;
-}
-
-.transcript-opened.full-screen .video-poster {
 }
 
 .pip-player .video-poster {
@@ -1064,9 +1061,16 @@ body.preload * {
     backdrop-filter: blur(1vh);
 }
 
+@supports not (filter: blur()) {
+
+    .video-backdrop-seeking {
+        background-color: #000000cc;
+    }
+}
+
 @media screen and (max-width: 1024px),
 screen and (max-height: 600px) {
-    .seeking-thumbnail {
+    .seeking-preview__thumbnail {
         width: calc(108px * var(--aspect-ratio-size));
         height: 108px;
     }
@@ -1103,17 +1107,17 @@ screen and (max-height: 600px) {
     pointer-events: all;
 }
 
-.scrubbing .timeline-container .seeking-thumbnail {
+.scrubbing .timeline-container .seeking-preview__thumbnail {
     -webkit-box-shadow: inset 0 0 0 2px var(--accent-color), 0 0 0 2px var(--accent-color);
     box-shadow: inset 0 0 0 2px var(--accent-color), 0 0 0 2px var(--accent-color);
 }
 
-.scrubbing .timeline-container .seeking-preview.loading .seeking-thumbnail {
+.scrubbing .timeline-container .seeking-preview.loading .seeking-preview__thumbnail {
     -webkit-box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
     box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
 }
 
-.cuetime-tooltip {
+.seeking-preview__time-tooltip {
     display: block;
     padding: 6px 12px;
     text-align: center;
@@ -1136,8 +1140,8 @@ screen and (max-height: 600px) {
     user-select: none;
 }
 
-.video-container.scrubbing .timeline-scrubber,
-.timeline:hover .timeline-scrubber {
+.video-container.scrubbing .timeline__progressbar,
+.timeline:hover .timeline__progressbar {
     display: block;
 }
 
@@ -1153,7 +1157,7 @@ screen and (max-height: 600px) {
     transition-delay: 100ms;
 }
 
-.timeline:hover .timeline-scrubber {
+.timeline:hover .timeline__progressbar {
     border-radius: 32px 32px 8px 8px;
     height: 16px;
     margin-top: -8px;
@@ -1164,8 +1168,8 @@ screen and (max-height: 600px) {
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.scrubbing .timeline .timeline-scrubber,
-.scrubbing:hover .timeline .timeline-scrubber {
+.scrubbing .timeline .timeline__progressbar,
+.scrubbing:hover .timeline .timeline__progressbar {
     border-radius: 12px;
     height: 16px;
     margin-top: 0px;
@@ -1178,8 +1182,8 @@ screen and (max-height: 600px) {
     transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.scrubbing .timeline .timeline-scrubber::after,
-.scrubbing:hover .timeline .timeline-scrubber::after {
+.scrubbing .timeline .timeline__progressbar::after,
+.scrubbing:hover .timeline .timeline__progressbar::after {
     background-image: var(--buffer-scrubber-bright-accent);
 }
 
@@ -1359,7 +1363,7 @@ screen and (max-height: 600px) {
 }
 
 .video-context-menu .span {
-    padding: 1px 0px 1px 8px;
+    padding: 1px 0px 1px 12px;
     display: inline-block;
 }
 
@@ -2208,6 +2212,8 @@ input[type=range]::-ms-tooltip {
     left: 0;
     width: 100%;
     height: 100%;
+    -webkit-transform: scale(100%);
+    transform: scale(100%);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2225,7 +2231,7 @@ input[type=range]::-ms-tooltip {
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.full-screen.video-player {
+.full-screen.video-player-container {
     -webkit-transition: none;
     -o-transition: none;
     transition: none;
@@ -2234,41 +2240,37 @@ input[type=range]::-ms-tooltip {
     box-shadow: none !important;
 }
 
-.video-player:-webkit-full-screen {
-    -webkit-animation: fullscreenPlayer 600ms 1 cubic-bezier(0.19, 1, 0.22, 1);
-    animation: fullscreenPlayer 600ms 1 cubic-bezier(0.19, 1, 0.22, 1);
+.full-screen.video-player {
+    -webkit-animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.video-player:-ms-fullscreen {
-    animation: fullscreenPlayer 600ms 1 cubic-bezier(0.19, 1, 0.22, 1);
+.full-screen.video-player {
+    animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.video-player:fullscreen {
-    -webkit-animation: fullscreenPlayer 600ms 1 cubic-bezier(0.19, 1, 0.22, 1);
-    animation: fullscreenPlayer 600ms 1 cubic-bezier(0.19, 1, 0.22, 1);
+.full-screen.video-player {
+    -webkit-animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @-webkit-keyframes fullscreenPlayer {
     0% {
-        -webkit-transform: scale(105%);
-        transform: scale(105%);
+        filter: blur(1vh);
     }
 
     100% {
-        -webkit-transform: scale(100%);
-        transform: scale(100%);
+        filter: blur(0vh);
     }
 }
 
 @keyframes fullscreenPlayer {
     0% {
-        -webkit-transform: scale(105%);
-        transform: scale(105%);
+        filter: blur(1vh);
     }
 
     100% {
-        -webkit-transform: scale(100%);
-        transform: scale(100%);
+        filter: blur(0vh);
     }
 }
 
@@ -2934,21 +2936,21 @@ input[type=range]::-ms-tooltip {
         fill: LinkText;
     }
 
-    .timeline-scrubber {
+    .timeline__progressbar {
         outline: 2px solid Canvas;
     }
 
-    .timeline-scrubber::after {
+    .timeline__progressbar::after {
         display: none;
     }
 
-    .timeline:hover .timeline-scrubber {
+    .timeline:hover .timeline__progressbar {
         -webkit-box-shadow: none;
         box-shadow: none;
     }
 
-    .scrubbing .timeline .timeline-scrubber,
-    .scrubbing:hover .timeline .timeline-scrubber {
+    .scrubbing .timeline .timeline__progressbar,
+    .scrubbing:hover .timeline .timeline__progressbar {
         -webkit-transform: translateY(-4px);
         -ms-transform: translateY(-4px);
         transform: translateY(-4px);
@@ -2998,13 +3000,13 @@ input[type=range]::-ms-tooltip {
         outline: 2px solid CanvasText;
     }
 
-    .cuetime-tooltip {
+    .seeking-preview__time-tooltip {
         background: Canvas;
         color: var(--text-color);
         outline: 2px solid CanvasText;
     }
 
-    .seeking-thumbnail {
+    .seeking-preview__thumbnail {
         background: Highlight;
         outline-width: 2px;
         outline-style: solid;
@@ -3014,7 +3016,7 @@ input[type=range]::-ms-tooltip {
         transition: outline-width 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
     }
 
-    .scrubbing .timeline-container .seeking-thumbnail {
+    .scrubbing .timeline-container .seeking-preview__thumbnail {
         outline-width: 4px;
         outline-style: solid;
         outline-color: Highlight;
@@ -3211,5 +3213,16 @@ input[type=range]::-ms-tooltip {
         outline-width: 4px;
         background-color: HighlightText;
         color: LinkText !important;
+    }
+
+    .video-backdrop-seeking {
+        background-color: CanvasText;
+    }
+
+    .video-container.scrubbing .video-backdrop-seeking,
+    .video-container.buffering-scrubbing .video-backdrop-seeking {
+        -webkit-backdrop-filter: blur(1vh);
+        backdrop-filter: blur(1vh);
+        opacity: 0.8 !important;
     }
 }

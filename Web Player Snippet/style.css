@@ -3173,13 +3173,17 @@ input[type=range]::-ms-tooltip {
     .cue-container:hover {
         background-color: HighlightText;
         outline-width: 2px;
-        outline-color: LinkText;
+        outline-color: Highlight;
     }
 
     .cue-container:active {
         background-color: HighlightText;
         outline-width: 2px;
-        outline-color: Highlight;
+        outline-color: LinkText;
+    }
+
+    .cue-container:active .cues {
+        color: LinkText !important;
     }
 
     .cue-container.current {

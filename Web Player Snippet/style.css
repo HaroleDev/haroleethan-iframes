@@ -2892,7 +2892,7 @@ input[type=range]::-ms-tooltip {
 
     .video-context-menu .item,
     .settings-context-menu .item {
-        background: Canvas;
+        background: transparent;
         color: CanvasText;
         -webkit-transition: all 0s;
         -o-transition: all 0s;

@@ -2768,15 +2768,8 @@ input[type=range]::-ms-tooltip {
         font-size: 16px;
     }
 
-    .preload .video-player {
-        background-color: Canvas;
-    }
-
     .video-player {
-        background-color: Highlight;
-        -webkit-transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-        -o-transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1) !important;
-        transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+        background-color: Canvas;
     }
 
     .video-controls-container .left-side button path,

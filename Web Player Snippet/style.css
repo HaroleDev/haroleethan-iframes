@@ -1411,7 +1411,8 @@ screen and (max-height: 600px) {
     width: 300px;
     z-index: 5;
     border-radius: 8px;
-    right: 48px;
+    right: 0;
+    margin: 40px;
     bottom: 128px;
     margin-bottom: 12px;
     opacity: 0;

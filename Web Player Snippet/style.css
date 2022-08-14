@@ -38,6 +38,8 @@
     --page-background: #E7FEF7;
     --flyout-bg: #082b21f5;
     --link-and-focus-color: #4B99E7;
+
+    accent-color: var(--accent-color);
 }
 
 :focus {
@@ -708,6 +710,8 @@ body.preload * {
 
 .duration-container {
     display: block;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
     font-style: normal;
@@ -1638,6 +1642,12 @@ screen and (max-height: 600px) {
     -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    will-change: box-shadow -webkit-box-shadow;
 }
 
 .dialog button.close-dialog:hover {
@@ -1782,16 +1792,13 @@ screen and (max-height: 600px) {
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
-    height: -webkit-max-content;
-    height: -moz-max-content;
-    height: max-content;
     padding: 6px 14px;
     line-height: 100%;
     background: var(--flyout-bg);
     border-radius: 8px;
-    -webkit-transform: translateX(-85%) translateY(-150%);
-    -ms-transform: translateX(-85%) translateY(-150%);
-    transform: translateX(-85%) translateY(-150%);
+    -webkit-transform: translateX(-80%) translateY(-150%);
+    -ms-transform: translateX(-80%) translateY(-150%);
+    transform: translateX(-80%) translateY(-150%);
     opacity: 0;
     -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
     -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -1801,9 +1808,9 @@ screen and (max-height: 600px) {
 }
 
 .paused .tooltip-left::after {
-    -webkit-transform: translateX(-100%) translateY(-150%);
-    -ms-transform: translateX(-100%) translateY(-150%);
-    transform: translateX(-100%) translateY(-150%);
+    -webkit-transform: translateX(-95%) translateY(-150%);
+    -ms-transform: translateX(-95%) translateY(-150%);
+    transform: translateX(-95%) translateY(-150%);
 }
 
 .tooltip-left:hover::after {
@@ -1821,10 +1828,13 @@ screen and (max-height: 600px) {
     font-variation-settings: "wght" 500;
     font-weight: 500;
     font-size: 1rem;
-    top: 0.75rem;
+    top: 1rem;
+    line-height: 160%;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
+    -webkit-font-variant-ligatures: none;
+    font-variant-ligatures: none;
 }
 
 div.tooltip-right::after {
@@ -2758,6 +2768,17 @@ input[type=range]::-ms-tooltip {
         font-size: 16px;
     }
 
+    .preload .video-player {
+        background-color: Canvas;
+    }
+
+    .video-player {
+        background-color: Highlight;
+        -webkit-transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+        -o-transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+        transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+    }
+
     .video-controls-container .left-side button path,
     .video-controls-container .left-side button rect {
         fill: ButtonText;
@@ -3234,7 +3255,7 @@ input[type=range]::-ms-tooltip {
         bottom: 0;
         left: 0;
         right: 0;
-        top: -8px;
+        top: -4px;
         z-index: -1;
         background-color: Canvas;
         pointer-events: none;
@@ -3246,5 +3267,7 @@ input[type=range]::-ms-tooltip {
         background-color: Canvas;
         padding: 12px 12px 10px 12px;
         border-radius: 16px;
+        pointer-events: none;
+        outline: 2px solid CanvasText;
     }
 }

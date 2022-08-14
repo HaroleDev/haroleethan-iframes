@@ -3232,13 +3232,13 @@ input[type=range]::-ms-tooltip {
     }
 
     .video-backdrop-seeking {
-        background-color: CanvasText;
+        background-color: transparent;
     }
 
     .video-container.scrubbing .video-backdrop-seeking,
     .video-container.buffering-scrubbing .video-backdrop-seeking {
-        -webkit-backdrop-filter: blur(1vh);
-        backdrop-filter: blur(1vh);
+        -webkit-backdrop-filter: blur(1vh) brightness(60%);
+        backdrop-filter: blur(1vh) brightness(60%);
         opacity: 0.8 !important;
     }
 

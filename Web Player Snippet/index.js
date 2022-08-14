@@ -232,6 +232,7 @@ videoContainer.addEventListener("contextmenu", e => {
         settingsButton.classList.remove("pressed");
         settingsContextMenu.classList.remove("pressed");
         settingsTooltipContainer.classList.add("tooltip-right");
+        seekingPreview.classList.remove("hidden");
         closedDialog();
     };
 
@@ -272,6 +273,7 @@ function closeSettingsMenu(e) {
         settingsButton.classList.remove("pressed");
         settingsContextMenu.classList.remove("pressed");
         settingsTooltipContainer.classList.add("tooltip-right");
+        seekingPreview.classList.remove("hidden");
         closedDialog();
     };
 };
@@ -283,14 +285,8 @@ document.addEventListener("click", e => {
         settingsButton.classList.remove("pressed");
         settingsContextMenu.classList.remove("pressed");
         settingsTooltipContainer.classList.add("tooltip-right");
+        seekingPreview.classList.remove("hidden");
     };
-});
-
-Item.addEventListener("click", () => {
-    showContextMenu(false);
-    settingsButton.classList.remove("pressed");
-    settingsContextMenu.classList.remove("pressed");
-    settingsTooltipContainer.classList.add("tooltip-right");
 });
 
 downloadItem.addEventListener("click", () => {
@@ -304,6 +300,11 @@ settingsButton.addEventListener("click", () => {
     settingsButton.classList.toggle("pressed");
     settingsContextMenu.classList.toggle("pressed");
     settingsTooltipContainer.classList.toggle("tooltip-right");
+    if (settingsButton.classList.contains("pressed") && settingsContextMenu.classList.contains("pressed")) {
+        seekingPreview.classList.add("hidden");
+    } else {
+        seekingPreview.classList.remove("hidden");
+    }
 });
 
 //AudioContext

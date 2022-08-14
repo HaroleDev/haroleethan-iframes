@@ -3237,9 +3237,9 @@ input[type=range]::-ms-tooltip {
 
     .video-container.scrubbing .video-backdrop-seeking,
     .video-container.buffering-scrubbing .video-backdrop-seeking {
-        -webkit-backdrop-filter: blur(1vh) brightness(60%);
-        backdrop-filter: blur(1vh) brightness(60%);
-        opacity: 0.8 !important;
+        -webkit-backdrop-filter: brightness(30%);
+        backdrop-filter: brightness(30%);
+        opacity: 1 !important;
     }
 
     .video-controls-container::after {

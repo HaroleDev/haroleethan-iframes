@@ -348,7 +348,8 @@ body.preload * {
     background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00518832) 6.67%, rgba(0, 0, 0, 0.021306) 13.33%, rgba(0, 0, 0, 0.0489959) 20%, rgba(0, 0, 0, 0.0884468) 26.67%, rgba(0, 0, 0, 0.139065) 33.33%, rgba(0, 0, 0, 0.19913) 40%, rgba(0, 0, 0, 0.265615) 46.67%, rgba(0, 0, 0, 0.334385) 53.33%, rgba(0, 0, 0, 0.40087) 60%, rgba(0, 0, 0, 0.460935) 66.67%, rgba(0, 0, 0, 0.511553) 73.33%, rgba(0, 0, 0, 0.551004) 80%, rgba(0, 0, 0, 0.578694) 86.67%, rgba(0, 0, 0, 0.594812) 93.33%, rgba(0, 0, 0, 0.6) 100%);
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(6.67%, rgba(0, 0, 0, 0.00518832)), color-stop(13.33%, rgba(0, 0, 0, 0.021306)), color-stop(20%, rgba(0, 0, 0, 0.0489959)), color-stop(26.67%, rgba(0, 0, 0, 0.0884468)), color-stop(33.33%, rgba(0, 0, 0, 0.139065)), color-stop(40%, rgba(0, 0, 0, 0.19913)), color-stop(46.67%, rgba(0, 0, 0, 0.265615)), color-stop(53.33%, rgba(0, 0, 0, 0.334385)), color-stop(60%, rgba(0, 0, 0, 0.40087)), color-stop(66.67%, rgba(0, 0, 0, 0.460935)), color-stop(73.33%, rgba(0, 0, 0, 0.511553)), color-stop(80%, rgba(0, 0, 0, 0.551004)), color-stop(86.67%, rgba(0, 0, 0, 0.578694)), color-stop(93.33%, rgba(0, 0, 0, 0.594812)), to(rgba(0, 0, 0, 0.6)));
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00518832) 6.67%, rgba(0, 0, 0, 0.021306) 13.33%, rgba(0, 0, 0, 0.0489959) 20%, rgba(0, 0, 0, 0.0884468) 26.67%, rgba(0, 0, 0, 0.139065) 33.33%, rgba(0, 0, 0, 0.19913) 40%, rgba(0, 0, 0, 0.265615) 46.67%, rgba(0, 0, 0, 0.334385) 53.33%, rgba(0, 0, 0, 0.40087) 60%, rgba(0, 0, 0, 0.460935) 66.67%, rgba(0, 0, 0, 0.511553) 73.33%, rgba(0, 0, 0, 0.551004) 80%, rgba(0, 0, 0, 0.578694) 86.67%, rgba(0, 0, 0, 0.594812) 93.33%, rgba(0, 0, 0, 0.6) 100%);
-    width: 100%;
+    left: 0;
+    right: 0;
     height: 512px;
     z-index: -1;
     pointer-events: none;
@@ -2237,7 +2238,7 @@ input[type=range]::-ms-tooltip {
     transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.full-screen.video-player-container {
+.full-screen .video-player-container {
     -webkit-transition: none;
     -o-transition: none;
     transition: none;
@@ -2247,18 +2248,8 @@ input[type=range]::-ms-tooltip {
 }
 
 .full-screen.video-player {
-    -webkit-animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.full-screen.video-player {
-    -webkit-animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.full-screen.video-player {
-    -webkit-animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    animation: fullscreenPlayer 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-animation: fullscreenPlayer 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    animation: fullscreenPlayer 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @-webkit-keyframes fullscreenPlayer {
@@ -3235,5 +3226,19 @@ input[type=range]::-ms-tooltip {
         -webkit-backdrop-filter: blur(1vh);
         backdrop-filter: blur(1vh);
         opacity: 0.8 !important;
+    }
+
+    .video-controls-container::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: -1;
+        background-color: Canvas;
+        pointer-events: none;
+        opacity: 0.6;
+        border-top: 2px solid CanvasText;
     }
 }

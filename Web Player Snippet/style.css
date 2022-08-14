@@ -3234,11 +3234,17 @@ input[type=range]::-ms-tooltip {
         bottom: 0;
         left: 0;
         right: 0;
-        top: 0;
+        top: -8px;
         z-index: -1;
         background-color: Canvas;
         pointer-events: none;
         opacity: 0.7;
         border-top: 2px solid CanvasText;
+    }
+
+    .seeking-preview {
+        background-color: Canvas;
+        padding: 12px 12px 10px 12px;
+        border-radius: 16px;
     }
 }

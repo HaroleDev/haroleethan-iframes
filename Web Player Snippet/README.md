@@ -1,6 +1,6 @@
 # Playful Video
 A HTML5-based video player created by myself with some features you wouldn't normally see online.
-## Attributes
+## Attribut
 #### This folder of this repo includes modified/borrowed code from the following source:
 [YouTube Video Player Clone](https://github.com/WebDevSimplified/youtube-video-player-clone)
 
@@ -9,8 +9,6 @@ A HTML5-based video player created by myself with some features you wouldn't nor
 [Custom Context Menu](https://codepen.io/dcode-software/pen/dgpNKE)
 
 [Equalizer](https://codepen.io/rajwosa/pen/qBBXexE)
-
-[Web Audio Peak Meters](https://esonderegger.github.io/web-audio-peak-meter)
 
 [A player with a clickable transcript](http://masf-html5.blogspot.com/2016/04/html5-player-with-clickable-transcript.html)
 

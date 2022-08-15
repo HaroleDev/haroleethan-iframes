@@ -1004,26 +1004,29 @@ function formatDurationARIA(time) {
     const seconds = Math.floor(time % 60);
     const minutes = Math.floor(time / 60) % 60;
     const hours = Math.floor(time / 3600);
+
+    let secondsARIA = 0;
+    if (seconds < 1) secondsARIA = `Less than a second`;
+    if (seconds === 1) secondsARIA = `${seconds} second`;
+    if (seconds > 1) secondsARIA = `${seconds} seconds`;
+
+    let minutesARIA = 0;
+    if (minutes <= 1) minutesARIA = `${minutes} minute`;
+    if (minutes > 1) minutesARIA = `${minutes} minutes`;
+
+    let hoursARIA = 0;
+    if (hours <= 1) hoursARIA = `${hours} hour`;
+    if (hours > 1) hoursARIA = `${hours} hours`;
+
     if (minutes === 0) {
-        if (seconds >= 1) return `${seconds} seconds`;
-        if (seconds < 1) return `${seconds} second`;
-    } else if (minutes > 0 && hours === 0) {
-        if (minutes < 1 && seconds < 1) return `${minutes} minute ${seconds} second`;
-        if (minutes < 1 && seconds >= 1) return `${minutes} minute ${seconds} seconds`;
-        if (minutes >= 1 && seconds < 1) return `${minutes} minutes ${seconds} second`;
-        if (minutes >= 1 && seconds >= 1) return `${minutes} minutes ${seconds} seconds`;
+        return `${secondsARIA}`;
+    } else if (minutes > 0) {
+        return `${minutesARIA} ${secondsARIA}`;
     } else if (hours > 0) {
-        if (hours < 1 && minutes < 1 && seconds < 1) return `${hours}hour ${minutes} minute ${seconds} second`;
-        if (hours < 1 && minutes < 1 && seconds >= 1) return `${hours}hour ${minutes} minute ${seconds} seconds`;
-        if (hours < 1 && minutes >= 1 && seconds < 1) return `${hours}hour ${minutes} minutes ${seconds} second`;
-        if (hours < 1 && minutes >= 1 && seconds > 1) return `${hours}hour ${minutes} minutes ${seconds} seconds`;
-        if (hours >= 1 && minutes < 1 && seconds < 1) return `${hours}hours ${minutes} minute ${seconds} second`;
-        if (hours >= 1 && minutes < 1 && seconds >= 1) return `${hours}hours ${minutes} minute ${seconds} seconds`;
-        if (hours >= 1 && minutes >= 1 && seconds < 1) return `${hours}hours ${minutes} minutes ${seconds} second`;
-        if (hours >= 1 && minutes >= 1 && seconds >= 1) return `${hours}hours ${minutes} minutes ${seconds} seconds`;
+        return `${hoursARIA} ${minutesARIA} ${secondsARIA}`;
     } else {
-        return `0 second`;
-    }
+        return `${secondsARIA}`;
+    };
 };
 
 //Playback and Media Session
@@ -1396,6 +1399,7 @@ const eventListeners = [
         video.textTracks[0].mode = "hidden";
         seekingThumbnail.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
         videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
+        durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
 
         videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
         videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);

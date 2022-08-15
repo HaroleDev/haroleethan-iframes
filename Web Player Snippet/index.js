@@ -703,9 +703,9 @@ function toggleFullScreen() {
         }
         fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
     } else {
-        if (document.mozFullScreenElement || 
-            document.webkitIsFullScreen || 
-            document.msRequestFullscreen || 
+        if (document.mozFullScreenElement ||
+            document.webkitIsFullScreen ||
+            document.msRequestFullscreen ||
             document.requestFullscreen) {
             if (document.requestFullscreen) {
                 document.exitFullscreen()
@@ -773,17 +773,26 @@ pipPlayerButton.addEventListener("click", togglePIPPlayerMode);
 
 //Volume control
 let isVolumeScrubbing = false;
-volumeSliderContainer.addEventListener("pointerdown", e => {
-    volumeSliderContainer.setPointerCapture(e.pointerId);
-    if (e.button === 0)
-        volumeSliderContainer.addEventListener("pointermove", e => {
+volumeSliderContainer.addEventListener("pointermove", e => {
+    handleVolumeUpdate(e);
+    volumeSliderContainer.addEventListener("pointerleave", () => {
+        volumeSliderContainer.releasePointerCapture(e.pointerId);
+    });
+    volumeSliderContainer.addEventListener("pointerdown", e => {
+        volumeSliderContainer.setPointerCapture(e.pointerId);
+        if (e.button === 0) volumeUpdate(e);
+    });
+    if (isVolumeScrubbing) {
+        lockScroll();
+        volumeUpdate(e);
+    };
+    volumeSliderContainer.addEventListener("pointerup", e => {
+        volumeSliderContainer.releasePointerCapture(e.pointerId);
+        if (isVolumeScrubbing) {
+            volumeSliderContainer.releasePointerCapture(e.pointerId);
             volumeUpdate(e);
-            handleVolumeUpdate(e);
-            volumeSliderContainer.addEventListener("pointerup", e => {
-                volumeSliderContainer.releasePointerCapture(e.pointerId);
-                volumeUpdate(e);
-            });
-        });
+        };
+    });
 });
 
 function volumeUpdate(e) {

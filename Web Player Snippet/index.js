@@ -96,12 +96,12 @@ const CastTooltip = document.querySelector(".gcast-tooltip");
 function init() {
     document.body.classList.remove("preload");
     if (video.hasAttribute("controls")) {
-        videoControlsContainer.classList.remove("hidden");
-        videoInformationOverlay.classList.remove("hidden");
+        videoControlsContainer.removeAttribute("hidden");
+        videoInformationOverlay.removeAttribute("hidden");
         video.removeAttribute("controls");
     } else {
-        videoControlsContainer.classList.add("hidden");
-        videoInformationOverlay.classList.add("hidden");
+        videoControlsContainer.setAttribute("hidden", "");
+        videoInformationOverlay.setAttribute("hidden", "");
         video.removeAttribute("controls");
     };
 }
@@ -171,11 +171,11 @@ window.addEventListener("DOMContentLoaded", () => {
     //Disable features for mobile users
     let isMobile = /Mobi/.test(window.navigator.userAgent);
     if (isMobile) {
-        volumeTooltipContainer.classList.add("hidden");
+        volumeTooltipContainer.setAttribute("hidden", "");
     };
     if (navigator.userAgent.match(/Mac/) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2) {
         videoPlayer.dataset.device = "iPadOS";
-        volumeTooltipContainer.classList.add("hidden");
+        volumeTooltipContainer.setAttribute("hidden", "");
     };
 });
 
@@ -244,7 +244,7 @@ videoContainer.addEventListener("contextmenu", e => {
         settingsButton.classList.remove("pressed");
         settingsContextMenu.classList.remove("pressed");
         settingsTooltipContainer.classList.add("tooltip-right");
-        seekingPreview.classList.remove("hidden");
+        seekingPreview.removeAttribute("hidden");
         closedDialog();
     };
 
@@ -285,19 +285,18 @@ function closeSettingsMenu(e) {
         settingsButton.classList.remove("pressed");
         settingsContextMenu.classList.remove("pressed");
         settingsTooltipContainer.classList.add("tooltip-right");
-        seekingPreview.classList.remove("hidden");
+        seekingPreview.removeAttribute("hidden");
         closedDialog();
     };
 };
 
 document.addEventListener("click", e => {
-    volumeContainer.classList.remove("scrubbing");
     showContextMenu(false);
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove("pressed");
         settingsContextMenu.classList.remove("pressed");
         settingsTooltipContainer.classList.add("tooltip-right");
-        seekingPreview.classList.remove("hidden");
+        seekingPreview.removeAttribute("hidden");
     };
 });
 
@@ -313,9 +312,9 @@ settingsButton.addEventListener("click", () => {
     settingsContextMenu.classList.toggle("pressed");
     settingsTooltipContainer.classList.toggle("tooltip-right");
     if (settingsButton.classList.contains("pressed") && settingsContextMenu.classList.contains("pressed")) {
-        seekingPreview.classList.add("hidden");
+        seekingPreview.setAttribute("hidden", "");
     } else {
-        seekingPreview.classList.remove("hidden");
+        seekingPreview.removeAttribute("hidden");
     }
 });
 
@@ -552,7 +551,6 @@ function toggleBtn(e) {
 };
 
 transcriptPanel.addEventListener("click", e => {
-    volumeContainer.classList.remove("scrubbing");
     showContextMenu(show = false);
     if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
         settingsButton.classList.remove("pressed");
@@ -633,7 +631,7 @@ function spinnerDivider() {
     const spinners = ["/", "–", "\\", "|"];
     let index = 0;
     var interval = setInterval(() => {
-        if (videoContainer.classList.contains("paused") && video.paused) clearInterval(interval);
+        if (video.paused) clearInterval(interval);
         let line = spinners[index];
         if (line == undefined) {
             index = 0;
@@ -643,7 +641,6 @@ function spinnerDivider() {
         document.querySelector(".divider-time").textContent = `${line}`;
     }, 1000);
 };
-
 
 const requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -706,7 +703,10 @@ function toggleFullScreen() {
         }
         fullscreenTooltip.dataset.tooltip = "Exit full screen" + " (f)";
     } else {
-        if (document.mozFullScreenElement || document.webkitIsFullScreen || document.msRequestFullscreen || document.requestFullscreen) {
+        if (document.mozFullScreenElement || 
+            document.webkitIsFullScreen || 
+            document.msRequestFullscreen || 
+            document.requestFullscreen) {
             if (document.requestFullscreen) {
                 document.exitFullscreen()
             } if (document.webkitCancelFullScreen) {
@@ -760,8 +760,6 @@ function togglePIPClass() {
     if (videoContainer.classList.contains("pip-player")) {
         videoContainer.classList.remove("pip-player");
         fullscreenTooltip.dataset.tooltip = "Full screen" + " (f)";
-        if (!video.paused)
-            video.play();
     } else {
         videoContainer.classList.add("pip-player");
         fullscreenTooltip.dataset.tooltip = "Full screen is unavailable";
@@ -824,10 +822,10 @@ function toggleVolume() {
 };
 
 //Timeline
-function clamp(input = 0, min = 0, max = 255) {
-    return Math.min(Math.max(input, min), max);
-};
 function seekingPreviewPosition(e) {
+    /*function clamp(input = 0, min = 0, max = 255) {
+        return Math.min(Math.max(input, min), max);
+    };*/
     /*var rect = e.target.getBoundingClientRect();
     var eventX = e.clientX - rect.left;
     seekingPreview.style.setProperty("--thumbnail-seek-position", eventX < seekingPreview.clientWidth ? seekingPreview.offsetLeft + "px" : eventX + seekingPreview.offsetLeft > videoContainer.clientWidth ? seekingPreview.offsetLeft + "px" : e.x + "px");*/
@@ -889,22 +887,20 @@ function lockScroll() {
 
 timelineInner.addEventListener("pointermove", e => {
     seekingPreview.classList.add("hovered");
-    videoControls.classList.add("hidden");
+    videoControls.setAttribute("hidden", "");
     handleTimelineUpdate(e);
     timelineInner.addEventListener("pointerleave", () => {
         timelineInner.releasePointerCapture(e.pointerId);
         seekingPreview.classList.remove("hovered");
-        videoControls.classList.remove("hidden");
+        videoControls.removeAttribute("hidden");
     });
     timelineInner.addEventListener("pointerdown", e => {
         timelineInner.setPointerCapture(e.pointerId);
-        if (e.button === 0) {
-            toggleScrubbing(e);
-        };
+        if (e.button === 0) toggleScrubbing(e);
     });
     if (isScrubbing) {
         lockScroll();
-        videoControls.classList.add("hidden");
+        videoControls.setAttribute("hidden", "");
     };
     timelineInner.addEventListener("pointerup", e => {
         timelineInner.releasePointerCapture(e.pointerId);
@@ -912,7 +908,8 @@ timelineInner.addEventListener("pointermove", e => {
             toggleScrubbing(e);
             unlockScroll();
             seekingPreview.classList.remove("hovered");
-            videoControls.classList.remove("hidden");
+            videoControls.removeAttribute("hidden");
+            videoContainer.classList.add("buffering-scrubbing");
         };
     });
 });
@@ -1106,11 +1103,11 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
         switch (e.availability) {
             case "available":
                 video.setAttribute("x-webkit-airplay", "allow");
-                AirPlayTooltip.classList.remove("hidden");
+                AirPlayTooltip.removeAttribute("hidden");
                 break;
 
             default:
-                AirPlayTooltip.classList.add("hidden");
+                AirPlayTooltip.setAttribute("hidden", "");
                 break;
         };
 
@@ -1120,7 +1117,7 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
         });
     });
 } else {
-    AirPlayTooltip.classList.add("hidden");
+    AirPlayTooltip.setAttribute("hidden", "");
 };
 
 if (window.chrome && !window.chrome.cast && video.readyState > 0) {
@@ -1230,10 +1227,10 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
         function (e) {
             switch (e.castState) {
                 case cast.framework.SessionState.NO_DEVICES_AVAILABLE:
-                    CastTooltip.classList.add("hidden");
+                    CastTooltip.setAttribute("hidden", "");
                     break;
                 case cast.framework.SessionState.NOT_CONNECTED:
-                    CastTooltip.classList.remove("hidden");
+                    CastTooltip.removeAttribute("hidden");
                     break;
                 case cast.framework.SessionState.CONNECTED:
                     videoContainer.classList.add("casted-session");
@@ -1281,116 +1278,43 @@ videoPlayer.addEventListener("keydown", e => {
         e.getModifierState("Meta") > 1) {
         return;
     } else {
+        videoContainer.classList.add("hovered");
+        activity();
         switch (e.key.toLowerCase()) {
             case "":
                 if (tagName === "button") break;
-            case "0":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0);
-                break;
-            case "1":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.1);
-                break;
-            case "2":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.2);
-                break;
-            case "3":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.3);
-                break;
-            case "4":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.4);
-                break;
-            case "5":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.5);
-                break;
-            case "6":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.6);
-                break;
-            case "7":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.7);
-                break;
-            case "8":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.8);
-                break;
-            case "9":
-                videoContainer.classList.add("hovered");
-                activity();
-                skipPercent(0.9);
+            case "0": case "1": case "2": case "3": case "4": case "5": case "6": case "7": case "8": case "9":
+                skipPercent(e.key / 10);
                 break;
             case "k": case " ":
                 e.preventDefault();
-                videoContainer.classList.add("hovered");
-                activity();
                 togglePlay();
                 break;
             case "f":
-                videoContainer.classList.add("hovered");
                 if (fullscreenButton.classList.contains("unsupported")) break;
-                activity();
                 toggleFullScreen();
                 break;
             case "c":
-                videoContainer.classList.add("hovered");
-                activity();
                 toggleCaptions();
                 break;
             case "i":
-                videoContainer.classList.add("hovered");
                 if (pipPlayerButton.classList.contains("unsupported")) break;
-                activity();
                 togglePIPPlayerMode();
                 break;
             case "m":
-                videoContainer.classList.add("hovered");
-                activity();
                 toggleVolume();
                 break;
-            case "arrowleft":
-                videoContainer.classList.add("hovered");
-                activity();
-                skip(-5);
+            case "arrowleft": case "arrowright":
+                if (e.key.toLowerCase() === "arrowleft") skip(-5);
+                if (e.key.toLowerCase() === "arrowright") skip(5);
                 break;
-            case "j":
-                videoContainer.classList.add("hovered");
-                activity();
-                skip(-10);
+            case "j": case "l":
+                if (e.key.toLowerCase() === "j") skip(-10);
+                if (e.key.toLowerCase() === "l") skip(10);
                 break;
-            case "arrowright":
-                videoContainer.classList.add("hovered");
-                activity();
-                skip(5);
-                break;
-            case "l":
-                videoContainer.classList.add("hovered");
-                activity();
-                skip(10);
-                break;
-            case ",":
-                videoContainer.classList.add("hovered");
-                activity();
-                frameSeeking(`-${videoMetadata.video_FPS}`);
-                break;
-            case ".":
-                videoContainer.classList.add("hovered");
-                activity();
-                frameSeeking(videoMetadata.video_FPS);
+            case ",": case ".":
+                if (e.key === ",") frameSeeking(`-${videoMetadata.video_FPS}`);
+                if (e.key === ".") frameSeeking(videoMetadata.video_FPS);
                 break;
         };
     };
@@ -1404,8 +1328,7 @@ const eventListeners = [
 
         video.addEventListener("timeupdate", mediaSessionToggle);
         spinnerDivider();
-        if (Hls.isSupported() && video.currentTime === 0)
-            hls.startLoad();
+        if (Hls.isSupported() && video.currentTime === 0) hls.startLoad();
         videoContainer.addEventListener("pointerover", activity);
         videoContainer.addEventListener("pointermove", activity);
         videoContainer.addEventListener("pointerleave", () => {
@@ -1437,11 +1360,7 @@ const eventListeners = [
     }],
     ["playing", () => {
         videoContainer.classList.remove("buffering");
-        videoControls.classList.remove("hidden");
-
-    }],
-    ["seeking", () => {
-        videoContainer.classList.add("buffering-scrubbing");
+        videoControls.removeAttribute("hidden");
     }],
     ["seeked", () => {
         requestAnimFrame(updatetime);

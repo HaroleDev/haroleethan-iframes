@@ -205,7 +205,7 @@ body.preload * {
     transition: opacity 300ms var(--ease-out-expo);
 }
 
-.hidden.seeking-preview {
+.seeking-preview[hidden] {
     opacity: 0 !important;
 }
 
@@ -642,14 +642,14 @@ body.preload * {
     pointer-events: none;
 }
 
-.hidden {
+[hidden] {
     display: none;
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
 }
 
-.controls.hidden {
+.controls[hidden] {
     opacity: 0.3;
 }
 
@@ -1759,13 +1759,14 @@ screen and (max-height: 600px) {
 
 .volume-slider {
     background: transparent;
-    height: 12px;
+    height: 8px;
     width: 0px;
     border-radius: 8px;
     position: relative;
-    -webkit-transition: all 300ms var(--ease-in-expo);
-    -o-transition: all 300ms var(--ease-in-expo);
-    transition: all 300ms var(--ease-in-expo);
+    -webkit-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    will-change: height margin;
 }
 
 .volume-container:hover .volume-slider,
@@ -1791,7 +1792,7 @@ screen and (max-height: 600px) {
     left: 0;
     top: 0;
     bottom: 0;
-    height: 12px;
+    height: 100%;
     background: rgba(255, 255, 255, 1);
     border-radius: 8px;
     right: calc(100% - var(--volume-position, 1) * 100%);
@@ -1806,7 +1807,7 @@ screen and (max-height: 600px) {
     right: 0;
     top: 0;
     bottom: 0;
-    margin: 4px 0px 0px 0px;
+    height: 100%;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     left: calc(var(--volume-position, 0) * 100%);
@@ -1820,6 +1821,15 @@ screen and (max-height: 600px) {
     -webkit-transition: none;
     -o-transition: none;
     transition: none;
+}
+
+.volume-container.scrubbing .volume-slider {
+    height: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+    -webkit-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
 }
 
 [data-volume-level="mute"] .volume-slider::before {

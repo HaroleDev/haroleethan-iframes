@@ -769,8 +769,21 @@ const requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
         function (callback) {
             window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
+const cancelAnimFrame = (function () {
+    return window.cancelAnimationFrame ||
+        window.webkitCancelAnimationFrame ||
+        window.mozCancelAnimationFrame ||
+        window.oCancelAnimationFrame ||
+        window.msCancelAnimationFrame ||
+        function (callback) {
+            window.clearTimeout(callback);
         };
 })();
 
@@ -786,7 +799,7 @@ function activity() {
             return;
         } else {
             timeout = setTimeout(function () {
-                window.cancelAnimationFrame(updatetime);
+                cancelAnimFrame(updatetime);
                 videoContainer.classList.remove("hovered");
                 videoControlsContainer.classList.add("inactive");
                 video.classList.add("inactive");
@@ -977,6 +990,23 @@ function seekingPreviewPosition(e) {
     seekingPreview.style.setProperty("--thumbnail-seek-position", seekPos);
 };
 
+let scrollPosition = 0;
+function unlockScroll() {
+    scrollPosition = window.pageYOffset;
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.style.width = "100%";
+};
+
+function lockScroll() {
+    document.body.style.removeProperty("overflow");
+    document.body.style.removeProperty("position");
+    document.body.style.removeProperty("top");
+    document.body.style.removeProperty("width");
+    window.scrollTo(0, scrollPosition);
+};
+
 timelineInner.addEventListener("pointermove", e => {
     seekingPreview.classList.add("hovered");
     videoControls.classList.add("hidden");
@@ -988,15 +1018,19 @@ timelineInner.addEventListener("pointermove", e => {
     });
     timelineInner.addEventListener("pointerdown", e => {
         timelineInner.setPointerCapture(e.pointerId);
-        if (e.button === 0) toggleScrubbing(e);
+        if (e.button === 0) {
+            toggleScrubbing(e);
+        };
     });
     if (isScrubbing) {
+        lockScroll();
         videoControls.classList.add("hidden");
     };
     timelineInner.addEventListener("pointerup", e => {
         timelineInner.releasePointerCapture(e.pointerId);
         if (isScrubbing) {
             toggleScrubbing(e);
+            unlockScroll();
             seekingPreview.classList.remove("hovered");
             videoControls.classList.remove("hidden");
         };
@@ -1017,6 +1051,7 @@ function toggleScrubbing(e) {
         video.currentTime = percent * video.duration;
         if (!wasPaused) video.play();
     };
+    reqAnimFrame(updatetime);
 
     handleTimelineUpdate(e);
 };
@@ -1038,6 +1073,7 @@ function handleTimelineUpdate(e) {
     if (seekTime > video.duration - 1) seekTime = video.duration - 1;
 
     if (isScrubbing) {
+        cancelAnimFrame(updatetime);
         e.preventDefault();
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`;
         timelineInner.style.setProperty("--progress-position", percent);
@@ -1208,7 +1244,7 @@ const eventListeners = [
         videoContainer.classList.remove("paused");
     }],
     ["pause", () => {
-        window.cancelAnimationFrame(updatetime);
+        cancelAnimFrame(updatetime);
         navigator.mediaSession.playbackState = "paused";
         playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
         video.classList.remove("inactive");
@@ -1236,6 +1272,7 @@ const eventListeners = [
         videoContainer.classList.add("buffering-scrubbing");
     }],
     ["seeked", () => {
+        requestAnimFrame(updatetime);
         videoPoster.classList.add("played");
         seekingPreview.classList.remove("loading");
         videoContainer.classList.remove("buffering-scrubbing");

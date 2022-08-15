@@ -203,6 +203,10 @@ body.preload * {
     transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.hidden.seeking-preview {
+    opacity: 0 !important;
+}
+
 @-webkit-keyframes transition {
     0% {
         opacity: 0;
@@ -2566,7 +2570,7 @@ input[type=range]::-ms-tooltip {
     min-width: fit-content;
     max-width: calc(1280px + 64px);
     margin-top: 48px;
-    padding: 0px 32px;
+    padding: 0px max(1rem, 2rem);
 }
 
 .website-header {

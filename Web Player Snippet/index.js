@@ -1005,16 +1005,16 @@ function formatDurationARIA(time) {
     const minutes = Math.floor(time / 60) % 60;
     const hours = Math.floor(time / 3600);
 
-    let secondsARIA = 0;
+    let secondsARIA = `0 second`;
     if (seconds < 1) secondsARIA = `Less than a second`;
     if (seconds === 1) secondsARIA = `${seconds} second`;
     if (seconds > 1) secondsARIA = `${seconds} seconds`;
 
-    let minutesARIA = 0;
+    let minutesARIA = `0 minute`;
     if (minutes <= 1) minutesARIA = `${minutes} minute`;
     if (minutes > 1) minutesARIA = `${minutes} minutes`;
 
-    let hoursARIA = 0;
+    let hoursARIA = `0 hour`;
     if (hours <= 1) hoursARIA = `${hours} hour`;
     if (hours > 1) hoursARIA = `${hours} hours`;
 
@@ -1024,8 +1024,6 @@ function formatDurationARIA(time) {
         return `${minutesARIA} ${secondsARIA}`;
     } else if (hours > 0) {
         return `${hoursARIA} ${minutesARIA} ${secondsARIA}`;
-    } else {
-        return `${secondsARIA}`;
     };
 };
 

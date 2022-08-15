@@ -38,6 +38,8 @@
     --page-background: #E7FEF7;
     --flyout-bg: #082b21f5;
     --link-and-focus-color: #4B99E7;
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
 
     accent-color: var(--accent-color);
 }
@@ -67,9 +69,9 @@ body {
     line-height: 160%;
     background: var(--page-background);
     color: var(--background);
-    -webkit-transition: background-color 600ms cubic-bezier(0.19, 1, 0.22, 1), color 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: background-color 600ms cubic-bezier(0.19, 1, 0.22, 1), color 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: background-color 600ms cubic-bezier(0.19, 1, 0.22, 1), color 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: background-color 600ms var(--ease-out-expo), color 600ms var(--ease-out-expo);
+    -o-transition: background-color 600ms var(--ease-out-expo), color 600ms var(--ease-out-expo);
+    transition: background-color 600ms var(--ease-out-expo), color 600ms var(--ease-out-expo);
 }
 
 @media (color-gamut: p3) {
@@ -116,9 +118,9 @@ body.preload * {
     align-items: center;
     margin-inline: auto;
     overflow: hidden;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .transcript-opened .video-container {
@@ -133,11 +135,11 @@ body.preload * {
     height: 100%;
     opacity: 1;
     margin: 0 auto;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-transition: opacityze 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacityze 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacityze 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    -webkit-transition: opacityze 300ms var(--ease-out-expo);
+    -o-transition: opacityze 300ms var(--ease-out-expo);
+    transition: opacityze 300ms var(--ease-out-expo);
     will-change: width, height;
 }
 
@@ -151,9 +153,9 @@ body.preload * {
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-animation: transition 600ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
-    animation: transition 600ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
+    -webkit-animation: transition 600ms var(--ease-out-expo) forwards;
+    animation: transition 600ms var(--ease-out-expo) forwards;
 }
 
 .full-screen .video-fit-contain {
@@ -180,9 +182,9 @@ body.preload * {
     height: calc(100vw * var(--aspect-ratio-size-inverse));
     max-height: 100vh;
     max-width: calc(100vh * var(--aspect-ratio-size));
-    -webkit-transition: width 300ms cubic-bezier(0.19, 1, 0.22, 1), height 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: width 300ms cubic-bezier(0.19, 1, 0.22, 1), height 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: width 300ms cubic-bezier(0.19, 1, 0.22, 1), height 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
+    -o-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
+    transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
 }
 
 .video-player.loading .video-fit-contain {
@@ -198,9 +200,9 @@ body.preload * {
 
 .loading .seeking-preview {
     opacity: 0 !important;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
 }
 
 .hidden.seeking-preview {
@@ -276,8 +278,8 @@ body.preload * {
 }
 
 .full-screen .video-fit-contain {
-    -webkit-animation: 600ms cubic-bezier(0.19, 1, 0.22, 1) 0s 1 FullScreenTransition;
-    animation: 600ms cubic-bezier(0.19, 1, 0.22, 1) 0s 1 FullScreenTransition;
+    -webkit-animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
+    animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
 }
 
 .video-controls-container {
@@ -286,17 +288,17 @@ body.preload * {
     z-index: 1;
     width: calc(100%);
     opacity: 0;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo);
     will-change: width;
 }
 
 .transcript-opened .video-controls-container {
     width: calc(100% - 25rem);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-fit-content {
@@ -315,9 +317,9 @@ body.preload * {
     height: calc(100vw * var(--aspect-ratio-size-inverse));
     max-height: calc(100vh);
     max-width: calc(100vh * var(--aspect-ratio-size));
-    -webkit-transition: width 300ms cubic-bezier(0.19, 1, 0.22, 1), height 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: width 300ms cubic-bezier(0.19, 1, 0.22, 1), height 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: width 300ms cubic-bezier(0.19, 1, 0.22, 1), height 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
+    -o-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
+    transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
 }
 
 .aspect-ratio-response {
@@ -370,9 +372,9 @@ body.preload * {
 .video-container.pip-player .video-controls-container,
 .video-container.pip-player .video-information-overlay {
     opacity: 1;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-container.pip-player .pip-enter,
@@ -412,9 +414,9 @@ body.preload * {
     -ms-flex-pack: justify;
     justify-content: space-between;
     margin: 12px 40px;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-controls-container .left-side button {
@@ -432,12 +434,12 @@ body.preload * {
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
+    -webkit-transition: all 600ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
 }
 
 .video-controls-container .left-side button:focus-visible {
@@ -472,9 +474,9 @@ body.preload * {
     stroke: var(--accent-color);
     border-radius: 100%;
     opacity: 0;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
 }
@@ -536,19 +538,19 @@ body.preload * {
     border-radius: 4px;
     cursor: pointer;
     position: relative;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
+    -webkit-transition: all 600ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
 }
 
 .video-controls-container .right-side button path {
     fill: var(--text-color);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-controls-container .right-side button:hover path {
@@ -557,6 +559,66 @@ body.preload * {
 
 .video-controls-container .right-side button:active path {
     fill: var(--soft-accent-color);
+}
+
+@supports (d: path("")) {
+    .video-controls-container .right-side .pip-button:hover path.pip-enter {
+        -webkit-animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
+        animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
+    }
+
+    .video-controls-container .right-side .pip-button:hover path.pip-exit {
+        -webkit-animation: pip-morph-exit 600ms var(--ease-out-expo) forwards;
+        animation: pip-morph-exit 600ms var(--ease-out-expo) forwards;
+    }
+}
+
+@-webkit-keyframes pip-morph-enter {
+
+    0%,
+    100% {
+        d: path("M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z");
+    }
+
+    50% {
+        d: path("M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z");
+    }
+}
+
+@keyframes pip-morph-enter {
+
+    0%,
+    100% {
+        d: path("M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z");
+    }
+
+    50% {
+        d: path("M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z");
+    }
+}
+
+@-webkit-keyframes pip-morph-exit {
+
+    0%,
+    100% {
+        d: path("M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z");
+    }
+
+    50% {
+        d: path("M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z");
+    }
+}
+
+@keyframes pip-morph-exit {
+
+    0%,
+    100% {
+        d: path("M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z");
+    }
+
+    50% {
+        d: path("M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z");
+    }
 }
 
 .video-container.paused .pause-icon,
@@ -582,9 +644,9 @@ body.preload * {
 
 .hidden {
     display: none;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .controls.hidden {
@@ -596,9 +658,9 @@ body.preload * {
 .buffering-scrubbing .controls,
 .buffering-scrubbing .video-information-overlay {
     opacity: 0.6 !important;
-    -webkit-transition: all 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms 100ms var(--ease-out-expo);
+    -o-transition: all 300ms 100ms var(--ease-out-expo);
+    transition: all 300ms 100ms var(--ease-out-expo);
 }
 
 .video-information-overlay {
@@ -617,9 +679,9 @@ body.preload * {
     height: fit-content;
     padding: 28px 28px 56px 28px;
     opacity: 0;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo);
     will-change: width;
     pointer-events: none;
 }
@@ -648,9 +710,9 @@ body.preload * {
 
 .transcript-opened .video-information-overlay {
     width: calc(100% - 25rem);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-information-container {
@@ -683,9 +745,9 @@ body.preload * {
     user-select: auto;
     pointer-events: auto;
     cursor: default;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
 }
 
 .video-name h1 {
@@ -795,9 +857,9 @@ body.preload * {
     -ms-flex-align: center;
     align-items: center;
     cursor: pointer;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -816,9 +878,9 @@ body.preload * {
     right: calc((1 - var(--buffered-position)) * 100%);
     border-radius: 12px;
     background: #01A5734d;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     will-change: right;
 }
 
@@ -832,9 +894,9 @@ body.preload * {
     border-radius: 12px;
     background: rgba(209, 239, 230, 0.2);
     opacity: 0;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
     will-change: right;
 }
 
@@ -842,9 +904,9 @@ body.preload * {
     height: 16px;
     border-radius: 8px;
     margin-top: 0px;
-    -webkit-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 150ms var(--ease-out-expo);
+    -o-transition: all 150ms var(--ease-out-expo);
+    transition: all 150ms var(--ease-out-expo);
 }
 
 .timeline__progressbar {
@@ -863,9 +925,9 @@ body.preload * {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     transform: translate(0, 0);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), background-color 0s;
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), background-color 0s;
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), background-color 0s;
+    -webkit-transition: all 300ms var(--ease-out-expo), background-color 0s;
+    -o-transition: all 300ms var(--ease-out-expo), background-color 0s;
+    transition: all 300ms var(--ease-out-expo), background-color 0s;
     pointer-events: none;
     cursor: pointer;
     will-change: width, height;
@@ -883,9 +945,9 @@ body.preload * {
     right: 0;
     bottom: 0;
     opacity: 0;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -webkit-transform: translateX(-100%);
     -ms-transform: translateX(-100%);
     transform: translateX(-100%);
@@ -968,9 +1030,9 @@ body.preload * {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
     left: var(--thumbnail-seek-position, 192px);
     will-change: left;
 }
@@ -986,9 +1048,9 @@ body.preload * {
     border: none;
     padding: 2px;
     margin-bottom: 8px;
-    -webkit-transition: box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    -o-transition: box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    transition: box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
 }
 
 .video-thumb-preview {
@@ -1000,9 +1062,9 @@ body.preload * {
     top: 0;
     left: 0;
     background-size: calc(100%);
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
     position: absolute;
 }
 
@@ -1014,12 +1076,12 @@ body.preload * {
     height: 100%;
     top: 0;
     left: 0;
-    -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+    -o-transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+    -webkit-transition: opacity 150ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
+    transition: opacity 150ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
+    transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+    transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
     position: absolute;
     display: block;
 }
@@ -1031,9 +1093,9 @@ body.preload * {
 
 .loading .video-poster {
     opacity: 0;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
 }
 
 .video-poster.played {
@@ -1051,9 +1113,9 @@ body.preload * {
     background-color: #00000099;
     opacity: 0;
     pointer-events: none;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -webkit-backdrop-filter: blur(0vh);
     backdrop-filter: blur(0vh);
 }
@@ -1063,10 +1125,10 @@ body.preload * {
 .video-container.buffering-scrubbing .video-backdrop-seeking,
 .video-container.buffering-scrubbing .video-thumb-preview {
     opacity: 1 !important;
-    -webkit-transition: all 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1), background-position-y 0s;
-    -o-transition: all 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1) background-position-y 0s;
-    -webkit-transition: all 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1) background-position-y 0s;
-    transition: all 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1) background-position-y 0s;
+    -webkit-transition: all 300ms 100ms var(--ease-out-expo), background-position-y 0s;
+    -o-transition: all 300ms 100ms var(--ease-out-expo) background-position-y 0s;
+    -webkit-transition: all 300ms 100ms var(--ease-out-expo) background-position-y 0s;
+    transition: all 300ms 100ms var(--ease-out-expo) background-position-y 0s;
 }
 
 .video-container.scrubbing .video-backdrop-seeking,
@@ -1111,9 +1173,9 @@ screen and (max-height: 600px) {
 .video-container.buffering .video-backdrop-seeking,
 .video-container.buffering .video-thumb-preview {
     opacity: 0;
-    -webkit-transition: opacity 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms 100ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo);
+    -o-transition: opacity 300ms 100ms var(--ease-out-expo);
+    transition: opacity 300ms 100ms var(--ease-out-expo);
 }
 
 .seeking-preview.hovered {
@@ -1144,9 +1206,9 @@ screen and (max-height: 600px) {
     border-radius: 1.25rem;
     background: #016F4E;
     color: var(--text-color);
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
     pointer-events: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1177,9 +1239,9 @@ screen and (max-height: 600px) {
     margin-top: -8px;
     -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo), margin-top 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo), margin-top 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo), margin-top 300ms var(--ease-out-expo);
 }
 
 .scrubbing .timeline .timeline__progressbar,
@@ -1193,7 +1255,7 @@ screen and (max-height: 600px) {
     transform: translateY(-4px);
     -webkit-box-shadow: 0px 1px 0px var(--accent-color), 0px 2px 0px var(--accent-color), 0px 3px 0px var(--accent-color), 0px 4px 0px var(--accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 1px 0px var(--accent-color), 0px 2px 0px var(--accent-color), 0px 3px 0px var(--accent-color), 0px 4px 0px var(--accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
-    transition: margin-top 300ms cubic-bezier(0.19, 1, 0.22, 1), border-radius 300ms cubic-bezier(0.19, 1, 0.22, 1), box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-box-shadow 300ms cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1), filter 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: margin-top 300ms var(--ease-out-expo), border-radius 300ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
 }
 
 .scrubbing .timeline .timeline__progressbar::after,
@@ -1205,18 +1267,18 @@ screen and (max-height: 600px) {
     -webkit-transform: translateX(2px) translateY(2px);
     -ms-transform: translateX(2px) translateY(2px);
     transform: translateX(2px) translateY(2px);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .full-screen-button .enter .bottom-corner {
     -webkit-transform: translateX(-2px) translateY(-2px);
     -ms-transform: translateX(-2px) translateY(-2px);
     transform: translateX(-2px) translateY(-2px);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .full-screen-button:hover .enter .bottom-corner {
@@ -1235,18 +1297,18 @@ screen and (max-height: 600px) {
     -webkit-transform: translateX(0px) translateY(0px);
     -ms-transform: translateX(0px) translateY(0px);
     transform: translateX(0px) translateY(0px);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .full-screen-button .exit .bottom-corner {
     -webkit-transform: translateX(0px) translateY(0px);
     -ms-transform: translateX(0px) translateY(0px);
     transform: translateX(0px) translateY(0px);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .full-screen-button:hover .exit .bottom-corner {
@@ -1289,9 +1351,9 @@ screen and (max-height: 600px) {
     bottom: 0px;
     width: 0px;
     margin-left: 16px;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-container .pip-button::after,
@@ -1300,9 +1362,9 @@ screen and (max-height: 600px) {
 }
 
 .video-container .settings-button path {
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -webkit-transform-origin: 50% 50%;
     -ms-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
@@ -1340,9 +1402,9 @@ screen and (max-height: 600px) {
     border-radius: 8px;
     opacity: 0;
     pointer-events: none;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), top 0s, left 0s;
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), top 0s, left 0s;
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), top 0s, left 0s;
+    -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
+    -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
+    transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
 }
 
 .video-context-menu .item,
@@ -1370,9 +1432,9 @@ screen and (max-height: 600px) {
     border-radius: 4px;
     cursor: pointer;
     background-color: transparent;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -webkit-box-shadow: 0 0 0 0px transparent;
     box-shadow: 0 0 0 0px transparent;
 }
@@ -1393,9 +1455,9 @@ screen and (max-height: 600px) {
 .video-context-menu svg.check {
     float: right;
     opacity: 0;
-    -webkit-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 150ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 150ms var(--ease-out-expo);
+    -o-transition: opacity 150ms var(--ease-out-expo);
+    transition: opacity 150ms var(--ease-out-expo);
 }
 
 .video-context-menu .loop-item.enabled svg.check {
@@ -1420,9 +1482,9 @@ screen and (max-height: 600px) {
     bottom: 128px;
     margin-bottom: 12px;
     opacity: 0;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     pointer-events: none;
 }
 
@@ -1472,9 +1534,9 @@ screen and (max-height: 600px) {
     -ms-user-select: none;
     user-select: none;
     overflow: hidden;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .dialog-overlay {
@@ -1487,9 +1549,9 @@ screen and (max-height: 600px) {
     z-index: 6;
     opacity: 0;
     pointer-events: none;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
 }
 
 .dialog h2 {
@@ -1633,9 +1695,9 @@ screen and (max-height: 600px) {
     line-height: 160%;
     -webkit-box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px var(--background), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
     box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px var(--background), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1690,9 +1752,9 @@ screen and (max-height: 600px) {
     width: 100%;
     overflow: hidden;
     padding: 0;
-    -webkit-transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
-    -o-transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
-    transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
+    -webkit-transition: all 300ms var(--ease-in-expo);
+    -o-transition: all 300ms var(--ease-in-expo);
+    transition: all 300ms var(--ease-in-expo);
 }
 
 .volume-slider {
@@ -1701,26 +1763,26 @@ screen and (max-height: 600px) {
     width: 0px;
     border-radius: 8px;
     position: relative;
-    -webkit-transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
-    -o-transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
-    transition: all 300ms cubic-bezier(0.32, 0, 0.67, 0);
+    -webkit-transition: all 300ms var(--ease-in-expo);
+    -o-transition: all 300ms var(--ease-in-expo);
+    transition: all 300ms var(--ease-in-expo);
 }
 
 .volume-container:hover .volume-slider,
 .volume-container.scrubbing .volume-slider {
     width: 128px;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .volume-container:hover .volume-slider-container,
 .volume-container.scrubbing .volume-slider-container {
     padding: 18px 10px;
     width: 100%;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .volume-slider::before {
@@ -1733,9 +1795,9 @@ screen and (max-height: 600px) {
     background: rgba(255, 255, 255, 1);
     border-radius: 8px;
     right: calc(100% - var(--volume-position, 1) * 100%);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .volume-slider::after {
@@ -1748,9 +1810,9 @@ screen and (max-height: 600px) {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     left: calc(var(--volume-position, 0) * 100%);
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .volume-container.scrubbing .volume-slider::before,
@@ -1794,9 +1856,9 @@ screen and (max-height: 600px) {
     -ms-transform: translateX(-80%) translateY(-150%);
     transform: translateX(-80%) translateY(-150%);
     opacity: 0;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
     pointer-events: none;
     text-align: left;
 }
@@ -1844,9 +1906,9 @@ div.tooltip-right::after {
     -ms-transform: translateX(-75%) translateY(-125%);
     transform: translateX(-75%) translateY(-125%);
     opacity: 0;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
     pointer-events: none;
     text-align: center;
 }
@@ -1884,9 +1946,9 @@ div.tooltip-right::after {
 .volume-tooltip-container {
     width: 48px;
     border-radius: 8px;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 0s 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 0s 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 0s 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo), width 0s 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo), width 0s 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo), width 0s 300ms var(--ease-out-expo);
 }
 
 .volume-tooltip-container:hover {
@@ -1901,16 +1963,16 @@ div.tooltip-right::after {
     -webkit-filter: drop-shadow(0px 2px 0px #AFC9C1) drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
     filter: drop-shadow(0px 2px 0px #AFC9C1) drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
     fill: #DBFBF1;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .switch .switch-bg {
     fill: #016F4E;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     stroke: #165248;
 }
 
@@ -1943,9 +2005,9 @@ div.tooltip-right::after {
     background-repeat: no-repeat;
     cursor: pointer;
     border-radius: 5px;
-    -webkit-transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: background-color 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: background-color 300ms var(--ease-out-expo);
+    -o-transition: background-color 300ms var(--ease-out-expo);
+    transition: background-color 300ms var(--ease-out-expo);
     -webkit-box-shadow: 0 0 0 4px #165248;
     box-shadow: 0 0 0 4px #165248;
 }
@@ -1962,8 +2024,8 @@ div.tooltip-right::after {
     background: #DAFCF1;
     cursor: -webkit-grab;
     cursor: grab;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -webkit-transform: translateX(2px);
     transform: translateX(2px);
     will-change: transform;
@@ -1978,8 +2040,8 @@ div.tooltip-right::after {
     box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
     background: #DAFCF1;
     cursor: grab;
-    -moz-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -moz-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     transform: translateX(2px);
     will-change: transform;
 }
@@ -1993,8 +2055,8 @@ div.tooltip-right::after {
     box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
     background: #DAFCF1;
     cursor: grab;
-    -ms-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -ms-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     -ms-transform: translateX(2px);
     transform: translateX(2px);
     will-change: transform;
@@ -2148,9 +2210,9 @@ input[type=range]::-ms-tooltip {
     min-height: 100%;
     position: relative;
     z-index: 5;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     overflow: hidden;
     will-change: min-width, max-width;
 }
@@ -2238,9 +2300,9 @@ input[type=range]::-ms-tooltip {
     justify-content: center;
     background: #000;
     z-index: 0;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .full-screen .video-player-container {
@@ -2253,8 +2315,8 @@ input[type=range]::-ms-tooltip {
 }
 
 .full-screen.video-player {
-    -webkit-animation: fullscreenPlayer 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    animation: fullscreenPlayer 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-animation: fullscreenPlayer 600ms var(--ease-out-expo);
+    animation: fullscreenPlayer 600ms var(--ease-out-expo);
 }
 
 @-webkit-keyframes fullscreenPlayer {
@@ -2296,9 +2358,9 @@ input[type=range]::-ms-tooltip {
     padding-top: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
     position: relative;
     border-radius: 8px;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-player-container {
@@ -2321,16 +2383,16 @@ input[type=range]::-ms-tooltip {
     height: 48px;
     padding: 0;
     cursor: pointer;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo);
 }
 
 .transcript-panel button path {
     fill: #fff;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .transcript-panel button:hover path {
@@ -2350,9 +2412,9 @@ input[type=range]::-ms-tooltip {
     transform: translateY(30%);
     will-change: transform;
     opacity: 0;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo);
 }
 
 .transcript-opened .transcript-panel .contents {
@@ -2402,9 +2464,9 @@ input[type=range]::-ms-tooltip {
     -ms-transform: translateY(0px);
     transform: translateY(0px);
     will-change: transform;
-    -webkit-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: 300ms var(--ease-out-expo);
+    -o-transition: 300ms var(--ease-out-expo);
+    transition: 300ms var(--ease-out-expo);
 }
 
 .snackbar-sync-time.synced {
@@ -2490,9 +2552,9 @@ input[type=range]::-ms-tooltip {
     width: 100%;
     background: transparent;
     border-radius: 8px;
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
     cursor: pointer;
 }
 
@@ -2505,9 +2567,9 @@ input[type=range]::-ms-tooltip {
     line-height: 160%;
     word-wrap: break-word;
     margin-top: 2px;
-    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 600ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo);
     -ms-word-break: break-all;
     word-break: break-all;
     -webkit-hyphens: auto;
@@ -2529,9 +2591,9 @@ input[type=range]::-ms-tooltip {
     letter-spacing: -0.04em;
     font-weight: 800;
 
-    -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .cue-container:hover {
@@ -2689,9 +2751,9 @@ input[type=range]::-ms-tooltip {
     -webkit-user-select: all;
     -moz-user-select: all;
     user-select: all;
-    -webkit-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    -o-transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
-    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-transition: opacity 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
 }
 
 .error-dialog p {
@@ -2785,12 +2847,12 @@ input[type=range]::-ms-tooltip {
     .video-controls-container .left-side button {
         background-color: ButtonFace;
         outline: 2px solid ButtonText;
-        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1), transform 300ms cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 0s var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+        -o-transition: all 0s var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+        -webkit-transition: all 0s var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
+        transition: all 0s var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
+        transition: all 0s var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+        transition: all 0s var(--ease-out-expo), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
     }
 
     .video-controls-container .left-side button:focus-visible {
@@ -2819,16 +2881,16 @@ input[type=range]::-ms-tooltip {
     .video-controls-container .right-side button {
         background: ButtonFace;
         outline: 2px solid ButtonText;
-        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 0s var(--ease-out-expo);
+        -o-transition: all 0s var(--ease-out-expo);
+        transition: all 0s var(--ease-out-expo);
     }
 
     :focus-visible {
         outline: 6px solid Highlight !important;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 300ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo);
     }
 
     .video-controls-container .right-side button:hover {
@@ -2843,9 +2905,9 @@ input[type=range]::-ms-tooltip {
 
     .video-controls-container .right-side button path {
         fill: ButtonText;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 300ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo);
     }
 
     .video-controls-container .right-side button:hover path {
@@ -2869,9 +2931,9 @@ input[type=range]::-ms-tooltip {
         bottom: 2px;
         width: 0px;
         margin-left: 16px;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 300ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo);
     }
 
     .video-container.caption .caption-button::after,
@@ -3022,9 +3084,9 @@ input[type=range]::-ms-tooltip {
         outline-width: 2px;
         outline-style: solid;
         outline-color: CanvasText;
-        -webkit-transition: outline-width 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        -o-transition: outline-width 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        transition: outline-width 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -webkit-transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
+        -o-transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
+        transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
     }
 
     .scrubbing .timeline-container .seeking-preview__thumbnail {
@@ -3037,9 +3099,9 @@ input[type=range]::-ms-tooltip {
         outline-width: 2px;
         outline-style: solid;
         outline-color: CanvasText;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -webkit-transition: all 300ms var(--ease-out-expo), outline-color 0s;
+        -o-transition: all 300ms var(--ease-out-expo), outline-color 0s;
+        transition: all 300ms var(--ease-out-expo), outline-color 0s;
     }
 
     .video-player-container:hover {
@@ -3052,15 +3114,15 @@ input[type=range]::-ms-tooltip {
         background: Canvas;
         outline: 2px solid CanvasText;
         border-radius: 8px;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 300ms cubic-bezier(0.32, 0, 0.67, 0);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 300ms cubic-bezier(0.32, 0, 0.67, 0);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 300ms cubic-bezier(0.32, 0, 0.67, 0);
+        -webkit-transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-in-expo);
+        -o-transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-in-expo);
+        transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-in-expo);
     }
 
     .volume-tooltip-container:hover {
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), width 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-out-expo);
     }
 
     .volume-slider::before {
@@ -3108,9 +3170,9 @@ input[type=range]::-ms-tooltip {
         outline-width: 2px;
         outline-style: solid;
         outline-color: ButtonText;
-        -webkit-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 0s cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 0s var(--ease-out-expo);
+        -o-transition: all 0s var(--ease-out-expo);
+        transition: all 0s var(--ease-out-expo);
     }
 
     .transcript-panel button:hover {
@@ -3125,9 +3187,9 @@ input[type=range]::-ms-tooltip {
 
     .transcript-panel button path {
         fill: ButtonText;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 300ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo);
     }
 
     .transcript-panel button:hover path {
@@ -3165,9 +3227,9 @@ input[type=range]::-ms-tooltip {
     }
 
     .cues {
-        -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        -o-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        -webkit-transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        -o-transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
     }
 
     .cue-container {
@@ -3175,9 +3237,9 @@ input[type=range]::-ms-tooltip {
         outline-width: 0px;
         outline-style: solid;
         outline-color: CanvasText;
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        -webkit-transition: all 300ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        -o-transition: all 300ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        transition: all 300ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
     }
 
     .cue-time {
@@ -3189,9 +3251,9 @@ input[type=range]::-ms-tooltip {
         text-decoration: underline;
         letter-spacing: -0.04em;
 
-        -webkit-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        -o-transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
-        transition: all 300ms cubic-bezier(0.19, 1, 0.22, 1), outline-color 0s;
+        -webkit-transition: all 300ms var(--ease-out-expo), outline-color 0s;
+        -o-transition: all 300ms var(--ease-out-expo), outline-color 0s;
+        transition: all 300ms var(--ease-out-expo), outline-color 0s;
     }
 
     .cue-container:hover {

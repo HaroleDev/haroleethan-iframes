@@ -610,19 +610,21 @@ videoPlayer.addEventListener("pointerleave", checkLoop);
 function skip(duration) {
     video.currentTime += duration;
     const percent = video.currentTime / video.duration;
+    currentTime.textContent = formatDuration(percent * video.duration);
     timelineInner.style.setProperty("--progress-position", percent);
 };
 
 function skipPercent(number) {
     video.currentTime = video.duration * number;
     const percent = video.currentTime / video.duration;
+    currentTime.textContent = formatDuration(percent * video.duration);
     timelineInner.style.setProperty("--progress-position", percent);
 };
 
 function frameSeeking(fps) {
     video.currentTime += 1 / fps;
-    console.log(video.currentTime)
     const percent = video.currentTime / video.duration;
+    currentTime.textContent = formatDuration(percent * video.duration);
     timelineInner.style.setProperty("--progress-position", percent);
 };
 

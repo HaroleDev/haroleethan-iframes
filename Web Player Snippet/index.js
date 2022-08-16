@@ -259,8 +259,8 @@ videoContainer.addEventListener("contextmenu", e => {
     };
 });
 
-let menuOffset = 8;
 function ctxmenuPosition(eventPos) {
+    let menuOffset = 8;
     const scope = document.querySelector(".video-player");
     let x = eventPos.offsetX + menuOffset,
         y = eventPos.offsetY + menuOffset,

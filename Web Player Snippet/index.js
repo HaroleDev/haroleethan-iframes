@@ -1387,6 +1387,9 @@ const eventListeners = [
         videoContainer.classList.remove("buffering");
         videoControls.removeAttribute("hidden");
     }],
+    ["seeking", () => {
+        currentTime.textContent = formatDuration(video.currentTime);
+    }],
     ["seeked", () => {
         requestAnimFrame(updatetime);
         videoPoster.classList.add("played");

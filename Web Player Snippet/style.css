@@ -27,7 +27,7 @@
     --background: #1C5947;
     --foreground: #1C6550;
     --tooltip-bg: #016F4E;
-    --stroke-accent-color: #165248;
+    --stroke-accent-color: var(--stroke-accent-color);
     --page-background: #E7FEF7;
     --flyout-bg: #082b21f5;
     --link-and-focus-color: #4B99E7;
@@ -70,6 +70,7 @@ body {
 @media (color-gamut: p3) {
     @supports (color: color(display-p3 1 1 1)) {
         :root {
+            --text-color: color(display-p3 calc(240/255) calc(240/255) calc(240/255));
             --soft-accent-color: color(display-p3 calc(1/255) calc(165/255) calc(115/255));
             --accent-color: color(display-p3 calc(2/255) calc(218/255) calc(154/255));
             --bright-accent-color: color(display-p3 calc(35/255) calc(253/255) calc(188/255));
@@ -916,7 +917,7 @@ body.preload * {
     pointer-events: none;
     cursor: pointer;
     overflow: hidden;
-    will-change: width, height;
+    will-change: width, height, box-shadow;
     -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
 }
@@ -1607,8 +1608,8 @@ screen and (max-height: 600px) {
     -webkit-transform: translate(-50%, -50%) scale(1);
     -ms-transform: translate(-50%, -50%) scale(1);
     transform: translate(-50%, -50%) scale(1);
-    -webkit-box-shadow: 0px 4px 0px #165248, 0px 32px 64px rgba(0, 31, 26, 0.3);
-    box-shadow: 0px 4px 0px #165248, 0px 32px 64px rgba(0, 31, 26, 0.3);
+    -webkit-box-shadow: 0px 4px 0px var(--stroke-accent-color), 0px 32px 64px rgba(0, 31, 26, 0.3);
+    box-shadow: 0px 4px 0px var(--stroke-accent-color), 0px 32px 64px rgba(0, 31, 26, 0.3);
     -webkit-user-select: auto;
     -moz-user-select: auto;
     -ms-user-select: auto;
@@ -1713,7 +1714,7 @@ screen and (max-height: 600px) {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    will-change: box-shadow -webkit-box-shadow;
+    will-change: box-shadow, -webkit-box-shadow;
 }
 
 .dialog button.close-dialog:hover {
@@ -1776,7 +1777,7 @@ screen and (max-height: 600px) {
     -webkit-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-    will-change: height margin;
+    will-change: height, margin;
 }
 
 .volume-container:hover .volume-slider,
@@ -1993,7 +1994,7 @@ div.tooltip-right::after {
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
-    stroke: #165248;
+    stroke: var(--stroke-accent-color);
 }
 
 .enabled .switch .switch-knob {
@@ -2028,8 +2029,8 @@ div.tooltip-right::after {
     -webkit-transition: background-color 300ms var(--ease-out-expo);
     -o-transition: background-color 300ms var(--ease-out-expo);
     transition: background-color 300ms var(--ease-out-expo);
-    -webkit-box-shadow: 0 0 0 4px #165248;
-    box-shadow: 0 0 0 4px #165248;
+    -webkit-box-shadow: 0 0 0 4px var(--stroke-accent-color);
+    box-shadow: 0 0 0 4px var(--stroke-accent-color);
 }
 
 .dialog .eq-control input::-webkit-slider-thumb {
@@ -2150,7 +2151,7 @@ div.tooltip-right::after {
 }
 
 .dialog .eq-control input:disabled {
-    background: #165248;
+    background: var(--stroke-accent-color);
     background-image: -o-linear-gradient(var(--accent-color), var(--accent-color));
     background-image: -webkit-gradient(linear, left top, left bottom, from(var(--accent-color)), to(var(--accent-color)));
     background-image: linear-gradient(var(--accent-color), var(--accent-color));
@@ -2259,8 +2260,8 @@ input[type=range]::-ms-tooltip {
     padding: 28px 30px;
     background: var(--foreground);
     min-width: 25rem;
-    -webkit-box-shadow: inset 0px -4px 0px #165248;
-    box-shadow: inset 0px -4px 0px #165248;
+    -webkit-box-shadow: inset 0px -4px 0px var(--stroke-accent-color);
+    box-shadow: inset 0px -4px 0px var(--stroke-accent-color);
 }
 
 .transcript-panel .header-buttons {

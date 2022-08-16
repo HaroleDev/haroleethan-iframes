@@ -27,7 +27,7 @@
     --background: #1C5947;
     --foreground: #1C6550;
     --tooltip-bg: #016F4E;
-    --stroke-accent-color: var(--stroke-accent-color);
+    --stroke-accent-color: #165248;
     --page-background: #E7FEF7;
     --flyout-bg: #082b21f5;
     --link-and-focus-color: #4B99E7;
@@ -1206,7 +1206,7 @@ screen and (max-height: 600px) {
     font-variant: normal;
     letter-spacing: -0.02em;
     border-radius: 1.25rem;
-    background: var(--foreground);
+    background: var(--flyout-bg);
     color: var(--text-color);
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
@@ -1668,7 +1668,7 @@ screen and (max-height: 600px) {
 
 .dialog .footer-buttons {
     width: 100%;
-    background: var(--foreground);
+    background: var(--flyout-bg);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1738,7 +1738,7 @@ screen and (max-height: 600px) {
 
 .dialog button.close-dialog.default:hover {
     background-color: #0de4a4;
-    color: var(--foreground)
+    color: var(--foreground);
 }
 
 .dialog button.close-dialog.default:active {
@@ -1871,7 +1871,7 @@ screen and (max-height: 600px) {
     width: max-content;
     padding: 6px 14px;
     line-height: 100%;
-    background: var(--foreground);
+    background: var(--flyout-bg);
     border-radius: 8px;
     -webkit-transform: translateX(-80%) translateY(-150%);
     -ms-transform: translateX(-80%) translateY(-150%);
@@ -1921,7 +1921,7 @@ div.tooltip-right::after {
     width: -moz-max-content;
     width: max-content;
     padding: 6px 14px;
-    background: var(--foreground);
+    background: var(--flyout-bg);
     border-radius: 8px;
     -webkit-transform: translateX(-75%) translateY(-125%);
     -ms-transform: translateX(-75%) translateY(-125%);

@@ -601,11 +601,6 @@ function checkLoop() {
 
 loopItem.addEventListener("click", loopVideo);
 
-videoPlayer.addEventListener("pointermove", checkLoop);
-videoPlayer.addEventListener("pointerover", checkLoop);
-videoPlayer.addEventListener("pointerdown", checkLoop);
-videoPlayer.addEventListener("pointerleave", checkLoop);
-
 //Skip time
 function skip(duration) {
     video.currentTime += duration;
@@ -695,9 +690,9 @@ function toggleFullScreen() {
     if (document.fullscreenElement == null) {
         if (videoPlayer.requestFullscreen) {
             videoPlayer.requestFullscreen();
-        } if (videoPlayer.webkitRequestFullScreen) {
+        } else if (videoPlayer.webkitRequestFullScreen) {
             videoPlayer.webkitRequestFullScreen();
-        } if (video.webkitEnterFullScreen) {
+        } else if (video.webkitEnterFullScreen) {
             video.webkitEnterFullScreen();
         } else {
             if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen();
@@ -711,7 +706,7 @@ function toggleFullScreen() {
             document.requestFullscreen) {
             if (document.requestFullscreen) {
                 document.exitFullscreen()
-            } if (document.webkitCancelFullScreen) {
+            } else if (document.webkitCancelFullScreen) {
                 document.webkitCancelFullScreen();
             } else {
                 if (document.mozCancelFullScreen) document.mozCancelFullScreen();
@@ -1005,16 +1000,16 @@ function formatDurationARIA(time) {
     const minutes = Math.floor(time / 60) % 60;
     const hours = Math.floor(time / 3600);
 
-    let secondsARIA = `0 second`;
+    let secondsARIA = 0;
     if (seconds < 1) secondsARIA = `Less than a second`;
     if (seconds === 1) secondsARIA = `${seconds} second`;
     if (seconds > 1) secondsARIA = `${seconds} seconds`;
 
-    let minutesARIA = `0 minute`;
+    let minutesARIA = 0;
     if (minutes <= 1) minutesARIA = `${minutes} minute`;
     if (minutes > 1) minutesARIA = `${minutes} minutes`;
 
-    let hoursARIA = `0 hour`;
+    let hoursARIA = 0;
     if (hours <= 1) hoursARIA = `${hours} hour`;
     if (hours > 1) hoursARIA = `${hours} hours`;
 
@@ -1024,6 +1019,8 @@ function formatDurationARIA(time) {
         return `${minutesARIA} ${secondsARIA}`;
     } else if (hours > 0) {
         return `${hoursARIA} ${minutesARIA} ${secondsARIA}`;
+    } else {
+        return `${secondsARIA}`;
     };
 };
 
@@ -1284,49 +1281,59 @@ videoPlayer.addEventListener("keydown", e => {
         e.getModifierState("Super") ||
         e.getModifierState("Win")) {
         return;
-    };
-    if (e.getModifierState("Control") +
+    } else if (e.getModifierState("Control") +
         e.getModifierState("Alt") +
         e.getModifierState("Meta") > 1) {
         return;
     } else {
-        videoContainer.classList.add("hovered");
-        activity();
+        function checkActive() {
+            videoContainer.classList.add("hovered");
+            activity();
+        };
         switch (e.key.toLowerCase()) {
             case "":
                 if (tagName === "button") break;
             case "0": case "1": case "2": case "3": case "4": case "5": case "6": case "7": case "8": case "9":
+                checkActive();
                 skipPercent(e.key / 10);
                 break;
             case "k": case " ":
+                checkActive();
                 e.preventDefault();
                 togglePlay();
                 break;
             case "f":
                 if (fullscreenButton.classList.contains("unsupported")) break;
+                checkActive();
                 toggleFullScreen();
                 break;
             case "c":
+                checkActive();
                 toggleCaptions();
                 break;
             case "i":
                 if (pipPlayerButton.classList.contains("unsupported")) break;
+                checkActive();
                 togglePIPPlayerMode();
                 break;
             case "m":
+                checkActive();
                 toggleVolume();
                 break;
             case "arrowleft": case "arrowright":
                 if (e.key.toLowerCase() === "arrowleft") skip(-5);
                 if (e.key.toLowerCase() === "arrowright") skip(5);
+                checkActive();
                 break;
             case "j": case "l":
                 if (e.key.toLowerCase() === "j") skip(-10);
                 if (e.key.toLowerCase() === "l") skip(10);
+                checkActive();
                 break;
             case ",": case ".":
                 if (e.key === ",") frameSeeking(`-${videoMetadata.video_FPS}`);
                 if (e.key === ".") frameSeeking(videoMetadata.video_FPS);
+                checkActive();
                 break;
         };
     };
@@ -1341,8 +1348,14 @@ const eventListeners = [
         video.addEventListener("timeupdate", mediaSessionToggle);
         spinnerDivider();
         if (Hls.isSupported() && video.currentTime === 0) hls.startLoad();
-        videoContainer.addEventListener("pointerover", activity);
-        videoContainer.addEventListener("pointermove", activity);
+        videoContainer.addEventListener("pointerover", () => {
+            activity();
+            checkLoop();
+        });
+        videoContainer.addEventListener("pointermove", () => {
+            activity();
+            checkLoop();
+        });
         videoContainer.addEventListener("pointerleave", () => {
             if (settingsContextMenu.classList.contains("pressed")) return;
             videoContainer.classList.remove("hovered");

@@ -137,7 +137,6 @@ body.preload * {
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
     transition: opacity 300ms var(--ease-out-expo);
-    will-change: width, height;
 }
 
 .video-fit-contain {
@@ -153,6 +152,7 @@ body.preload * {
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
     -webkit-animation: transition 600ms var(--ease-out-expo) forwards;
     animation: transition 600ms var(--ease-out-expo) forwards;
+    will-change: filter, animation;
 }
 
 .full-screen .video-fit-contain {
@@ -182,6 +182,7 @@ body.preload * {
     -webkit-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
     -o-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
     transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
+    will-change: width, height;
 }
 
 .video-player.loading .video-fit-contain {
@@ -444,6 +445,7 @@ body.preload * {
     transition: all 600ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    will-change: box-shadow;
 }
 
 .video-controls-container .left-side button:focus-visible {
@@ -548,6 +550,7 @@ body.preload * {
     transition: all 600ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
+    will-change: box-shadow;
 }
 
 .video-controls-container .right-side button path {
@@ -3081,7 +3084,7 @@ input[type=range]::-ms-tooltip {
     .video-container .gcast-button::after {
         content: "";
         width: inherit;
-        height: 4px;
+        height: 8px;
         background: Highlight;
         position: absolute;
         display: block;
@@ -3089,9 +3092,9 @@ input[type=range]::-ms-tooltip {
         bottom: 2px;
         width: 0px;
         margin-left: 16px;
-        -webkit-transition: all 300ms var(--ease-in-expo);
-        -o-transition: all 300ms var(--ease-in-expo);
-        transition: all 300ms var(--ease-in-expo);
+        -webkit-transition: all 150ms var(--ease-in-expo), background-color 0s;
+        -o-transition: all 150ms var(--ease-in-expo), background-color 0s;
+        transition: all 150ms var(--ease-in-expo), background-color 0s;
     }
 
     .video-container.caption .caption-button::after,
@@ -3107,9 +3110,9 @@ input[type=range]::-ms-tooltip {
         width: 32px;
         bottom: 2px;
         margin-left: 0px;
-        -webkit-transition: all 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo);
+        -webkit-transition: all 300ms var(--ease-out-expo), background-color 0s;
+        -o-transition: all 300ms var(--ease-out-expo), background-color 0s;
+        transition: all 300ms var(--ease-out-expo), background-color 0s;
     }
 
     .video-container.caption .video-controls-container .right-side button:active.caption-button::after,

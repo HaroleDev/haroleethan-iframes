@@ -1422,13 +1422,14 @@ screen and (max-height: 600px) {
     position: absolute;
     top: 0;
     left: 0;
+    clip-path: circle(0% at 0% 0%);
     background-color: var(--flyout-bg);
     color: var(--text-color);
     padding: 12px 8px;
     min-width: 256px;
     z-index: 6;
     border-radius: 8px;
-    opacity: 0;
+    opacity: 0.3;
     pointer-events: none;
     -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
     -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
@@ -1517,6 +1518,7 @@ screen and (max-height: 600px) {
 
 .video-context-menu.show {
     opacity: 1;
+    clip-path: circle(150% at 0% 0%);
     pointer-events: inherit;
 }
 

@@ -1286,6 +1286,11 @@ screen and (max-height: 600px) {
     transition: height 300ms var(--ease-out-expo), border-radius 300ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
 }
 
+.scrubbing .timeline,
+.scrubbing:hover .timeline {
+    margin-top: 0px;
+}
+
 .scrubbing .timeline .timeline__progressbar::after,
 .scrubbing:hover .timeline .timeline__progressbar::after {
     background-image: var(--buffer-scrubber-bright-accent);
@@ -1362,8 +1367,11 @@ screen and (max-height: 600px) {
     display: block;
     border-radius: 4px;
     width: 32px;
-    bottom: 0px;
-    margin-left: 0px;
+    bottom: 0;
+    margin-left: 0;
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-container .caption-button::after,
@@ -1371,17 +1379,17 @@ screen and (max-height: 600px) {
 .video-container .gcast-button::after {
     content: "";
     width: inherit;
-    height: 4px;
-    background: transparent;
+    height: 8px;
+    background: var(--bright-accent-color);
     position: absolute;
     display: block;
-    border-radius: 4px;
-    bottom: 0px;
-    width: 0px;
+    border-radius: 2px;
+    bottom: 2px;
+    width: 0;
     margin-left: 16px;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: all 150ms var(--ease-in-expo);
+    -o-transition: all 150ms var(--ease-in-expo);
+    transition: all 150ms var(--ease-in-expo);
 }
 
 .video-container .pip-button::after,
@@ -3081,9 +3089,9 @@ input[type=range]::-ms-tooltip {
         bottom: 2px;
         width: 0px;
         margin-left: 16px;
-        -webkit-transition: all 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo);
+        -webkit-transition: all 300ms var(--ease-in-expo);
+        -o-transition: all 300ms var(--ease-in-expo);
+        transition: all 300ms var(--ease-in-expo);
     }
 
     .video-container.caption .caption-button::after,
@@ -3099,6 +3107,9 @@ input[type=range]::-ms-tooltip {
         width: 32px;
         bottom: 2px;
         margin-left: 0px;
+        -webkit-transition: all 300ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo);
     }
 
     .video-container.caption .video-controls-container .right-side button:active.caption-button::after,

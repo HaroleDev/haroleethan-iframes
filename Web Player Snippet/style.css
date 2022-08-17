@@ -9,6 +9,7 @@
     -webkit-box-sizing: border-box;
     font-synthesis: none;
     box-sizing: border-box;
+    color-adjust: exact;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     -webkit-font-kerning: normal;
@@ -104,12 +105,15 @@ body.preload * {
     height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     margin-inline: auto;
     overflow: hidden;
@@ -132,9 +136,7 @@ body.preload * {
     margin: 0 auto;
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
-    -webkit-transition: opacityze 300ms var(--ease-out-expo);
-    -o-transition: opacityze 300ms var(--ease-out-expo);
-    transition: opacityze 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo);
     will-change: width, height;
 }
 
@@ -380,33 +382,40 @@ body.preload * {
 .video-controls-container .left-side {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     padding-right: 32px;
     gap: 24px;
     -webkit-box-align: end;
     -ms-flex-align: end;
+    -webkit-align-items: flex-end;
     align-items: flex-end;
 }
 
 .video-controls-container .right-side {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     gap: 16px;
     -webkit-box-align: end;
     -ms-flex-align: end;
+    -webkit-align-items: flex-end;
     align-items: flex-end;
     -webkit-box-pack: right;
     -ms-flex-pack: right;
+    -webkit-justify-content: right;
     justify-content: right;
 }
 
 .video-controls-container .controls {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     margin: 12px 40px;
     -webkit-transition: all 300ms var(--ease-out-expo);
@@ -662,9 +671,11 @@ body.preload * {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     top: 0;
     z-index: 2;
@@ -685,6 +696,7 @@ body.preload * {
 .video-player[data-device="iPadOS"] .video-information-container {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
     justify-content: flex-end;
     text-align: right;
 }
@@ -713,17 +725,22 @@ body.preload * {
 .video-information-container {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -ms-flex-line-pack: start;
+    -webkit-align-content: flex-start;
     align-content: flex-start;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     z-index: 0;
     top: 0;
@@ -823,10 +840,12 @@ body.preload * {
 .timeline-container {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     margin-inline: 40px;
     margin-bottom: 24px;
@@ -841,9 +860,11 @@ body.preload * {
     margin: 8px 0px 8px 0px;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     cursor: pointer;
     -webkit-transition: all 300ms var(--ease-out-expo);
@@ -852,9 +873,11 @@ body.preload * {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
 }
 
@@ -892,7 +915,6 @@ body.preload * {
 .scrubbing .timeline {
     height: 16px;
     border-radius: 8px;
-    margin-top: 0px;
     -webkit-transition: all 150ms var(--ease-out-expo);
     -o-transition: all 150ms var(--ease-out-expo);
     transition: all 150ms var(--ease-out-expo);
@@ -1004,17 +1026,22 @@ body.preload * {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -ms-flex-line-pack: center;
+    -webkit-align-content: center;
     align-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -1029,6 +1056,7 @@ body.preload * {
     user-select: none;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
     justify-content: flex-end;
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
@@ -1140,7 +1168,7 @@ body.preload * {
     backdrop-filter: blur(1vh);
 }
 
-@supports not (filter: blur()) {
+@supports not ((-webkit-filter: blur()) or (filter: blur())) {
 
     .video-backdrop-seeking {
         background-color: #000000cc;
@@ -1206,7 +1234,7 @@ screen and (max-height: 600px) {
     font-variant: normal;
     letter-spacing: -0.02em;
     border-radius: 1.25rem;
-    background: var(--flyout-bg);
+    background: var(--foreground);
     color: var(--text-color);
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
@@ -1232,26 +1260,30 @@ screen and (max-height: 600px) {
 .timeline:hover .timeline__progressbar {
     border-radius: 32px 32px 8px 8px;
     height: 16px;
-    margin-top: -8px;
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px);
     -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
-    -webkit-transition: all 300ms var(--ease-out-expo), margin-top 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo), margin-top 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo), margin-top 300ms var(--ease-out-expo);
+    -webkit-transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+    -webkit-transition: all 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
 }
 
 .scrubbing .timeline .timeline__progressbar,
 .scrubbing:hover .timeline .timeline__progressbar {
     border-radius: 12px;
     height: 16px;
-    margin-top: 0px;
     background-color: var(--bright-accent-color);
     -webkit-transform: translateY(-4px);
     -ms-transform: translateY(-4px);
     transform: translateY(-4px);
     -webkit-box-shadow: 0px 1px 0px var(--accent-color), 0px 2px 0px var(--accent-color), 0px 3px 0px var(--accent-color), 0px 4px 0px var(--accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 1px 0px var(--accent-color), 0px 2px 0px var(--accent-color), 0px 3px 0px var(--accent-color), 0px 4px 0px var(--accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px rgba(2, 218, 154, 0.2), 0px 4px 0px 8px rgba(2, 218, 154, 0.1);
-    transition: height 300ms var(--ease-out-expo), margin-top 300ms var(--ease-out-expo), border-radius 300ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+    transition: height 300ms var(--ease-out-expo), border-radius 300ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
 }
 
 .scrubbing .timeline .timeline__progressbar::after,
@@ -1407,16 +1439,20 @@ screen and (max-height: 600px) {
 .settings-context-menu .item {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     position: relative;
     -webkit-user-select: none;
@@ -1445,15 +1481,19 @@ screen and (max-height: 600px) {
 .settings-context-menu .item-content {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
     display: inline-flex;
     -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -1517,9 +1557,11 @@ screen and (max-height: 600px) {
 .volume-container {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -1599,6 +1641,7 @@ screen and (max-height: 600px) {
 .equalizers {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
     display: inline-flex;
     margin: 0 auto;
 }
@@ -1648,6 +1691,7 @@ screen and (max-height: 600px) {
 .decibel-labels {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     height: calc(164px + 12px);
     width: -webkit-fit-content;
@@ -1656,9 +1700,11 @@ screen and (max-height: 600px) {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     text-align: right;
     margin: 8px 8px 8px 4px;
@@ -1668,19 +1714,23 @@ screen and (max-height: 600px) {
 
 .dialog .footer-buttons {
     width: 100%;
-    background: var(--flyout-bg);
+    background: var(--foreground);
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     padding: 18px 28px 28px;
 }
@@ -1754,6 +1804,7 @@ screen and (max-height: 600px) {
 .volume-container {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     cursor: pointer;
     gap: 0px;
@@ -2246,16 +2297,20 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .header {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     padding: 28px 30px;
     background: var(--foreground);
@@ -2267,13 +2322,16 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .header-buttons {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     gap: 16px;
 }
@@ -2311,13 +2369,16 @@ input[type=range]::-ms-tooltip {
     transform: scale(100%);
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
     background: #000;
     z-index: 0;
@@ -2452,10 +2513,12 @@ input[type=range]::-ms-tooltip {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     padding: 32px;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
@@ -2510,12 +2573,15 @@ input[type=range]::-ms-tooltip {
     padding: 16px 20px 128px 20px;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     gap: 8px;
     height: calc(100% - 125px);
@@ -2558,13 +2624,16 @@ input[type=range]::-ms-tooltip {
 .cue-container {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
+    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: start;
     -ms-flex-align: start;
+    -webkit-align-items: flex-start;
     align-items: flex-start;
     padding: 9px 12px;
     gap: 10px;
@@ -2637,13 +2706,16 @@ input[type=range]::-ms-tooltip {
 .column {
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     margin: 0 auto;
     min-width: -webkit-fit-content;
@@ -2659,20 +2731,26 @@ input[type=range]::-ms-tooltip {
     padding: 64px 32px 32px 32px;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
+    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -ms-flex-line-pack: center;
+    -webkit-align-content: center;
     align-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     text-align: center;
 }

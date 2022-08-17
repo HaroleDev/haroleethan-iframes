@@ -1422,14 +1422,13 @@ screen and (max-height: 600px) {
     position: absolute;
     top: 0;
     left: 0;
-    clip-path: circle(0% at 0% 0%);
     background-color: var(--flyout-bg);
     color: var(--text-color);
     padding: 12px 8px;
     min-width: 256px;
     z-index: 6;
     border-radius: 8px;
-    opacity: 0.3;
+    opacity: 0;
     pointer-events: none;
     -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
     -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
@@ -1518,8 +1517,10 @@ screen and (max-height: 600px) {
 
 .video-context-menu.show {
     opacity: 1;
-    clip-path: circle(150% at 0% 0%);
     pointer-events: inherit;
+    -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
+    -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
+    transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
 }
 
 .settings-context-menu {
@@ -1544,6 +1545,9 @@ screen and (max-height: 600px) {
 .settings-context-menu.pressed {
     opacity: 1;
     pointer-events: inherit;
+    -webkit-transition: all 300ms var(--ease-out-expo);
+    -o-transition: all 300ms var(--ease-out-expo);
+    transition: all 300ms var(--ease-out-expo);
 }
 
 .video-context-menu .item:hover,
@@ -1554,6 +1558,44 @@ screen and (max-height: 600px) {
 .video-context-menu .item:active,
 .settings-context-menu .item:active {
     background-color: var(--stroke-accent-color);
+}
+
+@supports ((-webkit-clip-path: circle()) or (clip-path: circle())) {
+    .video-context-menu {
+        opacity: 0.3;
+        -webkit-clip-path: circle(0% at 0% 0%);
+        clip-path: circle(0% at 0% 0%);
+    }
+
+    .video-context-menu.show {
+        opacity: 1;
+        -webkit-clip-path: circle(150% at 0% 0%);
+        clip-path: circle(150% at 0% 0%);
+        -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
+        -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s, -webkit-clip-path 450ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo), top 0s, left 0s, -webkit-clip-path 450ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
+    }
+
+    .settings-context-menu {
+        opacity: 0.3;
+        -webkit-clip-path: circle(0% at 70% 100%);
+        clip-path: circle(0% at 70% 100%);
+    }
+
+    .settings-context-menu.pressed {
+        opacity: 1;
+        -webkit-clip-path: circle(130% at 70% 100%);
+        clip-path: circle(130% at 70% 100%);
+        -webkit-transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
+        -o-transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
+        -webkit-transition: all 300ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
+        transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
+    }
 }
 
 .volume-container {

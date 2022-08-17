@@ -123,7 +123,7 @@ body.preload * {
 }
 
 .transcript-opened .video-container {
-    width: calc(100% - 25rem);
+    width: calc(100% - clamp(20rem, 34%, 400px));
     height: 100%;
 }
 
@@ -292,7 +292,7 @@ body.preload * {
 }
 
 .transcript-opened .video-controls-container {
-    width: calc(100% - 25rem);
+    width: calc(100% - clamp(20rem, 34%, 400px));
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
@@ -310,7 +310,7 @@ body.preload * {
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100vw - 25rem);
+    width: calc(100vw - clamp(20rem, 34%, 400px));
     height: calc(100vw * var(--aspect-ratio-size-inverse));
     max-height: calc(100vh);
     max-width: calc(100vh * var(--aspect-ratio-size));
@@ -716,7 +716,7 @@ body.preload * {
 }
 
 .transcript-opened .video-information-overlay {
-    width: calc(100% - 25rem);
+    width: calc(100% - clamp(20rem, 34%, 400px));
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
@@ -2334,8 +2334,8 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-opened .transcript-panel {
-    min-width: 25rem;
-    max-width: 25rem;
+    min-width: clamp(20rem, 34%, 400px);
+    max-width: clamp(20rem, 34%, 400px);
 }
 
 .transcript-panel .header {
@@ -2358,7 +2358,7 @@ input[type=range]::-ms-tooltip {
     justify-content: space-between;
     padding: 28px 30px;
     background: var(--foreground);
-    min-width: 25rem;
+    min-width: clamp(20rem, 34%, 400px);
     -webkit-box-shadow: inset 0px -4px 0px var(--stroke-accent-color);
     box-shadow: inset 0px -4px 0px var(--stroke-accent-color);
 }
@@ -2530,7 +2530,7 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel .contents {
-    min-width: 25rem;
+    min-width: clamp(20rem, 34%, 400px);
     height: 100%;
     overflow: hidden;
     -webkit-transform: translateY(30%);
@@ -2552,7 +2552,7 @@ input[type=range]::-ms-tooltip {
 
 .transcript-panel .snackbar-sync-time {
     width: 100%;
-    min-width: 25rem;
+    min-width: clamp(20rem, 34%, 400px);
     bottom: 0;
     position: absolute;
     display: -webkit-box;
@@ -2702,16 +2702,16 @@ input[type=range]::-ms-tooltip {
     -webkit-transition: all 600ms var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo);
-    -ms-word-break: break-all;
-    word-break: break-all;
+    -ms-word-break: keep-all;
+    word-break: keep-all;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
 }
 
 .cue-time {
-    padding: 2px 8px;
-    min-width: 3.25rem;
+    padding: 2px 0.5rem;
+    min-width: fit-content;
     background: transparent;
     -webkit-box-shadow: inset 0 0 0 0px #4B99E7;
     box-shadow: inset 0 0 0 0px #4B99E7;
@@ -2720,6 +2720,7 @@ input[type=range]::-ms-tooltip {
     text-align: center;
     color: #CCE7FF !important;
     font-variation-settings: "wght" 800;
+    font-variant-numeric: tabular-nums;
     letter-spacing: -0.04em;
     font-weight: 800;
 

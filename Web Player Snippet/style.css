@@ -51,8 +51,6 @@
 
 html,
 body {
-    overflow-y: auto;
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -284,7 +282,7 @@ body.preload * {
     position: absolute;
     bottom: 0;
     z-index: 1;
-    width: calc(100%);
+    width: 100%;
     opacity: 0;
     -webkit-transition: all 600ms var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo);
@@ -686,7 +684,8 @@ body.preload * {
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
-    padding: 28px 28px 56px 28px;
+    padding: 28px;
+    padding-bottom: calc(28px * 4);
     opacity: 0;
     -webkit-transition: all 600ms var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo);
@@ -973,8 +972,6 @@ body.preload * {
     -webkit-animation: buffer 2s infinite linear;
     animation: buffer 2s infinite linear;
     background-image: var(--buffer-scrubber-accent);
-    -webkit-animation: buffer 2s infinite linear;
-    animation: buffer 2s infinite linear;
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
     -webkit-transform: translateY(0px);
@@ -3085,7 +3082,7 @@ input[type=range]::-ms-tooltip {
         content: "";
         width: inherit;
         height: 8px;
-        background: Highlight;
+        background-color: Highlight;
         position: absolute;
         display: block;
         border-radius: 4px;
@@ -3103,7 +3100,7 @@ input[type=range]::-ms-tooltip {
         content: "";
         width: inherit;
         height: 4px;
-        background: Highlight;
+        background-color: Highlight;
         position: absolute;
         display: block;
         border-radius: 4px;

@@ -30,6 +30,7 @@ const playpauseTooltipContainer = document.querySelector(".play-pause-tooltip-co
 const videoContainer = document.querySelector(".video-container");
 const videoPoster = document.querySelector(".video-poster");
 const video = document.querySelector(".video");
+const videoFit = document.querySelector(".video-fit-contain");
 const source = video.querySelector("source");
 
 const currentTime = document.querySelector(".current-time");
@@ -589,7 +590,7 @@ function loopVideo() {
     };
 };
 
-function checkLoop() {
+function checkElement() {
     if (video.loop === true) {
         loopItem.classList.add("enabled");
     } else if (video.loop === false) {
@@ -597,6 +598,15 @@ function checkLoop() {
     } else {
         return;
     };
+
+    if (video.hasAttribute("controls")) {
+        videoControlsContainer.setAttribute("hidden", "");
+        videoInformationOverlay.setAttribute("hidden", "");
+        video.removeAttribute("controls");
+    } else if (!video.hasAttribute("controls")) {
+        videoControlsContainer.removeAttribute("hidden");
+        videoInformationOverlay.removeAttribute("hidden");
+    }
 };
 
 loopItem.addEventListener("click", loopVideo);
@@ -1026,7 +1036,7 @@ function formatDurationARIA(time) {
 
 //Playback and Media Session
 playpauseButton.addEventListener("click", togglePlay);
-video.addEventListener("click", togglePlay);
+videoFit.addEventListener("click", togglePlay);
 
 async function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
@@ -1350,11 +1360,11 @@ const eventListeners = [
         if (Hls.isSupported() && video.currentTime === 0) hls.startLoad();
         videoContainer.addEventListener("pointerover", () => {
             activity();
-            checkLoop();
+            checkElement();
         });
         videoContainer.addEventListener("pointermove", () => {
             activity();
-            checkLoop();
+            checkElement();
         });
         videoContainer.addEventListener("pointerleave", () => {
             if (settingsContextMenu.classList.contains("pressed")) return;

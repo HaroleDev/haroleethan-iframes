@@ -1,6 +1,6 @@
 # Playful Video
 A HTML5-based video player created by myself with some features you wouldn't normally see online.
-## Attribut
+## Attribute
 #### This folder of this repo includes modified/borrowed code from the following source:
 [YouTube Video Player Clone](https://github.com/WebDevSimplified/youtube-video-player-clone)
 

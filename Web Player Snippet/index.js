@@ -6,8 +6,6 @@ const videoMetadata = {
     Fallback_src: "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
     Fallback_codec: "video/mp4",
     video_FPS: "59.940",
-
-    video_Viewport: "1280",
 };
 
 const mediaSessionMetadata = {
@@ -89,10 +87,17 @@ const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-preview__thumbnail");
 const videoThumbPreview = document.querySelector(".video-thumb-preview");
 
+const qualityContainer = document.querySelector(".quality-badge");
+const qualityText = document.querySelector(".quality-badge .quality");
+
 const AirPlayTooltip = document.querySelector(".airplay-tooltip");
 const AirPlayButton = document.querySelector(".airplay-button");
 const CastButton = document.querySelector(".gcast-button");
 const CastTooltip = document.querySelector(".gcast-tooltip");
+
+var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content") || decodeURI(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf('/') + 1));
+var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
+var description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
 
 function init() {
     document.body.classList.remove("preload");
@@ -977,8 +982,6 @@ function handleTimelineUpdate(e) {
 function loadedMetadata() {
     totalTime.textContent = formatDuration(video.duration);
     currentTime.textContent = formatDuration(video.currentTime);
-    video.width = videoMetadata.video_Viewport;
-    video.height = videoMetadata.video_Viewport / (video.videoWidth / video.videoHeight);
 };
 
 function updatetime() {
@@ -1048,6 +1051,10 @@ async function togglePlay() {
     };
     if (context.state === "suspended") context.resume();
     video.paused ? await video.play() : await video.pause();
+};
+
+function qualityCheck() {
+    return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
 };
 
 function updatePositionState() {
@@ -1355,7 +1362,7 @@ const eventListeners = [
         navigator.mediaSession.playbackState = "playing";
         playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
 
-        video.addEventListener("timeupdate", mediaSessionToggle);
+        video.addEventListener("timeupdate", mediaSessionToggle());
         spinnerDivider();
         if (Hls.isSupported() && video.currentTime === 0) hls.startLoad();
         videoContainer.addEventListener("pointerover", () => {
@@ -1425,6 +1432,9 @@ const eventListeners = [
         videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
         durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
 
+        qualityContainer.dataset.quality = qualityCheck();
+        qualityText.textContent = qualityCheck();
+        
         videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
         videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
         loadedMetadata();

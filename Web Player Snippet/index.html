@@ -246,11 +246,11 @@
                     </div>
                     <div class="video-information-overlay">
                         <div class="video-information-container">
-                            <div class="author-name">
-                                <div class="span"></div>
-                            </div>
                             <div class="video-name">
                                 <h1></h1>
+                            </div>
+                            <div class="author-name">
+                                <div class="span"></div>
                             </div>
                         </div>
                     </div>
@@ -514,12 +514,17 @@
                                     <div class="seek-filler"></div>
                                     <div class="timeline__progressbar"></div>
                                 </div>
-                                <div class="duration-container" role="text"
-                                    aria-label="Less than a second elapsed of 0 second">
-                                    <div class="current-time span" aria-hidden="true">0:00</div>
-                                    <div class="divider-time-copy span" aria-hidden="true">/</div>
-                                    <div class="divider-time span" aria-hidden="true">/</div>
-                                    <div class="total-time span" aria-hidden="true">0:00</div>
+                                <div class="footer">
+                                    <div class="duration-container" role="text"
+                                        aria-label="Less than a second elapsed of 0 second">
+                                        <div class="current-time span" aria-hidden="true">0:00</div>
+                                        <div class="divider-time-copy span" aria-hidden="true">/</div>
+                                        <div class="divider-time span" aria-hidden="true">/</div>
+                                        <div class="total-time span" aria-hidden="true">0:00</div>
+                                    </div>
+                                    <div class="quality-badge" data-quality="N/A">
+                                        <div class="span quality">N/A</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -591,12 +596,12 @@
         <div class="bugs">
             <p><b>KNOWN BUGS:</b>
                 <br>The "Cast to TV" button is nonfunctional.
-                <br>Incomplete accessibility features (ARIA and Windows High Contrast Mode)
+                <br>Incomplete accessibility features (ARIA and Windows High Contrast Mode).
             </p>
         </div>
     </div>
     <script type="text/javascript" defer>
-        var title = document.head.querySelector("meta[property=\"og:title\"]").getAttribute("content");
+        var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
         var author = document.head.querySelector("meta[property=\"og:author\"]").getAttribute("content");
         var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
 

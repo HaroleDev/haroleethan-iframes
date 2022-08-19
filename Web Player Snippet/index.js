@@ -1057,6 +1057,10 @@ function qualityCheck() {
     return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "4K UHD" : video.videoWidth >= 5120 ? "5K UHD" : video.videoWidth >= 6144 ? "6K UHD" : video.videoWidth >= 7860 ? "8K UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
 };
 
+function qualityCheckAcro() {
+    return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
+};
+
 function updatePositionState() {
     navigator.mediaSession.setPositionState({
         duration: video.duration,
@@ -1432,7 +1436,7 @@ const eventListeners = [
         videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
         durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
 
-        qualityContainer.dataset.quality = qualityCheck();
+        qualityContainer.dataset.quality = qualityCheckAcro();
         qualityText.textContent = qualityCheck();
 
         videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);

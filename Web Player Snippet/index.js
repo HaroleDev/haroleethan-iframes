@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 const videoMetadata = {
     video_thumbs: "//res.cloudinary.com/harole/image/upload/s--3AQUSV56--/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
     video_poster: "//res.cloudinary.com/harole/video/upload/s--p6nXm3qO--/c_fill,h_720,q_auto:low,w_1280/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
@@ -99,7 +99,7 @@ const AirPlayButton = document.querySelector(".airplay-button");
 const CastButton = document.querySelector(".gcast-button");
 const CastTooltip = document.querySelector(".gcast-tooltip");
 
-var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content") || decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf('/') + 1));
+var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content") || decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf("/") + 1));
 var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
 var description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
 
@@ -1113,14 +1113,14 @@ async function togglePlay() {
 
 
 const qualityLabels = [
-    { label: 'SD', size: 640 },
-    { label: 'HD', size: 1280 },
-    { label: 'FHD', size: 1920 },
-    { label: 'QHD', size: 2560 },
-    { label: '4K', size: 3840 },
-    { label: '5K', size: 5120 },
-    { label: '6K', size: 6144 },
-    { label: '8K', size: 7860 },
+    { label: "SD", size: 640 },
+    { label: "HD", size: 1280 },
+    { label: "FHD", size: 1920 },
+    { label: "QHD", size: 2560 },
+    { label: "4K", size: 3840 },
+    { label: "5K", size: 5120 },
+    { label: "6K", size: 6144 },
+    { label: "8K", size: 7860 },
 ];
 
 function qualityCheck(size) {

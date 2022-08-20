@@ -87,8 +87,11 @@ const seekingPreview = document.querySelector(".seeking-preview");
 const seekingThumbnail = document.querySelector(".seeking-preview__thumbnail");
 const videoThumbPreview = document.querySelector(".video-thumb-preview");
 
-const qualityContainer = document.querySelector(".quality-badge");
-const qualityText = document.querySelector(".quality-badge .quality");
+const qualityBadgeContainer = document.querySelector(".quality-badge");
+const qualityBadgeText = document.querySelector(".quality-badge .quality");
+
+const streamingBadgeContainer = document.querySelector(".streaming-badge");
+const streamingBadgeText = document.querySelector(".streaming-badge .streaming");
 
 const AirPlayTooltip = document.querySelector(".airplay-tooltip");
 const AirPlayButton = document.querySelector(".airplay-button");
@@ -188,26 +191,26 @@ window.addEventListener("DOMContentLoaded", () => {
     /*if (!Hls.isSupported()) {
         hls.loadSource(videoMetadata.HLS_src);
         hls.attachMedia(video);
-        video.querySelector("source").setAttribute("type", videoMetadata.HLS_codec);
+        source.setAttribute("type", videoMetadata.HLS_codec);
         //For HLS container
         hls.on(Hls.Events.LEVEL_LOADED, function () {
             loadedMetadata();
         });
     } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.querySelector("source").setAttribute("src", videoMetadata.HLS_src);
-        video.querySelector("source").setAttribute("type", videoMetadata.HLS_codec);
+        source.setAttribute("src", videoMetadata.HLS_src);
+        source.setAttribute("type", videoMetadata.HLS_codec);
         video.load();
         video.addEventListener("durationchange", updatetime);
     } else {
-        video.querySelector("source").setAttribute("src", videoMetadata.Fallback_src);
-        video.querySelector("source").setAttribute("type", videoMetadata.Fallback_codec);
+        source.setAttribute("src", videoMetadata.Fallback_src);
+        source.setAttribute("type", videoMetadata.Fallback_codec);
         video.load();
         //For MP4 container
         video.addEventListener("durationchange", updatetime);
     };*/
 
-    video.querySelector("source").setAttribute("src", videoMetadata.Fallback_src);
-    video.querySelector("source").setAttribute("type", videoMetadata.Fallback_codec);
+    source.setAttribute("src", videoMetadata.Fallback_src);
+    source.setAttribute("type", videoMetadata.Fallback_codec);
 
     video.load();
     video.addEventListener("durationchange", updatetime);
@@ -1128,6 +1131,10 @@ function qualityCheckAcro() {
     return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
 };
 
+function streamingCheck() {
+    return (source.hasAttribute("type") === videoMetadata.HLS_codec && source.hasAttribute("src") === videoMetadata.HLS_src) ? "Adaptive Streaming" : "Progressive Streaming";
+};
+
 function updatePositionState() {
     navigator.mediaSession.setPositionState({
         duration: video.duration,
@@ -1503,8 +1510,12 @@ const eventListeners = [
         videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
         durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
 
-        qualityContainer.dataset.quality = qualityCheckAcro();
-        qualityText.textContent = qualityCheck(video.videoWidth);
+        qualityBadgeContainer.dataset.quality = qualityCheckAcro();
+        qualityBadgeText.textContent = qualityCheck(video.videoWidth);
+
+        streamingBadgeContainer.dataset.streaming = streamingCheck();
+        streamingBadgeText.textContent = streamingCheck();
+        streamingBadgeContainer.removeAttribute("hidden");
 
         videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
         videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);

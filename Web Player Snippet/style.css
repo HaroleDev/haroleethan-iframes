@@ -668,7 +668,7 @@ body.preload * {
 }
 
 [hidden] {
-    display: none;
+    display: none !important;
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
@@ -891,7 +891,24 @@ body.preload * {
     justify-content: space-between;
 }
 
-.quality-badge {
+.badges-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.badge {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -905,7 +922,7 @@ body.preload * {
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
-    padding: 0px 8px;
+    padding: 0px 12px;
     position: relative;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -913,24 +930,26 @@ body.preload * {
     border-radius: 1rem;
 }
 
-.quality-badge .span {
+.badge .span {
     font-variation-settings: "wght" 800;
     font-weight: 800;
     font-size: 1rem;
     line-height: 160%;
+    cursor: text;
 }
 
 [data-quality="HD"].quality-badge,
 [data-quality="FHD"].quality-badge,
 [data-quality="QHD"].quality-badge,
-[data-quality="UHD"].quality-badge {
+[data-quality="UHD"].quality-badge,
+[data-streaming="Adaptive Streaming"].streaming-badge {
     color: #000;
     background: var(--accent-color);
 }
 
 [data-quality="SD"].quality-badge,
 [data-quality="LD"].quality-badge,
-.quality-badge {
+.badge {
     color: #FFF;
     background: var(--background);
 }
@@ -1702,6 +1721,7 @@ screen and (max-height: 600px) {
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+    float: right;
 }
 
 .dialog {
@@ -3601,7 +3621,8 @@ input[type=range]::-ms-tooltip {
     [data-quality="HD"].quality-badge,
     [data-quality="FHD"].quality-badge,
     [data-quality="QHD"].quality-badge,
-    [data-quality="UHD"].quality-badge {
+    [data-quality="UHD"].quality-badge,
+    [data-streaming="Adaptive Streaming"].streaming-badge {
         color: Highlight;
         background: HighlightText;
         outline: 2px solid Highlight;
@@ -3609,7 +3630,7 @@ input[type=range]::-ms-tooltip {
 
     [data-quality="SD"].quality-badge,
     [data-quality="LD"].quality-badge,
-    .quality-badge {
+    .badge {
         color: CanvasText;
         background: Canvas;
         outline: 2px solid CanvasText;

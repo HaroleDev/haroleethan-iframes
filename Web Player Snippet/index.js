@@ -1,3 +1,4 @@
+'use strict';
 const videoMetadata = {
     video_thumbs: "//res.cloudinary.com/harole/image/upload/s--3AQUSV56--/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
     video_poster: "//res.cloudinary.com/harole/video/upload/s--p6nXm3qO--/c_fill,h_720,q_auto:low,w_1280/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
@@ -698,20 +699,18 @@ function frameSeeking(fps) {
 };
 
 //Time divider animation
-function spinnerDivider() {
-    const spinners = ["/", "–", "\\", "|"];
-    let index = 0;
-    var interval = setInterval(() => {
-        if (video.paused) clearInterval(interval);
-        let line = spinners[index];
-        if (line == undefined) {
-            index = 0;
-            line = spinners[index];
-        };
-        index = index > spinners.length ? 0 : index + 1;
-        document.querySelector(".divider-time").textContent = `${line}`;
-    }, 1000);
+const spinners = ["/", "–", "\\", "|"];
+let spinindex = 0;
+function intervalDivide() {
+    let line = spinners[spinindex];
+    if (line == undefined) {
+        spinindex = 0;
+        line = spinners[spinindex];
+    };
+    spinindex = spinindex > spinners.length ? 0 : spinindex + 1;
+    document.querySelector(".divider-time").textContent = `${line}`;
 };
+let interval;
 
 const requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -1442,9 +1441,8 @@ const eventListeners = [
         videoPoster.classList.add("played");
         navigator.mediaSession.playbackState = "playing";
         playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
-
         video.addEventListener("timeupdate", mediaSessionToggle());
-        spinnerDivider();
+        interval = setInterval(intervalDivide, 1000);
         if (Hls.isSupported() && video.currentTime === 0) hls.startLoad();
         videoContainer.addEventListener("pointerover", () => {
             activity();
@@ -1462,6 +1460,7 @@ const eventListeners = [
         videoContainer.classList.remove("paused");
     }],
     ["pause", () => {
+        clearInterval(interval);
         cancelAnimFrame(updatetime);
         navigator.mediaSession.playbackState = "paused";
         playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";

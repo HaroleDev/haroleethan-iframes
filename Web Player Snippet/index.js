@@ -136,14 +136,14 @@ function init() {
     font-size: 1rem;
     line-height: 130%;
     margin: 4px 0px 16px 0px;
-    font-weight: 500;
+    font-weight: 400;
     font-kerning: normal;
     color: #1C5947;`);
     console.log("%cThis is a browser feature intended for developers to debug the player. As this is a rolling release of a developing project, I'd encourage you to send a feedback to me once you discovered a bug not listed on the page (which you can by my Discord's username below).\n\nDiscord: %cHarole#1225\n%cWebsite (WIP): %chttps://preview.studio.site/live/4BqN8BM2Wr",
         `font-family: Inconsolata, monospace;
     font-size: 1rem;
     line-height: 130%;
-    font-weight: 500;
+    font-weight: 400;
     color: #1C5947;
     `,
         `font-family: Inconsolata, monospace;
@@ -156,7 +156,7 @@ function init() {
         `font-family: Inconsolata, monospace;
     font-size: 1rem;
     line-height: 130%;
-    font-weight: 500;
+    font-weight: 400;
     color: #1C5947;
     `,
         `font-family: Inconsolata, monospace;
@@ -352,12 +352,16 @@ function closeSettingsMenu(e) {
 };
 
 document.addEventListener("click", e => {
-    showContextMenu(false);
-    if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
-        settingsButton.classList.remove("pressed");
-        settingsContextMenu.classList.remove("pressed");
-        settingsTooltipContainer.classList.add("tooltip-right");
-        seekingPreview.removeAttribute("hidden");
+    const isClickInside = document.body.contains(e.target);
+
+    if (isClickInside || !isClickInside) {
+        showContextMenu(false);
+        if (!settingsButton.contains(e.target) && !settingsContextMenu.contains(e.target) && !transcriptPanel.contains(e.target)) {
+            settingsButton.classList.remove("pressed");
+            settingsContextMenu.classList.remove("pressed");
+            settingsTooltipContainer.classList.add("tooltip-right");
+            seekingPreview.removeAttribute("hidden");
+        };
     };
 });
 
@@ -1048,7 +1052,7 @@ function updatetime() {
     requestAnimFrame(updatetime);
 };
 
-const leading0Formatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
+const leading0Formatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2, });
 
 function formatDuration(time) {
     const seconds = Math.trunc(time % 60);
@@ -1125,14 +1129,13 @@ function qualityCheck(size) {
     const label = qualityLabels.find(lb => lb.size >= size);
     return label ? label.label : "LD";
 };
-//return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "4K UHD" : video.videoWidth >= 5120 ? "5K UHD" : video.videoWidth >= 6144 ? "6K UHD" : video.videoWidth >= 7860 ? "8K UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
 
 function qualityCheckAcro() {
-    return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
+    return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "UHD" : video.videoWidth >= 640 ? "SD" : "N/A";
 };
 
 function streamingCheck() {
-    return (source.hasAttribute("type") === videoMetadata.HLS_codec && source.hasAttribute("src") === videoMetadata.HLS_src) ? "Adaptive Streaming" : "Progressive Streaming";
+    return (source.hasAttribute("type") === videoMetadata.HLS_codec && source.hasAttribute("src") === videoMetadata.HLS_src) ? "Multiple Qualities" : "Single Quality";
 };
 
 function updatePositionState() {

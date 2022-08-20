@@ -136,7 +136,7 @@ function init() {
     font-weight: 500;
     font-kerning: normal;
     color: #1C5947;`);
-    console.log("%cThis is a browser feature intended for developers to debug the player. As this is a rolling release of a developing project, I'd encourage you to send a feedback to me once you discovered a bug not listed on the page (which you can by my Discord's username below).\n\nDiscord: %cHarole#1225%c\nWebsite (WIP): %chttps://preview.studio.site/live/4BqN8BM2Wr",
+    console.log("%cThis is a browser feature intended for developers to debug the player. As this is a rolling release of a developing project, I'd encourage you to send a feedback to me once you discovered a bug not listed on the page (which you can by my Discord's username below).\n\nDiscord: %cHarole#1225\n%cWebsite (WIP): %chttps://preview.studio.site/live/4BqN8BM2Wr",
         `font-family: Inconsolata, monospace;
     font-size: 1rem;
     line-height: 130%;

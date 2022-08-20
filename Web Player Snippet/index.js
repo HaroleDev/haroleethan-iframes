@@ -996,9 +996,9 @@ function updatetime() {
 const leading0Formatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
 
 function formatDuration(time) {
-    const seconds = Math.floor(time % 60);
-    const minutes = Math.floor(time / 60) % 60;
-    const hours = Math.floor(time / 3600);
+    const seconds = Math.trunc(time % 60);
+    const minutes = Math.trunc((time / 60) % 60);
+    const hours = Math.trunc((time / 60 / 60) % 60);
     if (hours === 0) {
         return `${minutes}:${leading0Formatter.format(seconds)}`;
     } else if (hours > 0) {
@@ -1009,9 +1009,9 @@ function formatDuration(time) {
 };
 
 function formatDurationARIA(time) {
-    const seconds = Math.floor(time % 60);
-    const minutes = Math.floor(time / 60) % 60;
-    const hours = Math.floor(time / 3600);
+    const seconds = Math.trunc(time % 60);
+    const minutes = Math.trunc((time / 60) % 60);
+    const hours = Math.trunc((time / 60 / 60) % 60);
 
     let secondsARIA = 0;
     if (seconds < 1) secondsARIA = `Less than a second`;
@@ -1053,9 +1053,24 @@ async function togglePlay() {
     video.paused ? await video.play() : await video.pause();
 };
 
-function qualityCheck() {
-    return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "4K UHD" : video.videoWidth >= 5120 ? "5K UHD" : video.videoWidth >= 6144 ? "6K UHD" : video.videoWidth >= 7860 ? "8K UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
+
+const qualityLabels = [
+    { label: 'SD', size: 640 },
+    { label: 'HD', size: 1280 },
+    { label: 'FHD', size: 1920 },
+    { label: 'QHD', size: 2560 },
+    { label: '4K', size: 3840 },
+    { label: '5K', size: 5120 },
+    { label: '6K', size: 6144 },
+    { label: '8K', size: 7860 },
+];
+
+function qualityCheck(size) {
+    if (!size || size < 0) return "N/A";
+    const label = qualityLabels.find(lb => lb.size >= size);
+    return label ? label.label : "LD";
 };
+//return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "4K UHD" : video.videoWidth >= 5120 ? "5K UHD" : video.videoWidth >= 6144 ? "6K UHD" : video.videoWidth >= 7860 ? "8K UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
 
 function qualityCheckAcro() {
     return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "UHD" : video.videoWidth < 640 ? "LD" : video.videoWidth >= 640 ? "SD" : "N/A";
@@ -1437,7 +1452,7 @@ const eventListeners = [
         durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
 
         qualityContainer.dataset.quality = qualityCheckAcro();
-        qualityText.textContent = qualityCheck();
+        qualityText.textContent = qualityCheck(video.videoWidth);
 
         videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
         videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);

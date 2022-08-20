@@ -99,6 +99,30 @@ var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("
 var author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content");
 var description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
 
+var asciiLogo = [
+    "                                                                      G@@@@@@@&BY~                                                                              ",
+    "                                                                      ?GBBGGB&@@@@B!                                                                            ",
+    "PBP7.                                                                        :!P@@@@5                                                                           ",
+    "@@@@&5!.               .~?Y55Y7^                                        ^?YY!   ~P#BJ               :PGGGP.                                                     ",
+    "@@@@@@@#Y^            ?#@@@@@@@@G!                                     7@@@@@G                      :@@@@&.                                                     ",
+    "@@@@@@@@@@B?:        5@@@@@@@@@@@@7                                    !&@@@@P                      :&@@@&.                                                     ",
+    "@@@@@@@@@@@@@?      ^@@@@@@@@@@@@@B                                     :7J?~                       :&@@@&.                                                     ",
+    "@@@@@@@@@@@B?:      .#@@@@@@@@@@@@5                                                                 :&@@@&.                                                     ",
+    "@@@@@@@@#Y^          ^B@@@@@@@@@@5.                                                     .:^^~^^:    :&@@@&.         .:^^~^^:.                  .:^^~^^:         ",
+    "@@@@@&5!.              !5B#&&#GJ^            ?#BB#P.            ?#BB#Y  5#BB#~       ^?P#&@@@@@&BP7.:&@@@&.      ^JP#&@@@@@@#GY~.          ^?5B&@@@@@@&#PJ~     ",
+    "&@&P7.                    ....               .G@@@@5           !@@@@B.  G@@@@!     ^P@@@@@@&###&@@@#Y&@@@&.    !G@@@@&#BGBB&@@@@#?       !G@@@@@@&##&@@@@@@B?   ",
+    ":~:                                           .B@@@@?         ^&@@@#:   P@@@@!    ?@@@@@G7^....:~JB@@@@@@&.   5@@@@P!:.    :!P@@@@P.   .P@@@@&57^....:!Y#@@@@B^ ",
+    "                             ^~^               ^&@@@@!       :#@@@&^    P@@@@!   !@@@@&!           ?@@@@@&.  5@@@@7           7@@@@Y   G@@@@G:          .J@@@@#^",
+    "                           ^B@@@P.              ~@@@@&^     .G@@@@!     P@@@@!   B@@@@7             J@@@@&. ^@@@@G^^^^^^^^^^^^^B@@@&: ?@@@@B              Y@@@@P",
+    "                           G@@@@#.               7@@@@B.    P@@@@7      P@@@@!  :@@@@&.             ^@@@@&. 7@@@@@@@@@@@@@@@@@@@@@@@~ P@@@@?              ^@@@@&",
+    "                          J@@@@@J                 J@@@@P   J@@@@J       P@@@@!  :&@@@&:             ~@@@@&. 7@@@@P777777777777777777. 5@@@@J              ^@@@@&",
+    "                        ^P@@@@@P                   5@@@@? !@@@@Y        P@@@@!   B@@@@J             P@@@@&. :&@@@G                    !@@@@#:             P@@@@5",
+    "         ^YPPY7^:..:^~JG@@@@@@Y.                   .G@@@&!#@@@P         P@@@@!   ~@@@@@Y.         :P@@@@@&.  ?@@@@5.          .P&#&B.  Y@@@@#!          ^G@@@@G.",
+    "        .#@@@@@@&&&&@@@@@@@@P~                      :#@@@@@@@G.         P@@@@!    !&@@@@&5?~^^~!?P@@&&@@@&.   7&@@@#Y!^:..:^!Y#@@@#~    ?&@@@@BY7~^^^!JG@@@@@5. ",
+    "         !5#@@@@@@@@@@@@&GJ^                         ^&@@@@@B.          G@@@@!     :Y#@@@@@@@@@@@@&P^B@@@&.    :J#@@@@@&&&&@@@@@#J.      :JB@@@@@@@@@@@@@@#5^   ",
+    "           .^7J5PGGPPY?~:                             !GGGGG^           YGGGG^       .!5G#&@@@&BP?^  JGGGP.      .~JP#&@@@@&#GJ!.           ~?PB#&@@@&#GY!.     ",
+];
+
 function init() {
     document.body.classList.remove("preload");
     if (video.hasAttribute("controls")) {
@@ -110,7 +134,8 @@ function init() {
         videoInformationOverlay.setAttribute("hidden", "");
         video.removeAttribute("controls");
     };
-}
+    console.log("%c\n\n\n" + asciiLogo.join("\n"), "background: #E7FEF7; color: #02DA9A");
+};
 
 init();
 

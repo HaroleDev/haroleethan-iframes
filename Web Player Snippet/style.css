@@ -1516,7 +1516,6 @@ screen and (max-height: 600px) {
     left: 0;
     background-color: var(--flyout-bg);
     color: var(--text-color);
-    padding: 12px 8px;
     min-width: 256px;
     z-index: 6;
     border-radius: 8px;
@@ -1619,7 +1618,6 @@ screen and (max-height: 600px) {
     position: absolute;
     background: var(--flyout-bg);
     color: var(--text-color);
-    padding: 12px 8px;
     width: 300px;
     z-index: 5;
     border-radius: 8px;
@@ -1632,6 +1630,11 @@ screen and (max-height: 600px) {
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
     pointer-events: none;
+}
+
+.video-context-menu .contents,
+.settings-context-menu .contents {
+    padding: 12px 8px;
 }
 
 .settings-context-menu.pressed {

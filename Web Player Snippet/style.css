@@ -20,6 +20,7 @@
 
 :root {
     --text-color: #F0F0F0;
+    --dark-text-color: #161616;
     --soft-accent-color: #01A573;
     --accent-color: #02DA9A;
     --bright-accent-color: #23FDBC;
@@ -72,6 +73,7 @@ body {
     @supports (color: color(display-p3 1 1 1)) {
         :root {
             --text-color: color(display-p3 calc(240/255) calc(240/255) calc(240/255));
+            --dark-text-color: color(display-p3 calc(22/255) calc(22/255) calc(22/255));
             --soft-accent-color: color(display-p3 calc(1/255) calc(165/255) calc(115/255));
             --accent-color: color(display-p3 calc(2/255) calc(218/255) calc(154/255));
             --bright-accent-color: color(display-p3 calc(35/255) calc(253/255) calc(188/255));
@@ -675,7 +677,8 @@ body.preload * {
 }
 
 .controls[hidden] {
-    opacity: 0.3;
+    display: flex !important;
+    opacity: 0.3 !important;
 }
 
 .scrubbing .controls,
@@ -942,15 +945,13 @@ body.preload * {
 [data-quality="FHD"].quality-badge,
 [data-quality="QHD"].quality-badge,
 [data-quality="UHD"].quality-badge,
-[data-streaming="Adaptive Streaming"].streaming-badge {
-    color: #000;
+[data-streaming="Multiple Qualities"].streaming-badge {
+    color: var(--dark-text-color);
     background: var(--accent-color);
 }
 
-[data-quality="SD"].quality-badge,
-[data-quality="LD"].quality-badge,
 .badge {
-    color: #FFF;
+    color: var(--text-color);
     background: var(--background);
 }
 
@@ -3628,8 +3629,6 @@ input[type=range]::-ms-tooltip {
         outline: 2px solid Highlight;
     }
 
-    [data-quality="SD"].quality-badge,
-    [data-quality="LD"].quality-badge,
     .badge {
         color: CanvasText;
         background: Canvas;

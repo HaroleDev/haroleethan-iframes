@@ -1206,6 +1206,7 @@
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
+    pointer-events: painted;
 }
 
 .play-btn-poster:hover .symbol {

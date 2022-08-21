@@ -117,13 +117,14 @@ function init() {
     };
     console.log("%cPlayful Video%c\nRolling Progress Release", `
     background-image: url(data:image/svg+xml;base64,${btoa(svg)});
-    padding: 1rem 5.375rem;
+    padding: 2rem 12rem;
     padding-right: 0px;
     margin: 20px;
-    margin-left: -7px;
+    margin-left: 0px;
     margin-bottom: 8px;
     color: transparent;
     text-align: center;
+    font-size: 0px;
     user-select: none;
     pointer-events: none;
     background-size: contain;
@@ -931,6 +932,7 @@ timelineInner.addEventListener("pointermove", e => {
     };
     timelineInner.addEventListener("pointerup", e => {
         timelineInner.releasePointerCapture(e.pointerId);
+
         if (isScrubbing) {
             toggleScrubbing(e);
             seekingPreview.classList.remove("hovered");

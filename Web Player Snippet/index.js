@@ -113,8 +113,7 @@ function init() {
         videoInformationOverlay.setAttribute("hidden", "");
         video.removeAttribute("controls");
     };
-    console.log("%cPlayful Video%c\nRolling Progress Release",
-        `background-image: url(data:image/svg+xml;base64,${btoa(svg)});
+    console.log("%cPlayful Video%c\nRolling Progress Release", `background-image: url(data:image/svg+xml;base64,${btoa(svg)});
     display: inline-block;
     padding: 2rem 12rem;
     padding-right: 0px;
@@ -127,8 +126,7 @@ function init() {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
-    `,
-        `font-family: Manrope, Arial, Helvetica, sans-serif;
+    `, `font-family: Manrope, Arial, Helvetica, sans-serif;
     display: block;
     font-size: 1rem;
     line-height: 130%;
@@ -136,27 +134,23 @@ function init() {
     font-weight: 400;
     font-kerning: normal;
     color: currentColor;`);
-    console.log("%cThis is a browser feature intended for developers to debug the player. As this is a rolling release of a developing project, I'd encourage you to send a feedback to me once you discovered a bug not listed on the page (which you can by my Discord's username below).\n\nDiscord: %cHarole#1225\n%cWebsite (WIP): %chttps://preview.studio.site/live/4BqN8BM2Wr",
-        `font-family: Inconsolata, monospace;
+    console.log("%cThis is a browser feature intended for developers to debug the player. As this is a rolling release of a developing project, I'd encourage you to send a feedback to me once you discovered a bug not listed on the page (which you can by my Discord's username below).\n\nDiscord: %cHarole#1225\n%cWebsite (WIP): %chttps://preview.studio.site/live/4BqN8BM2Wr", `font-family: Inconsolata, monospace;
     font-size: 1rem;
     line-height: 130%;
     font-weight: 400;
     color: currentColor;
-    `,
-        `font-family: Inconsolata, monospace;
+    `, `font-family: Inconsolata, monospace;
     font-size: 1rem;
     line-height: 100%;
     font-weight: 800;
     color: currentColor;
     border-bottom: 2px solid currentColor;
-    `,
-        `font-family: Inconsolata, monospace;
+    `, `font-family: Inconsolata, monospace;
     font-size: 1rem;
     line-height: 130%;
     font-weight: 400;
     color: currentColor;
-    `,
-        `font-family: Inconsolata, monospace;
+    `, `font-family: Inconsolata, monospace;
     font-size: 1rem;
     line-height: 100%;
     font-weight: 800;
@@ -304,7 +298,10 @@ videoContainer.addEventListener("contextmenu", e => {
         showContextMenu(false);
     } else {
         e.preventDefault();
-        const { x, y } = ctxmenuPosition(e);
+        const {
+            x,
+            y
+        } = ctxmenuPosition(e);
         contextMenu.style.left = `${x}px`;
         contextMenu.style.top = `${y}px`;
         showContextMenu();
@@ -329,7 +326,10 @@ function ctxmenuPosition(eventPos) {
         y = winHeight - cmHeight - 8;
     }
 
-    return { x, y };
+    return {
+        x,
+        y
+    };
 };
 
 function closeSettingsMenu(e) {
@@ -352,13 +352,14 @@ document.addEventListener("click", e => {
     };
 });
 
-downloadItem.addEventListener("click", () => {
-    window.open(videoMetadata.Fallback_src);
-    settingsButton.classList.remove("pressed");
-    settingsContextMenu.classList.remove("pressed");
-    settingsTooltipContainer.classList.add("tooltip-right");
+//Context menu items
+eqItem.addEventListener("click", () => eqContainer.classList.add("opened"));
+transcriptItem.addEventListener("click", () => {
+    loadTranscript(document.getElementById("default-track").getAttribute("srclang"));
+    videoPlayer.classList.add("transcript-opened");
 });
 
+//Settings
 settingsButton.addEventListener("click", () => {
     settingsButton.classList.toggle("pressed");
     settingsContextMenu.classList.toggle("pressed");
@@ -368,6 +369,14 @@ settingsButton.addEventListener("click", () => {
     } else {
         seekingPreview.removeAttribute("hidden");
     };
+});
+
+//Settings items
+downloadItem.addEventListener("click", () => {
+    window.open(videoMetadata.Fallback_src, "_parent");
+    settingsButton.classList.remove("pressed");
+    settingsContextMenu.classList.remove("pressed");
+    settingsTooltipContainer.classList.add("tooltip-right");
 });
 
 //AudioContext
@@ -418,8 +427,6 @@ function changeGain(sliderValue, nbFilter) {
 };*/
 
 //EQ dialog
-eqItem.addEventListener("click", eqContainer.classList.add("opened"));
-
 EQswitchToggle.addEventListener("click", () => {
     if (eqContainer.classList.contains("enabled")) {
         eqContainer.classList.remove("enabled")
@@ -452,15 +459,10 @@ function closedDialog() {
     };
 };
 
-dialogOverlay.addEventListener("click", closedDialog());
-closeDialogBtn.addEventListener("click", closedDialog());
+dialogOverlay.addEventListener("click", closedDialog);
+closeDialogBtn.addEventListener("click", closedDialog);
 
 //Transcript Panel
-transcriptItem.addEventListener("click", () => {
-    loadTranscript(document.getElementById("default-track").getAttribute("srclang"));
-    videoPlayer.classList.add("transcript-opened");
-});
-
 closeTranscriptPanelBtn.addEventListener("pointerover", () => {
     videoContainer.classList.add("hovered");
     video.classList.remove("inactive");
@@ -478,7 +480,7 @@ closeTranscriptPanelBtn.addEventListener("click", () => {
 const captions = video.textTracks[0];
 captions.mode = "hidden";
 
-captionButton.addEventListener("click", toggleCaptions());
+captionButton.addEventListener("click", toggleCaptions);
 
 function toggleCaptions() {
     const isHidden = captions.mode === "hidden";
@@ -565,10 +567,8 @@ function removeHTML(text) {
 };
 
 function jumpToTranscript(time) {
-    (video.currentTime = time),
-        video.paused ? (video.pause(),
-            timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration)) :
-            video.play();
+    (video.currentTime = time), video.paused ? (video.pause(), timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration)) :
+        video.play();
 };
 
 function clearTranscriptDiv() {
@@ -662,22 +662,19 @@ loopItem.addEventListener("click", loopVideo);
 function skip(time) {
     video.currentTime += time;
     const percent = video.currentTime / video.duration;
-    (currentTime.textContent = formatDuration(percent * video.duration)),
-        timelineInner.style.setProperty("--progress-position", percent);
+    (currentTime.textContent = formatDuration(percent * video.duration)), timelineInner.style.setProperty("--progress-position", percent);
 };
 
 function skipPercent(time) {
     video.currentTime = video.duration * time;
     const percent = video.currentTime / video.duration;
-    (currentTime.textContent = formatDuration(percent * video.duration)),
-        timelineInner.style.setProperty("--progress-position", percent);
+    (currentTime.textContent = formatDuration(percent * video.duration)), timelineInner.style.setProperty("--progress-position", percent);
 };
 
 function frameSeeking(time) {
     video.currentTime += 1 / time;
     const percent = video.currentTime / video.duration;
-    (currentTime.textContent = formatDuration(percent * video.duration)),
-        timelineInner.style.setProperty("--progress-position", percent);
+    (currentTime.textContent = formatDuration(percent * video.duration)), timelineInner.style.setProperty("--progress-position", percent);
 };
 
 //Time divider animation
@@ -872,10 +869,9 @@ function handleVolumeUpdate(e) {
 volumeButton.addEventListener("click", toggleVolume);
 
 function toggleVolume() {
-    (video.muted = !video.muted),
-        video.muted
-            ? (volumeTooltipContainer.dataset.tooltip = "Unmute (m)")
-            : (volumeTooltipContainer.dataset.tooltip = "Mute (m)");
+    (video.muted = !video.muted), video.muted ?
+        (volumeTooltipContainer.dataset.tooltip = "Unmute (m)") :
+        (volumeTooltipContainer.dataset.tooltip = "Mute (m)");
 };
 
 //Timeline
@@ -1049,16 +1045,31 @@ async function togglePlay() {
 };
 
 
-const qualityLabels = [
-    { label: "SD", size: 640 },
-    { label: "HD", size: 1280 },
-    { label: "FHD", size: 1920 },
-    { label: "QHD", size: 2560 },
-    { label: "4K", size: 3840 },
-    { label: "5K", size: 5120 },
-    { label: "6K", size: 6144 },
-    { label: "8K", size: 7860 },
-];
+const qualityLabels = [{
+    label: "SD",
+    size: 640
+}, {
+    label: "HD",
+    size: 1280
+}, {
+    label: "FHD",
+    size: 1920
+}, {
+    label: "QHD",
+    size: 2560
+}, {
+    label: "4K",
+    size: 3840
+}, {
+    label: "5K",
+    size: 5120
+}, {
+    label: "6K",
+    size: 6144
+}, {
+    label: "8K",
+    size: 7860
+},];
 
 function qualityCheck(size) {
     if (!size || size < 0) return "N/A";
@@ -1092,33 +1103,27 @@ async function mediaSessionToggle() {
                     src: `${mediaSessionMetadata.thumb_96}`,
                     sizes: "96x96",
                     type: mediaSessionMetadata.type,
-                },
-                {
+                }, {
                     src: `${mediaSessionMetadata.thumb_128}`,
                     sizes: "128x128",
                     type: mediaSessionMetadata.type,
-                },
-                {
+                }, {
                     src: `${mediaSessionMetadata.thumb_192}`,
                     sizes: "192x192",
                     type: mediaSessionMetadata.type,
-                },
-                {
+                }, {
                     src: `${mediaSessionMetadata.thumb_256}`,
                     sizes: "256x256",
                     type: mediaSessionMetadata.type,
-                },
-                {
+                }, {
                     src: `${mediaSessionMetadata.thumb_384}`,
                     sizes: "384x384",
                     type: mediaSessionMetadata.type,
-                },
-                {
+                }, {
                     src: `${mediaSessionMetadata.thumb_512}`,
                     sizes: "512x512",
                     type: mediaSessionMetadata.type,
-                },
-                ],
+                },],
             });
         };
     } catch (error) {
@@ -1243,10 +1248,9 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
     castSession.loadMedia(request)
         .then(function () {
             console.log("Load succeed");
-        },
-            function (errorCode) {
-                console.log("Error code: " + errorCode)
-            });
+        }, function (errorCode) {
+            console.log("Error code: " + errorCode)
+        });
 
     let sessionId;
 
@@ -1298,31 +1302,29 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
         });
 
     var context = cast.framework.CastContext.getInstance();
-    context.addEventListener(cast.framework,
-        function (e) {
-            switch (e.castState) {
-                case cast.framework.SessionState.NO_DEVICES_AVAILABLE:
-                    CastTooltip.setAttribute("hidden", "");
-                    break;
-                case cast.framework.SessionState.NOT_CONNECTED:
-                    CastTooltip.removeAttribute("hidden");
-                    break;
-                case cast.framework.SessionState.CONNECTED:
-                    videoContainer.classList.add("casted-session");
-                    break;
-            };
-        });
-    context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
-        function (e) {
-            switch (e.sessionState) {
-                case cast.framework.SessionState.SESSION_STARTED:
-                case cast.framework.SessionState.SESSION_RESUMED:
-                    break;
-                case cast.framework.SessionState.SESSION_ENDED:
-                    videoContainer.classList.remove("casted-session");
-                    break;
-            };
-        });
+    context.addEventListener(cast.framework, function (e) {
+        switch (e.castState) {
+            case cast.framework.SessionState.NO_DEVICES_AVAILABLE:
+                CastTooltip.setAttribute("hidden", "");
+                break;
+            case cast.framework.SessionState.NOT_CONNECTED:
+                CastTooltip.removeAttribute("hidden");
+                break;
+            case cast.framework.SessionState.CONNECTED:
+                videoContainer.classList.add("casted-session");
+                break;
+        };
+    });
+    context.addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED, function (e) {
+        switch (e.sessionState) {
+            case cast.framework.SessionState.SESSION_STARTED:
+            case cast.framework.SessionState.SESSION_RESUMED:
+                break;
+            case cast.framework.SessionState.SESSION_ENDED:
+                videoContainer.classList.remove("casted-session");
+                break;
+        };
+    });
 
     playerController.addEventListener(cast.framework.RemotePlayerEventType.IS_CONNECTED_CHANGED, function () {
         if (!player.isConnected) {

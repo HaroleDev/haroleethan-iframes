@@ -24,6 +24,7 @@
     <link rel="dns-prefetch" href="//polyfill.io" pr="0.3">
     <link rel="preconnect" href="//gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="page.css">
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
     <link href="//fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=Manrope:wght@500;800&display=swap"
@@ -545,10 +546,25 @@
                     <div class="video-fit-contain">
                         <div class="video-fit-content">
                             <div class="aspect-ratio-response">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="video-filters">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="video-filters"
+                                    color-interpolation-filters="sRGB">
                                     <defs>
                                         <filter id="blur">
                                             <feGaussianBlur in="SourceGraphic" stdDeviation="12,0" />
+                                        </filter>
+                                        <filter id="gamma">
+                                            <feComponentTransfer>
+                                                <feFuncR type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                                                <feFuncG type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                                                <feFuncB type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                                            </feComponentTransfer>
+                                        </filter>
+                                        <filter id="mosaic" x="0" y="0">
+                                            <feFlood x="4" y="4" height="2" width="2" />
+                                            <feComposite width="8" class="comp" />
+                                            <feTile result="a" />
+                                            <feComposite in="SourceGraphic" in2="a" operator="in" />
+                                            <feMorphology operator="dilate" class="dilate" />
                                         </filter>
                                     </defs>
                                 </svg>
@@ -630,6 +646,9 @@
         document.querySelector(".author-name .span").textContent = author;
         document.querySelector(".video-information .author-info .span").textContent = author;
         document.querySelector(".video-information .description p").textContent = description;
+
+        document.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (document.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1);
+        document.querySelector("#mosaic feComposite.comp").setAttribute("height", document.querySelector("#mosaic feComposite.comp").getAttribute("width"));
 
         var scripts = [
             "//polyfill.io/v3/polyfill.min.js?features=Function.prototype.name%2CDocument%2CBlob%2CAudioContext%2CArray.prototype.map%2CArray.prototype.lastIndexOf%2CArray.prototype.indexOf%2CArray.prototype.forEach%2CArray.prototype.findIndex%2Ces2015%2Cdefault",

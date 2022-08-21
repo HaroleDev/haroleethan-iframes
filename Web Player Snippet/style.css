@@ -52,23 +52,6 @@
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-variation-settings: "wght" 500;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 160%;
-    background: var(--page-background);
-    color: var(--background);
-    -webkit-transition: background-color 600ms var(--ease-out-expo), color 600ms var(--ease-out-expo);
-    -o-transition: background-color 600ms var(--ease-out-expo), color 600ms var(--ease-out-expo);
-    transition: background-color 600ms var(--ease-out-expo), color 600ms var(--ease-out-expo);
-}
-
 @media (color-gamut: p3) {
     @supports (color: color(display-p3 1 1 1)) {
         :root {
@@ -88,19 +71,6 @@ body {
             --link-and-focus-color: color(display-p3 calc(75/255) calc(153/255) calc(231/255));
         }
     }
-}
-
-.logo.dark,
-.logo.forced-color {
-    display: none;
-}
-
-body.preload * {
-    animation-duration: 0s !important;
-    -webkit-animation-duration: 0s !important;
-    -webkit-transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
-    -o-transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
-    transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
 }
 
 .video-container {
@@ -174,17 +144,16 @@ body.preload * {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
 }
 
 .video-filters {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
+    right: 0;
+    bottom: 0;
 }
 
 .full-screen .video-fit-content {
@@ -2917,125 +2886,6 @@ input[type=range]::-ms-tooltip {
     font-weight: 800;
 }
 
-.column {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    margin: 0 auto;
-    min-width: -webkit-fit-content;
-    min-width: -moz-fit-content;
-    min-width: fit-content;
-    max-width: calc(1280px + 64px);
-    margin-top: 48px;
-    padding: 0px max(1rem, 2rem);
-}
-
-.website-header {
-    width: 100%;
-    padding: 64px 32px 32px 32px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -ms-flex-line-pack: center;
-    -webkit-align-content: center;
-    align-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    text-align: center;
-}
-
-.website-header p,
-.bugs p {
-    margin: 4px 0px;
-}
-
-.website-header b,
-.bugs b {
-    font-variation-settings: "wght" 800;
-    font-weight: 800;
-}
-
-.bugs {
-    margin-top: 32px;
-}
-
-.website-header .logo {
-    height: 64px;
-    width: auto;
-}
-
-.video-information {
-    font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-    font-style: normal;
-    z-index: 1;
-}
-
-.video-information h1 {
-    font-variation-settings: "wght" 800;
-    font-weight: 800;
-    line-height: 110%;
-    letter-spacing: -0.04em;
-    font-size: 2rem;
-    margin-bottom: 4px;
-    margin-top: 8px;
-}
-
-.video-information .author-info .span {
-    font-variation-settings: "wght" 800;
-    font-weight: 800;
-    font-size: 1rem;
-    line-height: 160%;
-    letter-spacing: -0.02em;
-    margin: 4px 0px;
-}
-
-.video-information .description p {
-    font-variation-settings: "wght" 500;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 160%;
-    margin: 8px 0px;
-    word-wrap: break-word;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    -ms-hyphenate-limit-chars: 6 3 2;
-    hyphenate-limit-chars: 6 3 2;
-    -ms-hyphenate-limit-lines: 2;
-    -webkit-hyphenate-limit-lines: 2;
-    hyphenate-limit-lines: 2;
-    -webkit-hyphenate-character: auto;
-    hyphenate-character: auto;
-}
-
 .error-dialog {
     position: absolute;
     top: 48px;
@@ -3086,20 +2936,6 @@ input[type=range]::-ms-tooltip {
 
 @media (prefers-color-scheme: dark) {
 
-    html,
-    body {
-        background: var(--background);
-        color: var(--text-color);
-    }
-
-    .logo.light {
-        display: none;
-    }
-
-    .logo.dark {
-        display: block !important;
-    }
-
     .video-player-container {
         -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--stroke-accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 0px #1C6550, 0px 4px 0px 0px #1C655099, 0px 4px 0px 0px #1C65504d, 0px 4px 0px 0px #1C65501a;
         box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--stroke-accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 0px #1C6550, 0px 4px 0px 0px #1C655099, 0px 4px 0px 0px #1C65504d, 0px 4px 0px 0px #1C65501a;
@@ -3126,31 +2962,6 @@ input[type=range]::-ms-tooltip {
 
 @media (-ms-high-contrast: active),
 (forced-colors: active) {
-
-    *,
-    *::before,
-    *::after {
-        text-rendering: optimizeLegibility;
-        shape-rendering: optimizeLegibility;
-    }
-
-    :root {
-        --text-color: CanvasText;
-        --soft-accent-color: Highlight;
-        --accent-color: Highlight;
-        --bright-accent-color: Highlight;
-        --flyout-bg: Canvas;
-        font-size: 16px;
-    }
-
-    .logo.dark,
-    .logo.light {
-        display: none !important;
-    }
-
-    .logo.forced-color {
-        display: block;
-    }
 
     .video-player {
         background-color: Canvas;

@@ -154,11 +154,11 @@ body.preload * {
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
     -webkit-animation: transition 600ms var(--ease-out-expo) forwards;
     animation: transition 600ms var(--ease-out-expo) forwards;
-    will-change: filter, animation;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    will-change: filter, transform, animation;
 }
 
 .full-screen .video-fit-contain {
@@ -175,6 +175,15 @@ body.preload * {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.video-filters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
 }
 
 .full-screen .video-fit-content {
@@ -1544,6 +1553,7 @@ screen and (max-height: 600px) {
     background-color: var(--flyout-bg);
     color: var(--text-color);
     min-width: 256px;
+    width: fit-content;
     z-index: 6;
     border-radius: 8px;
     opacity: 0;
@@ -1645,7 +1655,8 @@ screen and (max-height: 600px) {
     position: absolute;
     background: var(--flyout-bg);
     color: var(--text-color);
-    width: 300px;
+    min-width: 256px;
+    width: fit-content;
     z-index: 5;
     border-radius: 8px;
     right: 0;
@@ -3157,12 +3168,12 @@ input[type=range]::-ms-tooltip {
     }
 
     .video-controls-container .left-side button:hover {
-        background-color: ButtonFace;
+        background-color: HighlightText;
         outline: 2px solid Highlight;
     }
 
     .video-controls-container .left-side button:active {
-        background: Highlight;
+        background-color: Highlight;
         outline: 2px solid HighlightText;
         -webkit-transform: scale(0.96);
         -ms-transform: scale(0.96);
@@ -3176,7 +3187,7 @@ input[type=range]::-ms-tooltip {
     }
 
     .video-controls-container .right-side button {
-        background: ButtonFace;
+        background-color: ButtonFace;
         outline: 2px solid ButtonText;
         -webkit-transition: all 0s var(--ease-out-expo);
         -o-transition: all 0s var(--ease-out-expo);
@@ -3192,12 +3203,12 @@ input[type=range]::-ms-tooltip {
 
     .video-controls-container .right-side button:hover {
         outline: 2px solid Highlight;
-        background: HighlightText;
+        background-color: HighlightText;
     }
 
     .video-controls-container .right-side button:active {
         outline: 2px solid HighlightText;
-        background: Highlight;
+        background-color: Highlight;
     }
 
     .video-controls-container .right-side button path {
@@ -3254,7 +3265,7 @@ input[type=range]::-ms-tooltip {
     .video-container.caption .video-controls-container .right-side button:active.caption-button::after,
     .video-container.pip-player .video-controls-container .right-side button:active.pip-button::after,
     .video-container.casted-session .video-controls-container .right-side button:active.gcast-button::after {
-        background: HighlightText;
+        background-color: HighlightText;
     }
 
     .video-container .settings-button.pressed {
@@ -3267,7 +3278,7 @@ input[type=range]::-ms-tooltip {
 
     .video-context-menu,
     .settings-context-menu {
-        background: Canvas;
+        background-color: Canvas;
         outline: 4px solid CanvasText;
     }
 
@@ -3278,7 +3289,7 @@ input[type=range]::-ms-tooltip {
 
     .video-context-menu .item,
     .settings-context-menu .item {
-        background: transparent;
+        background-color: transparent;
         color: CanvasText;
         -webkit-transition: all 0s;
         -o-transition: all 0s;
@@ -3288,7 +3299,7 @@ input[type=range]::-ms-tooltip {
     .video-context-menu .item:hover,
     .settings-context-menu .item:hover {
         color: Highlight;
-        background: HighlightText;
+        background-color: HighlightText;
         outline: 2px solid Highlight;
     }
 
@@ -3300,7 +3311,7 @@ input[type=range]::-ms-tooltip {
     .video-context-menu .item:active,
     .settings-context-menu .item:active {
         color: LinkText;
-        background: HighlightText;
+        background-color: HighlightText;
         outline: 2px solid LinkText;
     }
 
@@ -3334,17 +3345,17 @@ input[type=range]::-ms-tooltip {
     }
 
     .timeline {
-        background: Canvas;
+        background-color: Canvas;
         outline: 2px solid CanvasText;
     }
 
     .timeline::before {
-        background: Highlight;
+        background-color: Highlight;
         opacity: 0.5 !important;
     }
 
     .timeline::after {
-        background: Highlight;
+        background-color: Highlight;
     }
 
     .timeline:hover::after {
@@ -3355,7 +3366,7 @@ input[type=range]::-ms-tooltip {
     }
 
     .video-information-container {
-        background: Canvas;
+        background-color: Canvas;
         color: CanvasText;
         border-radius: 8px;
         outline: 2px solid CanvasText;
@@ -3368,19 +3379,19 @@ input[type=range]::-ms-tooltip {
         margin-top: 0px;
         margin-bottom: -6px;
         border-radius: 16px;
-        background: Canvas;
+        background-color: Canvas;
         color: CanvasText;
         outline: 2px solid CanvasText;
     }
 
     .seeking-preview__time-tooltip {
-        background: Canvas;
+        background-color: Canvas;
         color: var(--text-color);
         outline: 2px solid CanvasText;
     }
 
     .seeking-preview__thumbnail {
-        background: Highlight;
+        background-color: Highlight;
         outline-width: 2px;
         outline-style: solid;
         outline-color: CanvasText;
@@ -3431,11 +3442,11 @@ input[type=range]::-ms-tooltip {
     }
 
     .volume-slider::before {
-        background: Highlight;
+        background-color: Highlight;
     }
 
     .volume-slider::after {
-        background: ButtonText;
+        background-color: ButtonText;
         opacity: 0.3;
     }
 
@@ -3444,7 +3455,7 @@ input[type=range]::-ms-tooltip {
     }
 
     .transcript-panel .captions-contents::-webkit-scrollbar-track {
-        background: ButtonFace;
+        background-color: ButtonFace;
         border-radius: 0px 0px 0px 8px;
     }
 
@@ -3632,7 +3643,7 @@ input[type=range]::-ms-tooltip {
     [data-quality="UHD"].quality-badge,
     [data-streaming="Adaptive Streaming"].streaming-badge {
         color: Highlight;
-        background: HighlightText;
+        background-color: HighlightText;
         outline: 2px solid Highlight;
     }
 

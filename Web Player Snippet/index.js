@@ -7,22 +7,22 @@ const videoMetadata = {
     Fallback_src: "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
     Fallback_codec: "video/mp4",
     video_FPS: "59.940",
-};
-
-const mediaSessionMetadata = {
-    thumb_512: "//res.cloudinary.com/harole/video/upload/s--Vjfp8q3F--/c_fill,h_512,q_auto:eco,w_512/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_384: "//res.cloudinary.com/harole/video/upload/s--GSclQ4pU--/c_fill,h_384,q_auto:eco,w_384/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_256: "//res.cloudinary.com/harole/video/upload/s--Il1IjHMZ--/c_fill,h_256,q_auto:eco,w_256/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_192: "//res.cloudinary.com/harole/video/upload/s--XGk0fUrZ--/c_fill,h_192,q_auto:eco,w_192/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_128: "//res.cloudinary.com/harole/video/upload/s--G8UlljUd--/c_fill,h_128,q_auto:eco,w_128/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    thumb_96: "//res.cloudinary.com/harole/video/upload/s--d8U6mcP6--/c_fill,h_96,q_auto:eco,w_96/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    type: "image/jpeg",
-};
+},
+    mediaSessionMetadata = {
+        thumb_512: "//res.cloudinary.com/harole/video/upload/s--Vjfp8q3F--/c_fill,h_512,q_auto:eco,w_512/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_384: "//res.cloudinary.com/harole/video/upload/s--GSclQ4pU--/c_fill,h_384,q_auto:eco,w_384/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_256: "//res.cloudinary.com/harole/video/upload/s--Il1IjHMZ--/c_fill,h_256,q_auto:eco,w_256/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_192: "//res.cloudinary.com/harole/video/upload/s--XGk0fUrZ--/c_fill,h_192,q_auto:eco,w_192/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_128: "//res.cloudinary.com/harole/video/upload/s--G8UlljUd--/c_fill,h_128,q_auto:eco,w_128/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_96: "//res.cloudinary.com/harole/video/upload/s--d8U6mcP6--/c_fill,h_96,q_auto:eco,w_96/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        type: "image/jpeg",
+    };
 
 var config = {
     startPosition: -1,
 };
 var hls = new Hls(config);
+
 const playpauseButton = document.querySelector(".play-pause-button"),
     playpauseTooltipContainer = document.querySelector(".play-pause-tooltip-container"),
     videoContainer = document.querySelector(".video-container"),
@@ -309,10 +309,7 @@ videoContainer.addEventListener("contextmenu", e => {
         showContextMenu(false);
     } else {
         e.preventDefault();
-        const {
-            x,
-            y
-        } = ctxmenuPosition(e);
+        const { x, y } = ctxmenuPosition(e);
         contextMenu.style.left = `${x}px`;
         contextMenu.style.top = `${y}px`;
         showContextMenu();
@@ -337,10 +334,7 @@ function ctxmenuPosition(eventPos) {
         y = winHeight - cmHeight - 8;
     }
 
-    return {
-        x,
-        y
-    };
+    return { x, y };
 };
 
 function closeSettingsMenu(e) {
@@ -382,11 +376,11 @@ settingsButton.addEventListener("click", () => {
 });
 
 //AudioContext
-var ctx = (window.AudioContext ||
+var ctx = window.AudioContext ||
     window.webkitAudioContext ||
     window.mozAudioContext ||
     window.oAudioContext ||
-    window.msAudioContext);
+    window.msAudioContext;
 if (ctx) {
     var context = new ctx();
 } else {
@@ -456,7 +450,7 @@ closeDialog.addEventListener("click", closedDialog);
 
 //Transcript Panel
 transcriptItem.addEventListener("click", () => {
-    loadTranscript(document.getElementById("default-track").getAttribute("srclang"))
+    loadTranscript(document.getElementById("default-track").getAttribute("srclang"));
     videoPlayer.classList.add("transcript-opened");
 });
 
@@ -504,11 +498,7 @@ function loadTranscript(lang) {
         var trackAsHtmlElement = trackElements[i];
 
         if ((track.language === lang) && (track.kind !== "chapters")) {
-            if (videoContainer.classList.contains("caption")) {
-                track.mode = "showing";
-            } else {
-                track.mode = "hidden";
-            };
+            videoContainer.classList.contains("caption") ? track.mode = "showing" : track.mode = "hidden";
 
             if (trackAsHtmlElement.readyState === 2) {
                 displayCues(track);
@@ -713,16 +703,16 @@ const requestAnimFrame =
     window.mozRequestAnimationFrame ||
     window.oRequestAnimationFrame ||
     window.msRequestAnimationFrame ||
-    function (n) {
-        window.setTimeout(n, 1e3 / 60)
+    function (rq) {
+        window.setTimeout(rq, 1e3 / 60);
     },
     cancelAnimFrame = window.cancelAnimationFrame ||
         window.webkitCancelAnimationFrame ||
         window.mozCancelAnimationFrame ||
         window.oCancelAnimationFrame ||
         window.msCancelAnimationFrame ||
-        function (n) {
-            window.clearTimeout(n)
+        function (rq) {
+            window.clearTimeout(rq);
         };
 
 //Activity check

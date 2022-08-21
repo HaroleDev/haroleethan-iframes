@@ -692,6 +692,9 @@ body.preload * {
     display: -ms-flexbox !important;
     display: flex !important;
     opacity: 0.3 !important;
+    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo);
+    -o-transition: opacity 300ms 100ms var(--ease-out-expo);
+    transition: opacity 300ms 100ms var(--ease-out-expo);
 }
 
 .scrubbing .controls,
@@ -1162,9 +1165,10 @@ body.preload * {
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%) scale(0.9);
+    -ms-transform: translate(-50%, -50%) scale(0.9);
+    transform: translate(-50%, -50%) scale(0.9);
+    transform-origin: 50% 100%;
     bottom: -8px;
     opacity: 0;
     z-index: 2;
@@ -1177,9 +1181,9 @@ body.preload * {
     -ms-flex-pack: end;
     -webkit-justify-content: flex-end;
     justify-content: flex-end;
-    -webkit-transition: opacity 300ms var(--ease-out-expo);
-    -o-transition: opacity 300ms var(--ease-out-expo);
-    transition: opacity 300ms var(--ease-out-expo);
+    -webkit-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
     left: var(--thumbnail-seek-position, 192px);
     will-change: left;
 }
@@ -1332,7 +1336,13 @@ screen and (max-height: 600px) {
 
 .seeking-preview.hovered {
     opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
     pointer-events: all;
+    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo);
+    -o-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo);
+    transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo);
 }
 
 .scrubbing .timeline-container .seeking-preview__thumbnail {

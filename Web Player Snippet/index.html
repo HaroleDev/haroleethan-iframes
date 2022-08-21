@@ -24,7 +24,8 @@
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
     <meta name="format-detection" content="telephone=no" />
-    <link href="//fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=Manrope:wght@500;700&display=swap"
+        rel="stylesheet">
     <style type="text/css">
         @supports (font-variation-settings:normal) {
             @font-face {
@@ -41,6 +42,7 @@
         <div class="logo-container">
             <img src="./media/Playful%20Video_Dark.svg" class="logo dark" alt="Playful Video">
             <img src="./media/Playful%20Video_Light.svg" class="logo light" alt="Playful Video">
+            <img src="./media/Playful%20Video_HighContrast.svg" class="logo forced-color" alt="Playful Video">
         </div>
         <div class="version">
             <p>Rolling Progress Release</p>
@@ -540,6 +542,13 @@
                     <div class="video-fit-contain">
                         <div class="video-fit-content">
                             <div class="aspect-ratio-response">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="video-filters">
+                                    <defs>
+                                        <filter id="blur">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="12,0" />
+                                        </filter>
+                                    </defs>
+                                </svg>
                                 <div class="video-backdrop-seeking"></div>
                                 <img class="video-thumb-preview" alt="">
                                 <img class="video-poster" alt="">

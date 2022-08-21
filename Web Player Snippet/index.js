@@ -177,9 +177,6 @@ function canFullscreen() {
         void 0 !== document.body.webkitExitFullscreen;
 };
 
-let lastKnownScrollPosition = 0;
-let ticking = false;
-
 window.addEventListener("DOMContentLoaded", () => {
     videoPoster.src = videoMetadata.video_poster;
     videoPoster.decoding = "async";
@@ -288,7 +285,7 @@ function handleInputChange(e) {
     const max = target.max;
     const val = target.value;
 
-    target.style.backgroundSize = (val - min) * 100 / (max - min) + "% 100%";
+    target.style.backgroundSize = `${(val - min) * 100 / (max - min)}% 100%`;
 };
 
 //Context menu
@@ -835,7 +832,6 @@ volumeSliderContainer.addEventListener("pointermove", e => {
         if (e.button === 0) volumeUpdate(e);
     });
     if (isVolumeScrubbing) {
-        lockScroll();
         volumeUpdate(e);
     };
     volumeSliderContainer.addEventListener("pointerup", e => {

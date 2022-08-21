@@ -1422,7 +1422,7 @@ videoPlayer.addEventListener("keydown", e => {
 
 const eventListeners = [
     ["play", () => {
-        videoPoster.classList.add("played");
+        videoContainer.classList.add("played");
         navigator.mediaSession.playbackState = "playing";
         playpauseTooltipContainer.dataset.tooltip = "Pause" + " (k)";
         video.addEventListener("timeupdate", mediaSessionToggle());
@@ -1473,7 +1473,7 @@ const eventListeners = [
     }],
     ["seeked", () => {
         requestAnimFrame(updatetime);
-        videoPoster.classList.add("played");
+        videoContainer.classList.add("played");
         seekingPreview.classList.remove("loading");
         videoContainer.classList.remove("buffering-scrubbing");
         updatetime();

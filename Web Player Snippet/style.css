@@ -3135,7 +3135,7 @@ input[type=range]::-ms-tooltip {
 
     .logo.dark,
     .logo.light {
-        display: none;
+        display: none !important;
     }
 
     .logo.forced-color {

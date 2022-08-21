@@ -115,6 +115,7 @@ function init() {
     };
     console.log("%cPlayful Video%c\nRolling Progress Release",
         `background-image: url(data:image/svg+xml;base64,${btoa(svg)});
+    display: inline-block;
     padding: 2rem 12rem;
     padding-right: 0px;
     margin: 20px;
@@ -123,13 +124,12 @@ function init() {
     color: transparent;
     text-align: center;
     font-size: 0px;
-    user-select: none;
-    pointer-events: none;
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     `,
         `font-family: Manrope, Arial, Helvetica, sans-serif;
+    display: block;
     font-size: 1rem;
     line-height: 130%;
     margin: 4px 0px 16px 0px;

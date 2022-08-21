@@ -40,7 +40,7 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     timeTooltip = document.querySelector(".seeking-preview__time-tooltip"),
 
     EQswitchToggle = document.querySelector(".eq-switch"),
-    rangeEQControl = document.querySelectorAll(".dialog .eq-control input"),
+    rangeEQInputs = document.querySelectorAll(".dialog .eq-control input"),
     eqContainer = document.querySelector(".eq-dialog-container"),
     loopItem = document.querySelector(".loop-item"),
     eqItem = document.querySelector(".eq-item"),
@@ -56,12 +56,12 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     transcriptItem = document.querySelector(".transcript-item"),
 
     transcriptPanel = document.querySelector(".transcript-panel"),
-    closeTranscriptPanel = document.querySelector(".close-transcript-panel"),
+    closeTranscriptPanelBtn = document.querySelector(".close-transcript-panel"),
     transcriptDiv = document.querySelector(".captions-contents"),
     snackbarSyncTranscript = document.querySelector(".snackbar-sync-time"),
 
     dialog = document.querySelector(".dialog"),
-    closeDialog = document.querySelector(".close-dialog"),
+    closeDialogBtn = document.querySelector(".close-dialog"),
     dialogOverlay = document.querySelector(".dialog-overlay"),
 
     volumeSliderContainer = document.querySelector(".volume-slider-container"),
@@ -258,9 +258,7 @@ const srcEventListeners = [
 
         let message = err.message;
 
-        if (message && message.length) {
-            s += message;
-        };
+        if (message && message.length) s += message;
 
         document.getElementById("error-log").textContent = err.code;
         document.getElementsByClassName("error-dialog").classList.add("error-occurred");
@@ -279,11 +277,11 @@ for (const [action, event] of srcEventListeners) {
 function handleInputChange(e) {
     let target = e.target;
     if (e.target.type !== "range") {
-        target = rangeEQControl;
+        target = rangeEQInputs;
     };
-    const min = target.min;
-    const max = target.max;
-    const val = target.value;
+    const min = target.min,
+        max = target.max,
+        val = target.value;
 
     target.style.backgroundSize = `${(val - min) * 100 / (max - min)}% 100%`;
 };
@@ -407,8 +405,20 @@ function changeGain(sliderValue, nbFilter) {
     filters[nbFilter].gain.value = value;
 };
 
+/*function childElements(node) {
+    var elems = new Array();
+    var children = node.childNodes;
+
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].nodeType === document.ELEMENT_NODE) {
+            elems.push(children[i]);
+            return elems;
+        };
+    };
+};*/
+
 //EQ dialog
-eqItem.addEventListener("click", () => eqContainer.classList.add("opened"));
+eqItem.addEventListener("click", eqContainer.classList.add("opened"));
 
 EQswitchToggle.addEventListener("click", () => {
     if (eqContainer.classList.contains("enabled")) {
@@ -423,7 +433,7 @@ EQswitchToggle.addEventListener("click", () => {
         eqContainer.classList.add("enabled");
         eqContainer.querySelectorAll(".eq-slider").forEach(element => {
             element.disabled = false;
-            rangeEQControl.forEach(input => {
+            rangeEQInputs.forEach(input => {
                 input.addEventListener("input", handleInputChange);
             });
             sourceNode.disconnect();
@@ -442,8 +452,8 @@ function closedDialog() {
     };
 };
 
-dialogOverlay.addEventListener("click", closedDialog);
-closeDialog.addEventListener("click", closedDialog);
+dialogOverlay.addEventListener("click", closedDialog());
+closeDialogBtn.addEventListener("click", closedDialog());
 
 //Transcript Panel
 transcriptItem.addEventListener("click", () => {
@@ -451,16 +461,16 @@ transcriptItem.addEventListener("click", () => {
     videoPlayer.classList.add("transcript-opened");
 });
 
-closeTranscriptPanel.addEventListener("pointerover", () => {
+closeTranscriptPanelBtn.addEventListener("pointerover", () => {
     videoContainer.classList.add("hovered");
     video.classList.remove("inactive");
-    closeTranscriptPanel.addEventListener("pointerleave", () => {
+    closeTranscriptPanelBtn.addEventListener("pointerleave", () => {
         videoContainer.classList.remove("hovered");
         video.classList.add("inactive");
     });
 });
 
-closeTranscriptPanel.addEventListener("click", () => {
+closeTranscriptPanelBtn.addEventListener("click", () => {
     videoPlayer.classList.remove("transcript-opened");
 });
 
@@ -468,7 +478,7 @@ closeTranscriptPanel.addEventListener("click", () => {
 const captions = video.textTracks[0];
 captions.mode = "hidden";
 
-captionButton.addEventListener("click", toggleCaptions);
+captionButton.addEventListener("click", toggleCaptions());
 
 function toggleCaptions() {
     const isHidden = captions.mode === "hidden";
@@ -496,20 +506,13 @@ function loadTranscript(lang) {
 
         if ((track.language === lang) && (track.kind !== "chapters")) {
             videoContainer.classList.contains("caption") ? track.mode = "showing" : track.mode = "hidden";
-
-            if (trackAsHtmlElement.readyState === 2) {
-                displayCues(track);
-            } else {
-                displayCuesAfterTrackLoaded(trackAsHtmlElement, track);
-            };
+            trackAsHtmlElement.readyState === 2 ? displayCues(track) : displayCuesAfterTrackLoaded(trackAsHtmlElement, track);
         };
     };
 };
 
 function displayCuesAfterTrackLoaded(trackElem, track) {
-    trackElem.addEventListener("load", function () {
-        displayCues(track);
-    });
+    trackElem.addEventListener("load", displayCues(track));
 };
 
 function disableAllTracks() {
@@ -589,9 +592,7 @@ function addCueListeners(cue) {
 };
 
 transcriptDiv.addEventListener("keydown", e => {
-    if (e.key === " " || e.key === "Enter" || e.key === "Spacebar") {
-        toggleBtn(e.target);
-    };
+    if (e.key === " " || e.key === "Enter" || e.key === "Spacebar") toggleBtn(e.target);
 });
 
 function toggleBtn(e) {
@@ -736,6 +737,7 @@ function activity() {
 
 //Full screen and picture-in-picture
 fullscreenButton.addEventListener("click", toggleFullScreen);
+video.addEventListener("dblclick", toggleFullScreen);
 
 function toggleFullScreen() {
     if (context.state === "suspended") context.resume();

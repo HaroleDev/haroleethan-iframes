@@ -720,12 +720,14 @@ function activity() {
     video.classList.remove("inactive");
     videoControlsContainer.classList.remove("inactive");
     videoContainer.classList.add("hovered");
+    cancelAnimFrame(updateMetadata);
     if (videoContainer.classList.contains("hovered") && !settingsContextMenu.classList.contains("pressed")) {
         if (video.paused) {
             return;
         } else {
             timeout = setTimeout(function () {
                 cancelAnimFrame(updatetime);
+                requestAnimFrame(updateMetadata);
                 videoContainer.classList.remove("hovered");
                 videoControlsContainer.classList.add("inactive");
                 video.classList.add("inactive");
@@ -979,8 +981,6 @@ function updatetime() {
     if (!video.paused) {
         if (video.currentTime > 0) timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", percent);
-        videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
-        videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
         if (orientationInfluence > 16/9) {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);
             qualityBadgeText.textContent = qualityCheck(video.videoWidth);
@@ -990,6 +990,14 @@ function updatetime() {
         };
     };
     requestAnimFrame(updatetime);
+};
+
+
+function updateMetadata() {
+    videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+    videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
+    videoContainer.classList.contains("hovered") ? cancelAnimFrame(updateMetadata) : requestAnimFrame(updateMetadata);
+    
 };
 
 const leading0Formatter = new Intl.NumberFormat(undefined, {
@@ -1447,15 +1455,18 @@ const eventListeners = [
         videoContainer.addEventListener("pointerover", () => {
             activity();
             checkElement();
+            if (videoContainer.classList.contains("hovered")) cancelAnimFrame(updateMetadata);
         });
         videoContainer.addEventListener("pointermove", () => {
             activity();
             checkElement();
+            if (videoContainer.classList.contains("hovered")) cancelAnimFrame(updateMetadata);
         });
         videoContainer.addEventListener("pointerleave", () => {
             if (settingsContextMenu.classList.contains("pressed")) return;
             videoContainer.classList.remove("hovered");
             video.classList.add("inactive");
+            requestAnimFrame(updateMetadata);
         });
         videoContainer.classList.remove("paused");
     }],

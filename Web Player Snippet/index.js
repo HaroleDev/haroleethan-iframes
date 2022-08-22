@@ -981,6 +981,13 @@ function updatetime() {
         timelineInner.style.setProperty("--progress-position", percent);
         videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
         videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
+        if (orientationInfluence > 16/9) {
+            qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);
+            qualityBadgeText.textContent = qualityCheck(video.videoWidth);
+        } else {
+            qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight);
+            qualityBadgeText.textContent = qualityCheck(video.videoHeight);
+        };
     };
     requestAnimFrame(updatetime);
 };

@@ -915,6 +915,9 @@
     width: -moz-fit-content;
     width: fit-content;
     border-radius: 1rem;
+    -webkit-transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
+    -o-transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
+    transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
 }
 
 .badge .span {
@@ -931,7 +934,7 @@
 [data-quality="UHD"].quality-badge,
 [data-streaming="Multiple Qualities"].streaming-badge {
     color: var(--dark-text-color);
-    background: var(--accent-color);
+    background-color: var(--accent-color);
 }
 
 .quality-badge {
@@ -940,7 +943,7 @@
 
 .badge {
     color: var(--text-color);
-    background: var(--background);
+    background-color: var(--background);
 }
 
 .timeline {

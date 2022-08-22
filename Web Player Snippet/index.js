@@ -979,6 +979,8 @@ function updatetime() {
     if (!video.paused) {
         if (video.currentTime > 0) timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", percent);
+        videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+        videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     };
     requestAnimFrame(updatetime);
 };
@@ -1490,11 +1492,7 @@ const eventListeners = [
         requestAnimFrame(updatetime);
         currentTime.textContent = formatDuration(video.currentTime);
         durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
-        if (video.currentTime === video.duration) {
-            videoContainer.classList.add("ended");
-        } else {
-            videoContainer.classList.remove("ended");
-        };
+        video.currentTime === video.duration ? videoContainer.classList.add("ended") :videoContainer.classList.remove("ended");
     }],
     ["loadedmetadata", () => {
         videoPlayer.classList.remove("loading");

@@ -1374,40 +1374,6 @@
     }
 }
 
-@media screen and (max-width: 1024px),
-screen and (max-height: 600px) {
-    .seeking-preview__thumbnail {
-        width: calc(108px * var(--aspect-ratio-size));
-        height: 108px;
-    }
-
-    .seeking-preview {
-        -webkit-transform: translate(-50%, -60%);
-        -ms-transform: translate(-50%, -60%);
-        transform: translate(-50%, -60%);
-    }
-
-    .video-container.scrubbing .video-backdrop-seeking,
-    .video-container.buffering-scrubbing .video-backdrop-seeking {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-    }
-
-    .pip-player .video-poster {
-        -webkit-filter: brightness(60%);
-        filter: brightness(60%);
-    }
-
-}
-
-.video-container.buffering .video-backdrop-seeking,
-.video-container.buffering .video-thumb-preview {
-    opacity: 0;
-    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo);
-    -o-transition: opacity 300ms 100ms var(--ease-out-expo);
-    transition: opacity 300ms 100ms var(--ease-out-expo);
-}
-
 .seeking-preview.hovered {
     opacity: 1;
     -webkit-transform: translate(-50%, -50%) scale(1);
@@ -1452,6 +1418,49 @@ screen and (max-height: 600px) {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+@media screen and (max-width: 1024px),
+screen and (max-height: 600px) {
+    .seeking-preview__thumbnail {
+        width: calc(108px * var(--aspect-ratio-size));
+        height: 108px;
+    }
+
+    .seeking-preview {
+        -webkit-transform: translate(-50%, -60%) scale(0.9);
+        -ms-transform: translate(-50%, -60%) scale(0.9);
+        transform: translate(-50%, -60%) scale(0.9);
+        -webkit-transform-origin: 50% 100%;
+        -ms-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+    }
+
+    .seeking-preview.hovered {
+        -webkit-transform: translate(-50%, -60%) scale(1);
+        -ms-transform: translate(-50%, -60%) scale(1);
+        transform: translate(-50%, -60%) scale(1);
+    }
+
+    .video-container.scrubbing .video-backdrop-seeking,
+    .video-container.buffering-scrubbing .video-backdrop-seeking {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .pip-player .video-poster {
+        -webkit-filter: brightness(60%);
+        filter: brightness(60%);
+    }
+
+}
+
+.video-container.buffering .video-backdrop-seeking,
+.video-container.buffering .video-thumb-preview {
+    opacity: 0;
+    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo);
+    -o-transition: opacity 300ms 100ms var(--ease-out-expo);
+    transition: opacity 300ms 100ms var(--ease-out-expo);
 }
 
 .video-container.scrubbing .timeline::before {

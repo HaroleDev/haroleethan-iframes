@@ -1508,7 +1508,7 @@ const eventListeners = [
         if (orientationInfluence > 16/9) {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);
             qualityBadgeText.textContent = qualityCheck(video.videoWidth);
-        } else if (orientationInfluence < 16/9) {
+        } else {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight);
             qualityBadgeText.textContent = qualityCheck(video.videoHeight);
         };

@@ -96,6 +96,8 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     CastButton = document.querySelector(".gcast-button"),
     CastTooltip = document.querySelector(".gcast-tooltip");
 
+var orientationInfluence;
+
 var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content") || decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf("/") + 1)),
     author = document.querySelector("meta[property=\"og:author\"]").getAttribute("content"),
     description = document.querySelector("meta[property=\"og:description\"]").getAttribute("content");
@@ -1047,38 +1049,43 @@ async function togglePlay() {
 
 const qualityLabels = [{
     label: "SD",
-    size: 640
+    size: 640,
+    length: 480
 }, {
     label: "HD",
-    size: 1280
+    size: 1280,
+    length: 720
 }, {
     label: "FHD",
-    size: 1920
+    size: 1920,
+    length: 1080
 }, {
     label: "QHD",
-    size: 2560
+    size: 2560,
+    length: 1440
 }, {
     label: "4K",
-    size: 3840
+    size: 3840,
+    length: 2160
 }, {
     label: "5K",
-    size: 5120
+    size: 5120,
+    length: 2880
 }, {
     label: "6K",
-    size: 6144
+    size: 6144,
+    length: 3456,
 }, {
     label: "8K",
-    size: 7860
+    size: 7860,
+    length: 4320
 },];
 
 function qualityCheck(size) {
     if (!size || size < 0) return "N/A";
-    const label = qualityLabels.find(l => l.size >= size);
+    var label;
+    orientationInfluence > 16/9 ? label = qualityLabels.find(l => l.size >= size) : label = qualityLabels.find(l => l.length >= size);
     return label ? label.label : "LD";
-};
-
-function qualityCheckAcro() {
-    return video.videoWidth >= 1280 ? "HD" : video.videoWidth >= 1920 ? "FHD" : video.videoWidth >= 2560 ? "QHD" : video.videoWidth >= 3840 ? "UHD" : video.videoWidth >= 640 ? "SD" : "N/A";
 };
 
 function streamingCheck() {
@@ -1496,9 +1503,16 @@ const eventListeners = [
         videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
         durationContainer.setAttribute("aria-label", `${formatDurationARIA(video.currentTime)} elapsed of ${formatDurationARIA(video.duration)}`);
 
-        qualityBadgeContainer.dataset.quality = qualityCheckAcro();
-        qualityBadgeText.textContent = qualityCheck(video.videoWidth);
+        orientationInfluence = video.videoWidth / video.videoHeight;
 
+        if (orientationInfluence > 16/9) {
+            qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);
+            qualityBadgeText.textContent = qualityCheck(video.videoWidth);
+        } else if (orientationInfluence < 16/9) {
+            qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight);
+            qualityBadgeText.textContent = qualityCheck(video.videoHeight);
+        };
+        
         streamingBadgeContainer.dataset.streaming = streamingCheck();
         streamingBadgeText.textContent = streamingCheck();
         streamingBadgeContainer.removeAttribute("hidden");

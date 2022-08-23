@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Harole's Videos</title>
+    <title>Playful Video Player</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="robots" content="noindex,follow" />
@@ -647,6 +647,7 @@
             <p><b>KNOWN BUGS:</b>
                 <br>The "Cast to TV" button is nonfunctional.
                 <br>Incomplete accessibility features (ARIA and Windows High Contrast Mode).
+                <br>Desktop-size only.
             </p>
         </div>
     </div>
@@ -670,7 +671,7 @@
 
         scripts.forEach(function (scriptUrl) {
             var scriptTag = document.createElement("script");
-            scriptTag.type = "text/javascript";
+            scriptTag.type = "module";
             scriptTag.src = scriptUrl;
             scriptTag.defer = true;
             document.body.insertAdjacentElement("afterend", scriptTag);

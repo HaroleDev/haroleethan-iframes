@@ -20,6 +20,7 @@
 
 :root {
     --text-color: #F0F0F0;
+    --shadow-text-color: #B0B0B0;
     --dark-text-color: #161616;
     --dark-accent-color: #01A573;
     --accent-color: #02DA9A;
@@ -919,7 +920,6 @@
     width: fit-content;
     overflow: hidden;
     -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     border-radius: 1rem;
     -webkit-transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
@@ -942,11 +942,14 @@
     background-color: var(--mid-blue-color);
 }
 
-[data-quality="QHD"].quality-badge .span.quality,
 [data-quality="UHD"].quality-badge .span.quality {
     color: var(--text-color);
+    -webkit-transform: translateY(-1.5px);
+    -ms-transform: translateY(-1.5px);
     transform: translateY(-1.5px);
-    text-shadow: 0 1.5px 0px rgba(0, 0, 0, 0.3), 0 1.5px 0px var(--text-color), 0px 1.5px 2px var(--dark-blue-color), 0px 3.5px 4px var(--dark-blue-color), 0px 5.5px 8px var(--dark-blue-color);
+    text-shadow: 0 0.25px 0px var(--shadow-text-color), 0 0.5px 0px var(--shadow-text-color), 0 0.75px 0px var(--shadow-text-color), 0 1px 0px var(--shadow-text-color), 0 1.25px 0px var(--shadow-text-color), 0 1.5px 0px var(--shadow-text-color);
+    -webkit-filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
 }
 
 [data-streaming="Multiple Qualities"].streaming-badge {
@@ -3621,6 +3624,27 @@ input[type=range]::-ms-tooltip {
         color: Highlight;
         background-color: HighlightText;
         outline: 2px solid Highlight;
+    }
+
+    [data-quality="HD"].quality-badge,
+    [data-quality="FHD"].quality-badge,
+    [data-quality="QHD"].quality-badge,
+    [data-quality="UHD"].quality-badge {
+        background-color: HighlightText;
+    }
+
+    [data-quality="UHD"].quality-badge .span.quality {
+        color: Highlight;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+        text-shadow: none;
+        -webkit-filter: none;
+        filter: none;
+    }
+
+    [data-streaming="Multiple Qualities"].streaming-badge {
+        background-color: var(--accent-color);
     }
 
     .badge {

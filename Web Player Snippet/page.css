@@ -176,7 +176,7 @@ body.preload * {
 
     :root {
         --text-color: CanvasText;
-        --soft-accent-color: Highlight;
+        --dark-accent-color: Highlight;
         --accent-color: Highlight;
         --bright-accent-color: Highlight;
         --flyout-bg: Canvas;

@@ -90,8 +90,6 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     videoThumbPreview = document.querySelector(".video-thumb-preview"),
     qualityBadgeContainer = document.querySelector(".quality-badge"),
     qualityBadgeText = document.querySelector(".quality-badge .quality"),
-    streamingBadgeContainer = document.querySelector(".streaming-badge"),
-    streamingBadgeText = document.querySelector(".streaming-badge .streaming"),
     AirPlayTooltip = document.querySelector(".airplay-tooltip"),
     AirPlayButton = document.querySelector(".airplay-button"),
     CastButton = document.querySelector(".gcast-button"),
@@ -1221,13 +1219,6 @@ function qualityCheck(size) {
     return label ? label.label : "LD";
 }
 
-function streamingCheck() {
-    return source.hasAttribute("type") === videoMetadata.HLS_codec &&
-        source.hasAttribute("src") === videoMetadata.HLS_src
-        ? "Multiple Qualities"
-        : "Single Quality";
-}
-
 function updatePositionState() {
     navigator.mediaSession.setPositionState({
         duration: video.duration,
@@ -1748,10 +1739,6 @@ const eventListeners = [
                 qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight);
                 qualityBadgeText.textContent = qualityCheck(video.videoHeight);
             }
-
-            streamingBadgeContainer.dataset.streaming = streamingCheck();
-            streamingBadgeText.textContent = streamingCheck();
-            streamingBadgeContainer.removeAttribute("hidden");
 
             videoPlayerContainer.style.setProperty(
                 "--aspect-ratio-size",

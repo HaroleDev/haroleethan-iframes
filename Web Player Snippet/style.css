@@ -156,8 +156,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
 .full-screen .video-fit-content {
@@ -336,6 +337,7 @@
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 .video-player.full-screen .controls-container {
@@ -952,13 +954,8 @@
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
 }
 
-[data-streaming="Multiple Qualities"].streaming-badge {
-    background-color: var(--accent-color);
-}
-
 [data-quality="HD"].quality-badge .span.quality,
-[data-quality="FHD"].quality-badge .span.quality,
-[data-streaming="Multiple Qualities"].streaming-badge .span.quality {
+[data-quality="FHD"].quality-badge .span.quality {
     color: var(--text-color);
 }
 
@@ -1240,6 +1237,7 @@
     bottom: 0;
     z-index: 0;
     cursor: pointer;
+    pointer-events: all;
 }
 
 .play-btn-poster,
@@ -1284,6 +1282,10 @@
 .video-poster-container:active .play-btn-poster .stroke {
     fill: var(--dark-accent-color);
     fill-opacity: 1;
+}
+
+.video-container.played .video-poster-container {
+    pointer-events: none;
 }
 
 .video-container.played .play-btn-poster {
@@ -3619,8 +3621,7 @@ input[type=range]::-ms-tooltip {
     [data-quality="HD"].quality-badge,
     [data-quality="FHD"].quality-badge,
     [data-quality="QHD"].quality-badge,
-    [data-quality="UHD"].quality-badge,
-    [data-streaming="Multiple Qualities"].streaming-badge {
+    [data-quality="UHD"].quality-badge {
         color: Highlight;
         background-color: HighlightText;
         outline: 2px solid Highlight;
@@ -3641,10 +3642,6 @@ input[type=range]::-ms-tooltip {
         text-shadow: none;
         -webkit-filter: none;
         filter: none;
-    }
-
-    [data-streaming="Multiple Qualities"].streaming-badge {
-        background-color: var(--accent-color);
     }
 
     .badge {

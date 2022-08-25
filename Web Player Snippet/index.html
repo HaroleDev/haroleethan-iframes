@@ -536,9 +536,6 @@
                                         <div class="badge quality-badge" data-quality="N/A">
                                             <div class="span quality">N/A</div>
                                         </div>
-                                        <div class="badge streaming-badge" data-streaming="N/A" hidden>
-                                            <div class="span streaming">N/A</div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -672,7 +669,8 @@
 
         scripts.forEach(function (scriptUrl) {
             var scriptTag = document.createElement("script");
-            scriptTag.type = "module";
+            scriptTag.type = "text/javascript";
+            scriptTag.crossOrigin = "anonymous";
             scriptTag.src = scriptUrl;
             scriptTag.defer = true;
             document.body.insertAdjacentElement("afterend", scriptTag);

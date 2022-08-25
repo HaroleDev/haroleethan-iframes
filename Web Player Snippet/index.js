@@ -1,31 +1,21 @@
 "use strict";
 
 const videoMetadata = {
-    video_thumbs:
-        "//res.cloudinary.com/harole/image/upload/s--3AQUSV56--/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
-    video_poster:
-        "//res.cloudinary.com/harole/video/upload/s--p6nXm3qO--/c_fill,h_720,q_auto:low,w_1280/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-    HLS_src:
-        "//res.cloudinary.com/harole/video/upload/s--w9SNLopB--/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
+    video_thumbs: "//res.cloudinary.com/harole/image/upload/s--3AQUSV56--/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
+    video_poster: "//res.cloudinary.com/harole/video/upload/s--p6nXm3qO--/c_fill,h_720,q_auto:low,w_1280/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+    HLS_src: "//res.cloudinary.com/harole/video/upload/s--w9SNLopB--/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
     HLS_codec: "application/x-mpegURL",
-    Fallback_src:
-        "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
+    Fallback_src: "//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0",
     Fallback_codec: "video/mp4",
     video_FPS: "59.940",
 },
     mediaSessionMetadata = {
-        thumb_512:
-            "//res.cloudinary.com/harole/video/upload/s--Vjfp8q3F--/c_fill,h_512,q_auto:eco,w_512/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-        thumb_384:
-            "//res.cloudinary.com/harole/video/upload/s--GSclQ4pU--/c_fill,h_384,q_auto:eco,w_384/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-        thumb_256:
-            "//res.cloudinary.com/harole/video/upload/s--Il1IjHMZ--/c_fill,h_256,q_auto:eco,w_256/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-        thumb_192:
-            "//res.cloudinary.com/harole/video/upload/s--XGk0fUrZ--/c_fill,h_192,q_auto:eco,w_192/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-        thumb_128:
-            "//res.cloudinary.com/harole/video/upload/s--G8UlljUd--/c_fill,h_128,q_auto:eco,w_128/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
-        thumb_96:
-            "//res.cloudinary.com/harole/video/upload/s--d8U6mcP6--/c_fill,h_96,q_auto:eco,w_96/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_512: "//res.cloudinary.com/harole/video/upload/s--Vjfp8q3F--/c_fill,h_512,q_auto:eco,w_512/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_384: "//res.cloudinary.com/harole/video/upload/s--GSclQ4pU--/c_fill,h_384,q_auto:eco,w_384/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_256: "//res.cloudinary.com/harole/video/upload/s--Il1IjHMZ--/c_fill,h_256,q_auto:eco,w_256/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_192: "//res.cloudinary.com/harole/video/upload/s--XGk0fUrZ--/c_fill,h_192,q_auto:eco,w_192/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_128: "//res.cloudinary.com/harole/video/upload/s--G8UlljUd--/c_fill,h_128,q_auto:eco,w_128/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
+        thumb_96: "//res.cloudinary.com/harole/video/upload/s--d8U6mcP6--/c_fill,h_96,q_auto:eco,w_96/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
         type: "image/jpeg",
     };
 var config = {
@@ -128,8 +118,7 @@ function init() {
 
     console.log(
         "%cPlayful Video%c\nRolling Progress Release",
-        "background-image: url(data:image/svg+xml;base64," +
-        btoa(svg) +
+        "background-image: url(data:image/svg+xml;base64," + btoa(svg) +
         ");\n    display: inline-block;\n    padding: 2rem 12rem;\n    padding-right: 0px;\n    margin: 20px;\n    margin-left: 0px;\n    margin-bottom: 8px;\n    color: transparent;\n    text-align: center;\n    font-size: 0px;\n    background-size: contain;\n    background-position: center center;\n    background-repeat: no-repeat;\n    ",
         "font-family: Manrope, Arial, Helvetica, sans-serif;\n    display: block;\n    font-size: 1rem;\n    line-height: 130%;\n    margin: 4px 0px 16px 0px;\n    font-weight: 400;\n    font-kerning: normal;\n    color: currentColor;"
     );
@@ -282,8 +271,9 @@ function showContextMenu(show) {
     }
 
     show
-        ? contextMenu.classList.add("show")
-        : contextMenu.classList.remove("show");
+        ?
+        contextMenu.classList.add("show") :
+        contextMenu.classList.remove("show");
 }
 
 videoContainer.addEventListener("contextmenu", (e) => {
@@ -303,7 +293,10 @@ videoContainer.addEventListener("contextmenu", (e) => {
         showContextMenu(false);
     } else {
         e.preventDefault();
-        const { x, y } = ctxmenuPosition(e);
+        const {
+            x,
+            y
+        } = ctxmenuPosition(e);
         contextMenu.style.left = x + "px";
         contextMenu.style.top = y + "px";
         showContextMenu();
@@ -386,7 +379,11 @@ settingsButton.addEventListener("click", () => {
 }); //Settings items
 
 function downloadFile(url, fileName) {
-    fetch(url, { method: "get", mode: "no-cors", referrerPolicy: "no-referrer" })
+    fetch(url, {
+        method: "get",
+        mode: "no-cors",
+        referrerPolicy: "no-referrer"
+    })
         .then((res) => res.blob())
         .then((res) => {
             const a = document.createElement("a");
@@ -541,12 +538,12 @@ function loadTranscript(lang) {
         var trackAsHtmlElement = trackElements[i];
 
         if (track.language === lang && track.kind !== "chapters") {
-            videoContainer.classList.contains("caption")
-                ? (track.mode = "showing")
-                : (track.mode = "hidden");
-            trackAsHtmlElement.readyState === 2
-                ? displayCues(track)
-                : displayCuesAfterTrackLoaded(trackAsHtmlElement, track);
+            videoContainer.classList.contains("caption") ?
+                (track.mode = "showing") :
+                (track.mode = "hidden");
+            trackAsHtmlElement.readyState === 2 ?
+                displayCues(track) :
+                displayCuesAfterTrackLoaded(trackAsHtmlElement, track);
         }
     }
 }
@@ -609,13 +606,13 @@ function removeHTML(text) {
 
 function jumpToTranscript(time) {
     (video.currentTime = time),
-        video.paused
-            ? (video.pause(),
+        video.paused ?
+            (video.pause(),
                 timelineInner.style.setProperty(
                     "--progress-position",
                     video.currentTime / video.duration
-                ))
-            : video.play();
+                )) :
+            video.play();
 }
 
 function clearTranscriptDiv() {
@@ -688,8 +685,7 @@ function loopVideo() {
         if (typeof video.loop == "boolean") {
             video.loop = false;
         } else {
-            video.removeEventListener(
-                "ended",
+            video.removeEventListener("ended",
                 function () {
                     video.currentTime = 0;
                     video.play();
@@ -957,9 +953,9 @@ volumeButton.addEventListener("click", toggleVolume);
 
 function toggleVolume() {
     (video.muted = !video.muted),
-        video.muted
-            ? (volumeTooltipContainer.dataset.tooltip = "Unmute (m)")
-            : (volumeTooltipContainer.dataset.tooltip = "Mute (m)");
+        video.muted ?
+            (volumeTooltipContainer.dataset.tooltip = "Unmute (m)") :
+            (volumeTooltipContainer.dataset.tooltip = "Mute (m)");
 }
 
 //Timeline
@@ -978,9 +974,7 @@ function seekingPreviewPosition(e) {
     if (percent > 100) percent = 100;
 
     const seekRect = seekingPreview.getBoundingClientRect();
-    var seekPos = `calc(${percent}% - ${(seekRect.width * (percent / 100)) / 2 + 40 * (1 - percent / 100)
-        }px + ${(seekRect.width * (1 - percent / 100)) / 2 - (percent / 100) * 40
-        }px + ${80 * (1 - percent / 100)}px)`;
+    var seekPos = `calc(${percent}% - ${(seekRect.width * (percent / 100)) / 2 + 40 * (1 - percent / 100)}px + ${(seekRect.width * (1 - percent / 100)) / 2 - (percent / 100) * 40}px + ${80 * (1 - percent / 100)}px)`;
     seekingPreview.style.setProperty("--thumbnail-seek-position", seekPos);
 }
 
@@ -1072,10 +1066,7 @@ function updatetime() {
     const percent = video.currentTime / video.duration;
     if (!video.paused) {
         if (video.currentTime > 0)
-            timelineInner.style.setProperty(
-                "--buffered-position",
-                (1 / video.duration) * video.buffered.end(0)
-            );
+            timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", percent);
         if (orientationInfluence > 16 / 9) {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);
@@ -1089,14 +1080,8 @@ function updatetime() {
 }
 
 function updateMetadata() {
-    videoPlayerContainer.style.setProperty(
-        "--aspect-ratio-size",
-        video.videoWidth / video.videoHeight
-    );
-    videoPlayerContainer.style.setProperty(
-        "--aspect-ratio-size-inverse",
-        video.videoHeight / video.videoWidth
-    );
+    videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+    videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     videoContainer.classList.contains("hovered")
         ? cancelAnimFrame(updateMetadata)
         : requestAnimFrame(updateMetadata);
@@ -1147,7 +1132,7 @@ function formatDurationARIA(time) {
     } else if (hours > 0) {
         return `${hoursARIA} ${minutesARIA} ${secondsARIA}`;
     } else {
-        return `0`;
+        return `Less than a second`;
     }
 }
 
@@ -1167,56 +1152,60 @@ async function togglePlay() {
     video.paused ? await video.play() : await video.pause();
 }
 
-const qualityLabels = [
-    {
-        label: "SD",
-        size: 640,
-        length: 480,
-    },
-    {
-        label: "HD",
-        size: 1280,
-        length: 720,
-    },
-    {
-        label: "FHD",
-        size: 1920,
-        length: 1080,
-    },
-    {
-        label: "QHD",
-        size: 2560,
-        length: 1440,
-    },
-    {
-        label: "4K",
-        size: 3840,
-        length: 2160,
-    },
-    {
-        label: "5K",
-        size: 5120,
-        length: 2880,
-    },
-    {
-        label: "6K",
-        size: 6144,
-        length: 3456,
-    },
-    {
-        label: "8K",
-        size: 7860,
-        length: 4320,
-    },
+const qualityLabels = [{
+    label: "LD",
+    size: 320,
+    length: 180,
+},
+{
+    label: "SD",
+    size: 640,
+    length: 360,
+},
+{
+    label: "HD",
+    size: 1280,
+    length: 720,
+},
+{
+    label: "FHD",
+    size: 1920,
+    length: 1080,
+},
+{
+    label: "QHD",
+    size: 2560,
+    length: 1440,
+},
+{
+    label: "4K",
+    size: 3840,
+    length: 2160,
+},
+{
+    label: "5K",
+    size: 5120,
+    length: 2880,
+},
+{
+    label: "6K",
+    size: 6144,
+    length: 3456,
+},
+{
+    label: "8K",
+    size: 7860,
+    length: 4320,
+},
 ];
 
 function qualityCheck(size) {
     if (!size || size < 0) return "N/A";
     var label;
-    orientationInfluence > 16 / 9
-        ? (label = qualityLabels.find((l) => l.size >= size))
-        : (label = qualityLabels.find((l) => l.length >= size));
-    return label ? label.label : "LD";
+    orientationInfluence > 16 / 9 ?
+        (label = qualityLabels.find((l) => l.size >= size)) :
+        (label = qualityLabels.find((l) => l.length >= size));
+    return label.label;
 }
 
 function updatePositionState() {
@@ -1233,37 +1222,36 @@ async function mediaSessionToggle() {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: title,
                 artist: author,
-                artwork: [
-                    {
-                        src: `${mediaSessionMetadata.thumb_96}`,
-                        sizes: "96x96",
-                        type: mediaSessionMetadata.type,
-                    },
-                    {
-                        src: `${mediaSessionMetadata.thumb_128}`,
-                        sizes: "128x128",
-                        type: mediaSessionMetadata.type,
-                    },
-                    {
-                        src: `${mediaSessionMetadata.thumb_192}`,
-                        sizes: "192x192",
-                        type: mediaSessionMetadata.type,
-                    },
-                    {
-                        src: `${mediaSessionMetadata.thumb_256}`,
-                        sizes: "256x256",
-                        type: mediaSessionMetadata.type,
-                    },
-                    {
-                        src: `${mediaSessionMetadata.thumb_384}`,
-                        sizes: "384x384",
-                        type: mediaSessionMetadata.type,
-                    },
-                    {
-                        src: `${mediaSessionMetadata.thumb_512}`,
-                        sizes: "512x512",
-                        type: mediaSessionMetadata.type,
-                    },
+                artwork: [{
+                    src: `${mediaSessionMetadata.thumb_96}`,
+                    sizes: "96x96",
+                    type: mediaSessionMetadata.type,
+                },
+                {
+                    src: `${mediaSessionMetadata.thumb_128}`,
+                    sizes: "128x128",
+                    type: mediaSessionMetadata.type,
+                },
+                {
+                    src: `${mediaSessionMetadata.thumb_192}`,
+                    sizes: "192x192",
+                    type: mediaSessionMetadata.type,
+                },
+                {
+                    src: `${mediaSessionMetadata.thumb_256}`,
+                    sizes: "256x256",
+                    type: mediaSessionMetadata.type,
+                },
+                {
+                    src: `${mediaSessionMetadata.thumb_384}`,
+                    sizes: "384x384",
+                    type: mediaSessionMetadata.type,
+                },
+                {
+                    src: `${mediaSessionMetadata.thumb_512}`,
+                    sizes: "512x512",
+                    type: mediaSessionMetadata.type,
+                },
                 ],
             });
         }
@@ -1335,7 +1323,7 @@ async function mediaSessionToggle() {
 if (window.WebKitPlaybackTargetAvailabilityEvent) {
     video.addEventListener(
         "webkitplaybacktargetavailabilitychanged",
-        function (e) {
+        (function (e) {
             switch (e.availability) {
                 case "available":
                     video.setAttribute("x-webkit-airplay", "allow");
@@ -1347,11 +1335,11 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
                     break;
             }
 
-            AirPlayButton.addEventListener("click", function () {
+            AirPlayButton.addEventListener("click", (function () {
                 mediaSessionToggle();
                 video.webkitShowPlaybackTargetPicker();
-            });
-        }
+            }));
+        })
     );
 } else {
     AirPlayTooltip.setAttribute("hidden", "");
@@ -1711,9 +1699,9 @@ const eventListeners = [
                     video.currentTime
                 )} elapsed of ${formatDurationARIA(video.duration)}`
             );
-            video.currentTime === video.duration
-                ? videoContainer.classList.add("ended")
-                : videoContainer.classList.remove("ended");
+            video.currentTime === video.duration ?
+                videoContainer.classList.add("ended") :
+                videoContainer.classList.remove("ended");
         },
     ],
     [

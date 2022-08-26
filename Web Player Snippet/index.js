@@ -85,15 +85,12 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     CastButton = document.querySelector(".gcast-button"),
     CastTooltip = document.querySelector(".gcast-tooltip");
 var orientationInfluence;
+var videoPercent;
 var title =
     document
         .querySelector('meta[property="og:title"]')
         .getAttribute("content") ||
-    decodeURIComponent(
-        videoMetadata.Fallback_src.substring(
-            videoMetadata.Fallback_src.lastIndexOf("/") + 1
-        )
-    ),
+    decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf("/") + 1)),
     author = document
         .querySelector('meta[property="og:author"]')
         .getAttribute("content"),
@@ -148,7 +145,6 @@ function canFullscreen() {
 
 window.addEventListener("DOMContentLoaded", () => {
     videoPoster.src = videoMetadata.video_poster;
-    videoPoster.decoding = "async";
     /*if (!Hls.isSupported()) {
           hls.loadSource(videoMetadata.HLS_src);
           hls.attachMedia(video);
@@ -266,9 +262,7 @@ function handleInputChange(e) {
 } //Context menu
 
 function showContextMenu(show) {
-    if (show === void 0) {
-        show = true;
-    }
+    if (show === void 0) show = true;
 
     show
         ?
@@ -649,7 +643,7 @@ function toggleBtn(e) {
 }
 
 transcriptPanel.addEventListener("click", (e) => {
-    showContextMenu((show = false));
+    showContextMenu(false);
     if (
         !settingsButton.contains(e.target) &&
         !settingsContextMenu.contains(e.target) &&
@@ -721,23 +715,20 @@ loopItem.addEventListener("click", loopVideo);
 //Skip time
 function skip(time) {
     video.currentTime += time;
-    const percent = video.currentTime / video.duration;
-    (currentTime.textContent = formatDuration(percent * video.duration)),
-        timelineInner.style.setProperty("--progress-position", percent);
+    (currentTime.textContent = formatDuration(videoPercent * video.duration)),
+        timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration);
 }
 
 function skipPercent(time) {
     video.currentTime = video.duration * time;
-    const percent = video.currentTime / video.duration;
-    (currentTime.textContent = formatDuration(percent * video.duration)),
-        timelineInner.style.setProperty("--progress-position", percent);
+    (currentTime.textContent = formatDuration(videoPercent * video.duration)),
+        timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration);
 }
 
 function frameSeeking(time) {
     video.currentTime += 1 / time;
-    const percent = video.currentTime / video.duration;
-    (currentTime.textContent = formatDuration(percent * video.duration)),
-        timelineInner.style.setProperty("--progress-position", percent);
+    (currentTime.textContent = formatDuration(videoPercent * video.duration)),
+        timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration);
 }
 
 //Time divider animation
@@ -1062,12 +1053,12 @@ function loadedMetadata() {
     currentTime.textContent = formatDuration(video.currentTime);
 }
 
-function updatetime() {
-    const percent = video.currentTime / video.duration;
+async function updatetime() {
+    videoPercent = video.currentTime / video.duration;
     if (!video.paused) {
         if (video.currentTime > 0)
             timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
-        timelineInner.style.setProperty("--progress-position", percent);
+        timelineInner.style.setProperty("--progress-position", videoPercent);
         if (orientationInfluence > 16 / 9) {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);
             qualityBadgeText.textContent = qualityCheck(video.videoWidth);
@@ -1080,7 +1071,8 @@ function updatetime() {
 }
 
 function updateMetadata() {
-    videoPlayerContainer.style.setProperty("--aspect-ratio-size", video.videoWidth / video.videoHeight);
+    orientationInfluence = video.videoWidth / video.videoHeight;
+    videoPlayerContainer.style.setProperty("--aspect-ratio-size", orientationInfluence);
     videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     videoContainer.classList.contains("hovered")
         ? cancelAnimFrame(updateMetadata)
@@ -1099,9 +1091,7 @@ function formatDuration(time) {
     if (hours === 0) {
         return `${minutes}:${leading0Formatter.format(seconds)}`;
     } else if (hours > 0) {
-        return `${hours}:${leading0Formatter.format(
-            minutes
-        )}:${leading0Formatter.format(seconds)}`;
+        return `${hours}:${leading0Formatter.format(minutes)}:${leading0Formatter.format(seconds)}`;
     } else {
         return `0:00`;
     }
@@ -1283,8 +1273,7 @@ async function mediaSessionToggle() {
             "seekbackward",
             (d) => {
                 video.currentTime -= d.seekOffset || 10;
-                const percent = video.currentTime / video.duration;
-                timelineInner.style.setProperty("--progress-position", percent);
+                timelineInner.style.setProperty("--progress-position", videoPercent);
                 currentTime.textContent = formatDuration(video.currentTime);
             },
         ],
@@ -1292,8 +1281,7 @@ async function mediaSessionToggle() {
             "seekforward",
             (d) => {
                 video.currentTime += d.seekOffset || 10;
-                const percent = video.currentTime / video.duration;
-                timelineInner.style.setProperty("--progress-position", percent);
+                timelineInner.style.setProperty("--progress-position", videoPercent);
                 currentTime.textContent = formatDuration(video.currentTime);
             },
         ],
@@ -1699,6 +1687,7 @@ const eventListeners = [
                     video.currentTime
                 )} elapsed of ${formatDurationARIA(video.duration)}`
             );
+            videoPercent = video.currentTime / video.duration;
             video.currentTime === video.duration ?
                 videoContainer.classList.add("ended") :
                 videoContainer.classList.remove("ended");
@@ -1707,6 +1696,7 @@ const eventListeners = [
     [
         "loadedmetadata",
         () => {
+            videoPercent = video.currentTime / video.duration;
             videoPlayer.classList.remove("loading");
             video.textTracks[0].mode = "hidden";
             seekingThumbnail.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
@@ -1730,7 +1720,7 @@ const eventListeners = [
 
             videoPlayerContainer.style.setProperty(
                 "--aspect-ratio-size",
-                video.videoWidth / video.videoHeight
+                orientationInfluence
             );
             videoPlayerContainer.style.setProperty(
                 "--aspect-ratio-size-inverse",

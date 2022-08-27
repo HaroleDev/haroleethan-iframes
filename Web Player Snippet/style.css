@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 20 versions
+*/
+
 *,
 *::before,
 *::after {
@@ -1877,6 +1884,45 @@ screen and (max-height: 600px) {
     font-weight: 800;
     font-size: 1rem;
     padding-left: 24px;
+}
+
+.settings-context-menu .page:not([hidden]) {
+    max-height: 500px;
+    max-width: 500px;
+    top: 0;
+    left: 0;
+    display: block !important;
+    -webkit-transform: translateX(0%) translateY(0%);
+    -ms-transform: translateX(0%) translateY(0%);
+    transform: translateX(0%) translateY(0%);
+    opacity: 1;
+    pointer-events: all;
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+}
+
+.settings-context-menu .page[hidden] {
+    max-height: 0;
+    max-width: 0;
+    -webkit-transform: translateX(0%) translateY(0%);
+    -ms-transform: translateX(0%) translateY(0%);
+    transform: translateX(0%) translateY(0%);
+    display: block !important;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+}
+
+.settings-context-menu .contents {
+    overflow-y: auto;
+    position: relative;
+    top: 0;
+    bottom: 0;
 }
 
 .volume-container {

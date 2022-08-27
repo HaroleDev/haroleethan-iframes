@@ -1875,7 +1875,7 @@ screen and (max-height: 600px) {
 }
 
 .playback-speed-settings .header {
-    background-color: var(--foreground);
+    background-color: var(--background);
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -1908,7 +1908,7 @@ screen and (max-height: 600px) {
 .settings-context-menu .page:not([hidden]) {
     max-height: 500px;
     max-width: 500px;
-    top: 0;
+    bottom: 0;
     left: 0;
     display: block !important;
     -webkit-transform: translateX(0%) translateY(0%);
@@ -1929,7 +1929,7 @@ screen and (max-height: 600px) {
     -ms-transform: translateX(0%) translateY(0%);
     transform: translateX(0%) translateY(0%);
     display: block !important;
-    top: 0;
+    bottom: 0;
     left: 0;
     opacity: 0;
     pointer-events: none;

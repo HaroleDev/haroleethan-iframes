@@ -23,9 +23,7 @@ var config = {
 };
 var hls = new Hls(config);
 const playpauseButton = document.querySelector(".play-pause-button"),
-    playpauseTooltipContainer = document.querySelector(
-        ".play-pause-tooltip-container"
-    ),
+    playpauseTooltipContainer = document.querySelector(".play-pause-tooltip-container"),
     videoContainer = document.querySelector(".video-container"),
     videoPoster = document.querySelector(".video-poster"),
     video = document.querySelector(".video"),
@@ -43,15 +41,18 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     loopItem = document.querySelector(".loop-item"),
     eqItem = document.querySelector(".eq-item"),
     captionButton = document.querySelector(".caption-button"),
+
     settingsButton = document.querySelector(".settings-button"),
     settingsContextMenu = document.querySelector(".settings-context-menu"),
-    settingsTooltipContainer = document.querySelector(
-        ".settings-tooltip-container"
-    ),
+    settingsTooltipContainer = document.querySelector(".settings-tooltip-container"),
+
     contextMenu = document.querySelector(".video-context-menu"),
-    downloadItem = document.querySelector(".download-item"),
+
     Item = document.querySelector(".item"),
+    downloadItem = document.querySelector(".download-item"),
+    playbackSpeedItem = document.querySelector(".playback-speed-item"),
     transcriptItem = document.querySelector(".transcript-item"),
+
     transcriptPanel = document.querySelector(".transcript-panel"),
     closeTranscriptPanelBtn = document.querySelector(".close-transcript-panel"),
     transcriptDiv = document.querySelector(".captions-contents"),
@@ -69,9 +70,7 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     pipTooltip = document.querySelector(".pip-tooltip"),
     timelineContainer = document.querySelector(".timeline-container"),
     timelineInner = document.querySelector(".timeline"),
-    videoInformationOverlay = document.querySelector(
-        ".video-information-overlay"
-    ),
+    videoInformationOverlay = document.querySelector(".video-information-overlay"),
     videoControlsContainer = document.querySelector(".video-controls-container"),
     videoControls = document.querySelector(".controls"),
     rightVideoControls = document.querySelector(".right-side"),
@@ -84,8 +83,9 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     AirPlayButton = document.querySelector(".airplay-button"),
     CastButton = document.querySelector(".gcast-button"),
     CastTooltip = document.querySelector(".gcast-tooltip");
-var orientationInfluence;
-var videoPercent;
+
+var orientationInfluence, videoPercent;
+
 var title =
     document
         .querySelector('meta[property="og:title"]')
@@ -346,6 +346,12 @@ document.addEventListener("click", (e) => {
         settingsContextMenu.classList.remove("pressed");
         settingsTooltipContainer.classList.add("tooltip-right");
         seekingPreview.removeAttribute("hidden");
+        const oldContent = settingsContextMenu.querySelectorAll(".page");
+        oldContent.forEach(element => {
+            element.setAttribute("hidden", "");
+        })
+        const content = settingsContextMenu.querySelector(".front-page");
+        content.removeAttribute("hidden");
     }
 }); //Context menu items
 
@@ -366,6 +372,12 @@ settingsButton.addEventListener("click", () => {
         settingsButton.classList.contains("pressed") &&
         settingsContextMenu.classList.contains("pressed")
     ) {
+        const oldContent = settingsContextMenu.querySelectorAll(".page");
+        oldContent.forEach(element => {
+            element.setAttribute("hidden", "");
+        })
+        const content = settingsContextMenu.querySelector(".front-page");
+        content.removeAttribute("hidden");
         seekingPreview.setAttribute("hidden", "");
     } else {
         seekingPreview.removeAttribute("hidden");
@@ -399,7 +411,15 @@ downloadItem.addEventListener("click", () => {
     settingsButton.classList.remove("pressed");
     settingsContextMenu.classList.remove("pressed");
     settingsTooltipContainer.classList.add("tooltip-right");
-}); //AudioContext
+});
+
+playbackSpeedItem.addEventListener("click", () => {
+    const parent = playbackSpeedItem.parentNode.parentNode;
+    parent.setAttribute("hidden", "");
+    const content = document.querySelector(".playback-speed-settings");
+    content.removeAttribute("hidden");
+});
+//AudioContext
 
 var ctx =
     window.AudioContext ||
@@ -1273,7 +1293,7 @@ async function mediaSessionToggle() {
             "seekbackward",
             (d) => {
                 video.currentTime -= d.seekOffset || 10;
-                timelineInner.style.setProperty("--progress-position", videoPercent);
+                timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration);
                 currentTime.textContent = formatDuration(video.currentTime);
             },
         ],
@@ -1281,7 +1301,7 @@ async function mediaSessionToggle() {
             "seekforward",
             (d) => {
                 video.currentTime += d.seekOffset || 10;
-                timelineInner.style.setProperty("--progress-position", videoPercent);
+                timelineInner.style.setProperty("--progress-position", video.currentTime / video.duration);
                 currentTime.textContent = formatDuration(video.currentTime);
             },
         ],

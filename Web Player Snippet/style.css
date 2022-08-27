@@ -1799,11 +1799,16 @@ screen and (max-height: 600px) {
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
     pointer-events: none;
+    overflow: hidden;
 }
 
 .video-context-menu .contents,
 .settings-context-menu .contents {
     padding: 12px 8px;
+}
+
+.settings-context-menu .contents.playback-speed-settings .span {
+    padding-left: 12px;
 }
 
 .settings-context-menu.pressed {
@@ -1851,8 +1856,8 @@ screen and (max-height: 600px) {
 
     .settings-context-menu.pressed {
         opacity: 1;
-        -webkit-clip-path: circle(130% at 70% 100%);
-        clip-path: circle(130% at 70% 100%);
+        -webkit-clip-path: circle(135% at 70% 100%);
+        clip-path: circle(135% at 70% 100%);
         -webkit-transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
         -o-transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
         -webkit-transition: all 300ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
@@ -1860,6 +1865,18 @@ screen and (max-height: 600px) {
         transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
         transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
     }
+}
+
+.playback-speed-settings .header {
+    background-color: var(--foreground);
+    padding: 4px 8px;
+}
+
+.playback-speed-settings .header h2 {
+    font-variation-settings: "wght" 800;
+    font-weight: 800;
+    font-size: 1rem;
+    padding-left: 24px;
 }
 
 .volume-container {

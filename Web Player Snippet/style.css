@@ -1876,14 +1876,33 @@ screen and (max-height: 600px) {
 
 .playback-speed-settings .header {
     background-color: var(--foreground);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.playback-speed-settings .header .contents {
     padding: 4px 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.playback-speed-settings .header .contents.back-page {
+    cursor: pointer;
 }
 
 .playback-speed-settings .header h2 {
     font-variation-settings: "wght" 800;
     font-weight: 800;
     font-size: 1rem;
-    padding-left: 24px;
+    margin-left: 6px;
+}
+
+.playback-speed-settings .header svg {
+    margin-left: 6px;
 }
 
 .settings-context-menu .page:not([hidden]) {
@@ -1896,6 +1915,7 @@ screen and (max-height: 600px) {
     -ms-transform: translateX(0%) translateY(0%);
     transform: translateX(0%) translateY(0%);
     opacity: 1;
+    overflow: hidden;
     pointer-events: all;
     -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);

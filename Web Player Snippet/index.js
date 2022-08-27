@@ -52,6 +52,7 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     downloadItem = document.querySelector(".download-item"),
     playbackSpeedItem = document.querySelector(".playback-speed-item"),
     transcriptItem = document.querySelector(".transcript-item"),
+    backPageSettings = document.querySelector(".back-page"),
 
     transcriptPanel = document.querySelector(".transcript-panel"),
     closeTranscriptPanelBtn = document.querySelector(".close-transcript-panel"),
@@ -353,7 +354,8 @@ document.addEventListener("click", (e) => {
         const content = settingsContextMenu.querySelector(".front-page");
         content.removeAttribute("hidden");
     }
-}); //Context menu items
+});
+//Context menu items
 
 eqItem.addEventListener("click", () => eqContainer.classList.add("opened"));
 transcriptItem.addEventListener("click", () => {
@@ -368,21 +370,33 @@ settingsButton.addEventListener("click", () => {
     settingsContextMenu.classList.toggle("pressed");
     settingsTooltipContainer.classList.toggle("tooltip-right");
 
+    const oldContent = settingsContextMenu.querySelectorAll(".page");
+    oldContent.forEach(element => {
+        element.setAttribute("hidden", "");
+    })
+    const content = settingsContextMenu.querySelector(".front-page");
+    content.removeAttribute("hidden");
     if (
         settingsButton.classList.contains("pressed") &&
         settingsContextMenu.classList.contains("pressed")
     ) {
-        const oldContent = settingsContextMenu.querySelectorAll(".page");
-        oldContent.forEach(element => {
-            element.setAttribute("hidden", "");
-        })
-        const content = settingsContextMenu.querySelector(".front-page");
         content.removeAttribute("hidden");
         seekingPreview.setAttribute("hidden", "");
     } else {
         seekingPreview.removeAttribute("hidden");
     }
-}); //Settings items
+});
+
+backPageSettings.addEventListener("click", () => {
+    const oldContent = settingsContextMenu.querySelectorAll(".page");
+    oldContent.forEach(element => {
+        element.setAttribute("hidden", "");
+    })
+    const content = settingsContextMenu.querySelector(".front-page");
+    content.removeAttribute("hidden");
+    seekingPreview.setAttribute("hidden", "");
+})
+//Settings items
 
 function downloadFile(url, fileName) {
     fetch(url, {

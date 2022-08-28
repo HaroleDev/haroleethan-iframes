@@ -9,7 +9,6 @@
     -webkit-box-sizing: border-box;
     font-synthesis: none;
     box-sizing: border-box;
-    color-adjust: exact;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     -webkit-font-kerning: normal;
@@ -85,17 +84,13 @@
     height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
-    margin-inline: auto;
     overflow: hidden;
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
@@ -390,40 +385,33 @@
 .video-controls-container .left-side {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     padding-right: 32px;
     gap: 24px;
     -webkit-box-align: end;
     -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
 }
 
 .video-controls-container .right-side {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     gap: 16px;
     -webkit-box-align: end;
     -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
     -webkit-box-pack: right;
     -ms-flex-pack: right;
-    -webkit-justify-content: right;
     justify-content: right;
 }
 
 .video-controls-container .controls {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     margin: 12px 40px;
     -webkit-transition: all 300ms var(--ease-out-expo);
@@ -665,7 +653,6 @@
 
 .controls[hidden] {
     display: -webkit-box !important;
-    display: -webkit-flex !important;
     display: -ms-flexbox !important;
     display: flex !important;
     opacity: 0.3 !important;
@@ -688,11 +675,9 @@
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     top: 0;
     z-index: 2;
@@ -714,7 +699,6 @@
 .video-player[data-device="iPadOS"] .video-information-container {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
     text-align: right;
 }
@@ -741,22 +725,17 @@
 .video-information-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -ms-flex-line-pack: start;
-    -webkit-align-content: flex-start;
     align-content: flex-start;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     z-index: 0;
     top: 0;
@@ -856,49 +835,40 @@
 .timeline-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
-    margin-inline: 40px;
+    margin: 0px 40px;
     margin-bottom: 24px;
 }
 
 .timeline-container .footer {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
-    -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
     -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
 .badges-container {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
     -webkit-box-align: end;
-    -webkit-align-items: flex-end;
     -ms-flex-align: end;
     align-items: flex-end;
     gap: 8px;
@@ -906,16 +876,13 @@
 
 .badge {
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: start;
-    -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
     padding: 0px 12px;
@@ -980,11 +947,9 @@
     margin: 8px 0px 8px 0px;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     cursor: pointer;
     -webkit-transition: all 300ms var(--ease-out-expo);
@@ -993,11 +958,9 @@
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
 }
 
@@ -1150,22 +1113,17 @@
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -ms-flex-line-pack: center;
-    -webkit-align-content: center;
     align-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     -webkit-transform: translate(-50%, -50%) scale(0.9);
     -ms-transform: translate(-50%, -50%) scale(0.9);
@@ -1183,7 +1141,6 @@
     user-select: none;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
     -webkit-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
@@ -1229,15 +1186,12 @@
 .video-poster-container {
     position: absolute;
     display: -webkit-box;
-    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-    -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
     -webkit-box-align: center;
-    -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
     top: 0;
@@ -1406,7 +1360,7 @@
     backdrop-filter: blur(1vh);
 }
 
-@supports not ((-webkit-filter: blur()) or (filter: blur())) {
+@supports not (filter: blur()) {
 
     .video-backdrop-seeking {
         background-color: #000000cc;
@@ -1630,6 +1584,125 @@ screen and (max-height: 600px) {
     transition: all 300ms var(--ease-out-expo);
 }
 
+.video-container.caption .caption-button svg,
+.video-container.pip-player .pip-button svg,
+.video-container.casted-session .gcast-button svg {
+    -webkit-animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
+    animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
+}
+
+.video-container:not(.caption) .caption-button svg,
+.video-container:not(.pip-player) .pip-button svg,
+.video-container:not(.casted-session) .gcast-button svg {
+    -webkit-animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
+    animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
+}
+
+.right-side button:not(.caption-button):not(.pip-button):not(.gcast-button) svg {
+    -webkit-animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
+    animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
+}
+
+@-webkit-keyframes bounceOut {
+
+    0%,
+    100% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+
+    30% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+    }
+
+    70% {
+        -webkit-transform: translateY(2px);
+        transform: translateY(2px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+}
+
+@keyframes bounceOut {
+
+    0%,
+    100% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+
+    30% {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+    }
+
+    70% {
+        -webkit-transform: translateY(2px);
+        transform: translateY(2px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+}
+
+@-webkit-keyframes bounceIn {
+
+    0%,
+    100% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+
+    30% {
+        -webkit-transform: translateY(8px);
+        transform: translateY(8px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+    }
+
+    70% {
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+}
+
+@keyframes bounceIn {
+
+    0%,
+    100% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+
+    30% {
+        -webkit-transform: translateY(8px);
+        transform: translateY(8px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+    }
+
+    70% {
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+    }
+}
+
 .video-container .caption-button::after,
 .video-container .pip-button::after,
 .video-container .gcast-button::after {
@@ -1642,6 +1715,7 @@ screen and (max-height: 600px) {
     border-radius: 2px;
     bottom: 2px;
     width: 0;
+    z-index: 0;
     margin-left: 16px;
     -webkit-transition: all 150ms var(--ease-in-expo);
     -o-transition: all 150ms var(--ease-in-expo);
@@ -1705,20 +1779,16 @@ screen and (max-height: 600px) {
 .settings-context-menu .item {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     position: relative;
     -webkit-user-select: none;
@@ -1747,19 +1817,15 @@ screen and (max-height: 600px) {
 .settings-context-menu .item-content {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
     display: inline-flex;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -1878,17 +1944,33 @@ screen and (max-height: 600px) {
 
 .playback-speed-settings .header {
     background-color: var(--background);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
 .playback-speed-settings .header .contents {
     padding: 4px 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
@@ -1950,11 +2032,9 @@ screen and (max-height: 600px) {
 .volume-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     float: right;
 }
@@ -2035,7 +2115,6 @@ screen and (max-height: 600px) {
 .equalizers {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
     display: inline-flex;
     margin: 0 auto;
 }
@@ -2085,7 +2164,6 @@ screen and (max-height: 600px) {
 .decibel-labels {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     height: calc(164px + 12px);
     width: -webkit-fit-content;
@@ -2094,11 +2172,9 @@ screen and (max-height: 600px) {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     text-align: right;
     margin: 8px 8px 8px 4px;
@@ -2111,20 +2187,16 @@ screen and (max-height: 600px) {
     background: var(--foreground);
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     padding: 18px 28px 28px;
 }
@@ -2198,7 +2270,6 @@ screen and (max-height: 600px) {
 .volume-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     cursor: pointer;
     gap: 0px;
@@ -2713,20 +2784,16 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .header {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     padding: 28px 30px;
     background: var(--foreground);
@@ -2738,16 +2805,13 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .header-buttons {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     gap: 16px;
 }
@@ -2785,16 +2849,13 @@ input[type=range]::-ms-tooltip {
     transform: scale(100%);
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     background: #000;
     z-index: 0;
@@ -2929,12 +2990,10 @@ input[type=range]::-ms-tooltip {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     padding: 32px;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
@@ -2989,15 +3048,12 @@ input[type=range]::-ms-tooltip {
     padding: 16px 20px 128px 20px;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     gap: 8px;
     height: calc(100% - 125px);
@@ -3041,16 +3097,13 @@ input[type=range]::-ms-tooltip {
 .cue-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: start;
     -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
     padding: 9px 12px;
     gap: 10px;
@@ -3735,4 +3788,19 @@ input[type=range]::-ms-tooltip {
         background: Canvas;
         outline: 2px solid CanvasText;
     }
+}
+
+.example {
+    display: -ms-grid;
+    display: grid;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
+    background: -o-linear-gradient(top, white, black);
+    background: linear-gradient(to bottom, white, black);
 }

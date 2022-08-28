@@ -1,7 +1,7 @@
 "use strict";
 
 const videoMetadata = {
-    video_thumbs: "//res.cloudinary.com/harole/image/upload/s--3AQUSV56--/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
+    video_thumbs: "//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg",
     video_poster: "//res.cloudinary.com/harole/video/upload/s--p6nXm3qO--/c_fill,h_720,q_auto:low,w_1280/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg",
     HLS_src: "//res.cloudinary.com/harole/video/upload/s--w9SNLopB--/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8",
     HLS_codec: "application/x-mpegURL",
@@ -993,19 +993,22 @@ function toggleVolume() {
 function seekingPreviewPosition(e) {
     let percent = 0;
     const clientRect = timelineInner.getBoundingClientRect();
+
+    const RectContainer = window.getComputedStyle(timelineContainer);
+    var marginLeft = parseFloat(RectContainer.marginLeft);
+    var marginRight = parseFloat(RectContainer.marginRight);
+
     if (e.target) {
         percent = (100 / clientRect.width) * (e.clientX - clientRect.left);
     } else if (seekingPreview.classList.contains("hovered")) {
         percent = parseFloat(seekingPreview.style.left, 10);
-    } else {
-        return;
     }
 
     if (percent < 0) percent = 0;
     if (percent > 100) percent = 100;
 
     const seekRect = seekingPreview.getBoundingClientRect();
-    var seekPos = `calc(${percent}% - ${(seekRect.width * (percent / 100)) / 2 + 40 * (1 - percent / 100)}px + ${(seekRect.width * (1 - percent / 100)) / 2 - (percent / 100) * 40}px + ${80 * (1 - percent / 100)}px)`;
+    var seekPos = `calc(${percent}% - ${(seekRect.width * (percent / 100)) / 2 + marginLeft * (1 - percent / 100)}px + ${(seekRect.width * (1 - percent / 100)) / 2 - (percent / 100) * marginRight}px + ${(marginLeft * 2) * (1 - percent / 100)}px)`;
     seekingPreview.style.setProperty("--thumbnail-seek-position", seekPos);
 }
 
@@ -1020,12 +1023,14 @@ timelineInner.addEventListener("pointermove", (e) => {
     });
     timelineInner.addEventListener("pointerdown", (e) => {
         timelineInner.setPointerCapture(e.pointerId);
-        settingsButton.classList.remove("pressed");
-        settingsContextMenu.classList.remove("pressed");
-        settingsTooltipContainer.classList.add("tooltip-right");
-        seekingPreview.removeAttribute("hidden");
-        showContextMenu(false);
-        if (e.button === 0) toggleScrubbing(e);
+        if (e.button === 0) {
+            settingsButton.classList.remove("pressed");
+            settingsContextMenu.classList.remove("pressed");
+            settingsTooltipContainer.classList.add("tooltip-right");
+            seekingPreview.removeAttribute("hidden");
+            showContextMenu(false);
+            toggleScrubbing(e);
+        }
     });
     if (isScrubbing) {
         videoControls.setAttribute("hidden", "");
@@ -1063,16 +1068,20 @@ function toggleScrubbing(e) {
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
-    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+    let percent;
+    const updateThrottlePercent = throttle(() => {
+        percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+    }, 1000);
+    updateThrottlePercent();
+
+    let seekTime = percent * video.duration;
+    timelineInner.style.setProperty("--preview-position", percent);
+    timeTooltip.textContent = formatDuration(seekTime);
 
     var thumbPosition =
         (Math.trunc(percent * video.duration) / Math.trunc(video.duration)) * 100;
     seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`;
-
     seekingPreviewPosition(e);
-    let seekTime = percent * video.duration;
-    timelineInner.style.setProperty("--preview-position", percent);
-    timeTooltip.textContent = formatDuration(seekTime);
 
     if (seekTime < 0) seekTime = 0;
     if (seekTime > video.duration - 1) seekTime = video.duration - 1;
@@ -1088,6 +1097,31 @@ function handleTimelineUpdate(e) {
 }
 
 //Load and update data
+function throttle(cb, delay = 1000) {
+    let shouldWait = false;
+    let waitingArgs;
+    const timeoutFunc = () => {
+        if (waitingArgs == null) {
+            shouldWait = false;
+        } else {
+            cb(...waitingArgs);
+            waitingArgs = null;
+            setTimeout(timeoutFunc, delay);
+        }
+    }
+
+    return (...args) => {
+        if (shouldWait) {
+            waitingArgs = args;
+            return;
+        }
+        cb(...args);
+        shouldWait = true;
+
+        setTimeout(timeoutFunc, delay);
+    }
+}
+
 function loadedMetadata() {
     totalTime.textContent = formatDuration(video.duration);
     currentTime.textContent = formatDuration(video.currentTime);
@@ -1099,6 +1133,16 @@ async function updatetime() {
         if (video.currentTime > 0)
             timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", videoPercent);
+        window.requestAnimationFrame(updatetime);
+    }
+    window.cancelAnimationFrame(updatetime);
+}
+
+function updateMetadata() {
+    const updateThrottleMetadata = throttle(() => {
+        orientationInfluence = video.videoWidth / video.videoHeight;
+        videoPlayerContainer.style.setProperty("--aspect-ratio-size", orientationInfluence);
+        videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
         if (orientationInfluence > 16 / 9) {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);
             qualityBadgeText.textContent = qualityCheck(video.videoWidth);
@@ -1106,15 +1150,8 @@ async function updatetime() {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight);
             qualityBadgeText.textContent = qualityCheck(video.videoHeight);
         }
-        window.requestAnimationFrame(updatetime);
-    }
-    window.cancelAnimationFrame(updatetime);
-}
-
-function updateMetadata() {
-    orientationInfluence = video.videoWidth / video.videoHeight;
-    videoPlayerContainer.style.setProperty("--aspect-ratio-size", orientationInfluence);
-    videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
+    }, 1000);
+    updateThrottleMetadata();
     videoContainer.classList.contains("hovered")
         ? window.cancelAnimationFrame(updateMetadata)
         : window.requestAnimationFrame(updateMetadata);
@@ -1621,6 +1658,15 @@ videoPlayer.addEventListener("keydown", (e) => {
     }
 });
 
+const isURL = str => {
+    try {
+        return Boolean(new URL(`https://${str}`));
+    }
+    catch (e) {
+        return false;
+    }
+}
+
 const eventListeners = [
     [
         "play",
@@ -1631,6 +1677,7 @@ const eventListeners = [
             video.addEventListener("timeupdate", mediaSessionToggle());
             interval = setInterval(intervalDivide, 1e3);
             if (Hls.isSupported() && video.currentTime === 0) hls.startLoad();
+            window.requestAnimationFrame(updateMetadata);
             videoContainer.addEventListener("pointerover", () => {
                 activity();
                 checkElement();
@@ -1657,7 +1704,10 @@ const eventListeners = [
         "pause",
         () => {
             clearInterval(interval);
-            window.cancelAnimationFrame(updatetime);
+            videoContainer.addEventListener("pointerleave", () => {
+                window.cancelAnimationFrame(updatetime);
+                window.cancelAnimationFrame(updateMetadata);
+            });
             navigator.mediaSession.playbackState = "paused";
             playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
             video.classList.remove("inactive");
@@ -1744,6 +1794,9 @@ const eventListeners = [
             videoPercent = video.currentTime / video.duration;
             videoPlayer.classList.remove("loading");
             video.textTracks[0].mode = "hidden";
+            if (isURL(videoMetadata.video_thumbs) === false) {
+                seekingThumbnail.setAttribute("hidden", "");
+            }
             seekingThumbnail.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
             videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`;
             durationContainer.setAttribute(

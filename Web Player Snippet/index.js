@@ -766,10 +766,9 @@ function frameSeeking(time) {
 }
 
 //Time divider animation
-const spinners = ["/", "–", "\\", "|"];
-let spinindex = 0;
-
 function intervalDivide() {
+    const spinners = ["/", "–", "\\", "|"];
+    let spinindex = 0;
     let line = spinners[spinindex];
     if (line == undefined) {
         spinindex = 0;
@@ -780,24 +779,30 @@ function intervalDivide() {
 }
 let interval;
 
-const requestAnimFrame =
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    function (rq) {
-        window.setTimeout(rq, 1e3 / 60);
-    },
-    cancelAnimFrame =
-        window.cancelAnimationFrame ||
-        window.webkitCancelAnimationFrame ||
-        window.mozCancelAnimationFrame ||
-        window.oCancelAnimationFrame ||
-        window.msCancelAnimationFrame ||
-        function (rq) {
-            window.clearTimeout(rq);
-        };
+(function () {
+    var lastTime = 0;
+    var vendors = ['webkit', 'moz'];
+    for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+        window.cancelAnimationFrame =
+            window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+    }
+
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function (callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function () { callback(currTime + timeToCall); },
+                timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        }
+
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function (id) {
+            clearTimeout(id);
+        }
+}());
 
 //Activity check
 let timeout = null;
@@ -807,7 +812,8 @@ function activity() {
     video.classList.remove("inactive");
     videoControlsContainer.classList.remove("inactive");
     videoContainer.classList.add("hovered");
-    cancelAnimFrame(updateMetadata);
+    window.cancelAnimationFrame(updateMetadata);
+    window.requestAnimationFrame(updatetime);
     if (
         videoContainer.classList.contains("hovered") &&
         !settingsContextMenu.classList.contains("pressed")
@@ -816,8 +822,8 @@ function activity() {
             return;
         } else {
             timeout = setTimeout(function () {
-                cancelAnimFrame(updatetime);
-                requestAnimFrame(updateMetadata);
+                window.cancelAnimationFrame(updatetime);
+                window.requestAnimationFrame(updateMetadata);
                 videoContainer.classList.remove("hovered");
                 videoControlsContainer.classList.add("inactive");
                 video.classList.add("inactive");
@@ -1072,7 +1078,7 @@ function handleTimelineUpdate(e) {
     if (seekTime > video.duration - 1) seekTime = video.duration - 1;
 
     if (isScrubbing) {
-        cancelAnimFrame(updatetime);
+        window.cancelAnimationFrame(updatetime);
         e.preventDefault();
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`;
         timelineInner.style.setProperty("--progress-position", percent);
@@ -1089,7 +1095,7 @@ function loadedMetadata() {
 
 async function updatetime() {
     videoPercent = video.currentTime / video.duration;
-    if (!video.paused) {
+    if (!video.paused && videoContainer.classList.contains("hovered")) {
         if (video.currentTime > 0)
             timelineInner.style.setProperty("--buffered-position", (1 / video.duration) * video.buffered.end(0));
         timelineInner.style.setProperty("--progress-position", videoPercent);
@@ -1100,8 +1106,9 @@ async function updatetime() {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight);
             qualityBadgeText.textContent = qualityCheck(video.videoHeight);
         }
+        window.requestAnimationFrame(updatetime);
     }
-    requestAnimFrame(updatetime);
+    window.cancelAnimationFrame(updatetime);
 }
 
 function updateMetadata() {
@@ -1109,8 +1116,8 @@ function updateMetadata() {
     videoPlayerContainer.style.setProperty("--aspect-ratio-size", orientationInfluence);
     videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
     videoContainer.classList.contains("hovered")
-        ? cancelAnimFrame(updateMetadata)
-        : requestAnimFrame(updateMetadata);
+        ? window.cancelAnimationFrame(updateMetadata)
+        : window.requestAnimationFrame(updateMetadata);
 }
 
 const leading0Formatter = new Intl.NumberFormat(undefined, {
@@ -1591,18 +1598,21 @@ videoPlayer.addEventListener("keydown", (e) => {
                 break;
             case "arrowleft":
             case "arrowright":
+                videoContainer.classList.add("seeking");
                 if (e.key.toLowerCase() === "arrowleft") skip(-5);
                 if (e.key.toLowerCase() === "arrowright") skip(5);
                 checkActive();
                 break;
             case "j":
             case "l":
+                videoContainer.classList.add("seeking");
                 if (e.key.toLowerCase() === "j") skip(-10);
                 if (e.key.toLowerCase() === "l") skip(10);
                 checkActive();
                 break;
             case ",":
             case ".":
+                videoContainer.classList.add("seeking");
                 if (e.key === ",") frameSeeking(`-${videoMetadata.video_FPS}`);
                 if (e.key === ".") frameSeeking(videoMetadata.video_FPS);
                 checkActive();
@@ -1625,19 +1635,20 @@ const eventListeners = [
                 activity();
                 checkElement();
                 if (videoContainer.classList.contains("hovered"))
-                    cancelAnimFrame(updateMetadata);
+                    window.cancelAnimationFrame(updateMetadata);
             });
             videoContainer.addEventListener("pointermove", () => {
                 activity();
                 checkElement();
                 if (videoContainer.classList.contains("hovered"))
-                    cancelAnimFrame(updateMetadata);
+                    window.cancelAnimationFrame(updateMetadata);
             });
             videoContainer.addEventListener("pointerleave", () => {
                 if (settingsContextMenu.classList.contains("pressed")) return;
                 videoContainer.classList.remove("hovered");
                 video.classList.add("inactive");
-                requestAnimFrame(updateMetadata);
+                window.cancelAnimationFrame(updatetime);
+                window.requestAnimationFrame(updateMetadata);
             });
             videoContainer.classList.remove("paused");
         },
@@ -1646,7 +1657,7 @@ const eventListeners = [
         "pause",
         () => {
             clearInterval(interval);
-            cancelAnimFrame(updatetime);
+            window.cancelAnimationFrame(updatetime);
             navigator.mediaSession.playbackState = "paused";
             playpauseTooltipContainer.dataset.tooltip = "Play" + " (k)";
             video.classList.remove("inactive");
@@ -1702,8 +1713,9 @@ const eventListeners = [
     [
         "seeked",
         () => {
-            requestAnimFrame(updatetime);
+            window.requestAnimationFrame(updatetime);
             videoContainer.classList.add("played");
+            videoContainer.classList.remove("seeking");
             seekingPreview.classList.remove("loading");
             videoContainer.classList.remove("buffering-scrubbing");
             updatetime();
@@ -1713,7 +1725,6 @@ const eventListeners = [
     [
         "timeupdate",
         () => {
-            requestAnimFrame(updatetime);
             currentTime.textContent = formatDuration(video.currentTime);
             durationContainer.setAttribute(
                 "aria-label",

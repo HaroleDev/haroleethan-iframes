@@ -1,22 +1,3 @@
-*,
-*::before,
-*::after {
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    image-rendering: auto;
-    text-rendering: geometricPrecision;
-    shape-rendering: geometricPrecision;
-    -webkit-box-sizing: border-box;
-    font-synthesis: none;
-    box-sizing: border-box;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-    -webkit-font-kerning: normal;
-    font-kerning: normal;
-
-    color-scheme: light dark;
-}
-
 :root {
     --text-color: #F0F0F0;
     --shadow-text-color: #B0B0B0;
@@ -42,8 +23,25 @@
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
     font-style: normal;
+}
 
+*,
+*::before,
+*::after {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    image-rendering: auto;
+    text-rendering: geometricPrecision;
+    shape-rendering: geometricPrecision;
+    -webkit-box-sizing: border-box;
+    font-synthesis: none;
+    box-sizing: border-box;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    -webkit-font-kerning: normal;
+    font-kerning: normal;
     accent-color: var(--accent-color);
+    color-scheme: light dark;
 }
 
 :focus {
@@ -2396,24 +2394,29 @@ screen and (max-height: 600px) {
     opacity: 0;
 }
 
-.tooltip-left::after {
+[class*="tooltip-left"]:after,
+[class*="tooltip-right"]:after {
     content: attr(data-tooltip);
     color: var(--text-color);
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
     padding: 6px 14px;
-    line-height: 100%;
     background: var(--flyout-bg);
     border-radius: 8px;
-    -webkit-transform: translateX(-80%) translateY(-150%);
-    -ms-transform: translateX(-80%) translateY(-150%);
-    transform: translateX(-80%) translateY(-150%);
     opacity: 0;
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
     transition: opacity 300ms var(--ease-out-expo);
     pointer-events: none;
+    text-align: center;
+}
+
+.tooltip-left::after {
+    border-radius: 8px;
+    -webkit-transform: translateX(-80%) translateY(-150%);
+    -ms-transform: translateX(-80%) translateY(-150%);
+    transform: translateX(-80%) translateY(-150%);
     text-align: left;
 }
 
@@ -2448,22 +2451,9 @@ screen and (max-height: 600px) {
 }
 
 div.tooltip-right::after {
-    content: attr(data-tooltip);
-    color: var(--text-color);
-    width: -webkit-max-content;
-    width: -moz-max-content;
-    width: max-content;
-    padding: 6px 14px;
-    background: var(--flyout-bg);
-    border-radius: 8px;
     -webkit-transform: translateX(-75%) translateY(-125%);
     -ms-transform: translateX(-75%) translateY(-125%);
     transform: translateX(-75%) translateY(-125%);
-    opacity: 0;
-    -webkit-transition: opacity 300ms var(--ease-out-expo);
-    -o-transition: opacity 300ms var(--ease-out-expo);
-    transition: opacity 300ms var(--ease-out-expo);
-    pointer-events: none;
     text-align: center;
 }
 
@@ -2471,7 +2461,6 @@ div.tooltip-right.volume-tooltip-container::after {
     -webkit-transform: translateX(75%) translateY(-125%);
     -ms-transform: translateX(75%) translateY(-125%);
     transform: translateX(75%) translateY(-125%);
-    text-align: left;
 }
 
 div.tooltip-right:hover::after {

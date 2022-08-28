@@ -1257,6 +1257,10 @@
     pointer-events: painted;
 }
 
+.play-btn-poster {
+    pointer-events: none;
+}
+
 .video-poster-container:hover .play-btn-poster .symbol {
     fill: var(--dark-text-color);
 }
@@ -3002,6 +3006,8 @@ input[type=range]::-ms-tooltip {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scrollbar-width: auto;
+    scrollbar-color: var(--accent-color) var(--background);
 }
 
 .transcript-panel .captions-contents::-webkit-scrollbar {
@@ -3029,7 +3035,6 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .captions-contents::-webkit-scrollbar-thumb:hover {
     background-color: var(--dark-accent-color);
 }
-
 
 .transcript-panel .captions-contents::-webkit-scrollbar-thumb:active {
     background-color: var(--accent-color);

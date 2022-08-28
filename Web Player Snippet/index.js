@@ -103,7 +103,6 @@ const svg =
 
 function init() {
     document.body.classList.remove("preload");
-
     if (video.hasAttribute("controls")) {
         videoControlsContainer.removeAttribute("hidden");
         videoInformationOverlay.removeAttribute("hidden");

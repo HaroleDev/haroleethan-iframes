@@ -636,7 +636,8 @@
 
 .video-player.full-screen .enter,
 .video-player:not(.full-screen) .exit {
-    display: none;
+    position: absolute;
+    opacity: 0;
 }
 
 .video-container.pip-player:not(.full-screen) .full-screen-button {
@@ -1591,21 +1592,20 @@ screen and (max-height: 600px) {
     animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
 }
 
+.video-player .right-side button svg {
+    animation-name: bounceIn;
+    animation-duration: 600ms;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+}
+
 .video-container:not(.caption) .caption-button svg,
 .video-container:not(.pip-player) .pip-button svg,
 .video-container:not(.casted-session) .gcast-button svg {
-    -webkit-animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
-    animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
-}
-
-.video-player .right-side button:not(.caption-button):not(.pip-button):not(.gcast-button) svg {
-    -webkit-animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
-    animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
-}
-
-.video-player.full-screen .right-side button.full-screen-button svg.exit {
-    -webkit-animation: bounceOut 600ms var(--ease-in-expo) 1 normal both;
-    animation: bounceOut 600ms var(--ease-in-expo) 1 normal both;
+    -webkit-animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
+    animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
+    animation-play-state: paused;
 }
 
 @-webkit-keyframes bounceOut {

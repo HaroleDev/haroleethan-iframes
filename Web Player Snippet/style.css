@@ -72,6 +72,9 @@
             --stroke-accent-color: color(display-p3 calc(22/255) calc(82/255) calc(72/255));
             --page-background: color(display-p3 calc(231/255) calc(254/255) calc(247/255));
             --flyout-bg: color(display-p3 calc(8/255) calc(43/255) calc(33/255) / 0.961);
+            --blue-color: color(display-p3 calc(75/255) calc(153/255) calc(231/255));
+            --mid-blue-color: color(display-p3 calc(39/255) calc(113/255) calc(215/255));
+            --dark-blue-color: color(display-p3 calc(0/255) calc(71/255) calc(187/255));
             --link-and-focus-color: color(display-p3 calc(75/255) calc(153/255) calc(231/255));
         }
     }

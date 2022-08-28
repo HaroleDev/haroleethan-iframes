@@ -1598,9 +1598,14 @@ screen and (max-height: 600px) {
     animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
 }
 
-.right-side button:not(.caption-button):not(.pip-button):not(.gcast-button) svg {
+.video-player .right-side button:not(.caption-button):not(.pip-button):not(.gcast-button) svg {
     -webkit-animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
     animation: bounceIn 600ms var(--ease-in-expo) 1 normal both;
+}
+
+.video-player.full-screen .right-side button.full-screen-button svg.exit {
+    -webkit-animation: bounceOut 600ms var(--ease-in-expo) 1 normal both !important;
+    animation: bounceOut 600ms var(--ease-in-expo) 1 normal both !important;
 }
 
 @-webkit-keyframes bounceOut {

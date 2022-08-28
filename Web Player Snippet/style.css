@@ -1604,8 +1604,8 @@ screen and (max-height: 600px) {
 }
 
 .video-player.full-screen .right-side button.full-screen-button svg.exit {
-    -webkit-animation: bounceOut 600ms var(--ease-in-expo) 1 normal both !important;
-    animation: bounceOut 600ms var(--ease-in-expo) 1 normal both !important;
+    -webkit-animation: bounceOut 600ms var(--ease-in-expo) 1 normal both;
+    animation: bounceOut 600ms var(--ease-in-expo) 1 normal both;
 }
 
 @-webkit-keyframes bounceOut {

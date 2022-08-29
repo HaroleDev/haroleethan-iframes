@@ -1557,15 +1557,15 @@
 
 .video-player .right-side button svg {
     -webkit-animation-name: bounceIn;
-            animation-name: bounceIn;
+    animation-name: bounceIn;
     -webkit-animation-duration: 600ms;
-            animation-duration: 600ms;
+    animation-duration: 600ms;
     -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
+    animation-fill-mode: both;
     -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
+    animation-timing-function: linear;
     -webkit-animation-play-state: paused;
-            animation-play-state: paused;
+    animation-play-state: paused;
 }
 
 .video-container:not(.caption) .caption-button svg,
@@ -1574,7 +1574,7 @@
     -webkit-animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
     animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
     -webkit-animation-play-state: paused;
-            animation-play-state: paused;
+    animation-play-state: paused;
 }
 
 @-webkit-keyframes bounceOut {
@@ -1977,7 +1977,7 @@
     max-height: calc(500px - 60px);
     overflow-y: auto;
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .settings-context-menu .page:not([hidden]) {

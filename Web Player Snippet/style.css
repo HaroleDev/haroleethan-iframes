@@ -3237,6 +3237,17 @@ input[type=range]::-ms-tooltip {
     }
 }
 
+@media screen and (max-width: 960px) {
+    .settings-context-menu {
+        right: 0;
+        max-height: 30vw;
+        margin: 40px;
+        bottom: 128px;
+        margin-bottom: 12px;
+        opacity: 0;
+    }
+}
+
 @media screen and (max-width: 1024px),
 screen and (max-height: 600px) {
 

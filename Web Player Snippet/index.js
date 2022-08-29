@@ -54,6 +54,8 @@ const playpauseButton = document.querySelector(".play-pause-button"),
     transcriptItem = document.querySelector(".transcript-item"),
     backPageSettings = document.querySelector(".back-page"),
 
+    playbackSpeedItemControls = document.querySelectorAll(".contents.playback-speed-settings .item"),
+
     transcriptPanel = document.querySelector(".transcript-panel"),
     closeTranscriptPanelBtn = document.querySelector(".close-transcript-panel"),
     transcriptDiv = document.querySelector(".captions-contents"),
@@ -169,6 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
     source.setAttribute("src", videoMetadata.Fallback_src);
     source.setAttribute("type", videoMetadata.Fallback_codec);
     video.load();
+    video.playbackRate = videoPlayer.getAttribute("data-speed");
     video.addEventListener("durationchange", updatetime);
     eqContainer.querySelectorAll(".eq-slider").forEach((element) => {
         element.disabled = true;
@@ -431,6 +434,26 @@ playbackSpeedItem.addEventListener("click", () => {
     parent.setAttribute("hidden", "");
     const content = document.querySelector(".playback-speed-settings");
     content.removeAttribute("hidden");
+});
+
+for (var i = 0; i < playbackSpeedItemControls.length; i++) {
+    playbackSpeedItemControls[i].classList.add(`speed__${i}`);
+};
+
+playbackSpeedItemControls.forEach(element => {
+    element.addEventListener("click", () => {
+        if (document.querySelectorAll(`.item[class*="speed__"]`)) {
+            video.playbackRate = element.getAttribute("data-speed");
+            videoPlayer.setAttribute("data-speed", video.playbackRate);
+        }
+        const oldContent = settingsContextMenu.querySelectorAll(".page");
+        oldContent.forEach(element => {
+            element.setAttribute("hidden", "");
+        });
+        const content = settingsContextMenu.querySelector(".front-page");
+        content.removeAttribute("hidden");
+        seekingPreview.setAttribute("hidden", "");
+    });
 });
 //AudioContext
 

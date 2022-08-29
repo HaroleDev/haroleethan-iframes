@@ -1992,6 +1992,10 @@ screen and (max-height: 600px) {
     margin-left: 6px;
 }
 
+.video-player .playback-speed-settings .item .check {
+    display: none;
+}
+
 .settings-context-menu .page:not([hidden]) {
     max-height: 500px;
     max-width: 500px;

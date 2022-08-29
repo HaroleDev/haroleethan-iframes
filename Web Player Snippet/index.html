@@ -32,7 +32,7 @@
         rel="stylesheet">
     <meta name="format-detection" content="telephone=no" />
     <style type="text/css">
-        @supports (font-variation-settings:normal) {
+        @supports (font-variation-settings: normal) {
             @font-face {
                 font-family: "Manrope Variable";
                 src: url(Manrope[wght].woff2) format("woff2 supports variations") url(Manrope[wght].woff2) format("woff2 variations");
@@ -56,7 +56,7 @@
     </div>
     <div class="column">
         <div class="video-player-container">
-            <div class="video-player loading" data-device="">
+            <div class="video-player loading" data-device="" data-speed="1">
                 <div class="video-context-menu">
                     <div class="contents">
                         <div class="item loop-item">
@@ -388,50 +388,104 @@
                                         </div>
                                     </div>
                                     <div class="contents playback-speed-settings">
-                                        <div class="item">
+                                        <div class="item" data-speed="0.25">
                                             <div class="item-content">
                                                 <div class="span">0.25x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="0.5">
                                             <div class="item-content">
                                                 <div class="span">0.5x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="0.75">
                                             <div class="item-content">
                                                 <div class="span">0.75x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="1">
                                             <div class="item-content">
                                                 <div class="span">1x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="1.25">
                                             <div class="item-content">
                                                 <div class="span">1.25x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="1.5">
                                             <div class="item-content">
                                                 <div class="span">1.5x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="1.75">
                                             <div class="item-content">
                                                 <div class="span">1.75x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="2">
                                             <div class="item-content">
                                                 <div class="span">2x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
-                                        <div class="item">
+                                        <div class="item" data-speed="4">
                                             <div class="item-content">
                                                 <div class="span">4x</div>
                                             </div>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="check">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                                                    fill="var(--text-color)" />
+                                            </svg>
                                         </div>
                                     </div>
                                 </div>
@@ -729,7 +783,7 @@
         document.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (document.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1);
         document.querySelector("#mosaic feComposite.comp").setAttribute("height", document.querySelector("#mosaic feComposite.comp").getAttribute("width"));
 
-        document.querySelector(".video").addEventListener("play", () => {
+        document.querySelector(".video").addEventListener("loadedmetadata", () => {
             if (!document.querySelector(".video-container").classList.contains("played")) {
                 document.querySelectorAll(`.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg`).forEach(element => {
                     element.style.animationDelay = `calc(var(--animation-order) * 64ms)`;

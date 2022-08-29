@@ -213,7 +213,6 @@ window.addEventListener("DOMContentLoaded", () => {
     source.setAttribute("src", videoMetadata.Fallback_src);
     source.setAttribute("type", videoMetadata.Fallback_codec);
     video.load();
-    video.playbackRate = videoPlayer.getAttribute("data-speed");
     video.addEventListener("durationchange", updatetime);
     eqContainer.querySelectorAll(".eq-slider").forEach((element) => {
         element.disabled = true;
@@ -472,14 +471,16 @@ playbackSpeedItem.addEventListener("click", () => {
 
 for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     playbackSpeedItemControls[i].classList.add(`speed__${i}`);
+    video.playbackRate = videoPlayer.getAttribute("data-speed");
+    document.querySelector(`.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute("data-speed")}"]`).setAttribute("aria-checked", "true");
 };
 
 playbackSpeedItemControls.forEach(element => {
     element.addEventListener("click", () => {
         playbackSpeedItemControls.forEach(element => {
             element.removeAttribute("aria-checked");
-        })
-        if (document.querySelectorAll(`.item[class*="speed__"]`)) {
+        });
+        if (document.querySelector(`.playback-speed-settings .item[class*="speed__"]`)) {
             video.playbackRate = element.getAttribute("data-speed");
             videoPlayer.setAttribute("data-speed", video.playbackRate);
             element.setAttribute("aria-checked", "true");

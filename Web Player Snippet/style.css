@@ -3216,9 +3216,29 @@ input[type=range]::-ms-tooltip {
     font-size: 1rem;
 }
 
+@media screen and (max-width: 640px) {
+    .video-controls-container .controls-container .controls {
+        margin: 18px 30px;
+    }
+
+    .video-controls-container .controls-container .timeline-container {
+        margin: 0px 30px;
+        margin-bottom: 18px;
+    }
+
+    .video-controls-container .right-side>div {
+        display: none;
+    }
+
+    .video-controls-container .right-side>div:last-child,
+    .video-controls-container .right-side>div:nth-child(5) {
+        display: block;
+    }
+}
 
 @media screen and (max-width: 1024px),
 screen and (max-height: 600px) {
+
     .seeking-preview__thumbnail {
         width: calc(108px * var(--aspect-ratio-size));
         height: 108px;

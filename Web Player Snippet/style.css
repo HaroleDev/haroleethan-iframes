@@ -36,7 +36,6 @@
     -webkit-box-sizing: border-box;
     font-synthesis: none;
     box-sizing: border-box;
-    color-adjust: exact;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     -webkit-font-kerning: normal;
@@ -83,15 +82,12 @@
     height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     overflow: hidden;
     -webkit-transition: all 300ms var(--ease-out-expo);
@@ -387,40 +383,33 @@
 .video-controls-container .left-side {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     padding-right: 32px;
     gap: 24px;
     -webkit-box-align: end;
     -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
 }
 
 .video-controls-container .right-side {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     gap: 16px;
     -webkit-box-align: end;
     -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
     -webkit-box-pack: right;
     -ms-flex-pack: right;
-    -webkit-justify-content: right;
     justify-content: right;
 }
 
 .video-controls-container .controls {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     margin: 12px 40px;
     -webkit-transition: all 300ms var(--ease-out-expo);
@@ -664,7 +653,6 @@
 .controls[hidden] {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
-    display: -webkit-flex !important;
     display: flex !important;
     opacity: 0.3 !important;
     -webkit-transition: opacity 300ms 100ms var(--ease-out-expo);
@@ -686,11 +674,9 @@
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     top: 0;
     z-index: 2;
@@ -712,7 +698,6 @@
 .video-player[data-device="iPadOS"] .video-information-container {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
     text-align: right;
 }
@@ -739,22 +724,17 @@
 .video-information-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -ms-flex-line-pack: start;
-    -webkit-align-content: flex-start;
     align-content: flex-start;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     z-index: 0;
     top: 0;
@@ -854,12 +834,10 @@
 .timeline-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     margin: 0px 40px;
     margin-bottom: 24px;
@@ -868,36 +846,29 @@
 .timeline-container .footer {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
 }
 
 .badges-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row-reverse;
-    -webkit-flex-direction: row-reverse;
     flex-direction: row-reverse;
     -webkit-box-align: end;
     -ms-flex-align: end;
-    -webkit-align-items: flex-end;
     align-items: flex-end;
     gap: 8px;
 }
@@ -905,16 +876,13 @@
 .badge {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: start;
     -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
     padding: 0px 12px;
     position: relative;
@@ -978,11 +946,9 @@
     margin: 8px 0px 8px 0px;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     cursor: pointer;
     -webkit-transition: all 300ms var(--ease-out-expo);
@@ -991,11 +957,9 @@
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
 }
 
@@ -1148,22 +1112,17 @@
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -ms-flex-line-pack: center;
-    -webkit-align-content: center;
     align-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     -webkit-transform: translate(-50%, -50%) scale(0.9);
     -ms-transform: translate(-50%, -50%) scale(0.9);
@@ -1181,7 +1140,6 @@
     user-select: none;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
-    -webkit-justify-content: flex-end;
     justify-content: flex-end;
     -webkit-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
@@ -1228,15 +1186,12 @@
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     top: 0;
     left: 0;
@@ -1404,7 +1359,7 @@
     backdrop-filter: blur(1vh);
 }
 
-@supports not ((-webkit-filter: blur()) or (filter: blur())) {
+@supports not (filter: blur()) {
 
     .video-backdrop-seeking {
         background-color: #000000cc;
@@ -1602,15 +1557,15 @@
 
 .video-player .right-side button svg {
     -webkit-animation-name: bounceIn;
-    animation-name: bounceIn;
+            animation-name: bounceIn;
     -webkit-animation-duration: 600ms;
-    animation-duration: 600ms;
+            animation-duration: 600ms;
     -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+            animation-fill-mode: both;
     -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
+            animation-timing-function: linear;
     -webkit-animation-play-state: paused;
-    animation-play-state: paused;
+            animation-play-state: paused;
 }
 
 .video-container:not(.caption) .caption-button svg,
@@ -1619,7 +1574,7 @@
     -webkit-animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
     animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
     -webkit-animation-play-state: paused;
-    animation-play-state: paused;
+            animation-play-state: paused;
 }
 
 @-webkit-keyframes bounceOut {
@@ -1798,20 +1753,16 @@
 .settings-context-menu .item {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     position: relative;
     -webkit-user-select: none;
@@ -1840,19 +1791,15 @@
 .settings-context-menu .item-content {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
     display: inline-flex;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -1973,19 +1920,15 @@
     background-color: var(--background);
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -1993,19 +1936,15 @@
     padding: 4px 8px;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -2038,7 +1977,7 @@
     max-height: calc(500px - 60px);
     overflow-y: auto;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 .settings-context-menu .page:not([hidden]) {
@@ -2084,11 +2023,9 @@
 .volume-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     float: right;
 }
@@ -2169,7 +2106,6 @@
 .equalizers {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
     display: inline-flex;
     margin: 0 auto;
 }
@@ -2219,7 +2155,6 @@
 .decibel-labels {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     height: calc(164px + 12px);
     width: -webkit-fit-content;
@@ -2228,11 +2163,9 @@
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     text-align: right;
     margin: 8px 8px 8px 4px;
@@ -2245,20 +2178,16 @@
     background: var(--foreground);
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     padding: 18px 28px 28px;
 }
@@ -2332,7 +2261,6 @@
 .volume-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     cursor: pointer;
     gap: 0px;
@@ -2838,20 +2766,16 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .header {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
     justify-content: space-between;
     padding: 28px 30px;
     background: var(--foreground);
@@ -2863,16 +2787,13 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .header-buttons {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
     gap: 16px;
 }
@@ -2910,16 +2831,13 @@ input[type=range]::-ms-tooltip {
     transform: scale(100%);
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     background: #000;
     z-index: 0;
@@ -3054,12 +2972,10 @@ input[type=range]::-ms-tooltip {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     padding: 32px;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
@@ -3114,15 +3030,12 @@ input[type=range]::-ms-tooltip {
     padding: 16px 20px 128px 20px;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    -webkit-flex-direction: column;
     flex-direction: column;
     -ms-flex-wrap: nowrap;
-    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     gap: 8px;
     height: calc(100% - 125px);
@@ -3176,16 +3089,13 @@ input[type=range]::-ms-tooltip {
 .cue-container {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
-    -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-box-align: start;
     -ms-flex-align: start;
-    -webkit-align-items: flex-start;
     align-items: flex-start;
     padding: 9px 12px;
     gap: 10px;

@@ -3231,7 +3231,8 @@ input[type=range]::-ms-tooltip {
     }
 
     .video-controls-container .right-side>div:last-child,
-    .video-controls-container .right-side>div:nth-child(5) {
+    .video-controls-container .right-side>div:nth-child(5),
+    .video-controls-container .right-side>div:nth-child(2) {
         display: block;
     }
 }

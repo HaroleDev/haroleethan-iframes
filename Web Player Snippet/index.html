@@ -2,835 +2,811 @@
 <html lang="en" data-cast-api-enabled="true">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Playful Video Player</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="robots" content="noindex,follow" />
-    <meta property="og:site_name" content="Playful Video">
-    <meta property="og:title" content="Feeding Fish in Hue" />
-    <meta property="og:author" content="Harole Ethan" />
-    <meta property="og:type" content="video.other" />
-    <meta property="og:description" content="A sample video from Harole feeding fish while vacating in Hue." />
-    <meta property="og:image"
-        content="//res.cloudinary.com/harole/video/upload/s--9TaDuwy7--/c_fill,h_720,q_auto:low,w_1280/g_south_west,l_Harole%27s%20Portfolio%20Site:Watermarks:harole_watermark_jeukdh.png/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:image:type" content="image/jpeg">
-    <link rel="canonical" href="https://haroleethan-iframes.netlify.app/web%20player%20snippet/" />
-    <meta name="theme-color" content="#02DA9A">
-    <meta name="color-scheme" content="light dark">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-    <link rel="dns-prefetch" href="//res.cloudinary.com" pr="0.9">
-    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" pr="0.7">
-    <link rel="dns-prefetch" href="//polyfill.io" pr="0.3">
-    <link rel="preconnect" href="//gstatic.com" crossorigin>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="page.css">
-    <link rel="preconnect" href="//fonts.googleapis.com">
-    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
-    <link href="//fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=Manrope:wght@500;800&display=swap"
-        rel="stylesheet">
-    <meta name="format-detection" content="telephone=no" />
-    <style type="text/css">
-        @supports (font-variation-settings: normal) {
-            @font-face {
-                font-family: "Manrope Variable";
-                src: url(Manrope[wght].woff2) format("woff2 supports variations") url(Manrope[wght].woff2) format("woff2 variations");
-                font-display: optional;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Playful Video Player</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="robots" content="noindex,follow" />
+  <meta property="og:site_name" content="Playful Video">
+  <meta property="og:title" content="Feeding Fish in Hue" />
+  <meta property="og:author" content="Harole Ethan" />
+  <meta property="og:type" content="video.other" />
+  <meta property="og:description" content="A sample video from Harole feeding fish while vacating in Hue." />
+  <meta property="og:image"
+    content="//res.cloudinary.com/harole/video/upload/s--9TaDuwy7--/c_fill,h_720,q_auto:low,w_1280/g_south_west,l_Harole%27s%20Portfolio%20Site:Watermarks:harole_watermark_jeukdh.png/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image:type" content="image/jpeg">
+  <link rel="canonical" href="https://haroleethan-iframes.netlify.app/web%20player%20snippet/" />
+  <meta name="theme-color" content="#02DA9A">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="dns-prefetch" href="//res.cloudinary.com" pr="0.9">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net" pr="0.7">
+  <link rel="dns-prefetch" href="//polyfill.io" pr="0.3">
+  <link rel="preconnect" href="//gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page.css">
+  <link rel="preconnect" href="//fonts.googleapis.com">
+  <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
+  <link href="//fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=Manrope:wght@500;800&display=swap"
+    rel="stylesheet">
+  <meta name="format-detection" content="telephone=no" />
+  <style type="text/css">
+    @supports (font-variation-settings: normal) {
+      @font-face {
+        font-family: "Manrope Variable";
+        src: url(Manrope[wght].woff2) format("woff2 supports variations") url(Manrope[wght].woff2) format("woff2 variations");
+        font-display: optional;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="website-header">
-        <div class="logo-container">
-            <img src="./media/Playful%20Video_Dark.svg" class="logo dark" alt="Playful Video">
-            <img src="./media/Playful%20Video_Light.svg" class="logo light" alt="Playful Video">
-            <img src="./media/Playful%20Video_HighContrast.svg" class="logo forced-color" alt="Playful Video">
-        </div>
-        <div class="version">
-            <p>Rolling Progress Release</p>
-            <p><b>NOTE:</b> This video player is a work in progress, so expect the features to bug out.</p>
-        </div>
+  <div class="website-header">
+    <div class="logo-container">
+      <img src="./media/Playful%20Video_Dark.svg" class="logo dark" alt="Playful Video">
+      <img src="./media/Playful%20Video_Light.svg" class="logo light" alt="Playful Video">
+      <img src="./media/Playful%20Video_HighContrast.svg" class="logo forced-color" alt="Playful Video">
     </div>
-    <div class="column">
-        <div class="video-player-container preload">
-            <div class="video-player loading" data-device="" data-speed="1">
-                <div class="video-context-menu">
-                    <div class="contents">
-                        <div class="item loop-item">
-                            <div class="item-content">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M0 12C0 7.86846 3.30258 4.5 7.4 4.5H17.25C17.6642 4.5 18 4.83579 18 5.25C18 5.66421 17.6642 6 17.25 6H7.4C4.15203 6 1.5 8.6757 1.5 12C1.5 13.6827 2.18008 15.2007 3.27487 16.2897C3.56855 16.5818 3.56982 17.0567 3.27772 17.3503C2.98561 17.644 2.51074 17.6453 2.21706 17.3532C0.848404 15.9918 0 14.0947 0 12ZM20.7223 6.64966C21.0144 6.35599 21.4893 6.35471 21.7829 6.64682C23.1516 8.00816 24 9.90527 24 12C24 16.1315 20.6974 19.5 16.6 19.5H6.75C6.33579 19.5 6 19.1642 6 18.75C6 18.3358 6.33579 18 6.75 18H16.6C19.848 18 22.5 15.3243 22.5 12C22.5 10.3173 21.8199 8.79926 20.7251 7.71032C20.4314 7.41821 20.4302 6.94334 20.7223 6.64966Z"
-                                        fill="var(--text-color)" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M15.2197 1.71967C15.5126 1.42678 15.9874 1.42678 16.2803 1.71967L19.2803 4.71967C19.5732 5.01256 19.5732 5.48744 19.2803 5.78033L16.2803 8.78033C15.9874 9.07322 15.5126 9.07322 15.2197 8.78033C14.9268 8.48744 14.9268 8.01256 15.2197 7.71967L17.6893 5.25L15.2197 2.78033C14.9268 2.48744 14.9268 2.01256 15.2197 1.71967Z"
-                                        fill="var(--text-color)" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M8.78033 15.2197C9.07322 15.5126 9.07322 15.9874 8.78033 16.2803L6.31066 18.75L8.78033 21.2197C9.07322 21.5126 9.07322 21.9874 8.78033 22.2803C8.48744 22.5732 8.01256 22.5732 7.71967 22.2803L4.71967 19.2803C4.42678 18.9874 4.42678 18.5126 4.71967 18.2197L7.71967 15.2197C8.01256 14.9268 8.48744 14.9268 8.78033 15.2197Z"
-                                        fill="var(--text-color)" />
-                                </svg>
-                                <div class="span">Loop</div>
-                            </div>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                    fill="var(--text-color)" />
-                            </svg>
-                        </div>
-                        <div class="item eq-item">
-                            <div class="item-content">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M8 0.75C8 0.335786 7.66421 0 7.25 0C6.83579 0 6.5 0.335786 6.5 0.75V11.575C4.78832 11.9225 3.5 13.4358 3.5 15.25C3.5 17.0642 4.78832 18.5775 6.5 18.925V23.25C6.5 23.6642 6.83579 24 7.25 24C7.66421 24 8 23.6642 8 23.25V18.925C9.71168 18.5775 11 17.0642 11 15.25C11 13.4358 9.71168 11.9225 8 11.575V0.75ZM9.5 15.25C9.5 16.4926 8.49264 17.5 7.25 17.5C6.00736 17.5 5 16.4926 5 15.25C5 14.0074 6.00736 13 7.25 13C8.49264 13 9.5 14.0074 9.5 15.25Z"
-                                        fill="var(--text-color)" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M18.5 23.25C18.5 23.6642 18.1642 24 17.75 24C17.3358 24 17 23.6642 17 23.25V12.425C15.2883 12.0775 14 10.5642 14 8.75C14 6.9345 15.2901 5.42033 17.0036 5.07428C17.0012 5.04984 17 5.02507 17 5V0.75C17 0.335787 17.3358 0 17.75 0C18.1642 0 18.5 0.335787 18.5 0.75V5C18.5 5.02507 18.4988 5.04984 18.4964 5.07428C20.2099 5.42033 21.5 6.9345 21.5 8.75C21.5 10.5642 20.2117 12.0775 18.5 12.425V23.25ZM17.75 11C16.5074 11 15.5 9.99264 15.5 8.75C15.5 7.50736 16.5074 6.5 17.75 6.5C18.9926 6.5 20 7.50736 20 8.75C20 9.99264 18.9926 11 17.75 11Z"
-                                        fill="var(--text-color)" />
-                                </svg>
-                                <div class="span">Equalizer</div>
-                            </div>
-                        </div>
-                        <div class="item transcript-item">
-                            <div class="item-content">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 6.75C12 6.33579 12.3358 6 12.75 6H20.25C20.6642 6 21 6.33579 21 6.75V17.25C21 17.6642 20.6642 18 20.25 18H12.75C12.3358 18 12 17.6642 12 17.25V6.75ZM14.25 7.5C13.8358 7.5 13.5 7.83579 13.5 8.25C13.5 8.66421 13.8358 9 14.25 9H15.75C16.1642 9 16.5 8.66421 16.5 8.25C16.5 7.83579 16.1642 7.5 15.75 7.5H14.25ZM18.75 7.5C18.3358 7.5 18 7.83579 18 8.25C18 8.66421 18.3358 9 18.75 9C19.1642 9 19.5 8.66421 19.5 8.25C19.5 7.83579 19.1642 7.5 18.75 7.5ZM13.5 15.75C13.5 15.3358 13.8358 15 14.25 15H15.75C16.1642 15 16.5 15.3358 16.5 15.75C16.5 16.1642 16.1642 16.5 15.75 16.5H14.25C13.8358 16.5 13.5 16.1642 13.5 15.75ZM18.75 15C18.3358 15 18 15.3358 18 15.75C18 16.1642 18.3358 16.5 18.75 16.5C19.1642 16.5 19.5 16.1642 19.5 15.75C19.5 15.3358 19.1642 15 18.75 15ZM16.5 12.75C16.5 12.3358 16.8358 12 17.25 12H18.75C19.1642 12 19.5 12.3358 19.5 12.75C19.5 13.1642 19.1642 13.5 18.75 13.5H17.25C16.8358 13.5 16.5 13.1642 16.5 12.75ZM14.25 12C13.8358 12 13.5 12.3358 13.5 12.75C13.5 13.1642 13.8358 13.5 14.25 13.5C14.6642 13.5 15 13.1642 15 12.75C15 12.3358 14.6642 12 14.25 12Z"
-                                        fill="var(--text-color)" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M0 6C0 4.34315 1.34315 3 3 3H21C22.6569 3 24 4.34315 24 6V18C24 19.6569 22.6569 21 21 21H3C1.34315 21 0 19.6569 0 18V6ZM3 4.5H21C21.8284 4.5 22.5 5.17157 22.5 6V18C22.5 18.8284 21.8284 19.5 21 19.5H3C2.17157 19.5 1.5 18.8284 1.5 18V6C1.5 5.17157 2.17157 4.5 3 4.5Z"
-                                        fill="var(--text-color)" />
-                                </svg>
-                                <div class="span">Transcript</div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-content">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.799 6.20101 22.5 12 22.5ZM12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
-                                        fill="var(--text-color)" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 10.5C12.4142 10.5 12.75 10.8358 12.75 11.25V18C12.75 18.4142 12.4142 18.75 12 18.75C11.5858 18.75 11.25 18.4142 11.25 18V11.25C11.25 10.8358 11.5858 10.5 12 10.5Z"
-                                        fill="var(--text-color)" />
-                                    <path
-                                        d="M13.125 7.5C13.125 8.12132 12.6213 8.625 12 8.625C11.3787 8.625 10.875 8.12132 10.875 7.5C10.875 6.87868 11.3787 6.375 12 6.375C12.6213 6.375 13.125 6.87868 13.125 7.5Z"
-                                        fill="var(--text-color)" />
-                                </svg>
-                                <div class="span">Video Details</div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-content">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M21 4.5H3C2.17157 4.5 1.5 5.17157 1.5 6V18C1.5 18.8284 2.17157 19.5 3 19.5H21C21.8284 19.5 22.5 18.8284 22.5 18V6C22.5 5.17157 21.8284 4.5 21 4.5ZM3 3C1.34315 3 0 4.34315 0 6V18C0 19.6569 1.34315 21 3 21H21C22.6569 21 24 19.6569 24 18V6C24 4.34315 22.6569 3 21 3H3Z"
-                                        fill="var(--text-color)" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M3.75 6C3.33579 6 3 6.33579 3 6.75V15.75C3 16.1642 3.33579 16.5 3.75 16.5H14.25C14.6642 16.5 15 16.1642 15 15.75V6.75C15 6.33579 14.6642 6 14.25 6H3.75ZM5.25 7.5C4.83579 7.5 4.5 7.83579 4.5 8.25C4.5 8.66421 4.83579 9 5.25 9H6.75C7.16421 9 7.5 8.66421 7.5 8.25C7.5 7.83579 7.16421 7.5 6.75 7.5H5.25ZM9.75 7.5C9.33579 7.5 9 7.83579 9 8.25C9 8.66421 9.33579 9 9.75 9H12.75C13.1642 9 13.5 8.66421 13.5 8.25C13.5 7.83579 13.1642 7.5 12.75 7.5H9.75ZM4.5 11.25C4.5 10.8358 4.83579 10.5 5.25 10.5H12.75C13.1642 10.5 13.5 10.8358 13.5 11.25C13.5 11.6642 13.1642 12 12.75 12H5.25C4.83579 12 4.5 11.6642 4.5 11.25ZM5.25 13.5C4.83579 13.5 4.5 13.8358 4.5 14.25C4.5 14.6642 4.83579 15 5.25 15H8.25C8.66421 15 9 14.6642 9 14.25C9 13.8358 8.66421 13.5 8.25 13.5H5.25ZM10.5 14.25C10.5 13.8358 10.8358 13.5 11.25 13.5H12.75C13.1642 13.5 13.5 13.8358 13.5 14.25C13.5 14.6642 13.1642 15 12.75 15H11.25C10.8358 15 10.5 14.6642 10.5 14.25Z"
-                                        fill="var(--text-color)" />
-                                </svg>
-                                <div class="span">Nerdy Stats</div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-content">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.799 6.20101 22.5 12 22.5ZM12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
-                                        fill="var(--text-color)" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 10.5C12.4142 10.5 12.75 10.8358 12.75 11.25V18C12.75 18.4142 12.4142 18.75 12 18.75C11.5858 18.75 11.25 18.4142 11.25 18V11.25C11.25 10.8358 11.5858 10.5 12 10.5Z"
-                                        fill="var(--text-color)" />
-                                    <path
-                                        d="M13.125 7.5C13.125 8.12132 12.6213 8.625 12 8.625C11.3787 8.625 10.875 8.12132 10.875 7.5C10.875 6.87868 11.3787 6.375 12 6.375C12.6213 6.375 13.125 6.87868 13.125 7.5Z"
-                                        fill="var(--text-color)" />
-                                </svg>
-                                <div class="span">About Playful Video</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="eq-dialog-container">
-                    <div class="equalizer-dialog dialog">
-                        <div class="contents">
-                            <div style="width: 100%; margin-bottom: 8px;">
-                                <h2>Equalizer</h2>
-                                <svg width="50" height="32" viewBox="0 0 50 32" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="switch eq-switch">
-                                    <rect x="2" y="2" width="46" height="28" rx="14" stroke-width="4"
-                                        class="switch-bg" />
-                                    <rect x="8" y="8" width="16" height="16" rx="8" class="switch-knob" />
-                                </svg>
-                            </div>
-                            <p>So, you wanted to fine tune the sound from the video you're playing? Great! This is for
-                                you.<br>In layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of
-                                a
-                                specific
-                                frequency.</p>
-                            <div class="equalizers">
-                                <div class="decibel-labels">
-                                    <div class="span">+12 dB</div>
-                                    <div class="span">+6 dB</div>
-                                    <div class="span">0 dB</div>
-                                    <div class="span">-6 dB</div>
-                                    <div class="span">-12 dB</div>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 0);" disabled />
-                                    <label>30 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 1);" disabled />
-                                    <label>60 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 2);" disabled />
-                                    <label>125 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 3);" disabled />
-                                    <label>250 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 4);" disabled />
-                                    <label>500 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 5);" disabled />
-                                    <label>800 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 6);" disabled />
-                                    <label>1 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 7);" disabled />
-                                    <label>2 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 8);" disabled />
-                                    <label>4 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 9);" disabled />
-                                    <label>8 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        oninput="changeGain(this.value, 10);" disabled />
-                                    <label>16 kHz</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer-buttons">
-                            <button class="close-dialog">Close</button>
-                        </div>
-                    </div>
-                    <div class="dialog-overlay"></div>
-                </div>
-                <div class="video-container paused" data-volume-level="full" data-start="0">
-                    <div class="error-dialog">
-                        <h3>Error</h3>
-                        <p id="error-log">An unknown error occurred.</p>
-                    </div>
-                    <div class="video-information-overlay">
-                        <div class="video-information-container">
-                            <div class="video-name">
-                                <h1></h1>
-                            </div>
-                            <div class="author-name">
-                                <div class="span"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-controls-container">
-                        <div class="controls-container">
-                            <div class="settings-context-menu">
-                                <div class="front-page page">
-                                    <div class="contents">
-                                        <div class="item">
-                                            <div class="item-content">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M5.96151 17.8845C4.78264 18.2775 3.50842 17.6404 3.11546 16.4615C2.72251 15.2826 3.35962 14.0084 4.53849 13.6155C4.65083 13.578 4.78323 13.5077 4.92399 13.3705C2.9583 12.8882 1.5 11.1144 1.5 9C1.5 6.51472 3.51472 4.5 6 4.5C8.48528 4.5 10.5 6.51472 10.5 9C10.5 10.6517 10.2982 12.4549 9.69378 14.0265C9.08732 15.6032 7.95528 17.2199 5.96151 17.8845ZM5.01283 15.0385C4.61987 15.1695 4.4075 15.5942 4.53849 15.9872C4.66947 16.3801 5.09421 16.5925 5.48717 16.4615C6.89891 15.9906 7.77795 14.8291 8.29376 13.488C8.80774 12.1516 9 10.5506 9 9C9 7.34315 7.65685 6 6 6C4.34315 6 3 7.34315 3 9C3 10.6569 4.34315 12 6 12L6.01353 12C6.54023 11.9976 7.08282 12.4579 6.89374 12.9495C6.52334 13.9126 6.00001 14.5767 5.31589 14.914C5.21816 14.9622 5.11715 15.0037 5.01283 15.0385Z"
-                                                        fill="var(--text-color)" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M16.4615 17.8845C15.2826 18.2775 14.0084 17.6404 13.6155 16.4615C13.2225 15.2826 13.8596 14.0084 15.0385 13.6155C15.1508 13.578 15.2832 13.5077 15.424 13.3705C13.4583 12.8882 12 11.1144 12 9C12 6.51472 14.0147 4.5 16.5 4.5C18.9853 4.5 21 6.51472 21 9C21 10.6517 20.7982 12.4549 20.1938 14.0265C19.5873 15.6032 18.4553 17.2199 16.4615 17.8845ZM15.5128 15.0385C15.1199 15.1695 14.9075 15.5942 15.0385 15.9872C15.1695 16.3801 15.5942 16.5925 15.9872 16.4615C17.3989 15.9906 18.2779 14.8291 18.7938 13.488C19.3077 12.1516 19.5 10.5506 19.5 9C19.5 7.34315 18.1569 6 16.5 6C14.8431 6 13.5 7.34315 13.5 9C13.5 10.6569 14.8431 12 16.5 12L16.5135 12C17.0402 11.9976 17.5828 12.4579 17.3937 12.9495C17.0233 13.9126 16.5 14.5767 15.8159 14.914C15.7182 14.9622 15.6171 15.0037 15.5128 15.0385Z"
-                                                        fill="var(--text-color)" />
-                                                </svg>
-                                                <div class="span">Annotations</div>
-                                            </div>
-                                        </div>
-                                        <div class="item download-item">
-                                            <div class="item-content">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M11.25 4.5C11.6642 4.5 12 4.83579 12 5.25V16.9393L15.2197 13.7197C15.5126 13.4268 15.9874 13.4268 16.2803 13.7197C16.5732 14.0126 16.5732 14.4874 16.2803 14.7803L11.7803 19.2803C11.4874 19.5732 11.0126 19.5732 10.7197 19.2803L6.21967 14.7803C5.92678 14.4874 5.92678 14.0126 6.21967 13.7197C6.51256 13.4268 6.98744 13.4268 7.28033 13.7197L10.5 16.9393V5.25C10.5 4.83579 10.8358 4.5 11.25 4.5Z"
-                                                        fill="var(--text-color)" />
-                                                </svg>
-                                                <div class="span">Download</div>
-                                            </div>
-                                        </div>
-                                        <div class="item playback-speed-item">
-                                            <div class="item-content">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 1.5C14.3076 1.5 16.4393 2.24353 18.1716 3.50425C18.5065 3.74799 18.9756 3.67409 19.2194 3.33918C19.4631 3.00427 19.3892 2.53518 19.0543 2.29144C17.0742 0.850346 14.6353 0 12 0C11.0361 0 10.0977 0.113805 9.19809 0.32905C8.79524 0.425432 8.54681 0.830135 8.64319 1.23298C8.73957 1.63582 9.14427 1.88426 9.54712 1.78788C10.3333 1.59978 11.1545 1.5 12 1.5Z"
-                                                        fill="var(--text-color)" />
-                                                    <path
-                                                        d="M21.7086 4.94571C21.4648 4.6108 20.9957 4.5369 20.6608 4.78063C20.3259 5.02437 20.252 5.49346 20.4957 5.82837C21.7565 7.56066 22.5 9.6924 22.5 12C22.5 17.799 17.799 22.5 12 22.5C11.7687 22.5 11.5393 22.4925 11.3119 22.4778C10.8985 22.4511 10.5418 22.7646 10.5151 23.1779C10.4884 23.5913 10.8018 23.948 11.2151 23.9747C11.4747 23.9915 11.7364 24 12 24C18.6274 24 24 18.6274 24 12C24 9.36472 23.1497 6.92584 21.7086 4.94571Z"
-                                                        fill="var(--text-color)" />
-                                                    <path
-                                                        d="M0 12C0 11.0361 0.113805 10.0977 0.329049 9.19809C0.425431 8.79525 0.830134 8.54681 1.23298 8.64319C1.63582 8.73957 1.88426 9.14427 1.78788 9.54712C1.59978 10.3333 1.5 11.1545 1.5 12C1.5 12.2313 1.50747 12.4607 1.52216 12.6881C1.54887 13.1015 1.23544 13.4582 0.822088 13.4849C0.408737 13.5116 0.0519952 13.1982 0.0252834 12.7849C0.00851011 12.5253 0 12.2636 0 12Z"
-                                                        fill="var(--text-color)" />
-                                                    <path
-                                                        d="M1.10322 14.9073C1.49546 14.7742 1.92135 14.9842 2.05447 15.3765C2.20252 15.8127 2.37851 16.2361 2.58032 16.6446C2.7638 17.016 2.6115 17.4658 2.24014 17.6492C1.86878 17.8327 1.419 17.6804 1.23551 17.3091C1.00474 16.842 0.803432 16.3577 0.634041 15.8586C0.500922 15.4663 0.710981 15.0404 1.10322 14.9073Z"
-                                                        fill="var(--text-color)" />
-                                                    <path
-                                                        d="M3.04692 18.854C3.35824 18.5808 3.83211 18.6116 4.10534 18.923C4.40779 19.2676 4.73243 19.5922 5.07703 19.8947C5.38835 20.1679 5.41922 20.6418 5.14599 20.9531C4.87276 21.2644 4.39889 21.2953 4.08757 21.022C3.69406 20.6767 3.32334 20.3059 2.97797 19.9124C2.70473 19.6011 2.73561 19.1272 3.04692 18.854Z"
-                                                        fill="var(--text-color)" />
-                                                    <path
-                                                        d="M6.35077 21.7599C6.53425 21.3885 6.98404 21.2362 7.3554 21.4197C7.76385 21.6215 8.18727 21.7975 8.62352 21.9455C9.01575 22.0787 9.22581 22.5045 9.09269 22.8968C8.95958 23.289 8.53369 23.4991 8.14145 23.366C7.64233 23.1966 7.15802 22.9953 6.69095 22.7645C6.31959 22.581 6.16729 22.1312 6.35077 21.7599Z"
-                                                        fill="var(--text-color)" />
-                                                    <path
-                                                        d="M6.51368 3.04546C6.86665 2.82871 6.97707 2.36685 6.76032 2.01388C6.54356 1.6609 6.0817 1.55048 5.72873 1.76724C4.11686 2.75707 2.75707 4.11686 1.76723 5.72873C1.55048 6.08171 1.6609 6.54356 2.01388 6.76032C2.36685 6.97707 2.82871 6.86665 3.04546 6.51368C3.91192 5.10271 5.10271 3.91192 6.51368 3.04546Z"
-                                                        fill="var(--text-color)" />
-                                                    <path
-                                                        d="M10.2439 6.18558C10.0224 5.99179 9.70807 5.94543 9.44009 6.06704C9.1721 6.18864 9 6.45573 9 6.75001V17.25C9 17.5443 9.1721 17.8114 9.44009 17.933C9.70807 18.0546 10.0224 18.0082 10.2439 17.8144L16.2439 12.5644C16.4066 12.422 16.5 12.2163 16.5 12C16.5 11.7837 16.4066 11.578 16.2439 11.4356L10.2439 6.18558Z"
-                                                        fill="var(--text-color)" />
-                                                </svg>
-                                                <div class="span">Playback Speed</div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="item-content">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M18.7171 18.5738L19.7141 18.3869C20.9916 18.1473 21.9581 17.0942 22.0875 15.8009L22.2072 14.603C22.397 12.7058 22.397 10.7943 22.2072 8.89697L22.0875 7.69913C21.9581 6.40584 20.9916 5.35268 19.7141 5.11316L18.7171 4.92621C13.8013 4.0045 8.75125 4.06951 3.8608 5.11747C2.8317 5.33799 2.06273 6.19779 1.95801 7.24503L1.79768 8.84835C1.60471 10.778 1.60471 12.722 1.79768 14.6517L1.95801 16.255C2.06273 17.3022 2.83169 18.162 3.8608 18.3825C8.75125 19.4305 13.8013 19.4955 18.7171 18.5738ZM3.54651 3.65076C1.88015 4.00784 0.635025 5.40005 0.465452 7.09578L0.30512 8.6991C0.102232 10.728 0.102232 12.772 0.30512 14.8009L0.465452 16.4042C0.635025 18.1 1.88015 19.4922 3.54651 19.8493C8.63141 20.9389 13.8822 21.0065 18.9935 20.0481L19.9905 19.8612C21.9226 19.4989 23.3844 17.9061 23.58 15.9501L23.6998 14.7523C23.8995 12.7557 23.8995 10.7443 23.6998 8.74771L23.58 7.54987C23.3844 5.5939 21.9226 4.00111 19.9905 3.63885L18.9935 3.45191C13.8822 2.49354 8.63141 2.56114 3.54651 3.65076Z"
-                                                        fill="var(--text-color)" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M7.27792 7.59254C8.10019 7.25195 9.00499 7.16283 9.8779 7.33647C10.2842 7.41728 10.548 7.81212 10.4672 8.21837C10.3864 8.62463 9.99152 8.88846 9.58527 8.80765C9.00333 8.69189 8.40013 8.7513 7.85195 8.97836C7.30377 9.20543 6.83523 9.58994 6.50559 10.0833C6.17595 10.5766 6 11.1567 6 11.75C6 12.3433 6.17595 12.9234 6.50559 13.4167C6.83524 13.9101 7.30377 14.2946 7.85195 14.5216C8.40013 14.7487 9.00333 14.8081 9.58527 14.6924C9.99152 14.6115 10.3864 14.8754 10.4672 15.2816C10.548 15.6879 10.2842 16.0827 9.87791 16.1635C9.00499 16.3372 8.10019 16.2481 7.27792 15.9075C6.45566 15.5669 5.75285 14.9901 5.25839 14.2501C4.76392 13.51 4.5 12.64 4.5 11.75C4.5 10.86 4.76392 9.98996 5.25839 9.24994C5.75285 8.50991 6.45566 7.93314 7.27792 7.59254Z"
-                                                        fill="var(--text-color)" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M14.7779 7.59254C15.6002 7.25195 16.505 7.16283 17.3779 7.33647C17.7842 7.41728 18.048 7.81212 17.9672 8.21837C17.8864 8.62463 17.4915 8.88846 17.0853 8.80765C16.5033 8.69189 15.9001 8.7513 15.3519 8.97836C14.8038 9.20543 14.3352 9.58994 14.0056 10.0833C13.6759 10.5766 13.5 11.1567 13.5 11.75C13.5 12.3433 13.6759 12.9234 14.0056 13.4167C14.3352 13.9101 14.8038 14.2946 15.3519 14.5216C15.9001 14.7487 16.5033 14.8081 17.0853 14.6924C17.4915 14.6115 17.8864 14.8754 17.9672 15.2816C18.048 15.6879 17.7842 16.0827 17.3779 16.1635C16.505 16.3372 15.6002 16.2481 14.7779 15.9075C13.9557 15.5669 13.2529 14.9901 12.7584 14.2501C12.2639 13.51 12 12.64 12 11.75C12 10.86 12.2639 9.98996 12.7584 9.24994C13.2529 8.50991 13.9557 7.93314 14.7779 7.59254Z"
-                                                        fill="var(--text-color)" />
-                                                </svg>
-                                                <div class="span">Subtitles/CC</div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="item-content">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M5.25 15C5.66421 15 6 15.3358 6 15.75V18.75C6 19.1642 5.66421 19.5 5.25 19.5C4.83579 19.5 4.5 19.1642 4.5 18.75V15.75C4.5 15.3358 4.83579 15 5.25 15Z"
-                                                        fill="var(--text-color)" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M9.75 11.2499C10.1642 11.2499 10.5 11.5857 10.5 11.9999V18.75C10.5 19.1642 10.1642 19.5 9.75 19.5C9.33579 19.5 9 19.1642 9 18.75V11.9999C9 11.5857 9.33579 11.2499 9.75 11.2499Z"
-                                                        fill="var(--text-color)" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M14.25 7.5C14.6642 7.5 15 7.83579 15 8.25V18.75C15 19.1642 14.6642 19.5 14.25 19.5C13.8358 19.5 13.5 19.1642 13.5 18.75V8.25C13.5 7.83579 13.8358 7.5 14.25 7.5Z"
-                                                        fill="var(--text-color)" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M18.75 4.5C19.1642 4.5 19.5 4.83579 19.5 5.25V18.75C19.5 19.1642 19.1642 19.5 18.75 19.5C18.3358 19.5 18 19.1642 18 18.75V5.25C18 4.83579 18.3358 4.5 18.75 4.5Z"
-                                                        fill="var(--text-color)" />
-                                                </svg>
-                                                <div class="span">Quality</div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="item-content">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M12 4.50004C10.369 4.50004 8.9606 3.70406 7.94954 2.55143C7.90752 2.50352 7.86262 2.46381 7.82007 2.43397C7.79329 2.41519 7.7705 2.40243 7.75289 2.39402C7.0618 2.70009 6.40949 3.07881 5.80571 3.52075C5.80412 3.54037 5.80371 3.56688 5.80662 3.60004C5.81118 3.65184 5.8231 3.71059 5.84355 3.77095C6.33518 5.22207 6.31975 6.83855 5.50483 8.25003C4.68982 9.66168 3.29739 10.4833 1.79466 10.783C1.7321 10.7955 1.67519 10.8146 1.62802 10.8366C1.59815 10.8505 1.57557 10.864 1.55943 10.8751C1.52018 11.2442 1.5 11.6195 1.5 12C1.5 12.3805 1.52018 12.7559 1.55943 13.125C1.57558 13.1361 1.59815 13.1496 1.62802 13.1635C1.6752 13.1855 1.7321 13.2046 1.79466 13.2171C3.29738 13.5168 4.6898 14.3384 5.50481 15.75C6.31972 17.1615 6.33516 18.778 5.84354 20.2291C5.82309 20.2894 5.81117 20.3482 5.80661 20.4C5.8037 20.4331 5.80412 20.4597 5.80571 20.4793C6.4095 20.9212 7.06182 21.3 7.75292 21.606C7.77053 21.5976 7.79333 21.5848 7.8201 21.5661C7.86265 21.5362 7.90755 21.4965 7.94958 21.4486C8.96063 20.296 10.369 19.5 12 19.5C13.631 19.5 15.0394 20.296 16.0504 21.4486C16.0925 21.4965 16.1374 21.5362 16.1799 21.5661C16.2067 21.5848 16.2295 21.5976 16.2471 21.606C16.9382 21.2999 17.5905 20.9212 18.1943 20.4793C18.1959 20.4596 18.1963 20.4331 18.1934 20.4C18.1889 20.3482 18.1769 20.2894 18.1565 20.2291C17.6649 18.7779 17.6803 17.1615 18.4952 15.75C19.3102 14.3384 20.7026 13.5168 22.2053 13.2171C22.2679 13.2046 22.3248 13.1855 22.372 13.1635C22.4018 13.1496 22.4244 13.1361 22.4406 13.125C22.4798 12.7559 22.5 12.3805 22.5 12C22.5 11.6195 22.4798 11.2442 22.4406 10.8751C22.4244 10.864 22.4018 10.8505 22.372 10.8365C22.3248 10.8146 22.2679 10.7955 22.2053 10.783C20.7026 10.4833 19.3102 9.66167 18.4952 8.25003C17.6803 6.83856 17.6649 5.2221 18.1565 3.77098C18.1769 3.71062 18.1889 3.65187 18.1934 3.60007C18.1963 3.56691 18.1959 3.5404 18.1943 3.52077C17.5905 3.07883 16.9382 2.7001 16.2471 2.39402C16.2295 2.40244 16.2067 2.4152 16.1799 2.43398C16.1374 2.46382 16.0925 2.50353 16.0505 2.55143C15.0394 3.70406 13.631 4.50004 12 4.50004ZM4.2058 7.50003C4.76324 6.53451 4.80518 5.3807 4.42287 4.25227C4.19376 3.57604 4.27709 2.78747 4.8502 2.36164C5.58243 1.81757 6.37881 1.35496 7.22591 0.987236C7.88115 0.702799 8.60615 1.02529 9.07719 1.56228C9.86351 2.4587 10.8843 3.00004 12 3.00004C13.1157 3.00004 14.1365 2.45871 14.9228 1.56229C15.3939 1.02529 16.1189 0.702804 16.7741 0.987243C17.6212 1.35498 18.4176 1.81759 19.1499 2.36167C19.7229 2.7875 19.8063 3.57607 19.5772 4.25229C19.1949 5.38072 19.2368 6.53452 19.7943 7.50003C20.3518 8.46566 21.3302 9.0789 22.4987 9.31198C23.1999 9.45181 23.8419 9.91931 23.9226 10.6297C23.9737 11.0794 24 11.5366 24 12C24 12.4634 23.9737 12.9207 23.9226 13.3704C23.8419 14.0808 23.1999 14.5483 22.4987 14.6881C21.3302 14.9212 20.3518 15.5344 19.7943 16.5C19.2368 17.4655 19.1949 18.6193 19.5772 19.7477C19.8063 20.424 19.7229 21.2125 19.1498 21.6384C18.4176 22.1825 17.6212 22.6451 16.7741 23.0128C16.1188 23.2972 15.3938 22.9748 14.9228 22.4378C14.1365 21.5414 13.1157 21 12 21C10.8844 21 9.86353 21.5414 9.07722 22.4378C8.60618 22.9748 7.88118 23.2972 7.22595 23.0128C6.37883 22.6451 5.58244 22.1825 4.85019 21.6384C4.27709 21.2126 4.19376 20.424 4.42285 19.7478C4.80515 18.6193 4.76321 17.4655 4.20577 16.5C3.64827 15.5344 2.66985 14.9212 1.50127 14.6881C0.800151 14.5482 0.158147 14.0807 0.077392 13.3704C0.0262665 12.9207 0 12.4634 0 12C0 11.5366 0.0262648 11.0794 0.077387 10.6297C0.15814 9.91932 0.80015 9.45182 1.50127 9.31198C2.66986 9.07892 3.64829 8.46567 4.2058 7.50003ZM16.5 12.0001C16.5 14.4853 14.4853 16.5001 12 16.5001C9.51472 16.5001 7.5 14.4853 7.5 12.0001C7.5 9.51478 9.51472 7.50006 12 7.50006C14.4853 7.50006 16.5 9.51478 16.5 12.0001ZM15 12.0001C15 13.6569 13.6569 15.0001 12 15.0001C10.3431 15.0001 9 13.6569 9 12.0001C9 10.3432 10.3431 9.00006 12 9.00006C13.6569 9.00006 15 10.3432 15 12.0001Z"
-                                                        fill="var(--text-color)" />
-                                                </svg>
-                                                <div class="span">Advanced Settings</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="playback-speed-settings page" hidden>
-                                    <div class="header">
-                                        <div class="contents back-page">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M14.0303 5.46967C14.3232 5.76256 14.3232 6.23744 14.0303 6.53033L8.56066 12L14.0303 17.4697C14.3232 17.7626 14.3232 18.2374 14.0303 18.5303C13.7374 18.8232 13.2626 18.8232 12.9697 18.5303L6.96967 12.5303C6.67678 12.2374 6.67678 11.7626 6.96967 11.4697L12.9697 5.46967C13.2626 5.17678 13.7374 5.17678 14.0303 5.46967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                            <h2>Playback Speed</h2>
-                                        </div>
-                                    </div>
-                                    <div class="contents playback-speed-settings">
-                                        <div class="item" data-speed="0.25">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="0.5">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="0.75">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="1">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="1.25">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="1.5">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="1.75">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="2">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                        <div class="item" data-speed="4">
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="check">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="controls">
-                                <div class="left-side">
-                                    <div class="tooltip-left play-pause-tooltip-container" data-tooltip="Play (k)">
-                                        <button class="play-pause-button" aria-label="Play">
-                                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
-                                                class="play-icon" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M34.9896 17.2668C36.3257 18.036 36.3257 19.964 34.9896 20.7332L7.99793 36.2739C6.6646 37.0416 5 36.0792 5 34.5407L5 3.45932C5 1.92079 6.6646 0.958404 7.99793 1.72608L34.9896 17.2668Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
-                                                class="pause-icon" xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="3" width="12" height="38" rx="2" fill="var(--text-color)" />
-                                                <rect x="23" width="12" height="38" rx="2" fill="var(--text-color)" />
-                                            </svg>
-                                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
-                                                class="replay-icon" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M20 4.8284L18.8284 5.99997H19C27.2843 5.99997 34 12.7157 34 21C34 29.2842 27.2843 36 19 36C10.7157 36 4 29.2842 4 21C4 19.3431 5.34315 18 7 18C8.65685 18 10 19.3431 10 21C10 25.9706 14.0294 30 19 30C23.9706 30 28 25.9705 28 21C28 16.0294 23.9706 12 19 12H18.8284L20 13.1715C20.7811 13.9526 20.781 15.2189 20 16C19.219 16.781 17.9526 16.781 17.1716 16L11.5858 10.4142C10.8047 9.63311 10.8047 8.36678 11.5858 7.58573L17.1716 1.99997C17.9526 1.21892 19.219 1.21892 20 1.99997C20.781 2.78102 20.781 4.04735 20 4.8284Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                            <svg width="76" height="76" viewBox="0 0 76 76" fill="none"
-                                                class="buffering-circle" xmlns="http://www.w3.org/2000/svg">
-                                                <circle cx="38" cy="38" width="38" height="38" r="38" fill="none">
-                                                </circle>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="right-side">
-                                    <div class="tooltip-right volume-tooltip-container" data-tooltip="Mute (m)">
-                                        <div class="volume-container">
-                                            <div class="volume-slider-container" aria-label="Control volume">
-                                                <div class="volume-slider"></div>
-                                            </div>
-                                            <button class="volume-button">
-                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg" style="--animation-order: 1;">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M16.2929 13.2929C16.6834 12.9024 17.3166 12.9024 17.7071 13.2929C19.7545 15.3403 19.7545 18.6597 17.7071 20.7071C17.3166 21.0976 16.6834 21.0976 16.2929 20.7071C15.9024 20.3166 15.9024 19.6834 16.2929 19.2929C17.5592 18.0266 17.5592 15.9734 16.2929 14.7071C15.9024 14.3166 15.9024 13.6834 16.2929 13.2929Z"
-                                                        class="low-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M19.2567 7.33104C19.6262 6.92053 20.2585 6.88726 20.669 7.25671C26.4547 12.4639 26.4547 21.5361 20.669 26.7433C20.2585 27.1128 19.6262 27.0795 19.2567 26.669C18.8873 26.2585 18.9205 25.6262 19.331 25.2567C24.234 20.844 24.234 13.156 19.331 8.7433C18.9205 8.37384 18.8873 7.74155 19.2567 7.33104Z"
-                                                        class="mid-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M23.2689 1.31769C23.6458 0.913935 24.2786 0.892115 24.6823 1.26895C33.2175 9.23515 33.2175 22.7649 24.6823 30.7311C24.2786 31.1079 23.6458 31.0861 23.2689 30.6823C22.8921 30.2786 22.9139 29.6458 23.3177 29.2689C31.0058 22.0934 31.0058 9.90659 23.3177 2.73106C22.9139 2.35422 22.8921 1.72144 23.2689 1.31769Z"
-                                                        class="full-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M17.2929 11.2929C17.6834 10.9024 18.3166 10.9024 18.7071 11.2929L22 14.5858L25.2929 11.2929C25.6834 10.9024 26.3166 10.9024 26.7071 11.2929C27.0976 11.6834 27.0976 12.3166 26.7071 12.7071L23.4142 16L26.7071 19.2929C27.0976 19.6834 27.0976 20.3166 26.7071 20.7071C26.3166 21.0976 25.6834 21.0976 25.2929 20.7071L22 17.4142L18.7071 20.7071C18.3166 21.0976 17.6834 21.0976 17.2929 20.7071C16.9024 20.3166 16.9024 19.6834 17.2929 19.2929L20.5858 16L17.2929 12.7071C16.9024 12.3166 16.9024 11.6834 17.2929 11.2929Z"
-                                                        class="mute-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M10.39 3.87193C11.5331 2.3132 14 3.12173 14 5.05466V26.9454C14 28.8783 11.5331 29.6868 10.39 28.1281L6.99 23.5H3C1.89543 23.5 1 22.6046 1 21.5V10.5C1 9.39545 1.89543 8.50002 3 8.50002L6.99 8.50002L10.39 3.87193ZM12 5.05466L8.61 9.68274C8.23325 10.1965 7.62709 10.5 6.99 10.5H3V21.5H6.99C7.62709 21.5 8.23325 21.8035 8.61 22.3173L12 26.9454V5.05466Z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-right" data-tooltip="Subtitles/closed captions (c)">
-                                        <button class="caption-button" aria-label="Toggle subtitles or closed captions">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 2;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M24.956 25.0984L26.2854 24.8491C27.9887 24.5298 29.2774 23.1255 29.4499 21.4012L29.6096 19.804C29.8626 17.2743 29.8626 14.7257 29.6096 12.1959L29.4499 10.5988C29.2774 8.87443 27.9887 7.47022 26.2854 7.15085L24.956 6.9016C18.4016 5.67265 11.6682 5.75933 5.14765 7.1566C3.77551 7.45063 2.75023 8.59703 2.6106 9.99335L2.39682 12.1311C2.13954 14.7039 2.13954 17.296 2.39682 19.8689L2.6106 22.0066C2.75023 23.403 3.77551 24.5493 5.14765 24.8434C11.6682 26.2406 18.4016 26.3273 24.956 25.0984ZM4.72859 5.201C2.50679 5.6771 0.846619 7.53338 0.620522 9.79435L0.406746 11.9321C0.136228 14.6373 0.136228 17.3627 0.406746 20.0679L0.620522 22.2056C0.846619 24.4666 2.50679 26.3229 4.72859 26.799C11.5085 28.2518 18.5096 28.3419 25.3246 27.0641L26.6539 26.8149C29.23 26.3319 31.1791 24.2081 31.4399 21.6002L31.5997 20.003C31.8659 17.341 31.8659 14.659 31.5997 11.9969L31.4399 10.3998C31.1791 7.79184 29.23 5.66812 26.6539 5.18511L25.3246 4.93586C18.5096 3.65804 11.5085 3.74817 4.72859 5.201Z" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M9.7039 10.4567C10.8003 10.0026 12.0067 9.88378 13.1705 10.1153C13.7122 10.223 14.064 10.7495 13.9562 11.2912C13.8485 11.8328 13.322 12.1846 12.7804 12.0769C12.0044 11.9225 11.2002 12.0017 10.4693 12.3045C9.73836 12.6072 9.11365 13.1199 8.67412 13.7777C8.2346 14.4355 8 15.2089 8 16C8 16.7911 8.2346 17.5645 8.67412 18.2223C9.11365 18.8801 9.73836 19.3928 10.4693 19.6955C11.2002 19.9983 12.0044 20.0775 12.7804 19.9231C13.322 19.8154 13.8485 20.1672 13.9562 20.7088C14.064 21.2505 13.7122 21.777 13.1705 21.8847C12.0067 22.1162 10.8003 21.9974 9.7039 21.5433C8.60754 21.0892 7.67047 20.3201 7.01118 19.3334C6.35189 18.3467 6 17.1867 6 16C6 14.8133 6.35189 13.6533 7.01118 12.6666C7.67047 11.6799 8.60754 10.9109 9.7039 10.4567Z" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M19.7039 10.4567C20.8003 10.0026 22.0067 9.88378 23.1705 10.1153C23.7122 10.223 24.064 10.7495 23.9562 11.2912C23.8485 11.8328 23.322 12.1846 22.7804 12.0769C22.0044 11.9225 21.2002 12.0017 20.4693 12.3045C19.7384 12.6072 19.1136 13.1199 18.6741 13.7777C18.2346 14.4355 18 15.2089 18 16C18 16.7911 18.2346 17.5645 18.6741 18.2223C19.1136 18.8801 19.7384 19.3928 20.4693 19.6955C21.2002 19.9983 22.0044 20.0775 22.7804 19.9231C23.322 19.8154 23.8485 20.1672 23.9562 20.7088C24.064 21.2505 23.7122 21.777 23.1705 21.8847C22.0067 22.1162 20.8003 21.9974 19.7039 21.5433C18.6075 21.0892 17.6705 20.3201 17.0112 19.3334C16.3519 18.3467 16 17.1867 16 16C16 14.8133 16.3519 13.6533 17.0112 12.6666C17.6705 11.6799 18.6075 10.9109 19.7039 10.4567Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="tooltip-right settings-tooltip-container" data-tooltip="Settings">
-                                        <button class="settings-button" aria-label="Video settings">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 3;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M16 6.00004C13.8254 6.00004 11.9475 4.93872 10.5994 3.40188C10.5434 3.33801 10.4835 3.28507 10.4268 3.24528C10.3911 3.22024 10.3607 3.20322 10.3372 3.192C9.41573 3.60009 8.54598 4.10507 7.74094 4.69431C7.73883 4.72048 7.73828 4.75582 7.74216 4.80003C7.74824 4.8691 7.76413 4.94744 7.79139 5.02791C8.44691 6.96275 8.42634 9.11805 7.33978 11C6.25309 12.8822 4.39652 13.9777 2.39288 14.3773C2.30946 14.394 2.23359 14.4194 2.17069 14.4487C2.13087 14.4673 2.10076 14.4853 2.07924 14.5001C2.02691 14.9923 2 15.4926 2 16C2 16.5074 2.02691 17.0078 2.07925 17.5C2.10077 17.5148 2.13087 17.5328 2.17069 17.5513C2.23359 17.5806 2.30946 17.6061 2.39288 17.6227C4.39651 18.0223 6.25306 19.1178 7.33975 21C8.4263 22.882 8.44688 25.0373 7.79138 26.9721C7.76412 27.0526 7.74823 27.1309 7.74215 27.2C7.73827 27.2442 7.73883 27.2795 7.74094 27.3057C8.546 27.8949 9.41576 28.3999 10.3372 28.808C10.3607 28.7968 10.3911 28.7798 10.4268 28.7547C10.4835 28.715 10.5434 28.662 10.5994 28.5981C11.9475 27.0613 13.8254 26 16 26C18.1746 26 20.0525 27.0613 21.4006 28.5981C21.4566 28.662 21.5165 28.7149 21.5732 28.7547C21.6089 28.7798 21.6393 28.7968 21.6628 28.808C22.5843 28.3999 23.454 27.8949 24.2591 27.3057C24.2612 27.2795 24.2618 27.2441 24.2579 27.1999C24.2518 27.1309 24.2359 27.0525 24.2087 26.9721C23.5532 25.0372 23.5738 22.882 24.6603 21C25.747 19.1178 27.6035 18.0224 29.6071 17.6227C29.6905 17.6061 29.7664 17.5807 29.8293 17.5513C29.8691 17.5328 29.8992 17.5148 29.9208 17.5C29.9731 17.0078 30 16.5074 30 16C30 15.4926 29.9731 14.9922 29.9208 14.5001C29.8992 14.4853 29.8691 14.4673 29.8293 14.4487C29.7664 14.4194 29.6905 14.394 29.6071 14.3773C27.6035 13.9777 25.747 12.8822 24.6603 11C23.5737 9.11806 23.5532 6.96278 24.2087 5.02795C24.2359 4.94748 24.2518 4.86914 24.2579 4.80007C24.2618 4.75586 24.2612 4.72051 24.2591 4.69435C23.4541 4.10509 22.5843 3.60011 21.6628 3.19201C21.6394 3.20323 21.609 3.22025 21.5733 3.24529C21.5165 3.28507 21.4567 3.33802 21.4006 3.40189C20.0525 4.93873 18.1747 6.00004 16 6.00004ZM5.60773 10C6.35099 8.71266 6.4069 7.17425 5.89716 5.66967C5.59168 4.76803 5.70279 3.7166 6.46693 3.14883C7.44324 2.4234 8.50508 1.8066 9.63455 1.31629C10.5082 0.937045 11.4749 1.36703 12.1029 2.08302C13.1513 3.27825 14.5125 4.00004 16 4.00004C17.4876 4.00004 18.8487 3.27826 19.8971 2.08303C20.5251 1.36704 21.4918 0.937052 22.3655 1.3163C23.495 1.80662 24.5568 2.42343 25.5331 3.14888C26.2973 3.71665 26.4084 4.76807 26.1029 5.6697C25.5932 7.17427 25.6491 8.71267 26.3923 10C27.1357 11.2875 28.4402 12.1052 29.9983 12.4159C30.9331 12.6024 31.7891 13.2257 31.8968 14.1729C31.965 14.7725 32 15.3821 32 16C32 16.6179 31.965 17.2276 31.8968 17.8272C31.7891 18.7743 30.9331 19.3976 29.9983 19.5841C28.4402 19.8949 27.1357 20.7125 26.3923 22C25.6491 23.2874 25.5932 24.8258 26.1029 26.3303C26.4084 27.2319 26.2972 28.2834 25.5331 28.8511C24.5568 29.5766 23.4949 30.1934 22.3654 30.6837C21.4918 31.063 20.5251 30.633 19.8971 29.917C18.8486 28.7218 17.4875 28 16 28C14.5125 28 13.1514 28.7218 12.103 29.917C11.4749 30.633 10.5082 31.063 9.6346 30.6837C8.5051 30.1934 7.44325 29.5766 6.46692 28.8512C5.70279 28.2834 5.59167 27.232 5.89714 26.3303C6.40687 24.8258 6.35095 23.2874 5.6077 22C4.86436 20.7125 3.5598 19.8948 2.00169 19.5841C1.06687 19.3976 0.210862 18.7743 0.103189 17.8272C0.035022 17.2275 0 16.6179 0 16C0 15.3822 0.0350197 14.7725 0.103183 14.1729C0.210853 13.2257 1.06687 12.6024 2.0017 12.416C3.55982 12.1052 4.86438 11.2875 5.60773 10ZM22 16.0001C22 19.3138 19.3137 22.0001 16 22.0001C12.6863 22.0001 10 19.3138 10 16.0001C10 12.6864 12.6863 10.0001 16 10.0001C19.3137 10.0001 22 12.6864 22 16.0001ZM20 16.0001C20 18.2092 18.2091 20.0001 16 20.0001C13.7909 20.0001 12 18.2092 12 16.0001C12 13.7909 13.7909 12.0001 16 12.0001C18.2091 12.0001 20 13.7909 20 16.0001Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="tooltip-right pip-tooltip" data-tooltip="Picture in picture (i)">
-                                        <button class="pip-button" aria-label="Toggle picture in picture">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 4;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M28 6H4C2.89543 6 2 6.89543 2 8V24C2 25.1046 2.89543 26 4 26H28C29.1046 26 30 25.1046 30 24V8C30 6.89543 29.1046 6 28 6ZM4 4C1.79086 4 0 5.79086 0 8V24C0 26.2091 1.79086 28 4 28H28C30.2091 28 32 26.2091 32 24V8C32 5.79086 30.2091 4 28 4H4Z" />
-                                                <path
-                                                    d="M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z"
-                                                    class="pip-enter" />
-                                                <path
-                                                    d="M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z"
-                                                    class="pip-exit" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="tooltip-right airplay-tooltip" data-tooltip="AirPlay" hidden>
-                                        <button class="airplay-button" aria-label="AirPlay">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_636_10)">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M15.9996 18.0969C16.2025 18.0969 16.4062 18.1833 16.5532 18.3552L26.0145 29.4211C26.3758 29.8431 26.0853 30.5091 25.5388 30.5091H6.46041C5.91391 30.5091 5.62428 29.8431 5.98477 29.4211L15.4452 18.3552C15.5922 18.1833 15.7959 18.0969 15.9996 18.0969Z" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M4.55825 2H27.4418C29.0275 2 29.6017 2.16448 30.1814 2.47552C30.7609 2.78488 31.2151 3.24003 31.5252 3.81865C31.8348 4.39825 32 4.97245 32 6.55825V18.7751C32 20.36 31.8348 20.9351 31.5252 21.5148C31.2151 22.0933 30.7609 22.5485 30.1814 22.8586C29.6017 23.1689 29.0275 23.3333 27.4418 23.3333H23.7973L22.2747 21.5555H27.944C28.735 21.5555 29.0232 21.4729 29.313 21.3173C29.6027 21.1635 29.8294 20.936 29.985 20.6453C30.1395 20.3565 30.2222 20.0685 30.2222 19.2764V6.0569C30.2222 5.26487 30.1395 4.97687 29.985 4.68711C29.8294 4.39734 29.6027 4.17065 29.313 4.01513C29.0232 3.85953 28.735 3.77778 27.944 3.77778H4.0569C3.26487 3.77778 2.97687 3.85953 2.68711 4.01513C2.39734 4.17065 2.17065 4.39734 2.01513 4.68711C1.85953 4.97687 1.77778 5.26487 1.77778 6.0569V19.2764C1.77778 20.0685 1.85953 20.3565 2.01513 20.6453C2.17065 20.936 2.39734 21.1635 2.68711 21.3173C2.97687 21.4729 3.26487 21.5555 4.0569 21.5555H9.72536L8.20269 23.3333H4.55825C2.97245 23.3333 2.39825 23.1689 1.81865 22.8586C1.24003 22.5485 0.784882 22.0933 0.47552 21.5148C0.164479 20.9351 0 20.36 0 18.7751V6.55825C0 4.97245 0.164479 4.39825 0.47552 3.81865C0.784882 3.24003 1.24003 2.78488 1.81865 2.47552C2.39825 2.16448 2.97245 2 4.55825 2Z" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_636_10">
-                                                        <rect width="32" height="28.5091" transform="translate(0 2)" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="tooltip-right gcast-tooltip" data-tooltip="Cast to a device" hidden>
-                                        <button is="google-cast-button" class="gcast-button"
-                                            aria-label="Cast to a device">
-                                        </button>
-                                    </div>
-                                    <div class="tooltip-right full-screen-tooltip" data-tooltip="Full screen (f)">
-                                        <button class="full-screen-button" aria-label="Toggle full screen">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="enter"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 5;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M0 3V12H2V3C2 2.44771 2.44771 2 3 2H12V0H3C1.34315 0 0 1.34315 0 3Z"
-                                                    class="top-corner" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M32 20H30V29C30 29.5523 29.5523 30 29 30H20V32H29C30.6569 32 32 30.6569 32 29V20Z"
-                                                    class="bottom-corner" />
-                                            </svg>
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="exit"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M12 9V0H10V9C10 9.55229 9.55229 10 9 10H0V12H9C10.6569 12 12 10.6569 12 9Z"
-                                                    class="top-corner" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M20 32H22V23C22 22.4477 22.4477 22 23 22H32V20H23C21.3431 20 20 21.3431 20 23V32Z"
-                                                    class="bottom-corner" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="timeline-container">
-                                <div class="seeking-preview">
-                                    <img class="seeking-preview__thumbnail">
-                                    <div class="seeking-preview__time-tooltip">0:00</div>
-                                </div>
-                                <div class="timeline">
-                                    <div class="seek-filler"></div>
-                                    <div class="timeline__progressbar"></div>
-                                </div>
-                                <div class="footer">
-                                    <div class="duration-container" role="text"
-                                        aria-label="Less than a second elapsed of 0 second">
-                                        <div class="current-time span" aria-hidden="true">0:00</div>
-                                        <div class="divider-time-copy span" aria-hidden="true">/</div>
-                                        <div class="divider-time span" aria-hidden="true">/</div>
-                                        <div class="total-time span" aria-hidden="true">0:00</div>
-                                    </div>
-                                    <div class="badges-container">
-                                        <div class="badge quality-badge" data-quality="N/A">
-                                            <div class="span quality">N/A</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-fit-contain">
-                        <div class="video-fit-content">
-                            <div class="aspect-ratio-response">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="video-filters"
-                                    color-interpolation-filters="sRGB">
-                                    <defs>
-                                        <filter id="blur">
-                                            <feGaussianBlur in="SourceGraphic" stdDeviation="12,0" />
-                                        </filter>
-                                        <filter id="gamma">
-                                            <feComponentTransfer>
-                                                <feFuncR type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
-                                                <feFuncG type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
-                                                <feFuncB type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
-                                            </feComponentTransfer>
-                                        </filter>
-                                        <filter id="mosaic" x="0" y="0">
-                                            <feFlood x="4" y="4" height="2" width="2" />
-                                            <feComposite width="8" class="comp" />
-                                            <feTile result="a" />
-                                            <feComposite in="SourceGraphic" in2="a" operator="in" />
-                                            <feMorphology operator="dilate" class="dilate" />
-                                        </filter>
-
-                                        <filter id="1.25x-speed">
-                                            <feGaussianBlur in="SourceGraphic" stdDeviation="0.5,0" />
-                                        </filter>
-                                        <filter id="1.5x-speed">
-                                            <feGaussianBlur in="SourceGraphic" stdDeviation="1,0" />
-                                        </filter>
-                                        <filter id="1.75x-speed">
-                                            <feGaussianBlur in="SourceGraphic" stdDeviation="1.5,0" />
-                                        </filter>
-                                        <filter id="2x-speed">
-                                            <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
-                                        </filter>
-                                        <filter id="4x-speed">
-                                            <feGaussianBlur in="SourceGraphic" stdDeviation="4,0" />
-                                        </filter>
-                                    </defs>
-                                </svg>
-                                <div class="video-backdrop-seeking"></div>
-                                <img class="video-thumb-preview" alt="">
-                                <div class="video-poster-container">
-                                    <svg width="96" height="96" viewBox="0 0 96 96" fill="none" class="play-btn-poster"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M0 48C0 21.4903 21.4903 0 48 0V0C74.5097 0 96 21.4903 96 48V48C96 74.5097 74.5097 96 48 96V96C21.4903 96 0 74.5097 0 48V48Z"
-                                            fill="black" fill-opacity="0.6" class="circle" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M2 48C2 73.4051 22.5949 94 48 94C73.4051 94 94 73.4051 94 48C94 22.5949 73.4051 2 48 2C22.5949 2 2 22.5949 2 48ZM48 0C21.4903 0 0 21.4903 0 48C0 74.5097 21.4903 96 48 96C74.5097 96 96 74.5097 96 48C96 21.4903 74.5097 0 48 0Z"
-                                            fill="black" fill-opacity="0.3" class="stroke" />
-                                        <path
-                                            d="M63.9896 46.2668C65.3257 47.036 65.3257 48.964 63.9896 49.7333L36.9979 65.2739C35.6646 66.0416 34 65.0792 34 63.5407L34 32.4593C34 30.9208 35.6646 29.9584 36.9979 30.7261L63.9896 46.2668Z"
-                                            fill="white" class="symbol" />
-                                    </svg>
-                                    <img class="video-poster" alt="">
-                                </div>
-                            </div>
-                            <video controls tabindex="-1" playsinline class="video" preload="metadata"
-                                crossorigin="anonymous" webkit-playsinline="true" x5-playsinline="true"
-                                x5-video-player-type="h5" x5-video-player-fullscreen="true"
-                                x5-video-orientation="landscape|portrait" poster="data:image/svg+xml,%3Csvg xmlns='
-                                http://www.w3.org/2000/svg'/%3E">
-                                <source>
-                                <track id="default-track" label="English" kind="captions" srclang="en"
-                                    src="./sample.vtt" default>
-                            </video>
-                        </div>
-                    </div>
-                </div>
-                <div class="transcript-panel">
-                    <div class="header">
-                        <div class="title">
-                            <h1>Transcript</h1>
-                            <div class="transcript-language"></div>
-                        </div>
-                        <div class="header-buttons">
-                            <button>
-                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M18 24C18 25.1046 17.1046 26 16 26C14.8954 26 14 25.1046 14 24C14 22.8954 14.8954 22 16 22C17.1046 22 18 22.8954 18 24Z" />
-                                    <path
-                                        d="M26 24C26 25.1046 25.1046 26 24 26C22.8954 26 22 25.1046 22 24C22 22.8954 22.8954 22 24 22C25.1046 22 26 22.8954 26 24Z" />
-                                    <path
-                                        d="M34 24C34 25.1046 33.1046 26 32 26C30.8954 26 30 25.1046 30 24C30 22.8954 30.8954 22 32 22C33.1046 22 34 22.8954 34 24Z" />
-                                </svg>
-                            </button>
-                            <button class="close-transcript-panel">
-                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M30.2929 16.2929C30.6834 15.9024 31.3166 15.9024 31.7071 16.2929C32.0976 16.6834 32.0976 17.3166 31.7071 17.7071L25.4142 24L31.7071 30.2929C32.0976 30.6834 32.0976 31.3166 31.7071 31.7071C31.3166 32.0977 30.6834 32.0977 30.2929 31.7071L24 25.4142L17.7071 31.7071C17.3166 32.0977 16.6834 32.0977 16.2929 31.7071C15.9024 31.3166 15.9024 30.6834 16.2929 30.2929L22.5858 24L16.2929 17.7071C15.9024 17.3166 15.9024 16.6834 16.2929 16.2929C16.6834 15.9024 17.3166 15.9024 17.7071 16.2929L24 22.5858L30.2929 16.2929Z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="contents">
-                        <div class="captions-contents"></div>
-                        <div class="snackbar-sync-time">
-                            <button tabindex="-1" class="sync-to-time">Sync to current video time</button>
-                        </div>
-                    </div>
-                </div>
+    <div class="version">
+      <p>Rolling Progress Release</p>
+      <p><b>NOTE:</b> This video player is a work in progress, so expect the features to bug out.</p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="video-player-container preload">
+      <div class="video-player loading" data-device="" data-speed="1">
+        <div class="video-context-menu">
+          <div class="contents">
+            <div class="item loop-item">
+              <div class="item-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0 12C0 7.86846 3.30258 4.5 7.4 4.5H17.25C17.6642 4.5 18 4.83579 18 5.25C18 5.66421 17.6642 6 17.25 6H7.4C4.15203 6 1.5 8.6757 1.5 12C1.5 13.6827 2.18008 15.2007 3.27487 16.2897C3.56855 16.5818 3.56982 17.0567 3.27772 17.3503C2.98561 17.644 2.51074 17.6453 2.21706 17.3532C0.848404 15.9918 0 14.0947 0 12ZM20.7223 6.64966C21.0144 6.35599 21.4893 6.35471 21.7829 6.64682C23.1516 8.00816 24 9.90527 24 12C24 16.1315 20.6974 19.5 16.6 19.5H6.75C6.33579 19.5 6 19.1642 6 18.75C6 18.3358 6.33579 18 6.75 18H16.6C19.848 18 22.5 15.3243 22.5 12C22.5 10.3173 21.8199 8.79926 20.7251 7.71032C20.4314 7.41821 20.4302 6.94334 20.7223 6.64966Z"
+                    fill="var(--text-color)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M15.2197 1.71967C15.5126 1.42678 15.9874 1.42678 16.2803 1.71967L19.2803 4.71967C19.5732 5.01256 19.5732 5.48744 19.2803 5.78033L16.2803 8.78033C15.9874 9.07322 15.5126 9.07322 15.2197 8.78033C14.9268 8.48744 14.9268 8.01256 15.2197 7.71967L17.6893 5.25L15.2197 2.78033C14.9268 2.48744 14.9268 2.01256 15.2197 1.71967Z"
+                    fill="var(--text-color)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.78033 15.2197C9.07322 15.5126 9.07322 15.9874 8.78033 16.2803L6.31066 18.75L8.78033 21.2197C9.07322 21.5126 9.07322 21.9874 8.78033 22.2803C8.48744 22.5732 8.01256 22.5732 7.71967 22.2803L4.71967 19.2803C4.42678 18.9874 4.42678 18.5126 4.71967 18.2197L7.71967 15.2197C8.01256 14.9268 8.48744 14.9268 8.78033 15.2197Z"
+                    fill="var(--text-color)" />
+                </svg>
+                <div class="span">Loop</div>
+              </div>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="check">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                  fill="var(--text-color)" />
+              </svg>
             </div>
+            <div class="item eq-item">
+              <div class="item-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8 0.75C8 0.335786 7.66421 0 7.25 0C6.83579 0 6.5 0.335786 6.5 0.75V11.575C4.78832 11.9225 3.5 13.4358 3.5 15.25C3.5 17.0642 4.78832 18.5775 6.5 18.925V23.25C6.5 23.6642 6.83579 24 7.25 24C7.66421 24 8 23.6642 8 23.25V18.925C9.71168 18.5775 11 17.0642 11 15.25C11 13.4358 9.71168 11.9225 8 11.575V0.75ZM9.5 15.25C9.5 16.4926 8.49264 17.5 7.25 17.5C6.00736 17.5 5 16.4926 5 15.25C5 14.0074 6.00736 13 7.25 13C8.49264 13 9.5 14.0074 9.5 15.25Z"
+                    fill="var(--text-color)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M18.5 23.25C18.5 23.6642 18.1642 24 17.75 24C17.3358 24 17 23.6642 17 23.25V12.425C15.2883 12.0775 14 10.5642 14 8.75C14 6.9345 15.2901 5.42033 17.0036 5.07428C17.0012 5.04984 17 5.02507 17 5V0.75C17 0.335787 17.3358 0 17.75 0C18.1642 0 18.5 0.335787 18.5 0.75V5C18.5 5.02507 18.4988 5.04984 18.4964 5.07428C20.2099 5.42033 21.5 6.9345 21.5 8.75C21.5 10.5642 20.2117 12.0775 18.5 12.425V23.25ZM17.75 11C16.5074 11 15.5 9.99264 15.5 8.75C15.5 7.50736 16.5074 6.5 17.75 6.5C18.9926 6.5 20 7.50736 20 8.75C20 9.99264 18.9926 11 17.75 11Z"
+                    fill="var(--text-color)" />
+                </svg>
+                <div class="span">Equalizer</div>
+              </div>
+            </div>
+            <div class="item transcript-item">
+              <div class="item-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 6.75C12 6.33579 12.3358 6 12.75 6H20.25C20.6642 6 21 6.33579 21 6.75V17.25C21 17.6642 20.6642 18 20.25 18H12.75C12.3358 18 12 17.6642 12 17.25V6.75ZM14.25 7.5C13.8358 7.5 13.5 7.83579 13.5 8.25C13.5 8.66421 13.8358 9 14.25 9H15.75C16.1642 9 16.5 8.66421 16.5 8.25C16.5 7.83579 16.1642 7.5 15.75 7.5H14.25ZM18.75 7.5C18.3358 7.5 18 7.83579 18 8.25C18 8.66421 18.3358 9 18.75 9C19.1642 9 19.5 8.66421 19.5 8.25C19.5 7.83579 19.1642 7.5 18.75 7.5ZM13.5 15.75C13.5 15.3358 13.8358 15 14.25 15H15.75C16.1642 15 16.5 15.3358 16.5 15.75C16.5 16.1642 16.1642 16.5 15.75 16.5H14.25C13.8358 16.5 13.5 16.1642 13.5 15.75ZM18.75 15C18.3358 15 18 15.3358 18 15.75C18 16.1642 18.3358 16.5 18.75 16.5C19.1642 16.5 19.5 16.1642 19.5 15.75C19.5 15.3358 19.1642 15 18.75 15ZM16.5 12.75C16.5 12.3358 16.8358 12 17.25 12H18.75C19.1642 12 19.5 12.3358 19.5 12.75C19.5 13.1642 19.1642 13.5 18.75 13.5H17.25C16.8358 13.5 16.5 13.1642 16.5 12.75ZM14.25 12C13.8358 12 13.5 12.3358 13.5 12.75C13.5 13.1642 13.8358 13.5 14.25 13.5C14.6642 13.5 15 13.1642 15 12.75C15 12.3358 14.6642 12 14.25 12Z"
+                    fill="var(--text-color)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0 6C0 4.34315 1.34315 3 3 3H21C22.6569 3 24 4.34315 24 6V18C24 19.6569 22.6569 21 21 21H3C1.34315 21 0 19.6569 0 18V6ZM3 4.5H21C21.8284 4.5 22.5 5.17157 22.5 6V18C22.5 18.8284 21.8284 19.5 21 19.5H3C2.17157 19.5 1.5 18.8284 1.5 18V6C1.5 5.17157 2.17157 4.5 3 4.5Z"
+                    fill="var(--text-color)" />
+                </svg>
+                <div class="span">Transcript</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.799 6.20101 22.5 12 22.5ZM12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+                    fill="var(--text-color)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 10.5C12.4142 10.5 12.75 10.8358 12.75 11.25V18C12.75 18.4142 12.4142 18.75 12 18.75C11.5858 18.75 11.25 18.4142 11.25 18V11.25C11.25 10.8358 11.5858 10.5 12 10.5Z"
+                    fill="var(--text-color)" />
+                  <path
+                    d="M13.125 7.5C13.125 8.12132 12.6213 8.625 12 8.625C11.3787 8.625 10.875 8.12132 10.875 7.5C10.875 6.87868 11.3787 6.375 12 6.375C12.6213 6.375 13.125 6.87868 13.125 7.5Z"
+                    fill="var(--text-color)" />
+                </svg>
+                <div class="span">Video Details</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M21 4.5H3C2.17157 4.5 1.5 5.17157 1.5 6V18C1.5 18.8284 2.17157 19.5 3 19.5H21C21.8284 19.5 22.5 18.8284 22.5 18V6C22.5 5.17157 21.8284 4.5 21 4.5ZM3 3C1.34315 3 0 4.34315 0 6V18C0 19.6569 1.34315 21 3 21H21C22.6569 21 24 19.6569 24 18V6C24 4.34315 22.6569 3 21 3H3Z"
+                    fill="var(--text-color)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M3.75 6C3.33579 6 3 6.33579 3 6.75V15.75C3 16.1642 3.33579 16.5 3.75 16.5H14.25C14.6642 16.5 15 16.1642 15 15.75V6.75C15 6.33579 14.6642 6 14.25 6H3.75ZM5.25 7.5C4.83579 7.5 4.5 7.83579 4.5 8.25C4.5 8.66421 4.83579 9 5.25 9H6.75C7.16421 9 7.5 8.66421 7.5 8.25C7.5 7.83579 7.16421 7.5 6.75 7.5H5.25ZM9.75 7.5C9.33579 7.5 9 7.83579 9 8.25C9 8.66421 9.33579 9 9.75 9H12.75C13.1642 9 13.5 8.66421 13.5 8.25C13.5 7.83579 13.1642 7.5 12.75 7.5H9.75ZM4.5 11.25C4.5 10.8358 4.83579 10.5 5.25 10.5H12.75C13.1642 10.5 13.5 10.8358 13.5 11.25C13.5 11.6642 13.1642 12 12.75 12H5.25C4.83579 12 4.5 11.6642 4.5 11.25ZM5.25 13.5C4.83579 13.5 4.5 13.8358 4.5 14.25C4.5 14.6642 4.83579 15 5.25 15H8.25C8.66421 15 9 14.6642 9 14.25C9 13.8358 8.66421 13.5 8.25 13.5H5.25ZM10.5 14.25C10.5 13.8358 10.8358 13.5 11.25 13.5H12.75C13.1642 13.5 13.5 13.8358 13.5 14.25C13.5 14.6642 13.1642 15 12.75 15H11.25C10.8358 15 10.5 14.6642 10.5 14.25Z"
+                    fill="var(--text-color)" />
+                </svg>
+                <div class="span">Nerdy Stats</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.799 6.20101 22.5 12 22.5ZM12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+                    fill="var(--text-color)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 10.5C12.4142 10.5 12.75 10.8358 12.75 11.25V18C12.75 18.4142 12.4142 18.75 12 18.75C11.5858 18.75 11.25 18.4142 11.25 18V11.25C11.25 10.8358 11.5858 10.5 12 10.5Z"
+                    fill="var(--text-color)" />
+                  <path
+                    d="M13.125 7.5C13.125 8.12132 12.6213 8.625 12 8.625C11.3787 8.625 10.875 8.12132 10.875 7.5C10.875 6.87868 11.3787 6.375 12 6.375C12.6213 6.375 13.125 6.87868 13.125 7.5Z"
+                    fill="var(--text-color)" />
+                </svg>
+                <div class="span">About Playful Video</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="video-information">
-            <h1 class="video-name"></h1>
-            <div class="author-info">
+        <div class="eq-dialog-container">
+          <div class="equalizer-dialog dialog">
+            <div class="contents">
+              <div style="width: 100%; margin-bottom: 8px;">
+                <h2>Equalizer</h2>
+                <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  class="switch eq-switch">
+                  <rect x="2" y="2" width="46" height="28" rx="14" stroke-width="4" class="switch-bg" />
+                  <rect x="8" y="8" width="16" height="16" rx="8" class="switch-knob" />
+                </svg>
+              </div>
+              <p>So, you wanted to fine tune the sound from the video you're playing? Great! This is for
+                you.<br>In layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of
+                a
+                specific
+                frequency.</p>
+              <div class="equalizers">
+                <div class="decibel-labels">
+                  <div class="span">+12 dB</div>
+                  <div class="span">+6 dB</div>
+                  <div class="span">0 dB</div>
+                  <div class="span">-6 dB</div>
+                  <div class="span">-12 dB</div>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 0);" disabled />
+                  <label>30 Hz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 1);" disabled />
+                  <label>60 Hz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 2);" disabled />
+                  <label>125 Hz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 3);" disabled />
+                  <label>250 Hz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 4);" disabled />
+                  <label>500 Hz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 5);" disabled />
+                  <label>800 Hz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 6);" disabled />
+                  <label>1 kHz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 7);" disabled />
+                  <label>2 kHz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 8);" disabled />
+                  <label>4 kHz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 9);" disabled />
+                  <label>8 kHz</label>
+                </div>
+                <div class="eq-control">
+                  <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                    oninput="changeGain(this.value, 10);" disabled />
+                  <label>16 kHz</label>
+                </div>
+              </div>
+            </div>
+            <div class="footer-buttons">
+              <button class="close-dialog">Close</button>
+            </div>
+          </div>
+          <div class="dialog-overlay"></div>
+        </div>
+        <div class="video-container paused" data-volume-level="full" data-start="0">
+          <div class="error-dialog">
+            <h3>Error</h3>
+            <p id="error-log">An unknown error occurred.</p>
+          </div>
+          <div class="video-information-overlay">
+            <div class="video-information-container">
+              <div class="video-name">
+                <h1></h1>
+              </div>
+              <div class="author-name">
                 <div class="span"></div>
+              </div>
             </div>
-            <div class="description">
-                <p></p>
+          </div>
+          <div class="video-controls-container">
+            <div class="controls-container">
+              <div class="settings-context-menu">
+                <div class="front-page page">
+                  <div class="contents">
+                    <div class="item">
+                      <div class="item-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M5.96151 17.8845C4.78264 18.2775 3.50842 17.6404 3.11546 16.4615C2.72251 15.2826 3.35962 14.0084 4.53849 13.6155C4.65083 13.578 4.78323 13.5077 4.92399 13.3705C2.9583 12.8882 1.5 11.1144 1.5 9C1.5 6.51472 3.51472 4.5 6 4.5C8.48528 4.5 10.5 6.51472 10.5 9C10.5 10.6517 10.2982 12.4549 9.69378 14.0265C9.08732 15.6032 7.95528 17.2199 5.96151 17.8845ZM5.01283 15.0385C4.61987 15.1695 4.4075 15.5942 4.53849 15.9872C4.66947 16.3801 5.09421 16.5925 5.48717 16.4615C6.89891 15.9906 7.77795 14.8291 8.29376 13.488C8.80774 12.1516 9 10.5506 9 9C9 7.34315 7.65685 6 6 6C4.34315 6 3 7.34315 3 9C3 10.6569 4.34315 12 6 12L6.01353 12C6.54023 11.9976 7.08282 12.4579 6.89374 12.9495C6.52334 13.9126 6.00001 14.5767 5.31589 14.914C5.21816 14.9622 5.11715 15.0037 5.01283 15.0385Z"
+                            fill="var(--text-color)" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M16.4615 17.8845C15.2826 18.2775 14.0084 17.6404 13.6155 16.4615C13.2225 15.2826 13.8596 14.0084 15.0385 13.6155C15.1508 13.578 15.2832 13.5077 15.424 13.3705C13.4583 12.8882 12 11.1144 12 9C12 6.51472 14.0147 4.5 16.5 4.5C18.9853 4.5 21 6.51472 21 9C21 10.6517 20.7982 12.4549 20.1938 14.0265C19.5873 15.6032 18.4553 17.2199 16.4615 17.8845ZM15.5128 15.0385C15.1199 15.1695 14.9075 15.5942 15.0385 15.9872C15.1695 16.3801 15.5942 16.5925 15.9872 16.4615C17.3989 15.9906 18.2779 14.8291 18.7938 13.488C19.3077 12.1516 19.5 10.5506 19.5 9C19.5 7.34315 18.1569 6 16.5 6C14.8431 6 13.5 7.34315 13.5 9C13.5 10.6569 14.8431 12 16.5 12L16.5135 12C17.0402 11.9976 17.5828 12.4579 17.3937 12.9495C17.0233 13.9126 16.5 14.5767 15.8159 14.914C15.7182 14.9622 15.6171 15.0037 15.5128 15.0385Z"
+                            fill="var(--text-color)" />
+                        </svg>
+                        <div class="span">Annotations</div>
+                      </div>
+                    </div>
+                    <div class="item download-item">
+                      <div class="item-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M11.25 4.5C11.6642 4.5 12 4.83579 12 5.25V16.9393L15.2197 13.7197C15.5126 13.4268 15.9874 13.4268 16.2803 13.7197C16.5732 14.0126 16.5732 14.4874 16.2803 14.7803L11.7803 19.2803C11.4874 19.5732 11.0126 19.5732 10.7197 19.2803L6.21967 14.7803C5.92678 14.4874 5.92678 14.0126 6.21967 13.7197C6.51256 13.4268 6.98744 13.4268 7.28033 13.7197L10.5 16.9393V5.25C10.5 4.83579 10.8358 4.5 11.25 4.5Z"
+                            fill="var(--text-color)" />
+                        </svg>
+                        <div class="span">Download</div>
+                      </div>
+                    </div>
+                    <div class="item playback-speed-item">
+                      <div class="item-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12 1.5C14.3076 1.5 16.4393 2.24353 18.1716 3.50425C18.5065 3.74799 18.9756 3.67409 19.2194 3.33918C19.4631 3.00427 19.3892 2.53518 19.0543 2.29144C17.0742 0.850346 14.6353 0 12 0C11.0361 0 10.0977 0.113805 9.19809 0.32905C8.79524 0.425432 8.54681 0.830135 8.64319 1.23298C8.73957 1.63582 9.14427 1.88426 9.54712 1.78788C10.3333 1.59978 11.1545 1.5 12 1.5Z"
+                            fill="var(--text-color)" />
+                          <path
+                            d="M21.7086 4.94571C21.4648 4.6108 20.9957 4.5369 20.6608 4.78063C20.3259 5.02437 20.252 5.49346 20.4957 5.82837C21.7565 7.56066 22.5 9.6924 22.5 12C22.5 17.799 17.799 22.5 12 22.5C11.7687 22.5 11.5393 22.4925 11.3119 22.4778C10.8985 22.4511 10.5418 22.7646 10.5151 23.1779C10.4884 23.5913 10.8018 23.948 11.2151 23.9747C11.4747 23.9915 11.7364 24 12 24C18.6274 24 24 18.6274 24 12C24 9.36472 23.1497 6.92584 21.7086 4.94571Z"
+                            fill="var(--text-color)" />
+                          <path
+                            d="M0 12C0 11.0361 0.113805 10.0977 0.329049 9.19809C0.425431 8.79525 0.830134 8.54681 1.23298 8.64319C1.63582 8.73957 1.88426 9.14427 1.78788 9.54712C1.59978 10.3333 1.5 11.1545 1.5 12C1.5 12.2313 1.50747 12.4607 1.52216 12.6881C1.54887 13.1015 1.23544 13.4582 0.822088 13.4849C0.408737 13.5116 0.0519952 13.1982 0.0252834 12.7849C0.00851011 12.5253 0 12.2636 0 12Z"
+                            fill="var(--text-color)" />
+                          <path
+                            d="M1.10322 14.9073C1.49546 14.7742 1.92135 14.9842 2.05447 15.3765C2.20252 15.8127 2.37851 16.2361 2.58032 16.6446C2.7638 17.016 2.6115 17.4658 2.24014 17.6492C1.86878 17.8327 1.419 17.6804 1.23551 17.3091C1.00474 16.842 0.803432 16.3577 0.634041 15.8586C0.500922 15.4663 0.710981 15.0404 1.10322 14.9073Z"
+                            fill="var(--text-color)" />
+                          <path
+                            d="M3.04692 18.854C3.35824 18.5808 3.83211 18.6116 4.10534 18.923C4.40779 19.2676 4.73243 19.5922 5.07703 19.8947C5.38835 20.1679 5.41922 20.6418 5.14599 20.9531C4.87276 21.2644 4.39889 21.2953 4.08757 21.022C3.69406 20.6767 3.32334 20.3059 2.97797 19.9124C2.70473 19.6011 2.73561 19.1272 3.04692 18.854Z"
+                            fill="var(--text-color)" />
+                          <path
+                            d="M6.35077 21.7599C6.53425 21.3885 6.98404 21.2362 7.3554 21.4197C7.76385 21.6215 8.18727 21.7975 8.62352 21.9455C9.01575 22.0787 9.22581 22.5045 9.09269 22.8968C8.95958 23.289 8.53369 23.4991 8.14145 23.366C7.64233 23.1966 7.15802 22.9953 6.69095 22.7645C6.31959 22.581 6.16729 22.1312 6.35077 21.7599Z"
+                            fill="var(--text-color)" />
+                          <path
+                            d="M6.51368 3.04546C6.86665 2.82871 6.97707 2.36685 6.76032 2.01388C6.54356 1.6609 6.0817 1.55048 5.72873 1.76724C4.11686 2.75707 2.75707 4.11686 1.76723 5.72873C1.55048 6.08171 1.6609 6.54356 2.01388 6.76032C2.36685 6.97707 2.82871 6.86665 3.04546 6.51368C3.91192 5.10271 5.10271 3.91192 6.51368 3.04546Z"
+                            fill="var(--text-color)" />
+                          <path
+                            d="M10.2439 6.18558C10.0224 5.99179 9.70807 5.94543 9.44009 6.06704C9.1721 6.18864 9 6.45573 9 6.75001V17.25C9 17.5443 9.1721 17.8114 9.44009 17.933C9.70807 18.0546 10.0224 18.0082 10.2439 17.8144L16.2439 12.5644C16.4066 12.422 16.5 12.2163 16.5 12C16.5 11.7837 16.4066 11.578 16.2439 11.4356L10.2439 6.18558Z"
+                            fill="var(--text-color)" />
+                        </svg>
+                        <div class="span">Playback Speed</div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="item-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.7171 18.5738L19.7141 18.3869C20.9916 18.1473 21.9581 17.0942 22.0875 15.8009L22.2072 14.603C22.397 12.7058 22.397 10.7943 22.2072 8.89697L22.0875 7.69913C21.9581 6.40584 20.9916 5.35268 19.7141 5.11316L18.7171 4.92621C13.8013 4.0045 8.75125 4.06951 3.8608 5.11747C2.8317 5.33799 2.06273 6.19779 1.95801 7.24503L1.79768 8.84835C1.60471 10.778 1.60471 12.722 1.79768 14.6517L1.95801 16.255C2.06273 17.3022 2.83169 18.162 3.8608 18.3825C8.75125 19.4305 13.8013 19.4955 18.7171 18.5738ZM3.54651 3.65076C1.88015 4.00784 0.635025 5.40005 0.465452 7.09578L0.30512 8.6991C0.102232 10.728 0.102232 12.772 0.30512 14.8009L0.465452 16.4042C0.635025 18.1 1.88015 19.4922 3.54651 19.8493C8.63141 20.9389 13.8822 21.0065 18.9935 20.0481L19.9905 19.8612C21.9226 19.4989 23.3844 17.9061 23.58 15.9501L23.6998 14.7523C23.8995 12.7557 23.8995 10.7443 23.6998 8.74771L23.58 7.54987C23.3844 5.5939 21.9226 4.00111 19.9905 3.63885L18.9935 3.45191C13.8822 2.49354 8.63141 2.56114 3.54651 3.65076Z"
+                            fill="var(--text-color)" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M7.27792 7.59254C8.10019 7.25195 9.00499 7.16283 9.8779 7.33647C10.2842 7.41728 10.548 7.81212 10.4672 8.21837C10.3864 8.62463 9.99152 8.88846 9.58527 8.80765C9.00333 8.69189 8.40013 8.7513 7.85195 8.97836C7.30377 9.20543 6.83523 9.58994 6.50559 10.0833C6.17595 10.5766 6 11.1567 6 11.75C6 12.3433 6.17595 12.9234 6.50559 13.4167C6.83524 13.9101 7.30377 14.2946 7.85195 14.5216C8.40013 14.7487 9.00333 14.8081 9.58527 14.6924C9.99152 14.6115 10.3864 14.8754 10.4672 15.2816C10.548 15.6879 10.2842 16.0827 9.87791 16.1635C9.00499 16.3372 8.10019 16.2481 7.27792 15.9075C6.45566 15.5669 5.75285 14.9901 5.25839 14.2501C4.76392 13.51 4.5 12.64 4.5 11.75C4.5 10.86 4.76392 9.98996 5.25839 9.24994C5.75285 8.50991 6.45566 7.93314 7.27792 7.59254Z"
+                            fill="var(--text-color)" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M14.7779 7.59254C15.6002 7.25195 16.505 7.16283 17.3779 7.33647C17.7842 7.41728 18.048 7.81212 17.9672 8.21837C17.8864 8.62463 17.4915 8.88846 17.0853 8.80765C16.5033 8.69189 15.9001 8.7513 15.3519 8.97836C14.8038 9.20543 14.3352 9.58994 14.0056 10.0833C13.6759 10.5766 13.5 11.1567 13.5 11.75C13.5 12.3433 13.6759 12.9234 14.0056 13.4167C14.3352 13.9101 14.8038 14.2946 15.3519 14.5216C15.9001 14.7487 16.5033 14.8081 17.0853 14.6924C17.4915 14.6115 17.8864 14.8754 17.9672 15.2816C18.048 15.6879 17.7842 16.0827 17.3779 16.1635C16.505 16.3372 15.6002 16.2481 14.7779 15.9075C13.9557 15.5669 13.2529 14.9901 12.7584 14.2501C12.2639 13.51 12 12.64 12 11.75C12 10.86 12.2639 9.98996 12.7584 9.24994C13.2529 8.50991 13.9557 7.93314 14.7779 7.59254Z"
+                            fill="var(--text-color)" />
+                        </svg>
+                        <div class="span">Subtitles/CC</div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="item-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M5.25 15C5.66421 15 6 15.3358 6 15.75V18.75C6 19.1642 5.66421 19.5 5.25 19.5C4.83579 19.5 4.5 19.1642 4.5 18.75V15.75C4.5 15.3358 4.83579 15 5.25 15Z"
+                            fill="var(--text-color)" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M9.75 11.2499C10.1642 11.2499 10.5 11.5857 10.5 11.9999V18.75C10.5 19.1642 10.1642 19.5 9.75 19.5C9.33579 19.5 9 19.1642 9 18.75V11.9999C9 11.5857 9.33579 11.2499 9.75 11.2499Z"
+                            fill="var(--text-color)" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M14.25 7.5C14.6642 7.5 15 7.83579 15 8.25V18.75C15 19.1642 14.6642 19.5 14.25 19.5C13.8358 19.5 13.5 19.1642 13.5 18.75V8.25C13.5 7.83579 13.8358 7.5 14.25 7.5Z"
+                            fill="var(--text-color)" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.75 4.5C19.1642 4.5 19.5 4.83579 19.5 5.25V18.75C19.5 19.1642 19.1642 19.5 18.75 19.5C18.3358 19.5 18 19.1642 18 18.75V5.25C18 4.83579 18.3358 4.5 18.75 4.5Z"
+                            fill="var(--text-color)" />
+                        </svg>
+                        <div class="span">Quality</div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="item-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12 4.50004C10.369 4.50004 8.9606 3.70406 7.94954 2.55143C7.90752 2.50352 7.86262 2.46381 7.82007 2.43397C7.79329 2.41519 7.7705 2.40243 7.75289 2.39402C7.0618 2.70009 6.40949 3.07881 5.80571 3.52075C5.80412 3.54037 5.80371 3.56688 5.80662 3.60004C5.81118 3.65184 5.8231 3.71059 5.84355 3.77095C6.33518 5.22207 6.31975 6.83855 5.50483 8.25003C4.68982 9.66168 3.29739 10.4833 1.79466 10.783C1.7321 10.7955 1.67519 10.8146 1.62802 10.8366C1.59815 10.8505 1.57557 10.864 1.55943 10.8751C1.52018 11.2442 1.5 11.6195 1.5 12C1.5 12.3805 1.52018 12.7559 1.55943 13.125C1.57558 13.1361 1.59815 13.1496 1.62802 13.1635C1.6752 13.1855 1.7321 13.2046 1.79466 13.2171C3.29738 13.5168 4.6898 14.3384 5.50481 15.75C6.31972 17.1615 6.33516 18.778 5.84354 20.2291C5.82309 20.2894 5.81117 20.3482 5.80661 20.4C5.8037 20.4331 5.80412 20.4597 5.80571 20.4793C6.4095 20.9212 7.06182 21.3 7.75292 21.606C7.77053 21.5976 7.79333 21.5848 7.8201 21.5661C7.86265 21.5362 7.90755 21.4965 7.94958 21.4486C8.96063 20.296 10.369 19.5 12 19.5C13.631 19.5 15.0394 20.296 16.0504 21.4486C16.0925 21.4965 16.1374 21.5362 16.1799 21.5661C16.2067 21.5848 16.2295 21.5976 16.2471 21.606C16.9382 21.2999 17.5905 20.9212 18.1943 20.4793C18.1959 20.4596 18.1963 20.4331 18.1934 20.4C18.1889 20.3482 18.1769 20.2894 18.1565 20.2291C17.6649 18.7779 17.6803 17.1615 18.4952 15.75C19.3102 14.3384 20.7026 13.5168 22.2053 13.2171C22.2679 13.2046 22.3248 13.1855 22.372 13.1635C22.4018 13.1496 22.4244 13.1361 22.4406 13.125C22.4798 12.7559 22.5 12.3805 22.5 12C22.5 11.6195 22.4798 11.2442 22.4406 10.8751C22.4244 10.864 22.4018 10.8505 22.372 10.8365C22.3248 10.8146 22.2679 10.7955 22.2053 10.783C20.7026 10.4833 19.3102 9.66167 18.4952 8.25003C17.6803 6.83856 17.6649 5.2221 18.1565 3.77098C18.1769 3.71062 18.1889 3.65187 18.1934 3.60007C18.1963 3.56691 18.1959 3.5404 18.1943 3.52077C17.5905 3.07883 16.9382 2.7001 16.2471 2.39402C16.2295 2.40244 16.2067 2.4152 16.1799 2.43398C16.1374 2.46382 16.0925 2.50353 16.0505 2.55143C15.0394 3.70406 13.631 4.50004 12 4.50004ZM4.2058 7.50003C4.76324 6.53451 4.80518 5.3807 4.42287 4.25227C4.19376 3.57604 4.27709 2.78747 4.8502 2.36164C5.58243 1.81757 6.37881 1.35496 7.22591 0.987236C7.88115 0.702799 8.60615 1.02529 9.07719 1.56228C9.86351 2.4587 10.8843 3.00004 12 3.00004C13.1157 3.00004 14.1365 2.45871 14.9228 1.56229C15.3939 1.02529 16.1189 0.702804 16.7741 0.987243C17.6212 1.35498 18.4176 1.81759 19.1499 2.36167C19.7229 2.7875 19.8063 3.57607 19.5772 4.25229C19.1949 5.38072 19.2368 6.53452 19.7943 7.50003C20.3518 8.46566 21.3302 9.0789 22.4987 9.31198C23.1999 9.45181 23.8419 9.91931 23.9226 10.6297C23.9737 11.0794 24 11.5366 24 12C24 12.4634 23.9737 12.9207 23.9226 13.3704C23.8419 14.0808 23.1999 14.5483 22.4987 14.6881C21.3302 14.9212 20.3518 15.5344 19.7943 16.5C19.2368 17.4655 19.1949 18.6193 19.5772 19.7477C19.8063 20.424 19.7229 21.2125 19.1498 21.6384C18.4176 22.1825 17.6212 22.6451 16.7741 23.0128C16.1188 23.2972 15.3938 22.9748 14.9228 22.4378C14.1365 21.5414 13.1157 21 12 21C10.8844 21 9.86353 21.5414 9.07722 22.4378C8.60618 22.9748 7.88118 23.2972 7.22595 23.0128C6.37883 22.6451 5.58244 22.1825 4.85019 21.6384C4.27709 21.2126 4.19376 20.424 4.42285 19.7478C4.80515 18.6193 4.76321 17.4655 4.20577 16.5C3.64827 15.5344 2.66985 14.9212 1.50127 14.6881C0.800151 14.5482 0.158147 14.0807 0.077392 13.3704C0.0262665 12.9207 0 12.4634 0 12C0 11.5366 0.0262648 11.0794 0.077387 10.6297C0.15814 9.91932 0.80015 9.45182 1.50127 9.31198C2.66986 9.07892 3.64829 8.46567 4.2058 7.50003ZM16.5 12.0001C16.5 14.4853 14.4853 16.5001 12 16.5001C9.51472 16.5001 7.5 14.4853 7.5 12.0001C7.5 9.51478 9.51472 7.50006 12 7.50006C14.4853 7.50006 16.5 9.51478 16.5 12.0001ZM15 12.0001C15 13.6569 13.6569 15.0001 12 15.0001C10.3431 15.0001 9 13.6569 9 12.0001C9 10.3432 10.3431 9.00006 12 9.00006C13.6569 9.00006 15 10.3432 15 12.0001Z"
+                            fill="var(--text-color)" />
+                        </svg>
+                        <div class="span">Advanced Settings</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="playback-speed-settings page" hidden>
+                  <div class="header">
+                    <div class="contents back-page">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M14.0303 5.46967C14.3232 5.76256 14.3232 6.23744 14.0303 6.53033L8.56066 12L14.0303 17.4697C14.3232 17.7626 14.3232 18.2374 14.0303 18.5303C13.7374 18.8232 13.2626 18.8232 12.9697 18.5303L6.96967 12.5303C6.67678 12.2374 6.67678 11.7626 6.96967 11.4697L12.9697 5.46967C13.2626 5.17678 13.7374 5.17678 14.0303 5.46967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                      <h2>Playback Speed</h2>
+                    </div>
+                  </div>
+                  <div class="contents playback-speed-settings">
+                    <div class="item" data-speed="0.25">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="0.5">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="0.75">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="1">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="1.25">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="1.5">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="1.75">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="2">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                    <div class="item" data-speed="4">
+                      <div class="item-content">
+                        <div class="span"></div>
+                      </div>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="check">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M23.7803 4.21967C24.0732 4.51256 24.0732 4.98744 23.7803 5.28033L8.78033 20.2803C8.48744 20.5732 8.01256 20.5732 7.71967 20.2803L0.21967 12.7803C-0.0732233 12.4874 -0.0732233 12.0126 0.21967 11.7197C0.512563 11.4268 0.987437 11.4268 1.28033 11.7197L8.25 18.6893L22.7197 4.21967C23.0126 3.92678 23.4874 3.92678 23.7803 4.21967Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="controls">
+                <div class="left-side">
+                  <div class="tooltip-left play-pause-tooltip-container" data-tooltip="Play (k)">
+                    <button class="play-pause-button" aria-label="Play">
+                      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="play-icon"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M34.9896 17.2668C36.3257 18.036 36.3257 19.964 34.9896 20.7332L7.99793 36.2739C6.6646 37.0416 5 36.0792 5 34.5407L5 3.45932C5 1.92079 6.6646 0.958404 7.99793 1.72608L34.9896 17.2668Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="pause-icon"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" width="12" height="38" rx="2" fill="var(--text-color)" />
+                        <rect x="23" width="12" height="38" rx="2" fill="var(--text-color)" />
+                      </svg>
+                      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" class="replay-icon"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M20 4.8284L18.8284 5.99997H19C27.2843 5.99997 34 12.7157 34 21C34 29.2842 27.2843 36 19 36C10.7157 36 4 29.2842 4 21C4 19.3431 5.34315 18 7 18C8.65685 18 10 19.3431 10 21C10 25.9706 14.0294 30 19 30C23.9706 30 28 25.9705 28 21C28 16.0294 23.9706 12 19 12H18.8284L20 13.1715C20.7811 13.9526 20.781 15.2189 20 16C19.219 16.781 17.9526 16.781 17.1716 16L11.5858 10.4142C10.8047 9.63311 10.8047 8.36678 11.5858 7.58573L17.1716 1.99997C17.9526 1.21892 19.219 1.21892 20 1.99997C20.781 2.78102 20.781 4.04735 20 4.8284Z"
+                          fill="var(--text-color)" />
+                      </svg>
+                      <svg width="76" height="76" viewBox="0 0 76 76" fill="none" class="buffering-circle"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="38" cy="38" width="38" height="38" r="38" fill="none">
+                        </circle>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="right-side">
+                  <div class="tooltip-right volume-tooltip-container" data-tooltip="Mute (m)">
+                    <div class="volume-container">
+                      <div class="volume-slider-container" aria-label="Control volume">
+                        <div class="volume-slider"></div>
+                      </div>
+                      <button class="volume-button">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                          style="--animation-order: 1;">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M16.2929 13.2929C16.6834 12.9024 17.3166 12.9024 17.7071 13.2929C19.7545 15.3403 19.7545 18.6597 17.7071 20.7071C17.3166 21.0976 16.6834 21.0976 16.2929 20.7071C15.9024 20.3166 15.9024 19.6834 16.2929 19.2929C17.5592 18.0266 17.5592 15.9734 16.2929 14.7071C15.9024 14.3166 15.9024 13.6834 16.2929 13.2929Z"
+                            class="low-volume" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M19.2567 7.33104C19.6262 6.92053 20.2585 6.88726 20.669 7.25671C26.4547 12.4639 26.4547 21.5361 20.669 26.7433C20.2585 27.1128 19.6262 27.0795 19.2567 26.669C18.8873 26.2585 18.9205 25.6262 19.331 25.2567C24.234 20.844 24.234 13.156 19.331 8.7433C18.9205 8.37384 18.8873 7.74155 19.2567 7.33104Z"
+                            class="mid-volume" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M23.2689 1.31769C23.6458 0.913935 24.2786 0.892115 24.6823 1.26895C33.2175 9.23515 33.2175 22.7649 24.6823 30.7311C24.2786 31.1079 23.6458 31.0861 23.2689 30.6823C22.8921 30.2786 22.9139 29.6458 23.3177 29.2689C31.0058 22.0934 31.0058 9.90659 23.3177 2.73106C22.9139 2.35422 22.8921 1.72144 23.2689 1.31769Z"
+                            class="full-volume" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M17.2929 11.2929C17.6834 10.9024 18.3166 10.9024 18.7071 11.2929L22 14.5858L25.2929 11.2929C25.6834 10.9024 26.3166 10.9024 26.7071 11.2929C27.0976 11.6834 27.0976 12.3166 26.7071 12.7071L23.4142 16L26.7071 19.2929C27.0976 19.6834 27.0976 20.3166 26.7071 20.7071C26.3166 21.0976 25.6834 21.0976 25.2929 20.7071L22 17.4142L18.7071 20.7071C18.3166 21.0976 17.6834 21.0976 17.2929 20.7071C16.9024 20.3166 16.9024 19.6834 17.2929 19.2929L20.5858 16L17.2929 12.7071C16.9024 12.3166 16.9024 11.6834 17.2929 11.2929Z"
+                            class="mute-volume" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M10.39 3.87193C11.5331 2.3132 14 3.12173 14 5.05466V26.9454C14 28.8783 11.5331 29.6868 10.39 28.1281L6.99 23.5H3C1.89543 23.5 1 22.6046 1 21.5V10.5C1 9.39545 1.89543 8.50002 3 8.50002L6.99 8.50002L10.39 3.87193ZM12 5.05466L8.61 9.68274C8.23325 10.1965 7.62709 10.5 6.99 10.5H3V21.5H6.99C7.62709 21.5 8.23325 21.8035 8.61 22.3173L12 26.9454V5.05466Z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="tooltip-right" data-tooltip="Subtitles/closed captions (c)">
+                    <button class="caption-button" aria-label="Toggle subtitles or closed captions">
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="--animation-order: 2;">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M24.956 25.0984L26.2854 24.8491C27.9887 24.5298 29.2774 23.1255 29.4499 21.4012L29.6096 19.804C29.8626 17.2743 29.8626 14.7257 29.6096 12.1959L29.4499 10.5988C29.2774 8.87443 27.9887 7.47022 26.2854 7.15085L24.956 6.9016C18.4016 5.67265 11.6682 5.75933 5.14765 7.1566C3.77551 7.45063 2.75023 8.59703 2.6106 9.99335L2.39682 12.1311C2.13954 14.7039 2.13954 17.296 2.39682 19.8689L2.6106 22.0066C2.75023 23.403 3.77551 24.5493 5.14765 24.8434C11.6682 26.2406 18.4016 26.3273 24.956 25.0984ZM4.72859 5.201C2.50679 5.6771 0.846619 7.53338 0.620522 9.79435L0.406746 11.9321C0.136228 14.6373 0.136228 17.3627 0.406746 20.0679L0.620522 22.2056C0.846619 24.4666 2.50679 26.3229 4.72859 26.799C11.5085 28.2518 18.5096 28.3419 25.3246 27.0641L26.6539 26.8149C29.23 26.3319 31.1791 24.2081 31.4399 21.6002L31.5997 20.003C31.8659 17.341 31.8659 14.659 31.5997 11.9969L31.4399 10.3998C31.1791 7.79184 29.23 5.66812 26.6539 5.18511L25.3246 4.93586C18.5096 3.65804 11.5085 3.74817 4.72859 5.201Z" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M9.7039 10.4567C10.8003 10.0026 12.0067 9.88378 13.1705 10.1153C13.7122 10.223 14.064 10.7495 13.9562 11.2912C13.8485 11.8328 13.322 12.1846 12.7804 12.0769C12.0044 11.9225 11.2002 12.0017 10.4693 12.3045C9.73836 12.6072 9.11365 13.1199 8.67412 13.7777C8.2346 14.4355 8 15.2089 8 16C8 16.7911 8.2346 17.5645 8.67412 18.2223C9.11365 18.8801 9.73836 19.3928 10.4693 19.6955C11.2002 19.9983 12.0044 20.0775 12.7804 19.9231C13.322 19.8154 13.8485 20.1672 13.9562 20.7088C14.064 21.2505 13.7122 21.777 13.1705 21.8847C12.0067 22.1162 10.8003 21.9974 9.7039 21.5433C8.60754 21.0892 7.67047 20.3201 7.01118 19.3334C6.35189 18.3467 6 17.1867 6 16C6 14.8133 6.35189 13.6533 7.01118 12.6666C7.67047 11.6799 8.60754 10.9109 9.7039 10.4567Z" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M19.7039 10.4567C20.8003 10.0026 22.0067 9.88378 23.1705 10.1153C23.7122 10.223 24.064 10.7495 23.9562 11.2912C23.8485 11.8328 23.322 12.1846 22.7804 12.0769C22.0044 11.9225 21.2002 12.0017 20.4693 12.3045C19.7384 12.6072 19.1136 13.1199 18.6741 13.7777C18.2346 14.4355 18 15.2089 18 16C18 16.7911 18.2346 17.5645 18.6741 18.2223C19.1136 18.8801 19.7384 19.3928 20.4693 19.6955C21.2002 19.9983 22.0044 20.0775 22.7804 19.9231C23.322 19.8154 23.8485 20.1672 23.9562 20.7088C24.064 21.2505 23.7122 21.777 23.1705 21.8847C22.0067 22.1162 20.8003 21.9974 19.7039 21.5433C18.6075 21.0892 17.6705 20.3201 17.0112 19.3334C16.3519 18.3467 16 17.1867 16 16C16 14.8133 16.3519 13.6533 17.0112 12.6666C17.6705 11.6799 18.6075 10.9109 19.7039 10.4567Z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="tooltip-right settings-tooltip-container" data-tooltip="Settings">
+                    <button class="settings-button" aria-label="Video settings">
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="--animation-order: 3;">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M16 6.00004C13.8254 6.00004 11.9475 4.93872 10.5994 3.40188C10.5434 3.33801 10.4835 3.28507 10.4268 3.24528C10.3911 3.22024 10.3607 3.20322 10.3372 3.192C9.41573 3.60009 8.54598 4.10507 7.74094 4.69431C7.73883 4.72048 7.73828 4.75582 7.74216 4.80003C7.74824 4.8691 7.76413 4.94744 7.79139 5.02791C8.44691 6.96275 8.42634 9.11805 7.33978 11C6.25309 12.8822 4.39652 13.9777 2.39288 14.3773C2.30946 14.394 2.23359 14.4194 2.17069 14.4487C2.13087 14.4673 2.10076 14.4853 2.07924 14.5001C2.02691 14.9923 2 15.4926 2 16C2 16.5074 2.02691 17.0078 2.07925 17.5C2.10077 17.5148 2.13087 17.5328 2.17069 17.5513C2.23359 17.5806 2.30946 17.6061 2.39288 17.6227C4.39651 18.0223 6.25306 19.1178 7.33975 21C8.4263 22.882 8.44688 25.0373 7.79138 26.9721C7.76412 27.0526 7.74823 27.1309 7.74215 27.2C7.73827 27.2442 7.73883 27.2795 7.74094 27.3057C8.546 27.8949 9.41576 28.3999 10.3372 28.808C10.3607 28.7968 10.3911 28.7798 10.4268 28.7547C10.4835 28.715 10.5434 28.662 10.5994 28.5981C11.9475 27.0613 13.8254 26 16 26C18.1746 26 20.0525 27.0613 21.4006 28.5981C21.4566 28.662 21.5165 28.7149 21.5732 28.7547C21.6089 28.7798 21.6393 28.7968 21.6628 28.808C22.5843 28.3999 23.454 27.8949 24.2591 27.3057C24.2612 27.2795 24.2618 27.2441 24.2579 27.1999C24.2518 27.1309 24.2359 27.0525 24.2087 26.9721C23.5532 25.0372 23.5738 22.882 24.6603 21C25.747 19.1178 27.6035 18.0224 29.6071 17.6227C29.6905 17.6061 29.7664 17.5807 29.8293 17.5513C29.8691 17.5328 29.8992 17.5148 29.9208 17.5C29.9731 17.0078 30 16.5074 30 16C30 15.4926 29.9731 14.9922 29.9208 14.5001C29.8992 14.4853 29.8691 14.4673 29.8293 14.4487C29.7664 14.4194 29.6905 14.394 29.6071 14.3773C27.6035 13.9777 25.747 12.8822 24.6603 11C23.5737 9.11806 23.5532 6.96278 24.2087 5.02795C24.2359 4.94748 24.2518 4.86914 24.2579 4.80007C24.2618 4.75586 24.2612 4.72051 24.2591 4.69435C23.4541 4.10509 22.5843 3.60011 21.6628 3.19201C21.6394 3.20323 21.609 3.22025 21.5733 3.24529C21.5165 3.28507 21.4567 3.33802 21.4006 3.40189C20.0525 4.93873 18.1747 6.00004 16 6.00004ZM5.60773 10C6.35099 8.71266 6.4069 7.17425 5.89716 5.66967C5.59168 4.76803 5.70279 3.7166 6.46693 3.14883C7.44324 2.4234 8.50508 1.8066 9.63455 1.31629C10.5082 0.937045 11.4749 1.36703 12.1029 2.08302C13.1513 3.27825 14.5125 4.00004 16 4.00004C17.4876 4.00004 18.8487 3.27826 19.8971 2.08303C20.5251 1.36704 21.4918 0.937052 22.3655 1.3163C23.495 1.80662 24.5568 2.42343 25.5331 3.14888C26.2973 3.71665 26.4084 4.76807 26.1029 5.6697C25.5932 7.17427 25.6491 8.71267 26.3923 10C27.1357 11.2875 28.4402 12.1052 29.9983 12.4159C30.9331 12.6024 31.7891 13.2257 31.8968 14.1729C31.965 14.7725 32 15.3821 32 16C32 16.6179 31.965 17.2276 31.8968 17.8272C31.7891 18.7743 30.9331 19.3976 29.9983 19.5841C28.4402 19.8949 27.1357 20.7125 26.3923 22C25.6491 23.2874 25.5932 24.8258 26.1029 26.3303C26.4084 27.2319 26.2972 28.2834 25.5331 28.8511C24.5568 29.5766 23.4949 30.1934 22.3654 30.6837C21.4918 31.063 20.5251 30.633 19.8971 29.917C18.8486 28.7218 17.4875 28 16 28C14.5125 28 13.1514 28.7218 12.103 29.917C11.4749 30.633 10.5082 31.063 9.6346 30.6837C8.5051 30.1934 7.44325 29.5766 6.46692 28.8512C5.70279 28.2834 5.59167 27.232 5.89714 26.3303C6.40687 24.8258 6.35095 23.2874 5.6077 22C4.86436 20.7125 3.5598 19.8948 2.00169 19.5841C1.06687 19.3976 0.210862 18.7743 0.103189 17.8272C0.035022 17.2275 0 16.6179 0 16C0 15.3822 0.0350197 14.7725 0.103183 14.1729C0.210853 13.2257 1.06687 12.6024 2.0017 12.416C3.55982 12.1052 4.86438 11.2875 5.60773 10ZM22 16.0001C22 19.3138 19.3137 22.0001 16 22.0001C12.6863 22.0001 10 19.3138 10 16.0001C10 12.6864 12.6863 10.0001 16 10.0001C19.3137 10.0001 22 12.6864 22 16.0001ZM20 16.0001C20 18.2092 18.2091 20.0001 16 20.0001C13.7909 20.0001 12 18.2092 12 16.0001C12 13.7909 13.7909 12.0001 16 12.0001C18.2091 12.0001 20 13.7909 20 16.0001Z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="tooltip-right pip-tooltip" data-tooltip="Picture in picture (i)">
+                    <button class="pip-button" aria-label="Toggle picture in picture">
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="--animation-order: 4;">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M28 6H4C2.89543 6 2 6.89543 2 8V24C2 25.1046 2.89543 26 4 26H28C29.1046 26 30 25.1046 30 24V8C30 6.89543 29.1046 6 28 6ZM4 4C1.79086 4 0 5.79086 0 8V24C0 26.2091 1.79086 28 4 28H28C30.2091 28 32 26.2091 32 24V8C32 5.79086 30.2091 4 28 4H4Z" />
+                        <path
+                          d="M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z"
+                          class="pip-enter" />
+                        <path
+                          d="M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z"
+                          class="pip-exit" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="tooltip-right airplay-tooltip" data-tooltip="AirPlay" hidden>
+                    <button class="airplay-button" aria-label="AirPlay">
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_636_10)">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M15.9996 18.0969C16.2025 18.0969 16.4062 18.1833 16.5532 18.3552L26.0145 29.4211C26.3758 29.8431 26.0853 30.5091 25.5388 30.5091H6.46041C5.91391 30.5091 5.62428 29.8431 5.98477 29.4211L15.4452 18.3552C15.5922 18.1833 15.7959 18.0969 15.9996 18.0969Z" />
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M4.55825 2H27.4418C29.0275 2 29.6017 2.16448 30.1814 2.47552C30.7609 2.78488 31.2151 3.24003 31.5252 3.81865C31.8348 4.39825 32 4.97245 32 6.55825V18.7751C32 20.36 31.8348 20.9351 31.5252 21.5148C31.2151 22.0933 30.7609 22.5485 30.1814 22.8586C29.6017 23.1689 29.0275 23.3333 27.4418 23.3333H23.7973L22.2747 21.5555H27.944C28.735 21.5555 29.0232 21.4729 29.313 21.3173C29.6027 21.1635 29.8294 20.936 29.985 20.6453C30.1395 20.3565 30.2222 20.0685 30.2222 19.2764V6.0569C30.2222 5.26487 30.1395 4.97687 29.985 4.68711C29.8294 4.39734 29.6027 4.17065 29.313 4.01513C29.0232 3.85953 28.735 3.77778 27.944 3.77778H4.0569C3.26487 3.77778 2.97687 3.85953 2.68711 4.01513C2.39734 4.17065 2.17065 4.39734 2.01513 4.68711C1.85953 4.97687 1.77778 5.26487 1.77778 6.0569V19.2764C1.77778 20.0685 1.85953 20.3565 2.01513 20.6453C2.17065 20.936 2.39734 21.1635 2.68711 21.3173C2.97687 21.4729 3.26487 21.5555 4.0569 21.5555H9.72536L8.20269 23.3333H4.55825C2.97245 23.3333 2.39825 23.1689 1.81865 22.8586C1.24003 22.5485 0.784882 22.0933 0.47552 21.5148C0.164479 20.9351 0 20.36 0 18.7751V6.55825C0 4.97245 0.164479 4.39825 0.47552 3.81865C0.784882 3.24003 1.24003 2.78488 1.81865 2.47552C2.39825 2.16448 2.97245 2 4.55825 2Z" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_636_10">
+                            <rect width="32" height="28.5091" transform="translate(0 2)" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="tooltip-right gcast-tooltip" data-tooltip="Cast to a device" hidden>
+                    <button is="google-cast-button" class="gcast-button" aria-label="Cast to a device">
+                    </button>
+                  </div>
+                  <div class="tooltip-right full-screen-tooltip" data-tooltip="Full screen (f)">
+                    <button class="full-screen-button" aria-label="Toggle full screen">
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="enter"
+                        xmlns="http://www.w3.org/2000/svg" style="--animation-order: 5;">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0 3V12H2V3C2 2.44771 2.44771 2 3 2H12V0H3C1.34315 0 0 1.34315 0 3Z" class="top-corner" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M32 20H30V29C30 29.5523 29.5523 30 29 30H20V32H29C30.6569 32 32 30.6569 32 29V20Z"
+                          class="bottom-corner" />
+                      </svg>
+                      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="exit"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M12 9V0H10V9C10 9.55229 9.55229 10 9 10H0V12H9C10.6569 12 12 10.6569 12 9Z"
+                          class="top-corner" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M20 32H22V23C22 22.4477 22.4477 22 23 22H32V20H23C21.3431 20 20 21.3431 20 23V32Z"
+                          class="bottom-corner" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-container">
+                <div class="seeking-preview">
+                  <img class="seeking-preview__thumbnail">
+                  <div class="seeking-preview__time-tooltip">0:00</div>
+                </div>
+                <div class="timeline">
+                  <div class="seek-filler"></div>
+                  <div class="timeline__progressbar"></div>
+                </div>
+                <div class="footer">
+                  <div class="duration-container" role="text" aria-label="Less than a second elapsed of 0 second">
+                    <div class="current-time span" aria-hidden="true">0:00</div>
+                    <div class="divider-time-copy span" aria-hidden="true">/</div>
+                    <div class="divider-time span" aria-hidden="true">/</div>
+                    <div class="total-time span" aria-hidden="true">0:00</div>
+                  </div>
+                  <div class="badges-container">
+                    <div class="badge quality-badge" data-quality="N/A">
+                      <div class="span quality">N/A</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="video-fit-contain">
+            <div class="video-fit-content">
+              <div class="aspect-ratio-response">
+                <svg xmlns="http://www.w3.org/2000/svg" class="video-filters" color-interpolation-filters="sRGB">
+                  <defs>
+                    <filter id="blur">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="12,0" />
+                    </filter>
+                    <filter id="gamma">
+                      <feComponentTransfer>
+                        <feFuncR type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                        <feFuncG type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                        <feFuncB type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                      </feComponentTransfer>
+                    </filter>
+                    <filter id="mosaic" x="0" y="0">
+                      <feFlood x="4" y="4" height="2" width="2" />
+                      <feComposite width="8" class="comp" />
+                      <feTile result="a" />
+                      <feComposite in="SourceGraphic" in2="a" operator="in" />
+                      <feMorphology operator="dilate" class="dilate" />
+                    </filter>
+
+                    <filter id="1.25x-speed">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5,0" />
+                    </filter>
+                    <filter id="1.5x-speed">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="1,0" />
+                    </filter>
+                    <filter id="1.75x-speed">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5,0" />
+                    </filter>
+                    <filter id="2x-speed">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
+                    </filter>
+                    <filter id="4x-speed">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="4,0" />
+                    </filter>
+                  </defs>
+                </svg>
+                <div class="video-backdrop-seeking"></div>
+                <img class="video-thumb-preview" alt="">
+                <div class="video-poster-container">
+                  <svg width="96" height="96" viewBox="0 0 96 96" fill="none" class="play-btn-poster"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M0 48C0 21.4903 21.4903 0 48 0V0C74.5097 0 96 21.4903 96 48V48C96 74.5097 74.5097 96 48 96V96C21.4903 96 0 74.5097 0 48V48Z"
+                      fill="black" fill-opacity="0.6" class="circle" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 48C2 73.4051 22.5949 94 48 94C73.4051 94 94 73.4051 94 48C94 22.5949 73.4051 2 48 2C22.5949 2 2 22.5949 2 48ZM48 0C21.4903 0 0 21.4903 0 48C0 74.5097 21.4903 96 48 96C74.5097 96 96 74.5097 96 48C96 21.4903 74.5097 0 48 0Z"
+                      fill="black" fill-opacity="0.3" class="stroke" />
+                    <path
+                      d="M63.9896 46.2668C65.3257 47.036 65.3257 48.964 63.9896 49.7333L36.9979 65.2739C35.6646 66.0416 34 65.0792 34 63.5407L34 32.4593C34 30.9208 35.6646 29.9584 36.9979 30.7261L63.9896 46.2668Z"
+                      fill="white" class="symbol" />
+                  </svg>
+                  <img class="video-poster" alt="">
+                </div>
+              </div>
+              <video controls tabindex="-1" playsinline class="video" preload="metadata" crossorigin="anonymous"
+                webkit-playsinline="true" x5-playsinline="true" x5-video-player-type="h5"
+                x5-video-player-fullscreen="true" x5-video-orientation="landscape|portrait" poster="data:image/svg+xml,%3Csvg xmlns='
+                                http://www.w3.org/2000/svg'/%3E">
+                <source>
+                <track id="default-track" label="English" kind="captions" srclang="en" src="./sample.vtt" default>
+              </video>
+            </div>
+          </div>
         </div>
-        <div class="bugs">
-            <p><b>KNOWN ROOM FOR IMPROVEMENTS:</b>
-                <br>The "Cast to TV" button is nonfunctional.
-                <br>Incomplete accessibility features (ARIA and Windows High Contrast Mode).
-                <br>Inefficent CSS repaints.
-                <br>Desktop-size only.
-                <br>
-                <br>If you can read this, it's not responsive on mobile.
-                <br>And also you'll have to scrub on the bar if you're on that.
-            </p>
+        <div class="transcript-panel">
+          <div class="header">
+            <div class="title">
+              <h1>Transcript</h1>
+              <div class="transcript-language"></div>
+            </div>
+            <div class="header-buttons">
+              <button>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M18 24C18 25.1046 17.1046 26 16 26C14.8954 26 14 25.1046 14 24C14 22.8954 14.8954 22 16 22C17.1046 22 18 22.8954 18 24Z" />
+                  <path
+                    d="M26 24C26 25.1046 25.1046 26 24 26C22.8954 26 22 25.1046 22 24C22 22.8954 22.8954 22 24 22C25.1046 22 26 22.8954 26 24Z" />
+                  <path
+                    d="M34 24C34 25.1046 33.1046 26 32 26C30.8954 26 30 25.1046 30 24C30 22.8954 30.8954 22 32 22C33.1046 22 34 22.8954 34 24Z" />
+                </svg>
+              </button>
+              <button class="close-transcript-panel">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M30.2929 16.2929C30.6834 15.9024 31.3166 15.9024 31.7071 16.2929C32.0976 16.6834 32.0976 17.3166 31.7071 17.7071L25.4142 24L31.7071 30.2929C32.0976 30.6834 32.0976 31.3166 31.7071 31.7071C31.3166 32.0977 30.6834 32.0977 30.2929 31.7071L24 25.4142L17.7071 31.7071C17.3166 32.0977 16.6834 32.0977 16.2929 31.7071C15.9024 31.3166 15.9024 30.6834 16.2929 30.2929L22.5858 24L16.2929 17.7071C15.9024 17.3166 15.9024 16.6834 16.2929 16.2929C16.6834 15.9024 17.3166 15.9024 17.7071 16.2929L24 22.5858L30.2929 16.2929Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="contents">
+            <div class="captions-contents"></div>
+            <div class="snackbar-sync-time">
+              <button tabindex="-1" class="sync-to-time">Sync to current video time</button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <script type="text/javascript" defer>
-        var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
-        var author = document.head.querySelector("meta[property=\"og:author\"]").getAttribute("content");
-        var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
-        const videoPlayerInline = document.querySelector(".video-player");
-        document.querySelector(".video-name h1").textContent = title;
-        document.querySelector(".video-information h1").textContent = title;
-        document.querySelector(".author-name .span").textContent = author;
-        document.querySelector(".video-information .author-info .span").textContent = author;
-        document.querySelector(".video-information .description p").textContent = description;
+    <div class="video-information">
+      <h1 class="video-name"></h1>
+      <div class="author-info">
+        <div class="span"></div>
+      </div>
+      <div class="description">
+        <p></p>
+      </div>
+    </div>
+    <div class="bugs">
+      <p><b>KNOWN ROOM FOR IMPROVEMENTS:</b>
+        <br>The "Cast to TV" button is nonfunctional.
+        <br>Incomplete accessibility features (ARIA and Windows High Contrast Mode).
+        <br>Inefficent CSS repaints.
+        <br>Desktop-size only.
+        <br>
+        <br>If you can read this, it's not responsive on mobile.
+        <br>And also you'll have to scrub on the bar if you're on that.
+      </p>
+    </div>
+  </div>
+  <script type="text/javascript" defer>
+    var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
+    var author = document.head.querySelector("meta[property=\"og:author\"]").getAttribute("content");
+    var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
+    const videoPlayerInline = document.querySelector(".video-player");
+    document.querySelector(".video-name h1").textContent = title;
+    document.querySelector(".video-information h1").textContent = title;
+    document.querySelector(".author-name .span").textContent = author;
+    document.querySelector(".video-information .author-info .span").textContent = author;
+    document.querySelector(".video-information .description p").textContent = description;
 
-        videoPlayerInline.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1);
-        videoPlayerInline.querySelector("#mosaic feComposite.comp").setAttribute("height", videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width"));
+    videoPlayerInline.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1);
+    videoPlayerInline.querySelector("#mosaic feComposite.comp").setAttribute("height", videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width"));
 
-        videoPlayerInline.querySelector(".video").addEventListener("loadedmetadata", () => {
-            if (!videoPlayerInline.querySelector(".video-container").classList.contains("played")) {
-                videoPlayerInline.querySelectorAll(`.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg`).forEach(element => {
-                    element.style.animationDelay = `calc(var(--animation-order) * 64ms)`;
-                    element.style.animationPlayState = "running";
-                });
-                videoPlayerInline.querySelector(`.video-player .right-side button svg:last-child`).addEventListener("animationend", () => {
-                    setTimeout(() => {
-                        document.querySelector(".right-side").querySelectorAll("button svg").forEach(element => {
-                            element.style.animationDelay = `0s`;
-                        });
-                    }, parseFloat(window.getComputedStyle(videoPlayerInline.querySelector(".right-side").lastChild.parentElement.querySelector("svg")).animationDelay) * 15000);
-                });
-            }
+    videoPlayerInline.querySelector(".video").addEventListener("loadedmetadata", () => {
+      if (!videoPlayerInline.querySelector(".video-container").classList.contains("played")) {
+        videoPlayerInline.querySelectorAll(`.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg`).forEach(element => {
+          element.style.animationDelay = `calc(var(--animation-order) * 64ms)`;
+          element.style.animationPlayState = "running";
         });
-
-        var scripts = [
-            "//polyfill.io/v3/polyfill.min.js?features=Function.prototype.name%2CDocument%2CBlob%2CAudioContext%2CArray.prototype.map%2CArray.prototype.lastIndexOf%2CArray.prototype.indexOf%2CArray.prototype.forEach%2CArray.prototype.findIndex%2Ces2015%2Cdefault",
-        ];
-
-        scripts.forEach(function (scriptUrl) {
-            var scriptTag = document.createElement("script");
-            scriptTag.type = "text/javascript";
-            scriptTag.crossOrigin = "anonymous";
-            scriptTag.src = scriptUrl;
-            scriptTag.defer = true;
-            document.body.insertAdjacentElement("afterend", scriptTag);
+        videoPlayerInline.querySelector(`.video-player .right-side button svg:last-child`).addEventListener("animationend", () => {
+          setTimeout(() => {
+            document.querySelector(".right-side").querySelectorAll("button svg").forEach(element => {
+              element.style.animationDelay = `0s`;
+            });
+          }, parseFloat(window.getComputedStyle(videoPlayerInline.querySelector(".right-side").lastChild.parentElement.querySelector("svg")).animationDelay) * 15000);
         });
-    </script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
-    <script type="text/javascript" src="//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
-        defer></script>
-    <script type="text/javascript" src="index.js" defer></script>
+      }
+    });
+
+    var scripts = [
+      "//polyfill.io/v3/polyfill.min.js?features=Function.prototype.name%2CDocument%2CBlob%2CAudioContext%2CArray.prototype.map%2CArray.prototype.lastIndexOf%2CArray.prototype.indexOf%2CArray.prototype.forEach%2CArray.prototype.findIndex%2Ces2015%2Cdefault",
+    ];
+
+    scripts.forEach(function (scriptUrl) {
+      var scriptTag = document.createElement("script");
+      scriptTag.type = "text/javascript";
+      scriptTag.crossOrigin = "anonymous";
+      scriptTag.src = scriptUrl;
+      scriptTag.defer = true;
+      document.body.insertAdjacentElement("afterend", scriptTag);
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@1.2.0/dist/hls.min.js" defer></script>
+  <script type="text/javascript" src="//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" defer></script>
+  <script type="text/javascript" src="index.js" defer></script>
 </body>
 
 </html>

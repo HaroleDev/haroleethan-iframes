@@ -282,7 +282,7 @@ const srcEventListeners = [
 
             let message = err.message;
             if (message && message.length) s += message;
-            videoPlayer.getElementById("error-log").textContent = err.code;
+            videoPlayer.querySelector("#error-log").textContent = err.code;
             videoPlayer
                 .querySelector(".error-dialog")
                 .classList.add("error-occurred");
@@ -405,7 +405,7 @@ document.addEventListener("click", (e) => {
 eqItem.addEventListener("click", () => eqContainer.classList.add("opened"));
 transcriptItem.addEventListener("click", () => {
     loadTranscript(
-        videoPlayer.getElementById("default-track").getAttribute("srclang")
+        videoPlayer.querySelector("#default-track").getAttribute("srclang")
     );
     videoPlayer.classList.add("transcript-opened");
 });
@@ -1138,11 +1138,7 @@ function toggleScrubbing(e) {
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect();
-    let percent;
-    const updateThrottlePercent = throttle(() => {
-        percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-    }, 1000);
-    updateThrottlePercent();
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
 
     let seekTime = percent * video.duration;
     timelineInner.style.setProperty("--preview-position", percent);

@@ -430,10 +430,10 @@
     border: none;
     -webkit-box-shadow: 0 0 0 2px #ffffff33;
     box-shadow: 0 0 0 2px #ffffff33;
-    color: inherit;
-    padding: 25%;
-    height: 76px;
-    width: 76px;
+    padding: 0;
+    padding-top: 3px;
+    height: 72px;
+    width: 72px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 2;
@@ -552,6 +552,16 @@
     transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo), box-shadow 300ms var(--ease-out-expo), -webkit-box-shadow 300ms var(--ease-out-expo);
     will-change: box-shadow;
+}
+
+.video-controls-container .right-side button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0.1) 50%, #00000000 75%);
 }
 
 .video-controls-container .right-side button path {
@@ -1029,7 +1039,7 @@
     pointer-events: none;
     cursor: pointer;
     overflow: hidden;
-    will-change: width, height, box-shadow;
+    will-change: width, height, box-shadow, filter;
     -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
 }
@@ -2866,6 +2876,7 @@ input[type=range]::-ms-tooltip {
 .full-screen.video-player {
     -webkit-animation: fullscreenPlayer 600ms var(--ease-out-expo);
     animation: fullscreenPlayer 600ms var(--ease-out-expo);
+    will-change: filter, webkit-filter;
 }
 
 @-webkit-keyframes fullscreenPlayer {

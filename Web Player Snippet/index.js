@@ -470,7 +470,9 @@ playbackSpeedItem.addEventListener("click", () => {
 });
 
 for (var i = 0; i < playbackSpeedItemControls.length; i++) {
-    playbackSpeedItemControls[i].classList.add(`speed__${i}`);
+    const dataSpeed = playbackSpeedItemControls[i].getAttribute("data-speed");
+    playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`);
+    playbackSpeedItemControls[i].querySelector(".span").textContent = `${dataSpeed}x`;
     video.playbackRate = videoPlayer.getAttribute("data-speed");
     document.querySelector(`.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute("data-speed")}"]`).setAttribute("aria-checked", "true");
 };
@@ -1168,7 +1170,7 @@ async function updatetime() {
 
 function updateMetadata() {
     const updateThrottleMetadata = throttle(() => {
-        orientationInfluence = video.videoWidth / video.videoHeight;
+        var orientationInfluence = video.videoWidth / video.videoHeight;
         videoPlayerContainer.style.setProperty("--aspect-ratio-size", orientationInfluence);
         videoPlayerContainer.style.setProperty("--aspect-ratio-size-inverse", video.videoHeight / video.videoWidth);
         if (orientationInfluence > 16 / 9) {
@@ -1834,7 +1836,7 @@ const eventListeners = [
                 )} elapsed of ${formatDurationARIA(video.duration)}`
             );
 
-            orientationInfluence = video.videoWidth / video.videoHeight;
+            var orientationInfluence = video.videoWidth / video.videoHeight;
 
             if (orientationInfluence > 16 / 9) {
                 qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth);

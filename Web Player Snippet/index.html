@@ -42,7 +42,7 @@
     </style>
 </head>
 
-<body class="preload">
+<body>
     <div class="website-header">
         <div class="logo-container">
             <img src="./media/Playful%20Video_Dark.svg" class="logo dark" alt="Playful Video">
@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="column">
-        <div class="video-player-container">
+        <div class="video-player-container preload">
             <div class="video-player loading" data-device="" data-speed="1">
                 <div class="video-context-menu">
                     <div class="contents">
@@ -679,6 +679,22 @@
                                             <feComposite in="SourceGraphic" in2="a" operator="in" />
                                             <feMorphology operator="dilate" class="dilate" />
                                         </filter>
+
+                                        <filter id="1.25x-speed">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="0.5,0" />
+                                        </filter>
+                                        <filter id="1.5x-speed">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="1,0" />
+                                        </filter>
+                                        <filter id="1.75x-speed">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="1.5,0" />
+                                        </filter>
+                                        <filter id="2x-speed">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
+                                        </filter>
+                                        <filter id="4x-speed">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="4,0" />
+                                        </filter>
                                     </defs>
                                 </svg>
                                 <div class="video-backdrop-seeking"></div>
@@ -762,39 +778,38 @@
                 <br>Incomplete accessibility features (ARIA and Windows High Contrast Mode).
                 <br>Inefficent CSS repaints.
                 <br>Desktop-size only.
-                <br>Playback Speed still in "proof of concept" stage.
                 <br>
                 <br>If you can read this, it's not responsive on mobile.
                 <br>And also you'll have to scrub on the bar if you're on that.
             </p>
         </div>
     </div>
-    <script type="text/javascript" async>
+    <script type="text/javascript" defer>
         var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
         var author = document.head.querySelector("meta[property=\"og:author\"]").getAttribute("content");
         var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
-
+        const videoPlayerInline = document.querySelector(".video-player");
         document.querySelector(".video-name h1").textContent = title;
         document.querySelector(".video-information h1").textContent = title;
         document.querySelector(".author-name .span").textContent = author;
         document.querySelector(".video-information .author-info .span").textContent = author;
         document.querySelector(".video-information .description p").textContent = description;
 
-        document.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (document.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1);
-        document.querySelector("#mosaic feComposite.comp").setAttribute("height", document.querySelector("#mosaic feComposite.comp").getAttribute("width"));
+        videoPlayerInline.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1);
+        videoPlayerInline.querySelector("#mosaic feComposite.comp").setAttribute("height", videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width"));
 
-        document.querySelector(".video").addEventListener("loadedmetadata", () => {
-            if (!document.querySelector(".video-container").classList.contains("played")) {
-                document.querySelectorAll(`.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg`).forEach(element => {
+        videoPlayerInline.querySelector(".video").addEventListener("loadedmetadata", () => {
+            if (!videoPlayerInline.querySelector(".video-container").classList.contains("played")) {
+                videoPlayerInline.querySelectorAll(`.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg`).forEach(element => {
                     element.style.animationDelay = `calc(var(--animation-order) * 64ms)`;
                     element.style.animationPlayState = "running";
                 });
-                document.querySelector(`.video-player .right-side button svg:last-child`).addEventListener("animationend", () => {
+                videoPlayerInline.querySelector(`.video-player .right-side button svg:last-child`).addEventListener("animationend", () => {
                     setTimeout(() => {
                         document.querySelector(".right-side").querySelectorAll("button svg").forEach(element => {
                             element.style.animationDelay = `0s`;
                         });
-                    }, parseFloat(window.getComputedStyle(document.querySelector(".right-side").lastChild.parentElement.querySelector("svg")).animationDelay) * 15000);
+                    }, parseFloat(window.getComputedStyle(videoPlayerInline.querySelector(".right-side").lastChild.parentElement.querySelector("svg")).animationDelay) * 15000);
                 });
             }
         });

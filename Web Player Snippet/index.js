@@ -22,70 +22,76 @@ var config = {
     startPosition: -1,
 };
 var hls = new Hls(config);
-const playpauseButton = document.querySelector(".play-pause-button"),
-    playpauseTooltipContainer = document.querySelector(".play-pause-tooltip-container"),
-    videoContainer = document.querySelector(".video-container"),
-    videoPoster = document.querySelector(".video-poster"),
-    video = document.querySelector(".video"),
-    videoFit = document.querySelector(".video-fit-contain"),
+const videoPlayerContainer = document.querySelector(".video-player-container"),
+    videoPlayer = videoPlayerContainer.querySelector(".video-player"),
+
+    video = videoPlayer.querySelector(".video"),
+    videoFit = videoPlayer.querySelector(".video-fit-contain"),
     source = video.querySelector("source"),
-    videoPlayerContainer = document.querySelector(".video-player-container"),
-    videoPlayer = document.querySelector(".video-player"),
-    currentTime = document.querySelector(".current-time"),
-    totalTime = document.querySelector(".total-time"),
-    durationContainer = document.querySelector(".duration-container"),
-    timeTooltip = document.querySelector(".seeking-preview__time-tooltip"),
-    EQswitchToggle = document.querySelector(".eq-switch"),
-    rangeEQInputs = document.querySelectorAll(".dialog .eq-control input"),
-    eqContainer = document.querySelector(".eq-dialog-container"),
-    loopItem = document.querySelector(".loop-item"),
-    eqItem = document.querySelector(".eq-item"),
-    captionButton = document.querySelector(".caption-button"),
 
-    settingsButton = document.querySelector(".settings-button"),
-    settingsContextMenu = document.querySelector(".settings-context-menu"),
-    settingsTooltipContainer = document.querySelector(".settings-tooltip-container"),
+    playpauseButton = videoPlayer.querySelector(".play-pause-button"),
+    playpauseTooltipContainer = videoPlayer.querySelector(".play-pause-tooltip-container"),
+    videoContainer = videoPlayer.querySelector(".video-container"),
+    videoPoster = videoPlayer.querySelector(".video-poster"),
 
-    contextMenu = document.querySelector(".video-context-menu"),
+    currentTime = videoPlayer.querySelector(".current-time"),
+    totalTime = videoPlayer.querySelector(".total-time"),
+    durationContainer = videoPlayer.querySelector(".duration-container"),
+    timeTooltip = videoPlayer.querySelector(".seeking-preview__time-tooltip"),
+    EQswitchToggle = videoPlayer.querySelector(".eq-switch"),
+    rangeEQInputs = videoPlayer.querySelectorAll(".dialog .eq-control input"),
+    eqContainer = videoPlayer.querySelector(".eq-dialog-container"),
+    loopItem = videoPlayer.querySelector(".loop-item"),
+    eqItem = videoPlayer.querySelector(".eq-item"),
+    captionButton = videoPlayer.querySelector(".caption-button"),
 
-    Item = document.querySelector(".item"),
-    downloadItem = document.querySelector(".download-item"),
-    playbackSpeedItem = document.querySelector(".playback-speed-item"),
-    transcriptItem = document.querySelector(".transcript-item"),
-    backPageSettings = document.querySelector(".back-page"),
+    settingsButton = videoPlayer.querySelector(".settings-button"),
+    settingsContextMenu = videoPlayer.querySelector(".settings-context-menu"),
+    settingsTooltipContainer = videoPlayer.querySelector(".settings-tooltip-container"),
 
-    playbackSpeedItemControls = document.querySelectorAll(".contents.playback-speed-settings .item"),
+    contextMenu = videoPlayer.querySelector(".video-context-menu"),
 
-    transcriptPanel = document.querySelector(".transcript-panel"),
-    closeTranscriptPanelBtn = document.querySelector(".close-transcript-panel"),
-    transcriptDiv = document.querySelector(".captions-contents"),
-    snackbarSyncTranscript = document.querySelector(".snackbar-sync-time"),
-    dialog = document.querySelector(".dialog"),
-    closeDialogBtn = document.querySelector(".close-dialog"),
-    dialogOverlay = document.querySelector(".dialog-overlay"),
-    volumeSliderContainer = document.querySelector(".volume-slider-container"),
-    volumeContainer = document.querySelector(".volume-container"),
-    volumeButton = document.querySelector(".volume-button"),
-    volumeTooltipContainer = document.querySelector(".volume-tooltip-container"),
-    fullscreenButton = document.querySelector(".full-screen-button"),
-    fullscreenTooltip = document.querySelector(".full-screen-tooltip"),
-    pipPlayerButton = document.querySelector(".pip-button"),
-    pipTooltip = document.querySelector(".pip-tooltip"),
-    timelineContainer = document.querySelector(".timeline-container"),
-    timelineInner = document.querySelector(".timeline"),
-    videoInformationOverlay = document.querySelector(".video-information-overlay"),
-    videoControlsContainer = document.querySelector(".video-controls-container"),
-    videoControls = document.querySelector(".controls"),
-    rightVideoControls = document.querySelector(".right-side"),
-    seekingPreview = document.querySelector(".seeking-preview"),
-    seekingThumbnail = document.querySelector(".seeking-preview__thumbnail"),
-    videoThumbPreview = document.querySelector(".video-thumb-preview"),
-    qualityBadgeContainer = document.querySelector(".quality-badge"),
-    qualityBadgeText = document.querySelector(".quality-badge .quality"),
-    AirPlayTooltip = document.querySelector(".airplay-tooltip"),
-    AirPlayButton = document.querySelector(".airplay-button"),
-    CastButton = document.querySelector(".gcast-button"),
-    CastTooltip = document.querySelector(".gcast-tooltip");
+    Item = videoPlayer.querySelector(".item"),
+    downloadItem = videoPlayer.querySelector(".download-item"),
+    playbackSpeedItem = videoPlayer.querySelector(".playback-speed-item"),
+    transcriptItem = videoPlayer.querySelector(".transcript-item"),
+    backPageSettings = videoPlayer.querySelector(".back-page"),
+
+    playbackSpeedItemControls = videoPlayer.querySelectorAll(".contents.playback-speed-settings .item"),
+
+    transcriptPanel = videoPlayer.querySelector(".transcript-panel"),
+    closeTranscriptPanelBtn = videoPlayer.querySelector(".close-transcript-panel"),
+    transcriptDiv = videoPlayer.querySelector(".captions-contents"),
+    snackbarSyncTranscript = videoPlayer.querySelector(".snackbar-sync-time"),
+    dialog = videoPlayer.querySelector(".dialog"),
+    closeDialogBtn = videoPlayer.querySelector(".close-dialog"),
+    dialogOverlay = videoPlayer.querySelector(".dialog-overlay"),
+    volumeSliderContainer = videoPlayer.querySelector(".volume-slider-container"),
+    volumeContainer = videoPlayer.querySelector(".volume-container"),
+    volumeButton = videoPlayer.querySelector(".volume-button"),
+    volumeTooltipContainer = videoPlayer.querySelector(".volume-tooltip-container"),
+    fullscreenButton = videoPlayer.querySelector(".full-screen-button"),
+    fullscreenTooltip = videoPlayer.querySelector(".full-screen-tooltip"),
+    pipPlayerButton = videoPlayer.querySelector(".pip-button"),
+    pipTooltip = videoPlayer.querySelector(".pip-tooltip"),
+
+    timelineContainer = videoPlayer.querySelector(".timeline-container"),
+    timelineInner = videoPlayer.querySelector(".timeline"),
+    timelineProgressbar = videoPlayer.querySelector(".timeline__progressbar"),
+
+    videoInformationOverlay = videoPlayer.querySelector(".video-information-overlay"),
+    videoControlsContainer = videoPlayer.querySelector(".video-controls-container"),
+    videoControls = videoPlayer.querySelector(".controls"),
+    rightVideoControls = videoPlayer.querySelector(".right-side"),
+    seekingPreview = videoPlayer.querySelector(".seeking-preview"),
+    seekingThumbnail = videoPlayer.querySelector(".seeking-preview__thumbnail"),
+    videoThumbPreview = videoPlayer.querySelector(".video-thumb-preview"),
+    qualityBadgeContainer = videoPlayer.querySelector(".quality-badge"),
+    qualityBadgeText = videoPlayer.querySelector(".quality-badge .quality"),
+    AirPlayTooltip = videoPlayer.querySelector(".airplay-tooltip"),
+    AirPlayButton = videoPlayer.querySelector(".airplay-button"),
+    CastButton = videoPlayer.querySelector(".gcast-button"),
+    CastTooltip = videoPlayer.querySelector(".gcast-tooltip");
 
 var orientationInfluence, videoPercent;
 
@@ -160,7 +166,7 @@ const consoleWelcomeThrottle = debounce(() => {
 consoleWelcomeThrottle();
 
 function init() {
-    document.body.classList.remove("preload");
+    videoPlayer.classList.remove("preload");
     if (video.hasAttribute("controls")) {
         videoControlsContainer.removeAttribute("hidden");
         videoInformationOverlay.removeAttribute("hidden");
@@ -276,9 +282,9 @@ const srcEventListeners = [
 
             let message = err.message;
             if (message && message.length) s += message;
-            document.getElementById("error-log").textContent = err.code;
-            document
-                .getElementsByClassName("error-dialog")
+            videoPlayer.getElementById("error-log").textContent = err.code;
+            videoPlayer
+                .querySelector(".error-dialog")
                 .classList.add("error-occurred");
         },
     ],
@@ -399,7 +405,7 @@ document.addEventListener("click", (e) => {
 eqItem.addEventListener("click", () => eqContainer.classList.add("opened"));
 transcriptItem.addEventListener("click", () => {
     loadTranscript(
-        document.getElementById("default-track").getAttribute("srclang")
+        videoPlayer.getElementById("default-track").getAttribute("srclang")
     );
     videoPlayer.classList.add("transcript-opened");
 });
@@ -465,7 +471,7 @@ downloadItem.addEventListener("click", () => {
 playbackSpeedItem.addEventListener("click", () => {
     const parent = playbackSpeedItem.parentNode.parentNode;
     parent.setAttribute("hidden", "");
-    const content = document.querySelector(".playback-speed-settings");
+    const content = videoPlayer.querySelector(".playback-speed-settings");
     content.removeAttribute("hidden");
 });
 
@@ -474,7 +480,7 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`);
     playbackSpeedItemControls[i].querySelector(".span").textContent = `${dataSpeed}x`;
     video.playbackRate = videoPlayer.getAttribute("data-speed");
-    document.querySelector(`.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute("data-speed")}"]`).setAttribute("aria-checked", "true");
+    videoPlayer.querySelector(`.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute("data-speed")}"]`).setAttribute("aria-checked", "true");
 };
 
 playbackSpeedItemControls.forEach(element => {
@@ -482,10 +488,19 @@ playbackSpeedItemControls.forEach(element => {
         playbackSpeedItemControls.forEach(element => {
             element.removeAttribute("aria-checked");
         });
-        if (document.querySelector(`.playback-speed-settings .item[class*="speed__"]`)) {
+        if (videoPlayer.querySelector(`.playback-speed-settings .item[class*="speed__"]`)) {
             video.playbackRate = element.getAttribute("data-speed");
             videoPlayer.setAttribute("data-speed", video.playbackRate);
             element.setAttribute("aria-checked", "true");
+            if (element.getAttribute("data-speed") === "1.25" ||
+                element.getAttribute("data-speed") === "1.5" ||
+                element.getAttribute("data-speed") === "1.75" ||
+                element.getAttribute("data-speed") === "2" ||
+                element.getAttribute("data-speed") === "4") {
+                timelineProgressbar.style.filter = `url(#${element.getAttribute("data-speed")}x-speed)`;
+            } else {
+                timelineProgressbar.style.filter = "none";
+            }
         }
         backPageSettingsFn();
     });
@@ -606,7 +621,7 @@ function toggleCaptions() {
 var tracks,
     trackElements,
     tracksURLs = [];
-trackElements = document.querySelectorAll("track");
+trackElements = videoPlayer.querySelectorAll("track");
 
 for (var i = 0; i < trackElements.length; i++) {
     var currentTrackElem = trackElements[i];
@@ -618,7 +633,7 @@ tracks = video.textTracks;
 function loadTranscript(lang) {
     clearTranscriptDiv();
     disableAllTracks();
-    document.querySelector(".transcript-language").textContent = video
+    videoPlayer.querySelector(".transcript-language").textContent = video
         .querySelector("track")
         .getAttribute("label");
 
@@ -714,13 +729,13 @@ function addToTranscript(htmlText) {
 
 function addCueListeners(cue) {
     cue.addEventListener("enter", function () {
-        var transcriptText = document.getElementById(this.startTime);
+        var transcriptText = videoPlayer.getElementById(this.startTime);
         transcriptText.classList.add("current");
         transcriptText.parentNode.scrollTop =
             transcriptText.offsetTop - transcriptText.parentNode.offsetTop;
     });
     cue.addEventListener("exit", function () {
-        var transcriptText = document.getElementById(this.startTime);
+        var transcriptText = videoPlayer.getElementById(this.startTime);
         transcriptText.classList.remove("current");
     });
 }
@@ -834,7 +849,7 @@ function intervalDivide() {
         line = spinners[spinindex];
     }
     spinindex = spinindex > spinners.length ? 0 : spinindex + 1;
-    document.querySelector(".divider-time").textContent = `${line}`;
+    videoPlayer.querySelector(".divider-time").textContent = `${line}`;
 }
 let interval;
 
@@ -1638,6 +1653,13 @@ videoPlayer.addEventListener("keydown", (e) => {
             case "9":
                 checkActive();
                 skipPercent(e.key / 10);
+                break;
+            case "home":
+            case "end":
+                videoContainer.classList.add("seeking");
+                if (e.key === "home") video.currentTime = 0;
+                if (e.key === "end") video.currentTime = video.duration;
+                checkActive();
                 break;
             case "k":
             case " ":

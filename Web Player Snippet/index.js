@@ -57,7 +57,7 @@ const playbackSpeedItem = videoPlayer.querySelector('.playback-speed-item')
 const transcriptItem = videoPlayer.querySelector('.transcript-item')
 const backPageSettings = videoPlayer.querySelector('.back-page')
 
-const playbackSpeedItemControls = videoPlayer.querySelectorAll('.contents.playback-speed-settings .item')
+const playbackSpeedItemControls = videoPlayer.querySelectorAll('.page-contents.playback-speed-settings .item')
 
 const transcriptPanel = videoPlayer.querySelector('.transcript-panel')
 const closeTranscriptPanelBtn = videoPlayer.querySelector('.close-transcript-panel')
@@ -482,7 +482,7 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
     playbackSpeedItemControls[i].querySelector('.span').innerHTML = `${dataSpeed} &times;`
     video.playbackRate = videoPlayer.getAttribute('data-speed')
-    videoPlayer.querySelector(`.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
+    videoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
 };
 
 playbackSpeedItemControls.forEach(element => {
@@ -490,7 +490,7 @@ playbackSpeedItemControls.forEach(element => {
         playbackSpeedItemControls.forEach(element => {
             element.removeAttribute('aria-checked')
         })
-        if (videoPlayer.querySelector('.playback-speed-settings .item[class*="speed__"]')) {
+        if (videoPlayer.querySelector('.page-contents.playback-speed-settings .item[class*="speed__"]')) {
             video.playbackRate = element.getAttribute('data-speed')
             videoPlayer.setAttribute('data-speed', video.playbackRate)
             element.setAttribute('aria-checked', 'true')

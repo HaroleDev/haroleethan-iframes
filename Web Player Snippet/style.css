@@ -1897,11 +1897,11 @@
 }
 
 .video-context-menu .contents,
-.settings-context-menu .contents {
+.settings-context-menu .page-contents {
     padding: 12px 8px;
 }
 
-.settings-context-menu .contents.playback-speed-settings .span {
+.settings-context-menu .page-contents.playback-speed-settings .span {
     padding-left: 2px;
 }
 
@@ -1961,7 +1961,7 @@
     }
 }
 
-.playback-speed-settings .header {
+.settings-context-menu .page .header {
     background-color: var(--background);
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1975,12 +1975,14 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    position: fixed;
+    position: absolute;
     width: 100%;
+    gap: 0;
+    height: fit-content;
     z-index: 1;
 }
 
-.playback-speed-settings .header .contents {
+.settings-context-menu .page .header .contents {
     padding: 4px 8px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1996,35 +1998,34 @@
     align-items: center;
 }
 
-.playback-speed-settings .header .contents.back-page {
+.settings-context-menu .page .header .contents.back-page {
     cursor: pointer;
 }
 
-.playback-speed-settings .header h2 {
+.settings-context-menu .page .header h2 {
     font-variation-settings: "wght" 800;
     font-weight: 800;
     font-size: 1rem;
     margin-left: 6px;
 }
 
-.playback-speed-settings .header svg {
+.settings-context-menu .page .header svg {
     margin-left: 6px;
 }
 
-.video-player .playback-speed-settings .item.check {
+.video-player .page-contents.playback-speed-settings .item.check {
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
     transition: opacity 300ms var(--ease-out-expo);
 }
 
-.video-player .playback-speed-settings .item:not([aria-checked="true"]) .check {
+.video-player .page.playback-speed-settings .page-contents .item:not([aria-checked="true"]) .check {
     opacity: 0;
 }
 
-.playback-speed-settings .contents.playback-speed-settings {
+.playback-speed-settings.page .page-contents {
     position: relative;
     height: 100%;
-    margin-top: 60px;
     overflow-y: auto;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -2034,7 +2035,7 @@
     max-height: 500px;
     max-width: 500px;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 60px);
     bottom: 0;
     left: 0;
     display: block !important;
@@ -2044,9 +2045,9 @@
     opacity: 1;
     overflow: hidden;
     pointer-events: all;
-    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
 }
 
 .settings-context-menu .page[hidden] {
@@ -2060,16 +2061,20 @@
     left: 0;
     opacity: 0;
     pointer-events: none;
-    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
 }
 
-.settings-context-menu .page[hidden] .contents {
-    margin: 0;
+.settings-context-menu .page:not(.front-page):not([hidden]) .page-contents {
+    margin-top: 60px;
 }
 
-.settings-context-menu .contents {
+.settings-context-menu .page[hidden] .page-contents {
+    margin-top: 0px;
+}
+
+.settings-context-menu .page .page-contents {
     overflow-y: auto;
     position: relative;
     top: 0;
@@ -3110,22 +3115,22 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel .captions-contents::-webkit-scrollbar,
-.settings-context-menu .page .contents::-webkit-scrollbar {
+.settings-context-menu .page .page-contents::-webkit-scrollbar {
     width: 12px;
 }
 
 .transcript-panel .captions-contents:hover::-webkit-scrollbar,
-.settings-context-menu .page .contents:hover::-webkit-scrollbar {
+.settings-context-menu .page .page-contents:hover::-webkit-scrollbar {
     width: 20px;
 }
 
 .transcript-panel .captions-contents::-webkit-scrollbar-track,
-.settings-context-menu .page .contents::-webkit-scrollbar-track {
+.settings-context-menu .page .page-contents::-webkit-scrollbar-track {
     background: var(--background);
 }
 
 .transcript-panel .captions-contents::-webkit-scrollbar-thumb,
-.settings-context-menu .page .contents::-webkit-scrollbar-thumb {
+.settings-context-menu .page .page-contents::-webkit-scrollbar-thumb {
     background-color: #17785B;
     border-radius: 100vw;
     background-clip: content-box;
@@ -3133,19 +3138,19 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel .captions-contents::-webkit-scrollbar-track-piece,
-.settings-context-menu .page .contents::-webkit-scrollbar-track-piece {
+.settings-context-menu .page .page-contents::-webkit-scrollbar-track-piece {
     background-color: var(--stroke-accent-color);
     border: 4px solid var(--background);
     border-radius: 100vw;
 }
 
 .transcript-panel .captions-contents::-webkit-scrollbar-thumb:hover,
-.settings-context-menu .page .contents::-webkit-scrollbar-thumb:hover {
+.settings-context-menu .page .page-contents::-webkit-scrollbar-thumb:hover {
     background-color: var(--dark-accent-color);
 }
 
 .transcript-panel .captions-contents::-webkit-scrollbar-thumb:active,
-.settings-context-menu .page .contents::-webkit-scrollbar-thumb:active {
+.settings-context-menu .page .page-contents::-webkit-scrollbar-thumb:active {
     background-color: var(--accent-color);
 }
 
@@ -3345,12 +3350,12 @@ screen and (max-height: 600px) {
         filter: brightness(60%);
     }
 
-    .settings-context-menu .page:not([hidden]) {
+    .settings-context-menu .page-contents:not([hidden]) {
         max-height: 400px;
         max-width: 400px;
     }
 
-    .playback-speed-settings .contents.playback-speed-settings {
+    .playback-speed-settings.page .page-contents.playback-speed-settings {
         max-height: calc(30vw - 60px);
     }
 }

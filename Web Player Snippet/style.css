@@ -1975,6 +1975,9 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
 .playback-speed-settings .header .contents {
@@ -2019,7 +2022,9 @@
 }
 
 .playback-speed-settings .contents.playback-speed-settings {
-    max-height: calc(500px - 60px);
+    position: relative;
+    height: 100%;
+    margin-top: 60px;
     overflow-y: auto;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -2028,6 +2033,8 @@
 .settings-context-menu .page:not([hidden]) {
     max-height: 500px;
     max-width: 500px;
+    width: 100%;
+    height: 100%;
     bottom: 0;
     left: 0;
     display: block !important;
@@ -2056,6 +2063,10 @@
     -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+}
+
+.settings-context-menu .page[hidden] .contents {
+    margin: 0;
 }
 
 .settings-context-menu .contents {
@@ -2145,17 +2156,19 @@
     width: 640px;
 }
 
-.eq-dialog-container {
+.dialog-container {
     position: absolute;
     top: 0;
-    width: 100%;
-    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .equalizers {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
+    position: relative;
     margin: 0 auto;
 }
 
@@ -3338,7 +3351,7 @@ screen and (max-height: 600px) {
     }
 
     .playback-speed-settings .contents.playback-speed-settings {
-        max-height: calc(400px - 60px);
+        max-height: calc(30vw - 60px);
     }
 }
 

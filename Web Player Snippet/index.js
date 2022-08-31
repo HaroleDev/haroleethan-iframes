@@ -847,7 +847,7 @@ function intervalDivide() {
     spinindex = spinindex > spinners.length ? 0 : spinindex + 1
     videoPlayer.querySelector('.divider-time').innerText = `${line}`
 }
-let interval;
+let intervalDivider;
 
 (function () {
     const vendors = ['webkit', 'moz', 'ms', 'o']
@@ -1709,7 +1709,7 @@ const eventListeners = [
             navigator.mediaSession.playbackState = 'playing'
             playpauseTooltipContainer.dataset.tooltip = 'Pause' + ' (k)'
             video.addEventListener('timeupdate', mediaSessionToggle())
-            interval = setInterval(intervalDivide, 1e3)
+            intervalDivider = setInterval(intervalDivide, 1e3)
             if (Hls.isSupported() && video.currentTime === 0) hls.startLoad()
             window.requestAnimationFrame(updateMetadata)
             videoContainer.addEventListener('pointerover', () => {
@@ -1735,7 +1735,7 @@ const eventListeners = [
     [
         'pause',
         () => {
-            clearInterval(interval)
+            clearInterval(intervalDivider)
             videoContainer.addEventListener('pointerleave', () => {
                 window.cancelAnimationFrame(updatetime)
                 window.cancelAnimationFrame(updateMetadata)

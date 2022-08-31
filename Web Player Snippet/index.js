@@ -531,6 +531,7 @@ const filters = [];
         filters[i].connect(filters[i + 1])
     }
 })
+sourceNode.connect(context.destination)
 filters[filters.length - 1].connect(context.destination)
 
 function changeGain(sliderValue, nbFilter) {
@@ -1861,6 +1862,7 @@ const eventListeners = [
                 videoPlayer.querySelectorAll('.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
+                    element.style.opacity = 1;
                 })
                 videoPlayer.querySelector('.video-player .right-side button svg:last-child').addEventListener('animationend', () => {
                     setTimeout(() => {

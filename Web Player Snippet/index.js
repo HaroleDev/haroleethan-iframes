@@ -63,6 +63,8 @@ const transcriptPanel = videoPlayer.querySelector('.transcript-panel')
 const closeTranscriptPanelBtn = videoPlayer.querySelector('.close-transcript-panel')
 const transcriptDiv = videoPlayer.querySelector('.captions-contents')
 const snackbarSyncTranscript = videoPlayer.querySelector('.snackbar-sync-time')
+var cueContainers = videoPlayer.querySelectorAll('.cue-container')
+
 const dialog = videoPlayer.querySelector('.dialog')
 const closeDialogBtn = videoPlayer.querySelector('.close-dialog')
 const dialogOverlay = videoPlayer.querySelector('.dialog-overlay')
@@ -676,7 +678,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text
         }
-        const clickableTranscriptText = `<div class="cue-container" id="${cue.startTime}" role="button" aria-pressed="false" tabindex="0" onclick="jumpToTranscript(${cue.startTime});"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
+        const clickableTranscriptText = `<div class="cue-container" id="${cue.startTime}" role="button" aria-pressed="false" tabindex="0" onclick="var video = document.querySelector('.video-player .video'); video.currentTime = ${cue.startTime}; this.classList.add('current'); document.querySelector('.video-player .timeline').style.setProperty('--progress-position', video.currentTime / video.duration); video = null;"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
         addToTranscript(clickableTranscriptText)
     }
 }
@@ -705,17 +707,6 @@ function removeHTML(text) {
     return div.innerText || div.innerText || ''
 }
 
-function jumpToTranscript(time) {
-    (video.currentTime = time),
-        video.paused
-            ? (video.pause(),
-                timelineInner.style.setProperty(
-                    '--progress-position',
-                    video.currentTime / video.duration
-                ))
-            : video.play()
-}
-
 function clearTranscriptDiv() {
     transcriptDiv.innerHTML = ''
 }
@@ -726,13 +717,13 @@ function addToTranscript(htmlText) {
 
 function addCueListeners(cue) {
     cue.addEventListener('enter', function () {
-        const transcriptText = videoPlayer.getElementById(this.startTime)
+        const transcriptText = document.getElementById(this.startTime)
         transcriptText.classList.add('current')
         transcriptText.parentNode.scrollTop =
             transcriptText.offsetTop - transcriptText.parentNode.offsetTop
     })
     cue.addEventListener('exit', function () {
-        const transcriptText = videoPlayer.getElementById(this.startTime)
+        const transcriptText = document.getElementById(this.startTime)
         transcriptText.classList.remove('current')
     })
 }

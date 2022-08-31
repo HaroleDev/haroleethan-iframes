@@ -95,15 +95,15 @@ const CastTooltip = videoPlayer.querySelector('.gcast-tooltip')
 
 let orientationInfluence, videoPercent
 
-const title =
+var title =
   document
     .querySelector('meta[property="og:title"]')
     .getAttribute('content') ||
   decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf('/') + 1))
-const author = document
+var author = document
   .querySelector('meta[property="og:author"]')
   .getAttribute('content')
-const description = document
+var description = document
   .querySelector('meta[property="og:description"]')
   .getAttribute('content')
 
@@ -175,6 +175,9 @@ function init() {
     videoInformationOverlay.setAttribute('hidden', '')
     video.removeAttribute('controls')
   }
+
+  videoPlayer.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1)
+  videoPlayer.querySelector("#mosaic feComposite.comp").setAttribute("height", videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width"))
 }
 
 init()
@@ -474,7 +477,7 @@ playbackSpeedItem.addEventListener('click', () => {
 for (var i = 0; i < playbackSpeedItemControls.length; i++) {
   const dataSpeed = playbackSpeedItemControls[i].getAttribute('data-speed')
   playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
-  playbackSpeedItemControls[i].querySelector('.span').textContent = `${dataSpeed}x;`
+  playbackSpeedItemControls[i].querySelector('.span').innerHTML = `${dataSpeed} &times;`
   video.playbackRate = videoPlayer.getAttribute('data-speed')
   videoPlayer.querySelector(`.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
 };
@@ -488,15 +491,8 @@ playbackSpeedItemControls.forEach(element => {
       video.playbackRate = element.getAttribute('data-speed')
       videoPlayer.setAttribute('data-speed', video.playbackRate)
       element.setAttribute('aria-checked', 'true')
-      if (element.getAttribute('data-speed') === '1.25' ||
-        element.getAttribute('data-speed') === '1.5' ||
-        element.getAttribute('data-speed') === '1.75' ||
-        element.getAttribute('data-speed') === '2' ||
-        element.getAttribute('data-speed') === '4') {
-        timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`
-      } else {
-        timelineProgressbar.style.filter = 'none'
-      }
+      if (!element.getAttribute('data-speed') >= '1.25') return timelineProgressbar.style.filter = 'none'
+      timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`
     }
     backPageSettingsFn()
   })
@@ -540,6 +536,16 @@ function changeGain(sliderValue, nbFilter) {
   const value = parseFloat(sliderValue)
   filters[nbFilter].gain.value = value
 }
+
+for (var i = 0; i < rangeEQInputs.length; i++) {
+  rangeEQInputs[i].setAttribute('data-input', i)
+}
+
+rangeEQInputs.forEach(element => {
+  element.addEventListener('input', () => {
+    changeGain(element.value, element.getAttribute('data-input'))
+  })
+})
 
 /* function childElements(node) {
     var elems = new Array();
@@ -1189,7 +1195,7 @@ function updateMetadata() {
     }
   }, 1000)
   updateThrottleMetadata()
-  window[videoContainer.classList.contains('hovered') ? cancelAnimationFrame : requestAnimationFrame](updateMetadata)
+  videoContainer.classList.contains('hovered') ? window.cancelAnimationFrame(updateMetadata) : window.requestAnimationFrame(updateMetadata)
 }
 
 const leading0Formatter = new Intl.NumberFormat(undefined, {
@@ -1864,6 +1870,20 @@ const eventListeners = [
         video.videoHeight / video.videoWidth
       )
       loadedMetadata()
+
+      if (!videoPlayer.querySelector(".video-container").classList.contains("played")) {
+        videoPlayer.querySelectorAll(`.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg`).forEach(element => {
+          element.style.animationDelay = `calc(var(--animation-order) * 64ms)`;
+          element.style.animationPlayState = "running";
+        });
+        videoPlayer.querySelector(`.video-player .right-side button svg:last-child`).addEventListener("animationend", () => {
+          setTimeout(() => {
+            rightVideoControls.querySelectorAll("button svg").forEach(element => {
+              element.style.animationDelay = `0s`;
+            });
+          }, parseFloat(window.getComputedStyle(rightVideoControls.lastChild.parentElement.querySelector("svg")).animationDelay) * 15000);
+        });
+      }
     }
   ],
   [

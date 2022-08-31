@@ -107,6 +107,9 @@ var description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
 
+videoPlayerContainer.style.setProperty('--aspect-ratio-size', 16 / 9)
+videoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', 9 / 16)
+
 // Debounce and throttle
 function debounce(cb, delay = 1000) {
     let timeout
@@ -198,25 +201,25 @@ function canFullscreen() {
 window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
     /* if (!Hls.isSupported()) {
-              hls.loadSource(videoMetadata.HLS_src);
-              hls.attachMedia(video);
-              source.setAttribute("type", videoMetadata.HLS_codec);
-              //For HLS container
-              hls.on(Hls.Events.LEVEL_LOADED, function () {
-                  loadedMetadata();
-              });
-          } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-              source.setAttribute("src", videoMetadata.HLS_src);
-              source.setAttribute("type", videoMetadata.HLS_codec);
-              video.load();
-              video.addEventListener("durationchange", updatetime);
-          } else {
-              source.setAttribute("src", videoMetadata.Fallback_src);
-              source.setAttribute("type", videoMetadata.Fallback_codec);
-              video.load();
-              //For MP4 container
-              video.addEventListener("durationchange", updatetime);
-          }; */
+                hls.loadSource(videoMetadata.HLS_src);
+                hls.attachMedia(video);
+                source.setAttribute("type", videoMetadata.HLS_codec);
+                //For HLS container
+                hls.on(Hls.Events.LEVEL_LOADED, function () {
+                    loadedMetadata();
+                });
+            } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                source.setAttribute("src", videoMetadata.HLS_src);
+                source.setAttribute("type", videoMetadata.HLS_codec);
+                video.load();
+                video.addEventListener("durationchange", updatetime);
+            } else {
+                source.setAttribute("src", videoMetadata.Fallback_src);
+                source.setAttribute("type", videoMetadata.Fallback_codec);
+                video.load();
+                //For MP4 container
+                video.addEventListener("durationchange", updatetime);
+            }; */
 
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
@@ -491,7 +494,7 @@ playbackSpeedItemControls.forEach(element => {
             video.playbackRate = element.getAttribute('data-speed')
             videoPlayer.setAttribute('data-speed', video.playbackRate)
             element.setAttribute('aria-checked', 'true')
-            if (!element.getAttribute('data-speed') >= '1.25') return timelineProgressbar.style.filter = 'none'
+            if (!element.getAttribute('data-speed') >= '1.25' && !element.getAttribute('data-speed') < playbackSpeedItemControls.lastChild.getAttribute('data-speed')) return timelineProgressbar.style.filter = 'none'
             timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`
         }
         backPageSettingsFn()
@@ -537,16 +540,6 @@ function changeGain(sliderValue, nbFilter) {
     filters[nbFilter].gain.value = value
 }
 
-for (var i = 0; i < rangeEQInputs.length; i++) {
-    rangeEQInputs[i].setAttribute('data-input', i)
-}
-
-rangeEQInputs.forEach(element => {
-    element.addEventListener('input', () => {
-        changeGain(element.value, element.getAttribute('data-input'))
-    })
-})
-
 /* function childElements(node) {
     var elems = new Array();
     var children = node.childNodes;
@@ -581,6 +574,16 @@ EQswitchToggle.addEventListener('click', () => {
             filters[filters.length - 1].connect(context.destination)
         })
     }
+})
+
+for (var i = 0; i < rangeEQInputs.length; i++) {
+    rangeEQInputs[i].setAttribute('data-input', i)
+}
+
+rangeEQInputs.forEach(element => {
+    element.addEventListener('input', () => {
+        changeGain(element.value, element.getAttribute('data-input'))
+    })
 })
 
 // Dialog
@@ -851,29 +854,21 @@ function intervalDivide() {
 let interval;
 
 (function () {
-    let lastTime = 0
-    const vendors = ['webkit', 'moz']
-    for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame']
-        window.cancelAnimationFrame =
-            window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame']
+    const vendors = ['webkit', 'moz', 'ms', 'o']
+    let vp = null
+    for (let x = 0; x < vendors.length && !window.requestAnimationFrame && !window.cancelAnimationFrame; x++) {
+        vp = vendors[x]
+        window.requestAnimationFrame = window.requestAnimationFrame || window[vp + 'RequestAnimationFrame']
+        window.cancelAnimationFrame = window.cancelAnimationFrame || window[vp + 'CancelAnimationFrame'] || window[vp + 'CancelRequestAnimationFrame']
     }
-
-    if (!window.requestAnimationFrame) {
+    if (/iP(ad|hone|od).*OS 6/.test(window.navigator.userAgent) || !window.requestAnimationFrame || !window.cancelAnimationFrame) {
+        let lastTime = 0
         window.requestAnimationFrame = function (callback, element) {
-            const currTime = new Date().getTime()
-            const timeToCall = Math.max(0, 16 - (currTime - lastTime))
-            const id = window.setTimeout(function () { callback(currTime + timeToCall) },
-                timeToCall)
-            lastTime = currTime + timeToCall
-            return id
+            const now = window.performance.now()
+            const nextTime = Math.max(lastTime + 16, now)
+            return setTimeout(function () { callback(lastTime = nextTime) }, nextTime - now)
         }
-    }
-
-    if (!window.cancelAnimationFrame) {
-        window.cancelAnimationFrame = function (id) {
-            clearTimeout(id)
-        }
+        window.cancelAnimationFrame = clearTimeout
     }
 }())
 

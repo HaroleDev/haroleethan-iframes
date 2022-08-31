@@ -125,7 +125,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-bottom: calc(var(--aspect-ratio-size-inverse) * 100%);
+    padding-bottom: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
     opacity: 1;
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
@@ -335,7 +335,7 @@
     height: 0;
     width: 100%;
     z-index: 1;
-    padding-top: calc(var(--aspect-ratio-size-inverse) * 100%);
+    padding-top: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
     top: 0;
     left: 0;
     right: 0;
@@ -1200,7 +1200,7 @@
     position: absolute;
 }
 
-.video-poster-container {
+.video-play-container {
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1227,44 +1227,45 @@
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
+    z-index: 3;
     pointer-events: none;
 }
 
-.video-poster-container:hover .play-btn-poster .symbol {
+.video-play-container:hover .play-btn-poster .symbol {
     fill: var(--dark-text-color);
 }
 
-.video-poster-container:hover .play-btn-poster .circle {
+.video-play-container:hover .play-btn-poster .circle {
     fill: var(--bright-accent-color);
     fill-opacity: 1;
 }
 
-.video-poster-container:hover .play-btn-poster .stroke {
+.video-play-container:hover .play-btn-poster .stroke {
     fill: var(--accent-color);
     fill-opacity: 1;
 }
 
-.video-poster-container:active .play-btn-poster {
+.video-play-container:active .play-btn-poster {
     -webkit-transform: scale(0.96);
     -ms-transform: scale(0.96);
     transform: scale(0.96);
 }
 
-.video-poster-container:active .play-btn-poster .symbol {
+.video-play-container:active .play-btn-poster .symbol {
     fill: var(--dark-text-color);
 }
 
-.video-poster-container:active .play-btn-poster .circle {
+.video-play-container:active .play-btn-poster .circle {
     fill: var(--accent-color);
     fill-opacity: 1;
 }
 
-.video-poster-container:active .play-btn-poster .stroke {
+.video-play-container:active .play-btn-poster .stroke {
     fill: var(--dark-accent-color);
     fill-opacity: 1;
 }
 
-.video-container.played .video-poster-container {
+.video-container.played .video-play-container {
     pointer-events: none;
 }
 
@@ -1320,19 +1321,21 @@
     object-fit: contain;
     top: 0;
     left: 0;
-    -webkit-transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
-    -o-transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
-    -webkit-transition: opacity 150ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
-    transition: opacity 150ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
-    transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
-    transition: opacity 150ms var(--ease-out-expo), filter 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
+    -webkit-transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+    -webkit-transition: opacity 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
     position: absolute;
     display: block;
 }
 
-.pip-player .video-poster {
-    -webkit-filter: blur(1vh) brightness(60%);
-    filter: blur(1vh) brightness(60%);
+.pip-player .video-backdrop-seeking {
+    opacity: 1;
+    backdrop-filter: blur(1vh);
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: opacity 300ms var(--ease-out-expo), backdrop-filter 0s, -webkit-backdrop-filter 0s;
 }
 
 .loading .video-poster {
@@ -1342,8 +1345,9 @@
     transition: opacity 300ms var(--ease-out-expo);
 }
 
-.video-container.played .video-poster {
+.video-container.played:not(.pip-player) .video-poster {
     opacity: 0;
+    transition: opacity 300ms var(--ease-out-expo);
 }
 
 .video-backdrop-seeking {

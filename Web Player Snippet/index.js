@@ -176,8 +176,8 @@ function init() {
     video.removeAttribute('controls')
   }
 
-  videoPlayer.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1)
-  videoPlayer.querySelector("#mosaic feComposite.comp").setAttribute("height", videoPlayerInline.querySelector("#mosaic feComposite.comp").getAttribute("width"))
+  videoPlayer.querySelector("#mosaic feMorphology.dilate").setAttribute("radius", (videoPlayer.querySelector("#mosaic feComposite.comp").getAttribute("width") / 2) - 1)
+  videoPlayer.querySelector("#mosaic feComposite.comp").setAttribute("height", videoPlayer.querySelector("#mosaic feComposite.comp").getAttribute("width"))
 }
 
 init()

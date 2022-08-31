@@ -515,7 +515,6 @@ if (ctx) {
     eqItem.classList.add('unsupported')
 }
 const sourceNode = context.createMediaElementSource(video)
-
 // EQ
 const filters = [];
 [30, 60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].map(function (
@@ -527,7 +526,6 @@ const filters = [];
     eq.type = 'peaking'
     eq.gain.value = 0
     filters.push(eq)
-    sourceNode.connect(filters[0])
 
     for (var i = 0; i < filters.length - 1; i++) {
         filters[i].connect(filters[i + 1])
@@ -558,9 +556,8 @@ EQswitchToggle.addEventListener('click', () => {
         eqContainer.removeAttribute('aria-checked')
         eqContainer.querySelectorAll('.eq-slider').forEach((element) => {
             element.disabled = true
-            sourceNode.disconnect()
+            sourceNode.disconnect(filters)
             sourceNode.connect(context.destination)
-            filters[filters.length - 1].disconnect()
         })
     } else {
         eqContainer.setAttribute('aria-checked', 'true')
@@ -569,9 +566,7 @@ EQswitchToggle.addEventListener('click', () => {
             rangeEQInputs.forEach((input) => {
                 input.addEventListener('input', handleInputChange)
             })
-            sourceNode.disconnect()
             sourceNode.connect(filters[0])
-            filters[filters.length - 1].connect(context.destination)
         })
     }
 })

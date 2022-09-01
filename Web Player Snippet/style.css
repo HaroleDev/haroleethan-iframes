@@ -3110,6 +3110,7 @@ input[type=range]::-ms-tooltip {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scroll-padding-top: 32px;
     scrollbar-width: auto;
     scrollbar-color: var(--accent-color) var(--background);
 }
@@ -3193,6 +3194,7 @@ input[type=range]::-ms-tooltip {
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
+    border-radius: 4px;
 }
 
 .cue-time {
@@ -3232,8 +3234,10 @@ input[type=range]::-ms-tooltip {
 }
 
 .cue-container.current .cues {
-    font-variation-settings: "wght" 800;
-    font-weight: 800;
+    background-color: var(--accent-color);
+    color: #000;
+    padding: 0px 4px;
+    margin: 2px -4px;
 }
 
 .error-dialog {

@@ -472,8 +472,10 @@ playbackSpeedItem.addEventListener('click', () => {
 for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     const dataSpeed = playbackSpeedItemControls[i].getAttribute('data-speed')
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
-    playbackSpeedItemControls[i].querySelector('.span').innerHTML = `${dataSpeed} &times;`
+    playbackSpeedItemControls[i].querySelector('.span:last-child').innerHTML = `${dataSpeed} &times;`
     video.playbackRate = videoPlayer.getAttribute('data-speed')
+    videoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"] .span:last-child').innerHTML = `(${videoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"]').getAttribute('data-speed')} &times;)`
+    videoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
     playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
     videoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
 };

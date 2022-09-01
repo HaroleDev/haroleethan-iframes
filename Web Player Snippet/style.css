@@ -1816,13 +1816,6 @@
     display: inline-block;
 }
 
-.settings-context-menu .span.current-speed {
-    position: relative;
-    padding: 1px 0px;
-    opacity: 0.6;
-    text-align: right;
-}
-
 .video-context-menu .item-content,
 .settings-context-menu .item-content {
     display: -webkit-inline-box;
@@ -2046,6 +2039,19 @@
 
 .settings-context-menu .page .header svg {
     margin-left: 6px;
+}
+
+.settings-context-menu .span.current-speed {
+    position: relative;
+    padding: 1px 0px;
+    opacity: 0.6;
+    text-align: right;
+}
+
+.settings-context-menu .item[data-speed="1"] .span:last-child {
+    position: relative;
+    padding: 1px 0px 1px 4px;
+    opacity: 0.6;
 }
 
 .video-player .page-contents.playback-speed-settings .item.check {

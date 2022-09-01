@@ -1717,6 +1717,21 @@ const eventListeners = [
                 window.requestAnimationFrame(updateMetadata)
             })
             videoContainer.classList.remove('paused')
+
+            if (videoPlayer.querySelector('.video-container').classList.contains('played')) {
+                videoPlayer.querySelectorAll('.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
+                    element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
+                    element.style.animationPlayState = 'running'
+                    element.style.opacity = 1
+                })
+                videoPlayer.querySelector('.video-player .right-side button svg:last-child').addEventListener('animationend', () => {
+                    setTimeout(() => {
+                        rightVideoControls.querySelectorAll('button svg').forEach(element => {
+                            element.style.animationDelay = '0s'
+                        })
+                    }, parseFloat(window.getComputedStyle(rightVideoControls.lastChild.parentElement.querySelector('svg')).animationDelay) * 15000)
+                })
+            }
         }
     ],
     [

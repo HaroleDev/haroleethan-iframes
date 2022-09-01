@@ -1,3 +1,49 @@
+*,
+*::before,
+*::after {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    image-rendering: auto;
+    text-rendering: geometricPrecision;
+    shape-rendering: geometricPrecision;
+    -webkit-box-sizing: border-box;
+    font-synthesis: none;
+    box-sizing: border-box;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    -webkit-font-kerning: normal;
+    font-kerning: normal;
+    accent-color: var(--accent-color);
+    color-scheme: light dark;
+}
+
+:root {
+    --text-color: #F0F0F0;
+    --shadow-text-color: #B0B0B0;
+    --dark-text-color: #161616;
+    --dark-accent-color: #01A573;
+    --accent-color: #02DA9A;
+    --bright-accent-color: #23FDBC;
+    --buffer-scrubber-accent: linear-gradient(to right, var(--accent-color), #02d093, #01c68b, #01bc84, #01b27d, #01b27d, #01b27d, #01b27d, #01bc84, #01c68b, #02d093, var(--accent-color));
+    --buffer-scrubber-bright-accent: linear-gradient(to right, var(--bright-accent-color), #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, var(--bright-accent-color));
+    --background: #1C5947;
+    --foreground: #1C6550;
+    --tooltip-bg: #016F4E;
+    --stroke-accent-color: #165248;
+    --chrome-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00256711) 6.44%, rgba(0, 0, 0, 0.0102969) 12.95%, rgba(0, 0, 0, 0.023232) 19.52%, rgba(0, 0, 0, 0.0414151) 26.15%, rgba(0, 0, 0, 0.0648889) 32.81%, rgba(0, 0, 0, 0.093696) 39.52%, rgba(0, 0, 0, 0.127879) 46.25%, rgba(0, 0, 0, 0.167481) 53%, rgba(0, 0, 0, 0.212544) 59.76%, rgba(0, 0, 0, 0.263111) 66.52%, rgba(0, 0, 0, 0.319225) 73.27%, rgba(0, 0, 0, 0.380928) 80%, rgba(0, 0, 0, 0.448263) 86.71%, rgba(0, 0, 0, 0.521273) 93.37%, rgba(0, 0, 0, 0.6) 100%);
+    --chrome-overlay-inverse: linear-gradient(360deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00518832) 6.67%, rgba(0, 0, 0, 0.021306) 13.33%, rgba(0, 0, 0, 0.0489959) 20%, rgba(0, 0, 0, 0.0884468) 26.67%, rgba(0, 0, 0, 0.139065) 33.33%, rgba(0, 0, 0, 0.19913) 40%, rgba(0, 0, 0, 0.265615) 46.67%, rgba(0, 0, 0, 0.334385) 53.33%, rgba(0, 0, 0, 0.40087) 60%, rgba(0, 0, 0, 0.460935) 66.67%, rgba(0, 0, 0, 0.511553) 73.33%, rgba(0, 0, 0, 0.551004) 80%, rgba(0, 0, 0, 0.578694) 86.67%, rgba(0, 0, 0, 0.594812) 93.33%, rgba(0, 0, 0, 0.6) 100%);
+    --page-background: #E7FEF7;
+    --flyout-bg: #082b21f5;
+    --blue-color: #4B99E7;
+    --mid-blue-color: #2771D7;
+    --dark-blue-color: #0047BB;
+    --link-and-focus-color: #4B99E7;
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
+    font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
+    font-style: normal;
+}
+
 html,
 body {
     margin: 0;

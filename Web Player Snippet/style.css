@@ -21,7 +21,6 @@
     --link-and-focus-color: #4B99E7;
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
-    font-size: 62.5%;
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
     font-style: normal;
 }
@@ -760,7 +759,7 @@
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 3.2rem;
+    font-size: 2rem;
     line-height: 110%;
     margin: 0;
     cursor: text;
@@ -787,7 +786,7 @@
     font-variant-numeric: tabular-nums;
     font-weight: 500;
     letter-spacing: -0.02em;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 160%;
     color: var(--text-color);
     width: -webkit-fit-content;
@@ -804,7 +803,7 @@
 .author-name {
     font-variation-settings: "wght" 500;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 160%;
     color: var(--text-color);
     cursor: text;
@@ -892,7 +891,7 @@
     overflow: hidden;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border-radius: 1.6rem;
+    border-radius: 1rem;
     -webkit-transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
     -o-transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
     transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
@@ -901,7 +900,7 @@
 .badge .span {
     font-variation-settings: "wght" 800;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 160%;
     cursor: text;
 }
@@ -1987,7 +1986,7 @@
 .settings-context-menu .page .header h2 {
     font-variation-settings: "wght" 800;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1rem;
     margin-left: 6px;
 }
 
@@ -2125,7 +2124,7 @@
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 2.8rem;
+    font-size: 1.75rem;
     display: inline;
 }
 
@@ -2193,7 +2192,7 @@
     display: block;
     margin-top: calc(164px - 8px);
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 0.75rem;
     opacity: 0.6;
 }
 
@@ -2218,7 +2217,7 @@
     justify-content: space-between;
     text-align: right;
     margin: 8px 8px 8px 4px;
-    font-size: 1.2rem;
+    font-size: 0.75rem;
     opacity: 0.6;
 }
 
@@ -2247,7 +2246,7 @@
 }
 
 .dialog button.close-dialog {
-    font-size: 1.6rem;
+    font-size: 1rem;
     font-family: "Manrope", Arial, Helvetica, sans-serif;
     font-variation-settings: "wght" 500;
     font-weight: 500;
@@ -2319,7 +2318,7 @@
     width: 100%;
     overflow: hidden;
     padding: 20px 0px;
-    border-radius: 3.2rem 0rem 0rem 3.2rem;
+    border-radius: 2rem 0rem 0rem 2rem;
     -webkit-transition: all 300ms var(--ease-in-expo);
     -o-transition: all 300ms var(--ease-in-expo);
     transition: all 300ms var(--ease-in-expo);
@@ -2477,8 +2476,8 @@
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
     font-variation-settings: "wght" 500;
     font-weight: 500;
-    font-size: 1.6rem;
-    top: 1.6rem;
+    font-size: 1rem;
+    top: 1rem;
     line-height: 160%;
     height: -webkit-fit-content;
     height: -moz-fit-content;
@@ -2519,7 +2518,7 @@ div.tooltip-right::after {
     font-style: normal;
     font-variation-settings: "wght" 500;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: 1rem;
     top: 3rem;
     z-index: 5;
     height: -webkit-fit-content;
@@ -2852,7 +2851,7 @@ input[type=range]::-ms-tooltip {
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 3.2rem;
+    font-size: 2rem;
     line-height: 110%;
 
     color: var(--text-color);
@@ -2863,7 +2862,7 @@ input[type=range]::-ms-tooltip {
 .transcript-panel .span,
 .transcript-panel .transcript-language {
     font-style: normal;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 160%;
     color: var(--text-color);
     word-wrap: break-word;
@@ -3040,7 +3039,7 @@ input[type=range]::-ms-tooltip {
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 160%;
     color: var(--text-color);
     text-align: center;
@@ -3164,7 +3163,7 @@ input[type=range]::-ms-tooltip {
     font-style: normal;
     font-variation-settings: "wght" 500;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 160%;
     word-wrap: break-word;
     margin-top: 2px;
@@ -3256,7 +3255,7 @@ input[type=range]::-ms-tooltip {
 .error-dialog p {
     font-variation-settings: "wght" 500;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 160%;
     margin: 0;
 }
@@ -3267,7 +3266,7 @@ input[type=range]::-ms-tooltip {
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 640px) {

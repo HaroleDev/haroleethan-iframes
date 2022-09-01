@@ -474,6 +474,7 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
     playbackSpeedItemControls[i].querySelector('.span').innerHTML = `${dataSpeed} &times;`
     video.playbackRate = videoPlayer.getAttribute('data-speed')
+    playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
     videoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
 };
 
@@ -485,6 +486,7 @@ playbackSpeedItemControls.forEach(element => {
         if (videoPlayer.querySelector('.page-contents.playback-speed-settings .item[class*="speed__"]')) {
             video.playbackRate = element.getAttribute('data-speed')
             videoPlayer.setAttribute('data-speed', video.playbackRate)
+            playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
             element.setAttribute('aria-checked', 'true')
             if (!element.getAttribute('data-speed') >= '1.25' && !element.getAttribute('data-speed') < playbackSpeedItemControls.lastChild.getAttribute('data-speed')) return timelineProgressbar.style.filter = 'none'
             timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`

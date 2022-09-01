@@ -21,13 +21,19 @@ const currentTime = videoPlayer.querySelector('.current-time')
 const totalTime = videoPlayer.querySelector('.total-time')
 const durationContainer = videoPlayer.querySelector('.duration-container')
 const timeTooltip = videoPlayer.querySelector('.seeking-preview__time-tooltip')
+
 const EQswitchToggle = videoPlayer.querySelector('.eq-switch')
 const rangeEQInputs = videoPlayer.querySelectorAll('.dialog .eq-control input')
 const eqContainer = videoPlayer.querySelector('.eq-dialog-container')
 const loopItem = videoPlayer.querySelector('.loop-item')
 const eqItem = videoPlayer.querySelector('.eq-item')
-const captionButton = videoPlayer.querySelector('.caption-button')
 
+const aboutPlayerItem = videoPlayer.querySelector('.about-player-item')
+const aboutPlayerContainer = videoPlayer.querySelector('.about-player-dialog-container')
+
+const dialogContainer = videoPlayer.querySelectorAll('.dialog-container')
+
+const captionButton = videoPlayer.querySelector('.caption-button')
 const settingsButton = videoPlayer.querySelector('.settings-button')
 const settingsContextMenu = videoPlayer.querySelector('.settings-context-menu')
 const settingsTooltipContainer = videoPlayer.querySelector('.settings-tooltip-container')
@@ -48,9 +54,10 @@ const transcriptDiv = videoPlayer.querySelector('.captions-contents')
 const snackbarSyncTranscript = videoPlayer.querySelector('.snackbar-sync-time')
 let cueContainers = videoPlayer.querySelectorAll('.cue-container')
 
-const dialog = videoPlayer.querySelector('.dialog')
-const closeDialogBtn = videoPlayer.querySelector('.close-dialog')
-const dialogOverlay = videoPlayer.querySelector('.dialog-overlay')
+const dialog = videoPlayer.querySelectorAll('.dialog')
+const closeDialogBtn = videoPlayer.querySelectorAll('.dialog .close-dialog')
+
+const dialogOverlay = videoPlayer.querySelectorAll('.dialog-container .dialog-overlay')
 const volumeSliderContainer = videoPlayer.querySelector('.volume-slider-container')
 const volumeContainer = videoPlayer.querySelector('.volume-container')
 const volumeButton = videoPlayer.querySelector('.volume-button')
@@ -318,7 +325,7 @@ videoContainer.addEventListener('contextmenu', (e) => {
         settingsContextMenu.classList.remove('pressed')
         settingsTooltipContainer.classList.add('tooltip-right')
         seekingPreview.removeAttribute('hidden')
-        closedDialog()
+        closedDialog(e.target)
     }
 
     if (contextMenu.classList.contains('show')) {
@@ -368,7 +375,7 @@ function closeSettingsMenu(e) {
         settingsContextMenu.classList.remove('pressed')
         settingsTooltipContainer.classList.add('tooltip-right')
         seekingPreview.removeAttribute('hidden')
-        closedDialog()
+        closedDialog(e.target)
     }
 }
 
@@ -395,6 +402,7 @@ transcriptItem.addEventListener('click', () => {
     )
     videoPlayer.classList.add('transcript-opened')
 })
+aboutPlayerItem.addEventListener('click', () => aboutPlayerContainer.classList.add('opened'))
 
 // Settings
 settingsButton.addEventListener('click', () => {
@@ -567,16 +575,25 @@ rangeEQInputs.forEach(element => {
 })
 
 // Dialog
-function closedDialog() {
-    if (eqContainer.classList.contains('opened')) {
-        eqContainer.classList.remove('opened')
+function closedDialog(e) {
+    if (e.classList.contains('opened')) {
+        e.classList.remove('opened')
     } else {
-
+        return;
     }
 }
 
-dialogOverlay.addEventListener('click', closedDialog)
-closeDialogBtn.addEventListener('click', closedDialog)
+dialogOverlay.forEach(element => {
+    element.addEventListener('click', (e) => {
+        closedDialog(e.target.parentNode)
+    })
+})
+
+closeDialogBtn.forEach(element => {
+    element.addEventListener('click', (e) => {
+        closedDialog(e.target.parentNode.parentNode.parentNode)
+    })
+})
 
 // Transcript Panel
 closeTranscriptPanelBtn.addEventListener('pointerover', () => {

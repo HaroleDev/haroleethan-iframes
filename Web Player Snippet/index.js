@@ -660,7 +660,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text
         }
-        const clickableTranscriptText = `<div class="cue-container" id="ts-${cue.startTime}" role="button" aria-pressed="false" tabindex="0"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
+        const clickableTranscriptText = `<div class="cue-container" startTime="${cue.startTime}" role="button" aria-pressed="false" tabindex="0"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
         addToTranscript(clickableTranscriptText)
         cueContainers = videoPlayer.querySelectorAll('.cue-container')
     }
@@ -693,7 +693,7 @@ function removeHTML(text) {
 function jumpToTranscript(time) {
     video.currentTime = time
     videoPlayer.querySelector('.cue-container').classList.remove('current')
-    document.getElementById(`ts-${time}`).classList.add('current')
+    document.querySelector(`[startTime="${time}"]`).classList.add('current')
     videoPlayer.querySelector('.timeline').style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
@@ -707,13 +707,13 @@ function addToTranscript(htmlText) {
 
 function addCueListeners(cue) {
     cue.addEventListener('enter', function () {
-        const transcriptText = document.getElementById(`ts-${this.startTime}`)
+        const transcriptText = document.querySelector(`[startTime="${this.startTime}"]`)
         transcriptText.classList.add('current')
         transcriptText.parentNode.scrollTop =
             transcriptText.offsetTop - transcriptText.parentNode.offsetTop
     })
     cue.addEventListener('exit', function () {
-        const transcriptText = document.getElementById(`ts-${this.startTime}`)
+        const transcriptText = document.querySelector(`[startTime="${this.startTime}"]`)
         transcriptText.classList.remove('current')
     })
 }
@@ -724,7 +724,7 @@ transcriptDiv.addEventListener('keydown', (e) => {
 
 transcriptDiv.addEventListener('click', (e) => {
     cueContainers.forEach(element => {
-        if (element.contains(e.target)) jumpToTranscript(element.getAttribute('id').replace('ts-', ''))
+        if (element.contains(e.target)) jumpToTranscript(element.getAttribute('startTime'))
     })
 })
 

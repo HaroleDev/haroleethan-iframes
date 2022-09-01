@@ -2070,7 +2070,7 @@
     margin-top: 60px;
 }
 
-.settings-context-menu .page[hidden] .page-contents {
+.settings-context-menu .page:not(.front-page)[hidden] .page-contents {
     margin-top: 0px;
 }
 

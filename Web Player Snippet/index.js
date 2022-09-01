@@ -1,23 +1,6 @@
 'use strict'
 
-const videoMetadata = {
-    video_thumbs: '//res.cloudinary.com/harole/image/upload/q_auto:low/v1659426432/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_THUMBNAILS_shmsny.jpg',
-    video_poster: '//res.cloudinary.com/harole/video/upload/s--p6nXm3qO--/c_fill,h_720,q_auto:low,w_1280/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
-    HLS_src: '//res.cloudinary.com/harole/video/upload/s--w9SNLopB--/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.m3u8',
-    HLS_codec: 'application/x-mpegURL',
-    Fallback_src: '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0',
-    Fallback_codec: 'video/mp4',
-    video_FPS: '59.940'
-}
-const mediaSessionMetadata = {
-    thumb_512: '//res.cloudinary.com/harole/video/upload/s--Vjfp8q3F--/c_fill,h_512,q_auto:eco,w_512/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
-    thumb_384: '//res.cloudinary.com/harole/video/upload/s--GSclQ4pU--/c_fill,h_384,q_auto:eco,w_384/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
-    thumb_256: '//res.cloudinary.com/harole/video/upload/s--Il1IjHMZ--/c_fill,h_256,q_auto:eco,w_256/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
-    thumb_192: '//res.cloudinary.com/harole/video/upload/s--XGk0fUrZ--/c_fill,h_192,q_auto:eco,w_192/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
-    thumb_128: '//res.cloudinary.com/harole/video/upload/s--G8UlljUd--/c_fill,h_128,q_auto:eco,w_128/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
-    thumb_96: '//res.cloudinary.com/harole/video/upload/s--d8U6mcP6--/c_fill,h_96,q_auto:eco,w_96/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
-    type: 'image/jpeg'
-}
+import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 const config = {
     startPosition: -1
 }
@@ -97,15 +80,15 @@ const CastTooltip = videoPlayer.querySelector('.gcast-tooltip')
 
 let orientationInfluence, videoPercent
 
-var title =
+const title =
     document
         .querySelector('meta[property="og:title"]')
         .getAttribute('content') ||
     decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf('/') + 1))
-var author = document
+const author = document
     .querySelector('meta[property="og:author"]')
     .getAttribute('content')
-var description = document
+const description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
 
@@ -203,25 +186,25 @@ function canFullscreen() {
 window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
     /* if (!Hls.isSupported()) {
-                hls.loadSource(videoMetadata.HLS_src);
-                hls.attachMedia(video);
-                source.setAttribute("type", videoMetadata.HLS_codec);
-                //For HLS container
-                hls.on(Hls.Events.LEVEL_LOADED, function () {
-                    loadedMetadata();
-                });
-            } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-                source.setAttribute("src", videoMetadata.HLS_src);
-                source.setAttribute("type", videoMetadata.HLS_codec);
-                video.load();
-                video.addEventListener("durationchange", updatetime);
-            } else {
-                source.setAttribute("src", videoMetadata.Fallback_src);
-                source.setAttribute("type", videoMetadata.Fallback_codec);
-                video.load();
-                //For MP4 container
-                video.addEventListener("durationchange", updatetime);
-            }; */
+                  hls.loadSource(videoMetadata.HLS_src);
+                  hls.attachMedia(video);
+                  source.setAttribute("type", videoMetadata.HLS_codec);
+                  //For HLS container
+                  hls.on(Hls.Events.LEVEL_LOADED, function () {
+                      loadedMetadata();
+                  });
+              } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                  source.setAttribute("src", videoMetadata.HLS_src);
+                  source.setAttribute("type", videoMetadata.HLS_codec);
+                  video.load();
+                  video.addEventListener("durationchange", updatetime);
+              } else {
+                  source.setAttribute("src", videoMetadata.Fallback_src);
+                  source.setAttribute("type", videoMetadata.Fallback_codec);
+                  video.load();
+                  //For MP4 container
+                  video.addEventListener("durationchange", updatetime);
+              }; */
 
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
@@ -1866,7 +1849,7 @@ const eventListeners = [
                 videoPlayer.querySelectorAll('.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
-                    element.style.opacity = 1;
+                    element.style.opacity = 1
                 })
                 videoPlayer.querySelector('.video-player .right-side button svg:last-child').addEventListener('animationend', () => {
                     setTimeout(() => {

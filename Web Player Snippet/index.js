@@ -193,25 +193,25 @@ function canFullscreen() {
 window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
     /* if (!Hls.isSupported()) {
-                  hls.loadSource(videoMetadata.HLS_src);
-                  hls.attachMedia(video);
-                  source.setAttribute("type", videoMetadata.HLS_codec);
-                  //For HLS container
-                  hls.on(Hls.Events.LEVEL_LOADED, function () {
-                      loadedMetadata();
-                  });
-              } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-                  source.setAttribute("src", videoMetadata.HLS_src);
-                  source.setAttribute("type", videoMetadata.HLS_codec);
-                  video.load();
-                  video.addEventListener("durationchange", updatetime);
-              } else {
-                  source.setAttribute("src", videoMetadata.Fallback_src);
-                  source.setAttribute("type", videoMetadata.Fallback_codec);
-                  video.load();
-                  //For MP4 container
-                  video.addEventListener("durationchange", updatetime);
-              }; */
+                    hls.loadSource(videoMetadata.HLS_src);
+                    hls.attachMedia(video);
+                    source.setAttribute("type", videoMetadata.HLS_codec);
+                    //For HLS container
+                    hls.on(Hls.Events.LEVEL_LOADED, function () {
+                        loadedMetadata();
+                    });
+                } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                    source.setAttribute("src", videoMetadata.HLS_src);
+                    source.setAttribute("type", videoMetadata.HLS_codec);
+                    video.load();
+                    video.addEventListener("durationchange", updatetime);
+                } else {
+                    source.setAttribute("src", videoMetadata.Fallback_src);
+                    source.setAttribute("type", videoMetadata.Fallback_codec);
+                    video.load();
+                    //For MP4 container
+                    video.addEventListener("durationchange", updatetime);
+                }; */
 
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
@@ -474,8 +474,10 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
     playbackSpeedItemControls[i].querySelector('.span:last-child').innerHTML = `${dataSpeed} &times;`
     video.playbackRate = videoPlayer.getAttribute('data-speed')
+
     videoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"] .span:last-child').innerHTML = `(${videoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"]').getAttribute('data-speed')} &times;)`
     videoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
+
     playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
     videoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
 };
@@ -583,7 +585,7 @@ function closedDialog(e) {
     if (e.classList.contains('opened')) {
         e.classList.remove('opened')
     } else {
-        return;
+
     }
 }
 

@@ -25,6 +25,23 @@
     font-style: normal;
 }
 
+.video-player * {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    image-rendering: auto;
+    text-rendering: geometricPrecision;
+    shape-rendering: geometricPrecision;
+    -webkit-box-sizing: border-box;
+    font-synthesis: none;
+    box-sizing: border-box;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    -webkit-font-kerning: normal;
+    font-kerning: normal;
+    accent-color: var(--accent-color);
+    color-scheme: light dark;
+}
+
 .video-player.preload * {
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
@@ -430,11 +447,14 @@
     position: absolute;
     left: 0;
     top: 0;
-    margin: -2px;
+    bottom: 0;
+    right: 0;
+    z-index: 4;
+    isolation: isolate;
+    margin: auto;
     stroke-linecap: round;
     stroke-dasharray: 360 360;
     stroke-dashoffset: 360;
-    stroke-width: 4px;
     stroke: var(--accent-color);
     border-radius: 100%;
     opacity: 0;
@@ -443,6 +463,66 @@
     transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
+}
+
+.buffering-circle-stroke {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    stroke: var(--accent-color);
+    stroke-linecap: round;
+    isolation: isolate;
+    margin: auto;
+    opacity: 0;
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+}
+
+.buffering-circle-track {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    stroke: rgba(0, 0, 0, 1);
+    mix-blend-mode: multiply;
+    stroke-linecap: round;
+    isolation: isolate;
+    margin: auto;
+    opacity: 0;
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+}
+
+.buffering .buffering-circle-track,
+.buffering-scrubbing .buffering-circle-track {
+    opacity: 0.2;
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
+}
+
+.buffering .buffering-circle-stroke,
+.buffering-scrubbing .buffering-circle-stroke {
+    opacity: 0.3;
+    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
+    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
+}
+
+.buffering-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
 }
 
 .buffering .buffering-circle,
@@ -456,33 +536,44 @@
     opacity: 1;
 }
 
+.buffering .buffering-circle-stroke,
+.buffering-scrubbing .buffering-circle-stroke {
+    -webkit-animation: buffer-ring 3s infinite ease;
+    animation: buffer-ring 3s infinite ease;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+    opacity: 0.3;
+}
+
 @-webkit-keyframes buffer-ring {
     0% {
-        stroke-dasharray: 360 360;
-        stroke-dashoffset: 270;
-        -webkit-transform: rotate(-180deg);
-        transform: rotate(-180deg);
+        stroke-dasharray: 0, 480;
+        stroke-dashoffset: 360;
+        -webkit-transform: rotate(-195deg);
+        transform: rotate(-195deg);
     }
 
     100% {
-        stroke-dasharray: 270 270;
-        stroke-dashoffset: 270;
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
+        stroke-dasharray: 360, 420;
+        stroke-dashoffset: 360;
+        -webkit-transform: rotate(300deg);
+        transform: rotate(300deg);
     }
 }
 
 @keyframes buffer-ring {
     0% {
-        stroke-dasharray: 0 360;
-        stroke-dashoffset: 270;
-        -webkit-transform: rotate(-210deg);
-        transform: rotate(-210deg);
+        stroke-dasharray: 0, 480;
+        stroke-dashoffset: 360;
+        -webkit-transform: rotate(-195deg);
+        transform: rotate(-195deg);
     }
 
     100% {
-        stroke-dasharray: 270 270;
-        stroke-dashoffset: 270;
+        stroke-dasharray: 360, 420;
+        stroke-dashoffset: 360;
         -webkit-transform: rotate(300deg);
         transform: rotate(300deg);
     }
@@ -1144,7 +1235,7 @@
 }
 
 .video-thumb-preview {
-    z-index: 2;
+    z-index: 1;
     opacity: 0;
     pointer-events: none;
     width: 100%;
@@ -1314,7 +1405,7 @@
 .video-backdrop-seeking {
     position: absolute;
     display: block;
-    z-index: 3;
+    z-index: 2;
     top: 0;
     left: 0;
     bottom: 0;

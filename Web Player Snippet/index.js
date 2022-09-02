@@ -1,10 +1,11 @@
 'use strict'
-
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 const config = {
     startPosition: -1
 }
+
 const hls = new Hls(config)
+
 const videoPlayerContainer = document.querySelector('.video-player-container')
 const videoPlayer = videoPlayerContainer.querySelector('.video-player')
 
@@ -223,12 +224,11 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 
     if (!('pictureInPictureEnabled' in document)) {
-        pipPlayerButton.classList.add('unsupported')
-        pipTooltip.dataset.tooltip = 'Picture in picture is unavailable'
+        pipPlayerButton.parentElement.setAttribute('hidden', '')
     }
 
     if (!canFullscreen) {
-        fullscreenButton.classList.add('unsupported')
+        fullscreenButton.parentElement.setAttribute('unsupported', '')
         fullscreenTooltip.dataset.tooltip = 'Full screen is unavailable'
     }
 
@@ -463,7 +463,7 @@ downloadItem.addEventListener('click', () => {
 })
 
 playbackSpeedItem.addEventListener('click', () => {
-    const parent = playbackSpeedItem.parentNode.parentNode
+    const parent = playbackSpeedItem.parentElement.parentElement
     parent.setAttribute('hidden', '')
     const content = videoPlayer.querySelector('.playback-speed-settings')
     content.removeAttribute('hidden')
@@ -510,7 +510,7 @@ const ctx =
 if (ctx) {
     var context = new ctx()
 } else {
-    eqItem.classList.add('unsupported')
+    eqItem.setAttribute('unsupported', '')
 }
 const sourceNode = context.createMediaElementSource(video)
 // EQ
@@ -591,13 +591,13 @@ function closedDialog(e) {
 
 dialogOverlay.forEach(element => {
     element.addEventListener('click', (e) => {
-        closedDialog(e.target.parentNode)
+        closedDialog(e.target.parentElement)
     })
 })
 
 closeDialogBtn.forEach(element => {
     element.addEventListener('click', (e) => {
-        closedDialog(e.target.parentNode.parentNode.parentNode)
+        closedDialog(e.target.parentElement.parentElement.parentElement)
     })
 })
 
@@ -732,8 +732,8 @@ function addCueListeners(cue) {
     cue.addEventListener('enter', function () {
         const transcriptText = document.querySelector(`[startTime="${this.startTime}"]`)
         transcriptText.classList.add('current')
-        transcriptText.parentNode.scrollTop =
-            transcriptText.offsetTop - transcriptText.parentNode.offsetTop
+        transcriptText.parentElement.scrollTop =
+            transcriptText.offsetTop - transcriptText.parentElement.offsetTop
     })
     cue.addEventListener('exit', function () {
         const transcriptText = document.querySelector(`[startTime="${this.startTime}"]`)
@@ -1661,7 +1661,7 @@ videoPlayer.addEventListener('keydown', (e) => {
                 togglePlay()
                 break
             case 'f':
-                if (fullscreenButton.classList.contains('unsupported')) break
+                if (fullscreenButton.hasAttribute('unsupported')) break
                 checkActive()
                 toggleFullScreen()
                 break
@@ -1670,7 +1670,7 @@ videoPlayer.addEventListener('keydown', (e) => {
                 toggleCaptions()
                 break
             case 'i':
-                if (pipPlayerButton.classList.contains('unsupported')) break
+                if (pipPlayerButton.hasAttribute('unsupported')) break
                 checkActive()
                 togglePIPPlayerMode()
                 break

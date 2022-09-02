@@ -1,4 +1,4 @@
-@import url("./playful_vp_normalize.css");
+@import "./playful_vp_normalize.css";
 
 .video-player {
     --text-color: #F0F0F0;
@@ -58,6 +58,7 @@
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
+    will-change: width, height;
 }
 
 .transcript-opened .video-container {
@@ -94,7 +95,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    will-change: filter, transform, animation;
+    will-change: width, height, max-width, max-height, padding, padding-bottom, filter, transform, animation;
 }
 
 .full-screen .video-fit-contain {
@@ -136,7 +137,7 @@
     -webkit-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
     -o-transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
     transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
-    will-change: width, height;
+    will-change: width, height, max-width, max-height;
 }
 
 .video-player.loading .video-fit-contain {
@@ -259,7 +260,7 @@
     -webkit-transition: all 600ms var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo);
-    will-change: width;
+    will-change: width, height, max-width, max-height;
 }
 
 .transcript-opened .video-controls-container {
@@ -748,7 +749,7 @@
     -webkit-transition: all 600ms var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo);
     transition: all 600ms var(--ease-out-expo);
-    will-change: width;
+    will-change: width, height, max-width, max-height;
     pointer-events: none;
 }
 

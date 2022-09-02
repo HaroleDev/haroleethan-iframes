@@ -161,7 +161,6 @@ const consoleWelcomeThrottle = debounce(() => {
 consoleWelcomeThrottle()
 
 function init() {
-    videoPlayer.classList.remove('preload')
     if (video.hasAttribute('controls')) {
         videoControlsContainer.removeAttribute('hidden')
         videoInformationOverlay.removeAttribute('hidden')
@@ -174,6 +173,8 @@ function init() {
 
     videoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius', (videoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
     videoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height', videoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
+
+    videoPlayerContainer.classList.remove('preload')
 }
 
 init()
@@ -1159,7 +1160,6 @@ function loadedMetadata() {
 async function updatetime() {
     videoPercent = video.currentTime / video.duration
     if (!video.paused && videoContainer.classList.contains('hovered')) {
-        if (video.currentTime > 0) { timelineInner.style.setProperty('--buffered-position', (1 / video.duration) * video.buffered.end(0)) }
         timelineInner.style.setProperty('--progress-position', videoPercent)
         window.requestAnimationFrame(updatetime)
     }
@@ -1308,6 +1308,15 @@ function updatePositionState() {
         playbackRate: video.playbackRate,
         position: video.currentTime
     })
+}
+
+function bufferedLength(e) {
+    const buffers = e.buffered
+    let buffered = 0
+    for (let i = 0; i < buffers.length; i++) {
+        buffered = buffers.end(i) - buffers.start(i)
+    }
+    return buffered
 }
 
 async function mediaSessionToggle() {
@@ -1772,7 +1781,7 @@ const eventListeners = [
             if (video.buffered.length > 0) {
                 timelineInner.style.setProperty(
                     '--buffered-position',
-                    (1 / video.duration) * video.buffered.end(0)
+                    bufferedLength(video) / video.duration
                 )
             }
         }
@@ -1783,7 +1792,7 @@ const eventListeners = [
             if (video.buffered.length > 0) {
                 timelineInner.style.setProperty(
                     '--buffered-position',
-                    (1 / video.duration) * video.buffered.end(0)
+                    bufferedLength(video) / video.duration
                 )
             }
         }

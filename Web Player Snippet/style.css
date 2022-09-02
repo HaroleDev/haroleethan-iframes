@@ -1,4 +1,4 @@
-@import "./playful_vp_normalize.css";
+@import url("./playful_vp_normalize.css");
 
 .video-player {
     --text-color: #F0F0F0;
@@ -11,6 +11,8 @@
     --buffer-scrubber-bright-accent: linear-gradient(to right, var(--bright-accent-color), #1eecae, #19db9f, #13ca92, #0cba84, #0cba84, #0cba84, #0cba84, #13ca92, #19db9f, #1eecae, var(--bright-accent-color));
     --background: #1C5947;
     --foreground: #1C6550;
+    --lighter-foreground: #17785B;
+    --hover-foreground: #1A8464;
     --tooltip-bg: #016F4E;
     --stroke-accent-color: #165248;
     --chrome-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00256711) 6.44%, rgba(0, 0, 0, 0.0102969) 12.95%, rgba(0, 0, 0, 0.023232) 19.52%, rgba(0, 0, 0, 0.0414151) 26.15%, rgba(0, 0, 0, 0.0648889) 32.81%, rgba(0, 0, 0, 0.093696) 39.52%, rgba(0, 0, 0, 0.127879) 46.25%, rgba(0, 0, 0, 0.167481) 53%, rgba(0, 0, 0, 0.212544) 59.76%, rgba(0, 0, 0, 0.263111) 66.52%, rgba(0, 0, 0, 0.319225) 73.27%, rgba(0, 0, 0, 0.380928) 80%, rgba(0, 0, 0, 0.448263) 86.71%, rgba(0, 0, 0, 0.521273) 93.37%, rgba(0, 0, 0, 0.6) 100%);
@@ -30,19 +32,14 @@
     color-scheme: light dark;
 }
 
-.video-player.preload * {
+.video-player-container.preload * {
+    --aspect-ratio-size: calc(16 / 9);
+    --aspect-ratio-size-inverse: calc(9 / 16);
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
     -webkit-transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
     -o-transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
     transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
-}
-
-:focus,
-:focus-visible {
-    outline: none;
-    -webkit-box-shadow: 0 0 0 2px var(--link-and-focus-color);
-    box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
 .video-container {
@@ -64,7 +61,7 @@
 }
 
 .transcript-opened .video-container {
-    width: calc(100% - clamp(20rem, 34%, 400px));
+    width: calc(100% - 400px);
     height: 100%;
 }
 
@@ -266,7 +263,7 @@
 }
 
 .transcript-opened .video-controls-container {
-    width: calc(100% - clamp(20rem, 34%, 400px));
+    width: calc(100% - 400px);
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
@@ -281,7 +278,7 @@
 }
 
 .full-screen.transcript-opened .video-fit-content {
-    width: calc(100vw - clamp(20rem, 34%, 400px));
+    width: calc(100vw - 400px);
     height: calc(100vw * var(--aspect-ratio-size-inverse));
     max-height: calc(100vh);
     max-width: calc(100vh * var(--aspect-ratio-size));
@@ -413,11 +410,6 @@
     margin: auto;
 }
 
-.video-controls-container .left-side button:focus-visible {
-    -webkit-box-shadow: 0 0 0 2px #ffffff33, 0 0 0 2px var(--link-and-focus-color);
-    box-shadow: 0 0 0 2px #ffffff33, 0 0 0 2px var(--link-and-focus-color);
-}
-
 .video-controls-container .left-side button:hover {
     -webkit-box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
     box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
@@ -524,7 +516,9 @@
 }
 
 .buffering .buffering-circle,
-.buffering-scrubbing .buffering-circle {
+.buffering-scrubbing .buffering-circle,
+.buffering .buffering-circle-stroke,
+.buffering-scrubbing .buffering-circle-stroke {
     -webkit-animation: buffer-ring 3s infinite ease;
     animation: buffer-ring 3s infinite ease;
     -webkit-animation-delay: 1s;
@@ -633,8 +627,7 @@
     fill: var(--dark-accent-color);
 }
 
-
-@supports (d: path("")) {
+@supports (d: path("M 0 0")) {
     .video-controls-container .right-side .pip-button:hover path.pip-enter {
         -webkit-animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
         animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
@@ -705,6 +698,8 @@
 .video-player.full-screen .enter,
 .video-player:not(.full-screen) .exit {
     position: absolute;
+    width: 0;
+    height: 0;
     opacity: 0;
 }
 
@@ -778,7 +773,7 @@
 }
 
 .transcript-opened .video-information-overlay {
-    width: calc(100% - clamp(20rem, 34%, 400px));
+    width: calc(100% - 400px);
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
@@ -812,7 +807,7 @@
     -webkit-user-select: auto;
     -ms-user-select: auto;
     user-select: auto;
-    pointer-events: auto;
+    pointer-events: all;
     cursor: default;
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
@@ -1436,7 +1431,7 @@
     backdrop-filter: blur(1vh);
 }
 
-@supports not (filter: blur()) {
+@supports not (filter: blur(1vh)) {
     .video-backdrop-seeking {
         background-color: #000000cc;
     }
@@ -1981,7 +1976,7 @@
     background-color: var(--stroke-accent-color);
 }
 
-@supports ((-webkit-clip-path: circle()) or (clip-path: circle())) {
+@supports ((-webkit-clip-path: circle(0% at 0% 0%)) or (clip-path: circle(0% at 0% 0%))) {
     .video-context-menu {
         opacity: 0.3;
         -webkit-clip-path: circle(0% at 0% 0%);
@@ -2399,10 +2394,10 @@
     border-radius: 6px;
     padding: 6px 32px;
     height: 40px;
-    background-color: #17785B;
+    background-color: var(--lighter-foreground);
     line-height: 160%;
-    -webkit-box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px var(--background), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
-    box-shadow: 0px 4px 0px #1C5947, 0px 4px 0px var(--background), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
+    -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
+    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
@@ -2413,14 +2408,20 @@
     will-change: box-shadow, -webkit-box-shadow;
 }
 
+.dialog button.close-dialog:focus-visible {
+    outline: none;
+    -webkit-box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
+    box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
+}
+
 .dialog button.close-dialog:hover {
-    background-color: #1A8464;
+    background-color: var(--hover-foreground);
 }
 
 .dialog button.close-dialog:active {
     background-color: var(--background);
-    -webkit-box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
-    box-shadow: 0px 0px 0px #1C5947, 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
     -webkit-transform: translate(0px, 4px);
     -ms-transform: translate(0px, 4px);
     transform: translate(0px, 4px);
@@ -2799,7 +2800,7 @@ div.tooltip-right::after {
 }
 
 .dialog .eq-control input:hover {
-    background-color: #17785B;
+    background-color: var(--lighter-foreground);
     background-image: -o-linear-gradient(var(--accent-color), var(--accent-color));
     background-image: -webkit-gradient(linear, left top, left bottom, from(var(--accent-color)), to(var(--accent-color)));
     background-image: linear-gradient(var(--accent-color), var(--accent-color));
@@ -2936,8 +2937,8 @@ div.tooltip-right::after {
 }
 
 .transcript-opened .transcript-panel {
-    min-width: clamp(20rem, 34%, 400px);
-    max-width: clamp(20rem, 34%, 400px);
+    min-width: 400px;
+    max-width: 400px;
 }
 
 .transcript-panel .header {
@@ -2956,7 +2957,7 @@ div.tooltip-right::after {
     justify-content: space-between;
     padding: 28px 30px;
     background: var(--foreground);
-    min-width: clamp(20rem, 34%, 400px);
+    min-width: 400px;
     -webkit-box-shadow: inset 0px -4px 0px var(--stroke-accent-color);
     box-shadow: inset 0px -4px 0px var(--stroke-accent-color);
 }
@@ -2996,9 +2997,9 @@ div.tooltip-right::after {
     left: 0;
     width: 100%;
     height: 100%;
-    -webkit-transform: scale(100%);
-    -ms-transform: scale(100%);
-    transform: scale(100%);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -3115,7 +3116,7 @@ div.tooltip-right::after {
 }
 
 .transcript-panel .contents {
-    min-width: clamp(20rem, 34%, 400px);
+    width: 100%;
     height: 100%;
     overflow: hidden;
     -webkit-transform: translateY(30%);
@@ -3137,7 +3138,6 @@ div.tooltip-right::after {
 
 .transcript-panel .snackbar-sync-time {
     width: 100%;
-    min-width: clamp(20rem, 34%, 400px);
     bottom: 0;
     position: absolute;
     display: -webkit-box;
@@ -3234,7 +3234,7 @@ div.tooltip-right::after {
 
 .transcript-panel .captions-contents::-webkit-scrollbar-thumb,
 .settings-context-menu .page .page-contents::-webkit-scrollbar-thumb {
-    background-color: #17785B;
+    background-color: var(--lighter-foreground);
     border-radius: 100vw;
     background-clip: content-box;
     border: 4px solid var(--background);
@@ -3463,7 +3463,6 @@ screen and (max-height: 600px) {
 
     .video-controls-container .right-side>div:first-child,
     .video-controls-container .right-side>div:last-child,
-    .video-controls-container .right-side>div:nth-child(5),
     .video-controls-container .right-side>div:nth-child(2),
     .video-controls-container .right-side>div:nth-child(4) {
         display: block;
@@ -3506,6 +3505,15 @@ screen and (max-height: 600px) {
     .volume-tooltip-container:hover .volume-slider-container {
         background-color: #00000000;
     }
+
+    .transcript-item {
+        opacity: 0.3;
+        pointer-events: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 }
 
 @media screen and (max-width: 520px) {
@@ -3516,7 +3524,6 @@ screen and (max-height: 600px) {
     }
 
     .video-controls-container .right-side>div:last-child,
-    .video-controls-container .right-side>div:nth-child(5),
     .video-controls-container .right-side>div:nth-child(2) {
         display: block;
     }
@@ -3590,12 +3597,6 @@ screen and (max-height: 600px) {
         -webkit-transform: scale(0.96);
         -ms-transform: scale(0.96);
         transform: scale(0.96);
-    }
-
-    .buffering-circle {
-        stroke: Highlight;
-        stroke-width: 12px;
-        stroke-linecap: butt;
     }
 
     .video-controls-container .right-side button {
@@ -4148,6 +4149,32 @@ screen and (max-height: 600px) {
     .video-player .page-contents .item:not([aria-checked="true"]):hover .check {
         opacity: 0;
     }
+
+    .buffering-circle {
+        stroke: Highlight;
+        z-index: 5;
+    }
+
+    .buffering-circle-stroke {
+        stroke: ButtonFace;
+        z-index: 4;
+    }
+
+    .buffering-circle-track {
+        stroke: ButtonText;
+        mix-blend-mode: normal;
+        z-index: 3;
+    }
+
+    .buffering .buffering-circle-stroke,
+    .buffering-scrubbing .buffering-circle-stroke {
+        opacity: 1;
+    }
+
+    .buffering .buffering-circle-track,
+    .buffering-scrubbing .buffering-circle-track {
+        opacity: 0.6;
+    }
 }
 
 @media (color-gamut: p3) {
@@ -4305,5 +4332,35 @@ screen and (max-height: 600px) {
         -webkit-transform: none;
         -ms-transform: none;
         transform: none;
+    }
+
+    .transcript-panel .captions-contents {
+        scroll-behavior: auto;
+    }
+
+    @supports ((-webkit-clip-path: circle(0% at 0% 0%)) or (clip-path: circle(0% at 0% 0%))) {
+        .video-context-menu {
+            opacity: 0;
+            -webkit-clip-path: none;
+            clip-path: none;
+        }
+
+        .video-context-menu.show {
+            opacity: 1;
+            -webkit-clip-path: none;
+            clip-path: none;
+        }
+
+        .settings-context-menu {
+            opacity: 0;
+            -webkit-clip-path: none;
+            clip-path: none;
+        }
+
+        .settings-context-menu.pressed {
+            opacity: 1;
+            -webkit-clip-path: none;
+            clip-path: none;
+        }
     }
 }

@@ -27,7 +27,6 @@
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     /* 2 */
-    -ms-touch-action: manipulation;
     touch-action: manipulation;
     /* 3 */
     image-rendering: auto;
@@ -35,8 +34,6 @@
     text-rendering: geometricPrecision;
     shape-rendering: geometricPrecision;
     /* 5 */
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 6 */
     font-synthesis: none;
@@ -46,6 +43,8 @@
     -webkit-print-color-adjust: exact;
     /* 8 */
     -webkit-font-kerning: normal;
+    -webkit-font-feature-settings: "kern";
+            font-feature-settings: "kern";
     font-kerning: normal;
     /* 9 */
     font-style: normal;
@@ -99,8 +98,6 @@
     */
 
 .video-player hr {
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
     box-sizing: content-box;
     /* 1 */
     height: 0;
@@ -142,7 +139,6 @@
     text-decoration: underline;
     /* 2 */
     -webkit-text-decoration: underline dotted;
-    -moz-text-decoration: underline dotted;
     text-decoration: underline dotted;
     /* 2 */
 }
@@ -296,13 +292,23 @@
 /**
     * Set the custom outline style in all browsers. (opinionated)
     */
-.video-player :focus,
-.video-player :focus-visible,
+
 .video-player button:-moz-focusring,
 .video-player [type="button"]:-moz-focusring,
 .video-player [type="reset"]:-moz-focusring,
 .video-player [type="submit"]:-moz-focusring {
-    outline: 2px solid ButtonText;
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 2px var(--link-and-focus-color);
+}
+
+.video-player .focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 2px var(--link-and-focus-color);
+}
+
+.video-player :focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
 /**
@@ -321,8 +327,6 @@
     */
 
 .video-player legend {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 1 */
     color: inherit;
@@ -360,8 +364,6 @@
 
 .video-player [type="checkbox"],
 .video-player [type="radio"] {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 1 */
     padding: 0;
@@ -432,7 +434,7 @@
     */
 
 .video-player [hidden] {
-    display: none !important;
+    display: none;
 }
 
 /* Miscellaneous */

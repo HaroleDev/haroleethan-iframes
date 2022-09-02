@@ -454,7 +454,7 @@
     isolation: isolate;
     margin: auto;
     stroke-linecap: round;
-    stroke-dasharray: 360 360;
+    stroke-dasharray: 0, 480;
     stroke-dashoffset: 360;
     stroke: var(--accent-color);
     border-radius: 100%;

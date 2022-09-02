@@ -6,85 +6,85 @@ const config = {
 
 const hls = new Hls(config)
 
-const videoPlayerContainer = document.querySelector('.playful-video-player-container')
-const videoPlayer = videoPlayerContainer.querySelector('.playful-video-player')
+const playfulVideoPlayerContainer = document.querySelector('.playful-video-player-container')
+const playfulVideoPlayer = playfulVideoPlayerContainer.querySelector('.playful-video-player')
 
-const video = videoPlayer.querySelector('.video')
-const videoFit = videoPlayer.querySelector('.video-fit-contain')
+const video = playfulVideoPlayer.querySelector('.video')
+const videoFit = playfulVideoPlayer.querySelector('.video-fit-contain')
 const source = video.querySelector('source')
 
-const playpauseButton = videoPlayer.querySelector('.play-pause-button')
-const playpauseTooltipContainer = videoPlayer.querySelector('.play-pause-tooltip-container')
-const videoContainer = videoPlayer.querySelector('.video-container')
-const videoPoster = videoPlayer.querySelector('.video-poster')
+const playpauseButton = playfulVideoPlayer.querySelector('.play-pause-button')
+const playpauseTooltipContainer = playfulVideoPlayer.querySelector('.play-pause-tooltip-container')
+const videoContainer = playfulVideoPlayer.querySelector('.video-container')
+const videoPoster = playfulVideoPlayer.querySelector('.video-poster')
 
-const currentTime = videoPlayer.querySelector('.current-time')
-const totalTime = videoPlayer.querySelector('.total-time')
-const durationContainer = videoPlayer.querySelector('.duration-container')
-const timeTooltip = videoPlayer.querySelector('.seeking-preview__time-tooltip')
+const currentTime = playfulVideoPlayer.querySelector('.current-time')
+const totalTime = playfulVideoPlayer.querySelector('.total-time')
+const durationContainer = playfulVideoPlayer.querySelector('.duration-container')
+const timeTooltip = playfulVideoPlayer.querySelector('.seeking-preview__time-tooltip')
 
-const EQswitchToggle = videoPlayer.querySelector('.eq-switch')
-const rangeEQInputs = videoPlayer.querySelectorAll('.dialog .eq-control input')
-const eqContainer = videoPlayer.querySelector('.eq-dialog-container')
-const loopItem = videoPlayer.querySelector('.loop-item')
-const eqItem = videoPlayer.querySelector('.eq-item')
+const EQswitchToggle = playfulVideoPlayer.querySelector('.eq-switch')
+const rangeEQInputs = playfulVideoPlayer.querySelectorAll('.dialog .eq-control input')
+const eqContainer = playfulVideoPlayer.querySelector('.eq-dialog-container')
+const loopItem = playfulVideoPlayer.querySelector('.loop-item')
+const eqItem = playfulVideoPlayer.querySelector('.eq-item')
 
-const aboutPlayerItem = videoPlayer.querySelector('.about-player-item')
-const aboutPlayerContainer = videoPlayer.querySelector('.about-player-dialog-container')
+const aboutPlayerItem = playfulVideoPlayer.querySelector('.about-player-item')
+const aboutPlayerContainer = playfulVideoPlayer.querySelector('.about-player-dialog-container')
 
-const dialogContainer = videoPlayer.querySelectorAll('.dialog-container')
+const dialogContainer = playfulVideoPlayer.querySelectorAll('.dialog-container')
 
-const captionButton = videoPlayer.querySelector('.caption-button')
-const settingsButton = videoPlayer.querySelector('.settings-button')
-const settingsContextMenu = videoPlayer.querySelector('.settings-context-menu')
-const settingsTooltipContainer = videoPlayer.querySelector('.settings-tooltip-container')
+const captionButton = playfulVideoPlayer.querySelector('.caption-button')
+const settingsButton = playfulVideoPlayer.querySelector('.settings-button')
+const settingsContextMenu = playfulVideoPlayer.querySelector('.settings-context-menu')
+const settingsTooltipContainer = playfulVideoPlayer.querySelector('.settings-tooltip-container')
 
-const contextMenu = videoPlayer.querySelector('.video-context-menu')
+const contextMenu = playfulVideoPlayer.querySelector('.video-context-menu')
 
-const Item = videoPlayer.querySelector('.item')
-const downloadItem = videoPlayer.querySelector('.download-item')
-const playbackSpeedItem = videoPlayer.querySelector('.playback-speed-item')
-const transcriptItem = videoPlayer.querySelector('.transcript-item')
-const backPageSettings = videoPlayer.querySelector('.back-page')
+const Item = playfulVideoPlayer.querySelector('.item')
+const downloadItem = playfulVideoPlayer.querySelector('.download-item')
+const playbackSpeedItem = playfulVideoPlayer.querySelector('.playback-speed-item')
+const transcriptItem = playfulVideoPlayer.querySelector('.transcript-item')
+const backPageSettings = playfulVideoPlayer.querySelector('.back-page')
 
-const playbackSpeedItemControls = videoPlayer.querySelectorAll('.page-contents.playback-speed-settings .item')
+const playbackSpeedItemControls = playfulVideoPlayer.querySelectorAll('.page-contents.playback-speed-settings .item')
 
-const transcriptPanel = videoPlayer.querySelector('.transcript-panel')
-const closeTranscriptPanelBtn = videoPlayer.querySelector('.close-transcript-panel')
-const transcriptDiv = videoPlayer.querySelector('.captions-contents')
-const snackbarSyncTranscript = videoPlayer.querySelector('.snackbar-sync-time')
-let cueContainers = videoPlayer.querySelectorAll('.cue-container')
+const transcriptPanel = playfulVideoPlayer.querySelector('.transcript-panel')
+const closeTranscriptPanelBtn = playfulVideoPlayer.querySelector('.close-transcript-panel')
+const transcriptDiv = playfulVideoPlayer.querySelector('.captions-contents')
+const snackbarSyncTranscript = playfulVideoPlayer.querySelector('.snackbar-sync-time')
+let cueContainers = playfulVideoPlayer.querySelectorAll('.cue-container')
 
-const dialog = videoPlayer.querySelectorAll('.dialog')
-const closeDialogBtn = videoPlayer.querySelectorAll('.dialog .close-dialog')
+const dialog = playfulVideoPlayer.querySelectorAll('.dialog')
+const closeDialogBtn = playfulVideoPlayer.querySelectorAll('.dialog .close-dialog')
 
-const dialogOverlay = videoPlayer.querySelectorAll('.dialog-container .dialog-overlay')
-const volumeSliderContainer = videoPlayer.querySelector('.volume-slider-container')
-const volumeContainer = videoPlayer.querySelector('.volume-container')
-const volumeButton = videoPlayer.querySelector('.volume-button')
-const volumeTooltipContainer = videoPlayer.querySelector('.volume-tooltip-container')
-const fullscreenButton = videoPlayer.querySelector('.full-screen-button')
-const fullscreenTooltip = videoPlayer.querySelector('.full-screen-tooltip')
-const pipPlayerButton = videoPlayer.querySelector('.pip-button')
-const pipTooltip = videoPlayer.querySelector('.pip-tooltip')
+const dialogOverlay = playfulVideoPlayer.querySelectorAll('.dialog-container .dialog-overlay')
+const volumeSliderContainer = playfulVideoPlayer.querySelector('.volume-slider-container')
+const volumeContainer = playfulVideoPlayer.querySelector('.volume-container')
+const volumeButton = playfulVideoPlayer.querySelector('.volume-button')
+const volumeTooltipContainer = playfulVideoPlayer.querySelector('.volume-tooltip-container')
+const fullscreenButton = playfulVideoPlayer.querySelector('.full-screen-button')
+const fullscreenTooltip = playfulVideoPlayer.querySelector('.full-screen-tooltip')
+const pipPlayerButton = playfulVideoPlayer.querySelector('.pip-button')
+const pipTooltip = playfulVideoPlayer.querySelector('.pip-tooltip')
 
-const timelineContainer = videoPlayer.querySelector('.timeline-container')
-const timelineInner = videoPlayer.querySelector('.timeline')
-const timelineProgressbar = videoPlayer.querySelector('.timeline__progressbar')
+const timelineContainer = playfulVideoPlayer.querySelector('.timeline-container')
+const timelineInner = playfulVideoPlayer.querySelector('.timeline')
+const timelineProgressbar = playfulVideoPlayer.querySelector('.timeline__progressbar')
 
-const videoInformationOverlay = videoPlayer.querySelector('.video-information-overlay')
-const videoControlsContainer = videoPlayer.querySelector('.video-controls-container')
-const videoControls = videoPlayer.querySelector('.controls')
-const rightVideoControls = videoPlayer.querySelector('.right-side')
-const seekingPreview = videoPlayer.querySelector('.seeking-preview')
-const seekingThumbnail = videoPlayer.querySelector('.seeking-preview__thumbnail')
-const videoThumbPreview = videoPlayer.querySelector('.video-thumb-preview')
-const qualityBadgeContainer = videoPlayer.querySelector('.quality-badge')
-const qualityBadgeText = videoPlayer.querySelector('.quality-badge .quality')
-const AirPlayTooltip = videoPlayer.querySelector('.airplay-tooltip')
-const AirPlayButton = videoPlayer.querySelector('.airplay-button')
-const CastButton = videoPlayer.querySelector('.gcast-button')
-const CastTooltip = videoPlayer.querySelector('.gcast-tooltip')
+const videoInformationOverlay = playfulVideoPlayer.querySelector('.video-information-overlay')
+const videoControlsContainer = playfulVideoPlayer.querySelector('.video-controls-container')
+const videoControls = playfulVideoPlayer.querySelector('.controls')
+const rightVideoControls = playfulVideoPlayer.querySelector('.right-side')
+const seekingPreview = playfulVideoPlayer.querySelector('.seeking-preview')
+const seekingThumbnail = playfulVideoPlayer.querySelector('.seeking-preview__thumbnail')
+const videoThumbPreview = playfulVideoPlayer.querySelector('.video-thumb-preview')
+const qualityBadgeContainer = playfulVideoPlayer.querySelector('.quality-badge')
+const qualityBadgeText = playfulVideoPlayer.querySelector('.quality-badge .quality')
+const AirPlayTooltip = playfulVideoPlayer.querySelector('.airplay-tooltip')
+const AirPlayButton = playfulVideoPlayer.querySelector('.airplay-button')
+const CastButton = playfulVideoPlayer.querySelector('.gcast-button')
+const CastTooltip = playfulVideoPlayer.querySelector('.gcast-tooltip')
 
 let orientationInfluence, videoPercent
 
@@ -100,8 +100,8 @@ var description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
 
-videoPlayerContainer.style.setProperty('--aspect-ratio-size', 16 / 9)
-videoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', 9 / 16)
+playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', 16 / 9)
+playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', 9 / 16)
 
 // Debounce and throttle
 function debounce(cb, delay = 1000) {
@@ -171,10 +171,10 @@ function init() {
         video.removeAttribute('controls')
     }
 
-    videoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius', (videoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
-    videoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height', videoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
+    playfulVideoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius', (playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
+    playfulVideoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height', playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
 
-    videoPlayerContainer.classList.remove('preload')
+    playfulVideoPlayerContainer.classList.remove('preload')
 }
 
 init()
@@ -244,7 +244,7 @@ window.addEventListener('DOMContentLoaded', () => {
         navigator.maxTouchPoints &&
         navigator.maxTouchPoints > 2
     ) {
-        videoPlayer.dataset.device = 'iPadOS'
+        playfulVideoPlayer.dataset.device = 'iPadOS'
         volumeTooltipContainer.setAttribute('hidden', '')
     }
 })
@@ -280,8 +280,8 @@ const srcEventListeners = [
 
             const message = err.message
             if (message && message.length) s += message
-            videoPlayer.querySelector('#error-log').innerText = err.code
-            videoPlayer
+            playfulVideoPlayer.querySelector('#error-log').innerText = err.code
+            playfulVideoPlayer
                 .querySelector('.error-dialog')
                 .classList.add('error-occurred')
         }
@@ -345,7 +345,7 @@ videoContainer.addEventListener('contextmenu', (e) => {
 
 function ctxmenuPosition(eventPos) {
     const menuOffset = 8
-    const scope = videoPlayer
+    const scope = playfulVideoPlayer
     let x = eventPos.offsetX + menuOffset
     let y = eventPos.offsetY + menuOffset
     const winWidth = scope.innerWidth
@@ -399,9 +399,9 @@ document.addEventListener('click', (e) => {
 eqItem.addEventListener('click', () => eqContainer.classList.add('opened'))
 transcriptItem.addEventListener('click', () => {
     loadTranscript(
-        videoPlayer.querySelector('#default-track').getAttribute('srclang')
+        playfulVideoPlayer.querySelector('#default-track').getAttribute('srclang')
     )
-    videoPlayer.classList.add('transcript-opened')
+    playfulVideoPlayer.classList.add('transcript-opened')
 })
 aboutPlayerItem.addEventListener('click', () => aboutPlayerContainer.classList.add('opened'))
 
@@ -466,7 +466,7 @@ downloadItem.addEventListener('click', () => {
 playbackSpeedItem.addEventListener('click', () => {
     const parent = playbackSpeedItem.parentElement.parentElement
     parent.setAttribute('hidden', '')
-    const content = videoPlayer.querySelector('.playback-speed-settings')
+    const content = playfulVideoPlayer.querySelector('.playback-speed-settings')
     content.removeAttribute('hidden')
 })
 
@@ -474,13 +474,13 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     const dataSpeed = playbackSpeedItemControls[i].getAttribute('data-speed')
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
     playbackSpeedItemControls[i].querySelector('.span:last-child').innerHTML = `${dataSpeed} &times;`
-    video.playbackRate = videoPlayer.getAttribute('data-speed')
+    video.playbackRate = playfulVideoPlayer.getAttribute('data-speed')
 
-    videoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"] .span:last-child').innerHTML = `(${videoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"]').getAttribute('data-speed')} &times;)`
-    videoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
+    playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"] .span:last-child').innerHTML = `(${playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"]').getAttribute('data-speed')} &times;)`
+    playfulVideoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
 
     playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
-    videoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed="${videoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
+    playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed="${playfulVideoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
 };
 
 playbackSpeedItemControls.forEach(element => {
@@ -488,9 +488,9 @@ playbackSpeedItemControls.forEach(element => {
         playbackSpeedItemControls.forEach(element => {
             element.removeAttribute('aria-checked')
         })
-        if (videoPlayer.querySelector('.page-contents.playback-speed-settings .item[class*="speed__"]')) {
+        if (playfulVideoPlayer.querySelector('.page-contents.playback-speed-settings .item[class*="speed__"]')) {
             video.playbackRate = element.getAttribute('data-speed')
-            videoPlayer.setAttribute('data-speed', video.playbackRate)
+            playfulVideoPlayer.setAttribute('data-speed', video.playbackRate)
             playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
             element.setAttribute('aria-checked', 'true')
             if (!element.getAttribute('data-speed') >= '1.25' && !element.getAttribute('data-speed') < playbackSpeedItemControls.lastChild.getAttribute('data-speed')) return timelineProgressbar.style.filter = 'none'
@@ -600,7 +600,7 @@ closeTranscriptPanelBtn.addEventListener('pointerover', () => {
     })
 })
 closeTranscriptPanelBtn.addEventListener('click', () => {
-    videoPlayer.classList.remove('transcript-opened')
+    playfulVideoPlayer.classList.remove('transcript-opened')
 })
 
 // Captions
@@ -618,7 +618,7 @@ function toggleCaptions() {
 let tracks
 let trackElements
 const tracksURLs = []
-trackElements = videoPlayer.querySelectorAll('track')
+trackElements = playfulVideoPlayer.querySelectorAll('track')
 
 for (var i = 0; i < trackElements.length; i++) {
     const currentTrackElem = trackElements[i]
@@ -630,7 +630,7 @@ tracks = video.textTracks
 function loadTranscript(lang) {
     clearTranscriptDiv()
     disableAllTracks()
-    videoPlayer.querySelector('.transcript-language').innerText = video
+    playfulVideoPlayer.querySelector('.transcript-language').innerText = video
         .querySelector('track')
         .getAttribute('label')
 
@@ -674,7 +674,7 @@ function displayCues(track) {
         }
         const clickableTranscriptText = `<div class="cue-container" startTime="${cue.startTime}" role="button" aria-pressed="false" tabindex="0"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
         addToTranscript(clickableTranscriptText)
-        cueContainers = videoPlayer.querySelectorAll('.cue-container')
+        cueContainers = playfulVideoPlayer.querySelectorAll('.cue-container')
     }
 }
 
@@ -704,9 +704,9 @@ function removeHTML(text) {
 
 function jumpToTranscript(time) {
     video.currentTime = time
-    videoPlayer.querySelector('.cue-container').classList.remove('current')
+    playfulVideoPlayer.querySelector('.cue-container').classList.remove('current')
     document.querySelector(`[startTime="${time}"]`).classList.add('current')
-    videoPlayer.querySelector('.timeline').style.setProperty('--progress-position', video.currentTime / video.duration)
+    playfulVideoPlayer.querySelector('.timeline').style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 function clearTranscriptDiv() {
@@ -844,7 +844,7 @@ function intervalDivide() {
         line = spinners[spinindex]
     }
     spinindex = spinindex > spinners.length ? 0 : spinindex + 1
-    videoPlayer.querySelector('.divider-time').innerText = `${line}`
+    playfulVideoPlayer.querySelector('.divider-time').innerText = `${line}`
 }
 let intervalDivider;
 
@@ -902,15 +902,15 @@ video.addEventListener('dblclick', toggleFullScreen)
 function toggleFullScreen() {
     if (context.state === 'suspended') context.resume()
     if (document.fullscreenElement == null) {
-        if (videoPlayer.requestFullscreen) {
-            videoPlayer.requestFullscreen()
-        } else if (videoPlayer.webkitRequestFullScreen) {
-            videoPlayer.webkitRequestFullScreen()
+        if (playfulVideoPlayer.requestFullscreen) {
+            playfulVideoPlayer.requestFullscreen()
+        } else if (playfulVideoPlayer.webkitRequestFullScreen) {
+            playfulVideoPlayer.webkitRequestFullScreen()
         } else if (video.webkitEnterFullScreen) {
             video.webkitEnterFullScreen()
         } else {
-            if (videoPlayer.mozRequestFullScreen) videoPlayer.mozRequestFullScreen()
-            if (videoPlayer.msRequestFullScreen) videoPlayer.msRequestFullscreen()
+            if (playfulVideoPlayer.mozRequestFullScreen) playfulVideoPlayer.mozRequestFullScreen()
+            if (playfulVideoPlayer.msRequestFullScreen) playfulVideoPlayer.msRequestFullscreen()
         }
         fullscreenTooltip.dataset.tooltip = 'Exit full screen' + ' (f)'
     } else {
@@ -953,7 +953,7 @@ async function togglePIPPlayerMode() {
 }
 
 function fullScreenToggleChange() {
-    videoPlayer.classList.toggle('full-screen', document.fullscreenElement)
+    playfulVideoPlayer.classList.toggle('full-screen', document.fullscreenElement)
 }
 
 document.addEventListener('fullscreenchange', fullScreenToggleChange, false)
@@ -962,12 +962,12 @@ document.addEventListener('webkitfullscreenchange', fullScreenToggleChange, fals
 document.addEventListener('msfullscreenchange', fullScreenToggleChange, false)
 
 video.addEventListener('webkitenterfullscreen', () => {
-    videoPlayer.classList.add('full-screen')
+    playfulVideoPlayer.classList.add('full-screen')
     fullscreenTooltip.dataset.tooltip = 'Exit full screen' + ' (f)'
 })
 
 video.addEventListener('webkitendfullscreen', () => {
-    videoPlayer.classList.remove('full-screen')
+    playfulVideoPlayer.classList.remove('full-screen')
     fullscreenTooltip.dataset.tooltip = 'Full screen' + ' (f)'
     if (!video.paused) video.play()
 })
@@ -1169,8 +1169,8 @@ async function updatetime() {
 function updateMetadata() {
     const updateThrottleMetadata = throttle(() => {
         const orientationInfluence = video.videoWidth / video.videoHeight
-        videoPlayerContainer.style.setProperty('--aspect-ratio-size', orientationInfluence)
-        videoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth)
+        playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', orientationInfluence)
+        playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth)
         if (orientationInfluence > 16 / 9) {
             qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth)
             qualityBadgeText.innerText = qualityCheck(video.videoWidth)
@@ -1604,7 +1604,7 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
 }
 
 // Keyboard shortcuts
-videoPlayer.addEventListener('keydown', (e) => {
+playfulVideoPlayer.addEventListener('keydown', (e) => {
     const tagName = document.activeElement.tagName.toLowerCase()
 
     if (tagName === 'input') return
@@ -1738,13 +1738,13 @@ const eventListeners = [
             })
             videoContainer.classList.remove('paused')
 
-            if (videoPlayer.querySelector('.video-container').classList.contains('played')) {
-                videoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
+            if (playfulVideoPlayer.querySelector('.video-container').classList.contains('played')) {
+                playfulVideoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
                     element.style.opacity = 1
                 })
-                videoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
+                playfulVideoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
                     setTimeout(() => {
                         rightVideoControls.querySelectorAll('button svg').forEach(element => {
                             element.style.animationDelay = '0s'
@@ -1846,7 +1846,7 @@ const eventListeners = [
         'loadedmetadata',
         () => {
             videoPercent = video.currentTime / video.duration
-            videoPlayer.classList.remove('loading')
+            playfulVideoPlayer.classList.remove('loading')
             video.textTracks[0].mode = 'hidden'
             if (isURL(videoMetadata.video_thumbs) === false) {
                 seekingThumbnail.setAttribute('hidden', '')
@@ -1870,23 +1870,23 @@ const eventListeners = [
                 qualityBadgeText.innerText = qualityCheck(video.videoHeight)
             }
 
-            videoPlayerContainer.style.setProperty(
+            playfulVideoPlayerContainer.style.setProperty(
                 '--aspect-ratio-size',
                 orientationInfluence
             )
-            videoPlayerContainer.style.setProperty(
+            playfulVideoPlayerContainer.style.setProperty(
                 '--aspect-ratio-size-inverse',
                 video.videoHeight / video.videoWidth
             )
             loadedMetadata()
 
-            if (!videoPlayer.querySelector('.video-container').classList.contains('played')) {
-                videoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
+            if (!playfulVideoPlayer.querySelector('.video-container').classList.contains('played')) {
+                playfulVideoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
                     element.style.opacity = 1
                 })
-                videoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
+                playfulVideoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
                     setTimeout(() => {
                         rightVideoControls.querySelectorAll('button svg').forEach(element => {
                             element.style.animationDelay = '0s'

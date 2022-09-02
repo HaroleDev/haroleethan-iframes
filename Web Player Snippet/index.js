@@ -218,7 +218,7 @@ window.addEventListener('DOMContentLoaded', () => {
     video.load()
     video.addEventListener('durationchange', updatetime)
 
-    eqContainer.querySelectorAll('.eq-slider').forEach((element) => {
+    rangeEQInputs.forEach((element) => {
         element.disabled = true
         element.value = 0
     })
@@ -537,29 +537,17 @@ function changeGain(sliderValue, nbFilter) {
     filters[nbFilter].gain.value = value
 }
 
-/* function childElements(node) {
-    var elems = new Array();
-    var children = node.childNodes;
-
-    for (var i = 0; i < children.length; i++) {
-        if (children[i].nodeType === document.ELEMENT_NODE) {
-            elems.push(children[i]);
-            return elems;
-        };
-    };
-}; */
-
 // EQ dialog
 EQswitchToggle.addEventListener('click', () => {
-    if (eqContainer.hasAttribute('aria-checked')) {
-        eqContainer.removeAttribute('aria-checked')
+    if (EQswitchToggle.hasAttribute('aria-checked')) {
+        EQswitchToggle.removeAttribute('aria-checked')
         eqContainer.querySelectorAll('.eq-slider').forEach((element) => {
             element.disabled = true
             sourceNode.disconnect(filters)
             sourceNode.connect(context.destination)
         })
     } else {
-        eqContainer.setAttribute('aria-checked', 'true')
+        EQswitchToggle.setAttribute('aria-checked', 'true')
         eqContainer.querySelectorAll('.eq-slider').forEach((element) => {
             element.disabled = false
             rangeEQInputs.forEach((input) => {

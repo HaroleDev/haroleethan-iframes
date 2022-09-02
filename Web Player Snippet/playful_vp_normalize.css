@@ -4,48 +4,71 @@
 *! | Necolas' Normalize.css source code: github.com/necolas/normalize.css
 */
 
-/* Document  */
+/* Document */
+
+/**
+    * 1. Correct the line height in all browsers.
+    * 2. Prevent adjustments of font size after orientation changes in iOS.
+    * 3. Enable panning and pinch zoom gestures, but disable additional non-standard gestures such as double-tap to zoom. (opinionated)
+    * 4. UA-dependent image scaling.
+    * 5. Render texts and SVG shapes in geometric precision. (opinionated)
+    * 6. Contain the box-sizing inside the player itself.
+    * 7. Remove synthesization on typefaces.
+    * 8. The printed paper's appearance of the content should not be changed except by the user's request. (opinionated)
+    * 9. Correct font kerning in all browsers.
+    * 10. Correct font styling in all browsers.
+    */
 
 .video-player {
     line-height: 1.6;
+    /* 1 */
     -webkit-text-size-adjust: 100%;
+    /* 2 */
     -ms-touch-action: manipulation;
     touch-action: manipulation;
+    /* 3 */
     image-rendering: auto;
+    /* 4 */
     text-rendering: geometricPrecision;
     shape-rendering: geometricPrecision;
+    /* 5 */
     -webkit-box-sizing: border-box;
-    font-synthesis: none;
     box-sizing: border-box;
+    /* 6 */
+    font-synthesis: none;
+    /* 7 */
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
+    /* 8 */
     -webkit-font-kerning: normal;
     font-kerning: normal;
+    /* 9 */
     font-style: normal;
+    /* 10 */
 }
 
 /* Sections */
 
 /**
-   * Remove the margin in all browsers.
-   */
+    * Remove the margin in all browsers.
+    */
 
 .video-player {
     margin: 0;
 }
 
 /**
-   * Render the `main` element consistently in IE.
-   */
+    * Render the "main" element consistently in IE.
+    */
 
 .video-player main {
     display: block;
 }
 
 /**
-   * Correct the font size and margin on `h1` elements within `section` and
-   * `article` contexts in Chrome, Firefox, and Safari.
-   */
+    * Correct the font size and margin on "h1" elements within "section" and
+    * "article" contexts in Chrome, Firefox, and Safari.
+    */
 
 .video-player h1 {
     font-size: 2em;
@@ -58,12 +81,13 @@
     line-height: 110%;
     margin: 0.67em 0;
 }
+
 /* Grouping content */
 
 /**
-   * 1. Add the correct box sizing in Firefox.
-   * 2. Show the overflow in Edge and IE.
-   */
+    * 1. Add the correct box sizing in Firefox.
+    * 2. Show the overflow in Edge and IE.
+    */
 
 .video-player hr {
     box-sizing: content-box;
@@ -75,9 +99,9 @@
 }
 
 /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
+    * 1. Correct the inheritance and scaling of font size in all browsers.
+    * 2. Correct the odd "em" font sizing in all browsers.
+    */
 
 .video-player pre {
     font-family: monospace, monospace;
@@ -89,17 +113,17 @@
 /* Text-level semantics */
 
 /**
-   * Remove the gray background on active links in IE 10.
-   */
+    * Remove the gray background on active links in IE 10.
+    */
 
 .video-player a {
     background-color: transparent;
 }
 
 /**
-   * 1. Remove the bottom border in Chrome 57-
-   * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
-   */
+    * 1. Remove the bottom border in Chrome 57-
+    * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+    */
 
 .video-player abbr[title] {
     border-bottom: none;
@@ -111,8 +135,8 @@
 }
 
 /**
-   * Add the correct font weight in Chrome, Edge, and Safari.
-   */
+    * Add the correct font weight in Chrome, Edge, and Safari.
+    */
 
 .video-player b,
 .video-player strong {
@@ -120,9 +144,9 @@
 }
 
 /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
+    * 1. Correct the inheritance and scaling of font size in all browsers.
+    * 2. Correct the odd "em" font sizing in all browsers.
+    */
 
 .video-player code,
 .video-player kbd,
@@ -134,17 +158,17 @@
 }
 
 /**
-   * Add the correct font size in all browsers.
-   */
+    * Add the correct font size in all browsers.
+    */
 
 .video-player small {
     font-size: 80%;
 }
 
 /**
-   * Prevent `sub` and `sup` elements from affecting the line height in
-   * all browsers.
-   */
+    * Prevent "sub" and "sup" elements from affecting the line height in
+    * all browsers.
+    */
 
 .video-player sub,
 .video-player sup {
@@ -164,27 +188,31 @@
 
 /* Input semantics */
 
-.video-player input[type=range],
-.video-player input[type=range]::-webkit-slider-runnable-track,
-.video-player input[type=range]::-webkit-slider-thumb {
+/**
+    * Reseting input range in all browsers.
+    */
+
+.video-player input[type="range"],
+.video-player input[type="range"]::-webkit-slider-runnable-track,
+.video-player input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
 }
 
-.video-player input[type=range]::-ms-track {
+.video-player input[type="range"]::-ms-track {
     color: transparent;
 }
 
-.video-player input[type=range]::-ms-fill-lower,
-.video-player input[type=range]::-ms-fill-upper,
-.video-player input[type=range]::-ms-tooltip {
+.video-player input[type="range"]::-ms-fill-lower,
+.video-player input[type="range"]::-ms-fill-upper,
+.video-player input[type="range"]::-ms-tooltip {
     display: none;
 }
 
 /* Embedded content */
 
 /**
-   * Remove the border on images inside links in IE 10.
-   */
+    * Remove the border on images inside links in IE 10.
+    */
 
 .video-player img {
     border-style: none;
@@ -193,9 +221,9 @@
 /* Forms */
 
 /**
-   * 1. Change the font styles in all browsers.
-   * 2. Remove the margin in Firefox and Safari.
-   */
+    * 1. Change the font styles in all browsers.
+    * 2. Remove the margin in Firefox and Safari.
+    */
 
 .video-player button,
 .video-player input,
@@ -213,8 +241,8 @@
 }
 
 /**
-   * Show the overflow in IE and Edge.
-   */
+    * Show the overflow in IE and Edge.
+    */
 
 .video-player button,
 .video-player input {
@@ -222,8 +250,8 @@
 }
 
 /**
-   * Remove the inheritance of text transform in Edge, Firefox, and IE.
-   */
+    * Remove the inheritance of text transform in Edge, Firefox, and IE.
+    */
 
 .video-player button,
 .video-player select {
@@ -231,8 +259,8 @@
 }
 
 /**
-   * Correct the inability to style clickable types in iOS and Safari.
-   */
+    * Correct the inability to style clickable types in iOS and Safari.
+    */
 
 .video-player button,
 .video-player [type="button"],
@@ -242,8 +270,8 @@
 }
 
 /**
-   * Remove the inner border and padding in Firefox.
-   */
+    * Remove the inner border and padding in Firefox.
+    */
 
 .video-player button::-moz-focus-inner,
 .video-player [type="button"]::-moz-focus-inner,
@@ -254,9 +282,9 @@
 }
 
 /**
-   * Restore the focus styles unset by the previous rule.
-   */
-
+    * Restore the focus styles unset by the previous rule.
+    */
+.video-player :focus,
 .video-player button:-moz-focusring,
 .video-player [type="button"]:-moz-focusring,
 .video-player [type="reset"]:-moz-focusring,
@@ -265,19 +293,19 @@
 }
 
 /**
-   * Correct the padding in Firefox.
-   */
+    * Correct the padding in Firefox.
+    */
 
 .video-player fieldset {
     padding: 0.35em 0.75em 0.625em;
 }
 
 /**
-   * 1. Correct the text wrapping in Edge and IE.
-   * 2. Correct the color inheritance from `fieldset` elements in IE.
-   * 3. Remove the padding so developers are not caught out when they zero out
-   *    `fieldset` elements in all browsers.
-   */
+    * 1. Correct the text wrapping in Edge and IE.
+    * 2. Correct the color inheritance from "fieldset" elements in IE.
+    * 3. Remove the padding so developers are not caught out when they zero out
+    *    "fieldset" elements in all browsers.
+    */
 
 .video-player legend {
     box-sizing: border-box;
@@ -295,25 +323,25 @@
 }
 
 /**
-   * Add the correct vertical alignment in Chrome, Firefox, and Opera.
-   */
+    * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+    */
 
 .video-player progress {
     vertical-align: baseline;
 }
 
 /**
-   * Remove the default vertical scrollbar in IE 10+.
-   */
+    * Remove the default vertical scrollbar in IE 10+.
+    */
 
 .video-player textarea {
     overflow: auto;
 }
 
 /**
-   * 1. Add the correct box sizing in IE 10.
-   * 2. Remove the padding in IE 10.
-   */
+    * 1. Add the correct box sizing in IE 10.
+    * 2. Remove the padding in IE 10.
+    */
 
 .video-player [type="checkbox"],
 .video-player [type="radio"] {
@@ -324,8 +352,8 @@
 }
 
 /**
-   * Correct the cursor style of increment and decrement buttons in Chrome.
-   */
+    * Correct the cursor style of increment and decrement buttons in Chrome.
+    */
 
 .video-player [type="number"]::-webkit-inner-spin-button,
 .video-player [type="number"]::-webkit-outer-spin-button {
@@ -333,9 +361,9 @@
 }
 
 /**
-   * 1. Correct the odd appearance in Chrome and Safari.
-   * 2. Correct the outline style in Safari.
-   */
+    * 1. Correct the odd appearance in Chrome and Safari.
+    * 2. Correct the outline style in Safari.
+    */
 
 .video-player [type="search"] {
     -webkit-appearance: textfield;
@@ -345,17 +373,17 @@
 }
 
 /**
-   * Remove the inner padding in Chrome and Safari on macOS.
-   */
+    * Remove the inner padding in Chrome and Safari on macOS.
+    */
 
 .video-player [type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
 /**
-   * 1. Correct the inability to style clickable types in iOS and Safari.
-   * 2. Change font properties to `inherit` in Safari.
-   */
+       * 1. Correct the inability to style clickable types in iOS and Safari.
+       * 2. Change font properties to "inherit" in Safari.
+       */
 
 .video-player ::-webkit-file-upload-button {
     -webkit-appearance: button;
@@ -365,29 +393,37 @@
 }
 
 /*
-   * Add the correct display in Edge, IE 10+, and Firefox.
-   */
+    * Add the correct display in Edge, IE 10+, and Firefox.
+    */
 
 .video-player details {
     display: block;
 }
 
 /*
-   * Add the correct display in all browsers.
-   */
+    * Add the correct display in all browsers.
+    */
 
 .video-player summary {
     display: list-item;
 }
 
-/* Accessibility */
+/* Miscellaneous */
 
-.video-player :focus {
-    outline: none;
+/**
+    * Add the correct display in IE 10+.
+    */
+
+template {
+    display: none;
 }
 
 /* Attributes */
 
+/**
+    * Add the correct display in IE 10+.
+    */
+
 .video-player [hidden] {
-    display: none;
+    display: none !important;
 }

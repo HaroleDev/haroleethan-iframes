@@ -23,6 +23,7 @@
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
     font-style: normal;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .video-player * {
@@ -501,7 +502,9 @@
 }
 
 .buffering .buffering-circle-track,
-.buffering-scrubbing .buffering-circle-track {
+.buffering-scrubbing .buffering-circle-track,
+.buffering .buffering-circle-stroke,
+.buffering-scrubbing .buffering-circle-stroke {
     opacity: 0.2;
     -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
     -o-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
@@ -511,9 +514,6 @@
 .buffering .buffering-circle-stroke,
 .buffering-scrubbing .buffering-circle-stroke {
     opacity: 0.3;
-    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
 }
 
 .buffering-container {
@@ -538,12 +538,6 @@
 
 .buffering .buffering-circle-stroke,
 .buffering-scrubbing .buffering-circle-stroke {
-    -webkit-animation: buffer-ring 3s infinite ease;
-    animation: buffer-ring 3s infinite ease;
-    -webkit-animation-delay: 1s;
-    animation-delay: 1s;
-    -webkit-animation-play-state: running;
-    animation-play-state: running;
     opacity: 0.3;
 }
 
@@ -2420,7 +2414,6 @@
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);
-    -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

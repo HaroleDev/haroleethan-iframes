@@ -87,15 +87,15 @@ const CastTooltip = videoPlayer.querySelector('.gcast-tooltip')
 
 let orientationInfluence, videoPercent
 
-const title =
+var title =
     document
         .querySelector('meta[property="og:title"]')
         .getAttribute('content') ||
     decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf('/') + 1))
-const author = document
+var author = document
     .querySelector('meta[property="og:author"]')
     .getAttribute('content')
-const description = document
+var description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
 
@@ -212,11 +212,11 @@ window.addEventListener('DOMContentLoaded', () => {
                     //For MP4 container
                     video.addEventListener("durationchange", updatetime);
                 }; */
-
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
     video.load()
     video.addEventListener('durationchange', updatetime)
+
     eqContainer.querySelectorAll('.eq-slider').forEach((element) => {
         element.disabled = true
         element.value = 0

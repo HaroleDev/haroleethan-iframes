@@ -23,7 +23,6 @@
     --link-and-focus-color: #4B99E7;
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
-    font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
 }
 
 .video-player * {
@@ -39,7 +38,9 @@
     transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
 }
 
+:focus,
 :focus-visible {
+    outline: none;
     -webkit-box-shadow: 0 0 0 2px var(--link-and-focus-color);
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
@@ -2389,7 +2390,6 @@
 
 .dialog button.close-dialog {
     font-size: 1rem;
-    font-family: "Manrope", Arial, Helvetica, sans-serif;
     font-variation-settings: "wght" 500;
     font-weight: 500;
     color: var(--text-color);
@@ -2622,11 +2622,8 @@
 .tooltip-left::before,
 .tooltip-left::after {
     position: absolute;
-    font-style: normal;
-    font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
     font-variation-settings: "wght" 500;
     font-weight: 500;
-    font-size: 1rem;
     top: 1rem;
     line-height: 160%;
     height: -webkit-fit-content;
@@ -3546,8 +3543,6 @@ screen and (max-height: 600px) {
         --link-and-focus-color: Highlight;
         --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
         --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
-        font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
-        font-style: normal;
     }
 
     .video-player {

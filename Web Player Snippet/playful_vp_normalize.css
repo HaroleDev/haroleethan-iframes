@@ -8,20 +8,23 @@
 
 /**
     * 1. Correct the line height in all browsers.
-    * 2. Prevent adjustments of font size after orientation changes in iOS.
+    * 2. Prevent adjustments of font size after orientation changes in Safari (iOS) and IE/Edge.
     * 3. Enable panning and pinch zoom gestures, but disable additional non-standard gestures such as double-tap to zoom. (opinionated)
     * 4. UA-dependent image scaling.
     * 5. Render texts and SVG shapes in geometric precision. (opinionated)
-    * 6. Contain the box-sizing inside the player itself.
+    * 6. Use a better box model. (opinionated)
     * 7. Remove synthesization on typefaces.
-    * 8. The printed paper's appearance of the content should not be changed except by the user's request. (opinionated)
+    * 8. The printed paper's appearance of the content shouald not be changed except by the user's request. (opinionated)
     * 9. Correct font kerning in all browsers.
     * 10. Correct font styling in all browsers.
     */
 
-.video-player {
+.video-player,
+.video-player::before,
+.video-player::after {
     line-height: 1.6;
     /* 1 */
+    -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     /* 2 */
     -ms-touch-action: manipulation;
@@ -33,10 +36,12 @@
     shape-rendering: geometricPrecision;
     /* 5 */
     -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 6 */
     font-synthesis: none;
     /* 7 */
+    color-adjust: exact;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     /* 8 */
@@ -50,11 +55,15 @@
 /* Sections */
 
 /**
-    * Remove the margin in all browsers.
+    * 1. Remove the margin in all browsers.
+    * 2. Set default fonts consistently in all browsers.
     */
 
 .video-player {
     margin: 0;
+    /* 1 */
+    font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
+    /* 2 */
 }
 
 /**
@@ -90,6 +99,8 @@
     */
 
 .video-player hr {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
     box-sizing: content-box;
     /* 1 */
     height: 0;
@@ -130,6 +141,8 @@
     /* 1 */
     text-decoration: underline;
     /* 2 */
+    -webkit-text-decoration: underline dotted;
+    -moz-text-decoration: underline dotted;
     text-decoration: underline dotted;
     /* 2 */
 }
@@ -151,7 +164,7 @@
 .video-player code,
 .video-player kbd,
 .video-player samp {
-    font-family: monospace, monospace;
+    font-family: "Inconsolata", monospace, monospace;
     /* 1 */
     font-size: 1em;
     /* 2 */
@@ -166,8 +179,7 @@
 }
 
 /**
-    * Prevent "sub" and "sup" elements from affecting the line height in
-    * all browsers.
+    * Prevent "sub" and "sup" elements from affecting the line height in all browsers.
     */
 
 .video-player sub,
@@ -282,14 +294,15 @@
 }
 
 /**
-    * Restore the focus styles unset by the previous rule.
+    * Set the custom outline style in all browsers. (opinionated)
     */
 .video-player :focus,
+.video-player :focus-visible,
 .video-player button:-moz-focusring,
 .video-player [type="button"]:-moz-focusring,
 .video-player [type="reset"]:-moz-focusring,
 .video-player [type="submit"]:-moz-focusring {
-    outline: 1px dotted ButtonText;
+    outline: 2px solid ButtonText;
 }
 
 /**
@@ -308,6 +321,8 @@
     */
 
 .video-player legend {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 1 */
     color: inherit;
@@ -345,6 +360,8 @@
 
 .video-player [type="checkbox"],
 .video-player [type="radio"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 1 */
     padding: 0;
@@ -408,16 +425,6 @@
     display: list-item;
 }
 
-/* Miscellaneous */
-
-/**
-    * Add the correct display in IE 10+.
-    */
-
-template {
-    display: none;
-}
-
 /* Attributes */
 
 /**
@@ -426,4 +433,14 @@ template {
 
 .video-player [hidden] {
     display: none !important;
+}
+
+/* Miscellaneous */
+
+/**
+    * Add the correct display in IE 10+.
+    */
+
+template {
+    display: none;
 }

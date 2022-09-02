@@ -6,8 +6,8 @@ const config = {
 
 const hls = new Hls(config)
 
-const videoPlayerContainer = document.querySelector('.video-player-container')
-const videoPlayer = videoPlayerContainer.querySelector('.video-player')
+const videoPlayerContainer = document.querySelector('.playful-video-player-container')
+const videoPlayer = videoPlayerContainer.querySelector('.playful-video-player')
 
 const video = videoPlayer.querySelector('.video')
 const videoFit = videoPlayer.querySelector('.video-fit-contain')
@@ -345,7 +345,7 @@ videoContainer.addEventListener('contextmenu', (e) => {
 
 function ctxmenuPosition(eventPos) {
     const menuOffset = 8
-    const scope = document.querySelector('.video-player')
+    const scope = videoPlayer
     let x = eventPos.offsetX + menuOffset
     let y = eventPos.offsetY + menuOffset
     const winWidth = scope.innerWidth
@@ -1739,12 +1739,12 @@ const eventListeners = [
             videoContainer.classList.remove('paused')
 
             if (videoPlayer.querySelector('.video-container').classList.contains('played')) {
-                videoPlayer.querySelectorAll('.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
+                videoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
                     element.style.opacity = 1
                 })
-                videoPlayer.querySelector('.video-player .right-side button svg:last-child').addEventListener('animationend', () => {
+                videoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
                     setTimeout(() => {
                         rightVideoControls.querySelectorAll('button svg').forEach(element => {
                             element.style.animationDelay = '0s'
@@ -1881,12 +1881,12 @@ const eventListeners = [
             loadedMetadata()
 
             if (!videoPlayer.querySelector('.video-container').classList.contains('played')) {
-                videoPlayer.querySelectorAll('.video-player .right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
+                videoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
                     element.style.opacity = 1
                 })
-                videoPlayer.querySelector('.video-player .right-side button svg:last-child').addEventListener('animationend', () => {
+                videoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
                     setTimeout(() => {
                         rightVideoControls.querySelectorAll('button svg').forEach(element => {
                             element.style.animationDelay = '0s'

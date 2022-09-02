@@ -19,9 +19,9 @@
     * 10. Correct font styling in all browsers.
     */
 
-.video-player,
-.video-player::before,
-.video-player::after {
+.playful-video-player,
+.playful-video-player::before,
+.playful-video-player::after {
     line-height: 1.6;
     /* 1 */
     -ms-text-size-adjust: 100%;
@@ -58,7 +58,7 @@
     * 2. Set default fonts consistently in all browsers.
     */
 
-.video-player {
+.playful-video-player {
     margin: 0;
     /* 1 */
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
@@ -69,7 +69,7 @@
     * Render the "main" element consistently in IE.
     */
 
-.video-player main {
+.playful-video-player main {
     display: block;
 }
 
@@ -78,13 +78,13 @@
     * "article" contexts in Chrome, Firefox, and Safari.
     */
 
-.video-player h1 {
+.playful-video-player h1 {
     font-size: 2em;
     line-height: 110%;
     margin: 0.67em 0;
 }
 
-.video-player h2 {
+.playful-video-player h2 {
     font-size: 1.75rem;
     line-height: 110%;
     margin: 0.67em 0;
@@ -97,7 +97,7 @@
     * 2. Show the overflow in Edge and IE.
     */
 
-.video-player hr {
+.playful-video-player hr {
     box-sizing: content-box;
     /* 1 */
     height: 0;
@@ -111,7 +111,7 @@
     * 2. Correct the odd "em" font sizing in all browsers.
     */
 
-.video-player pre {
+.playful-video-player pre {
     font-family: monospace, monospace;
     /* 1 */
     font-size: 1em;
@@ -124,7 +124,7 @@
     * Remove the gray background on active links in IE 10.
     */
 
-.video-player a {
+.playful-video-player a {
     background-color: transparent;
 }
 
@@ -133,7 +133,7 @@
     * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
     */
 
-.video-player abbr[title] {
+.playful-video-player abbr[title] {
     border-bottom: none;
     /* 1 */
     text-decoration: underline;
@@ -147,8 +147,8 @@
     * Add the correct font weight in Chrome, Edge, and Safari.
     */
 
-.video-player b,
-.video-player strong {
+.playful-video-player b,
+.playful-video-player strong {
     font-weight: bolder;
 }
 
@@ -157,9 +157,9 @@
     * 2. Correct the odd "em" font sizing in all browsers.
     */
 
-.video-player code,
-.video-player kbd,
-.video-player samp {
+.playful-video-player code,
+.playful-video-player kbd,
+.playful-video-player samp {
     font-family: "Inconsolata", monospace, monospace;
     /* 1 */
     font-size: 1em;
@@ -170,7 +170,7 @@
     * Add the correct font size in all browsers.
     */
 
-.video-player small {
+.playful-video-player small {
     font-size: 80%;
 }
 
@@ -178,19 +178,19 @@
     * Prevent "sub" and "sup" elements from affecting the line height in all browsers.
     */
 
-.video-player sub,
-.video-player sup {
+.playful-video-player sub,
+.playful-video-player sup {
     font-size: 75%;
     line-height: 0;
     position: relative;
     vertical-align: baseline;
 }
 
-.video-player sub {
+.playful-video-player sub {
     bottom: -0.25em;
 }
 
-.video-player sup {
+.playful-video-player sup {
     top: -0.5em;
 }
 
@@ -200,19 +200,19 @@
     * Reseting input range in all browsers.
     */
 
-.video-player input[type="range"],
-.video-player input[type="range"]::-webkit-slider-runnable-track,
-.video-player input[type="range"]::-webkit-slider-thumb {
+.playful-video-player input[type="range"],
+.playful-video-player input[type="range"]::-webkit-slider-runnable-track,
+.playful-video-player input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
 }
 
-.video-player input[type="range"]::-ms-track {
+.playful-video-player input[type="range"]::-ms-track {
     color: transparent;
 }
 
-.video-player input[type="range"]::-ms-fill-lower,
-.video-player input[type="range"]::-ms-fill-upper,
-.video-player input[type="range"]::-ms-tooltip {
+.playful-video-player input[type="range"]::-ms-fill-lower,
+.playful-video-player input[type="range"]::-ms-fill-upper,
+.playful-video-player input[type="range"]::-ms-tooltip {
     display: none;
 }
 
@@ -222,7 +222,7 @@
     * Remove the border on images inside links in IE 10.
     */
 
-.video-player img {
+.playful-video-player img {
     border-style: none;
 }
 
@@ -233,11 +233,11 @@
     * 2. Remove the margin in Firefox and Safari.
     */
 
-.video-player button,
-.video-player input,
-.video-player optgroup,
-.video-player select,
-.video-player textarea {
+.playful-video-player button,
+.playful-video-player input,
+.playful-video-player optgroup,
+.playful-video-player select,
+.playful-video-player textarea {
     font-family: inherit;
     /* 1 */
     font-size: 100%;
@@ -252,8 +252,8 @@
     * Show the overflow in IE and Edge.
     */
 
-.video-player button,
-.video-player input {
+.playful-video-player button,
+.playful-video-player input {
     overflow: visible;
 }
 
@@ -261,8 +261,8 @@
     * Remove the inheritance of text transform in Edge, Firefox, and IE.
     */
 
-.video-player button,
-.video-player select {
+.playful-video-player button,
+.playful-video-player select {
     text-transform: none;
 }
 
@@ -270,10 +270,10 @@
     * Correct the inability to style clickable types in iOS and Safari.
     */
 
-.video-player button,
-.video-player [type="button"],
-.video-player [type="reset"],
-.video-player [type="submit"] {
+.playful-video-player button,
+.playful-video-player [type="button"],
+.playful-video-player [type="reset"],
+.playful-video-player [type="submit"] {
     -webkit-appearance: button;
 }
 
@@ -281,10 +281,10 @@
     * Remove the inner border and padding in Firefox.
     */
 
-.video-player button::-moz-focus-inner,
-.video-player [type="button"]::-moz-focus-inner,
-.video-player [type="reset"]::-moz-focus-inner,
-.video-player [type="submit"]::-moz-focus-inner {
+.playful-video-player button::-moz-focus-inner,
+.playful-video-player [type="button"]::-moz-focus-inner,
+.playful-video-player [type="reset"]::-moz-focus-inner,
+.playful-video-player [type="submit"]::-moz-focus-inner {
     border-style: none;
     padding: 0;
 }
@@ -293,20 +293,20 @@
     * Set the custom outline style in all browsers. (opinionated)
     */
 
-.video-player button:-moz-focusring,
-.video-player [type="button"]:-moz-focusring,
-.video-player [type="reset"]:-moz-focusring,
-.video-player [type="submit"]:-moz-focusring {
+.playful-video-player button:-moz-focusring,
+.playful-video-player [type="button"]:-moz-focusring,
+.playful-video-player [type="reset"]:-moz-focusring,
+.playful-video-player [type="submit"]:-moz-focusring {
     outline: 2px solid transparent;
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
-.video-player .focus-visible {
+.playful-video-player .focus-visible {
     outline: 2px solid transparent;
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
-.video-player :focus-visible {
+.playful-video-player :focus-visible {
     outline: 2px solid transparent;
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
@@ -315,7 +315,7 @@
     * Correct the padding in Firefox.
     */
 
-.video-player fieldset {
+.playful-video-player fieldset {
     padding: 0.35em 0.75em 0.625em;
 }
 
@@ -326,7 +326,7 @@
     *    "fieldset" elements in all browsers.
     */
 
-.video-player legend {
+.playful-video-player legend {
     box-sizing: border-box;
     /* 1 */
     color: inherit;
@@ -345,7 +345,7 @@
     * Add the correct vertical alignment in Chrome, Firefox, and Opera.
     */
 
-.video-player progress {
+.playful-video-player progress {
     vertical-align: baseline;
 }
 
@@ -353,7 +353,7 @@
     * Remove the default vertical scrollbar in IE 10+.
     */
 
-.video-player textarea {
+.playful-video-player textarea {
     overflow: auto;
 }
 
@@ -362,8 +362,8 @@
     * 2. Remove the padding in IE 10.
     */
 
-.video-player [type="checkbox"],
-.video-player [type="radio"] {
+.playful-video-player [type="checkbox"],
+.playful-video-player [type="radio"] {
     box-sizing: border-box;
     /* 1 */
     padding: 0;
@@ -374,8 +374,8 @@
     * Correct the cursor style of increment and decrement buttons in Chrome.
     */
 
-.video-player [type="number"]::-webkit-inner-spin-button,
-.video-player [type="number"]::-webkit-outer-spin-button {
+.playful-video-player [type="number"]::-webkit-inner-spin-button,
+.playful-video-player [type="number"]::-webkit-outer-spin-button {
     height: auto;
 }
 
@@ -384,7 +384,7 @@
     * 2. Correct the outline style in Safari.
     */
 
-.video-player [type="search"] {
+.playful-video-player [type="search"] {
     -webkit-appearance: textfield;
     /* 1 */
     outline-offset: -2px;
@@ -395,7 +395,7 @@
     * Remove the inner padding in Chrome and Safari on macOS.
     */
 
-.video-player [type="search"]::-webkit-search-decoration {
+.playful-video-player [type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
@@ -404,7 +404,7 @@
        * 2. Change font properties to "inherit" in Safari.
        */
 
-.video-player ::-webkit-file-upload-button {
+.playful-video-player ::-webkit-file-upload-button {
     -webkit-appearance: button;
     /* 1 */
     font: inherit;
@@ -415,7 +415,7 @@
     * Add the correct display in Edge, IE 10+, and Firefox.
     */
 
-.video-player details {
+.playful-video-player details {
     display: block;
 }
 
@@ -423,7 +423,7 @@
     * Add the correct display in all browsers.
     */
 
-.video-player summary {
+.playful-video-player summary {
     display: list-item;
 }
 
@@ -433,7 +433,7 @@
     * Add the correct display in IE 10+.
     */
 
-.video-player [hidden] {
+.playful-video-player [hidden] {
     display: none;
 }
 

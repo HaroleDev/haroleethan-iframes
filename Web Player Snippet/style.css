@@ -1,6 +1,6 @@
 @import "./playful_vp_normalize.css";
 
-.video-player {
+.playful-video-player {
     --text-color: #F0F0F0;
     --shadow-text-color: #B0B0B0;
     --dark-text-color: #161616;
@@ -27,12 +27,12 @@
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
 }
 
-.video-player * {
+.playful-video-player * {
     accent-color: var(--accent-color);
     color-scheme: light dark;
 }
 
-.video-player-container.preload * {
+.playful-video-player-container.preload * {
     --aspect-ratio-size: calc(16 / 9);
     --aspect-ratio-size-inverse: calc(9 / 16);
     animation-duration: 0s !important;
@@ -140,14 +140,14 @@
     will-change: width, height, max-width, max-height;
 }
 
-.video-player.loading .video-fit-contain {
+.playful-video-player.loading .video-fit-contain {
     opacity: 1;
     -webkit-filter: brightness(60%);
     filter: brightness(60%);
 }
 
-.video-player.loading .video-controls-container,
-.video-player.loading .video-information-overlay {
+.playful-video-player.loading .video-controls-container,
+.playful-video-player.loading .video-information-overlay {
     opacity: 0.6 !important;
 }
 
@@ -302,7 +302,7 @@
     pointer-events: none;
 }
 
-.video-player.full-screen .controls-container {
+.playful-video-player.full-screen .controls-container {
     margin: 0 auto;
 }
 
@@ -696,8 +696,8 @@
     display: none;
 }
 
-.video-player.full-screen .enter,
-.video-player:not(.full-screen) .exit {
+.playful-video-player.full-screen .enter,
+.playful-video-player:not(.full-screen) .exit {
     position: absolute;
     width: 0;
     height: 0;
@@ -753,8 +753,8 @@
     pointer-events: none;
 }
 
-.video-player[data-device="iPadOS"] .video-information-overlay,
-.video-player[data-device="iPadOS"] .video-information-container {
+.playful-video-player[data-device="iPadOS"] .video-information-overlay,
+.playful-video-player[data-device="iPadOS"] .video-information-container {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
@@ -826,8 +826,8 @@
     color: var(--text-color);
 }
 
-.video-player:not(.full-screen) .video-information-overlay,
-.video-player:not(.full-screen) .video-information-container {
+.playful-video-player:not(.full-screen) .video-information-overlay,
+.playful-video-player:not(.full-screen) .video-information-container {
     opacity: 0 !important;
     pointer-events: none;
     -webkit-user-select: none;
@@ -1619,7 +1619,7 @@
     animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
 }
 
-.video-player .right-side button svg {
+.playful-video-player .right-side button svg {
     -webkit-animation-name: bounceIn;
     animation-name: bounceIn;
     -webkit-animation-duration: 600ms;
@@ -1633,13 +1633,13 @@
     opacity: 0;
 }
 
-.video-player:not(.full-screen) .right-side button svg.enter,
-.video-player.full-screen .right-side button svg.exit {
+.playful-video-player:not(.full-screen) .right-side button svg.enter,
+.playful-video-player.full-screen .right-side button svg.exit {
     opacity: 1 !important;
 }
 
-.video-player:not(.full-screen) .right-side button svg.exit,
-.video-player.full-screen .right-side button svg.enter {
+.playful-video-player:not(.full-screen) .right-side button svg.exit,
+.playful-video-player.full-screen .right-side button svg.enter {
     opacity: 0 !important;
 }
 
@@ -2125,20 +2125,20 @@
     opacity: 0.6;
 }
 
-.video-player .video-context-menu .item .check,
-.video-player .page-contents .item .check {
+.playful-video-player .video-context-menu .item .check,
+.playful-video-player .page-contents .item .check {
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
     transition: opacity 300ms var(--ease-out-expo);
 }
 
-.video-player .video-context-menu .item:not([aria-checked="true"]) .check,
-.video-player .page-contents .item:not([aria-checked="true"]) .check {
+.playful-video-player .video-context-menu .item:not([aria-checked="true"]) .check,
+.playful-video-player .page-contents .item:not([aria-checked="true"]) .check {
     opacity: 0;
 }
 
-.video-player .video-context-menu .item:not([aria-checked="true"]):hover .check,
-.video-player .page-contents .item:not([aria-checked="true"]):hover .check {
+.playful-video-player .video-context-menu .item:not([aria-checked="true"]):hover .check,
+.playful-video-player .page-contents .item:not([aria-checked="true"]):hover .check {
     opacity: 0.1;
 }
 
@@ -2985,7 +2985,7 @@
     word-wrap: break-word;
 }
 
-.video-player {
+.playful-video-player {
     position: absolute;
     top: 0;
     left: 0;
@@ -3011,7 +3011,7 @@
     transition: all 300ms var(--ease-out-expo);
 }
 
-.full-screen .video-player-container {
+.full-screen .playful-video-player-container {
     -webkit-transition: none;
     -o-transition: none;
     transition: none;
@@ -3020,7 +3020,7 @@
     box-shadow: none !important;
 }
 
-.full-screen.video-player {
+.full-screen.playful-video-player {
     -webkit-animation: fullscreenPlayer 600ms var(--ease-out-expo);
     animation: fullscreenPlayer 600ms var(--ease-out-expo);
     will-change: filter, webkit-filter;
@@ -3050,7 +3050,7 @@
     }
 }
 
-.transcript-opened.video-player {
+.transcript-opened.playful-video-player {
     position: absolute;
     top: 0;
     left: 0;
@@ -3058,7 +3058,7 @@
     height: 100%;
 }
 
-.video-player-container {
+.playful-video-player-container {
     margin-bottom: 16px;
     overflow: hidden;
     padding-top: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
@@ -3069,12 +3069,12 @@
     transition: all 300ms var(--ease-out-expo);
 }
 
-.video-player-container {
+.playful-video-player-container {
     -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 0px #BBF7E5, 0px 4px 0px 0px rgba(187, 247, 229, 0.6), 0px 4px 0px 0px rgba(187, 247, 229, 0.3), 0px 4px 0px 0px rgba(187, 247, 229, 0.1);
     box-shadow: 0px 4px 0px rgba(0, 0, 0, 0), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 0px #BBF7E5, 0px 4px 0px 0px rgba(187, 247, 229, 0.6), 0px 4px 0px 0px rgba(187, 247, 229, 0.3), 0px 4px 0px 0px rgba(187, 247, 229, 0.1);
 }
 
-.video-player-container:hover {
+.playful-video-player-container:hover {
     -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #BBF7E5, 0px 4px 0px 14px rgba(187, 247, 229, 0.6), 0px 4px 0px 24px rgba(187, 247, 229, 0.3), 0px 4px 0px 32px rgba(187, 247, 229, 0.1);
     box-shadow: 0px 4px 0px rgba(0, 0, 0, 0), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #BBF7E5, 0px 4px 0px 14px rgba(187, 247, 229, 0.6), 0px 4px 0px 24px rgba(187, 247, 229, 0.3), 0px 4px 0px 32px rgba(187, 247, 229, 0.1);
 }
@@ -3525,7 +3525,7 @@ screen and (max-height: 600px) {
 
 @media (-ms-high-contrast: active),
 (forced-colors: active) {
-    .video-player {
+    .playful-video-player {
         --text-color: CanvasText;
         --shadow-text-color: CanvasText;
         --dark-text-color: CanvasText;
@@ -3546,7 +3546,7 @@ screen and (max-height: 600px) {
         --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
     }
 
-    .video-player {
+    .playful-video-player {
         background-color: Canvas;
     }
 
@@ -3822,7 +3822,7 @@ screen and (max-height: 600px) {
         outline-color: Highlight;
     }
 
-    .video-player-container {
+    .playful-video-player-container {
         outline-width: 2px;
         outline-style: solid;
         outline-color: CanvasText;
@@ -3831,7 +3831,7 @@ screen and (max-height: 600px) {
         transition: all 300ms var(--ease-out-expo), outline-color 0s;
     }
 
-    .video-player-container:hover {
+    .playful-video-player-container:hover {
         outline-width: 8px;
         outline-color: Highlight;
     }
@@ -4139,8 +4139,8 @@ screen and (max-height: 600px) {
         outline: 2px solid CanvasText;
     }
 
-    .video-player .video-context-menu .item:not([aria-checked="true"]):hover .check,
-    .video-player .page-contents .item:not([aria-checked="true"]):hover .check {
+    .playful-video-player .video-context-menu .item:not([aria-checked="true"]):hover .check,
+    .playful-video-player .page-contents .item:not([aria-checked="true"]):hover .check {
         opacity: 0;
     }
 
@@ -4197,7 +4197,7 @@ screen and (max-height: 600px) {
 
 @media (prefers-reduced-motion: reduce) {
 
-    .full-screen.video-player,
+    .full-screen.playful-video-player,
     .full-screen .video-fit-contain {
         -webkit-animation: none;
         animation: none;
@@ -4216,7 +4216,7 @@ screen and (max-height: 600px) {
         animation: none;
     }
 
-    .video-player .right-side button svg {
+    .playful-video-player .right-side button svg {
         -webkit-animation-name: bounceIn;
         animation-name: bounceIn;
         -webkit-animation-duration: 0s;

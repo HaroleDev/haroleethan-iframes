@@ -24,7 +24,6 @@
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
     font-family: "Manrope Variable", "Manrope", Arial, Helvetica, sans-serif;
-    font-style: normal;
 }
 
 .video-player * {
@@ -809,9 +808,8 @@
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 2rem;
-    line-height: 110%;
     margin: 0;
+    margin-bottom: 2px;
     cursor: text;
     text-align: left;
     color: var(--text-color);
@@ -1104,8 +1102,8 @@
     -webkit-transform: translateX(-100%);
     -ms-transform: translateX(-100%);
     transform: translateX(-100%);
-    -webkit-animation: buffer 2s infinite linear;
-    animation: buffer 2s infinite linear;
+    -webkit-animation: bufferBar 2s infinite linear;
+    animation: bufferBar 2s infinite linear;
     background-image: var(--buffer-scrubber-accent);
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
@@ -1126,7 +1124,7 @@
     animation-play-state: paused;
 }
 
-@-webkit-keyframes buffer {
+@-webkit-keyframes bufferBar {
     0% {
         -webkit-transform: translateX(-100%);
         transform: translateX(-100%);
@@ -1138,7 +1136,7 @@
     }
 }
 
-@keyframes buffer {
+@keyframes bufferBar {
     0% {
         -webkit-transform: translateX(-100%);
         transform: translateX(-100%);
@@ -2243,7 +2241,6 @@
 }
 
 .dialog h2 {
-    line-height: 110%;
     margin: 0 auto;
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
@@ -2253,7 +2250,6 @@
 }
 
 .dialog p {
-    line-height: 160%;
     margin: 0 auto;
     margin-bottom: 16px;
 }
@@ -2888,22 +2884,6 @@ div.tooltip-right::after {
     background: transparent;
 }
 
-input[type=range],
-input[type=range]::-webkit-slider-runnable-track,
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-}
-
-input[type=range]::-ms-track {
-    color: transparent;
-}
-
-input[type=range]::-ms-fill-lower,
-input[type=range]::-ms-fill-upper,
-input[type=range]::-ms-tooltip {
-    display: none;
-}
-
 .dialog .equalizers,
 .eq-dialog-container[aria-checked="true"]:not(.opened) .equalizers {
     pointer-events: none;
@@ -2981,12 +2961,9 @@ input[type=range]::-ms-tooltip {
 }
 
 .transcript-panel h1 {
-    font-style: normal;
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 2rem;
-    line-height: 110%;
     color: var(--text-color);
     margin: 0;
     margin-bottom: 8px;
@@ -2994,9 +2971,6 @@ input[type=range]::-ms-tooltip {
 
 .transcript-panel .span,
 .transcript-panel .transcript-language {
-    font-style: normal;
-    font-size: 1rem;
-    line-height: 160%;
     color: var(--text-color);
     word-wrap: break-word;
 }
@@ -3031,7 +3005,7 @@ input[type=range]::-ms-tooltip {
     -webkit-transition: none;
     -o-transition: none;
     transition: none;
-    border-radius: 0px;
+    border-radius: 0;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 }
@@ -3386,18 +3360,14 @@ input[type=range]::-ms-tooltip {
 .error-dialog p {
     font-variation-settings: "wght" 500;
     font-weight: 500;
-    font-size: 1rem;
-    line-height: 160%;
     margin: 0;
 }
 
-.error-dialog h3 {
-    line-height: 160%;
+.error-dialog h2 {
     margin: 0;
     font-variation-settings: "wght" 800;
     letter-spacing: -0.04em;
     font-weight: 800;
-    font-size: 1rem;
 }
 
 @media screen and (max-width: 1024px),

@@ -21,6 +21,7 @@
     -webkit-print-color-adjust: exact;
     -webkit-font-kerning: normal;
     font-kerning: normal;
+    font-style: normal;
 }
 
 /* Sections */
@@ -48,9 +49,15 @@
 
 .video-player h1 {
     font-size: 2em;
+    line-height: 110%;
     margin: 0.67em 0;
 }
 
+.video-player h2 {
+    font-size: 1.75rem;
+    line-height: 110%;
+    margin: 0.67em 0;
+}
 /* Grouping content */
 
 /**
@@ -153,6 +160,24 @@
 
 .video-player sup {
     top: -0.5em;
+}
+
+/* Input semantics */
+
+.video-player input[type=range],
+.video-player input[type=range]::-webkit-slider-runnable-track,
+.video-player input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+.video-player input[type=range]::-ms-track {
+    color: transparent;
+}
+
+.video-player input[type=range]::-ms-fill-lower,
+.video-player input[type=range]::-ms-fill-upper,
+.video-player input[type=range]::-ms-tooltip {
+    display: none;
 }
 
 /* Embedded content */

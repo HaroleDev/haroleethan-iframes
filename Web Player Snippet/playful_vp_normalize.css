@@ -27,6 +27,7 @@
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     /* 2 */
+    -ms-touch-action: manipulation;
     touch-action: manipulation;
     /* 3 */
     image-rendering: auto;
@@ -34,6 +35,8 @@
     text-rendering: geometricPrecision;
     shape-rendering: geometricPrecision;
     /* 5 */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 6 */
     font-synthesis: none;
@@ -44,7 +47,8 @@
     /* 8 */
     -webkit-font-kerning: normal;
     -webkit-font-feature-settings: "kern";
-            font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern";
+    font-feature-settings: "kern";
     font-kerning: normal;
     /* 9 */
     font-style: normal;
@@ -98,6 +102,8 @@
     */
 
 .playful-video-player hr {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
     box-sizing: content-box;
     /* 1 */
     height: 0;
@@ -139,6 +145,7 @@
     text-decoration: underline;
     /* 2 */
     -webkit-text-decoration: underline dotted;
+    -moz-text-decoration: underline dotted;
     text-decoration: underline dotted;
     /* 2 */
 }
@@ -298,16 +305,21 @@
 .playful-video-player [type="reset"]:-moz-focusring,
 .playful-video-player [type="submit"]:-moz-focusring {
     outline: 2px solid transparent;
+    -moz-box-shadow: 0 0 0 2px var(--link-and-focus-color);
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
 .playful-video-player .focus-visible {
     outline: 2px solid transparent;
+    -webkit-box-shadow: 0 0 0 2px var(--link-and-focus-color);
+    -moz-box-shadow: 0 0 0 2px var(--link-and-focus-color);
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
 .playful-video-player :focus-visible {
     outline: 2px solid transparent;
+    -webkit-box-shadow: 0 0 0 2px var(--link-and-focus-color);
+    -moz-box-shadow: 0 0 0 2px var(--link-and-focus-color);
     box-shadow: 0 0 0 2px var(--link-and-focus-color);
 }
 
@@ -327,6 +339,8 @@
     */
 
 .playful-video-player legend {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 1 */
     color: inherit;
@@ -364,6 +378,8 @@
 
 .playful-video-player [type="checkbox"],
 .playful-video-player [type="radio"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     /* 1 */
     padding: 0;
@@ -443,6 +459,6 @@
     * Add the correct display in IE 10+.
     */
 
-template {
+.playful-video-player template {
     display: none;
 }

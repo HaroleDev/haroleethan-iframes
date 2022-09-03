@@ -1240,8 +1240,7 @@
 .video-container.caption .caption-button svg,
 .video-container.pip-player .pip-button svg,
 .video-container.casted-session .gcast-button svg {
-    --animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
-    animation: var(--animation);
+    animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
 }
 
 .video-container.caption .caption-button svg .c {
@@ -3464,13 +3463,24 @@ screen and (max-height: 600px) {
         border-radius: 4px;
         width: 32px;
         bottom: 0;
-        opacity: 0;
         margin-left: 0;
+    }
+
+    .video-container .caption-button::after,
+    .video-container .pip-button::after,
+    .video-container .gcast-button::after {
+        opacity: 0;
+    }
+    .video-container.caption .caption-button::after,
+    .video-container.pip-player .pip-button::after,
+    .video-container.casted-session .gcast-button::after {
+        opacity: 1;
     }
 
     .video-container .settings-button:hover path,
     .video-container .settings-button:active path,
-    .video-container .settings-button.pressed path {
+    .video-container .settings-button.pressed path,
+    .video-container .settings-button.pressed:active path {
         transform: none;
     }
 
@@ -3536,24 +3546,21 @@ screen and (max-height: 600px) {
     }
 
     @supports (clip-path: circle(0% at 0% 0%)) {
+        .settings-context-menu,
         .video-context-menu {
             opacity: 0;
             clip-path: none;
         }
 
-        .video-context-menu.show {
-            opacity: 1;
-            clip-path: none;
-        }
-
-        .settings-context-menu {
-            opacity: 0;
-            clip-path: none;
-        }
-
+        .video-context-menu.show,
         .settings-context-menu.pressed {
             opacity: 1;
             clip-path: none;
         }
+    }
+
+    .video-container .caption-button svg .c,
+    .video-container.caption .caption-button svg .c {
+        animation: none;
     }
 }

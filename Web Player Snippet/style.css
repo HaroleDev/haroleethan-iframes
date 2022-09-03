@@ -344,6 +344,7 @@
     isolation: isolate;
     margin: auto;
     stroke-linecap: round;
+    stroke-width: 8px;
     stroke-dasharray: 0, 480;
     stroke-dashoffset: 360;
     stroke: var(--accent-color);
@@ -362,6 +363,7 @@
     z-index: 3;
     stroke: var(--accent-color);
     stroke-linecap: round;
+    stroke-width: 14px;
     isolation: isolate;
     margin: auto;
     opacity: 0;
@@ -375,9 +377,10 @@
     bottom: 0;
     right: 0;
     z-index: 3;
-    stroke: rgba(0, 0, 0, 1);
+    stroke: var(--stroke-accent-color);
     mix-blend-mode: multiply;
     stroke-linecap: round;
+    stroke-width: 3px;
     isolation: isolate;
     margin: auto;
     opacity: 0;
@@ -385,16 +388,15 @@
 }
 
 .buffering .buffering-circle-track,
-.buffering-scrubbing .buffering-circle-track,
-.buffering .buffering-circle-stroke,
-.buffering-scrubbing .buffering-circle-stroke {
-    opacity: 0.2;
+.buffering-scrubbing .buffering-circle-track {
+    opacity: 0.1;
     transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
 }
 
 .buffering .buffering-circle-stroke,
 .buffering-scrubbing .buffering-circle-stroke {
     opacity: 0.3;
+    transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
 }
 
 .buffering-container {
@@ -414,10 +416,24 @@
 }
 
 .buffering .buffering-circle,
-.buffering-scrubbing .buffering-circle,
+.buffering-scrubbing .buffering-circle {
+    animation: buffer-ring 3s infinite ease;
+    animation-delay: 1s;
+    animation-play-state: running;
+    opacity: 1;
+}
+
 .buffering .buffering-circle-stroke,
 .buffering-scrubbing .buffering-circle-stroke {
-    animation: buffer-ring 3s infinite ease;
+    animation: buffer-ring-stroke 3s infinite ease;
+    animation-delay: 1s;
+    animation-play-state: running;
+    opacity: 1;
+}
+
+.buffering .buffering-circle-track,
+.buffering-scrubbing .buffering-circle-track {
+    animation: buffer-ring-track 3s infinite ease;
     animation-delay: 1s;
     animation-play-state: running;
     opacity: 1;
@@ -430,15 +446,58 @@
 
 @keyframes buffer-ring {
     0% {
+        stroke-width: 0px;
         stroke-dasharray: 0, 480;
         stroke-dashoffset: 360;
         transform: rotate(-195deg);
     }
 
+    50% {
+        stroke-width: 12px;
+    }
+
     100% {
+        stroke-width: 0px;
         stroke-dasharray: 360, 420;
         stroke-dashoffset: 360;
         transform: rotate(300deg);
+    }
+}
+
+@keyframes buffer-ring-stroke {
+    0% {
+        stroke-width: 0px;
+        stroke-dasharray: 0, 480;
+        stroke-dashoffset: 360;
+        transform: rotate(-195deg);
+    }
+
+    33%,
+    66% {
+        stroke-width: 14px;
+    }
+
+    100% {
+        stroke-width: 0px;
+        stroke-dasharray: 360, 420;
+        stroke-dashoffset: 360;
+        transform: rotate(300deg);
+    }
+}
+
+@keyframes buffer-ring-track {
+    0% {
+        stroke-width: 0px;
+    }
+
+    11%,
+    66% {
+        stroke-width: 3px;
+    }
+
+    77%,
+    100% {
+        stroke-width: 0px;
     }
 }
 

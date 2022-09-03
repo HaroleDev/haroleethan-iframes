@@ -193,25 +193,25 @@ function canFullscreen() {
 window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
     /* if (!Hls.isSupported()) {
-                      hls.loadSource(videoMetadata.HLS_src);
-                      hls.attachMedia(video);
-                      source.setAttribute("type", videoMetadata.HLS_codec);
-                      //For HLS container
-                      hls.on(Hls.Events.LEVEL_LOADED, function () {
-                          loadedMetadata();
-                      });
-                  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-                      source.setAttribute("src", videoMetadata.HLS_src);
-                      source.setAttribute("type", videoMetadata.HLS_codec);
-                      video.load();
-                      video.addEventListener("durationchange", updatetime);
-                  } else {
-                      source.setAttribute("src", videoMetadata.Fallback_src);
-                      source.setAttribute("type", videoMetadata.Fallback_codec);
-                      video.load();
-                      //For MP4 container
-                      video.addEventListener("durationchange", updatetime);
-                  }; */
+                        hls.loadSource(videoMetadata.HLS_src);
+                        hls.attachMedia(video);
+                        source.setAttribute("type", videoMetadata.HLS_codec);
+                        //For HLS container
+                        hls.on(Hls.Events.LEVEL_LOADED, function () {
+                            loadedMetadata();
+                        });
+                    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                        source.setAttribute("src", videoMetadata.HLS_src);
+                        source.setAttribute("type", videoMetadata.HLS_codec);
+                        video.load();
+                        video.addEventListener("durationchange", updatetime);
+                    } else {
+                        source.setAttribute("src", videoMetadata.Fallback_src);
+                        source.setAttribute("type", videoMetadata.Fallback_codec);
+                        video.load();
+                        //For MP4 container
+                        video.addEventListener("durationchange", updatetime);
+                    }; */
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
     video.load()
@@ -305,10 +305,12 @@ function handleInputChange(e) {
     const min = target.min
     const max = target.max
     const val = target.value
-    const firstHalf = ((val - min) * 100) / (max - min) > 50 ? (((val - min) * 100) / (max - min) - 50) : ((val - min) * 100) / (max - min) === 50 ? 0 : (100 - ((val - min) * 100) / (max - min) - 50)
-    const secondHalf = ((val - min) * 100) / (max - min) * 2 >= 100 ? (((val - min) * 100) / (max - min)) : ((val - min) * 100) / (max - min) * 2 < 100 ? (((val - min) * 100) / (max - min)) : ((val - min) * 100) / (max - min) * 2
-    target.style.setProperty('background-size', `${firstHalf}% 100%`)
-    target.style.setProperty('background-position', `${secondHalf}% 100%`)
+    const bg = ((val - min) * 100) / (max - min)
+    target.style.setProperty('--gradient',
+        bg < 50
+            ? `linear-gradient(-90deg, transparent 50%, var(--bright-accent-color) 50%, var(--accent-color) ${100 - bg}%, transparent ${100 - bg}%)`
+            : `linear-gradient(90deg, transparent 50%, var(--accent-color) 50%, var(--bright-accent-color) ${bg}%, transparent ${bg}% )`
+    )
 }
 
 // Context menu

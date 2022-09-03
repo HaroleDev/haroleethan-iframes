@@ -19,6 +19,7 @@
     --chrome-overlay-inverse: linear-gradient(360deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00518832) 6.67%, rgba(0, 0, 0, 0.021306) 13.33%, rgba(0, 0, 0, 0.0489959) 20%, rgba(0, 0, 0, 0.0884468) 26.67%, rgba(0, 0, 0, 0.139065) 33.33%, rgba(0, 0, 0, 0.19913) 40%, rgba(0, 0, 0, 0.265615) 46.67%, rgba(0, 0, 0, 0.334385) 53.33%, rgba(0, 0, 0, 0.40087) 60%, rgba(0, 0, 0, 0.460935) 66.67%, rgba(0, 0, 0, 0.511553) 73.33%, rgba(0, 0, 0, 0.551004) 80%, rgba(0, 0, 0, 0.578694) 86.67%, rgba(0, 0, 0, 0.594812) 93.33%, rgba(0, 0, 0, 0.6) 100%);
     --page-background: #E7FEF7;
     --flyout-bg: #082b21f5;
+    --light-blue-color: #CCE7FF;
     --blue-color: #4B99E7;
     --mid-blue-color: #2771D7;
     --dark-blue-color: #0047BB;
@@ -155,13 +156,11 @@
 @keyframes ExitFullScreenTransition {
     0% {
         opacity: 0;
-        filter: blur(1vh);
         transform: scale(1.1);
     }
 
     40% {
         opacity: 1;
-        filter: blur(0vh);
     }
 
     100% {
@@ -172,13 +171,11 @@
 @keyframes FullScreenTransition {
     0% {
         opacity: 0;
-        filter: blur(1vh);
         transform: scale(0.9);
     }
 
     40% {
         opacity: 1;
-        filter: blur(0vh);
     }
 
     100% {
@@ -187,8 +184,7 @@
 }
 
 .full-screen .video-fit-contain {
-    --animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
-    animation: var(--animation);
+    animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
 }
 
 .video-controls-container {
@@ -542,15 +538,18 @@
     background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0.1) 50%, #00000000 75%);
 }
 
+.transcript-panel button path,
 .video-controls-container .right-side button path {
     fill: var(--text-color);
     transition: var(--300ms-all-ease-out-expo-prop);
 }
 
+.transcript-panel button:hover path,
 .video-controls-container .right-side button:hover path {
     fill: var(--accent-color);
 }
 
+.transcript-panel button:active path,
 .video-controls-container .right-side button:active path {
     fill: var(--dark-accent-color);
 }
@@ -1169,7 +1168,7 @@
 .seeking-preview__time-tooltip {
     padding: 6px 12px;
     text-align: center;
-    width: fit-content;
+    width: max-content;
     font-variant-numeric: tabular-nums;
     font-variant: normal;
     letter-spacing: -0.02em;
@@ -1470,7 +1469,7 @@
     background-color: var(--flyout-bg);
     color: var(--text-color);
     min-width: 256px;
-    width: fit-content;
+    width: max-content;
     z-index: 6;
     border-radius: 8px;
     opacity: 0;
@@ -1559,7 +1558,7 @@
     background: var(--flyout-bg);
     color: var(--text-color);
     min-width: 256px;
-    width: fit-content;
+    width: max-content;
     z-index: 5;
     border-radius: 8px;
     right: 0;
@@ -1649,6 +1648,24 @@
     transition: var(--300ms-all-ease-out-expo-prop);
 }
 
+.settings-context-menu .page .header .contents.back-page .span {
+    margin-bottom: -1px;
+}
+
+.settings-context-menu .page .header .contents.back-page .span::after {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    z-index: -1;
+    right: 0;
+    width: 0%;
+    height: 2px;
+    border-radius: 100vw;
+    background-color: var(--text-color);
+    opacity: 0.3;
+    transition: var(--600ms-all-ease-out-expo-prop);
+}
+
 .settings-context-menu .page .header .contents.back-page .back-arrow {
     transform: translateX(0);
     fill: var(--text-color);
@@ -1667,6 +1684,12 @@
     fill: var(--accent-color);
 }
 
+.settings-context-menu .page .header .contents.back-page:hover .span::after {
+    width: 100%;
+    left: 0;
+    background-color: var(--accent-color);
+}
+
 .settings-context-menu .page .header .contents.back-page:active {
     color: var(--dark-accent-color);
 }
@@ -1679,11 +1702,14 @@
     fill: var(--dark-accent-color);
 }
 
-.settings-context-menu .page .header h2 {
+.settings-context-menu .page .header .span {
+    position: relative;
     font-variation-settings: "wght" 800;
     font-weight: 800;
     font-size: 1rem;
     margin-left: 6px;
+    padding: 0;
+    isolation: isolate;
 }
 
 .settings-context-menu .page .header svg {
@@ -1778,9 +1804,9 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    width: max-content;
+    width: fit-content;
     max-width: 640px;
-    height: max-content;
+    height: fit-content;
     background: var(--background);
     color: var(--text-color);
     z-index: 7;
@@ -2124,7 +2150,7 @@
     font-size: 1rem;
     top: 40px;
     z-index: 5;
-    height: fit-content;
+    height: max-content;
     font-variant-ligatures: none;
 }
 
@@ -2157,23 +2183,19 @@
 .volume-tooltip-container {
     width: 48px;
     background-color: transparent;
-    --border-radius: 0px 8px 8px 0px;
-    border-radius: var(--border-radius);
-    --transition: var(--300ms-all-ease-in-expo-prop), width 300ms var(--ease-in-expo);
-    transition: var(--transition);
+    border-radius: 0px 8px 8px 0px;
+    transition: var(--300ms-all-ease-in-expo-prop), width 300ms var(--ease-in-expo);
 }
 
 .volume-tooltip-container:hover {
     background-color: #00000099;
-    --transition: var(--300ms-all-ease-out-expo-prop), width 300ms var(--ease-in-expo);
-    transition: var(--transition);
+    transition: var(--300ms-all-ease-out-expo-prop), width 300ms var(--ease-in-expo);
 }
 
 .switch .switch-knob {
     transform: translate(0, -2px);
     will-change: transform;
-    --filter: drop-shadow(0px 2px 0px #AFC9C1) drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
-    filter: var(--filter);
+    filter: drop-shadow(0px 2px 0px #AFC9C1) drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
     fill: #DBFBF1;
     transition: var(--300ms-all-ease-out-expo-prop);
 }
@@ -2204,7 +2226,7 @@
 .dialog .eq-control input {
     height: 12px;
     background-color: var(--tooltip-bg);
-    background-image: linear-gradient(var(--accent-color), var(--accent-color));
+    background-image: linear-gradient(-90deg, var(--accent-color), var(--accent-color));
     background-size: 50% 100%;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -2219,8 +2241,7 @@
     border-radius: 50%;
     border: 0px solid #DAFCF1;
     box-sizing: content-box;
-    --box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
-    box-shadow: var(--box-shadow);
+    box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
     background: #DAFCF1;
     cursor: grab;
     -webkit-transition: var(--300ms-all-ease-out-expo-prop);
@@ -2262,7 +2283,7 @@
 
 .dialog .eq-control input:hover {
     background-color: var(--lighter-foreground);
-    background-image: linear-gradient(var(--accent-color), var(--accent-color));
+    background-image: linear-gradient(-90deg, var(--bright-accent-color), var(--accent-color));
     background-size: 50% 100%;
     background-repeat: no-repeat;
 }
@@ -2271,14 +2292,12 @@
     background: #D1EFE6;
     box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 10px rgba(2, 218, 154, 0.3);
     border: 4px solid #D1EFE6;
-    box-sizing: content-box;
 }
 
 .dialog .eq-control input::-moz-range-thumb:active {
     background: #0DE4A4;
     box-shadow: -2px 0px 0px #0CCE94, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 16px rgba(2, 218, 154, 0.6);
     border: 6px solid #0DE4A4;
-    box-sizing: content-box;
     cursor: grabbing;
 }
 
@@ -2286,14 +2305,12 @@
     background: #D1EFE6;
     box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 10px rgba(2, 218, 154, 0.3);
     border: 4px solid #D1EFE6;
-    box-sizing: content-box;
 }
 
 .dialog .eq-control input::-webkit-slider-thumb:active {
     background: #0DE4A4;
     box-shadow: -2px 0px 0px #0CCE94, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 16px rgba(2, 218, 154, 0.6);
     border: 6px solid #0DE4A4;
-    box-sizing: content-box;
     cursor: grabbing;
 }
 
@@ -2301,14 +2318,12 @@
     background: #D1EFE6;
     box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 10px rgba(2, 218, 154, 0.3);
     border: 4px solid #D1EFE6;
-    box-sizing: content-box;
 }
 
 .dialog .eq-control input::-ms-thumb:active {
     background: #0DE4A4;
     box-shadow: -2px 0px 0px #0CCE94, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 16px rgba(2, 218, 154, 0.6);
     border: 6px solid #0DE4A4;
-    box-sizing: content-box;
     cursor: grabbing;
 }
 
@@ -2320,25 +2335,38 @@
 
 .dialog .eq-control input:disabled {
     background: var(--stroke-accent-color);
-    background-image: linear-gradient(var(--accent-color), var(--accent-color));
+    background-image: linear-gradient(90deg, var(--accent-color), var(--bright-accent-color));
+    cursor: default;
     background-blend-mode: soft-light;
     background-size: 50% 100%;
     background-repeat: no-repeat;
 }
 
-.dialog .eq-control input:disabled::-webkit-slider-thumb {
+.dialog .eq-control input:disabled::-webkit-slider-thumb,
+.dialog .eq-control input:disabled::-webkit-slider-thumb:hover,
+.dialog .eq-control input:disabled::-webkit-slider-thumb:active {
     background: var(--dark-accent-color);
     box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
+    border: 0;
+    cursor: not-allowed;
 }
 
-.dialog .eq-control input:disabled::-moz-range-thumb {
+.dialog .eq-control input:disabled::-moz-range-thumb,
+.dialog .eq-control input:disabled::-moz-range-thumb:hover,
+.dialog .eq-control input:disabled::-moz-range-thumb:active {
     background: var(--dark-accent-color);
     box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
+    border: 0;
+    cursor: not-allowed;
 }
 
-.dialog .eq-control input:disabled::-ms-range-thumb {
+.dialog .eq-control input:disabled::-ms-range-thumb,
+.dialog .eq-control input:disabled::-ms-range-thumb:hover,
+.dialog .eq-control input:disabled::-ms-range-thumb:active {
     background: var(--dark-accent-color);
     box-shadow: -2px 0px 0px #019568, -4px 0px rgba(0, 0, 0, 0.1);
+    border: 0;
+    cursor: not-allowed;
 }
 
 .dialog .eq-control input::-webkit-slider-runnable-track {
@@ -2484,19 +2512,6 @@
     padding: 0;
     cursor: pointer;
     transition: var(--600ms-all-ease-out-expo-prop);
-}
-
-.transcript-panel button path {
-    fill: #fff;
-    transition: var(--300ms-all-ease-out-expo-prop);
-}
-
-.transcript-panel button:hover path {
-    fill: var(--accent-color);
-}
-
-.transcript-panel button:active path {
-    fill: var(--dark-accent-color);
 }
 
 .transcript-panel .contents {
@@ -2650,17 +2665,42 @@
 .cue-time {
     padding: 2px 0.5rem;
     min-width: fit-content;
+    position: relative;
     background: transparent;
-    box-shadow: inset 0 0 0 0px #4B99E7;
+    box-shadow: inset 0 0 0 0px var(--blue-color);
     background: rgba(75, 153, 231, 0.3);
     border-radius: 4px;
     text-align: center;
-    color: #CCE7FF !important;
+    color: var(--light-blue-color) !important;
     font-variation-settings: "wght" 800;
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.04em;
     font-weight: 800;
     transition: var(--300ms-all-ease-out-expo-prop);
+}
+
+.cue-time.span::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    z-index: 0;
+    right: 0.5rem;
+    width: calc(0% - 1rem);
+    height: 2px;
+    border-radius: 100vw;
+    background-color: var(--dark-blue-color);
+    opacity: 0.6;
+    transition: var(--600ms-all-ease-out-expo-prop);
+}
+
+.cue-container:hover .cue-time.span::after {
+    left: 0.5rem;
+    width: calc(100% - 1rem);
+    background-color: var(--light-blue-color);
+}
+
+.cue-container.current:hover .cue-time.span::after {
+    background-color: var(--blue-color);
 }
 
 .cue-container:hover {
@@ -2933,7 +2973,6 @@ screen and (max-height: 600px) {
 
     .video-controls-container .right-side button path {
         fill: ButtonText;
-        transition: var(--300ms-all-ease-out-expo-prop);
     }
 
     .video-controls-container .right-side button:hover path {
@@ -3530,6 +3569,7 @@ screen and (max-height: 600px) {
     .video-container .gcast-button::after {
         opacity: 0;
     }
+
     .video-container.caption .caption-button::after,
     .video-container.pip-player .pip-button::after,
     .video-container.casted-session .gcast-button::after {
@@ -3605,6 +3645,7 @@ screen and (max-height: 600px) {
     }
 
     @supports (clip-path: circle(0% at 0% 0%)) {
+
         .settings-context-menu,
         .video-context-menu {
             opacity: 0;

@@ -305,7 +305,10 @@ function handleInputChange(e) {
     const min = target.min
     const max = target.max
     const val = target.value
-    target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%'
+    const firstHalf = ((val - min) * 100) / (max - min) > 50 ? (((val - min) * 100) / (max - min) - 50) : ((val - min) * 100) / (max - min) === 50 ? 0 : (100 - ((val - min) * 100) / (max - min) - 50)
+    const secondHalf = ((val - min) * 100) / (max - min) * 2 >= 100 ? (((val - min) * 100) / (max - min)) : ((val - min) * 100) / (max - min) * 2 < 100 ? (((val - min) * 100) / (max - min)) : ((val - min) * 100) / (max - min) * 2
+    target.style.setProperty('background-size', `${firstHalf}% 100%`)
+    target.style.setProperty('background-position', `${secondHalf}% 100%`)
 }
 
 // Context menu
@@ -551,7 +554,7 @@ EQswitchToggle.addEventListener('click', () => {
         eqContainer.querySelectorAll('.eq-slider').forEach((element) => {
             element.disabled = false
             rangeEQInputs.forEach((input) => {
-                input.addEventListener('input', handleInputChange)
+                input.addEventListener('input', e => handleInputChange(e))
             })
             sourceNode.connect(filters[0])
         })

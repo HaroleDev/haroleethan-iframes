@@ -2226,9 +2226,10 @@
 .dialog .eq-control input {
     height: 12px;
     background-color: var(--tooltip-bg);
-    background-image: linear-gradient(-90deg, var(--accent-color), var(--accent-color));
-    background-size: 50% 100%;
-    background-repeat: no-repeat;
+    background-image: linear-gradient(-90deg, var(--bright-accent-color), var(--accent-color));
+    background-size: 0% 100%;
+    background-position: 50% 100%;
+    background-repeat: no-repeat, no-repeat;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 300ms var(--ease-out-expo);
@@ -2283,8 +2284,7 @@
 
 .dialog .eq-control input:hover {
     background-color: var(--lighter-foreground);
-    background-image: linear-gradient(-90deg, var(--bright-accent-color), var(--accent-color));
-    background-size: 50% 100%;
+    background-image: linear-gradient(-90deg, var(--bright-accent-color), var(--accent-color)), linear-gradient(-90deg, var(--dark-accent-color), var(--dark-accent-color));
     background-repeat: no-repeat;
 }
 
@@ -2334,11 +2334,12 @@
 }
 
 .dialog .eq-control input:disabled {
-    background: var(--stroke-accent-color);
+    background: var(--foreground);
     background-image: linear-gradient(90deg, var(--accent-color), var(--bright-accent-color));
     cursor: default;
     background-blend-mode: soft-light;
-    background-size: 50% 100%;
+    background-size: 0% 100%;
+    background-position: 50% 100%;
     background-repeat: no-repeat;
 }
 

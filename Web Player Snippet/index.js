@@ -298,15 +298,13 @@ for (const [action, event] of srcEventListeners) {
 function handleInputChange(e) {
     let target = e.target
 
-    if (e.target.type !== 'range') {
-        target = rangeEQInputs
-    }
+    if (e.target.type !== 'range') target = rangeEQInputs
 
     const min = target.min
     const max = target.max
     const val = target.value
     const bg = ((val - min) * 100) / (max - min)
-    target.style.setProperty('--gradient',
+    return target.style.setProperty('--gradient',
         bg < 50
             ? `linear-gradient(-90deg, transparent 50%, var(--bright-accent-color) 50%, var(--accent-color) ${100 - bg}%, transparent ${100 - bg}%)`
             : `linear-gradient(90deg, transparent 50%, var(--accent-color) 50%, var(--bright-accent-color) ${bg}%, transparent ${bg}% )`

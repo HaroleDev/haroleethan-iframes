@@ -25,6 +25,11 @@
     --link-and-focus-color: #4B99E7;
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
+    --300ms-all-ease-out-expo-prop: all 300ms var(--ease-out-expo);
+    --300ms-all-ease-in-expo-prop: all 300ms var(--ease-in-expo);
+    --600ms-all-ease-out-expo-prop: all 600ms var(--ease-out-expo);
+    --300ms-visibility-step-start: visibility 300ms step-start;
+    --300ms-visibility-step-end: visibility 300ms step-end;
 }
 
 .playful-video-player * {
@@ -45,25 +50,22 @@
     width: 100%;
     height: 100%;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-pack: center;
-    -ms-flex-pack: center;
     -webkit-justify-content: center;
     -moz-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
     overflow: hidden;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     will-change: width, height;
 }
 
@@ -96,15 +98,15 @@
     padding-bottom: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
     opacity: 1;
     -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     -moz-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1);
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo), -webkit-filter 300ms var(--ease-out-expo);
-    -webkit-animation: ExitFullScreenTransition 600ms var(--ease-out-expo) forwards;
-    -moz-animation: ExitFullScreenTransition 600ms var(--ease-out-expo) forwards;
-    -o-animation: ExitFullScreenTransition 600ms var(--ease-out-expo) forwards;
-    animation: ExitFullScreenTransition 600ms var(--ease-out-expo) forwards;
+    --animation: ExitFullScreenTransition 600ms var(--ease-out-expo) forwards;
+    -webkit-animation: var(--animation);
+    -moz-animation: var(--animation);
+    -o-animation: var(--animation);
+    animation: var(--animation);
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -372,10 +374,11 @@
 }
 
 .full-screen .video-fit-contain {
-    -webkit-animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
-    -moz-animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
-    -o-animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
-    animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
+    --animation: 600ms var(--ease-out-expo) 0s 1 FullScreenTransition;
+    -webkit-animation: var(--animation);
+    -moz-animation: var(--animation);
+    -o-animation: var(--animation);
+    animation: var(--animation);
 }
 
 .video-controls-container {
@@ -384,10 +387,10 @@
     z-index: 1;
     width: 100%;
     opacity: 0;
-    -webkit-transition: all 600ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo);
-    -moz-transition: all 600ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo);
+    -webkit-transition: var(--600ms-all-ease-out-expo-prop);
+    -o-transition: var(--600ms-all-ease-out-expo-prop);
+    -moz-transition: var(--600ms-all-ease-out-expo-prop);
+    transition: var(--600ms-all-ease-out-expo-prop);
     will-change: width, height, max-width, max-height;
 }
 
@@ -395,10 +398,10 @@
     width: -webkit-calc(100% - 400px);
     width: -moz-calc(100% - 400px);
     width: calc(100% - 400px);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .video-fit-content {
@@ -479,10 +482,10 @@
 .video-container.pip-player .video-information-overlay {
     opacity: 1;
     visibility: visible;
-    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    -moz-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-start);
+    -o-transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-start);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-start);
+    transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-start);
 }
 
 .video-container.pip-player .pip-enter,
@@ -492,12 +495,10 @@
 
 .video-controls-container .left-side {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-align: end;
-    -ms-flex-align: end;
     -webkit-align-items: flex-end;
     -moz-box-align: end;
     align-items: flex-end;
@@ -505,17 +506,14 @@
 
 .video-controls-container .right-side {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-align: end;
-    -ms-flex-align: end;
     -webkit-align-items: flex-end;
     -moz-box-align: end;
     align-items: flex-end;
     -webkit-box-pack: right;
-    -ms-flex-pack: right;
     -webkit-justify-content: right;
     -moz-box-pack: right;
     justify-content: right;
@@ -523,28 +521,27 @@
 
 .video-controls-container .controls {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;
     justify-content: space-between;
     margin: 12px 40px;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .video-controls-container .left-side button {
     background-color: #FFFFFF1a;
     border: none;
-    -webkit-box-shadow: 0 0 0 2px #ffffff33;
-    -moz-box-shadow: 0 0 0 2px #ffffff33;
-    box-shadow: 0 0 0 2px #ffffff33;
+    --box-shadow: 0 0 0 2px #ffffff33;
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
     height: 72px;
     width: 72px;
     -webkit-border-radius: 50%;
@@ -553,7 +550,6 @@
     cursor: pointer;
     z-index: 2;
     -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     -moz-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1);
@@ -578,19 +574,20 @@
 }
 
 .video-controls-container .left-side button:hover {
-    -webkit-box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
-    -moz-box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
-    box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
+    --box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
     background: #01A5734d;
 }
 
 .video-controls-container .left-side button:active {
-    -webkit-box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
-    -moz-box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
-    box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
+    --box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
     background: #02DA9A99;
     -webkit-transform: scale(0.96);
-    -ms-transform: scale(0.96);
     -moz-transform: scale(0.96);
     -o-transform: scale(0.96);
     transform: scale(0.96);
@@ -848,10 +845,10 @@
 
 .video-controls-container .right-side button path {
     fill: var(--text-color);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .video-controls-container .right-side button:hover path {
@@ -864,17 +861,19 @@
 
 @supports (d: path("M 0 0")) {
     .video-controls-container .right-side .pip-button:hover path.pip-enter {
-        -webkit-animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
-        -moz-animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
-        -o-animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
-        animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
+        --animation: pip-morph-enter 600ms var(--ease-out-expo) forwards;
+        -webkit-animation: var(--animation);
+        -moz-animation: var(--animation);
+        -o-animation: var(--animation);
+        animation: var(--animation);
     }
 
     .video-controls-container .right-side .pip-button:hover path.pip-exit {
-        -webkit-animation: pip-morph-exit 600ms var(--ease-out-expo) forwards;
-        -moz-animation: pip-morph-exit 600ms var(--ease-out-expo) forwards;
-        -o-animation: pip-morph-exit 600ms var(--ease-out-expo) forwards;
-        animation: pip-morph-exit 600ms var(--ease-out-expo) forwards;
+        --animation: pip-morph-exit 600ms var(--ease-out-expo) forwards;
+        -webkit-animation: var(--animation);
+        -moz-animation: var(--animation);
+        -o-animation: var(--animation);
+        animation: var(--animation);
     }
 }
 
@@ -997,7 +996,6 @@
 
 .controls[hidden] {
     display: -webkit-box !important;
-    display: -ms-flexbox !important;
     display: -webkit-flex !important;
     display: -moz-box !important;
     display: flex !important;
@@ -1022,12 +1020,10 @@
 .video-information-overlay {
     position: absolute;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-pack: start;
-    -ms-flex-pack: start;
     -webkit-justify-content: flex-start;
     -moz-box-pack: start;
     justify-content: flex-start;
@@ -1042,10 +1038,10 @@
     padding-bottom: -moz-calc(28px * 4);
     padding-bottom: calc(28px * 4);
     opacity: 0;
-    -webkit-transition: all 600ms var(--ease-out-expo), visibility 300ms step-end;
-    -o-transition: all 600ms var(--ease-out-expo), visibility 300ms step-end;
-    -moz-transition: all 600ms var(--ease-out-expo), visibility 300ms step-end;
-    transition: all 600ms var(--ease-out-expo), visibility 300ms step-end;
+    -webkit-transition: all 600ms var(--ease-out-expo), visibility 600ms step-end;
+    -o-transition: all 600ms var(--ease-out-expo), visibility 600ms step-end;
+    -moz-transition: all 600ms var(--ease-out-expo), visibility 600ms step-end;
+    transition: all 600ms var(--ease-out-expo), visibility 600ms step-end;
     will-change: width, height, max-width, max-height;
     pointer-events: none;
     visibility: hidden;
@@ -1054,7 +1050,6 @@
 .playful-video-player[data-device="iPadOS"] .video-information-overlay,
 .playful-video-player[data-device="iPadOS"] .video-information-container {
     -webkit-box-pack: end;
-    -ms-flex-pack: end;
     -webkit-justify-content: flex-end;
     -moz-box-pack: end;
     justify-content: flex-end;
@@ -1077,33 +1072,28 @@
     width: -webkit-calc(100% - 400px);
     width: -moz-calc(100% - 400px);
     width: calc(100% - 400px);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .video-information-container {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     -webkit-flex-direction: column;
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
-    -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    -ms-flex-line-pack: start;
     -webkit-align-content: flex-start;
     align-content: flex-start;
     -webkit-box-pack: start;
-    -ms-flex-pack: start;
     -webkit-justify-content: flex-start;
     -moz-box-pack: start;
     justify-content: flex-start;
@@ -1205,13 +1195,11 @@
 
 .timeline-container {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     -webkit-flex-direction: column;
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
@@ -1222,24 +1210,20 @@
 
 .timeline-container .footer {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;
     justify-content: space-between;
@@ -1247,19 +1231,16 @@
 
 .badges-container {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row-reverse;
     -webkit-flex-direction: row-reverse;
     -moz-box-orient: horizontal;
     -moz-box-direction: reverse;
     flex-direction: row-reverse;
     -webkit-box-align: end;
-    -ms-flex-align: end;
     -webkit-align-items: flex-end;
     -moz-box-align: end;
     align-items: flex-end;
@@ -1268,19 +1249,16 @@
 
 .badge {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-align: start;
-    -ms-flex-align: start;
     -webkit-align-items: flex-start;
     -moz-box-align: start;
     align-items: flex-start;
@@ -1320,13 +1298,13 @@
 [data-quality="UHD"].quality-badge .span.quality {
     color: var(--text-color);
     -webkit-transform: translateY(-1.5px);
-    -ms-transform: translateY(-1.5px);
     -moz-transform: translateY(-1.5px);
     -o-transform: translateY(-1.5px);
     transform: translateY(-1.5px);
     text-shadow: 0 0.25px 0px var(--shadow-text-color), 0 0.5px 0px var(--shadow-text-color), 0 0.75px 0px var(--shadow-text-color), 0 1px 0px var(--shadow-text-color), 0 1.25px 0px var(--shadow-text-color), 0 1.5px 0px var(--shadow-text-color);
-    -webkit-filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
+    --filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
+    -webkit-filter: var(--filter);
+    filter: var(--filter);
 }
 
 [data-quality="HD"].quality-badge .span.quality,
@@ -1353,29 +1331,25 @@
     position: relative;
     margin: 8px 0px 8px 0px;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
     cursor: pointer;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     -webkit-flex-direction: column;
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
     -webkit-box-pack: center;
-    -ms-flex-pack: center;
     -webkit-justify-content: center;
     -moz-box-pack: center;
     justify-content: center;
@@ -1394,10 +1368,10 @@
     -moz-border-radius: 12px;
     border-radius: 12px;
     background: #01A5734d;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     will-change: right;
 }
 
@@ -1446,28 +1420,28 @@
     border-radius: 16px 24px 8px 16px;
     background-color: var(--accent-color);
     -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
     -moz-transform: translate(0, 0);
     -o-transform: translate(0, 0);
     transform: translate(0, 0);
-    -webkit-transition: all 300ms var(--ease-out-expo), background-color 0s, width 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo), background-color 0s, width 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo), background-color 0s, width 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo), background-color 0s, width 300ms var(--ease-out-expo);
+    --transition: var(--300ms-all-ease-out-expo-prop), background-color 0s, width 300ms var(--ease-out-expo);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
     pointer-events: none;
     cursor: pointer;
     overflow: hidden;
     will-change: width, height, box-shadow, filter;
-    -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
-    -moz-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
-    box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    --box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 0px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
 }
 
 .video-container:not(.paused):not(.seeking) .timeline__progressbar {
-    -webkit-transition: all 300ms var(--ease-out-expo), background-color 0s, width 0s;
-    -o-transition: all 300ms var(--ease-out-expo), background-color 0s, width 0s;
-    -moz-transition: all 300ms var(--ease-out-expo), background-color 0s, width 0s;
-    transition: all 300ms var(--ease-out-expo), background-color 0s, width 0s;
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop), background-color 0s, width 0s;
+    -o-transition: var(--300ms-all-ease-out-expo-prop), background-color 0s, width 0s;
+    -moz-transition: var(--300ms-all-ease-out-expo-prop), background-color 0s, width 0s;
+    transition: var(--300ms-all-ease-out-expo-prop), background-color 0s, width 0s;
 }
 
 .video-container.loading .timeline__progressbar {
@@ -1491,26 +1465,25 @@
     right: 0;
     bottom: 0;
     opacity: 0;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     -webkit-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
     -o-transform: translateX(-100%);
     transform: translateX(-100%);
-    -webkit-animation: bufferBar 2s infinite linear;
-    -moz-animation: bufferBar 2s infinite linear;
-    -o-animation: bufferBar 2s infinite linear;
-    animation: bufferBar 2s infinite linear;
+    --animation: bufferBar 2s infinite linear;
+    -webkit-animation: var(--animation);
+    -moz-animation: var(--animation);
+    -o-animation: var(--animation);
+    animation: var(--animation);
     background-image: var(--buffer-scrubber-accent);
     -webkit-animation-play-state: paused;
     -moz-animation-play-state: paused;
     -o-animation-play-state: paused;
     animation-play-state: paused;
     -webkit-transform: translateY(0px);
-    -ms-transform: translateY(0px);
     -moz-transform: translateY(0px);
     -o-transform: translateY(0px);
     transform: translateY(0px);
@@ -1600,35 +1573,28 @@
 .seeking-preview {
     position: absolute;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     -webkit-flex-direction: column;
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
-    -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    -ms-flex-line-pack: center;
     -webkit-align-content: center;
     align-content: center;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
     -webkit-transform: translate(-50%, -50%) scale(0.9);
-    -ms-transform: translate(-50%, -50%) scale(0.9);
     -moz-transform: translate(-50%, -50%) scale(0.9);
     -o-transform: translate(-50%, -50%) scale(0.9);
     transform: translate(-50%, -50%) scale(0.9);
     -webkit-transform-origin: 50% 100%;
-    -ms-transform-origin: 50% 100%;
     -moz-transform-origin: 50% 100%;
     -o-transform-origin: 50% 100%;
     transform-origin: 50% 100%;
@@ -1641,22 +1607,21 @@
     -ms-user-select: none;
     user-select: none;
     -webkit-box-pack: end;
-    -ms-flex-pack: end;
     -webkit-justify-content: flex-end;
     -moz-box-pack: end;
     justify-content: flex-end;
     visibility: hidden;
-    -webkit-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), visibility 300ms step-end;
-    -o-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), visibility 300ms step-end;
-    -webkit-transition: opacity 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), visibility 300ms step-end;
-    transition: opacity 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), visibility 300ms step-end;
-    -webkit-transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end, -webkit-transform 300ms var(--ease-out-expo);
-    transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end, -webkit-transform 300ms var(--ease-out-expo);
-    -o-transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end, -o-transform 300ms var(--ease-out-expo);
-    -moz-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), visibility 300ms step-end, -moz-transform 300ms var(--ease-out-expo);
-    transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), visibility 300ms step-end;
-    transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), visibility 300ms step-end, -webkit-transform 300ms var(--ease-out-expo), -moz-transform 300ms var(--ease-out-expo), -o-transform 300ms var(--ease-out-expo);
-    transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), visibility 300ms step-end;
+    -webkit-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    -o-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    -webkit-transition: opacity 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    transition: opacity 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    -webkit-transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end), -webkit-transform 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end), -webkit-transform 300ms var(--ease-out-expo);
+    -o-transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end), -o-transform 300ms var(--ease-out-expo);
+    -moz-transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end), -moz-transform 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end), -webkit-transform 300ms var(--ease-out-expo), -moz-transform 300ms var(--ease-out-expo), -o-transform 300ms var(--ease-out-expo);
+    transition: opacity 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
     left: var(--thumbnail-seek-position, 192px);
     will-change: left;
 }
@@ -1707,17 +1672,14 @@
 .video-play-container {
     position: absolute;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-pack: center;
-    -ms-flex-pack: center;
     -webkit-justify-content: center;
     -moz-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -1734,10 +1696,10 @@
 .play-btn-poster .symbol,
 .play-btn-poster .stroke,
 .play-btn-poster .circle {
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     z-index: 3;
     pointer-events: none;
 }
@@ -1758,7 +1720,6 @@
 
 .video-play-container:active .play-btn-poster {
     -webkit-transform: scale(0.96);
-    -ms-transform: scale(0.96);
     -moz-transform: scale(0.96);
     -o-transform: scale(0.96);
     transform: scale(0.96);
@@ -1785,7 +1746,6 @@
 .video-container.played .play-btn-poster {
     opacity: 0;
     -webkit-transform: scale(1.96);
-    -ms-transform: scale(1.96);
     -moz-transform: scale(1.96);
     -o-transform: scale(1.96);
     transform: scale(1.96);
@@ -1926,35 +1886,36 @@
 .seeking-preview.hovered {
     opacity: 1;
     -webkit-transform: translate(-50%, -50%) scale(1);
-    -ms-transform: translate(-50%, -50%) scale(1);
     -moz-transform: translate(-50%, -50%) scale(1);
     -o-transform: translate(-50%, -50%) scale(1);
     transform: translate(-50%, -50%) scale(1);
     pointer-events: all;
     visibility: visible;
-    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start;
-    -o-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start;
-    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo), -webkit-transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start;
-    transition: opacity 300ms 100ms var(--ease-out-expo), -webkit-transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start;
-    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo), visibility 300ms step-start, -webkit-transform 300ms 100ms var(--ease-out-expo);
-    transition: opacity 300ms 100ms var(--ease-out-expo), visibility 300ms step-start, -webkit-transform 300ms 100ms var(--ease-out-expo);
-    -o-transition: opacity 300ms 100ms var(--ease-out-expo), visibility 300ms step-start, -o-transform 300ms 100ms var(--ease-out-expo);
-    -moz-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start, -moz-transform 300ms 100ms var(--ease-out-expo);
-    transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start;
-    transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start, -webkit-transform 300ms 100ms var(--ease-out-expo), -moz-transform 300ms 100ms var(--ease-out-expo), -o-transform 300ms 100ms var(--ease-out-expo);
-    transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), -webkit-transform 300ms 100ms var(--ease-out-expo), visibility 300ms step-start;
+    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start);
+    -o-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start);
+    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo), -webkit-transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start);
+    transition: opacity 300ms 100ms var(--ease-out-expo), -webkit-transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start);
+    -webkit-transition: opacity 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start), -webkit-transform 300ms 100ms var(--ease-out-expo);
+    transition: opacity 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start), -webkit-transform 300ms 100ms var(--ease-out-expo);
+    -o-transition: opacity 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start), -o-transform 300ms 100ms var(--ease-out-expo);
+    -moz-transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start), -moz-transform 300ms 100ms var(--ease-out-expo);
+    transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start);
+    transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start), -webkit-transform 300ms 100ms var(--ease-out-expo), -moz-transform 300ms 100ms var(--ease-out-expo), -o-transform 300ms 100ms var(--ease-out-expo);
+    transition: opacity 300ms 100ms var(--ease-out-expo), transform 300ms 100ms var(--ease-out-expo), -webkit-transform 300ms 100ms var(--ease-out-expo), var(--300ms-visibility-step-start);
 }
 
 .scrubbing .timeline-container .seeking-preview__thumbnail {
-    -webkit-box-shadow: inset 0 0 0 2px var(--accent-color), 0 0 0 2px var(--accent-color);
-    -moz-box-shadow: inset 0 0 0 2px var(--accent-color), 0 0 0 2px var(--accent-color);
-    box-shadow: inset 0 0 0 2px var(--accent-color), 0 0 0 2px var(--accent-color);
+    --box-shadow: inset 0 0 0 2px var(--accent-color), 0 0 0 2px var(--accent-color);
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
 }
 
 .scrubbing .timeline-container .seeking-preview.loading .seeking-preview__thumbnail {
-    -webkit-box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
-    -moz-box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
-    box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
+    --box-shadow: inset 0 0 0 4px var(--text-color), 0 0 0 0px var(--text-color);
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
 }
 
 .seeking-preview__time-tooltip {
@@ -2009,22 +1970,21 @@
     border-radius: 32px 32px 8px 8px;
     height: 16px;
     -webkit-transform: translateY(0px);
-    -ms-transform: translateY(0px);
     -moz-transform: translateY(0px);
     -o-transform: translateY(0px);
     transform: translateY(0px);
     -webkit-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     -moz-box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
     box-shadow: 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px var(--accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 6px rgba(2, 218, 154, 0.2), 0px 0px 0px 0px rgba(2, 218, 154, 0.1);
-    -webkit-transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
-    -webkit-transition: all 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo), -o-transform 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), -moz-transform 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), -moz-transform 300ms var(--ease-out-expo), -o-transform 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop), transform 300ms var(--ease-out-expo);
+    -o-transition: var(--300ms-all-ease-out-expo-prop), transform 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop), -webkit-transform 300ms var(--ease-out-expo);
+    transition: var(--300ms-all-ease-out-expo-prop), -webkit-transform 300ms var(--ease-out-expo);
+    -o-transition: var(--300ms-all-ease-out-expo-prop), -o-transform 300ms var(--ease-out-expo);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop), transform 300ms var(--ease-out-expo), -moz-transform 300ms var(--ease-out-expo);
+    transition: var(--300ms-all-ease-out-expo-prop), transform 300ms var(--ease-out-expo);
+    transition: var(--300ms-all-ease-out-expo-prop), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo), -moz-transform 300ms var(--ease-out-expo), -o-transform 300ms var(--ease-out-expo);
+    transition: var(--300ms-all-ease-out-expo-prop), transform 300ms var(--ease-out-expo), -webkit-transform 300ms var(--ease-out-expo);
 }
 
 .timeline[style*="--progress-position:0.00"]:hover .timeline__progressbar {
@@ -2041,7 +2001,6 @@
     height: 16px;
     background-color: var(--bright-accent-color);
     -webkit-transform: translateY(-4px);
-    -ms-transform: translateY(-4px);
     -moz-transform: translateY(-4px);
     -o-transform: translateY(-4px);
     transform: translateY(-4px);
@@ -2063,97 +2022,90 @@
 
 .full-screen-button .enter .top-corner,
 .full-screen-button:active .enter .top-corner {
-    -webkit-transform: translate(2px, 2px);
-    -ms-transform: translate(2px, 2px);
-    -moz-transform: translate(2px, 2px);
-    -o-transform: translate(2px, 2px);
-    transform: translate(2px, 2px);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    --transform: translate(2px, 2px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .full-screen-button .enter .bottom-corner {
-    -webkit-transform: translate(-2px, -2px);
-    -ms-transform: translate(-2px, -2px);
-    -moz-transform: translate(-2px, -2px);
-    -o-transform: translate(-2px, -2px);
-    transform: translate(-2px, -2px);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    --transform: translate(-2px, -2px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .full-screen-button:hover .enter .top-corner,
 .full-screen-button:hover .enter .bottom-corner {
-    -webkit-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
+    --transform: translate(0px, 0px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .full-screen-button:active .enter .bottom-corner {
-    -webkit-transform: translate(-3px, -3px);
-    -ms-transform: translate(-3px, -3px);
-    -moz-transform: translate(-3px, -3px);
-    -o-transform: translate(-3px, -3px);
-    transform: translate(-3px, -3px);
+    --transform: translate(-3px, -3px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .full-screen-button:active .enter .top-corner {
-    -webkit-transform: translate(3px, 3px);
-    -ms-transform: translate(3px, 3px);
-    -moz-transform: translate(3px, 3px);
-    -o-transform: translate(3px, 3px);
-    transform: translate(3px, 3px);
+    --transform: translate(3px, 3px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .full-screen-button .exit .bottom-corner,
 .full-screen-button .exit .top-corner {
-    -webkit-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    --transform: translate(0px, 0px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .full-screen-button:hover .exit .bottom-corner {
-    -webkit-transform: translate(-2px, -2px);
-    -ms-transform: translate(-2px, -2px);
-    -moz-transform: translate(-2px, -2px);
-    -o-transform: translate(-2px, -2px);
-    transform: translate(-2px, -2px);
+    --transform: translate(-2px, -2px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .full-screen-button:hover .exit .top-corner {
-    -webkit-transform: translate(2px, 2px);
-    -ms-transform: translate(2px, 2px);
-    -moz-transform: translate(2px, 2px);
-    -o-transform: translate(2px, 2px);
-    transform: translate(2px, 2px);
+    --transform: translate(2px, 2px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
+.full-screen-button:active .exit .top-corner,
 .full-screen-button:active .exit .bottom-corner {
-    -webkit-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
-}
-
-.full-screen-button:active .exit .top-corner {
-    -webkit-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
+    --transform: translate(0px, 0px);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .video-container.caption .caption-button::after,
@@ -2171,19 +2123,20 @@
     width: 32px;
     bottom: 0;
     margin-left: 0;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .video-container.caption .caption-button svg,
 .video-container.pip-player .pip-button svg,
 .video-container.casted-session .gcast-button svg {
-    -webkit-animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
-    -moz-animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
-    -o-animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
-    animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
+    --animation: bounceOut 600ms var(--ease-out-expo) 1 normal both;
+    -webkit-animation: var(--animation);
+    -moz-animation: var(--animation);
+    -o-animation: var(--animation);
+    animation: var(--animation);
 }
 
 .video-container.caption .caption-button svg .c {
@@ -2237,10 +2190,11 @@
 .video-container:not(.caption) .caption-button svg,
 .video-container:not(.pip-player) .pip-button svg,
 .video-container:not(.casted-session) .gcast-button svg {
-    -webkit-animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
-    -moz-animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
-    -o-animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
-    animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
+    --animation: bounceIn 600ms var(--ease-out-expo) 1 normal both;
+    -webkit-animation: var(--animation);
+    -moz-animation: var(--animation);
+    -o-animation: var(--animation);
+    animation: var(--animation);
     -webkit-animation-play-state: paused;
     -moz-animation-play-state: paused;
     -o-animation-play-state: paused;
@@ -2253,22 +2207,25 @@
     100% {
         -webkit-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateY(-8px);
         transform: translateY(-8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateY(2px);
         transform: translateY(2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2279,27 +2236,30 @@
         -webkit-transform: translateY(0px);
         -moz-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateY(-8px);
         -moz-transform: translateY(-8px);
         transform: translateY(-8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateY(2px);
         -moz-transform: translateY(2px);
         transform: translateY(2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2310,27 +2270,30 @@
         -webkit-transform: translateY(0px);
         -o-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateY(-8px);
         -o-transform: translateY(-8px);
         transform: translateY(-8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateY(2px);
         -o-transform: translateY(2px);
         transform: translateY(2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2342,10 +2305,11 @@
         -moz-transform: translateY(0px);
         -o-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
@@ -2353,10 +2317,11 @@
         -moz-transform: translateY(-8px);
         -o-transform: translateY(-8px);
         transform: translateY(-8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
@@ -2364,10 +2329,11 @@
         -moz-transform: translateY(2px);
         -o-transform: translateY(2px);
         transform: translateY(2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2377,22 +2343,25 @@
     100% {
         -webkit-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateY(8px);
         transform: translateY(8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateY(-2px);
         transform: translateY(-2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2403,27 +2372,30 @@
         -webkit-transform: translateY(0px);
         -moz-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateY(8px);
         -moz-transform: translateY(8px);
         transform: translateY(8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateY(-2px);
         -moz-transform: translateY(-2px);
         transform: translateY(-2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2434,27 +2406,30 @@
         -webkit-transform: translateY(0px);
         -o-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateY(8px);
         -o-transform: translateY(8px);
         transform: translateY(8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateY(-2px);
         -o-transform: translateY(-2px);
         transform: translateY(-2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2466,10 +2441,11 @@
         -moz-transform: translateY(0px);
         -o-transform: translateY(0px);
         transform: translateY(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
@@ -2477,10 +2453,11 @@
         -moz-transform: translateY(8px);
         -o-transform: translateY(8px);
         transform: translateY(8px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
@@ -2488,10 +2465,11 @@
         -moz-transform: translateY(-2px);
         -o-transform: translateY(-2px);
         transform: translateY(-2px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2501,22 +2479,25 @@
     100% {
         -webkit-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateX(4px);
         transform: translateX(4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateX(-1px);
         transform: translateX(-1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2527,27 +2508,30 @@
         -webkit-transform: translateX(0px);
         -moz-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateX(4px);
         -moz-transform: translateX(4px);
         transform: translateX(4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateX(-1px);
         -moz-transform: translateX(-1px);
         transform: translateX(-1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2558,27 +2542,30 @@
         -webkit-transform: translateX(0px);
         -o-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateX(4px);
         -o-transform: translateX(4px);
         transform: translateX(4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateX(-1px);
         -o-transform: translateX(-1px);
         transform: translateX(-1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2590,10 +2577,11 @@
         -moz-transform: translateX(0px);
         -o-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
@@ -2601,10 +2589,11 @@
         -moz-transform: translateX(4px);
         -o-transform: translateX(4px);
         transform: translateX(4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
@@ -2612,10 +2601,11 @@
         -moz-transform: translateX(-1px);
         -o-transform: translateX(-1px);
         transform: translateX(-1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2625,22 +2615,25 @@
     100% {
         -webkit-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateX(-4px);
         transform: translateX(-4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateX(1px);
         transform: translateX(1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2651,27 +2644,30 @@
         -webkit-transform: translateX(0px);
         -moz-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateX(-4px);
         -moz-transform: translateX(-4px);
         transform: translateX(-4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateX(1px);
         -moz-transform: translateX(1px);
         transform: translateX(1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2682,27 +2678,30 @@
         -webkit-transform: translateX(0px);
         -o-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
         -webkit-transform: translateX(-4px);
         -o-transform: translateX(-4px);
         transform: translateX(-4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
         -webkit-transform: translateX(1px);
         -o-transform: translateX(1px);
         transform: translateX(1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2714,10 +2713,11 @@
         -moz-transform: translateX(0px);
         -o-transform: translateX(0px);
         transform: translateX(0px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     30% {
@@ -2725,10 +2725,11 @@
         -moz-transform: translateX(-4px);
         -o-transform: translateX(-4px);
         transform: translateX(-4px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0.72, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0.72, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 
     70% {
@@ -2736,10 +2737,11 @@
         -moz-transform: translateX(1px);
         -o-transform: translateX(1px);
         transform: translateX(1px);
-        -webkit-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -moz-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        -o-animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
-        animation-timing-function: cubic-Bezier(0.88, 0, 0, 1);
+        --animation-timing-function: cubic-bezier(0.88, 0, 0, 1);
+        -webkit-animation-timing-function: var(--animation-timing-function);
+        -moz-animation-timing-function: var(--animation-timing-function);
+        -o-animation-timing-function: var(--animation-timing-function);
+        animation-timing-function: var(--animation-timing-function);
     }
 }
 
@@ -2772,12 +2774,11 @@
 }
 
 .video-container .settings-button path {
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     -webkit-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
     -moz-transform-origin: 50% 50%;
     -o-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
@@ -2785,36 +2786,36 @@
 }
 
 .video-container .settings-button:hover path {
-    -webkit-transform: rotate(10deg);
-    -ms-transform: rotate(10deg);
-    -moz-transform: rotate(10deg);
-    -o-transform: rotate(10deg);
-    transform: rotate(10deg);
+    --transform: rotate(10deg);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .video-container .settings-button:active path {
-    -webkit-transform: rotate(-30deg) scale(0.9);
-    -ms-transform: rotate(-30deg) scale(0.9);
-    -moz-transform: rotate(-30deg) scale(0.9);
-    -o-transform: rotate(-30deg) scale(0.9);
-    transform: rotate(-30deg) scale(0.9);
+    --transform: rotate(-30deg) scale(0.9);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .video-container .settings-button.pressed path {
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(90deg);
+    --transform: rotate(90deg);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
     fill: var(--bright-accent-color);
 }
 
 .video-container .settings-button.pressed:active path {
-    -webkit-transform: rotate(120deg) scale(0.9);
-    -ms-transform: rotate(120deg) scale(0.9);
-    -moz-transform: rotate(120deg) scale(0.9);
-    -o-transform: rotate(120deg) scale(0.9);
-    transform: rotate(120deg) scale(0.9);
+    --transform: rotate(120deg) scale(0.9);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .video-context-menu {
@@ -2833,22 +2834,20 @@
     border-radius: 8px;
     opacity: 0;
     pointer-events: none;
-    -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
-    -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
-    -moz-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
-    transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
+    -o-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
+    -moz-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
+    transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
 }
 
 .video-context-menu .item,
 .settings-context-menu .item {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
@@ -2856,7 +2855,6 @@
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -2873,10 +2871,10 @@
     border-radius: 4px;
     cursor: pointer;
     background-color: transparent;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     -webkit-box-shadow: 0 0 0 0px transparent;
     -moz-box-shadow: 0 0 0 0px transparent;
     box-shadow: 0 0 0 0px transparent;
@@ -2884,7 +2882,6 @@
 
 .video-context-menu .item {
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;
     justify-content: space-between;
@@ -2892,12 +2889,10 @@
 
 .settings-context-menu .page[data-page-type="toggle"] .item {
     -webkit-box-pack: start;
-    -ms-flex-pack: start;
     -webkit-justify-content: flex-start;
     -moz-box-pack: start;
     justify-content: flex-start;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -2905,12 +2900,10 @@
 
 .settings-context-menu .page[data-page-type="list"] .item {
     -webkit-box-pack: start;
-    -ms-flex-pack: start;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;
     justify-content: space-between;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -2925,22 +2918,18 @@
 .video-context-menu .item-content,
 .settings-context-menu .item-content {
     display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
     display: -webkit-inline-flex;
     display: -moz-inline-box;
     display: inline-flex;
-    -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -2975,10 +2964,10 @@
 .video-context-menu.show {
     opacity: 1;
     pointer-events: all;
-    -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
-    -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
-    -moz-transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
-    transition: all 300ms var(--ease-out-expo), top 0s, left 0s;
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
+    -o-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
+    -moz-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
+    transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
 }
 
 .settings-context-menu {
@@ -2998,10 +2987,10 @@
     bottom: 128px;
     margin-bottom: 12px;
     opacity: 0;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     pointer-events: none;
     overflow: hidden;
 }
@@ -3018,10 +3007,10 @@
 .settings-context-menu.pressed {
     opacity: 1;
     pointer-events: inherit;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .video-context-menu .item:hover,
@@ -3045,13 +3034,13 @@
         opacity: 1;
         -webkit-clip-path: circle(150% at 0% 0%);
         clip-path: circle(150% at 0% 0%);
-        -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
-        -webkit-transition: all 300ms var(--ease-out-expo), top 0s, left 0s, -webkit-clip-path 450ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo), top 0s, left 0s, -webkit-clip-path 450ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo), top 0s, left 0s, clip-path 450ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
+        -o-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s, -webkit-clip-path 450ms var(--ease-out-expo);
+        transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s, -webkit-clip-path 450ms var(--ease-out-expo);
+        -moz-transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
+        transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s, clip-path 450ms var(--ease-out-expo);
+        transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s, clip-path 450ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
     }
 
     .settings-context-menu {
@@ -3064,35 +3053,31 @@
         opacity: 1;
         -webkit-clip-path: circle(135% at 70% 100%);
         clip-path: circle(135% at 70% 100%);
-        -webkit-transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
-        -webkit-transition: all 300ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo), clip-path 450ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop), clip-path 450ms var(--ease-out-expo);
+        -o-transition: var(--300ms-all-ease-out-expo-prop), clip-path 450ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop), -webkit-clip-path 450ms var(--ease-out-expo);
+        transition: var(--300ms-all-ease-out-expo-prop), -webkit-clip-path 450ms var(--ease-out-expo);
+        -moz-transition: var(--300ms-all-ease-out-expo-prop), clip-path 450ms var(--ease-out-expo);
+        transition: var(--300ms-all-ease-out-expo-prop), clip-path 450ms var(--ease-out-expo);
+        transition: var(--300ms-all-ease-out-expo-prop), clip-path 450ms var(--ease-out-expo), -webkit-clip-path 450ms var(--ease-out-expo);
     }
 }
 
 .settings-context-menu .page .header {
     background-color: var(--background);
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
-    -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -3109,22 +3094,18 @@
 .settings-context-menu .page .header .contents {
     padding: 4px 8px;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
-    -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -3133,23 +3114,22 @@
 .settings-context-menu .page .header .contents.back-page {
     cursor: pointer;
     color: var(--text-color);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .settings-context-menu .page .header .contents.back-page .back-arrow {
     -webkit-transform: translateX(0);
-    -ms-transform: translateX(0);
     -moz-transform: translateX(0);
     -o-transform: translateX(0);
     transform: translateX(0);
     fill: var(--text-color);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .settings-context-menu .page .header .contents.back-page:hover {
@@ -3158,7 +3138,6 @@
 
 .settings-context-menu .page .header .contents.back-page:hover .back-arrow {
     -webkit-transform: translateX(-4px);
-    -ms-transform: translateX(-4px);
     -moz-transform: translateX(-4px);
     -o-transform: translateX(-4px);
     transform: translateX(-4px);
@@ -3174,7 +3153,6 @@
 
 .settings-context-menu .page .header .contents.back-page:active .back-arrow {
     -webkit-transform: translateX(2px);
-    -ms-transform: translateX(2px);
     -moz-transform: translateX(2px);
     -o-transform: translateX(2px);
     transform: translateX(2px);
@@ -3247,24 +3225,23 @@
     left: 0;
     display: block !important;
     -webkit-transform: translateX(0%) translateY(0%);
-    -ms-transform: translateX(0%) translateY(0%);
     -moz-transform: translateX(0%) translateY(0%);
     -o-transform: translateX(0%) translateY(0%);
     transform: translateX(0%) translateY(0%);
     opacity: 1;
     overflow: hidden;
     pointer-events: all;
-    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    -moz-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    --transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
 }
 
 .settings-context-menu .page[hidden] {
     max-height: 0;
     max-width: 0;
     -webkit-transform: translateX(0%) translateY(0%);
-    -ms-transform: translateX(0%) translateY(0%);
     -moz-transform: translateX(0%) translateY(0%);
     -o-transform: translateX(0%) translateY(0%);
     transform: translateX(0%) translateY(0%);
@@ -3273,10 +3250,11 @@
     left: 0;
     opacity: 0;
     pointer-events: none;
-    -webkit-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    -moz-transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    --transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
 }
 
 .settings-context-menu .page:not(.front-page):not([hidden]) .page-contents {
@@ -3316,7 +3294,6 @@
     -moz-border-radius: 8px;
     border-radius: 8px;
     -webkit-transform: scale(1.06);
-    -ms-transform: scale(1.06);
     -moz-transform: scale(1.06);
     -o-transform: scale(1.06);
     transform: scale(1.06);
@@ -3332,10 +3309,10 @@
     user-select: none;
     overflow: hidden;
     visibility: hidden;
-    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-end;
-    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-end;
-    -moz-transition: all 300ms var(--ease-out-expo), visibility 300ms step-end;
-    transition: all 300ms var(--ease-out-expo), visibility 300ms step-end;
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-end);
+    -o-transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-end);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-end);
+    transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-end);
 }
 
 .dialog-overlay {
@@ -3349,10 +3326,10 @@
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    -webkit-transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end;
-    -o-transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end;
-    -moz-transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end;
-    transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end;
+    -webkit-transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    -o-transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    -moz-transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+    transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
 }
 
 .dialog h2 {
@@ -3393,7 +3370,6 @@
 
 .equalizers {
     display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
     display: -webkit-inline-flex;
     display: -moz-inline-box;
     display: inline-flex;
@@ -3404,43 +3380,44 @@
 .dialog-container.opened .dialog {
     opacity: 1;
     -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     -moz-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1);
-    -webkit-box-shadow: 0px 4px 0px var(--stroke-accent-color), 0px 32px 64px rgba(0, 31, 26, 0.3);
-    -moz-box-shadow: 0px 4px 0px var(--stroke-accent-color), 0px 32px 64px rgba(0, 31, 26, 0.3);
-    box-shadow: 0px 4px 0px var(--stroke-accent-color), 0px 32px 64px rgba(0, 31, 26, 0.3);
+    --box-shadow: 0px 4px 0px var(--stroke-accent-color), 0px 32px 64px rgba(0, 31, 26, 0.3);
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
     -webkit-user-select: auto;
     -moz-user-select: auto;
     -ms-user-select: auto;
     user-select: auto;
     pointer-events: all;
     visibility: visible;
-    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    -moz-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    --transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-start);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
 }
 
 .opened .dialog-overlay {
     opacity: 1;
     pointer-events: all;
     visibility: visible;
-    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    -moz-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
-    transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    --transition: var(--300ms-all-ease-out-expo-prop), var(--300ms-visibility-step-start);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
 }
 
 .eq-control input {
-    -webkit-transform: rotate(-90deg) translate(-100%, 200%);
-    -ms-transform: rotate(-90deg) translate(-100%, 200%);
-    -moz-transform: rotate(-90deg) translate(-100%, 200%);
-    -o-transform: rotate(-90deg) translate(-100%, 200%);
+    --transform: rotate(-90deg) translate(-100%, 200%);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
     transform: rotate(-90deg) translate(-100%, 200%);
     -webkit-transform-origin: center left;
-    -ms-transform-origin: center left;
     -moz-transform-origin: center left;
     -o-transform-origin: center left;
     transform-origin: center left;
@@ -3464,7 +3441,6 @@
 
 .decibel-labels {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
@@ -3476,13 +3452,11 @@
     width: fit-content;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     -webkit-flex-direction: column;
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;
     justify-content: space-between;
@@ -3496,24 +3470,20 @@
     width: 100%;
     background: var(--foreground);
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-pack: center;
-    -ms-flex-pack: center;
     -webkit-justify-content: center;
     -moz-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -3540,13 +3510,14 @@
     height: 40px;
     background-color: var(--lighter-foreground);
     line-height: 160%;
-    -webkit-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
-    -moz-box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
-    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    --box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -3556,9 +3527,10 @@
 
 .dialog button.close-dialog:focus-visible {
     outline: none;
-    -webkit-box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
-    -moz-box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
-    box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
+    --box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
 }
 
 .dialog button.close-dialog:hover {
@@ -3567,11 +3539,11 @@
 
 .dialog button.close-dialog:active {
     background-color: var(--background);
-    -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
-    -moz-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    --box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    -webkit-box-shadow: var(--box-shadow);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
     -webkit-transform: translate(0px, 4px);
-    -ms-transform: translate(0px, 4px);
     -moz-transform: translate(0px, 4px);
     -o-transform: translate(0px, 4px);
     transform: translate(0px, 4px);
@@ -3596,7 +3568,6 @@
     -moz-box-shadow: 0px 0px 0px var(--dark-accent-color), 0px 0px 0px var(--dark-accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
     box-shadow: 0px 0px 0px var(--dark-accent-color), 0px 0px 0px var(--dark-accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
     -webkit-transform: translate(0px, 4px);
-    -ms-transform: translate(0px, 4px);
     -moz-transform: translate(0px, 4px);
     -o-transform: translate(0px, 4px);
     transform: translate(0px, 4px);
@@ -3604,12 +3575,10 @@
 
 .volume-container {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -3624,18 +3593,18 @@
     -webkit-border-radius: 2rem 0rem 0rem 2rem;
     -moz-border-radius: 2rem 0rem 0rem 2rem;
     border-radius: 2rem 0rem 0rem 2rem;
-    -webkit-transition: all 300ms var(--ease-in-expo);
-    -o-transition: all 300ms var(--ease-in-expo);
-    -moz-transition: all 300ms var(--ease-in-expo);
-    transition: all 300ms var(--ease-in-expo);
+    -webkit-transition: var(--300ms-all-ease-in-expo-prop);
+    -o-transition: var(--300ms-all-ease-in-expo-prop);
+    -moz-transition: var(--300ms-all-ease-in-expo-prop);
+    transition: var(--300ms-all-ease-in-expo-prop);
 }
 
 .volume-tooltip-container:hover .volume-slider-container {
     background-color: #00000099;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .volume-container.scrubbing .volume-slider-container {
@@ -3650,30 +3619,30 @@
     -moz-border-radius: 8px;
     border-radius: 8px;
     position: relative;
-    -webkit-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    -o-transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    -moz-transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
     will-change: height, margin;
 }
 
 .volume-container:hover .volume-slider,
 .volume-container.scrubbing .volume-slider {
     width: 128px;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .volume-container:hover .volume-slider-container,
 .volume-container.scrubbing .volume-slider-container {
     padding: 20px 8px 20px 18px;
     width: 100%;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .volume-slider::before {
@@ -3690,10 +3659,10 @@
     right: -webkit-calc(100% - var(--volume-position, 1) * 100%);
     right: -moz-calc(100% - var(--volume-position, 1) * 100%);
     right: calc(100% - var(--volume-position, 1) * 100%);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .volume-slider::after {
@@ -3710,10 +3679,10 @@
     left: -webkit-calc(var(--volume-position, 0) * 100%);
     left: -moz-calc(var(--volume-position, 0) * 100%);
     left: calc(var(--volume-position, 0) * 100%);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .volume-container.scrubbing .volume-slider::before,
@@ -3728,10 +3697,11 @@
     height: 16px;
     margin-top: -2px;
     margin-bottom: -2px;
-    -webkit-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    --transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
 }
 
 [data-volume-level="mute"] .volume-slider::before {
@@ -3756,13 +3726,12 @@
 [data-volume-level="mute"] .mid-volume,
 [data-volume-level="mute"] .low-volume {
     opacity: 0;
-    -webkit-transform: translateX(-4px) scale(0.8);
-    -ms-transform: translateX(-4px) scale(0.8);
-    -moz-transform: translateX(-4px) scale(0.8);
-    -o-transform: translateX(-4px) scale(0.8);
-    transform: translateX(-4px) scale(0.8);
+    --transform: translateX(-4px) scale(0.8);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
     -webkit-transform-origin: 50% 50%;
-    -ms-transform-origin: 50% 50%;
     -moz-transform-origin: 50% 50%;
     -o-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
@@ -3793,20 +3762,20 @@
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    -webkit-transform: translateX(-80%) translateY(-150%);
-    -ms-transform: translateX(-80%) translateY(-150%);
-    -moz-transform: translateX(-80%) translateY(-150%);
-    -o-transform: translateX(-80%) translateY(-150%);
-    transform: translateX(-80%) translateY(-150%);
+    --transform: translateX(-80%) translateY(-150%);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
     text-align: left;
 }
 
 .paused [data-tooltip="left"]::after {
-    -webkit-transform: translateX(-95%) translateY(-150%);
-    -ms-transform: translateX(-95%) translateY(-150%);
-    -moz-transform: translateX(-95%) translateY(-150%);
-    -o-transform: translateX(-95%) translateY(-150%);
-    transform: translateX(-95%) translateY(-150%);
+    --transform: translateX(-95%) translateY(-150%);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 [data-tooltip="left"]:hover::after {
@@ -3842,20 +3811,20 @@
 }
 
 [data-tooltip="right"]::after {
-    -webkit-transform: translateX(-75%) translateY(-125%);
-    -ms-transform: translateX(-75%) translateY(-125%);
-    -moz-transform: translateX(-75%) translateY(-125%);
-    -o-transform: translateX(-75%) translateY(-125%);
-    transform: translateX(-75%) translateY(-125%);
+    --transform: translateX(-75%) translateY(-125%);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
     text-align: center;
 }
 
 [data-tooltip="right"].volume-tooltip-container::after {
-    -webkit-transform: translateX(75%) translateY(-125%);
-    -ms-transform: translateX(75%) translateY(-125%);
-    -moz-transform: translateX(75%) translateY(-125%);
-    -o-transform: translateX(75%) translateY(-125%);
-    transform: translateX(75%) translateY(-125%);
+    --transform: translateX(75%) translateY(-125%);
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 [data-tooltip="right"]:hover::after {
@@ -3867,64 +3836,66 @@
 }
 
 .volume-tooltip-container[data-tooltip="right"]::after {
-    -webkit-transform: translateX(-30%) translateY(-125%) !important;
-    -ms-transform: translateX(-30%) translateY(-125%) !important;
-    -moz-transform: translateX(-30%) translateY(-125%) !important;
-    -o-transform: translateX(-30%) translateY(-125%) !important;
-    transform: translateX(-30%) translateY(-125%) !important;
+    --transform: translateX(-30%) translateY(-125%) !important;
+    -webkit-transform: var(--transform);
+    -moz-transform: var(--transform);
+    -o-transform: var(--transform);
+    transform: var(--transform);
 }
 
 .volume-tooltip-container {
     width: 48px;
     background-color: transparent;
-    -webkit-border-radius: 0px 8px 8px 0px;
-    -moz-border-radius: 0px 8px 8px 0px;
-    border-radius: 0px 8px 8px 0px;
-    -webkit-transition: all 300ms var(--ease-in-expo), width 300ms var(--ease-in-expo);
-    -o-transition: all 300ms var(--ease-in-expo), width 300ms var(--ease-in-expo);
-    -moz-transition: all 300ms var(--ease-in-expo), width 300ms var(--ease-in-expo);
-    transition: all 300ms var(--ease-in-expo), width 300ms var(--ease-in-expo);
+    --border-radius: 0px 8px 8px 0px;
+    -webkit-border-radius: var(--border-radius);
+    -moz-border-radius: var(--border-radius);
+    border-radius: var(--border-radius);
+    --transition: var(--300ms-all-ease-in-expo-prop), width 300ms var(--ease-in-expo);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
 }
 
 .volume-tooltip-container:hover {
     background-color: #00000099;
-    -webkit-transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo), width 300ms var(--ease-out-expo);
+    --transition: var(--300ms-all-ease-out-expo-prop), width 300ms var(--ease-in-expo);
+    -webkit-transition: var(--transition);
+    -o-transition: var(--transition);
+    -moz-transition: var(--transition);
+    transition: var(--transition);
 }
 
 .switch .switch-knob {
-    -webkit-transform: translateX(0) translateY(-2px);
-    -ms-transform: translateX(0) translateY(-2px);
-    -moz-transform: translateX(0) translateY(-2px);
-    -o-transform: translateX(0) translateY(-2px);
-    transform: translateX(0) translateY(-2px);
+    -webkit-transform: translate(0, -2px);
+    -moz-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px);
     will-change: transform;
-    -webkit-filter: drop-shadow(0px 2px 0px #AFC9C1) drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
-    filter: drop-shadow(0px 2px 0px #AFC9C1) drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
+    --filter: drop-shadow(0px 2px 0px #AFC9C1) drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.1));
+    -webkit-filter: var(--filter);
+    filter: var(--filter);
     fill: #DBFBF1;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .switch .switch-bg {
     fill: var(--tooltip-bg);
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     stroke: var(--stroke-accent-color);
 }
 
 .switch[aria-checked="true"] .switch-knob {
-    -webkit-transform: translateX(18px) translateY(-2px);
-    -ms-transform: translateX(18px) translateY(-2px);
-    -moz-transform: translateX(18px) translateY(-2px);
-    -o-transform: translateX(18px) translateY(-2px);
-    transform: translateX(18px) translateY(-2px);
+    -webkit-transform: translate(18px, -2px);
+    -moz-transform: translate(18px, -2px);
+    -o-transform: translate(18px, -2px);
+    transform: translate(18px, -2px);
     fill: var(--text-color);
 }
 
@@ -3974,13 +3945,14 @@
     border: 0px solid #DAFCF1;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
-    -webkit-box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
-    box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
+    --box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
     background: #DAFCF1;
     cursor: -webkit-grab;
     cursor: grab;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     -webkit-transform: translateX(2px);
     transform: translateX(2px);
     will-change: transform;
@@ -3994,13 +3966,14 @@
     border: 0px solid #DAFCF1;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-    -moz-box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
-    box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
+    --box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
+    -moz-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
     background: #DAFCF1;
     cursor: -moz-grab;
     cursor: grab;
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     -moz-transform: translateX(2px);
     transform: translateX(2px);
     will-change: transform;
@@ -4015,9 +3988,8 @@
     box-shadow: -2px 0px 0px #AFC9C1, -4px 0px rgba(0, 0, 0, 0.1), -2px 0 0 0px rgba(2, 218, 154, 0.3);
     background: #DAFCF1;
     cursor: grab;
-    -ms-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
-    -ms-transform: translateX(2px);
+    -ms-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     transform: translateX(2px);
     will-change: transform;
 }
@@ -4168,10 +4140,10 @@
     min-height: 100%;
     position: relative;
     z-index: 5;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     overflow: hidden;
     will-change: min-width, max-width;
 }
@@ -4183,24 +4155,20 @@
 
 .transcript-panel .header {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;
     justify-content: space-between;
@@ -4214,19 +4182,16 @@
 
 .transcript-panel .header-buttons {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-align: center;
-    -ms-flex-align: center;
     -webkit-align-items: center;
     -moz-box-align: center;
     align-items: center;
@@ -4255,33 +4220,29 @@
     width: 100%;
     height: 100%;
     -webkit-transform: scale(1);
-    -ms-transform: scale(1);
     -moz-transform: scale(1);
     -o-transform: scale(1);
     transform: scale(1);
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-pack: center;
-    -ms-flex-pack: center;
     -webkit-justify-content: center;
     -moz-box-pack: center;
     justify-content: center;
     background: #000;
     z-index: 0;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .full-screen .playful-video-player-container {
@@ -4298,10 +4259,11 @@
 }
 
 .full-screen.playful-video-player {
-    -webkit-animation: fullscreenPlayer 600ms var(--ease-out-expo);
-    -moz-animation: fullscreenPlayer 600ms var(--ease-out-expo);
-    -o-animation: fullscreenPlayer 600ms var(--ease-out-expo);
-    animation: fullscreenPlayer 600ms var(--ease-out-expo);
+    --animation: fullscreenPlayer 600ms var(--ease-out-expo);
+    -webkit-animation: var(--animation);
+    -moz-animation: var(--animation);
+    -o-animation: var(--animation);
+    animation: var(--animation);
     will-change: filter, webkit-filter;
 }
 
@@ -4371,10 +4333,10 @@
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .playful-video-player-container {
@@ -4401,18 +4363,18 @@
     height: 48px;
     padding: 0;
     cursor: pointer;
-    -webkit-transition: all 600ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo);
-    -moz-transition: all 600ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo);
+    -webkit-transition: var(--600ms-all-ease-out-expo-prop);
+    -o-transition: var(--600ms-all-ease-out-expo-prop);
+    -moz-transition: var(--600ms-all-ease-out-expo-prop);
+    transition: var(--600ms-all-ease-out-expo-prop);
 }
 
 .transcript-panel button path {
     fill: #fff;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .transcript-panel button:hover path {
@@ -4428,21 +4390,19 @@
     height: 100%;
     overflow: hidden;
     -webkit-transform: translateY(30%);
-    -ms-transform: translateY(30%);
     -moz-transform: translateY(30%);
     -o-transform: translateY(30%);
     transform: translateY(30%);
     will-change: transform;
     opacity: 0;
-    -webkit-transition: all 600ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo);
-    -moz-transition: all 600ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo);
+    -webkit-transition: var(--600ms-all-ease-out-expo-prop);
+    -o-transition: var(--600ms-all-ease-out-expo-prop);
+    -moz-transition: var(--600ms-all-ease-out-expo-prop);
+    transition: var(--600ms-all-ease-out-expo-prop);
 }
 
 .transcript-opened .transcript-panel .contents {
     -webkit-transform: translateY(0%);
-    -ms-transform: translateY(0%);
     -moz-transform: translateY(0%);
     -o-transform: translateY(0%);
     transform: translateY(0%);
@@ -4454,13 +4414,11 @@
     bottom: 0;
     position: absolute;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     padding: 32px;
     -webkit-box-pack: center;
-    -ms-flex-pack: center;
     -webkit-justify-content: center;
     -moz-box-pack: center;
     justify-content: center;
@@ -4490,7 +4448,6 @@
     border-radius: 21px;
     padding: 6px 18px;
     -webkit-transform: translateY(0px);
-    -ms-transform: translateY(0px);
     -moz-transform: translateY(0px);
     -o-transform: translateY(0px);
     transform: translateY(0px);
@@ -4516,7 +4473,6 @@
     -moz-box-shadow: 0px 0px 0px #1D78D1, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 8px #165248, 0px 0px 16px 28px rgba(22, 82, 72, 0.6);
     box-shadow: 0px 0px 0px #1D78D1, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 8px #165248, 0px 0px 16px 28px rgba(22, 82, 72, 0.6);
     -webkit-transform: translateY(4px);
-    -ms-transform: translateY(4px);
     -moz-transform: translateY(4px);
     -o-transform: translateY(4px);
     transform: translateY(4px);
@@ -4525,18 +4481,15 @@
 .transcript-panel .captions-contents {
     padding: 16px 20px 128px 20px;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     -webkit-flex-direction: column;
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
-    -ms-flex-wrap: nowrap;
     -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     height: -webkit-calc(100% - 125px);
@@ -4594,19 +4547,16 @@
 
 .cue-container {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     -webkit-flex-direction: row;
     -moz-box-orient: horizontal;
     -moz-box-direction: normal;
     flex-direction: row;
     -webkit-box-align: start;
-    -ms-flex-align: start;
     -webkit-align-items: flex-start;
     -moz-box-align: start;
     align-items: flex-start;
@@ -4621,10 +4571,10 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
     cursor: pointer;
 }
 
@@ -4637,10 +4587,10 @@
     line-height: 160%;
     word-wrap: break-word;
     margin-top: 2px;
-    -webkit-transition: all 600ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo);
-    -moz-transition: all 600ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo);
+    -webkit-transition: var(--600ms-all-ease-out-expo-prop);
+    -o-transition: var(--600ms-all-ease-out-expo-prop);
+    -moz-transition: var(--600ms-all-ease-out-expo-prop);
+    transition: var(--600ms-all-ease-out-expo-prop);
     -ms-word-break: keep-all;
     word-break: keep-all;
     -webkit-hyphens: auto;
@@ -4671,10 +4621,10 @@
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.04em;
     font-weight: 800;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    -moz-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+    -o-transition: var(--300ms-all-ease-out-expo-prop);
+    -moz-transition: var(--300ms-all-ease-out-expo-prop);
+    transition: var(--300ms-all-ease-out-expo-prop);
 }
 
 .cue-container:hover {
@@ -4757,12 +4707,10 @@ screen and (max-height: 600px) {
 
     .seeking-preview {
         -webkit-transform: translate(-50%, -60%) scale(0.9);
-        -ms-transform: translate(-50%, -60%) scale(0.9);
         -moz-transform: translate(-50%, -60%) scale(0.9);
         -o-transform: translate(-50%, -60%) scale(0.9);
         transform: translate(-50%, -60%) scale(0.9);
         -webkit-transform-origin: 50% 100%;
-        -ms-transform-origin: 50% 100%;
         -moz-transform-origin: 50% 100%;
         -o-transform-origin: 50% 100%;
         transform-origin: 50% 100%;
@@ -4770,7 +4718,6 @@ screen and (max-height: 600px) {
 
     .seeking-preview.hovered {
         -webkit-transform: translate(-50%, -60%) scale(1);
-        -ms-transform: translate(-50%, -60%) scale(1);
         -moz-transform: translate(-50%, -60%) scale(1);
         -o-transform: translate(-50%, -60%) scale(1);
         transform: translate(-50%, -60%) scale(1);
@@ -4851,30 +4798,30 @@ screen and (max-height: 600px) {
         -moz-border-radius: 8px;
         border-radius: 8px;
         position: relative;
-        -webkit-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-in-expo), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+        -o-transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+        -moz-transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
+        transition: var(--300ms-all-ease-in-expo-prop), height 300ms var(--ease-out-expo), margin 300ms var(--ease-out-expo);
         will-change: height, margin;
     }
 
     .volume-container:hover .volume-slider,
     .volume-container.scrubbing .volume-slider {
         width: 0px;
-        -webkit-transition: all 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+        -o-transition: var(--300ms-all-ease-out-expo-prop);
+        -moz-transition: var(--300ms-all-ease-out-expo-prop);
+        transition: var(--300ms-all-ease-out-expo-prop);
     }
 
     .volume-container:hover .volume-slider-container,
     .volume-container.scrubbing .volume-slider-container {
         padding: 0px;
         width: 100%;
-        -webkit-transition: all 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+        -o-transition: var(--300ms-all-ease-out-expo-prop);
+        -moz-transition: var(--300ms-all-ease-out-expo-prop);
+        transition: var(--300ms-all-ease-out-expo-prop);
     }
 
     .volume-tooltip-container:hover,
@@ -4974,7 +4921,6 @@ screen and (max-height: 600px) {
         background-color: Highlight;
         outline: 2px solid HighlightText;
         -webkit-transform: scale(0.96);
-        -ms-transform: scale(0.96);
         -moz-transform: scale(0.96);
         -o-transform: scale(0.96);
         transform: scale(0.96);
@@ -4991,10 +4937,10 @@ screen and (max-height: 600px) {
 
     :focus-visible {
         outline: 6px solid Highlight !important;
-        -webkit-transition: all 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+        -o-transition: var(--300ms-all-ease-out-expo-prop);
+        -moz-transition: var(--300ms-all-ease-out-expo-prop);
+        transition: var(--300ms-all-ease-out-expo-prop);
     }
 
     .video-controls-container .right-side button:hover {
@@ -5009,10 +4955,10 @@ screen and (max-height: 600px) {
 
     .video-controls-container .right-side button path {
         fill: ButtonText;
-        -webkit-transition: all 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo);
+        -webkit-transition: var(--300ms-all-ease-out-expo-prop);
+        -o-transition: var(--300ms-all-ease-out-expo-prop);
+        -moz-transition: var(--300ms-all-ease-out-expo-prop);
+        transition: var(--300ms-all-ease-out-expo-prop);
     }
 
     .video-controls-container .right-side button:hover path {
@@ -5028,10 +4974,11 @@ screen and (max-height: 600px) {
     .video-container .gcast-button::after {
         background-color: Highlight;
         bottom: 2px;
-        -webkit-transition: all 150ms var(--ease-in-expo), background-color 0s;
-        -o-transition: all 150ms var(--ease-in-expo), background-color 0s;
-        -moz-transition: all 150ms var(--ease-in-expo), background-color 0s;
-        transition: all 150ms var(--ease-in-expo), background-color 0s;
+        --transition: all 150ms var(--ease-in-expo), background-color 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .video-container.caption .caption-button::after,
@@ -5039,10 +4986,11 @@ screen and (max-height: 600px) {
     .video-container.casted-session .gcast-button::after {
         background-color: Highlight;
         bottom: 2px;
-        -webkit-transition: all 300ms var(--ease-out-expo), background-color 0s;
-        -o-transition: all 300ms var(--ease-out-expo), background-color 0s;
-        -moz-transition: all 300ms var(--ease-out-expo), background-color 0s;
-        transition: all 300ms var(--ease-out-expo), background-color 0s;
+        --transition: var(--300ms-all-ease-out-expo-prop), background-color 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .video-container.caption .video-controls-container .right-side button:active.caption-button::after,
@@ -5104,18 +5052,13 @@ screen and (max-height: 600px) {
         fill: LinkText;
     }
 
-    .settings-context-menu .page .header .contents.back-page:hover {
-        -webkit-transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
-        -o-transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
-        -moz-transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
-        transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
-    }
-
+    .settings-context-menu .page .header .contents.back-page:hover,
     .settings-context-menu .page .header .contents.back-page:hover .back-arrow {
-        -webkit-transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
-        -o-transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
-        -moz-transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
-        transition: all 300ms var(--ease-out-expo), color 0s, fill 0s;
+        --transition: var(--300ms-all-ease-out-expo-prop), color 0s, fill 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .settings-context-menu .page .header .contents.back-page:hover {
@@ -5147,16 +5090,16 @@ screen and (max-height: 600px) {
 
     .scrubbing .timeline .timeline__progressbar,
     .scrubbing:hover .timeline .timeline__progressbar {
+        --filter: drop-shadow(0px 4px 0px #0000001a) drop-shadow(4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px #0000001a) drop-shadow(0px 4px 0px Highlight);
         -webkit-transform: translateY(-4px);
-        -ms-transform: translateY(-4px);
         -moz-transform: translateY(-4px);
         -o-transform: translateY(-4px);
         transform: translateY(-4px);
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
         box-sizing: content-box;
-        -webkit-filter: drop-shadow(0px 4px 0px #0000001a) drop-shadow(4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px Highlight);
-        filter: drop-shadow(0px 4px 0px #0000001a) drop-shadow(4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px #0000001a) drop-shadow(0px 4px 0px Highlight);
+        -webkit-filter: var(--filter);
+        filter: var(--filter);
     }
 
     .timeline {
@@ -5215,10 +5158,11 @@ screen and (max-height: 600px) {
         outline-width: 2px;
         outline-style: solid;
         outline-color: CanvasText;
-        -webkit-transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
-        -o-transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
-        -moz-transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
-        transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
+        --transition: outline-width 300ms var(--ease-out-expo), outline-color 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .scrubbing .timeline-container .seeking-preview__thumbnail {
@@ -5228,13 +5172,14 @@ screen and (max-height: 600px) {
     }
 
     .playful-video-player-container {
+        --transition: var(--300ms-all-ease-out-expo-prop), outline-color 0s;
         outline-width: 2px;
         outline-style: solid;
         outline-color: CanvasText;
-        -webkit-transition: all 300ms var(--ease-out-expo), outline-color 0s;
-        -o-transition: all 300ms var(--ease-out-expo), outline-color 0s;
-        -moz-transition: all 300ms var(--ease-out-expo), outline-color 0s;
-        transition: all 300ms var(--ease-out-expo), outline-color 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .playful-video-player-container:hover {
@@ -5250,21 +5195,23 @@ screen and (max-height: 600px) {
     }
 
     .volume-tooltip-container .volume-slider-container {
+        --transition: var(--300ms-all-ease-in-expo-prop), outline-width 0s 300ms;
         background-color: ButtonFace;
         outline: 0px solid transparent;
-        -webkit-transition: all 300ms var(--ease-in-expo), outline-width 0s 300ms;
-        -o-transition: all 300ms var(--ease-in-expo), outline-width 0s 300ms;
-        -moz-transition: all 300ms var(--ease-in-expo), outline-width 0s 300ms;
-        transition: all 300ms var(--ease-in-expo), outline-width 0s 300ms;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .volume-tooltip-container:hover .volume-slider-container {
+        --transition: var(--300ms-all-ease-out-expo-prop), outline-width 0s;
         background-color: ButtonFace;
         outline: 2px solid ButtonText;
-        -webkit-transition: all 300ms var(--ease-out-expo), outline-width 0s;
-        -o-transition: all 300ms var(--ease-out-expo), outline-width 0s;
-        -moz-transition: all 300ms var(--ease-out-expo), outline-width 0s;
-        transition: all 300ms var(--ease-out-expo), outline-width 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .volume-slider::before {
@@ -5312,13 +5259,14 @@ screen and (max-height: 600px) {
     }
 
     .transcript-panel button {
+        --transition: all 0s var(--ease-out-expo);
         outline-width: 2px;
         outline-style: solid;
         outline-color: ButtonText;
-        -webkit-transition: all 0s var(--ease-out-expo);
-        -o-transition: all 0s var(--ease-out-expo);
-        -moz-transition: all 0s var(--ease-out-expo);
-        transition: all 0s var(--ease-out-expo);
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .transcript-panel button:hover {
@@ -5332,11 +5280,12 @@ screen and (max-height: 600px) {
     }
 
     .transcript-panel button path {
+        --transition: var(--300ms-all-ease-out-expo-prop);
         fill: ButtonText;
-        -webkit-transition: all 300ms var(--ease-out-expo);
-        -o-transition: all 300ms var(--ease-out-expo);
-        -moz-transition: all 300ms var(--ease-out-expo);
-        transition: all 300ms var(--ease-out-expo);
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .transcript-panel button:hover path {
@@ -5424,27 +5373,30 @@ screen and (max-height: 600px) {
     }
 
     .cues {
+        --transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
         outline-width: 2px;
         outline-style: solid;
         outline-color: HighlightText;
-        -webkit-transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        -o-transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        -moz-transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        transition: all 600ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .cue-container {
+        --transition: var(--300ms-all-ease-out-expo-prop), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
         background-color: Canvas;
         outline-width: 0px;
         outline-style: solid;
         outline-color: CanvasText;
-        -webkit-transition: all 300ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        -o-transition: all 300ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        -moz-transition: all 300ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
-        transition: all 300ms var(--ease-out-expo), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .cue-time {
+        --transition: var(--300ms-all-ease-out-expo-prop), outline-color 0s;
         outline-width: 2px;
         outline-style: solid;
         outline-color: LinkText;
@@ -5452,10 +5404,10 @@ screen and (max-height: 600px) {
         color: LinkText !important;
         text-decoration: underline;
         letter-spacing: -0.04em;
-        -webkit-transition: all 300ms var(--ease-out-expo), outline-color 0s;
-        -o-transition: all 300ms var(--ease-out-expo), outline-color 0s;
-        -moz-transition: all 300ms var(--ease-out-expo), outline-color 0s;
-        transition: all 300ms var(--ease-out-expo), outline-color 0s;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        -moz-transition: var(--transition);
+        transition: var(--transition);
     }
 
     .cue-container:hover {
@@ -5547,7 +5499,6 @@ screen and (max-height: 600px) {
     [data-quality="UHD"].quality-badge .span.quality {
         color: Highlight;
         -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
         -moz-transform: translateY(0);
         -o-transform: translateY(0);
         transform: translateY(0);
@@ -5736,7 +5687,6 @@ screen and (max-height: 600px) {
     .video-container .settings-button:active path,
     .video-container .settings-button.pressed path {
         -webkit-transform: none;
-        -ms-transform: none;
         -moz-transform: none;
         -o-transform: none;
         transform: none;
@@ -5759,36 +5709,35 @@ screen and (max-height: 600px) {
 
     .full-screen-button .enter .top-corner,
     .full-screen-button:hover .enter .top-corner {
-        -webkit-transform: translate(2px, 2px);
-        -ms-transform: translate(2px, 2px);
-        -moz-transform: translate(2px, 2px);
-        -o-transform: translate(2px, 2px);
-        transform: translate(2px, 2px);
+        --transform: translate(2px, 2px);
+        -webkit-transform: var(--transform);
+        -moz-transform: var(--transform);
+        -o-transform: var(--transform);
+        transform: var(--transform);
     }
 
     .full-screen-button .enter .bottom-corner,
     .full-screen-button:hover .enter .bottom-corner {
-        -webkit-transform: translate(-2px, -2px);
-        -ms-transform: translate(-2px, -2px);
-        -moz-transform: translate(-2px, -2px);
-        -o-transform: translate(-2px, -2px);
-        transform: translate(-2px, -2px);
+        --transform: translate(-2px, -2px);
+        -webkit-transform: var(--transform);
+        -moz-transform: var(--transform);
+        -o-transform: var(--transform);
+        transform: var(--transform);
     }
 
     .full-screen-button .exit .bottom-corner,
     .full-screen-button .exit .top-corner,
     .full-screen-button:hover .exit .bottom-corner,
     .full-screen-button:hover .exit .top-corner {
-        -webkit-transform: translate(0px, 0px);
-        -ms-transform: translate(0px, 0px);
-        -moz-transform: translate(0px, 0px);
-        -o-transform: translate(0px, 0px);
-        transform: translate(0px, 0px);
+        --transform: translate(0px, 0px);
+        -webkit-transform: var(--transform);
+        -moz-transform: var(--transform);
+        -o-transform: var(--transform);
+        transform: var(--transform);
     }
 
     .video-controls-container .left-side button:active {
         -webkit-transform: none;
-        -ms-transform: none;
         -moz-transform: none;
         -o-transform: none;
         transform: none;
@@ -5801,7 +5750,6 @@ screen and (max-height: 600px) {
     .video-play-container:active .play-btn-poster,
     .video-container.played .play-btn-poster {
         -webkit-transform: none;
-        -ms-transform: none;
         -moz-transform: none;
         -o-transform: none;
         transform: none;
@@ -5817,7 +5765,6 @@ screen and (max-height: 600px) {
     [data-volume-level="mute"] .mid-volume,
     [data-volume-level="mute"] .low-volume {
         -webkit-transform: none;
-        -ms-transform: none;
         -moz-transform: none;
         -o-transform: none;
         transform: none;

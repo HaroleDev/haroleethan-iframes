@@ -1925,6 +1925,9 @@ const eventListeners = [
                 playfulVideoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
+                    element.style.webkitAnimationPlayState = 'running'
+                    element.style.mozAnimationPlayState = 'running'
+                    element.style.oAnimationPlayState = 'running'
                     element.style.opacity = 1
                 })
                 playfulVideoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {

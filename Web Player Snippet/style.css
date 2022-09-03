@@ -32,14 +32,9 @@
     color-scheme: light dark;
 }
 
-.playful-video-player-container.preload * {
+.playful-video-player-container {
     --aspect-ratio-size: calc(16 / 9);
     --aspect-ratio-size-inverse: calc(9 / 16);
-    animation-duration: 0s !important;
-    -webkit-animation-duration: 0s !important;
-    -webkit-transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
-    -o-transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
-    transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
 }
 
 .video-container {
@@ -72,7 +67,6 @@
     width: 100%;
     height: 100%;
     opacity: 1;
-    margin: 0 auto;
     -webkit-transition: opacity 300ms var(--ease-out-expo);
     -o-transition: opacity 300ms var(--ease-out-expo);
     transition: opacity 300ms var(--ease-out-expo);
@@ -106,6 +100,7 @@
     padding-bottom: calc(var(--aspect-ratio-size-inverse) * 0%);
 }
 
+.video-filters,
 .video-fit-content {
     position: absolute;
     top: 0;
@@ -115,11 +110,6 @@
 }
 
 .video-filters {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     pointer-events: none;
 }
 
@@ -149,6 +139,7 @@
 .playful-video-player.loading .video-controls-container,
 .playful-video-player.loading .video-information-overlay {
     opacity: 0.6 !important;
+    visibility: visible;
 }
 
 .loading .seeking-preview {
@@ -336,9 +327,10 @@
 .video-container.pip-player .video-controls-container,
 .video-container.pip-player .video-information-overlay {
     opacity: 1;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    visibility: visible;
+    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
 }
 
 .video-container.pip-player .pip-enter,
@@ -746,11 +738,12 @@
     padding: 28px;
     padding-bottom: calc(28px * 4);
     opacity: 0;
-    -webkit-transition: all 600ms var(--ease-out-expo);
-    -o-transition: all 600ms var(--ease-out-expo);
-    transition: all 600ms var(--ease-out-expo);
+    -webkit-transition: all 600ms var(--ease-out-expo), visibility 300ms step-end;
+    -o-transition: all 600ms var(--ease-out-expo), visibility 300ms step-end;
+    transition: all 600ms var(--ease-out-expo), visibility 300ms step-end;
     will-change: width, height, max-width, max-height;
     pointer-events: none;
+    visibility: hidden;
 }
 
 .playful-video-player[data-device="iPadOS"] .video-information-overlay,
@@ -829,6 +822,7 @@
 .playful-video-player:not(.full-screen) .video-information-overlay,
 .playful-video-player:not(.full-screen) .video-information-container {
     opacity: 0 !important;
+    visibility: hidden;
     pointer-events: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -2233,9 +2227,10 @@
     -ms-user-select: none;
     user-select: none;
     overflow: hidden;
-    -webkit-transition: all 300ms var(--ease-out-expo);
-    -o-transition: all 300ms var(--ease-out-expo);
-    transition: all 300ms var(--ease-out-expo);
+    visibility: hidden;
+    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-end;
+    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-end;
+    transition: all 300ms var(--ease-out-expo), visibility 300ms step-end;
 }
 
 .dialog-overlay {
@@ -2248,9 +2243,10 @@
     z-index: 6;
     opacity: 0;
     pointer-events: none;
-    -webkit-transition: opacity 300ms var(--ease-out-expo);
-    -o-transition: opacity 300ms var(--ease-out-expo);
-    transition: opacity 300ms var(--ease-out-expo);
+    visibility: hidden;
+    -webkit-transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end;
+    -o-transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end;
+    transition: opacity 300ms var(--ease-out-expo), visibility 300ms step-end;
 }
 
 .dialog h2 {
@@ -2309,11 +2305,19 @@
     -ms-user-select: auto;
     user-select: auto;
     pointer-events: all;
+    visibility: visible;
+    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
 }
 
 .opened .dialog-overlay {
     opacity: 1;
-    pointer-events: inherit;
+    pointer-events: all;
+    visibility: visible;
+    -webkit-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    -o-transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
+    transition: all 300ms var(--ease-out-expo), visibility 300ms step-start;
 }
 
 .eq-control input {
@@ -3201,7 +3205,6 @@
     flex-direction: column;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
-    gap: 8px;
     height: calc(100% - 125px);
     overflow-x: hidden;
     overflow-y: auto;
@@ -3263,10 +3266,12 @@
     -ms-flex-align: start;
     align-items: flex-start;
     padding: 9px 12px;
+    border: 2px solid var(--background);
+    box-sizing: border-box;
     gap: 10px;
     width: 100%;
     background: transparent;
-    border-radius: 8px;
+    border-radius: 10px;
     -webkit-transition: all 300ms var(--ease-out-expo);
     -o-transition: all 300ms var(--ease-out-expo);
     transition: all 300ms var(--ease-out-expo);

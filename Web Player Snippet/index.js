@@ -173,8 +173,6 @@ function init() {
 
     playfulVideoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius', (playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
     playfulVideoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height', playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
-
-    playfulVideoPlayerContainer.classList.remove('preload')
 }
 
 init()
@@ -835,18 +833,25 @@ function frameSeeking(time) {
 }
 
 // Time divider animation
-function intervalDivide() {
-    const spinners = ['/', '–', '\\', '|']
-    let spinindex = 0
-    let line = spinners[spinindex]
-    if (line == undefined) {
-        spinindex = 0
-        line = spinners[spinindex]
+let divide
+function intervalDivideWorker() {
+    if (typeof (Worker) !== 'undefined') {
+        if (typeof (divide) == 'undefined') {
+            divide = new Worker('timeDivider.js')
+        }
+        divide.onmessage = function (e) {
+            playfulVideoPlayer.querySelector('.divider-time').innerText = e.data
+        }
+    } else {
+        playfulVideoPlayer.querySelector('.divider-time').innerText = '/'
     }
-    spinindex = spinindex > spinners.length ? 0 : spinindex + 1
-    playfulVideoPlayer.querySelector('.divider-time').innerText = `${line}`
 }
-let intervalDivider;
+
+function stopIntervalDivideWorker() {
+    if (typeof (Worker) == 'undefined') return
+    divide.terminate()
+    divide = undefined
+}
 
 (function () {
     const vendors = ['webkit', 'moz', 'ms', 'o']
@@ -1168,14 +1173,14 @@ async function updatetime() {
 
 function updateMetadata() {
     const updateThrottleMetadata = throttle(() => {
-        const orientationInfluence = video.videoWidth / video.videoHeight
+        orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', orientationInfluence)
-        playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth)
-        if (orientationInfluence > 16 / 9) {
-            qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth)
+        playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth || 9 / 16)
+        if (orientationInfluence >= 16 / 9) {
+            qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth)
             qualityBadgeText.innerText = qualityCheck(video.videoWidth)
         } else {
-            qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight)
+            qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth)
             qualityBadgeText.innerText = qualityCheck(video.videoHeight)
         }
     }, 1000)
@@ -1296,9 +1301,45 @@ const qualityLabels = [{
 function qualityCheck(size) {
     if (!size || size < 0) return 'N/A'
     let label
-    orientationInfluence > 16 / 9
+    orientationInfluence >= 16 / 9
         ? label = qualityLabels.find((l) => l.size >= size)
         : label = qualityLabels.find((l) => l.length >= size)
+    return label.label
+}
+
+const qualityLabelsShort = [{
+    label: 'SD',
+    size: 640,
+    length: 360
+},
+{
+    label: 'HD',
+    size: 1280,
+    length: 720
+},
+{
+    label: 'FHD',
+    size: 1920,
+    length: 1080
+},
+{
+    label: 'QHD',
+    size: 2560,
+    length: 1440
+},
+{
+    label: 'UHD',
+    size: 3840,
+    length: 2160
+}
+]
+
+function qualityCheckShort(size) {
+    if (!size || size < 0) return 'N/A'
+    let label
+    orientationInfluence >= 16 / 9
+        ? label = qualityLabelsShort.find((l) => l.size >= size)
+        : label = qualityLabelsShort.find((l) => l.length >= size)
     return label.label
 }
 
@@ -1716,7 +1757,7 @@ const eventListeners = [
             navigator.mediaSession.playbackState = 'playing'
             playpauseTooltipContainer.dataset.tooltip = 'Pause' + ' (k)'
             video.addEventListener('timeupdate', mediaSessionToggle())
-            intervalDivider = setInterval(intervalDivide, 1e3)
+            intervalDivideWorker()
             if (Hls.isSupported() && video.currentTime === 0) hls.startLoad()
             window.requestAnimationFrame(updateMetadata)
             videoContainer.addEventListener('pointerover', () => {
@@ -1757,7 +1798,7 @@ const eventListeners = [
     [
         'pause',
         () => {
-            clearInterval(intervalDivider)
+            stopIntervalDivideWorker()
             videoContainer.addEventListener('pointerleave', () => {
                 window.cancelAnimationFrame(updatetime)
                 window.cancelAnimationFrame(updateMetadata)
@@ -1860,13 +1901,13 @@ const eventListeners = [
                 )} elapsed of ${formatDurationARIA(video.duration)}`
             )
 
-            const orientationInfluence = video.videoWidth / video.videoHeight
+            orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
 
-            if (orientationInfluence > 16 / 9) {
-                qualityBadgeContainer.dataset.quality = qualityCheck(video.videoWidth)
+            if (orientationInfluence >= 16 / 9) {
+                qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth)
                 qualityBadgeText.innerText = qualityCheck(video.videoWidth)
             } else {
-                qualityBadgeContainer.dataset.quality = qualityCheck(video.videoHeight)
+                qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoHeight)
                 qualityBadgeText.innerText = qualityCheck(video.videoHeight)
             }
 
@@ -1876,7 +1917,7 @@ const eventListeners = [
             )
             playfulVideoPlayerContainer.style.setProperty(
                 '--aspect-ratio-size-inverse',
-                video.videoHeight / video.videoWidth
+                video.videoHeight / video.videoWidth || 9 / 16
             )
             loadedMetadata()
 

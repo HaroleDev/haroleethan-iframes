@@ -2809,6 +2809,14 @@
     fill: var(--bright-accent-color);
 }
 
+.video-container .settings-button.pressed:active path {
+    -webkit-transform: rotate(120deg) scale(0.9);
+    -ms-transform: rotate(120deg) scale(0.9);
+    -moz-transform: rotate(120deg) scale(0.9);
+    -o-transform: rotate(120deg) scale(0.9);
+    transform: rotate(120deg) scale(0.9);
+}
+
 .video-context-menu {
     position: absolute;
     top: 0;

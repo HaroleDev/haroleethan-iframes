@@ -32,6 +32,18 @@
     --300ms-visibility-step-end: visibility 300ms step-end;
 }
 
+.playful-video-player-container.preload *,
+.playful-video-player-container.preload *::before,
+.playful-video-player-container.preload *::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+}
+
 .playful-video-player * {
     accent-color: var(--accent-color);
     color-scheme: light dark;

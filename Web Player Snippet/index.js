@@ -1884,6 +1884,12 @@ const eventListeners = [
         }
     ],
     [
+        'loadstart',
+        () => {
+            playfulVideoPlayerContainer.classList.remove('preload')
+        }
+    ],
+    [
         'loadedmetadata',
         () => {
             videoPercent = video.currentTime / video.duration

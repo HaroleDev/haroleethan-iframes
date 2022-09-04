@@ -1557,7 +1557,6 @@
 .settings-context-menu .span {
     padding: 1px 6px 1px 12px;
     display: inline-block;
-    max-width: max-content;
 }
 
 .video-context-menu .item-content,

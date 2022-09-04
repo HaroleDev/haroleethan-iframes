@@ -910,23 +910,6 @@ video.addEventListener('dblclick', toggleFullScreen)
 
 function toggleFullScreen() {
     if (context.state === 'suspended') context.resume()
-    if (!document.fullscreenElement ||
-        !document.webkitIsFullScreen ||
-        !document.mozIsFullScreen ||
-        !document.msIsFullScreen) {
-        if (playfulVideoPlayer.requestFullscreen) {
-            playfulVideoPlayer.requestFullscreen()
-        } else if (playfulVideoPlayer.webkitRequestFullScreen) {
-            playfulVideoPlayer.webkitRequestFullScreen()
-        } else if (video.webkitEnterFullScreen) {
-            video.webkitEnterFullScreen()
-        } else if (playfulVideoPlayer.mozRequestFullScreen) {
-            playfulVideoPlayer.mozRequestFullScreen()
-        } else if (playfulVideoPlayer.msRequestFullScreen) {
-            playfulVideoPlayer.msRequestFullscreen()
-        }
-        fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
-    }
     if (document.fullscreenElement ||
         document.webkitIsFullScreen ||
         document.mozIsFullScreen ||
@@ -943,6 +926,19 @@ function toggleFullScreen() {
             document.msExitFullscreen()
         }
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
+    } else {
+        if (playfulVideoPlayer.requestFullscreen) {
+            playfulVideoPlayer.requestFullscreen()
+        } else if (playfulVideoPlayer.webkitRequestFullScreen) {
+            playfulVideoPlayer.webkitRequestFullScreen()
+        } else if (video.webkitEnterFullScreen) {
+            video.webkitEnterFullScreen()
+        } else if (playfulVideoPlayer.mozRequestFullScreen) {
+            playfulVideoPlayer.mozRequestFullScreen()
+        } else if (playfulVideoPlayer.msRequestFullScreen) {
+            playfulVideoPlayer.msRequestFullscreen()
+        }
+        fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     }
 }
 

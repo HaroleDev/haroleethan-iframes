@@ -1230,7 +1230,7 @@ function formatDuration(time) {
     } else if (hours > 0) {
         return `${hours}:${leading0Formatter.format(minutes)}:${leading0Formatter.format(seconds)}`
     } else {
-        return '0:00'
+        return '-:--'
     }
 }
 

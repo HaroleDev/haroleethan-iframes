@@ -1065,6 +1065,31 @@ function toggleVolume() {
             : 'Mute (m)')
 }
 
+function volumeControlKeyboard(e, value) {
+    let volumeLevel
+    if (e.toLowerCase() === 'arrowup') {
+        video.volume = Math.min(1, video.volume + value);
+    }
+    if (e.toLowerCase() === 'arrowdown') {
+        video.volume = Math.max(0, video.volume - value);
+    }
+    volumeSliderContainer.style.setProperty('--volume-position', video.volume)
+    if (video.muted || video.volume === 0) {
+        volumeLevel = 'mute'
+        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute' + ' (m)')
+    } else if (video.volume >= 0.6) {
+        volumeLevel = 'full'
+        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
+    } else if (video.volume >= 0.3) {
+        volumeLevel = 'mid'
+        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
+    } else {
+        volumeLevel = 'low'
+        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
+    }
+    videoContainer.dataset.volumeLevel = volumeLevel
+}
+
 // Timeline
 function seekingPreviewPosition(e) {
     let percent = 0
@@ -1255,7 +1280,7 @@ async function togglePlay() {
         video.currentTime = 0
     }
     if (context.state === 'suspended') context.resume()
-    
+
     if (video.paused || video.ended) {
         await video.play()
     } else {
@@ -1813,6 +1838,12 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
                 if (e.key.toLowerCase() === 'arrowright') skip(5)
                 checkActive()
                 break
+            case 'arrowup':
+            case 'arrowdown':
+                e.preventDefault()
+                volumeControlKeyboard(e.key, 0.1)
+                checkActive()
+                break;
             case 'j':
             case 'l':
                 videoContainer.classList.add('seeking')

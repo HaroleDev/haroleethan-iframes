@@ -1150,12 +1150,13 @@ function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
     isScrubbing = (e.buttons && 1) === 1
+    let seekTime = percent * video.duration
     videoContainer.classList.toggle('scrubbing', isScrubbing)
     if (isScrubbing) {
         wasPaused = video.paused
         video.pause()
     } else {
-        video.currentTime = percent * video.duration
+        video.currentTime = seekTime
         if (!wasPaused) video.play()
     }
 

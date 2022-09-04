@@ -968,10 +968,10 @@ function fullScreenToggleChange() {
     playfulVideoPlayer.classList.toggle('full-screen', document.fullscreenElement)
 }
 
-document.addEventListener('fullscreenchange', fullScreenToggleChange, false)
-document.addEventListener('mozfullscreenchange', fullScreenToggleChange, false)
-document.addEventListener('webkitfullscreenchange', fullScreenToggleChange, false)
-document.addEventListener('msfullscreenchange', fullScreenToggleChange, false)
+document.addEventListener('fullscreenchange', fullScreenToggleChange)
+document.addEventListener('mozfullscreenchange', fullScreenToggleChange)
+document.addEventListener('webkitfullscreenchange', fullScreenToggleChange)
+document.addEventListener('msfullscreenchange', fullScreenToggleChange)
 
 video.addEventListener('webkitenterfullscreen', () => {
     playfulVideoPlayer.classList.add('full-screen')
@@ -1014,7 +1014,7 @@ volumeSliderContainer.addEventListener('pointermove', (e) => {
         seekingPreview.removeAttribute('hidden')
         showContextMenu(false)
         if (e.button === 0) volumeUpdate(e)
-    })
+    }, true)
     if (isVolumeScrubbing) {
         volumeUpdate(e)
     }
@@ -1128,7 +1128,7 @@ timelineInner.addEventListener('pointermove', (e) => {
             showContextMenu(false)
             toggleScrubbing(e)
         }
-    })
+    }, true)
     if (isScrubbing) {
         videoControls.setAttribute('hidden', '')
     }
@@ -1264,8 +1264,8 @@ function formatDurationARIA(time) {
 }
 
 // Playback and Media Session
-playpauseButton.addEventListener('click', togglePlay)
-videoFit.addEventListener('click', togglePlay)
+playpauseButton.addEventListener('click', togglePlay, true)
+videoFit.addEventListener('click', togglePlay, true)
 
 async function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {

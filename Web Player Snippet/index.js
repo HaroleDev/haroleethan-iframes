@@ -1255,7 +1255,12 @@ async function togglePlay() {
         video.currentTime = 0
     }
     if (context.state === 'suspended') context.resume()
-    await video.paused ? video.play() : video.pause()
+    
+    if (video.paused || video.ended) {
+        await video.play()
+    } else {
+        await video.pause()
+    }
 }
 
 const qualityLabels = [

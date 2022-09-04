@@ -85,7 +85,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-bottom: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
+    padding-bottom: calc(var(--aspect-ratio-size-inverse) * 100%);
     opacity: 1;
     transform: scale(1);
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
@@ -126,7 +126,7 @@
     width: 100vw;
     height: calc(100vw * var(--aspect-ratio-size-inverse));
     max-height: 100vh;
-    max-width: calc(100vh * var(--aspect-ratio-size));
+    max-width: calc(100vh * var(--aspect-ratio-size, 0.5625));
     transition: width 300ms var(--ease-out-expo), height 300ms var(--ease-out-expo);
     will-change: width, height, max-width, max-height;
 }
@@ -223,7 +223,7 @@
     height: 0;
     width: 100%;
     z-index: 1;
-    padding-top: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
+    padding-top: calc(var(--aspect-ratio-size-inverse) * 100%);
     top: 0;
     left: 0;
     right: 0;
@@ -1747,6 +1747,7 @@
 .settings-context-menu .page .page-contents {
     position: relative;
     height: 100%;
+    overscroll-behavior-y: contain;
     overflow-y: auto;
     overflow-x: hidden;
     box-sizing: border-box;
@@ -2489,8 +2490,9 @@
 
 .playful-video-player-container {
     margin-bottom: 16px;
+    max-height: 10vh;
     overflow: hidden;
-    padding-top: calc(var(--aspect-ratio-size-inverse, 0.5625) * 100%);
+    padding-top: calc(var(--aspect-ratio-size-inverse) * 100%);
     position: relative;
     border-radius: 8px;
     transition: var(--300ms-all-ease-out-expo-prop);

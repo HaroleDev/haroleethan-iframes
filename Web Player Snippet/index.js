@@ -1181,13 +1181,8 @@ function updateMetadata() {
         orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', orientationInfluence)
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth || 9 / 16)
-        if (orientationInfluence >= 16 / 9) {
-            qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth)
-            qualityBadgeText.innerText = qualityCheck(video.videoWidth)
-        } else {
-            qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth)
-            qualityBadgeText.innerText = qualityCheck(video.videoHeight)
-        }
+        qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth, video.videoHeight)
+        qualityBadgeText.innerText = qualityCheck(video.videoWidth, video.videoHeight)
     }, 1000)
     updateThrottleMetadata()
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
@@ -1256,59 +1251,60 @@ async function togglePlay() {
     await video[video.paused ? 'play' : 'pause']()
 }
 
-const qualityLabels = [{
-    label: 'LD',
-    size: 320,
-    length: 180
-},
-{
-    label: 'SD',
-    size: 640,
-    length: 360
-},
-{
-    label: 'HD',
-    size: 1280,
-    length: 720
-},
-{
-    label: 'FHD',
-    size: 1920,
-    length: 1080
-},
-{
-    label: 'QHD',
-    size: 2560,
-    length: 1440
-},
-{
-    label: '4K',
-    size: 3840,
-    length: 2160
-},
-{
-    label: '5K',
-    size: 5120,
-    length: 2880
-},
-{
-    label: '6K',
-    size: 6144,
-    length: 3456
-},
-{
-    label: '8K',
-    size: 7860,
-    length: 4320
-}
+const qualityLabels = [
+    {
+        label: '8K',
+        size: 7860,
+        length: 4320
+    },
+    {
+        label: '6K',
+        size: 6144,
+        length: 3456
+    },
+    {
+        label: '5K',
+        size: 5120,
+        length: 2880
+    },
+    {
+        label: '4K',
+        size: 3840,
+        length: 2160
+    },
+    {
+        label: 'QHD',
+        size: 2560,
+        length: 1440
+    },
+    {
+        label: 'FHD',
+        size: 1920,
+        length: 1080
+    },
+    {
+        label: 'HD',
+        size: 1280,
+        length: 720
+    },
+    {
+        label: 'SD',
+        size: 640,
+        length: 360
+    },
+    {
+        label: 'LD',
+        size: 320,
+        length: 180
+    },
 ]
 
-function qualityCheck(size) {
-    if (!size || size < 0) return 'N/A'
+function qualityCheck(sizeWidth, sizeHeight) {
+    if (!sizeWidth && !sizeHeight || sizeWidth < 0 && sizeHeight < 0) return 'N/A'
     let label
-    orientationInfluence >= 16 / 9
-        ? label = qualityLabels.find((l) => l.size >= size)
-        : label = qualityLabels.find((l) => l.length >= size)
+    sizeWidth >= sizeHeight
+        ? label = qualityLabels.find((l) => l.size <= sizeWidth)
+        : label = qualityLabels.find((l) => l.length <= sizeHeight)
     return label.label
 }
 
@@ -1339,13 +1335,89 @@ const qualityLabelsShort = [{
 }
 ]
 
-function qualityCheckShort(size) {
-    if (!size || size < 0) return 'N/A'
+function qualityCheckShort(sizeWidth, sizeHeight) {
+    if (!sizeWidth && !sizeHeight || sizeWidth < 0 && sizeHeight < 0) return 'N/A'
     let label
-    orientationInfluence >= 16 / 9
-        ? label = qualityLabelsShort.find((l) => l.size >= size)
-        : label = qualityLabelsShort.find((l) => l.length >= size)
+    sizeWidth >= sizeHeight
+        ? label = qualityLabelsShort.find((l) => l.size >= sizeWidth)
+        : label = qualityLabelsShort.find((l) => l.length >= sizeHeight)
     return label.label
+}
+
+function update_resolution() {
+    var elm = document.getElementById("yourResolution");
+    if (!elm)
+        return;
+
+    var w = screen.width;
+    var h = screen.height;
+
+    var minw = 1024;
+    var minh = 768;
+    var ref_year = 2015;
+    var refer = document.referrer;
+    if (refer.indexOf("small") != -1) {
+        minw = 320;
+        minh = 240;
+        refer = "small";
+    } else
+        refer = "big";
+
+
+    var res_names =
+        [
+            "320x240", "QVGA 4:3",
+            "240x320", "QVGA 3:4",
+            "320x396", "iPod 4:5",
+            "480x320", "HVGA 3:2",
+            "640x480", "VGA 4:3",
+            "800x600", "SVGA 4:3",
+            "800x480", "WVGA 5:3",
+            "1024x768", "XGA 4:3",
+            "1152x864", "XGA+ 4:3",
+            "1280x1024", "SXGA 5:4",
+            "1280x720", "720p 16:9",
+            "1280x768", "WXGA 5:3",
+            "1280x800", "WXGA 16:10",
+            "1280x854", "3:2",
+            "1280x960", "4:3",
+            "1360x768", "WXGA 16:9",
+            "1366x768", "WXGA 16:9",
+            "1440x900", "WXGA+ 16:10",
+            "1400x1050", "SXGA+ 4:3",
+            "1600x1200", "UXGA 4:3",
+            "1680x1050", "WSXGA+ 16:10",
+            "1920x1080", "FHD 16:9",
+            "1920x1200", "WUXGA 16:10",
+            "2048x1152", "QWXGA 16:9",
+            "2560x1080", "Unnamed 21:9",
+            "2560x1440", "WQHD 16:9",
+            "2560x1600", "WQXGA 16:10",
+            "3200x1800", "WQXGA+ 16:9",
+            "3440x1440", "UWQHD 21:9",
+            "3840x2160", "UHD 16:9",
+            "5120x2880", "UHD+ 16:9"
+        ];
+
+    if (w && h) {
+        var res = w + "x" + h;
+        var longres = res;
+        var comment = "";
+        var common = 0;
+        for (i = 0; i < res_names.length; i += 2) {
+            if (res_names[i] == res) {
+                if (res_desc[res])
+                    comment = res_desc[res] + " (" + resmsg_as_of(ref_year) + ')';
+                else
+                    comment = '';
+                longres = "<b>" + res + "</b> &nbsp; (" + res_names[i + 1] + ")";
+                common = 1;
+                break;
+            }
+        }
+    } else {
+        elm.innerHTML = res_msg["unknown"];
+    }
 }
 
 function updatePositionState() {
@@ -1914,13 +1986,8 @@ const eventListeners = [
 
             orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
 
-            if (orientationInfluence >= 16 / 9) {
-                qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth)
-                qualityBadgeText.innerText = qualityCheck(video.videoWidth)
-            } else {
-                qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoHeight)
-                qualityBadgeText.innerText = qualityCheck(video.videoHeight)
-            }
+            qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth, video.videoHeight)
+            qualityBadgeText.innerText = qualityCheck(video.videoWidth, video.videoHeight)
 
             playfulVideoPlayerContainer.style.setProperty(
                 '--aspect-ratio-size',

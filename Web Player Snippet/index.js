@@ -1267,7 +1267,7 @@ function formatDurationARIA(time) {
 playpauseButton.addEventListener('click', togglePlay, true)
 videoFit.addEventListener('click', togglePlay, true)
 
-async function togglePlay() {
+function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
         if (contextMenu.classList.contains('show')) return
         if (settingsContextMenu.classList.contains('pressed')) return
@@ -1275,13 +1275,14 @@ async function togglePlay() {
         videoContainer.classList.remove('ended')
         video.currentTime = 0
     }
-    if (context.state === 'suspended') context.resume()
 
     if (video.paused || video.ended) {
-        await video.play()
+        video.play()
     } else {
-        await video.pause()
+        video.pause()
     }
+
+    if (context.state === 'suspended') context.resume()
 }
 
 const qualityLabels = [

@@ -1216,16 +1216,12 @@ function updateMetadata() {
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
 
-const leading0Formatter = new Intl.NumberFormat(undefined, {
-    minimumIntegerDigits: 2
-})
-
 function formatDuration(time) {
     const seconds = Math.trunc(time % 60)
     const minutes = Math.trunc((time / 60) % 60)
     const hours = Math.trunc((time / 60 / 60) % 60)
     const format = (time) => (`0${time}`).slice(-2);
-    
+
     if (hours === 0) {
         return `${minutes}:${format(seconds)}`
     } else if (hours > 0) {

@@ -48,14 +48,18 @@
             "https://gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
         ];
 
-        if (window.chrome && !window.chrome.cast) {
-            scripts.forEach(function (scriptUrl) {
-                var scriptTag = document.createElement("script")
-                scriptTag.type = "text/javascript"
-                scriptTag.src = scriptUrl
-                scriptTag.defer = true
-                document.head.appendChild(scriptTag)
-            })
+        try {
+            if (window.chrome && !window.chrome.cast) {
+                scripts.forEach(function (scriptUrl) {
+                    var scriptTag = document.createElement("script")
+                    scriptTag.type = "text/javascript"
+                    scriptTag.src = scriptUrl
+                    scriptTag.defer = true
+                    document.head.appendChild(scriptTag)
+                })
+            }
+        } catch (e) {
+            console.log(e)
         }
     </script>
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />

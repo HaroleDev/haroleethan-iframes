@@ -959,8 +959,8 @@ async function togglePIPPlayerMode() {
                 pipTooltip.setAttribute('data-tooltip-text', 'Exit picture in picture' + ' (i)')
             }
         } else {
-            pipPlayerButton.parentElement.setAttribute('unsupported', '')
-            fullscreenTooltip.setAttribute('data-tooltip-text', 'Picture in picture is unavailable.')
+            pipPlayerButton.setAttribute('unsupported', '')
+            pipTooltip.setAttribute('data-tooltip-text', 'Picture in picture is unavailable.')
         }
     } catch (error) {
         console.error(error)

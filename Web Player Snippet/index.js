@@ -1044,6 +1044,7 @@ function volumeUpdate(e) {
 function handleVolumeUpdate(e) {
     const rect = volumeSliderContainer.getBoundingClientRect()
     const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
+    console.info(isFinite(percent))
     if (isVolumeScrubbing) {
         e.preventDefault()
         if (isFinite(percent)) {
@@ -1151,7 +1152,7 @@ let wasPaused
 
 function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect()
-    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     isScrubbing = (e.buttons && 1) === 1
     let seekTime = parseFloat(percent * video.duration)
     videoContainer.classList.toggle('scrubbing', isScrubbing)
@@ -1170,23 +1171,22 @@ function toggleScrubbing(e) {
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
-    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     let seekTime
-    let thumbPosition
+    const thumbPosition = (Math.trunc(percent * video.duration) / Math.trunc(video.duration)) * 100
     if (isFinite(percent)) {
         seekTime = parseFloat(percent * video.duration)
         timelineInner.style.setProperty('--preview-position', percent)
         timeTooltip.innerText = formatDuration(seekTime)
-        thumbPosition =
-            (Math.trunc(percent * video.duration) / Math.trunc(video.duration)) * 100
-        seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
     }
+    seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
     seekingPreviewPosition(e)
 
-    if (isFinite(percent)) {
-        if (seekTime < 0) seekTime = 0
-        if (seekTime > video.duration - 1) seekTime = video.duration - 1
-    }
+    console.info(isFinite(percent))
+
+    if (seekTime < 0) seekTime = 0
+    if (seekTime > video.duration - 1) seekTime = video.duration - 1
+
     if (isScrubbing) {
         window.cancelAnimationFrame(updatetime)
         e.preventDefault()

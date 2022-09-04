@@ -177,17 +177,16 @@ function init() {
 
 init()
 
-function canFullscreen() {
-    return (
-        void 0 !== document.body.requestFullscreen ||
-        void 0 !== document.body.mozRequestFullScreen ||
-        void 0 !== document.body.webkitRequestFullscreen ||
-        void 0 !== document.body.webkitEnterFullscreen ||
-        void 0 !== document.body.msRequestFullscreen ||
-        void 0 !== document.body.exitFullscreen ||
-        void 0 !== document.body.mozCancelFullScreen ||
-        void 0 !== document.body.webkitExitFullscreen
-    )
+function canFullscreenEnabled() {
+    if (document.fullscreenEnabled) {
+        return document.fullscreenEnabled
+    } else if (document.webkitFullscreenEnabled) {
+        return document.webkitFullscreenEnabled
+    } else if (document.mozFullscreenEnabled) {
+        return document.mozFullscreenEnabled
+    } else {
+        return false
+    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -226,7 +225,7 @@ window.addEventListener('DOMContentLoaded', () => {
         pipPlayerButton.parentElement.setAttribute('hidden', '')
     }
 
-    if (!canFullscreen) {
+    if (canFullscreenEnabled == false) {
         fullscreenButton.parentElement.setAttribute('unsupported', '')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }
@@ -910,7 +909,10 @@ video.addEventListener('dblclick', toggleFullScreen)
 
 function toggleFullScreen() {
     if (context.state === 'suspended') context.resume()
-    if (document.fullscreenElement == null) {
+    if (!document.fullscreenElement ||
+        !document.webkitIsFullScreen ||
+        !document.mozIsFullScreen ||
+        !document.msIsFullScreen) {
         if (playfulVideoPlayer.requestFullscreen) {
             playfulVideoPlayer.requestFullscreen()
         } else if (playfulVideoPlayer.webkitRequestFullScreen) {
@@ -921,29 +923,27 @@ function toggleFullScreen() {
             playfulVideoPlayer.mozRequestFullScreen()
         } else if (playfulVideoPlayer.msRequestFullScreen) {
             playfulVideoPlayer.msRequestFullscreen()
-        } else {
-            fullscreenButton.parentElement.setAttribute('unsupported', '')
-            fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
         }
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
-    } else {
-        if (
-            document.fullscreenElement ||
-            document.webkitIsFullScreen ||
-            document.mozFullScreenElement ||
-            document.msRequestFullscreen
-        ) {
-            if (document.exitFullscreen) {
-                document.exitFullscreen()
-            } else if (document.webkitCancelFullScreen) {
-                document.webkitCancelFullScreen()
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen()
-            } else if (document.msRequestFullscreen) {
-                document.msExitFullscreen()
-            }
-            fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
+    } else if (
+        document.fullscreenElement ||
+        document.webkitIsFullScreen ||
+        document.mozIsFullScreen ||
+        document.msIsFullScreen
+    ) {
+
+        if (document.exitFullscreen) {
+            document.exitFullscreen()
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen()
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen()
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen()
+        } else if (document.msRequestFullscreen) {
+            document.msExitFullscreen()
         }
+        fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     }
 }
 

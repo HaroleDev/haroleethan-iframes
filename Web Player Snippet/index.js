@@ -1308,39 +1308,40 @@ function qualityCheck(sizeWidth, sizeHeight) {
     return label.label
 }
 
-const qualityLabelsShort = [{
-    label: 'SD',
-    size: 640,
-    length: 360
-},
-{
-    label: 'HD',
-    size: 1280,
-    length: 720
-},
-{
-    label: 'FHD',
-    size: 1920,
-    length: 1080
-},
-{
-    label: 'QHD',
-    size: 2560,
-    length: 1440
-},
-{
-    label: 'UHD',
-    size: 3840,
-    length: 2160
-}
+const qualityLabelsShort = [
+    {
+        label: 'UHD',
+        size: 3840,
+        length: 2160
+    },
+    {
+        label: 'QHD',
+        size: 2560,
+        length: 1440
+    },
+    {
+        label: 'FHD',
+        size: 1920,
+        length: 1080
+    },
+    {
+        label: 'HD',
+        size: 1280,
+        length: 720
+    },
+    {
+        label: 'SD',
+        size: 640,
+        length: 360
+    },
 ]
 
 function qualityCheckShort(sizeWidth, sizeHeight) {
     if (!sizeWidth && !sizeHeight || sizeWidth < 0 && sizeHeight < 0) return 'N/A'
     let label
     sizeWidth >= sizeHeight
-        ? label = qualityLabelsShort.find((l) => l.size >= sizeWidth)
-        : label = qualityLabelsShort.find((l) => l.length >= sizeHeight)
+        ? label = qualityLabelsShort.find((l) => l.size <= sizeWidth)
+        : label = qualityLabelsShort.find((l) => l.length <= sizeHeight)
     return label.label
 }
 

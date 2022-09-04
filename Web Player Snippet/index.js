@@ -495,8 +495,7 @@ playbackSpeedItemControls.forEach(element => {
             playfulVideoPlayer.setAttribute('data-speed', video.playbackRate)
             playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
             element.setAttribute('aria-checked', 'true')
-            if (!element.getAttribute('data-speed') >= '1.25' && !element.getAttribute('data-speed') < playbackSpeedItemControls.lastChild.getAttribute('data-speed')) return timelineProgressbar.style.filter = 'none'
-            timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`
+            !element.getAttribute('data-speed') >= '1.25' && !element.getAttribute('data-speed') < playbackSpeedItemControls.lastChild.getAttribute('data-speed') ? timelineProgressbar.style.filter = 'none' : timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`
         }
         backPageSettingsFn()
     })
@@ -820,20 +819,20 @@ loopItem.addEventListener('click', loopVideo)
 // Skip time
 function skip(time) {
     video.currentTime += time;
-    (currentTime.innerText = formatDuration(videoPercent * video.duration)),
-        timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
+    currentTime.innerText = formatDuration(videoPercent * video.duration)
+    timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 function skipPercent(time) {
     video.currentTime = video.duration * time;
-    (currentTime.innerText = formatDuration(videoPercent * video.duration)),
-        timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
+    currentTime.innerText = formatDuration(videoPercent * video.duration)
+    timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 function frameSeeking(time) {
     video.currentTime += 1 / time;
-    (currentTime.innerText = formatDuration(videoPercent * video.duration)),
-        timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
+    currentTime.innerText = formatDuration(videoPercent * video.duration)
+    timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 // Time divider animation
@@ -1150,7 +1149,7 @@ let wasPaused
 function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
-    isScrubbing = (e.buttons & 1) === 1
+    isScrubbing = (e.buttons && 1) === 1
     videoContainer.classList.toggle('scrubbing', isScrubbing)
     if (isScrubbing) {
         wasPaused = video.paused
@@ -1377,82 +1376,6 @@ function qualityCheckShort(sizeWidth, sizeHeight) {
         ? label = qualityLabelsShort.find((l) => l.size <= sizeWidth)
         : label = qualityLabelsShort.find((l) => l.length <= sizeHeight)
     return label.label
-}
-
-function update_resolution() {
-    var elm = document.getElementById("yourResolution");
-    if (!elm)
-        return;
-
-    var w = screen.width;
-    var h = screen.height;
-
-    var minw = 1024;
-    var minh = 768;
-    var ref_year = 2015;
-    var refer = document.referrer;
-    if (refer.indexOf("small") != -1) {
-        minw = 320;
-        minh = 240;
-        refer = "small";
-    } else
-        refer = "big";
-
-
-    var res_names =
-        [
-            "320x240", "QVGA 4:3",
-            "240x320", "QVGA 3:4",
-            "320x396", "iPod 4:5",
-            "480x320", "HVGA 3:2",
-            "640x480", "VGA 4:3",
-            "800x600", "SVGA 4:3",
-            "800x480", "WVGA 5:3",
-            "1024x768", "XGA 4:3",
-            "1152x864", "XGA+ 4:3",
-            "1280x1024", "SXGA 5:4",
-            "1280x720", "720p 16:9",
-            "1280x768", "WXGA 5:3",
-            "1280x800", "WXGA 16:10",
-            "1280x854", "3:2",
-            "1280x960", "4:3",
-            "1360x768", "WXGA 16:9",
-            "1366x768", "WXGA 16:9",
-            "1440x900", "WXGA+ 16:10",
-            "1400x1050", "SXGA+ 4:3",
-            "1600x1200", "UXGA 4:3",
-            "1680x1050", "WSXGA+ 16:10",
-            "1920x1080", "FHD 16:9",
-            "1920x1200", "WUXGA 16:10",
-            "2048x1152", "QWXGA 16:9",
-            "2560x1080", "Unnamed 21:9",
-            "2560x1440", "WQHD 16:9",
-            "2560x1600", "WQXGA 16:10",
-            "3200x1800", "WQXGA+ 16:9",
-            "3440x1440", "UWQHD 21:9",
-            "3840x2160", "UHD 16:9",
-            "5120x2880", "UHD+ 16:9"
-        ];
-
-    if (w && h) {
-        var res = w + "x" + h;
-        var longres = res;
-        var comment = "";
-        var common = 0;
-        for (i = 0; i < res_names.length; i += 2) {
-            if (res_names[i] == res) {
-                if (res_desc[res])
-                    comment = res_desc[res] + " (" + resmsg_as_of(ref_year) + ')';
-                else
-                    comment = '';
-                longres = "<b>" + res + "</b> &nbsp; (" + res_names[i + 1] + ")";
-                common = 1;
-                break;
-            }
-        }
-    } else {
-        elm.innerHTML = res_msg["unknown"];
-    }
 }
 
 function updatePositionState() {

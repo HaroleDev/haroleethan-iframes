@@ -942,17 +942,17 @@ function toggleFullScreen() {
     }
 }
 
-async function togglePIPPlayerMode() {
+function togglePIPPlayerMode() {
     try {
         if (document.pictureInPictureEnabled && !video.disablePictureInPicture) {
             if (
                 videoContainer.classList.contains('pip-player') &&
                 !video.pictureInPictureElement
             ) {
-                await document.exitPictureInPicture()
+                document.exitPictureInPicture()
                 pipTooltip.setAttribute('data-tooltip-text', 'Picture in picture' + ' (i)')
             } else {
-                await video.requestPictureInPicture()
+                video.requestPictureInPicture()
                 pipTooltip.setAttribute('data-tooltip-text', 'Exit picture in picture' + ' (i)')
             }
         } else {
@@ -1195,7 +1195,7 @@ function loadedMetadata() {
     currentTime.innerText = formatDuration(video.currentTime)
 }
 
-async function updatetime() {
+function updatetime() {
     videoPercent = video.currentTime / video.duration
     if (!video.paused && videoContainer.classList.contains('hovered')) {
         timelineInner.style.setProperty('--progress-position', videoPercent)
@@ -1530,8 +1530,8 @@ async function mediaSessionToggle() {
         ],
         [
             'stop',
-            function () {
-                if (!video.paused) togglePlay()
+            async function () {
+                if (!video.paused) await togglePlay()
                 video.currentTime = 0
             }
         ],

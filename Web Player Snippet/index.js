@@ -1,5 +1,5 @@
 'use strict'
-import "//cdn.jsdelivr.net/npm/core-js-bundle@3.25.0/index.min.js";
+import "//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js";
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 const config = {
     startPosition: -1
@@ -1255,7 +1255,7 @@ async function togglePlay() {
         video.currentTime = 0
     }
     if (context.state === 'suspended') context.resume()
-    await video[video.paused ? 'play' : 'pause']()
+    await video.paused ? video.play() : video.pause()
 }
 
 const qualityLabels = [

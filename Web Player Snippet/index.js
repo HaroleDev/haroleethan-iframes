@@ -1170,7 +1170,7 @@ function toggleScrubbing(e) {
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
-    const percent = Math.min(Math.max(0, e.x - rect.x)) / rect.width
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
     let seekTime
     let thumbPosition
     if (isFinite(percent)) {

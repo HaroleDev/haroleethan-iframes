@@ -1044,7 +1044,7 @@ function volumeUpdate(e) {
 function handleVolumeUpdate(e) {
     const rect = volumeSliderContainer.getBoundingClientRect()
     const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
-    console.info(isFinite(percent))
+    console.info(Number.isFinite(percent))
     if (isVolumeScrubbing) {
         e.preventDefault()
         if (isFinite(percent)) {
@@ -1182,7 +1182,7 @@ function handleTimelineUpdate(e) {
     seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
     seekingPreviewPosition(e)
 
-    console.info(isFinite(percent))
+    console.info(Number.isFinite(percent))
 
     if (seekTime < 0) seekTime = 0
     if (seekTime > video.duration - 1) seekTime = video.duration - 1

@@ -18,12 +18,15 @@
     --chrome-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00256711) 6.44%, rgba(0, 0, 0, 0.0102969) 12.95%, rgba(0, 0, 0, 0.023232) 19.52%, rgba(0, 0, 0, 0.0414151) 26.15%, rgba(0, 0, 0, 0.0648889) 32.81%, rgba(0, 0, 0, 0.093696) 39.52%, rgba(0, 0, 0, 0.127879) 46.25%, rgba(0, 0, 0, 0.167481) 53%, rgba(0, 0, 0, 0.212544) 59.76%, rgba(0, 0, 0, 0.263111) 66.52%, rgba(0, 0, 0, 0.319225) 73.27%, rgba(0, 0, 0, 0.380928) 80%, rgba(0, 0, 0, 0.448263) 86.71%, rgba(0, 0, 0, 0.521273) 93.37%, rgba(0, 0, 0, 0.6) 100%);
     --chrome-overlay-inverse: linear-gradient(360deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.00518832) 6.67%, rgba(0, 0, 0, 0.021306) 13.33%, rgba(0, 0, 0, 0.0489959) 20%, rgba(0, 0, 0, 0.0884468) 26.67%, rgba(0, 0, 0, 0.139065) 33.33%, rgba(0, 0, 0, 0.19913) 40%, rgba(0, 0, 0, 0.265615) 46.67%, rgba(0, 0, 0, 0.334385) 53.33%, rgba(0, 0, 0, 0.40087) 60%, rgba(0, 0, 0, 0.460935) 66.67%, rgba(0, 0, 0, 0.511553) 73.33%, rgba(0, 0, 0, 0.551004) 80%, rgba(0, 0, 0, 0.578694) 86.67%, rgba(0, 0, 0, 0.594812) 93.33%, rgba(0, 0, 0, 0.6) 100%);
     --page-background: #E7FEF7;
-    --flyout-bg: #082b21f5;
+    --flyout-bg: rgba(8, 43, 33, 0.961);
     --light-blue-color: #CCE7FF;
     --blue-color: #4B99E7;
     --mid-blue-color: #2771D7;
     --dark-blue-color: #0047BB;
     --link-and-focus-color: #4B99E7;
+    --timeline-bg: rgba(28, 89, 71, 0.6);
+    --timeline-buffer: rgba(1, 165, 115, 0.3);
+    --timeline-preview-hover: rgba(209, 239, 230, 0.2);
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-in-expo: cubic-bezier(0.32, 0, 0.67, 0);
     --300ms-all-ease-out-expo-prop: all 300ms var(--ease-out-expo);
@@ -308,10 +311,9 @@
 }
 
 .video-controls-container .left-side button {
-    background-color: #FFFFFF1a;
+    background-color: rgba(255, 255, 255, 0.1);
     border: none;
-    --box-shadow: 0 0 0 2px #ffffff33;
-    box-shadow: var(--box-shadow);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
     height: 72px;
     width: 72px;
     border-radius: 50%;
@@ -332,15 +334,13 @@
 }
 
 .video-controls-container .left-side button:hover {
-    --box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
-    box-shadow: var(--box-shadow);
-    background: #01A5734d;
+    box-shadow: 0 0 0 2px rgba(1, 165, 115, 0.5);
+    background: rgba(1, 165, 115, 0.3);
 }
 
 .video-controls-container .left-side button:active {
-    --box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
-    box-shadow: var(--box-shadow);
-    background: #02DA9A99;
+    box-shadow: 0 0 0 2px rgba(2, 218, 154, 0.7);
+    background: rgba(2, 218, 154, 0.6);
     transform: scale(0.96);
 }
 
@@ -549,7 +549,7 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0.1) 50%, #00000000 75%);
+    background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 75%);
 }
 
 .transcript-panel button path,
@@ -833,7 +833,7 @@
 }
 
 .timeline {
-    background: #1c594799;
+    background: var(--timeline-bg);
     border-radius: 4px;
     width: 100%;
     height: 8px;
@@ -855,7 +855,7 @@
     bottom: 0;
     width: calc(var(--buffered-position) * 100%);
     border-radius: 12px;
-    background: #01A5734d;
+    background: var(--timeline-buffer);
     transition: var(--300ms-all-ease-out-expo-prop);
     will-change: right;
 }
@@ -868,7 +868,7 @@
     bottom: 0;
     width: calc(var(--preview-position) * 100%);
     border-radius: 12px;
-    background: rgba(209, 239, 230, 0.2);
+    background: var(--timeline-preview-hover);
     opacity: 0;
     transition: opacity 300ms var(--ease-out-expo);
     will-change: right;
@@ -1135,7 +1135,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: #00000099;
+    background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
@@ -1986,8 +1986,7 @@
     height: 40px;
     background-color: var(--lighter-foreground);
     line-height: 160%;
-    --box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
-    box-shadow: var(--box-shadow);
+    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 4px 0px var(--lighter-foreground), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px var(--stroke-accent-color);
     transition: var(--300ms-all-ease-out-expo-prop);
     user-select: none;
     will-change: box-shadow, -webkit-box-shadow;
@@ -1995,8 +1994,7 @@
 
 .dialog button.close-dialog:focus-visible {
     outline: none;
-    --box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
-    box-shadow: var(--box-shadow);
+    box-shadow: 0px 4px 0px rgba(0, 81, 187, 0.3), 0px 4px 0px var(--foreground), 0px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 6px var(--blue-color);
 }
 
 .dialog button.close-dialog:hover {
@@ -2005,25 +2003,24 @@
 
 .dialog button.close-dialog:active {
     background-color: var(--background);
-    --box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
-    box-shadow: var(--box-shadow);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 0px 0px var(--background), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px var(--stroke-accent-color);
     transform: translate(0px, 4px);
 }
 
 .dialog button.close-dialog.default {
     background-color: var(--accent-color);
-    box-shadow: 0px 4px 0px var(--dark-accent-color), 0px 4px 0px #01a675, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px #165248;
+    box-shadow: 0px 4px 0px var(--dark-accent-color), 0px 4px 0px var(--dark-accent-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 4px var(--stroke-accent-color);
 }
 
 .dialog button.close-dialog.default:hover {
-    background-color: #0de4a4;
+    background-color: var(--bright-accent-color);
     color: var(--foreground);
 }
 
 .dialog button.close-dialog.default:active {
     background-color: var(--dark-accent-color);
     color: #000;
-    box-shadow: 0px 0px 0px var(--dark-accent-color), 0px 0px 0px var(--dark-accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px #165248;
+    box-shadow: 0px 0px 0px var(--dark-accent-color), 0px 0px 0px var(--dark-accent-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 4px var(--stroke-accent-color);
     transform: translate(0px, 4px);
 }
 
@@ -2043,7 +2040,7 @@
 }
 
 .volume-tooltip-container:hover .volume-slider-container {
-    background-color: #00000099;
+    background-color: rgba(0, 0, 0, 0.6);
     transition: var(--300ms-all-ease-out-expo-prop);
 }
 
@@ -2210,7 +2207,7 @@
 }
 
 .volume-tooltip-container:hover {
-    background-color: #00000099;
+    background-color: rgba(0, 0, 0, 0.6);
     transition: var(--300ms-all-ease-out-expo-prop), width 300ms var(--ease-in-expo);
 }
 
@@ -2589,8 +2586,8 @@
     line-height: 160%;
     color: var(--text-color);
     text-align: center;
-    background: #4B99E7;
-    box-shadow: 0px 4px 0px #1D78D1, 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #165248, 0px 4px 16px 28px rgba(22, 82, 72, 0.6);
+    background: var(--blue-color);
+    box-shadow: 0px 4px 0px var(--mid-blue-color), 0px 8px 0px rgba(0, 0, 0, 0.1), 0px 4px 0px 8px #165248, 0px 4px 16px 28px rgba(22, 82, 72, 0.6);
     border-radius: 21px;
     padding: 6px 18px;
     transform: translateY(0px);
@@ -2608,8 +2605,8 @@
 }
 
 .transcript-panel button.sync-to-time:active {
-    background: #1D78D1;
-    box-shadow: 0px 0px 0px #1D78D1, 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 8px #165248, 0px 0px 16px 28px rgba(22, 82, 72, 0.6);
+    background: var(--mid-blue-color);
+    box-shadow: 0px 0px 0px var(--mid-blue-color), 0px 0px 0px rgba(0, 0, 0, 0.1), 0px 0px 0px 8px #165248, 0px 0px 16px 28px rgba(22, 82, 72, 0.6);
     transform: translateY(4px);
 }
 
@@ -3126,7 +3123,7 @@ screen and (max-height: 600px) {
 
     .scrubbing .timeline .timeline__progressbar,
     .scrubbing:hover .timeline .timeline__progressbar {
-        --filter: drop-shadow(0px 4px 0px #0000001a) drop-shadow(4px 2px 0px #0000001a) drop-shadow(-4px 2px 0px #0000001a) drop-shadow(0px 4px 0px Highlight);
+        --filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.1)) drop-shadow(4px 2px 0px rgba(0, 0, 0, 0.1)) drop-shadow(-4px 2px 0px rgba(0, 0, 0, 0.1)) drop-shadow(0px 4px 0px Highlight);
         transform: translateY(-4px);
         box-sizing: content-box;
         filter: var(--filter);

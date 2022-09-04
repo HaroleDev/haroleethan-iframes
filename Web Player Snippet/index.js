@@ -1,4 +1,5 @@
 'use strict'
+import "//cdn.jsdelivr.net/npm/core-js-bundle@3.25.0/index.min.js";
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 const config = {
     startPosition: -1

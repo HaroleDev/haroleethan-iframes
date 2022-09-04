@@ -2187,15 +2187,10 @@
     top: 24px;
 }
 
+[data-tooltip="right"].volume-tooltip-container::after,
 [data-tooltip="right"]::after {
-    --transform: translateX(-75%) translateY(-125%);
-    transform: var(--transform);
+    transform: translateX(-75%) translateY(-125%);
     text-align: center;
-}
-
-[data-tooltip="right"].volume-tooltip-container::after {
-    --transform: translateX(75%) translateY(-125%);
-    transform: var(--transform);
 }
 
 [data-tooltip="right"]:hover::after {
@@ -2204,8 +2199,7 @@
 }
 
 .volume-tooltip-container[data-tooltip="right"]::after {
-    --transform: translateX(-30%) translateY(-125%) !important;
-    transform: var(--transform);
+    transform: translateX(-30%) translateY(-125%) !important;
 }
 
 .volume-tooltip-container {

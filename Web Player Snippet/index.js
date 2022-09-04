@@ -1224,11 +1224,12 @@ function formatDuration(time) {
     const seconds = Math.trunc(time % 60)
     const minutes = Math.trunc((time / 60) % 60)
     const hours = Math.trunc((time / 60 / 60) % 60)
-
+    const format = (time) => (`0${time}`).slice(-2);
+    
     if (hours === 0) {
-        return `${minutes}:${leading0Formatter.format(seconds)}`
+        return `${minutes}:${format(seconds)}`
     } else if (hours > 0) {
-        return `${hours}:${leading0Formatter.format(minutes)}:${leading0Formatter.format(seconds)}`
+        return `${hours}:${format(minutes)}:${format(seconds)}`
     } else {
         return '-:--'
     }

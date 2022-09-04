@@ -925,13 +925,11 @@ function toggleFullScreen() {
             playfulVideoPlayer.msRequestFullscreen()
         }
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
-    } else if (
-        document.fullscreenElement ||
+    }
+    if (document.fullscreenElement ||
         document.webkitIsFullScreen ||
         document.mozIsFullScreen ||
-        document.msIsFullScreen
-    ) {
-
+        document.msIsFullScreen) {
         if (document.exitFullscreen) {
             document.exitFullscreen()
         } else if (document.webkitExitFullscreen) {

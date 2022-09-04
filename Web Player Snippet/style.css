@@ -85,22 +85,40 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-bottom: calc(var(--aspect-ratio-size-inverse) * 100%);
     opacity: 1;
     transform: scale(1);
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
     --animation: ExitFullScreenTransition 600ms var(--ease-out-expo) forwards;
     animation: var(--animation);
     user-select: none;
-    will-change: width, height, max-width, max-height, padding, padding-bottom, filter, transform, animation;
+    will-change: width, height, max-width, max-height, filter, transform, animation;
 }
 
-.full-screen .video-fit-contain {
+.playful-video-player-container[aria-orientation="landscape"] .video-container .video-fit-contain {
+    height: 100%;
+    width: 100%;
+}
+
+.playful-video-player-container[aria-orientation="portait"] .video-container .video-fit-contain {
+    max-height: calc(var(--aspect-ratio-size-inverse) * 100%);
+    height: calc(1 * 100%);
+}
+
+@supports (padding-top: min(100%, 40vh)) {
+    .playful-video-player-container[aria-orientation="portait"] .video-container .video-fit-contain {
+        max-height: calc(var(--aspect-ratio-size-inverse) * 100%);
+        height: calc(var(--aspect-ratio-size-inverse) * 60%);
+        min-height: calc(var(--aspect-ratio-size-inverse) * 40vh);
+    }
+}
+
+.playful-video-player-container[aria-orientation="portait"] .full-screen .video-container .video-fit-contain,
+.playful-video-player-container[aria-orientation="landscape"] .full-screen .video-container .video-fit-contain,
+.playful-video-player-container .full-screen .video-container .video-fit-contain {
     width: 100vw;
     height: calc(100vw * var(--aspect-ratio-size-inverse));
     max-height: 100vh;
     max-width: calc(100vh * var(--aspect-ratio-size));
-    padding-bottom: calc(var(--aspect-ratio-size-inverse) * 0%);
 }
 
 .video-filters,
@@ -220,15 +238,11 @@
 
 .aspect-ratio-response {
     position: absolute;
-    height: 0;
-    width: 100%;
     z-index: 1;
-    padding-top: calc(var(--aspect-ratio-size-inverse) * 100%);
     top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    margin: auto;
     pointer-events: none;
 }
 
@@ -1466,8 +1480,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: var(--flyout-bg);
-    color: var(--text-color);
     min-width: 256px;
     width: max-content;
     z-index: 6;
@@ -1475,6 +1487,27 @@
     opacity: 0;
     pointer-events: none;
     transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
+}
+
+.settings-context-menu {
+    position: absolute;
+    width: max-content;
+    z-index: 5;
+    border-radius: 8px;
+    right: 0;
+    margin: 40px;
+    bottom: 128px;
+    margin-bottom: 12px;
+    opacity: 0;
+    transition: var(--300ms-all-ease-out-expo-prop);
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.video-context-menu,
+.settings-context-menu {
+    background: var(--flyout-bg);
+    color: var(--text-color);
 }
 
 .video-context-menu .item,
@@ -1512,8 +1545,9 @@
 
 .video-context-menu .span,
 .settings-context-menu .span {
-    padding: 1px 0px 1px 12px;
+    padding: 1px 6px 1px 12px;
     display: inline-block;
+    max-width: max-content;
 }
 
 .video-context-menu .item-content,
@@ -1551,24 +1585,6 @@
     opacity: 1;
     pointer-events: all;
     transition: var(--300ms-all-ease-out-expo-prop), top 0s, left 0s;
-}
-
-.settings-context-menu {
-    position: absolute;
-    background: var(--flyout-bg);
-    color: var(--text-color);
-    min-width: 256px;
-    width: max-content;
-    z-index: 5;
-    border-radius: 8px;
-    right: 0;
-    margin: 40px;
-    bottom: 128px;
-    margin-bottom: 12px;
-    opacity: 0;
-    transition: var(--300ms-all-ease-out-expo-prop);
-    pointer-events: none;
-    overflow: hidden;
 }
 
 .video-context-menu .contents,
@@ -1615,7 +1631,7 @@
 
     .settings-context-menu.pressed {
         opacity: 1;
-        clip-path: circle(135% at 70% 100%);
+        clip-path: circle(140% at 70% 100%);
         transition: var(--300ms-all-ease-out-expo-prop), clip-path 450ms var(--ease-out-expo);
     }
 }
@@ -1710,6 +1726,7 @@
     margin-left: 6px;
     padding: 0;
     isolation: isolate;
+    width: max-content;
 }
 
 .settings-context-menu .page .header svg {
@@ -1720,6 +1737,7 @@
     position: relative;
     padding: 1px 0px;
     opacity: 0.6;
+    max-width: max-content;
     text-align: right;
 }
 
@@ -1755,7 +1773,6 @@
 
 .settings-context-menu .page:not([hidden]) {
     max-height: 500px;
-    max-width: 500px;
     width: 100%;
     height: calc(100% - 60px);
     bottom: 0;
@@ -1772,6 +1789,7 @@
 .settings-context-menu .page[hidden] {
     max-height: 0;
     max-width: 0;
+    min-width: 200px;
     transform: translateX(0%) translateY(0%);
     display: block !important;
     bottom: 0;
@@ -1784,6 +1802,15 @@
 
 .settings-context-menu .page:not(.front-page):not([hidden]) .page-contents {
     margin-top: 60px;
+}
+
+.settings-context-menu .page.front-page:not([hidden]) {
+    min-width: 280px;
+}
+
+.settings-context-menu .page:not([hidden]) {
+    min-width: 200px;
+    max-width: max-content;
 }
 
 .settings-context-menu .page:not(.front-page)[hidden] .page-contents {
@@ -2490,12 +2517,24 @@
 
 .playful-video-player-container {
     margin-bottom: 16px;
-    max-height: 10vh;
     overflow: hidden;
-    padding-top: calc(var(--aspect-ratio-size-inverse) * 100%);
     position: relative;
     border-radius: 8px;
     transition: var(--300ms-all-ease-out-expo-prop);
+}
+
+.playful-video-player-container[aria-orientation="landscape"] {
+    padding-top: calc(var(--aspect-ratio-size-inverse) * 100%);
+}
+
+.playful-video-player-container[aria-orientation="portait"] {
+    padding-top: calc(1 * 100%);
+}
+
+@supports (padding-top: min(100%, 40vh)) {
+    .playful-video-player-container[aria-orientation="portait"] {
+        padding-top: min(var(--aspect-ratio-size-inverse) * 100%, var(--aspect-ratio-size-inverse) * 40vh);
+    }
 }
 
 .playful-video-player-container {
@@ -2659,7 +2698,7 @@
     word-wrap: break-word;
     margin-top: 2px;
     transition: var(--600ms-all-ease-out-expo-prop);
-    -ms-word-break: keep-all;
+    overflow-wrap: break-word;
     word-break: keep-all;
     hyphens: auto;
     border-radius: 4px;

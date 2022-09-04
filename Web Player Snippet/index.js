@@ -674,7 +674,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text
         }
-        const clickableTranscriptText = `<div class="cue-container" startTime="${cue.startTime}" role="button" aria-pressed="false" tabindex="0"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
+        const clickableTranscriptText = `<div class="cue-container" start-time="${cue.startTime}" role="button" aria-pressed="false" tabindex="0"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
         addToTranscript(clickableTranscriptText)
         cueContainers = playfulVideoPlayer.querySelectorAll('.cue-container')
     }
@@ -707,8 +707,8 @@ function removeHTML(text) {
 function jumpToTranscript(time) {
     video.currentTime = time
     playfulVideoPlayer.querySelector('.cue-container').classList.remove('current')
-    document.querySelector(`[startTime="${time}"]`).classList.add('current')
-    playfulVideoPlayer.querySelector('.timeline').style.setProperty('--progress-position', video.currentTime / video.duration)
+    playfulVideoPlayer.querySelector(`.cue-container[start-time="${time}"]`).classList.add('current')
+    timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 function clearTranscriptDiv() {
@@ -721,13 +721,13 @@ function addToTranscript(htmlText) {
 
 function addCueListeners(cue) {
     cue.addEventListener('enter', function () {
-        const transcriptText = document.querySelector(`[startTime="${this.startTime}"]`)
+        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time="${this.startTime}"]`)
         transcriptText.classList.add('current')
         transcriptText.parentElement.scrollTop =
             transcriptText.offsetTop - transcriptText.parentElement.offsetTop
     })
     cue.addEventListener('exit', function () {
-        const transcriptText = document.querySelector(`[startTime="${this.startTime}"]`)
+        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time="${this.startTime}"]`)
         transcriptText.classList.remove('current')
     })
 }
@@ -738,7 +738,7 @@ transcriptDiv.addEventListener('keydown', (e) => {
 
 transcriptDiv.addEventListener('click', (e) => {
     cueContainers.forEach(element => {
-        if (element.contains(e.target)) jumpToTranscript(element.getAttribute('startTime'))
+        if (element.contains(e.target)) jumpToTranscript(element.getAttribute('start-time'))
     })
 })
 
@@ -1957,6 +1957,7 @@ const eventListeners = [
                 )} elapsed of ${formatDurationARIA(video.duration)}`
             )
             videoPercent = video.currentTime / video.duration
+            if (video.currentTime >= video.duration - 1) timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
             videoContainer.classList[video.currentTime === video.duration ? 'add' : 'remove']('ended')
         }
     ],
@@ -1985,6 +1986,9 @@ const eventListeners = [
             )
 
             orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
+
+            if (video.videoWidth > video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'landscape')
+            if (video.videoWidth < video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'portait')
 
             qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth, video.videoHeight)
             qualityBadgeText.innerText = qualityCheck(video.videoWidth, video.videoHeight)

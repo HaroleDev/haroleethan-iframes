@@ -42,6 +42,22 @@
             }
         }
     </style>
+    <script type="text/javascript" defer>
+        'use strict'
+        var scripts = [
+            "https://gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
+        ];
+
+        if (window.chrome && !window.chrome.cast) {
+            scripts.forEach(function (scriptUrl) {
+                var scriptTag = document.createElement("script")
+                scriptTag.type = "text/javascript"
+                scriptTag.src = scriptUrl
+                scriptTag.defer = true
+                document.head.appendChild(scriptTag)
+            })
+        }
+    </script>
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <meta http-equiv="Access-Control-Allow-Headers" content="X-Requested-With" />
 </head>
@@ -830,8 +846,12 @@
             </p>
         </div>
     </div>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
+    <script type="text/javascript"
+        src="//polyfill.io/v3/polyfill.min.js?features=Function.prototype.name%2CDocument%2CBlob%2CAudioContext%2CArray.prototype.map%2CArray.prototype.lastIndexOf%2CArray.prototype.indexOf%2CArray.prototype.forEach%2CArray.prototype.findIndex%2Ces2015%2Cdefault"
+        defer></script>
+    <script type="module" src="index.js"></script>
     <script type="text/javascript" defer>
-        'use strict'
         var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
         var author = document.head.querySelector("meta[property=\"og:author\"]").getAttribute("content");
         var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
@@ -841,24 +861,7 @@
         document.querySelector(".author-name .span").innerText = author;
         document.querySelector(".video-information .author-info .span").innerText = author;
         document.querySelector(".video-information .description p").innerText = description;
-
-        var scripts = [
-            "//polyfill.io/v3/polyfill.min.js?features=Function.prototype.name%2CDocument%2CBlob%2CAudioContext%2CArray.prototype.map%2CArray.prototype.lastIndexOf%2CArray.prototype.indexOf%2CArray.prototype.forEach%2CArray.prototype.findIndex%2Ces2015%2Cdefault",
-        ];
-
-        scripts.forEach(function (scriptUrl) {
-            var scriptTag = document.createElement("script");
-            scriptTag.type = "text/javascript";
-            scriptTag.crossOrigin = "anonymous";
-            scriptTag.src = scriptUrl;
-            scriptTag.defer = true;
-            document.body.insertAdjacentElement("afterend", scriptTag);
-        });
     </script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
-    <script type="text/javascript" src="//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
-        defer></script>
-    <script type="module" src="index.js"></script>
 </body>
 
 </html>

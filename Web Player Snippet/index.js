@@ -1028,25 +1028,29 @@ volumeSliderContainer.addEventListener('pointermove', (e) => {
 
 function volumeUpdate(e) {
     const rect = volumeSliderContainer.getBoundingClientRect()
-    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     isVolumeScrubbing = (e.buttons && 1) === 1
     volumeContainer.classList.toggle('scrubbing', isVolumeScrubbing)
     if (isVolumeScrubbing) {
-        video.volume = percent
-        video.muted = percent === 0
-        volumeSliderContainer.style.setProperty('--volume-position', percent)
+        if (isFinite(percent)) {
+            video.volume = percent
+            video.muted = percent === 0
+            volumeSliderContainer.style.setProperty('--volume-position', percent)
+        }
     }
     handleVolumeUpdate(e)
 }
 
 function handleVolumeUpdate(e) {
     const rect = volumeSliderContainer.getBoundingClientRect()
-    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     if (isVolumeScrubbing) {
         e.preventDefault()
-        video.volume = percent
-        video.muted = percent === 0
-        volumeSliderContainer.style.setProperty('--volume-position', percent)
+        if (isFinite(percent)) {
+            video.volume = percent
+            video.muted = percent === 0
+            volumeSliderContainer.style.setProperty('--volume-position', percent)
+        }
     }
 }
 
@@ -1133,7 +1137,6 @@ timelineInner.addEventListener('pointermove', (e) => {
     }
     timelineInner.addEventListener('pointerup', (e) => {
         timelineInner.releasePointerCapture(e.pointerId)
-
         if (isScrubbing) {
             toggleScrubbing(e)
             seekingPreview.classList.remove('hovered')
@@ -1156,8 +1159,10 @@ function toggleScrubbing(e) {
         wasPaused = video.paused
         video.pause()
     } else {
-        video.currentTime = seekTime
-        if (!wasPaused) video.play()
+        if (isFinite(seekTime)) {
+            video.currentTime = seekTime
+            if (!wasPaused) video.play()
+        }
     }
 
     handleTimelineUpdate(e)
@@ -1166,26 +1171,31 @@ function toggleScrubbing(e) {
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x)) / rect.width
-
-    let seekTime = parseFloat(percent * video.duration)
-    timelineInner.style.setProperty('--preview-position', percent)
-    timeTooltip.innerText = formatDuration(seekTime)
-
-    const thumbPosition =
-        (Math.trunc(percent * video.duration) / Math.trunc(video.duration)) * 100
-    seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
+    let seekTime
+    let thumbPosition
+    if (isFinite(percent)) {
+        seekTime = parseFloat(percent * video.duration)
+        timelineInner.style.setProperty('--preview-position', percent)
+        timeTooltip.innerText = formatDuration(seekTime)
+        thumbPosition =
+            (Math.trunc(percent * video.duration) / Math.trunc(video.duration)) * 100
+        seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
+    }
     seekingPreviewPosition(e)
 
-    if (seekTime < 0) seekTime = 0
-    if (seekTime > video.duration - 1) seekTime = video.duration - 1
-
+    if (isFinite(percent)) {
+        if (seekTime < 0) seekTime = 0
+        if (seekTime > video.duration - 1) seekTime = video.duration - 1
+    }
     if (isScrubbing) {
         window.cancelAnimationFrame(updatetime)
         e.preventDefault()
-        videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
-        timelineInner.style.setProperty('--progress-position', percent)
-        timeTooltip.innerText = formatDuration(seekTime)
-        currentTime.innerText = formatDuration(seekTime)
+        if (isFinite(percent)) {
+            videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
+            timelineInner.style.setProperty('--progress-position', percent)
+            timeTooltip.innerText = formatDuration(seekTime)
+            currentTime.innerText = formatDuration(seekTime)
+        }
     }
 }
 

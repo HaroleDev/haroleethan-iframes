@@ -1165,7 +1165,7 @@ function toggleScrubbing(e) {
 
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
-    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
+    const percent = Math.min(Math.max(0, e.x - rect.x)) / rect.width
 
     let seekTime = parseFloat(percent * video.duration)
     timelineInner.style.setProperty('--preview-position', percent)

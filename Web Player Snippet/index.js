@@ -917,25 +917,30 @@ function toggleFullScreen() {
             playfulVideoPlayer.webkitRequestFullScreen()
         } else if (video.webkitEnterFullScreen) {
             video.webkitEnterFullScreen()
+        } else if (playfulVideoPlayer.mozRequestFullScreen) {
+            playfulVideoPlayer.mozRequestFullScreen()
+        } else if (playfulVideoPlayer.msRequestFullScreen) {
+            playfulVideoPlayer.msRequestFullscreen()
         } else {
-            if (playfulVideoPlayer.mozRequestFullScreen) playfulVideoPlayer.mozRequestFullScreen()
-            if (playfulVideoPlayer.msRequestFullScreen) playfulVideoPlayer.msRequestFullscreen()
+            fullscreenButton.parentElement.setAttribute('unsupported', '')
+            fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
         }
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {
         if (
-            document.mozFullScreenElement ||
+            document.fullscreenElement ||
             document.webkitIsFullScreen ||
-            document.msRequestFullscreen ||
-            document.requestFullscreen
+            document.mozFullScreenElement ||
+            document.msRequestFullscreen
         ) {
-            if (document.requestFullscreen) {
+            if (document.exitFullscreen) {
                 document.exitFullscreen()
             } else if (document.webkitCancelFullScreen) {
                 document.webkitCancelFullScreen()
-            } else {
-                if (document.mozCancelFullScreen) document.mozCancelFullScreen()
-                if (document.msRequestFullscreen) document.msExitFullscreen()
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen()
+            } else if (document.msRequestFullscreen) {
+                document.msExitFullscreen()
             }
             fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
         }
@@ -955,6 +960,9 @@ async function togglePIPPlayerMode() {
                 await video.requestPictureInPicture()
                 pipTooltip.setAttribute('data-tooltip-text', 'Exit picture in picture' + ' (i)')
             }
+        } else {
+            pipPlayerButton.parentElement.setAttribute('unsupported', '')
+            fullscreenTooltip.setAttribute('data-tooltip-text', 'Picture in picture is unavailable.')
         }
     } catch (error) {
         console.error(error)
@@ -1556,7 +1564,7 @@ if (window.WebKitPlaybackTargetAvailabilityEvent) {
             }
 
             AirPlayButton.addEventListener('click', function () {
-                mediaSessionToggle()
+                if ('mediaSession' in navigator) mediaSessionToggle()
                 video.webkitShowPlaybackTargetPicker()
             })
         }
@@ -1633,7 +1641,7 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
         chrome.cast.requestSessionById(sessionId)
     }
     CastButton.addEventListener('click', function () {
-        mediaSessionToggle()
+        if ('mediaSession' in navigator) mediaSessionToggle()
         if (sessionId == null) {
             const castSession =
                 cast.framework.CastContext.getInstance().getCurrentSession()
@@ -1832,9 +1840,11 @@ const eventListeners = [
         'play',
         () => {
             videoContainer.classList.add('played')
-            navigator.mediaSession.playbackState = 'playing'
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.playbackState = 'playing'
+                video.addEventListener('timeupdate', mediaSessionToggle())
+            }
             playpauseTooltipContainer.setAttribute('data-tooltip-text', 'Pause' + ' (k)')
-            video.addEventListener('timeupdate', mediaSessionToggle())
             intervalDivideWorker()
             if (Hls.isSupported() && video.currentTime === 0) hls.startLoad()
             window.requestAnimationFrame(updateMetadata)
@@ -1881,7 +1891,7 @@ const eventListeners = [
                 window.cancelAnimationFrame(updatetime)
                 window.cancelAnimationFrame(updateMetadata)
             })
-            navigator.mediaSession.playbackState = 'paused'
+            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'
             playpauseTooltipContainer.setAttribute('data-tooltip-text', 'Play' + ' (k)')
             video.classList.remove('inactive')
             clearTimeout(timeout)

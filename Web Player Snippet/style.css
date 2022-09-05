@@ -2387,6 +2387,12 @@
     background: transparent;
 }
 
+.dialog .eq-control input::-moz-range-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
 .dialog .eq-control input:disabled {
     background: var(--foreground);
     background-image: var(--gradient);

@@ -796,7 +796,7 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 0px 12px;
+    padding: 0 0.625rem;
     position: relative;
     width: fit-content;
     overflow: hidden;
@@ -820,10 +820,18 @@
     background-color: var(--mid-blue-color);
 }
 
-[data-quality="UHD"].quality-badge .span.quality {
+[data-quality="HD"].quality-badge .span.quality {
     color: var(--text-color);
-    transform: translateY(-1.5px);
-    text-shadow: 0 0.25px 0px var(--shadow-text-color), 0 0.5px 0px var(--shadow-text-color), 0 0.75px 0px var(--shadow-text-color), 0 1px 0px var(--shadow-text-color), 0 1.25px 0px var(--shadow-text-color), 0 1.5px 0px var(--shadow-text-color);
+    transform: translateY(-2px);
+    text-shadow:
+        0 0.25px 0px var(--blue-color),
+        0 0.5px 0px var(--blue-color),
+        0 0.75px 0px var(--blue-color),
+        0 1px 0px var(--blue-color),
+        0 1.25px 0px var(--blue-color),
+        0 1.5px 0px var(--blue-color),
+        0 1.75px 0px var(--blue-color),
+        0 2px 0px var(--blue-color);
     --filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
     filter: var(--filter);
 }
@@ -831,10 +839,6 @@
 [data-quality="HD"].quality-badge .span.quality,
 [data-quality="FHD"].quality-badge .span.quality {
     color: var(--text-color);
-}
-
-.quality-badge {
-    padding: 0px 10px;
 }
 
 .badge {
@@ -1783,29 +1787,27 @@
 .settings-context-menu .page:not([hidden]) {
     position: relative;
     width: 100%;
-    height: calc(100% - 60px);
-    bottom: 0;
-    left: 0;
+    max-height: 100%;
     animation: 600ms var(--ease-out-expo) 0s 1 slideIn;
     display: block !important;
     opacity: 1;
+    top: 0;
     overflow: hidden;
     pointer-events: auto;
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), position 600ms step-start;
     will-change: transform;
 }
 
 .settings-context-menu .page[hidden] {
-    position: relative;
-    max-height: 0;
+    position: absolute;
     width: 100%;
+    max-height: 0%;
     min-width: 200px;
     display: block !important;
-    bottom: 0;
-    left: 0;
+    top: 0;
     opacity: 0;
     pointer-events: none;
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), position 600ms step-start;
     animation: 600ms var(--ease-out-expo) 0s 1 slideOut;
     will-change: transform;
 }
@@ -1820,6 +1822,16 @@
     }
 }
 
+@keyframes slideIn2 {
+    0% {
+        transform: translateX(-100%) translateY(0%);
+    }
+
+    100% {
+        transform: translateX(0%) translateY(0%);
+    }
+}
+
 @keyframes slideIn {
     0% {
         transform: translateX(100%) translateY(0%);
@@ -1829,7 +1841,6 @@
         transform: translateX(0%) translateY(0%);
     }
 }
-
 
 .settings-context-menu .page:not(.front-page)[hidden] .page-contents {
     margin-top: 0;
@@ -1843,6 +1854,7 @@
 
 .settings-context-menu .page.front-page:not([hidden]) {
     min-width: 280px;
+    animation: 600ms var(--ease-out-expo) 0s 1 slideIn2;
 }
 
 .settings-context-menu .page:not([hidden]) {

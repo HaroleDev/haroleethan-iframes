@@ -168,7 +168,7 @@ window.addEventListener('DOMContentLoaded', () => {
         pipPlayerButton.parentElement.setAttribute('hidden', '')
     }
 
-    if (canFullscreenEnabled == false) {
+    if (canFullscreenEnabled === false) {
         fullscreenButton.parentElement.setAttribute('unsupported', '')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }
@@ -860,37 +860,47 @@ function activity() {
 fullscreenButton.addEventListener('click', toggleFullScreen)
 video.addEventListener('dblclick', toggleFullScreen)
 
+var fullscreenElement =
+    document.fullscreenElement ||
+    document.mozFullScreenElement ||
+    document.webkitFullscreenElement ||
+    document.msFullscreenElement
+
+var isFullscreen =
+    document.fullscreenElement ||
+    document.webkitIsFullScreen ||
+    document.mozIsFullScreen ||
+    document.msIsFullScreen
+
 function toggleFullScreen() {
     if (context.state === 'suspended') context.resume()
-    if (document.fullscreenElement ||
-        document.webkitIsFullScreen ||
-        document.mozIsFullScreen ||
-        document.msIsFullScreen) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen()
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen()
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen()
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen()
-        } else if (document.msRequestFullscreen) {
-            document.msExitFullscreen()
-        }
+    if (isFullscreen) {
+        document.exitFullscreen
+            ? document.exitFullscreen()
+            : document.webkitExitFullscreen
+                ? document.webkitExitFullscreen()
+                : document.webkitCancelFullScreen
+                    ? document.webkitCancelFullScreen()
+                    : document.mozCancelFullScreen
+                        ? document.mozCancelFullScreen()
+                        : document.msRequestFullscreen
+                        && document.msExitFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
-    } else {
-        if (playfulVideoPlayer.requestFullscreen) {
-            playfulVideoPlayer.requestFullscreen()
-        } else if (playfulVideoPlayer.webkitRequestFullScreen) {
-            playfulVideoPlayer.webkitRequestFullScreen()
-        } else if (video.webkitEnterFullScreen) {
-            video.webkitEnterFullScreen()
-        } else if (playfulVideoPlayer.mozRequestFullScreen) {
-            playfulVideoPlayer.mozRequestFullScreen()
-        } else if (playfulVideoPlayer.msRequestFullScreen) {
-            playfulVideoPlayer.msRequestFullscreen()
-        }
+    } else if (!isFullscreen) {
+        playfulVideoPlayer.requestFullscreen
+            ? playfulVideoPlayer.requestFullscreen()
+            : playfulVideoPlayer.webkitRequestFullScreen
+                ? playfulVideoPlayer.webkitRequestFullScreen()
+                : video.webkitEnterFullScreen
+                    ? video.webkitEnterFullScreen()
+                    : playfulVideoPlayer.mozRequestFullScreen
+                        ? playfulVideoPlayer.mozRequestFullScreen()
+                        : playfulVideoPlayer.msRequestFullScreen
+                        && playfulVideoPlayer.msRequestFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
+    } else {
+        fullscreenButton.parentElement.setAttribute('unsupported', '')
+        fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }
 }
 
@@ -917,17 +927,13 @@ function togglePIPPlayerMode() {
 }
 
 function fullScreenToggleChange() {
-    playfulVideoPlayer.classList.toggle('full-screen',
-        document.fullscreenElement ||
-        document.webkitIsFullScreen ||
-        document.mozIsFullScreen ||
-        document.msIsFullScreen)
+    playfulVideoPlayer.classList.toggle('full-screen', fullscreenElement)
 }
 
-document.addEventListener('fullscreenchange', fullScreenToggleChange)
-document.addEventListener('mozfullscreenchange', fullScreenToggleChange)
-document.addEventListener('webkitfullscreenchange', fullScreenToggleChange)
-document.addEventListener('msfullscreenchange', fullScreenToggleChange)
+document.addEventListener('fullscreenchange', fullScreenToggleChange, fullscreenElement)
+document.addEventListener('mozfullscreenchange', fullScreenToggleChange, fullscreenElement)
+document.addEventListener('webkitfullscreenchange', fullScreenToggleChange, fullscreenElement)
+document.addEventListener('msfullscreenchange', fullScreenToggleChange, fullscreenElement)
 
 video.addEventListener('webkitenterfullscreen', () => {
     playfulVideoPlayer.classList.add('full-screen')

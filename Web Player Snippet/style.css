@@ -1780,36 +1780,64 @@
 }
 
 .settings-context-menu .page:not([hidden]) {
-    max-height: 500px;
+    position: relative;
     width: 100%;
     height: calc(100% - 60px);
     bottom: 0;
     left: 0;
+    animation: 600ms var(--ease-out-expo) 0s 1 slideIn;
     display: block !important;
-    transform: translateX(0%) translateY(0%);
     opacity: 1;
     overflow: hidden;
     pointer-events: auto;
-    --transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    transition: var(--transition);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    will-change: transform;
 }
 
 .settings-context-menu .page[hidden] {
+    position: relative;
     max-height: 0;
-    max-width: 0;
+    width: 100%;
     min-width: 200px;
-    transform: translateX(0%) translateY(0%);
     display: block !important;
     bottom: 0;
     left: 0;
     opacity: 0;
     pointer-events: none;
-    --transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), margin-top 450ms var(--ease-out-expo);
-    transition: var(--transition);
+    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo);
+    animation: 600ms var(--ease-out-expo) 0s 1 slideOut;
+    will-change: transform;
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateX(0%) translateY(0%);
+    }
+
+    100% {
+        transform: translateX(-100%) translateY(0%);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%) translateY(0%);
+    }
+
+    100% {
+        transform: translateX(0%) translateY(0%);
+    }
+}
+
+
+.settings-context-menu .page:not(.front-page)[hidden] .page-contents {
+    margin-top: 0;
+    transition: margin-top 600ms var(--ease-out-expo);
 }
 
 .settings-context-menu .page:not(.front-page):not([hidden]) .page-contents {
     margin-top: 60px;
+    transition: margin-top 600ms var(--ease-out-expo);
 }
 
 .settings-context-menu .page.front-page:not([hidden]) {
@@ -1818,7 +1846,6 @@
 
 .settings-context-menu .page:not([hidden]) {
     min-width: 200px;
-    max-width: max-content;
 }
 
 .settings-context-menu .page:not(.front-page)[hidden] .page-contents {

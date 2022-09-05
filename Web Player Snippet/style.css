@@ -358,8 +358,8 @@
     stroke-dashoffset: 360;
     stroke: var(--accent-color);
     border-radius: 100%;
-    opacity: 0;
     transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+    animation: buffer-ring 3s infinite ease;
     animation-play-state: paused;
 }
 
@@ -375,7 +375,8 @@
     stroke-width: 14px;
     isolation: isolate;
     margin: auto;
-    opacity: 0;
+    animation: buffer-ring-stroke 3s infinite ease;
+    animation-play-state: paused;
     transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
 }
 
@@ -386,19 +387,19 @@
     bottom: 0;
     right: 0;
     z-index: 3;
+    opacity: 0.6;
     stroke: var(--stroke-accent-color);
-    mix-blend-mode: multiply;
     stroke-linecap: round;
     stroke-width: 3px;
     isolation: isolate;
     margin: auto;
-    opacity: 0;
+    animation: buffer-ring-track 3s infinite ease;
+    animation-play-state: paused;
     transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
 }
 
 .buffering .buffering-circle-track,
 .buffering-scrubbing .buffering-circle-track {
-    opacity: 0.1;
     transition: all 600ms var(--ease-out-expo), opacity 300ms 1s var(--ease-out-expo);
 }
 
@@ -416,12 +417,18 @@
     right: 0;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 300ms 1s var(--ease-out-expo);
+    transition: width 600ms var(--ease-out-expo), opacity 600ms 1s var(--ease-out-expo);
+}
+
+.transcript-opened .buffering-container {
+    width: calc(100% - 400px);
+    height: 100%;
 }
 
 .buffering .buffering-container,
 .buffering-scrubbing .buffering-container {
     opacity: 1;
+    transition: opacity 600ms 1s var(--ease-out-expo);
 }
 
 .buffering .buffering-circle,
@@ -429,7 +436,6 @@
     animation: buffer-ring 3s infinite ease;
     animation-delay: 1s;
     animation-play-state: running;
-    opacity: 1;
 }
 
 .buffering .buffering-circle-stroke,
@@ -437,7 +443,6 @@
     animation: buffer-ring-stroke 3s infinite ease;
     animation-delay: 1s;
     animation-play-state: running;
-    opacity: 1;
 }
 
 .buffering .buffering-circle-track,
@@ -445,12 +450,6 @@
     animation: buffer-ring-track 3s infinite ease;
     animation-delay: 1s;
     animation-play-state: running;
-    opacity: 1;
-}
-
-.buffering .buffering-circle-stroke,
-.buffering-scrubbing .buffering-circle-stroke {
-    opacity: 0.3;
 }
 
 @keyframes buffer-ring {
@@ -820,7 +819,7 @@
     background-color: var(--mid-blue-color);
 }
 
-[data-quality="HD"].quality-badge .span.quality {
+[data-quality="UHD"].quality-badge .span.quality {
     color: var(--text-color);
     transform: translateY(-2px);
     text-shadow:
@@ -832,8 +831,7 @@
         0 1.5px 0px var(--blue-color),
         0 1.75px 0px var(--blue-color),
         0 2px 0px var(--blue-color);
-    --filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
-    filter: var(--filter);
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
 }
 
 [data-quality="HD"].quality-badge .span.quality,
@@ -871,7 +869,7 @@
     border-radius: 12px;
     background: var(--timeline-buffer);
     transition: var(--300ms-all-ease-out-expo-prop);
-    will-change: right;
+    will-change: width;
 }
 
 .timeline::after {
@@ -885,7 +883,7 @@
     background: var(--timeline-preview-hover);
     opacity: 0;
     transition: opacity 300ms var(--ease-out-expo);
-    will-change: right;
+    will-change: width;
 }
 
 .scrubbing .timeline {
@@ -945,12 +943,14 @@
     transform: translateY(0px);
 }
 
-.buffering .timeline__progressbar::after {
+.buffering .timeline__progressbar::after,
+.buffering-scrubbing .timeline__progressbar::after {
     opacity: 1;
     animation-play-state: running;
 }
 
-.video-container:not(.loading) .buffering .timeline__progressbar::after {
+.video-container:not(.loading) .buffering .timeline__progressbar::after,
+.video-container:not(.loading) .buffering-scrubbing .timeline__progressbar::after {
     opacity: 0;
     animation-play-state: paused;
 }
@@ -1209,12 +1209,15 @@
 }
 
 .video-container.buffering .video-backdrop-seeking,
-.video-container.buffering .video-thumb-preview {
+.video-container.buffering .video-thumb-preview,
+.video-container.buffering-scrubbing .video-backdrop-seeking,
+.video-container.buffering-scrubbing .video-thumb-preview {
     opacity: 0;
     transition: opacity 300ms 100ms var(--ease-out-expo);
 }
 
-.video-container.scrubbing .timeline::before {
+.video-container.buffering.scrubbing .timeline::before,
+.video-container.buffering-scrubbing.scrubbing .timeline::before {
     opacity: 1;
 }
 
@@ -1695,6 +1698,12 @@
     transition: var(--600ms-all-ease-out-expo-prop);
 }
 
+.settings-context-menu .page .header .contents.back-page:hover .span::after {
+    width: 100%;
+    left: 0;
+    background-color: var(--accent-color);
+}
+
 .settings-context-menu .page .header .contents.back-page .back-arrow {
     transform: translateX(0);
     fill: var(--text-color);
@@ -1711,12 +1720,6 @@
 
 .settings-context-menu .page .header .contents.back-page:hover .back-arrow path {
     fill: var(--accent-color);
-}
-
-.settings-context-menu .page .header .contents.back-page:hover .span::after {
-    width: 100%;
-    left: 0;
-    background-color: var(--accent-color);
 }
 
 .settings-context-menu .page .header .contents.back-page:active {
@@ -3727,7 +3730,7 @@ screen and (max-height: 600px) {
         transform: none;
     }
 
-    [data-volume-level="full"] .mute-volume,
+    [data-volume-level=".cue-timefull"] .mute-volume,
     [data-volume-level="mid"] .mute-volume,
     [data-volume-level="low"] .mute-volume,
     [data-volume-level="mid"] .full-volume,
@@ -3761,5 +3764,39 @@ screen and (max-height: 600px) {
     .video-container .caption-button svg .c,
     .video-container.caption .caption-button svg .c {
         animation: none;
+    }
+
+    .settings-context-menu .page .header .contents.back-page:hover .back-arrow {
+        transform: translateX(0);
+    }
+
+    .settings-context-menu .page .header .contents.back-page .span::after {
+        left: 0;
+        right: 0;
+        width: 100%;
+        opacity: 0;
+        transition: var(--600ms-all-ease-out-expo-prop);
+    }
+
+    .settings-context-menu .page .header .contents.back-page:hover .span::after {
+        width: 100%;
+        left: 0;
+        right: 0;
+        opacity: 0.3;
+    }
+
+    .cue-time.span::after {
+        left: 0.5rem;
+        right: 0.5rem;
+        width: auto;
+        opacity: 0;
+        transition: var(--600ms-all-ease-out-expo-prop);
+    }
+
+    .cue-container:hover .cue-time.span::after {
+        left: 0.5rem;
+        right: 0.5rem;
+        width: auto;
+        opacity: 0.6;
     }
 }

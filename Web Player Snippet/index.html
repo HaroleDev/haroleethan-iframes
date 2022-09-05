@@ -43,7 +43,7 @@
     </style>
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' gstatic.com *.gstatic.com *.jsdelivr.net; connect-src 'self'; img-src 'self' data: *.cloudinary.com; style-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; font-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; base-uri 'self'; form-action 'self'; media-src 'self' *.storjshare.io *.cloudinary.com;">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' gstatic.com *.gstatic.com *.jsdelivr.net; connect-src 'self' 'unsafe-inline' 'unsafe-eval' *.storjshare.io; img-src 'self' data: *.cloudinary.com; style-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; font-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; base-uri 'self'; form-action 'self'; media-src 'self' *.storjshare.io *.cloudinary.com;">
     <meta http-equiv="Access-Control-Allow-Headers" content="X-Requested-With" />
     <meta http-equiv="Access-Control-Allow-Credentials" content="true" />
 </head>
@@ -679,7 +679,7 @@
                             <div class="timeline-container">
                                 <div class="seeking-preview">
                                     <img class="seeking-preview__thumbnail">
-                                    <div class="seeking-preview__time-tooltip">0:00</div>
+                                    <div class="seeking-preview__time-tooltip">-:--</div>
                                 </div>
                                 <div class="timeline">
                                     <div class="seek-filler"></div>
@@ -688,10 +688,10 @@
                                 <div class="footer">
                                     <div class="duration-container" role="text"
                                         aria-label="Less than a second elapsed of 0 second">
-                                        <div class="current-time span" aria-hidden="true">0:00</div>
+                                        <div class="current-time span" aria-hidden="true">-:--</div>
                                         <div class="divider-time-copy span" aria-hidden="true">/</div>
                                         <div class="divider-time span" aria-hidden="true">/</div>
-                                        <div class="total-time span" aria-hidden="true">0:00</div>
+                                        <div class="total-time span" aria-hidden="true">-:--</div>
                                     </div>
                                     <div class="badges-container">
                                         <div class="badge quality-badge" data-quality="N/A">

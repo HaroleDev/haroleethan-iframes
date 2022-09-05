@@ -101,9 +101,6 @@ const description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
 
-playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', 16 / 9)
-playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', 9 / 16)
-
 // Debounce and throttle
 function debounce(cb, delay = 1000) {
     let timeout
@@ -179,15 +176,9 @@ function init() {
 init()
 
 function canFullscreenEnabled() {
-    if (document.fullscreenEnabled) {
-        return document.fullscreenEnabled
-    } else if (document.webkitFullscreenEnabled) {
-        return document.webkitFullscreenEnabled
-    } else if (document.mozFullscreenEnabled) {
-        return document.mozFullscreenEnabled
-    } else {
-        return false
-    }
+    return document.fullscreenEnabled ? document.fullscreenEnabled
+        : document.webkitFullscreenEnabled ? document.webkitFullscreenEnabled
+            : document.mozFullscreenEnabled ? document.mozFullscreenEnabled : false;
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -410,7 +401,6 @@ aboutPlayerItem.addEventListener('click', () => aboutPlayerContainer.classList.a
 settingsButton.addEventListener('click', () => {
     settingsButton.classList.toggle('pressed')
     settingsContextMenu.classList.toggle('pressed')
-
     backPageSettingsFn()
     if (
         settingsButton.classList.contains('pressed') &&
@@ -427,7 +417,7 @@ settingsButton.addEventListener('click', () => {
 backPageSettings.addEventListener('click', backPageSettingsFn)
 
 function backPageSettingsFn() {
-    const oldContent = settingsContextMenu.querySelectorAll('.page')
+    const oldContent = settingsContextMenu.querySelectorAll('.page:not(.front-page)')
     oldContent.forEach(element => {
         element.setAttribute('hidden', '')
     })
@@ -458,7 +448,7 @@ function downloadFile(url, fileName) {
 downloadItem.addEventListener('click', () => {
     downloadFile(
         videoMetadata.Fallback_src,
-        `${title}.${videoMetadata.Fallback_codec.split('/')[1]}`
+        `${title}.${videoMetadata.Fallback_codec.split('/')[1].substring(';')}`
     )
     settingsButton.classList.remove('pressed')
     settingsContextMenu.classList.remove('pressed')
@@ -1165,16 +1155,16 @@ function toggleScrubbing(e) {
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
-    const seekTime = parseFloat(percent * video.duration)
+    let seekTime = parseFloat(percent * video.duration)
     const thumbPosition = (Math.trunc(percent * video.duration) / Math.trunc(video.duration)) * 100
-    
+
     timelineInner.style.setProperty('--preview-position', percent)
     timeTooltip.innerText = formatDuration(seekTime)
     seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
     seekingPreviewPosition(e)
 
     if (seekTime < 0) seekTime = 0
-    if (seekTime > video.duration - 1) seekTime = video.duration - 1
+    if (seekTime > video.duration - 1) seekTime = parseFloat(video.duration - 1)
 
     if (isScrubbing) {
         window.cancelAnimationFrame(updatetime)
@@ -1903,6 +1893,8 @@ const eventListeners = [
             videoContainer.classList.remove('seeking')
             seekingPreview.classList.remove('loading')
             videoContainer.classList.remove('buffering-scrubbing')
+            videoContainer.classList.remove('buffering')
+            videoControls.removeAttribute('hidden')
             updatetime()
             currentTime.innerText = formatDuration(video.currentTime)
         }

@@ -862,12 +862,15 @@ video.addEventListener('dblclick', toggleFullScreen)
 
 const fullscreenElement =
     document.fullscreenElement ||
-    document.mozFullScreenElement ||
     document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
     document.msFullscreenElement
 
 function toggleFullScreen() {
-    if (fullscreenElement) {
+    if (document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement) {
         document.exitFullscreen
             ? document.exitFullscreen()
             : document.webkitExitFullscreen

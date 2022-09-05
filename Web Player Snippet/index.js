@@ -915,7 +915,11 @@ function togglePIPPlayerMode() {
 }
 
 function fullScreenToggleChange() {
-    playfulVideoPlayer.classList.toggle('full-screen', document.fullscreenElement)
+    playfulVideoPlayer.classList.toggle('full-screen',
+        document.fullscreenElement ||
+        document.webkitIsFullScreen ||
+        document.mozIsFullScreen ||
+        document.msIsFullScreen)
 }
 
 document.addEventListener('fullscreenchange', fullScreenToggleChange)

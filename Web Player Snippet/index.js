@@ -860,12 +860,6 @@ function activity() {
 fullscreenButton.addEventListener('click', toggleFullScreen)
 video.addEventListener('dblclick', toggleFullScreen)
 
-const fullscreenElement =
-    document.fullscreenElement ||
-    document.webkitFullscreenElement ||
-    document.mozFullScreenElement ||
-    document.msFullscreenElement
-
 function toggleFullScreen() {
     if (document.fullscreenElement ||
         document.webkitFullscreenElement ||
@@ -882,7 +876,10 @@ function toggleFullScreen() {
                         : document.msRequestFullscreen &&
                         document.msExitFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
-    } else if (!fullscreenElement) {
+    } else if (!document.fullscreenElement ||
+        !document.webkitFullscreenElement ||
+        !document.mozFullScreenElement ||
+        !document.msFullscreenElement) {
         playfulVideoPlayer.requestFullscreen
             ? playfulVideoPlayer.requestFullscreen()
             : playfulVideoPlayer.webkitRequestFullScreen
@@ -924,13 +921,33 @@ function togglePIPPlayerMode() {
 }
 
 function fullScreenToggleChange() {
-    playfulVideoPlayer.classList.toggle('full-screen', fullscreenElement)
+    playfulVideoPlayer.classList.toggle('full-screen',
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement)
 }
 
-document.addEventListener('fullscreenchange', fullScreenToggleChange, fullscreenElement)
-document.addEventListener('mozfullscreenchange', fullScreenToggleChange, fullscreenElement)
-document.addEventListener('webkitfullscreenchange', fullScreenToggleChange, fullscreenElement)
-document.addEventListener('msfullscreenchange', fullScreenToggleChange, fullscreenElement)
+document.addEventListener('fullscreenchange', fullScreenToggleChange,
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement)
+document.addEventListener('mozfullscreenchange', fullScreenToggleChange,
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement)
+document.addEventListener('webkitfullscreenchange', fullScreenToggleChange,
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement)
+document.addEventListener('msfullscreenchange', fullScreenToggleChange,
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement)
 
 video.addEventListener('webkitenterfullscreen', () => {
     playfulVideoPlayer.classList.add('full-screen')

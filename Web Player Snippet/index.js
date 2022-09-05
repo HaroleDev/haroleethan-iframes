@@ -1,5 +1,5 @@
 'use strict'
-import "//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js"
+import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 import { debounce, throttle } from './debounceAndThrottle.js'
 import consoleLog from './consoleLog.js'
@@ -129,31 +129,31 @@ function canFullscreenEnabled() {
             ? document.webkitFullscreenEnabled
             : document.mozFullscreenEnabled
                 ? document.mozFullscreenEnabled
-                : false;
+                : false
 }
 
 window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
-    /*if (!Hls.isSupported()) {
-        hls.loadSource(videoMetadata.HLS_src);
-        hls.attachMedia(video);
-        source.setAttribute("type", videoMetadata.HLS_codec);
-        //For HLS container
-        hls.on(Hls.Events.LEVEL_LOADED, function () {
-            loadedMetadata();
-        });
-    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        source.setAttribute("src", videoMetadata.HLS_src);
-        source.setAttribute("type", videoMetadata.HLS_codec);
-        video.load();
-        video.addEventListener("durationchange", updatetime);
-    } else {
-        source.setAttribute("src", videoMetadata.Fallback_src);
-        source.setAttribute("type", videoMetadata.Fallback_codec);
-        video.load();
-        //For MP4 container
-        video.addEventListener("durationchange", updatetime);
-    };*/
+    /* if (!Hls.isSupported()) {
+          hls.loadSource(videoMetadata.HLS_src);
+          hls.attachMedia(video);
+          source.setAttribute("type", videoMetadata.HLS_codec);
+          //For HLS container
+          hls.on(Hls.Events.LEVEL_LOADED, function () {
+              loadedMetadata();
+          });
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+          source.setAttribute("src", videoMetadata.HLS_src);
+          source.setAttribute("type", videoMetadata.HLS_codec);
+          video.load();
+          video.addEventListener("durationchange", updatetime);
+      } else {
+          source.setAttribute("src", videoMetadata.Fallback_src);
+          source.setAttribute("type", videoMetadata.Fallback_codec);
+          video.load();
+          //For MP4 container
+          video.addEventListener("durationchange", updatetime);
+      }; */
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
     video.load()
@@ -325,12 +325,12 @@ function closeSettingsMenu(e) {
 
 function showSettingsMenu(show) {
     if (show === void 0) show = true
-    show ?
-        (settingsButton.classList.add('pressed'),
+    show
+        ? (settingsButton.classList.add('pressed'),
             settingsContextMenu.classList.add('pressed'),
             seekingPreview.setAttribute('hidden', ''),
-            settingsTooltipContainer.removeAttribute('data-tooltip')) :
-        (settingsButton.classList.remove('pressed'),
+            settingsTooltipContainer.removeAttribute('data-tooltip'))
+        : (settingsButton.classList.remove('pressed'),
             settingsContextMenu.classList.remove('pressed'),
             seekingPreview.removeAttribute('hidden'),
             settingsTooltipContainer.setAttribute('data-tooltip', 'right'))
@@ -627,7 +627,7 @@ function displayCues(track) {
 function getVoices(speech) {
     const voices = []
     let pos = speech.indexOf('<v')
-    while (pos != -1) {
+    while (pos !== -1) {
         endVoice = speech.indexOf('>')
         const voice = speech.substring(pos + 2, endVoice).trim()
         const endSpeech = speech.indexOf('</v>')
@@ -677,10 +677,10 @@ function addCueListeners(cue) {
 }
 
 transcriptDiv.addEventListener('keydown', (e) => {
-    ' ' !== e.key
-        && 'Enter' !== e.key
-        && 'Spacebar' !== e.key
-        || toggleBtn(e.target);
+    if (e.key !== ' ' &&
+        e.key !== 'Enter' &&
+        e.key !== 'Spacebar')
+        toggleBtn(e.target)
 })
 
 transcriptDiv.addEventListener('click', (e) => {
@@ -746,11 +746,11 @@ function loopVideo() {
 }
 
 function checkElement() {
-    loopItem.forEach((element => {
+    loopItem.forEach(element => {
         video.loop
-            ? element.setAttribute("aria-checked", "true")
-            : element.removeAttribute("aria-checked")
-    }));
+            ? element.setAttribute('aria-checked', 'true')
+            : element.removeAttribute('aria-checked')
+    })
     if (video.hasAttribute('controls')) {
         videoControlsContainer.setAttribute('hidden', '')
         videoInformationOverlay.setAttribute('hidden', '')
@@ -771,19 +771,19 @@ loopItem.forEach(element => {
 
 // Skip time
 function skip(time) {
-    video.currentTime += time;
+    video.currentTime += time
     currentTime.innerText = formatDuration(videoPercent * video.duration)
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 function skipPercent(time) {
-    video.currentTime = video.duration * time;
+    video.currentTime = video.duration * time
     currentTime.innerText = formatDuration(videoPercent * video.duration)
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 function frameSeeking(time) {
-    video.currentTime += 1 / time;
+    video.currentTime += 1 / time
     currentTime.innerText = formatDuration(videoPercent * video.duration)
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
@@ -860,48 +860,50 @@ function activity() {
 fullscreenButton.addEventListener('click', toggleFullScreen)
 video.addEventListener('dblclick', toggleFullScreen)
 
-var fullscreenElement =
+const fullscreenElement =
     document.fullscreenElement ||
     document.mozFullScreenElement ||
     document.webkitFullscreenElement ||
     document.msFullscreenElement
 
-var isFullscreen =
+const isFullscreen =
     document.fullscreenElement ||
     document.webkitIsFullScreen ||
     document.mozIsFullScreen ||
     document.msIsFullScreen
 
 function toggleFullScreen() {
-    if (context.state === 'suspended') context.resume()
     if (isFullscreen) {
-        document.exitFullscreen
-            ? document.exitFullscreen()
-            : document.webkitExitFullscreen
-                ? document.webkitExitFullscreen()
-                : document.webkitCancelFullScreen
-                    ? document.webkitCancelFullScreen()
-                    : document.mozCancelFullScreen
-                        ? document.mozCancelFullScreen()
-                        : document.msRequestFullscreen
-                        && document.msExitFullscreen()
+        if (document.exitFullscreen) {
+            document.exitFullscreen()
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen()
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen()
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen()
+        } else if (document.msRequestFullscreen) {
+            document.msExitFullscreen()
+        }
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!isFullscreen) {
-        playfulVideoPlayer.requestFullscreen
-            ? playfulVideoPlayer.requestFullscreen()
-            : playfulVideoPlayer.webkitRequestFullScreen
-                ? playfulVideoPlayer.webkitRequestFullScreen()
-                : video.webkitEnterFullScreen
-                    ? video.webkitEnterFullScreen()
-                    : playfulVideoPlayer.mozRequestFullScreen
-                        ? playfulVideoPlayer.mozRequestFullScreen()
-                        : playfulVideoPlayer.msRequestFullScreen
-                        && playfulVideoPlayer.msRequestFullscreen()
+        if (playfulVideoPlayer.requestFullscreen) {
+            playfulVideoPlayer.requestFullscreen()
+        } else if (playfulVideoPlayer.webkitRequestFullScreen) {
+            playfulVideoPlayer.webkitRequestFullScreen()
+        } else if (video.webkitEnterFullScreen) {
+            video.webkitEnterFullScreen()
+        } else if (playfulVideoPlayer.mozRequestFullScreen) {
+            playfulVideoPlayer.mozRequestFullScreen()
+        } else if (playfulVideoPlayer.msRequestFullScreen) {
+            playfulVideoPlayer.msRequestFullscreen()
+        }
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {
         fullscreenButton.parentElement.setAttribute('unsupported', '')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }
+    if (context.state === 'suspended') context.resume()
 }
 
 function togglePIPPlayerMode() {
@@ -1028,13 +1030,13 @@ function volumeControlKeyboard(e, value) {
     if (e.toLowerCase() === 'arrowdown') video.volume = Math.max(0, video.volume - value)
 
     volumeSliderContainer.style.setProperty('--volume-position', video.volume)
-    video.muted || 0 === video.volume
-        ? (volumeLevel = "mute", volumeTooltipContainer.setAttribute("data-tooltip-text", "Unmute (m)"))
+    video.muted || video.volume === 0
+        ? (volumeLevel = 'mute', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute (m)'))
         : video.volume >= 0.6
-            ? (volumeLevel = "full", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+            ? (volumeLevel = 'full', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
             : video.volume >= 0.3
-                ? (volumeLevel = "mid", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
-                : (volumeLevel = "low", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+                ? (volumeLevel = 'mid', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                : (volumeLevel = 'low', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
     videoContainer.dataset.volumeLevel = volumeLevel
 }
 
@@ -1102,7 +1104,7 @@ function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     isScrubbing = (e.buttons && 1) === 1
-    let seekTime = parseFloat(percent * video.duration)
+    const seekTime = parseFloat(percent * video.duration)
     videoContainer.classList.toggle('scrubbing', isScrubbing)
     if (isScrubbing) {
         wasPaused = video.paused
@@ -1170,7 +1172,7 @@ function formatDuration(time) {
     const seconds = Math.trunc(time % 60)
     const minutes = Math.trunc((time / 60) % 60)
     const hours = Math.trunc((time / 60 / 60) % 60)
-    const format = (time) => (`0${time}`).slice(-2);
+    const format = (time) => (`0${time}`).slice(-2)
 
     if (hours === 0) {
         return `${minutes}:${format(seconds)}`
@@ -1223,7 +1225,7 @@ function togglePlay() {
         video.currentTime = 0
     }
 
-    video.paused || video.ended ? video.play() : video.pause();
+    video.paused || video.ended ? video.play() : video.pause()
     if (context.state === 'suspended') context.resume()
 }
 
@@ -1272,7 +1274,7 @@ const qualityLabels = [
         label: 'LD',
         size: 320,
         length: 180
-    },
+    }
 ]
 
 function qualityCheck(sizeWidth, sizeHeight) {
@@ -1309,7 +1311,7 @@ const qualityLabelsShort = [
         label: 'SD',
         size: 640,
         length: 360
-    },
+    }
 ]
 
 function qualityCheckShort(sizeWidth, sizeHeight) {
@@ -1627,7 +1629,7 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
     const tagName = document.activeElement.tagName.toLowerCase()
 
     if (tagName === 'input') {
-        return
+
     } else {
         function checkActive() {
             videoContainer.classList.add('hovered')
@@ -1692,7 +1694,7 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
                 e.preventDefault()
                 volumeControlKeyboard(e.key, 0.1)
                 checkActive()
-                break;
+                break
             case 'j':
             case 'l':
                 videoContainer.classList.add('seeking')
@@ -1926,13 +1928,13 @@ const eventListeners = [
         'volumechange',
         () => {
             let volumeLevel
-            video.muted || 0 === video.volume
-                ? (volumeLevel = "mute", volumeTooltipContainer.setAttribute("data-tooltip-text", "Unmute (m)"))
+            video.muted || video.volume === 0
+                ? (volumeLevel = 'mute', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute (m)'))
                 : video.volume >= 0.6
-                    ? (volumeLevel = "full", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+                    ? (volumeLevel = 'full', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
                     : video.volume >= 0.3
-                        ? (volumeLevel = "mid", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
-                        : (volumeLevel = "low", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+                        ? (volumeLevel = 'mid', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                        : (volumeLevel = 'low', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
             videoContainer.dataset.volumeLevel = volumeLevel
         }
     ]

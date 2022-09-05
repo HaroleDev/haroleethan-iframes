@@ -1585,15 +1585,15 @@
 }
 
 .video-context-menu .check,
-.settings-context-menu .page-contents.playback-speed-settings .check {
+.settings-context-menu .check {
     width: 16px;
     height: 16px;
     opacity: 0;
     transition: opacity 300ms var(--ease-out-expo);
 }
 
-.video-context-menu .loop-item[aria-checked="true"] .check,
-.settings-context-menu .page-contents.playback-speed-settings .item[aria-checked="true"] .check {
+.video-context-menu .item[aria-checked="true"] .check,
+.settings-context-menu .item[aria-checked="true"] .check {
     opacity: 1;
 }
 
@@ -1764,17 +1764,17 @@
 }
 
 .playful-video-player .video-context-menu .item .check,
-.playful-video-player .page-contents .item .check {
+.playful-video-player .settings-context-menu .item .check {
     transition: opacity 300ms var(--ease-out-expo);
 }
 
 .playful-video-player .video-context-menu .item:not([aria-checked="true"]) .check,
-.playful-video-player .page-contents .item:not([aria-checked="true"]) .check {
+.playful-video-player .settings-context-menu .item:not([aria-checked="true"]) .check {
     opacity: 0;
 }
 
 .playful-video-player .video-context-menu .item:not([aria-checked="true"]):hover .check,
-.playful-video-player .page-contents .item:not([aria-checked="true"]):hover .check {
+.playful-video-player .settings-context-menu .item:not([aria-checked="true"]):hover .check {
     opacity: 0.1;
 }
 
@@ -3562,7 +3562,7 @@ screen and (max-height: 600px) {
     }
 
     .playful-video-player .video-context-menu .item:not([aria-checked="true"]):hover .check,
-    .playful-video-player .page-contents .item:not([aria-checked="true"]):hover .check {
+    .playful-video-player .settings-context-menu .item:not([aria-checked="true"]):hover .check {
         opacity: 0;
     }
 

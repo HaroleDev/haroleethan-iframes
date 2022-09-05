@@ -1,6 +1,8 @@
 'use strict'
-import "//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js";
+import "//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js"
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
+import { debounce, throttle } from './debounceAndThrottle.js'
+import consoleLog from './consoleLog.js'
 const config = {
     startPosition: -1
 }
@@ -27,7 +29,7 @@ const timeTooltip = playfulVideoPlayer.querySelector('.seeking-preview__time-too
 const EQswitchToggle = playfulVideoPlayer.querySelector('.eq-switch')
 const rangeEQInputs = playfulVideoPlayer.querySelectorAll('.dialog .eq-control input')
 const eqContainer = playfulVideoPlayer.querySelector('.eq-dialog-container')
-const loopItem = playfulVideoPlayer.querySelector('.loop-item')
+const loopItem = playfulVideoPlayer.querySelectorAll('.loop-item')
 const eqItem = playfulVideoPlayer.querySelector('.eq-item')
 
 const aboutPlayerItem = playfulVideoPlayer.querySelector('.about-player-item')
@@ -101,62 +103,7 @@ const description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
 
-// Debounce and throttle
-function debounce(cb, delay = 1000) {
-    let timeout
-
-    return (...args) => {
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            cb(...args)
-        }, delay)
-    }
-}
-
-function throttle(cb, delay = 1000) {
-    let shouldWait = false
-    let waitingArgs
-    const timeoutFunc = () => {
-        if (waitingArgs == null) {
-            shouldWait = false
-        } else {
-            cb(...waitingArgs)
-            waitingArgs = null
-            setTimeout(timeoutFunc, delay)
-        }
-    }
-
-    return (...args) => {
-        if (shouldWait) {
-            waitingArgs = args
-            return
-        }
-        cb(...args)
-        shouldWait = true
-
-        setTimeout(timeoutFunc, delay)
-    }
-}
-
-const svg =
-    '<svg xmlns="http://www.w3.org/2000/svg" fill="#02da9a" viewBox="0 0 616 174"><path d="M290 .051a43 43 0 0 0-4.92.041c-3.75.245-7.43.979-11 2.17-4.44 1.5-5.82 6.79-3.47 10.8 2.34 4.06 7.56 5.29 12.2 4.37 1.12-.223 2.26-.372 3.4-.447a26 26 0 0 1 11.7 1.93c3.69 1.53 6.97 3.88 9.6 6.88a25.75 25.75 0 0 1 2.08 2.72c2.61 3.9 7.16 6.72 11.7 5.5s7.29-5.93 5.21-10.1a43.06 43.06 0 0 0-6.21-9.29c-4.35-4.96-9.78-8.85-15.9-11.4a43 43 0 0 0-14.3-3.22zM7 19.851c-3.27-.257-6.49 2.26-6.49 5.99v62.2c0 4.98 5.72 7.79 9.66 4.75l40.4-31.1c3.12-2.4 3.12-7.11 0-9.51l-40.4-31.1A5.96 5.96 0 0 0 7 19.841zm382 9.41v62c-3.07-5.63-7.42-9.86-13.1-12.7-5.63-2.94-12-4.42-19-4.42-9.34 0-17.4 2.18-24.2 6.53-6.79 4.22-12 10.1-15.6 17.7-3.59 7.55-5.38 16.1-5.38 25.7 0 9.73 1.79 18.3 5.38 25.7 3.59 7.3 8.64 13.1 15.2 17.3 6.66 4.22 14.5 6.34 23.6 6.34 7.3 0 13.9-1.6 19.8-4.8 6.02-3.33 10.6-8.06 13.6-14.2l1.34 16.5h17.7v-142h-19.4zm-281 .695c-14.9 0-27 12.1-27 27s12.1 27 27 27 27-12.1 27-27-12.1-27-27-27zm181 .455c-3.46 0-6.46 1.22-9.02 3.65-2.43 2.43-3.65 5.38-3.65 8.83s1.22 6.4 3.65 8.83c2.56 2.43 5.57 3.65 9.02 3.65 3.33 0 6.21-1.22 8.64-3.65s3.65-5.38 3.65-8.83-1.22-6.4-3.65-8.83-5.31-3.65-8.64-3.65zm176 43.8c-9.09 0-17.2 2.11-24.2 6.34-6.91 4.22-12.4 10-16.3 17.5-3.84 7.42-5.76 16.1-5.76 25.9 0 9.73 1.98 18.3 5.95 25.7 4.1 7.42 9.66 13.2 16.7 17.5 7.17 4.22 15.4 6.34 24.6 6.34 11.8 0 21.5-2.82 29.2-8.45s12.6-13.5 14.8-23.6h-18c-1.41 5.12-4.36 9.09-8.83 11.9-4.36 2.69-9.98 4.03-16.9 4.03-9.34 0-16.5-2.94-21.5-8.83-4.24-5-6.68-11.9-7.32-20.6l72.4-.172v-6.72c0-9.47-1.86-17.7-5.57-24.8-3.58-7.04-8.77-12.5-15.6-16.3-6.66-3.84-14.5-5.76-23.6-5.76zm102 0c-9.47 0-18 2.11-25.5 6.34-7.43 4.22-13.3 10-17.7 17.5-4.22 7.42-6.34 16-6.34 25.7s2.11 18.3 6.34 25.7c4.35 7.42 10.2 13.2 17.7 17.5 7.55 4.22 16.1 6.34 25.5 6.34s17.9-2.11 25.3-6.34 13.2-10 17.5-17.5 6.34-16 6.34-25.7-2.11-18.3-6.34-25.7c-4.22-7.42-10-13.2-17.5-17.5s-15.9-6.34-25.3-6.34zm-393 2.69l37.8 94.1H231l39.4-94.1h-20.2l-20.2 50.1-2.88 7.94-1.72 4.93c-1.41 3.97-2.56 7.49-3.46 10.6-.64-2.82-1.66-6.21-3.07-10.2-1.28-4.1-2.82-8.51-4.61-13.2l-19.4-50.1h-20.9zm105 0v94.1h19.2v-94.1H279zm186 13.4c7.68 0 13.8 2.3 18.4 6.91 4.61 4.48 6.91 10.4 6.91 17.9h-52.8c.528-3.55 1.43-6.75 2.7-9.6 2.3-4.99 5.5-8.77 9.6-11.3 4.23-2.56 9.28-3.84 15.2-3.84zm-105 1.15c6.02 0 11.1 1.41 15.4 4.22 4.35 2.69 7.68 6.46 9.98 11.3 2.3 4.74 3.46 10.2 3.46 16.5s-1.15 11.8-3.46 16.7-5.63 8.71-9.98 11.5c-4.23 2.69-9.35 4.03-15.4 4.03s-11.2-1.34-15.6-4.03c-4.22-2.82-7.49-6.66-9.79-11.5-2.18-4.86-3.26-10.4-3.26-16.7 0-6.14 1.09-11.6 3.26-16.3 2.3-4.86 5.57-8.7 9.79-11.5 4.35-2.82 9.54-4.22 15.6-4.22zm207 .191c5.89 0 11 1.35 15.4 4.03 4.48 2.69 8 6.46 10.6 11.3 2.56 4.74 3.84 10.3 3.84 16.7 0 6.27-1.28 11.8-3.84 16.7s-6.08 8.7-10.6 11.5c-4.35 2.69-9.47 4.03-15.4 4.03s-11.1-1.34-15.6-4.03c-4.48-2.82-8-6.66-10.6-11.5-2.56-4.86-3.84-10.4-3.84-16.7 0-6.4 1.28-12 3.84-16.7 2.56-4.86 6.08-8.64 10.6-11.3s9.66-4.03 15.6-4.03zm-449 15a10.85 10.85 0 0 0-2.2.123c-5.94.94-9.81 6.6-10.7 12.5-.567 3.69-1.72 7.29-3.43 10.7-3.38 6.63-8.77 12-15.4 15.4a35.2 35.2 0 0 1-32.1-.08c-5.34-2.76-12.2-2.95-16.5 1.3h-.002c-4.25 4.25-4.29 11.2.689 14.6a57 57 0 0 0 23 9.08c11.9 1.88 24.1-.047 34.8-5.51a57 57 0 0 0 31.08-48.8c.178-5.26-4.16-9.04-9.22-9.27z"/></svg>'
-
-const consoleWelcomeDebounce = debounce(() => {
-    console.log(
-        '%cPlayful Video%c\nRolling Progress Release',
-        'background-image: url(data:image/svg+xml;base64,' + btoa(svg) +
-        ');\n    display: inline-block;\n    padding: 2rem 12rem;\n    padding-right: 0px;\n    margin: 20px;\n    margin-left: 0px;\n    margin-bottom: 8px;\n    color: transparent;\n    text-align: center;\n    font-size: 0px;\n    background-size: contain;\n    background-position: center center;\n    background-repeat: no-repeat;\n    ',
-        'font-family: Manrope, Arial, Helvetica, sans-serif;\n    display: block;\n    font-size: 1rem;\n    line-height: 130%;\n    margin: 4px 0px 16px 0px;\n    font-weight: 400;\n    font-kerning: normal;\n    color: currentColor;'
-    )
-    console.log(
-        "%cThis is a browser feature intended for developers to debug the player. As this is a rolling release of a developing project, I'd encourage you to send a feedback to me once you discovered a bug not listed on the page (which you can by my Discord's username below).\n\nDiscord: %cHarole#1225\n%cWebsite (WIP): %chttps://preview.studio.site/live/4BqN8BM2Wr",
-        'font-family: Inconsolata, monospace;\n    font-size: 1rem;\n    line-height: 130%;\n    font-weight: 400;\n    color: currentColor;\n    ',
-        'font-family: Inconsolata, monospace;\n    font-size: 1rem;\n    line-height: 100%;\n    font-weight: 800;\n    color: currentColor;\n    border-bottom: 2px solid currentColor;\n    ',
-        'font-family: Inconsolata, monospace;\n    font-size: 1rem;\n    line-height: 130%;\n    font-weight: 400;\n    color: currentColor;\n    ',
-        'font-family: Inconsolata, monospace;\n    font-size: 1rem;\n    line-height: 100%;\n    font-weight: 800;\n    color: currentColor;\n    '
-    )
-}, 200)
-consoleWelcomeDebounce()
+consoleLog()
 
 function init() {
     if (video.hasAttribute('controls')) {
@@ -176,33 +123,37 @@ function init() {
 init()
 
 function canFullscreenEnabled() {
-    return document.fullscreenEnabled ? document.fullscreenEnabled
-        : document.webkitFullscreenEnabled ? document.webkitFullscreenEnabled
-            : document.mozFullscreenEnabled ? document.mozFullscreenEnabled : false;
+    return document.fullscreenEnabled
+        ? document.fullscreenEnabled
+        : document.webkitFullscreenEnabled
+            ? document.webkitFullscreenEnabled
+            : document.mozFullscreenEnabled
+                ? document.mozFullscreenEnabled
+                : false;
 }
 
 window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
-    /* if (!Hls.isSupported()) {
-                        hls.loadSource(videoMetadata.HLS_src);
-                        hls.attachMedia(video);
-                        source.setAttribute("type", videoMetadata.HLS_codec);
-                        //For HLS container
-                        hls.on(Hls.Events.LEVEL_LOADED, function () {
-                            loadedMetadata();
-                        });
-                    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-                        source.setAttribute("src", videoMetadata.HLS_src);
-                        source.setAttribute("type", videoMetadata.HLS_codec);
-                        video.load();
-                        video.addEventListener("durationchange", updatetime);
-                    } else {
-                        source.setAttribute("src", videoMetadata.Fallback_src);
-                        source.setAttribute("type", videoMetadata.Fallback_codec);
-                        video.load();
-                        //For MP4 container
-                        video.addEventListener("durationchange", updatetime);
-                    }; */
+    /*if (!Hls.isSupported()) {
+        hls.loadSource(videoMetadata.HLS_src);
+        hls.attachMedia(video);
+        source.setAttribute("type", videoMetadata.HLS_codec);
+        //For HLS container
+        hls.on(Hls.Events.LEVEL_LOADED, function () {
+            loadedMetadata();
+        });
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        source.setAttribute("src", videoMetadata.HLS_src);
+        source.setAttribute("type", videoMetadata.HLS_codec);
+        video.load();
+        video.addEventListener("durationchange", updatetime);
+    } else {
+        source.setAttribute("src", videoMetadata.Fallback_src);
+        source.setAttribute("type", videoMetadata.Fallback_codec);
+        video.load();
+        //For MP4 container
+        video.addEventListener("durationchange", updatetime);
+    };*/
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
     video.load()
@@ -372,6 +323,19 @@ function closeSettingsMenu(e) {
     }
 }
 
+function showSettingsMenu(show) {
+    if (show === void 0) show = true
+    show ?
+        (settingsButton.classList.add('pressed'),
+            settingsContextMenu.classList.add('pressed'),
+            seekingPreview.setAttribute('hidden', ''),
+            settingsTooltipContainer.removeAttribute('data-tooltip')) :
+        (settingsButton.classList.remove('pressed'),
+            settingsContextMenu.classList.remove('pressed'),
+            seekingPreview.removeAttribute('hidden'),
+            settingsTooltipContainer.setAttribute('data-tooltip', 'right'))
+}
+
 document.addEventListener('click', (e) => {
     showContextMenu(false)
     if (
@@ -379,10 +343,7 @@ document.addEventListener('click', (e) => {
         !settingsContextMenu.contains(e.target) &&
         !transcriptPanel.contains(e.target)
     ) {
-        settingsButton.classList.remove('pressed')
-        settingsContextMenu.classList.remove('pressed')
-        settingsTooltipContainer.setAttribute('data-tooltip', 'right')
-        seekingPreview.removeAttribute('hidden')
+        showSettingsMenu(false)
         backPageSettingsFn()
     }
 })
@@ -406,11 +367,9 @@ settingsButton.addEventListener('click', () => {
         settingsButton.classList.contains('pressed') &&
         settingsContextMenu.classList.contains('pressed')
     ) {
-        seekingPreview.setAttribute('hidden', '')
-        settingsTooltipContainer.setAttribute('data-tooltip', 'right')
+        showSettingsMenu(true)
     } else {
-        settingsTooltipContainer.removeAttribute('data-tooltip')
-        seekingPreview.removeAttribute('hidden')
+        showSettingsMenu(false)
     }
 })
 
@@ -562,11 +521,7 @@ rangeEQInputs.forEach(element => {
 
 // Dialog
 function closedDialog(e) {
-    if (e.classList.contains('opened')) {
-        e.classList.remove('opened')
-    } else {
-
-    }
+    if (e.classList.contains('opened')) e.classList.remove('opened')
 }
 
 dialogOverlay.forEach(element => {
@@ -722,7 +677,10 @@ function addCueListeners(cue) {
 }
 
 transcriptDiv.addEventListener('keydown', (e) => {
-    if (e.key === ' ' || e.key === 'Enter' || e.key === 'Spacebar') { toggleBtn(e.target) }
+    ' ' !== e.key
+        && 'Enter' !== e.key
+        && 'Spacebar' !== e.key
+        || toggleBtn(e.target);
 })
 
 transcriptDiv.addEventListener('click', (e) => {
@@ -745,9 +703,7 @@ transcriptPanel.addEventListener('click', (e) => {
         !settingsContextMenu.contains(e.target) &&
         !transcriptPanel.contains(e.target)
     ) {
-        settingsButton.classList.remove('pressed')
-        settingsContextMenu.classList.remove('pressed')
-        settingsTooltipContainer.setAttribute('data-tooltip', 'right')
+        showSettingsMenu(false)
     }
 })
 
@@ -756,55 +712,62 @@ transcriptPanel.addEventListener('click', (e) => closeSettingsMenu(e))
 
 // Loop function
 function loopVideo() {
-    if (!loopItem.hasAttribute('aria-checked')) {
-        video.loop = true
-        if (typeof video.loop === 'boolean') {
+    loopItem.forEach(element => {
+        if (!element.hasAttribute('aria-checked')) {
             video.loop = true
+            if (typeof video.loop === 'boolean') {
+                video.loop = true
+            } else {
+                video.addEventListener(
+                    'ended',
+                    function () {
+                        video.currentTime = 0
+                        video.play()
+                    },
+                    false
+                )
+            }
+            element.setAttribute('aria-checked', 'true')
         } else {
-            video.addEventListener(
-                'ended',
-                function () {
-                    video.currentTime = 0
-                    video.play()
-                },
-                false
-            )
+            if (typeof video.loop === 'boolean') {
+                video.loop = false
+            } else {
+                video.removeEventListener('ended',
+                    function () {
+                        video.currentTime = 0
+                        video.play()
+                    },
+                    false
+                )
+            }
+            element.removeAttribute('aria-checked')
         }
-        loopItem.setAttribute('aria-checked', 'true')
-    } else {
-        if (typeof video.loop === 'boolean') {
-            video.loop = false
-        } else {
-            video.removeEventListener('ended',
-                function () {
-                    video.currentTime = 0
-                    video.play()
-                },
-                false
-            )
-        }
-        loopItem.removeAttribute('aria-checked')
-    }
+    })
 }
 
 function checkElement() {
-    if (video.loop === true) {
-        loopItem.setAttribute('aria-checked', 'true')
-    } else if (video.loop === false) {
-        loopItem.removeAttribute('aria-checked')
-    }
-
+    loopItem.forEach((element => {
+        video.loop
+            ? element.setAttribute("aria-checked", "true")
+            : element.removeAttribute("aria-checked")
+    }));
     if (video.hasAttribute('controls')) {
         videoControlsContainer.setAttribute('hidden', '')
         videoInformationOverlay.setAttribute('hidden', '')
         video.removeAttribute('controls')
-    } else if (!video.hasAttribute('controls')) {
+    } else {
         videoControlsContainer.removeAttribute('hidden')
         videoInformationOverlay.removeAttribute('hidden')
     }
 }
 
-loopItem.addEventListener('click', loopVideo)
+loopItem.forEach(element => {
+    element.addEventListener('click', () => {
+        loopVideo()
+        showSettingsMenu(false)
+        showContextMenu(false)
+    })
+})
 
 // Skip time
 function skip(time) {
@@ -903,30 +866,28 @@ function toggleFullScreen() {
         document.webkitIsFullScreen ||
         document.mozIsFullScreen ||
         document.msIsFullScreen) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen()
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen()
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen()
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen()
-        } else if (document.msRequestFullscreen) {
-            document.msExitFullscreen()
-        }
+        document.exitFullscreen
+            ? document.exitFullscreen()
+            : document.webkitExitFullscreen
+                ? document.webkitExitFullscreen()
+                : document.webkitCancelFullScreen
+                    ? document.webkitCancelFullScreen()
+                    : document.mozCancelFullScreen
+                        ? document.mozCancelFullScreen()
+                        : document.msRequestFullscreen
+                        && document.msExitFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else {
-        if (playfulVideoPlayer.requestFullscreen) {
-            playfulVideoPlayer.requestFullscreen()
-        } else if (playfulVideoPlayer.webkitRequestFullScreen) {
-            playfulVideoPlayer.webkitRequestFullScreen()
-        } else if (video.webkitEnterFullScreen) {
-            video.webkitEnterFullScreen()
-        } else if (playfulVideoPlayer.mozRequestFullScreen) {
-            playfulVideoPlayer.mozRequestFullScreen()
-        } else if (playfulVideoPlayer.msRequestFullScreen) {
-            playfulVideoPlayer.msRequestFullscreen()
-        }
+        playfulVideoPlayer.requestFullscreen
+            ? playfulVideoPlayer.requestFullscreen()
+            : playfulVideoPlayer.webkitRequestFullScreen
+                ? playfulVideoPlayer.webkitRequestFullScreen()
+                : video.webkitEnterFullScreen
+                    ? video.webkitEnterFullScreen()
+                    : playfulVideoPlayer.mozRequestFullScreen
+                        ? playfulVideoPlayer.mozRequestFullScreen()
+                        : playfulVideoPlayer.msRequestFullScreen
+                        && playfulVideoPlayer.msRequestFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     }
 }
@@ -970,7 +931,6 @@ video.addEventListener('webkitenterfullscreen', () => {
 video.addEventListener('webkitendfullscreen', () => {
     playfulVideoPlayer.classList.remove('full-screen')
     fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
-    if (!video.paused) video.play()
 })
 
 function togglePIPClass() {
@@ -1052,26 +1012,17 @@ function toggleVolume() {
 
 function volumeControlKeyboard(e, value) {
     let volumeLevel
-    if (e.toLowerCase() === 'arrowup') {
-        video.volume = Math.min(1, video.volume + value);
-    }
-    if (e.toLowerCase() === 'arrowdown') {
-        video.volume = Math.max(0, video.volume - value);
-    }
+    if (e.toLowerCase() === 'arrowup') video.volume = Math.min(1, video.volume + value)
+    if (e.toLowerCase() === 'arrowdown') video.volume = Math.max(0, video.volume - value)
+
     volumeSliderContainer.style.setProperty('--volume-position', video.volume)
-    if (video.muted || video.volume === 0) {
-        volumeLevel = 'mute'
-        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute' + ' (m)')
-    } else if (video.volume >= 0.6) {
-        volumeLevel = 'full'
-        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
-    } else if (video.volume >= 0.3) {
-        volumeLevel = 'mid'
-        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
-    } else {
-        volumeLevel = 'low'
-        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
-    }
+    video.muted || 0 === video.volume
+        ? (volumeLevel = "mute", volumeTooltipContainer.setAttribute("data-tooltip-text", "Unmute (m)"))
+        : video.volume >= 0.6
+            ? (volumeLevel = "full", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+            : video.volume >= 0.3
+                ? (volumeLevel = "mid", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+                : (volumeLevel = "low", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
     videoContainer.dataset.volumeLevel = volumeLevel
 }
 
@@ -1260,12 +1211,7 @@ function togglePlay() {
         video.currentTime = 0
     }
 
-    if (video.paused || video.ended) {
-        video.play()
-    } else {
-        video.pause()
-    }
-
+    video.paused || video.ended ? video.play() : video.pause();
     if (context.state === 'suspended') context.resume()
 }
 
@@ -1387,32 +1333,32 @@ async function mediaSessionToggle() {
                 title,
                 artist: author,
                 artwork: [{
-                    src: `${mediaSessionMetadata.thumb_96}`,
+                    src: mediaSessionMetadata.thumb_96,
                     sizes: '96x96',
                     type: mediaSessionMetadata.type
                 },
                 {
-                    src: `${mediaSessionMetadata.thumb_128}`,
+                    src: mediaSessionMetadata.thumb_128,
                     sizes: '128x128',
                     type: mediaSessionMetadata.type
                 },
                 {
-                    src: `${mediaSessionMetadata.thumb_192}`,
+                    src: mediaSessionMetadata.thumb_192,
                     sizes: '192x192',
                     type: mediaSessionMetadata.type
                 },
                 {
-                    src: `${mediaSessionMetadata.thumb_256}`,
+                    src: mediaSessionMetadata.thumb_256,
                     sizes: '256x256',
                     type: mediaSessionMetadata.type
                 },
                 {
-                    src: `${mediaSessionMetadata.thumb_384}`,
+                    src: mediaSessionMetadata.thumb_384,
                     sizes: '384x384',
                     type: mediaSessionMetadata.type
                 },
                 {
-                    src: `${mediaSessionMetadata.thumb_512}`,
+                    src: mediaSessionMetadata.thumb_512,
                     sizes: '512x512',
                     type: mediaSessionMetadata.type
                 }
@@ -1668,22 +1614,8 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
 playfulVideoPlayer.addEventListener('keydown', (e) => {
     const tagName = document.activeElement.tagName.toLowerCase()
 
-    if (tagName === 'input') return
-    if (
-        e.getModifierState('Fn') ||
-        e.getModifierState('Hyper') ||
-        e.getModifierState('OS') ||
-        e.getModifierState('Super') ||
-        e.getModifierState('Win')
-    ) {
-
-    } else if (
-        e.getModifierState('Control') +
-        e.getModifierState('Alt') +
-        e.getModifierState('Meta') >
-        1
-    ) {
-
+    if (tagName === 'input') {
+        return
     } else {
         function checkActive() {
             videoContainer.classList.add('hovered')
@@ -1791,12 +1723,12 @@ const eventListeners = [
             videoContainer.addEventListener('pointerover', () => {
                 activity()
                 checkElement()
-                if (videoContainer.classList.contains('hovered')) { window.cancelAnimationFrame(updateMetadata) }
+                if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
             })
             videoContainer.addEventListener('pointermove', () => {
                 activity()
                 checkElement()
-                if (videoContainer.classList.contains('hovered')) { window.cancelAnimationFrame(updateMetadata) }
+                if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
             })
             videoContainer.addEventListener('pointerleave', () => {
                 if (settingsContextMenu.classList.contains('pressed')) return
@@ -1811,6 +1743,9 @@ const eventListeners = [
                 playfulVideoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
                     element.style.animationPlayState = 'running'
+                    element.style.webkitAnimationPlayState = 'running'
+                    element.style.mozAnimationPlayState = 'running'
+                    element.style.oAnimationPlayState = 'running'
                     element.style.opacity = 1
                 })
                 playfulVideoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
@@ -1979,19 +1914,13 @@ const eventListeners = [
         'volumechange',
         () => {
             let volumeLevel
-            if (video.muted || video.volume === 0) {
-                volumeLevel = 'mute'
-                volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute' + ' (m)')
-            } else if (video.volume >= 0.6) {
-                volumeLevel = 'full'
-                volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
-            } else if (video.volume >= 0.3) {
-                volumeLevel = 'mid'
-                volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
-            } else {
-                volumeLevel = 'low'
-                volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute' + ' (m)')
-            }
+            video.muted || 0 === video.volume
+                ? (volumeLevel = "mute", volumeTooltipContainer.setAttribute("data-tooltip-text", "Unmute (m)"))
+                : video.volume >= 0.6
+                    ? (volumeLevel = "full", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+                    : video.volume >= 0.3
+                        ? (volumeLevel = "mid", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
+                        : (volumeLevel = "low", volumeTooltipContainer.setAttribute("data-tooltip-text", "Mute (m)"))
             videoContainer.dataset.volumeLevel = volumeLevel
         }
     ]

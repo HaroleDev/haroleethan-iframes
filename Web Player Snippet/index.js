@@ -866,38 +866,30 @@ const fullscreenElement =
     document.webkitFullscreenElement ||
     document.msFullscreenElement
 
-const isFullscreen =
-    document.fullscreenElement ||
-    document.webkitIsFullScreen ||
-    document.mozIsFullScreen ||
-    document.msIsFullScreen
-
 function toggleFullScreen() {
-    if (isFullscreen) {
-        if (document.exitFullscreen) {
-            document.exitFullscreen()
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen()
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen()
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen()
-        } else if (document.msRequestFullscreen) {
-            document.msExitFullscreen()
-        }
+    if (fullscreenElement) {
+        document.exitFullscreen
+            ? document.exitFullscreen()
+            : document.webkitExitFullscreen
+                ? document.webkitExitFullscreen()
+                : document.webkitCancelFullScreen
+                    ? document.webkitCancelFullScreen()
+                    : document.mozCancelFullScreen
+                        ? document.mozCancelFullScreen()
+                        : document.msRequestFullscreen &&
+                        document.msExitFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
-    } else if (!isFullscreen) {
-        if (playfulVideoPlayer.requestFullscreen) {
-            playfulVideoPlayer.requestFullscreen()
-        } else if (playfulVideoPlayer.webkitRequestFullScreen) {
-            playfulVideoPlayer.webkitRequestFullScreen()
-        } else if (video.webkitEnterFullScreen) {
-            video.webkitEnterFullScreen()
-        } else if (playfulVideoPlayer.mozRequestFullScreen) {
-            playfulVideoPlayer.mozRequestFullScreen()
-        } else if (playfulVideoPlayer.msRequestFullScreen) {
-            playfulVideoPlayer.msRequestFullscreen()
-        }
+    } else if (!fullscreenElement) {
+        playfulVideoPlayer.requestFullscreen
+            ? playfulVideoPlayer.requestFullscreen()
+            : playfulVideoPlayer.webkitRequestFullScreen
+                ? playfulVideoPlayer.webkitRequestFullScreen()
+                : video.webkitEnterFullScreen
+                    ? video.webkitEnterFullScreen()
+                    : playfulVideoPlayer.mozRequestFullScreen
+                        ? playfulVideoPlayer.mozRequestFullScreen()
+                        : playfulVideoPlayer.msRequestFullScreen &&
+                        playfulVideoPlayer.msRequestFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {
         fullscreenButton.parentElement.setAttribute('unsupported', '')

@@ -849,7 +849,7 @@ function activity() {
                 videoContainer.classList.remove('hovered')
                 videoControlsContainer.classList.add('inactive')
                 video.classList.add('inactive')
-            }, 3e3)
+            }, 3000)
         }
     }
 }
@@ -876,8 +876,8 @@ function toggleFullScreen() {
                     ? document.webkitCancelFullScreen()
                     : document.mozCancelFullScreen
                         ? document.mozCancelFullScreen()
-                        : document.msRequestFullscreen &&
-                        document.msExitFullscreen()
+                        : document.msRequestFullscreen
+                        && document.msExitFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!fullscreenElement()) {
         playfulVideoPlayer.requestFullscreen
@@ -888,8 +888,8 @@ function toggleFullScreen() {
                     ? video.webkitEnterFullScreen()
                     : playfulVideoPlayer.mozRequestFullScreen
                         ? playfulVideoPlayer.mozRequestFullScreen()
-                        : playfulVideoPlayer.msRequestFullScreen &&
-                        playfulVideoPlayer.msRequestFullscreen()
+                        : playfulVideoPlayer.msRequestFullScreen
+                        && playfulVideoPlayer.msRequestFullscreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {
         fullscreenButton.parentElement.setAttribute('unsupported', '')

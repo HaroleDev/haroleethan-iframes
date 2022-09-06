@@ -795,12 +795,12 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 0 0.625rem;
+    padding: 0 0.625em;
     position: relative;
     width: fit-content;
     overflow: hidden;
     box-sizing: border-box;
-    border-radius: 1rem;
+    border-radius: 1em;
     transition: color 300ms var(--ease-out-expo), background-color 300ms var(--ease-out-expo);
 }
 
@@ -1200,7 +1200,7 @@
     font-variant-numeric: tabular-nums;
     font-variant: normal;
     letter-spacing: -0.02em;
-    border-radius: 1.25rem;
+    border-radius: 1.25em;
     background: var(--foreground);
     color: var(--text-color);
     transition: opacity 300ms var(--ease-out-expo);
@@ -1790,7 +1790,7 @@
 .settings-context-menu .page:not([hidden]) {
     position: relative;
     width: 100%;
-    max-height: 100%;
+    max-height: max-content;
     animation: 600ms var(--ease-out-expo) 0s 1 slideIn;
     display: block !important;
     opacity: 1;
@@ -1802,9 +1802,9 @@
 }
 
 .settings-context-menu .page[hidden] {
-    position: absolute;
+    position: relative;
     width: 100%;
-    max-height: 0%;
+    max-height: 0;
     min-width: 200px;
     display: block !important;
     top: 0;
@@ -2084,7 +2084,7 @@
     width: 100%;
     overflow: hidden;
     padding: 20px 0px;
-    border-radius: 2rem 0rem 0rem 2rem;
+    border-radius: 2em 0em 0em 2em;
     transition: var(--300ms-all-ease-in-expo-prop);
 }
 
@@ -2765,7 +2765,7 @@
 }
 
 .cue-time {
-    padding: 2px 0.5rem;
+    padding: 2px 0.5em;
     min-width: fit-content;
     position: relative;
     background: transparent;
@@ -2786,8 +2786,8 @@
     position: absolute;
     bottom: 4px;
     z-index: 0;
-    right: 0.5rem;
-    width: calc(0% - 1rem);
+    right: 0.5em;
+    width: calc(0% - 1em);
     height: 2px;
     border-radius: 100vw;
     background-color: var(--dark-blue-color);
@@ -2796,8 +2796,8 @@
 }
 
 .cue-container:hover .cue-time.span::after {
-    left: 0.5rem;
-    width: calc(100% - 1rem);
+    left: 0.5em;
+    width: calc(100% - 1em);
     background-color: var(--light-blue-color);
 }
 
@@ -3786,16 +3786,16 @@ screen and (max-height: 600px) {
     }
 
     .cue-time.span::after {
-        left: 0.5rem;
-        right: 0.5rem;
+        left: 0.5em;
+        right: 0.5em;
         width: auto;
         opacity: 0;
         transition: var(--600ms-all-ease-out-expo-prop);
     }
 
     .cue-container:hover .cue-time.span::after {
-        left: 0.5rem;
-        right: 0.5rem;
+        left: 0.5em;
+        right: 0.5em;
         width: auto;
         opacity: 0.6;
     }

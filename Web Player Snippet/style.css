@@ -1689,7 +1689,19 @@
 }
 
 .settings-context-menu .page .header .contents.back-page .span {
+    --text-shadow-color: var(--background);
     margin-bottom: -1px;
+    text-shadow:
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px,
+        var(--text-shadow-color) 0px 0px 2px;
 }
 
 .settings-context-menu .page .header .contents.back-page .span::after {

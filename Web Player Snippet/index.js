@@ -135,22 +135,22 @@ window.addEventListener('DOMContentLoaded', () => {
     /* if (!Hls.isSupported()) {
           hls.loadSource(videoMetadata.HLS_src);
           hls.attachMedia(video);
-          source.setAttribute("type", videoMetadata.HLS_codec);
+          source.setAttribute('type', videoMetadata.HLS_codec);
           //For HLS container
           hls.on(Hls.Events.LEVEL_LOADED, function () {
               loadedMetadata();
           });
-      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-          source.setAttribute("src", videoMetadata.HLS_src);
-          source.setAttribute("type", videoMetadata.HLS_codec);
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          source.setAttribute('src', videoMetadata.HLS_src);
+          source.setAttribute('type', videoMetadata.HLS_codec);
           video.load();
-          video.addEventListener("durationchange", updatetime);
+          video.addEventListener('durationchange', updatetime);
       } else {
-          source.setAttribute("src", videoMetadata.Fallback_src);
-          source.setAttribute("type", videoMetadata.Fallback_codec);
+          source.setAttribute('src', videoMetadata.Fallback_src);
+          source.setAttribute('type', videoMetadata.Fallback_codec);
           video.load();
           //For MP4 container
-          video.addEventListener("durationchange", updatetime);
+          video.addEventListener('durationchange', updatetime);
       }; */
     source.setAttribute('src', videoMetadata.Fallback_src)
     source.setAttribute('type', videoMetadata.Fallback_codec)
@@ -230,7 +230,7 @@ for (const [action, event] of srcEventListeners) {
     try {
         source.addEventListener(action, event)
     } catch (error) {
-        console.log(`The video event listener action "${action}" is unavailable.`)
+        console.log(`The video event listener action '${action}' is unavailable.`)
     }
 }
 
@@ -244,7 +244,7 @@ function handleInputChange(e) {
     const max = target.max
     const val = target.value
     const bg = ((val - min) * 100) / (max - min)
-    target.style.setProperty("--gradient", `linear-gradient(${bg < 50
+    target.style.setProperty('--gradient', `linear-gradient(${bg < 50
             ? `-90deg, transparent 50%, var(--bright-accent-color) 50%, var(--accent-color) ${100 - bg}%, transparent ${100 - bg}%`
             : `90deg, transparent 50%, var(--accent-color) 50%, var(--bright-accent-color) ${bg}%, transparent ${bg}%`})`)
 }
@@ -427,7 +427,7 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     playfulVideoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
 
     playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
-    playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed="${playfulVideoPlayer.getAttribute('data-speed')}"]`).setAttribute('aria-checked', 'true')
+    playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed='${playfulVideoPlayer.getAttribute('data-speed')}']`).setAttribute('aria-checked', 'true')
 };
 
 playbackSpeedItemControls.forEach(element => {
@@ -614,7 +614,7 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text
         }
-        const clickableTranscriptText = `<div class="cue-container" start-time="${cue.startTime}" role="button" aria-pressed="false" tabindex="0"><div class="cue-time span">${formatDuration(cue.startTime)}</div><div class="cues span">${transcriptText}</div></div>`
+        const clickableTranscriptText = `<div class='cue-container' start-time='${cue.startTime}' role='button' aria-pressed='false' tabindex='0'><div class='cue-time span'>${formatDuration(cue.startTime)}</div><div class='cues span'>${transcriptText}</div></div>`
         addToTranscript(clickableTranscriptText)
         cueContainers = playfulVideoPlayer.querySelectorAll('.cue-container')
     }
@@ -647,7 +647,7 @@ function removeHTML(text) {
 function jumpToTranscript(time) {
     video.currentTime = time
     playfulVideoPlayer.querySelector('.cue-container').classList.remove('current')
-    playfulVideoPlayer.querySelector(`.cue-container[start-time="${time}"]`).classList.add('current')
+    playfulVideoPlayer.querySelector(`.cue-container[start-time='${time}']`).classList.add('current')
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
@@ -661,13 +661,13 @@ function addToTranscript(htmlText) {
 
 function addCueListeners(cue) {
     cue.addEventListener('enter', function () {
-        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time="${this.startTime}"]`)
+        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time='${this.startTime}']`)
         transcriptText.classList.add('current')
         transcriptText.parentElement.scrollTop =
             transcriptText.offsetTop - transcriptText.parentElement.offsetTop
     })
     cue.addEventListener('exit', function () {
-        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time="${this.startTime}"]`)
+        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time='${this.startTime}']`)
         transcriptText.classList.remove('current')
     })
 }
@@ -1424,7 +1424,7 @@ async function mediaSessionToggle() {
             updatetime()
             updatePositionState()
         } catch (error) {
-            console.log(`The media session action "${action}" is unavailable.`)
+            console.log(`The media session action '${action}' is unavailable.`)
         }
     }
 }
@@ -1863,8 +1863,8 @@ const eventListeners = [
             if (isURL(videoMetadata.video_thumbs) === false) {
                 seekingThumbnail.setAttribute('hidden', '')
             }
-            seekingThumbnail.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`
-            videoThumbPreview.style.backgroundImage = `url("${videoMetadata.video_thumbs}")`
+            seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
+            videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
             durationContainer.setAttribute(
                 'aria-label',
                 `${formatDurationARIA(
@@ -1935,6 +1935,6 @@ for (const [action, event] of eventListeners) {
     try {
         video.addEventListener(action, event)
     } catch (error) {
-        console.log(`The video event listener action "${action}" is unavailable.`)
+        console.log(`The video event listener action '${action}' is unavailable.`)
     }
 }

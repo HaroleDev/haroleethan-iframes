@@ -1126,7 +1126,7 @@
 
 .pip-player .video-backdrop-seeking {
     opacity: 1;
-    backdrop-filter: blur(1vh);
+    backdrop-filter: blur(1vh) saturate(100%);
     background-color: rgba(0, 0, 0, 0.7);
     transition: opacity 300ms var(--ease-out-expo), backdrop-filter 0s;
 }
@@ -1153,7 +1153,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
-    backdrop-filter: blur(0vh);
+    backdrop-filter: blur(0vh) saturate(100%);
 }
 
 .video-container.scrubbing .video-backdrop-seeking,
@@ -1166,10 +1166,10 @@
 
 .video-container.scrubbing .video-backdrop-seeking,
 .video-container.buffering-scrubbing .video-backdrop-seeking {
-    backdrop-filter: blur(1vh);
+    backdrop-filter: blur(1vh) saturate(150%);
 }
 
-@supports not (filter: blur(1vh)) {
+@supports not (backdrop-filter: blur(1vh)) {
     .video-backdrop-seeking {
         background-color: #000000cc;
     }
@@ -2547,12 +2547,12 @@
 }
 
 @keyframes fullscreenPlayer {
-    0% {
-        filter: blur(1vh);
+    from {
+        filter: blur(1vh) saturate(150%);
     }
 
-    100% {
-        filter: blur(0vh);
+    to {
+        filter: blur(0vh) saturate(100%);
     }
 }
 

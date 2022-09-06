@@ -157,7 +157,7 @@ window.addEventListener('DOMContentLoaded', () => {
     video.load()
     video.addEventListener('durationchange', updatetime)
 
-    rangeEQInputs.forEach((element) => {
+    rangeEQInputs.forEach(element => {
         element.disabled = true
         element.value = 0
     })
@@ -166,7 +166,7 @@ window.addEventListener('DOMContentLoaded', () => {
         pipPlayerButton.parentElement.setAttribute('hidden', '')
     }
 
-    if (canFullscreenEnabled === false) {
+    if (!canFullscreenEnabled) {
         fullscreenButton.parentElement.setAttribute('unsupported', '')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }
@@ -244,11 +244,9 @@ function handleInputChange(e) {
     const max = target.max
     const val = target.value
     const bg = ((val - min) * 100) / (max - min)
-    return target.style.setProperty('--gradient',
-        bg < 50
-            ? `linear-gradient(-90deg, transparent 50%, var(--bright-accent-color) 50%, var(--accent-color) ${100 - bg}%, transparent ${100 - bg}%)`
-            : `linear-gradient(90deg, transparent 50%, var(--accent-color) 50%, var(--bright-accent-color) ${bg}%, transparent ${bg}% )`
-    )
+    target.style.setProperty("--gradient", `linear-gradient(${bg < 50
+            ? `-90deg, transparent 50%, var(--bright-accent-color) 50%, var(--accent-color) ${100 - bg}%, transparent ${100 - bg}%`
+            : `90deg, transparent 50%, var(--accent-color) 50%, var(--bright-accent-color) ${bg}%, transparent ${bg}%`})`)
 }
 
 // Context menu
@@ -780,8 +778,8 @@ function skipPercent(time) {
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
-function frameSeeking(time) {
-    video.currentTime += 1 / time
+function frameSeeking(fps) {
+    video.currentTime += 1 / fps
     currentTime.innerText = formatDuration(videoPercent * video.duration)
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
@@ -1016,20 +1014,10 @@ function toggleVolume() {
             : 'Mute (m)')
 }
 
-function volumeControlKeyboard(e, value) {
-    let volumeLevel
-    if (e.toLowerCase() === 'arrowup') video.volume = Math.min(1, video.volume + value)
-    if (e.toLowerCase() === 'arrowdown') video.volume = Math.max(0, video.volume - value)
-
+function volumeControlKeyboard(key, value) {
+    if (key.toLowerCase() === 'arrowup') video.volume = Math.min(1, video.volume + value)
+    if (key.toLowerCase() === 'arrowdown') video.volume = Math.max(0, video.volume - value)
     volumeSliderContainer.style.setProperty('--volume-position', video.volume)
-    video.muted || video.volume === 0
-        ? (volumeLevel = 'mute', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute (m)'))
-        : video.volume >= 0.6
-            ? (volumeLevel = 'full', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
-            : video.volume >= 0.3
-                ? (volumeLevel = 'mid', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
-                : (volumeLevel = 'low', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
-    videoContainer.dataset.volumeLevel = volumeLevel
 }
 
 // Timeline
@@ -1153,17 +1141,23 @@ function updateMetadata() {
         orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', orientationInfluence)
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth || 9 / 16)
-        qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth, video.videoHeight)
-        qualityBadgeText.innerText = qualityCheck(video.videoWidth, video.videoHeight)
+        qualityBadgeContainer.dataset.quality = qualityCheckShort({
+            sizeWidth: video.videoWidth,
+            sizeHeight: video.videoHeight,
+        })
+        qualityBadgeText.innerText = qualityCheck({
+            sizeWidth: video.videoWidth,
+            sizeHeight: video.videoHeight,
+        })
     }, 1000)
     updateThrottleMetadata()
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
 
 function formatDuration(time) {
-    const seconds = Math.trunc(time % 60)
-    const minutes = Math.trunc((time / 60) % 60)
-    const hours = Math.trunc((time / 60 / 60) % 60)
+    const seconds = Math.trunc(time % 60, 0)
+    const minutes = Math.trunc((time / 60) % 60, 0)
+    const hours = Math.trunc((time / 60 / 60) % 60, 0)
     const format = (time) => (`0${time}`).slice(-2)
 
     if (hours === 0) {
@@ -1176,9 +1170,9 @@ function formatDuration(time) {
 }
 
 function formatDurationARIA(time) {
-    const seconds = Math.trunc(time % 60)
-    const minutes = Math.trunc((time / 60) % 60)
-    const hours = Math.trunc((time / 60 / 60) % 60)
+    const seconds = Math.trunc(time % 60, 0)
+    const minutes = Math.trunc((time / 60) % 60, 0)
+    const hours = Math.trunc((time / 60 / 60) % 60, 0)
 
     let secondsARIA = 0
     if (seconds < 1) secondsARIA = 'Less than a second'
@@ -1210,14 +1204,15 @@ videoFit.addEventListener('click', togglePlay, true)
 
 function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
-        if (contextMenu.classList.contains('show')) return
-        if (settingsContextMenu.classList.contains('pressed')) return
+        if (contextMenu.classList.contains('show') || settingsContextMenu.classList.contains('pressed')) return
 
         videoContainer.classList.remove('ended')
         video.currentTime = 0
     }
 
-    video.paused || video.ended ? video.play() : video.pause()
+    video.paused || video.ended
+        ? video.play()
+        : video.pause()
     if (context.state === 'suspended') context.resume()
 }
 
@@ -1269,7 +1264,7 @@ const qualityLabels = [
     }
 ]
 
-function qualityCheck(sizeWidth, sizeHeight) {
+function qualityCheck({ sizeWidth, sizeHeight }) {
     if (!sizeWidth && !sizeHeight || sizeWidth < 0 && sizeHeight < 0) return 'N/A'
     let label
     sizeWidth >= sizeHeight
@@ -1306,7 +1301,7 @@ const qualityLabelsShort = [
     }
 ]
 
-function qualityCheckShort(sizeWidth, sizeHeight) {
+function qualityCheckShort({ sizeWidth, sizeHeight }) {
     if (!sizeWidth && !sizeHeight || sizeWidth < 0 && sizeHeight < 0) return 'N/A'
     let label
     sizeWidth >= sizeHeight
@@ -1482,8 +1477,6 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
             return videoMetadata.HLS_codec
         } else if ((video.currentSrc = videoMetadata.Fallback_src)) {
             return videoMetadata.Fallback_codec
-        } else {
-
         }
     }
 
@@ -1884,8 +1877,14 @@ const eventListeners = [
             if (video.videoWidth > video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'landscape')
             if (video.videoWidth < video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'portait')
 
-            qualityBadgeContainer.dataset.quality = qualityCheckShort(video.videoWidth, video.videoHeight)
-            qualityBadgeText.innerText = qualityCheck(video.videoWidth, video.videoHeight)
+            qualityBadgeContainer.dataset.quality = qualityCheckShort({
+                sizeWidth: video.videoWidth,
+                sizeHeight: video.videoHeight
+            })
+            qualityBadgeText.innerText = qualityCheck({
+                sizeWidth: video.videoWidth,
+                sizeHeight: video.videoHeight
+            })
 
             playfulVideoPlayerContainer.style.setProperty(
                 '--aspect-ratio-size',

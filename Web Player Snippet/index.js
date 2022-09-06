@@ -864,13 +864,13 @@ function fullscreenElement() {
         false
 }
 
-var exitFullscreen =
+const exitFullscreen =
     document.exitFullscreen ||
     document.webkitExitFullscreen ||
     document.mozCancelFullScreen ||
     document.msExitFullscreen
 
-var enterFullscreen =
+const enterFullscreen =
     playfulVideoPlayer.requestFullscreen ||
     playfulVideoPlayer.webkitRequestFullScreen ||
     playfulVideoPlayer.mozRequestFullScreen ||

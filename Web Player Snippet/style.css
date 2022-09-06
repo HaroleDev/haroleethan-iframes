@@ -275,8 +275,8 @@
 
 .video-container.hovered .video-controls-container,
 .video-container.hovered .video-information-overlay,
-.video-container.paused .video-controls-container,
-.video-container.paused .video-information-overlay,
+.video-container:not(.played) .video-controls-container,
+.video-container:not(.played) .video-information-overlay,
 .video-container.ended .video-controls-container,
 .video-container.ended .video-information-overlay,
 .video-container.pip-player .video-controls-container,
@@ -819,6 +819,10 @@
     background-color: var(--mid-blue-color);
 }
 
+[data-quality="UHD"][data-badge="quality"] {
+    background-image: linear-gradient(135deg, var(--mid-blue-color), var(--dark-blue-color));
+}
+
 [data-quality="HD"][data-badge="quality"] .span.quality,
 [data-quality="FHD"][data-badge="quality"] .span.quality,
 [data-quality="QHD"][data-badge="quality"] .span.quality,
@@ -827,17 +831,19 @@
 }
 
 [data-quality="UHD"][data-badge="quality"] .span.quality {
-    color: var(--light-blue-color);
+    color: var(--text-color);
     transform: translateY(-2px);
     text-shadow:
-        0 0.25px 0px var(--blue-color),
-        0 0.5px 0px var(--blue-color),
-        0 0.75px 0px var(--blue-color),
-        0 1px 0px var(--blue-color),
-        0 1.25px 0px var(--blue-color),
-        0 1.5px 0px var(--blue-color),
-        0 1.75px 0px var(--blue-color),
-        0 2px 0px var(--blue-color);
+        0 0.2px 0 var(--blue-color),
+        0 0.4px 0 var(--blue-color),
+        0 0.6px 0 var(--blue-color),
+        0 0.8px 0 var(--blue-color),
+        0 1px 0 var(--blue-color),
+        0 1.2px 0 var(--blue-color),
+        0 1.4px 0 var(--blue-color),
+        0 1.6px 0 var(--blue-color),
+        0 1.8px 0 var(--blue-color),
+        0 2px 0 var(--blue-color);
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
 }
 

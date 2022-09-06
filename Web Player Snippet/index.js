@@ -1198,7 +1198,12 @@ function formatDurationARIA(time) {
 
 // Playback and Media Session
 playpauseButton.addEventListener('click', togglePlay, true)
-videoFit.addEventListener('click', togglePlay, true)
+videoFit.addEventListener('click', (e) => {
+    if (e.pointerType === "touch"
+        && videoContainer.classList.contains('hovered')
+        && videoContainer.classList.contains('played')) return
+    togglePlay()
+})
 
 function togglePlay() {
     if (video.currentTime === video.duration && video.paused) {
@@ -1722,17 +1727,34 @@ const eventListeners = [
                 checkElement()
                 if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
             })
+            videoContainer.addEventListener('pointerup', (e) => {
+                if (e.pointerType === "touch" && !videoContainer.classList.contains('hovered')) {
+                    activity()
+                    checkElement()
+                    if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
+                } else if (e.pointerType === "touch" && videoContainer.classList.contains('hovered')) {
+                    window.cancelAnimationFrame(updatetime)
+                    window.requestAnimationFrame(updateMetadata)
+                    videoContainer.classList.remove('hovered')
+                    videoControlsContainer.classList.add('inactive')
+                    video.classList.add('inactive')
+                }
+            })
             videoContainer.addEventListener('pointermove', () => {
                 activity()
                 checkElement()
                 if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
             })
-            videoContainer.addEventListener('pointerleave', () => {
+            videoContainer.addEventListener('pointerleave', (e) => {
                 if (settingsContextMenu.classList.contains('pressed')) return
-                videoContainer.classList.remove('hovered')
-                video.classList.add('inactive')
-                window.cancelAnimationFrame(updatetime)
-                window.requestAnimationFrame(updateMetadata)
+                if (e.pointerType === "touch"
+                    && videoContainer.classList.contains('hovered')) return
+                if (!video.paused) {
+                    videoContainer.classList.remove('hovered')
+                    video.classList.add('inactive')
+                    window.cancelAnimationFrame(updatetime)
+                    window.requestAnimationFrame(updateMetadata)
+                }
             })
             videoContainer.classList.remove('paused')
 

@@ -245,8 +245,8 @@ function handleInputChange(e) {
     const val = target.value
     const bg = ((val - min) * 100) / (max - min)
     target.style.setProperty('--gradient', `linear-gradient(${bg < 50
-            ? `-90deg, transparent 50%, var(--bright-accent-color) 50%, var(--accent-color) ${100 - bg}%, transparent ${100 - bg}%`
-            : `90deg, transparent 50%, var(--accent-color) 50%, var(--bright-accent-color) ${bg}%, transparent ${bg}%`})`)
+        ? `-90deg, transparent 50%, var(--bright-accent-color) 50%, var(--accent-color) ${100 - bg}%, transparent ${100 - bg}%`
+        : `90deg, transparent 50%, var(--accent-color) 50%, var(--bright-accent-color) ${bg}%, transparent ${bg}%`})`)
 }
 
 // Context menu
@@ -864,30 +864,28 @@ function fullscreenElement() {
         false
 }
 
+var exitFullscreen =
+    document.exitFullscreen ||
+    document.webkitExitFullscreen ||
+    document.mozCancelFullScreen ||
+    document.msExitFullscreen
+
+var enterFullscreen =
+    playfulVideoPlayer.requestFullscreen ||
+    playfulVideoPlayer.webkitRequestFullScreen ||
+    playfulVideoPlayer.mozRequestFullScreen ||
+    playfulVideoPlayer.msRequestFullscreen
+
 function toggleFullScreen() {
     if (fullscreenElement()) {
-        document.exitFullscreen
-            ? document.exitFullscreen()
-            : document.webkitExitFullscreen
-                ? document.webkitExitFullscreen()
-                : document.webkitCancelFullScreen
-                    ? document.webkitCancelFullScreen()
-                    : document.mozCancelFullScreen
-                        ? document.mozCancelFullScreen()
-                        : document.msRequestFullscreen
-                        && document.msExitFullscreen()
+        fullscreenElement()
+            ? exitFullscreen.call(window.document)
+            : document.webkitCancelFullScreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!fullscreenElement()) {
-        playfulVideoPlayer.requestFullscreen
-            ? playfulVideoPlayer.requestFullscreen()
-            : playfulVideoPlayer.webkitRequestFullScreen
-                ? playfulVideoPlayer.webkitRequestFullScreen()
-                : video.webkitEnterFullScreen
-                    ? video.webkitEnterFullScreen()
-                    : playfulVideoPlayer.mozRequestFullScreen
-                        ? playfulVideoPlayer.mozRequestFullScreen()
-                        : playfulVideoPlayer.msRequestFullScreen
-                        && playfulVideoPlayer.msRequestFullscreen()
+        !fullscreenElement()
+            ? enterFullscreen.call(playfulVideoPlayer)
+            : video.webkitEnterFullScreen()
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {
         fullscreenButton.parentElement.setAttribute('unsupported', '')

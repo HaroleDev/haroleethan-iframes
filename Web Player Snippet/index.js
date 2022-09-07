@@ -10,7 +10,7 @@ function loadScript(url) {
         script.src = url
         script.defer = true
 
-        script.addEventListener('load', resolve(true));
+        script.addEventListener('load', resolve(true))
 
         document.body.appendChild(script)
     })
@@ -169,31 +169,28 @@ function canFullscreenEnabled() {
 window.addEventListener('DOMContentLoaded', () => {
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = videoMetadata.video_poster
-    /* if (!Hls.isSupported()) {
-          hls.loadSource(videoMetadata.HLS_src);
-          hls.attachMedia(video);
-          source.setAttribute('type', videoMetadata.HLS_codec);
-          //For HLS container
-          hls.on(Hls.Events.LEVEL_LOADED, function () {
-              loadedMetadata();
-          });
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          source.setAttribute('src', videoMetadata.HLS_src);
-          source.setAttribute('type', videoMetadata.HLS_codec);
-          video.load();
-          video.addEventListener('durationchange', updatetime);
-      } else {
-          source.setAttribute('src', videoMetadata.Fallback_src);
-          source.setAttribute('type', videoMetadata.Fallback_codec);
-          video.load();
-          //For MP4 container
-          video.addEventListener('durationchange', updatetime);
-      }; */
-    source.setAttribute('src', videoMetadata.Fallback_src)
-    source.setAttribute('type', videoMetadata.Fallback_codec)
-    video.load()
-    video.addEventListener('durationchange', updatetime)
-
+    //For HLS container
+    if (!Hls.isSupported()) {
+        hls.attachMedia(video)
+        hls.loadSource(videoMetadata.HLS_src)
+        hls.load(Hls.Events.MEDIA_ATTACHED, function () {
+            video.setAttribute('type', videoMetadata.HLS_codec)
+            hls.on(Hls.Events.LEVEL_LOADED, function () {
+                loadedMetadata()
+            })
+        })
+    } else if (video.canPlayType('application/vnd.apple.mpegurl') && window.chrome) {
+        source.setAttribute('src', videoMetadata.HLS_src)
+        source.setAttribute('type', videoMetadata.HLS_codec)
+        video.load()
+        video.addEventListener('durationchange', updatetime)
+    } else {
+        //For MP4 container
+        source.setAttribute('src', videoMetadata.Fallback_src)
+        source.setAttribute('type', videoMetadata.Fallback_codec)
+        video.load()
+        video.addEventListener('durationchange', updatetime)
+    }
     rangeEQInputs.forEach(element => {
         element.disabled = true
         element.value = 0
@@ -712,8 +709,7 @@ function addCueListeners(cue) {
 transcriptDiv.addEventListener('keydown', (e) => {
     if (e.key !== ' ' &&
         e.key !== 'Enter' &&
-        e.key !== 'Spacebar')
-        toggleBtn(e.target)
+        e.key !== 'Spacebar') { toggleBtn(e.target) }
 })
 
 transcriptDiv.addEventListener('click', (e) => {
@@ -808,14 +804,17 @@ class seekByTime {
         video.currentTime += time
         this.update()
     }
+
     skipPercent(time) {
         video.currentTime = video.duration * time
         this.update()
     }
+
     frameSeeking(fps) {
         video.currentTime += 1 / fps
         this.update()
     }
+
     update() {
         currentTime.innerText = formatDuration(videoPercent * video.duration)
         timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
@@ -1179,11 +1178,11 @@ function updateMetadata() {
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth || 9 / 16)
         qualityBadgeContainer.dataset.quality = qualityCheckShort({
             sizeWidth: video.videoWidth,
-            sizeHeight: video.videoHeight,
+            sizeHeight: video.videoHeight
         })
         qualityBadgeText.innerText = qualityCheck({
             sizeWidth: video.videoWidth,
-            sizeHeight: video.videoHeight,
+            sizeHeight: video.videoHeight
         })
     }, 1000)
     updateThrottleMetadata()
@@ -1192,14 +1191,17 @@ function updateMetadata() {
 
 class timeCode {
     constructor(time) {
-        this.time = time;
+        this.time = time
     }
+
     get seconds() {
         return Math.trunc(this.time % 60, 0)
     }
+
     get minutes() {
         return Math.trunc((this.time / 60) % 60, 0)
     }
+
     get hours() {
         return Math.trunc((this.time / 60 / 60) % 60, 0)
     }
@@ -1248,9 +1250,9 @@ function formatDurationARIA(time) {
 // Playback and Media Session
 playpauseButton.addEventListener('click', togglePlay, true)
 videoFit.addEventListener('click', (e) => {
-    if (e.pointerType === "touch"
-        && videoContainer.classList.contains('hovered')
-        && videoContainer.classList.contains('played')) return
+    if (e.pointerType === 'touch' &&
+        videoContainer.classList.contains('hovered') &&
+        videoContainer.classList.contains('played')) return
     togglePlay()
 })
 
@@ -1777,11 +1779,11 @@ const eventListeners = [
                 if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
             })
             videoContainer.addEventListener('pointerup', (e) => {
-                if (e.pointerType === "touch" && !videoContainer.classList.contains('hovered')) {
+                if (e.pointerType === 'touch' && !videoContainer.classList.contains('hovered')) {
                     activity()
                     checkElement()
                     if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
-                } else if (e.pointerType === "touch" && videoContainer.classList.contains('hovered')) {
+                } else if (e.pointerType === 'touch' && videoContainer.classList.contains('hovered')) {
                     window.cancelAnimationFrame(updatetime)
                     window.requestAnimationFrame(updateMetadata)
                     videoContainer.classList.remove('hovered')
@@ -1796,8 +1798,8 @@ const eventListeners = [
             })
             videoContainer.addEventListener('pointerleave', (e) => {
                 if (settingsContextMenu.classList.contains('pressed')) return
-                if (e.pointerType === "touch"
-                    && videoContainer.classList.contains('hovered')) return
+                if (e.pointerType === 'touch' &&
+                    videoContainer.classList.contains('hovered')) return
                 if (!video.paused) {
                     videoContainer.classList.remove('hovered')
                     video.classList.add('inactive')

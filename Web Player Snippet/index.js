@@ -173,7 +173,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (Hls.isSupported()) {
         hls.attachMedia(video)
         hls.loadSource(videoMetadata.HLS_src)
-        hls.load(Hls.Events.MEDIA_ATTACHED, function () {
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
             video.setAttribute('type', videoMetadata.HLS_codec)
             hls.on(Hls.Events.LEVEL_LOADED, function () {
                 loadedMetadata()

@@ -3,6 +3,39 @@ import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 import { debounce, throttle } from './debounceAndThrottle.js'
 import consoleLog from './consoleLog.js'
+
+function loadScript(url) {
+    return new Promise(function (resolve) {
+        const script = document.createElement('script')
+        script.src = url
+        script.defer = true
+
+        script.addEventListener('load', resolve(true));
+
+        document.body.appendChild(script)
+    })
+}
+
+function waterfall(promises) {
+    return promises.reduce(
+        function (p, c) {
+            return p.then(function () {
+                return c.then(function () {
+                    return true
+                })
+            })
+        },
+        Promise.resolve([])
+    )
+}
+
+function loadScriptsInOrder(arrayOfJS) {
+    const promises = arrayOfJS.map(function (url) {
+        return loadScript(url)
+    })
+    return waterfall(promises)
+}
+
 const config = {
     startPosition: -1
 }
@@ -116,11 +149,11 @@ function init() {
         video.removeAttribute('controls')
     }
 
-    playfulVideoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius', 
-    (playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
+    playfulVideoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius',
+        (playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
 
-    playfulVideoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height', 
-    playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
+    playfulVideoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height',
+        playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
 }
 
 init()
@@ -134,6 +167,7 @@ function canFullscreenEnabled() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = videoMetadata.video_poster
     /* if (!Hls.isSupported()) {
           hls.loadSource(videoMetadata.HLS_src);

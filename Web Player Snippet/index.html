@@ -856,45 +856,6 @@
         document.querySelector(".video-information .author-info .span").innerText = author;
         document.querySelector(".video-information .description p").innerText = description;
     </script>
-    <script type="text/javascript" defer>
-        'use strict'
-        var scripts = [
-            "//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
-        ];
-
-        function getBrowser() {
-            var ua = navigator.userAgent, tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-            if (/trident/i.test(M[1])) {
-                tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-                return { name: 'IE', version: (tem[1] || '') };
-            }
-            if (M[1] === 'Chrome') {
-                tem = ua.match(/\bOPR|Edge\/(\d+)/)
-                if (tem != null) { return { name: 'Opera', version: tem[1] }; }
-            }
-            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-            if ((tem = ua.match(/version\/(\d+)/i)) != null) { M.splice(1, 1, tem[1]); }
-            return {
-                name: M[0],
-                version: M[1]
-            };
-        }
-
-        var browser = getBrowser();
-        if (window.chrome && browser.name === "Chrome" && browser.version <= 60 && !window.chrome.cast) {
-            try {
-                scripts.forEach(function (scriptUrl) {
-                    var scriptTag = document.createElement("script")
-                    scriptTag.type = "text/javascript"
-                    scriptTag.src = scriptUrl
-                    scriptTag.defer = true
-                    document.body.appendChild(scriptTag)
-                })
-            } catch (e) {
-                console.log(e)
-            }
-        }
-    </script>
 </body>
 
 </html>

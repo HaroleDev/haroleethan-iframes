@@ -170,7 +170,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = videoMetadata.video_poster
     //For HLS container
-    if (!Hls.isSupported()) {
+    if (Hls.isSupported()) {
         hls.attachMedia(video)
         hls.loadSource(videoMetadata.HLS_src)
         hls.load(Hls.Events.MEDIA_ATTACHED, function () {
@@ -1771,7 +1771,9 @@ const eventListeners = [
             }
             playpauseTooltipContainer.setAttribute('data-tooltip-text', 'Pause' + ' (k)')
             intervalDivideWorker()
+
             if (Hls.isSupported() && video.currentTime === 0) hls.startLoad()
+            hls.on(Hls.Events.LEVEL_SWITCHED, updateMetadata)
             window.requestAnimationFrame(updateMetadata)
             videoContainer.addEventListener('pointerover', () => {
                 activity()

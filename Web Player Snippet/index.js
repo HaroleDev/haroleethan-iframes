@@ -440,7 +440,7 @@ downloadItem.addEventListener('click', () => {
     const fileType = videoMetadata.Fallback_codec.split('/')[1].split(';')[0]
     downloadFile(
         videoMetadata.Fallback_src,
-        `${title}.${fileType}`
+        `${title || 'download'}.${fileType}`
     )
     settingsButton.classList.remove('pressed')
     settingsContextMenu.classList.remove('pressed')

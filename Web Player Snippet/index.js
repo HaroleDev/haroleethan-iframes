@@ -179,7 +179,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 loadedMetadata()
             })
         })
-    } else if (video.canPlayType('application/vnd.apple.mpegurl') && window.chrome) {
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()

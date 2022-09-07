@@ -116,8 +116,11 @@ function init() {
         video.removeAttribute('controls')
     }
 
-    playfulVideoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius', (playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
-    playfulVideoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height', playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
+    playfulVideoPlayer.querySelector('#mosaic feMorphology.dilate').setAttribute('radius', 
+    (playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width') / 2) - 1)
+
+    playfulVideoPlayer.querySelector('#mosaic feComposite.comp').setAttribute('height', 
+    playfulVideoPlayer.querySelector('#mosaic feComposite.comp').getAttribute('width'))
 }
 
 init()
@@ -250,8 +253,7 @@ function handleInputChange(e) {
 }
 
 // Context menu
-function showContextMenu(show) {
-    if (show === void 0) show = true
+function showContextMenu(show = true) {
     return contextMenu.classList[show ? 'add' : 'remove']('show')
 }
 
@@ -401,9 +403,10 @@ function downloadFile(url, fileName) {
 }
 
 downloadItem.addEventListener('click', () => {
+    const fileType = videoMetadata.Fallback_codec.split('/')[1].split(';')[0]
     downloadFile(
         videoMetadata.Fallback_src,
-        `${title}.${videoMetadata.Fallback_codec.split('/')[1].substring(';')}`
+        `${title}.${fileType}`
     )
     settingsButton.classList.remove('pressed')
     settingsContextMenu.classList.remove('pressed')
@@ -766,22 +769,23 @@ loopItem.forEach(element => {
 })
 
 // Skip time
-function skip(time) {
-    video.currentTime += time
-    currentTime.innerText = formatDuration(videoPercent * video.duration)
-    timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
-}
-
-function skipPercent(time) {
-    video.currentTime = video.duration * time
-    currentTime.innerText = formatDuration(videoPercent * video.duration)
-    timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
-}
-
-function frameSeeking(fps) {
-    video.currentTime += 1 / fps
-    currentTime.innerText = formatDuration(videoPercent * video.duration)
-    timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
+class seekByTime {
+    skip(time) {
+        video.currentTime += time
+        this.update()
+    }
+    skipPercent(time) {
+        video.currentTime = video.duration * time
+        this.update()
+    }
+    frameSeeking(fps) {
+        video.currentTime += 1 / fps
+        this.update()
+    }
+    update() {
+        currentTime.innerText = formatDuration(videoPercent * video.duration)
+        timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
+    }
 }
 
 // Time divider animation
@@ -1152,25 +1156,38 @@ function updateMetadata() {
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
 
-function formatDuration(time) {
-    const seconds = Math.trunc(time % 60, 0)
-    const minutes = Math.trunc((time / 60) % 60, 0)
-    const hours = Math.trunc((time / 60 / 60) % 60, 0)
-    const format = (time) => (`0${time}`).slice(-2)
-
-    if (hours === 0) {
-        return `${minutes}:${format(seconds)}`
-    } else if (hours > 0) {
-        return `${hours}:${format(minutes)}:${format(seconds)}`
-    } else {
-        return '-:--'
+class timeCode {
+    constructor(time) {
+        this.time = time;
+    }
+    get seconds() {
+        return Math.trunc(this.time % 60, 0)
+    }
+    get minutes() {
+        return Math.trunc((this.time / 60) % 60, 0)
+    }
+    get hours() {
+        return Math.trunc((this.time / 60 / 60) % 60, 0)
     }
 }
 
+function formatDuration(time) {
+    const seconds = new timeCode(time).seconds
+    const minutes = new timeCode(time).minutes
+    const hours = new timeCode(time).hours
+    const format = (time) => (`0${time}`).slice(-2)
+
+    return hours === 0
+        ? `${minutes}:${format(seconds)}`
+        : hours > 0
+            ? `${hours}:${format(minutes)}:${format(seconds)}`
+            : '-:--'
+}
+
 function formatDurationARIA(time) {
-    const seconds = Math.trunc(time % 60, 0)
-    const minutes = Math.trunc((time / 60) % 60, 0)
-    const hours = Math.trunc((time / 60 / 60) % 60, 0)
+    const seconds = new timeCode(time).seconds
+    const minutes = new timeCode(time).minutes
+    const hours = new timeCode(time).hours
 
     let secondsARIA = 0
     if (seconds < 1) secondsARIA = 'Less than a second'
@@ -1185,15 +1202,13 @@ function formatDurationARIA(time) {
     if (hours <= 1) hoursARIA = `${hours} hour`
     if (hours > 1) hoursARIA = `${hours} hours`
 
-    if (minutes === 0) {
-        return `${secondsARIA}`
-    } else if (minutes > 0) {
-        return `${minutesARIA} ${secondsARIA}`
-    } else if (hours > 0) {
-        return `${hoursARIA} ${minutesARIA} ${secondsARIA}`
-    } else {
-        return 'Less than a second'
-    }
+    return minutes === 0
+        ? `${secondsARIA}`
+        : minutes > 0
+            ? `${minutesARIA} ${secondsARIA}`
+            : hours > 0
+                ? `${hoursARIA} ${minutesARIA} ${secondsARIA}`
+                : 'No time is displayed'
 }
 
 // Playback and Media Session
@@ -1637,7 +1652,7 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
             case '8':
             case '9':
                 checkActive()
-                skipPercent(e.key / 10)
+                new seekByTime.skipPercent(e.key / 10)
                 break
             case 'home':
             case 'end':
@@ -1673,8 +1688,8 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
             case 'arrowleft':
             case 'arrowright':
                 videoContainer.classList.add('seeking')
-                if (e.key.toLowerCase() === 'arrowleft') skip(-5)
-                if (e.key.toLowerCase() === 'arrowright') skip(5)
+                if (e.key.toLowerCase() === 'arrowleft') new seekByTime().skip(-5)
+                if (e.key.toLowerCase() === 'arrowright') new seekByTime().skip(5)
                 checkActive()
                 break
             case 'arrowup':
@@ -1686,15 +1701,15 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
             case 'j':
             case 'l':
                 videoContainer.classList.add('seeking')
-                if (e.key.toLowerCase() === 'j') skip(-10)
-                if (e.key.toLowerCase() === 'l') skip(10)
+                if (e.key.toLowerCase() === 'j') new seekByTime().skip(-10)
+                if (e.key.toLowerCase() === 'l') new seekByTime().skip(10)
                 checkActive()
                 break
             case ',':
             case '.':
                 videoContainer.classList.add('seeking')
-                if (e.key === ',') frameSeeking(`-${videoMetadata.video_FPS}`)
-                if (e.key === '.') frameSeeking(videoMetadata.video_FPS)
+                if (e.key === ',') new seekByTime().frameSeeking(videoMetadata.video_FPS * -1)
+                if (e.key === '.') new seekByTime().frameSeeking(videoMetadata.video_FPS)
                 checkActive()
                 break
         }
@@ -1759,12 +1774,13 @@ const eventListeners = [
             videoContainer.classList.remove('paused')
 
             if (playfulVideoPlayer.querySelector('.video-container').classList.contains('played')) {
-                playfulVideoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
+                playfulVideoPlayer.querySelectorAll(`
+                .right-side button svg, .video-container:not(.caption) .caption-button svg, 
+                .video-container:not(.pip-player) .pip-button svg, 
+                .video-container:not(.casted-session) .gcast-button svg
+                `).forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
-                    element.style.animationPlayState = 'running'
-                    element.style.webkitAnimationPlayState = 'running'
-                    element.style.mozAnimationPlayState = 'running'
-                    element.style.oAnimationPlayState = 'running'
+                    element.style['animationPlayState' || 'webkitAnimationPlayState' || 'mozAnimationPlayState' || 'oAnimationPlayState'] = 'running'
                     element.style.opacity = 1
                 })
                 playfulVideoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {
@@ -1917,12 +1933,13 @@ const eventListeners = [
             loadedMetadata()
 
             if (!playfulVideoPlayer.querySelector('.video-container').classList.contains('played')) {
-                playfulVideoPlayer.querySelectorAll('.right-side button svg, .video-container:not(.caption) .caption-button svg, .video-container:not(.pip-player) .pip-button svg, .video-container:not(.casted-session) .gcast-button svg').forEach(element => {
+                playfulVideoPlayer.querySelectorAll(`
+                .right-side button svg, .video-container:not(.caption) .caption-button svg, 
+                .video-container:not(.pip-player) .pip-button svg, 
+                .video-container:not(.casted-session) .gcast-button svg
+                `).forEach(element => {
                     element.style.animationDelay = 'calc(var(--animation-order) * 64ms)'
-                    element.style.animationPlayState = 'running'
-                    element.style.webkitAnimationPlayState = 'running'
-                    element.style.mozAnimationPlayState = 'running'
-                    element.style.oAnimationPlayState = 'running'
+                    element.style['animationPlayState' || 'webkitAnimationPlayState' || 'mozAnimationPlayState' || 'oAnimationPlayState'] = 'running'
                     element.style.opacity = 1
                 })
                 playfulVideoPlayer.querySelector('.right-side button svg:last-child').addEventListener('animationend', () => {

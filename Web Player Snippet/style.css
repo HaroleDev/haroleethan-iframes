@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "./playful_vp_normalize.css";
 
 .playful-video-player {
@@ -1811,13 +1812,13 @@
     position: relative;
     width: 100%;
     max-height: max-content;
-    animation: 600ms var(--ease-out-expo) 0s 1 slideIn;
+    animation: 450ms var(--ease-out-expo) 0s 1 slideIn;
     display: block !important;
     opacity: 1;
     top: 0;
     overflow: hidden;
     pointer-events: auto;
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), position 600ms step-start;
+    transition: all 300ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 300ms var(--ease-out-expo), max-width 300ms var(--ease-out-expo);
     will-change: transform;
 }
 
@@ -1830,8 +1831,8 @@
     top: 0;
     opacity: 0;
     pointer-events: none;
-    transition: all 600ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo), max-width 450ms var(--ease-out-expo), position 600ms step-start;
-    animation: 600ms var(--ease-out-expo) 0s 1 slideOut;
+    transition: all 300ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 300ms var(--ease-out-expo), max-width 300ms var(--ease-out-expo);
+    animation: 450ms var(--ease-out-expo) 0s 1 slideOut;
     will-change: transform;
 }
 
@@ -1867,17 +1868,17 @@
 
 .settings-context-menu .page:not(.front-page)[hidden] .page-contents {
     margin-top: 0;
-    transition: margin-top 600ms var(--ease-out-expo);
+    transition: margin-top 450ms var(--ease-out-expo);
 }
 
 .settings-context-menu .page:not(.front-page):not([hidden]) .page-contents {
     margin-top: 60px;
-    transition: margin-top 600ms var(--ease-out-expo);
+    transition: margin-top 450ms var(--ease-out-expo);
 }
 
 .settings-context-menu .page.front-page:not([hidden]) {
     min-width: 280px;
-    animation: 600ms var(--ease-out-expo) 0s 1 slideIn2;
+    animation: 450ms var(--ease-out-expo) 0s 1 slideIn2;
 }
 
 .settings-context-menu .page:not([hidden]) {
@@ -2017,12 +2018,11 @@
 
 .decibel-labels {
     display: flex;
-    height: calc(164px + 12px);
     width: fit-content;
     flex-direction: column;
     justify-content: space-between;
     text-align: right;
-    margin: 8px 8px 8px 4px;
+    margin: 8px 8px calc(8px + 12px) 4px;
     font-size: 0.75rem;
     opacity: 0.6;
 }

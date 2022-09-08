@@ -80,8 +80,9 @@ const contextMenu = playfulVideoPlayer.querySelector('.video-context-menu')
 const Item = playfulVideoPlayer.querySelector('.item')
 const downloadItem = playfulVideoPlayer.querySelector('.download-item')
 const playbackSpeedItem = playfulVideoPlayer.querySelector('.playback-speed-item')
+const qualityItem = playfulVideoPlayer.querySelector('.quality-item')
 const transcriptItem = playfulVideoPlayer.querySelector('.transcript-item')
-const backPageSettings = playfulVideoPlayer.querySelector('.back-page')
+const backPageSettings = playfulVideoPlayer.querySelectorAll('.back-page')
 
 const playbackSpeedItemControls = playfulVideoPlayer.querySelectorAll('.page-contents.playback-speed-settings .item')
 
@@ -402,7 +403,9 @@ settingsButton.addEventListener('click', () => {
     }
 })
 
-backPageSettings.addEventListener('click', backPageSettingsFn)
+backPageSettings.forEach(element => {
+    element.addEventListener('click', backPageSettingsFn)
+})
 
 function backPageSettingsFn() {
     const oldContent = settingsContextMenu.querySelectorAll('.page:not(.front-page)')
@@ -448,6 +451,13 @@ playbackSpeedItem.addEventListener('click', () => {
     const parent = playbackSpeedItem.parentElement.parentElement
     parent.setAttribute('hidden', '')
     const content = playfulVideoPlayer.querySelector('.playback-speed-settings')
+    content.removeAttribute('hidden')
+})
+
+qualityItem.addEventListener('click', () => {
+    const parent = playbackSpeedItem.parentElement.parentElement
+    parent.setAttribute('hidden', '')
+    const content = playfulVideoPlayer.querySelector('.quality-settings')
     content.removeAttribute('hidden')
 })
 

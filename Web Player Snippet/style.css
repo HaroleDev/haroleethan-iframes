@@ -1818,7 +1818,7 @@
     top: 0;
     overflow: hidden;
     pointer-events: auto;
-    transition: all 300ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 300ms var(--ease-out-expo), max-width 300ms var(--ease-out-expo);
+    transition: all 450ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo);
     will-change: transform;
 }
 
@@ -1831,7 +1831,7 @@
     top: 0;
     opacity: 0;
     pointer-events: none;
-    transition: all 300ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 300ms var(--ease-out-expo), max-width 300ms var(--ease-out-expo);
+    transition: all 450ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo), max-height 450ms var(--ease-out-expo);
     animation: 450ms var(--ease-out-expo) 0s 1 slideOut;
     will-change: transform;
 }

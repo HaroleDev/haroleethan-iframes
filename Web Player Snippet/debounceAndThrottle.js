@@ -10,26 +10,22 @@ export function debounce(cb, delay = 1000) {
 }
 
 export function throttle(cb, delay = 1000) {
-    let shouldWait = false
-    let waitingArgs
-    const timeoutFunc = () => {
-        if (waitingArgs == null) {
-            shouldWait = false
+    let lastFunc
+    let lastRan
+    return function () {
+        const context = this
+        const args = arguments
+        if (!lastRan) {
+            cb.apply(context, args)
+            lastRan = Date.now()
         } else {
-            cb(...waitingArgs)
-            waitingArgs = null
-            setTimeout(timeoutFunc, delay)
+            clearTimeout(lastFunc)
+            lastFunc = setTimeout(function () {
+                if ((Date.now() - lastRan) >= delay) {
+                    cb.apply(context, args)
+                    lastRan = Date.now()
+                }
+            }, delay - (Date.now() - lastRan))
         }
-    }
-
-    return (...args) => {
-        if (shouldWait) {
-            waitingArgs = args
-            return
-        }
-        cb(...args)
-        shouldWait = true
-
-        setTimeout(timeoutFunc, delay)
     }
 }

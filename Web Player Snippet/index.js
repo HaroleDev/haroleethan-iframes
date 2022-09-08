@@ -173,13 +173,12 @@ window.addEventListener('DOMContentLoaded', () => {
     //For HLS container
     if (Hls.isSupported()) {
         hls.attachMedia(video)
+        video.setAttribute('type', videoMetadata.HLS_codec)
         hls.loadSource(videoMetadata.HLS_src)
-        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-            video.setAttribute('type', videoMetadata.HLS_codec)
-            hls.on(Hls.Events.LEVEL_LOADED, function () {
-                loadedMetadata()
-            })
+        hls.on(Hls.Events.MANIFEST_LOADED, function () {
+            loadedMetadata()
         })
+        video.addEventListener('durationchange', updatetime)
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
@@ -201,7 +200,7 @@ window.addEventListener('DOMContentLoaded', () => {
         pipPlayerButton.parentElement.setAttribute('hidden', '')
     }
 
-    if (!canFullscreenEnabled) {
+    if (canFullscreenEnabled === false) {
         fullscreenButton.parentElement.setAttribute('unsupported', '')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }

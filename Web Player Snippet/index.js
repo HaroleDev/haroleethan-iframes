@@ -1160,6 +1160,20 @@ function handleTimelineUpdate(e) {
 function loadedMetadata() {
     totalTime.innerText = formatDuration(video.duration)
     currentTime.innerText = formatDuration(video.currentTime)
+    qualityBadgeContainer.dataset.quality = new qualityCheckShort({
+        sizeWidth: video.videoWidth,
+        sizeHeight: video.videoHeight
+    }).label
+
+    qualityBadgeContainer.setAttribute('title', new qualityCheckShort({
+        sizeWidth: video.videoWidth,
+        sizeHeight: video.videoHeight
+    }).fullLabel)
+
+    qualityBadgeText.innerText = qualityCheck({
+        sizeWidth: video.videoWidth,
+        sizeHeight: video.videoHeight
+    })
 }
 
 function updatetime() {
@@ -1176,15 +1190,7 @@ function updateMetadata() {
         orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', orientationInfluence)
         playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth || 9 / 16)
-        qualityBadgeContainer.dataset.quality = qualityCheckShort({
-            sizeWidth: video.videoWidth,
-            sizeHeight: video.videoHeight
-        })
-        qualityBadgeText.innerText = qualityCheck({
-            sizeWidth: video.videoWidth,
-            sizeHeight: video.videoHeight
-        })
-    }, 1000)
+    }, 10000)
     updateThrottleMetadata()
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
@@ -1330,38 +1336,61 @@ function qualityCheck({ sizeWidth, sizeHeight }) {
 const qualityLabelsShort = [
     {
         label: 'UHD',
+        full_label: 'Ultra High Definition',
         size: 3840,
         length: 2160
     },
     {
         label: 'QHD',
+        full_label: 'Quad High Definition',
         size: 2560,
         length: 1440
     },
     {
         label: 'FHD',
+        full_label: 'Full High Definition',
         size: 1920,
         length: 1080
     },
     {
         label: 'HD',
+        full_label: 'High Definition',
         size: 1280,
         length: 720
     },
     {
         label: 'SD',
+        full_label: 'Standard Definition',
         size: 640,
         length: 360
     }
 ]
 
-function qualityCheckShort({ sizeWidth, sizeHeight }) {
-    if (!sizeWidth && !sizeHeight || sizeWidth < 0 && sizeHeight < 0) return 'N/A'
-    let label
-    sizeWidth >= sizeHeight
-        ? label = qualityLabelsShort.find((l) => l.size <= sizeWidth)
-        : label = qualityLabelsShort.find((l) => l.length <= sizeHeight)
-    return label.label
+class qualityCheckShort {
+    constructor({ sizeWidth, sizeHeight }) {
+        this.sizeWidth = sizeWidth
+        this.sizeHeight = sizeHeight
+    }
+    get label() {
+        if (!this.sizeWidth && !this.sizeHeight ||
+            this.sizeWidth < 0 && this.sizeHeight < 0)
+            return 'N/A'
+        let label
+        this.sizeWidth >= this.sizeHeight
+            ? label = qualityLabelsShort.find((l) => l.size <= this.sizeWidth)
+            : label = qualityLabelsShort.find((l) => l.length <= this.sizeHeight)
+        return label.label
+    }
+    get fullLabel() {
+        if (!this.sizeWidth && !this.sizeHeight ||
+            this.sizeWidth < 0 && this.sizeHeight < 0)
+            return 'Not Available'
+        let label
+        this.sizeWidth >= this.sizeHeight
+            ? label = qualityLabelsShort.find((l) => l.size <= this.sizeWidth)
+            : label = qualityLabelsShort.find((l) => l.length <= this.sizeHeight)
+        return label.full_label
+    }
 }
 
 function updatePositionState() {
@@ -1917,6 +1946,24 @@ const eventListeners = [
                     video.currentTime
                 )} elapsed of ${formatDurationARIA(video.duration)}`
             )
+            const updateThrottleQuality = throttle(() => {
+                qualityBadgeContainer.dataset.quality = new qualityCheckShort({
+                    sizeWidth: video.videoWidth,
+                    sizeHeight: video.videoHeight
+                }).label
+
+                qualityBadgeContainer.setAttribute('title', new qualityCheckShort({
+                    sizeWidth: video.videoWidth,
+                    sizeHeight: video.videoHeight
+                }).fullLabel)
+
+                qualityBadgeText.innerText = qualityCheck({
+                    sizeWidth: video.videoWidth,
+                    sizeHeight: video.videoHeight
+                })
+            }, 5000)
+
+            updateThrottleQuality()
             videoPercent = video.currentTime / video.duration
             if (video.currentTime >= video.duration - 1) timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
             videoContainer.classList[video.currentTime === video.duration ? 'add' : 'remove']('ended')
@@ -1950,15 +1997,6 @@ const eventListeners = [
 
             if (video.videoWidth > video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'landscape')
             if (video.videoWidth < video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'portait')
-
-            qualityBadgeContainer.dataset.quality = qualityCheckShort({
-                sizeWidth: video.videoWidth,
-                sizeHeight: video.videoHeight
-            })
-            qualityBadgeText.innerText = qualityCheck({
-                sizeWidth: video.videoWidth,
-                sizeHeight: video.videoHeight
-            })
 
             playfulVideoPlayerContainer.style.setProperty(
                 '--aspect-ratio-size',

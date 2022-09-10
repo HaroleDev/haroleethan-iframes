@@ -732,8 +732,9 @@
 .live-container {
     display: block;
     height: fit-content;
-    font-variation-settings: "wght" 500;
-    font-weight: 500;
+    font-variation-settings: "wght" 800;
+    font-weight: 800;
+    letter-spacing: 0.02em;
     font-size: 1rem;
     line-height: 160%;
     color: var(--text-color);
@@ -775,11 +776,13 @@
     bottom: 0;
     width: 8px;
     height: 8px;
+    box-sizing: border-box;
+    border: 1px var(--red-color);
+    border-style: solid;
     border-radius: 50%;
     opacity: 0;
     animation: livePulse 2s infinite var(--ease-out-expo);
     animation-play-state: paused;
-    background-color: inherit;
 }
 
 .video-container:not(.paused) .live-container:not([data-rewind="true"]) .live-dot::before {

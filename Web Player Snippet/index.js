@@ -1261,7 +1261,7 @@ function formatDuration(time) {
             ? `${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
             : hours > 0
                 ? `${hours}:${format(minutes)}:${format(seconds)}`
-                : video.duration < 60 && isMotionReduced() === false
+                : video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS
                     ? `${format(seconds)}.${format(frameSeconds)}`
                     : hours === 0
                         ? `${minutes}:${format(seconds)}`

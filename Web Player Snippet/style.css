@@ -3684,6 +3684,20 @@ screen and (max-height: 600px) {
     .buffering-scrubbing .buffering-circle-track {
         opacity: 0.6;
     }
+
+    .live-dot {
+        background-color: Highlight;
+    }
+    
+    .live-container[data-rewind="true"] .live-dot {
+        background-color: ButtonText;
+        opacity: 0.6;
+    }
+    
+    .live-dot:not([data-rewind="true"])::before {
+        border: 1px Highlight;
+        border-style: solid;
+    }
 }
 
 @media (color-gamut: p3) {

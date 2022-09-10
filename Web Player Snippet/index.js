@@ -2,7 +2,7 @@
 import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
-import consoleLog from './consoleLog.js'
+import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
 
 const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;

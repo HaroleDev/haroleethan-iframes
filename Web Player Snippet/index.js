@@ -1989,7 +1989,6 @@ const eventListeners = [
         'timeupdate',
         () => {
             currentTime.innerText = formatDuration(video.currentTime)
-            updateThrottleTime()
             durationContainer.setAttribute(
                 'aria-label',
                 `${formatDurationARIA(

@@ -5,6 +5,8 @@ import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
 
+const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
 function loadScript(url) {
     return new Promise(function (resolve) {
         const script = document.createElement('script')
@@ -184,11 +186,13 @@ window.addEventListener('DOMContentLoaded', () => {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()
+        qualityItem.setAttribute('unsupported', '')
     } else {
         //For MP4 container
         source.setAttribute('src', videoMetadata.Fallback_src)
         source.setAttribute('type', videoMetadata.Fallback_codec)
         video.load()
+        qualityItem.setAttribute('unsupported', '')
     }
     video.addEventListener('durationchange', updatetime)
     rangeEQInputs.forEach(element => {
@@ -1189,6 +1193,7 @@ function updatetime() {
     videoPercent = video.currentTime / video.duration
     if (!video.paused && videoContainer.classList.contains('hovered')) {
         timelineInner.style.setProperty('--progress-position', videoPercent)
+        currentTime.innerText = formatDuration(video.currentTime)
         window.requestAnimationFrame(updatetime)
     }
     window.cancelAnimationFrame(updatetime)
@@ -1204,23 +1209,20 @@ function updateMetadata() {
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
 
-const [
-    SECONDS_PER_MINUTE,
-    MINUTES_PER_HOUR
-] = Array(2).fill(60)
-const HOURS_PER_DAY = 24
-let DATE = new Date()
-
-const GET_TIME = () => {  
-    return new Date(DATE.setTime(DATE.getTime() + Math.trunc(video.currentTime)));
-}
-const GET_FULL_YEAR = new Date(GET_TIME()).getFullYear()
-const GET_FULL_MONTH = new Date(GET_TIME()).getMonth()
-let DAYS_IN_MONTH = new Date(GET_FULL_YEAR, GET_FULL_MONTH, 0).getDate()
+const
+    SECONDS_PER_MINUTE = 60,
+    MINUTES_PER_HOUR = 60,
+    HOURS_PER_DAY = 24,
+    DAYS_PER_WEEK = 7,
+    FRAMES_PER_SECOND = videoMetadata.video_FPS || 30
 
 class timeCode {
     constructor(time) {
         this.time = time
+    }
+
+    get frameSeconds() {
+        return Math.trunc(this.time * FRAMES_PER_SECOND % FRAMES_PER_SECOND, 0)
     }
 
     get seconds() {
@@ -1236,39 +1238,42 @@ class timeCode {
     }
 
     get days() {
-        return Math.trunc(this.time / SECONDS_PER_MINUTE / MINUTES_PER_HOUR / HOURS_PER_DAY % DAYS_IN_MONTH, 0)
+        return Math.trunc(this.time / SECONDS_PER_MINUTE / MINUTES_PER_HOUR / HOURS_PER_DAY % DAYS_PER_WEEK, 0)
     }
 
-    get months() {
-        return Math.trunc(this.time / SECONDS_PER_MINUTE / MINUTES_PER_HOUR / HOURS_PER_DAY / DAYS_IN_MONTH, 0)
+    get weeks() {
+        return Math.trunc(this.time / SECONDS_PER_MINUTE / MINUTES_PER_HOUR / HOURS_PER_DAY / DAYS_PER_WEEK, 0)
     }
 }
 
 function formatDuration(time) {
+    const frameSeconds = new timeCode(time).frameSeconds
     const seconds = new timeCode(time).seconds
     const minutes = new timeCode(time).minutes
     const hours = new timeCode(time).hours
     const days = new timeCode(time).days
-    const months = new timeCode(time).months
+    const weeks = new timeCode(time).weeks
     const format = (time) => (`0${time}`).slice(-2)
 
-    return months > 0
-        ? `${months}:${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`
+    return weeks > 0
+        ? `${weeks}:${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`
         : days > 0
             ? `${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
             : hours > 0
                 ? `${hours}:${format(minutes)}:${format(seconds)}`
-                : hours === 0
-                    ? `${minutes}:${format(seconds)}`
-                    : '-:--'
+                : video.duration < 60 && isMotionReduced() === false
+                    ? `${format(seconds)}.${format(frameSeconds)}`
+                    : hours === 0
+                        ? `${minutes}:${format(seconds)}`
+                        : '-:--'
 }
 
-function formatDurationARIA(time) { 
+function formatDurationARIA(time) {
     const seconds = new timeCode(time).seconds
     const minutes = new timeCode(time).minutes
     const hours = new timeCode(time).hours
     const days = new timeCode(time).days
-    const months = new timeCode(time).months
+    const weeks = new timeCode(time).weeks
 
     let secondsARIA, minutesARIA, hoursARIA, daysARIA
     if (seconds < 1) secondsARIA = 'Less than a second'
@@ -1276,10 +1281,10 @@ function formatDurationARIA(time) {
     if (minutes > 0) minutesARIA = `${seconds} ${minutes > 1 ? 'minutes' : 'minute'}`
     if (hours > 0) hoursARIA = `${hours} ${hours > 1 ? 'hours' : 'hour'}`
     if (days > 0) daysARIA = `${days} ${days > 1 ? 'days' : 'day'}`
-    if (months > 0) monthsARIA = `${months} ${months > 1 ? 'months' : 'month'}`
+    if (weeks > 0) weeksARIA = `${weeks} ${weeks > 1 ? 'weeks' : 'week'}`
 
-    return months > 0
-        ? `${monthsARIA}, ${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
+    return weeks > 0
+        ? `${weeksARIA}, ${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
         : days > 0
             ? `${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
             : hours > 0
@@ -1811,12 +1816,18 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
             case ',':
             case '.':
                 videoContainer.classList.add('seeking')
-                if (e.key === ',') new seekByTime().frameSeeking(videoMetadata.video_FPS * -1)
-                if (e.key === '.') new seekByTime().frameSeeking(videoMetadata.video_FPS)
+                if (e.key === ',') new seekByTime().frameSeeking((videoMetadata.video_FPS || 30) * -1)
+                if (e.key === '.') new seekByTime().frameSeeking((videoMetadata.video_FPS || 30))
                 checkActive()
                 break
         }
     }
+})
+
+const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+mediaQuery.addEventListener('change', () => {
+    isMotionReduced() ? totalTime.innerText = formatDuration(video.duration) : totalTime.innerText = formatDuration(video.duration)
 })
 
 const isURL = str => {
@@ -1978,6 +1989,7 @@ const eventListeners = [
         'timeupdate',
         () => {
             currentTime.innerText = formatDuration(video.currentTime)
+            updateThrottleTime()
             durationContainer.setAttribute(
                 'aria-label',
                 `${formatDurationARIA(
@@ -2003,8 +2015,7 @@ const eventListeners = [
 
             updateThrottleQuality()
             videoPercent = video.currentTime / video.duration
-            DATE = new Date()
-            DAYS_IN_MONTH = new Date(GET_FULL_YEAR, GET_FULL_MONTH, 0).getDate()
+
             if (video.currentTime >= video.duration - 1) timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
             videoContainer.classList[video.currentTime === video.duration ? 'add' : 'remove']('ended')
         }

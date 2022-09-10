@@ -1,5 +1,5 @@
 'use strict'
-import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
+import 'https://cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './utils/consoleLog.js'
@@ -60,6 +60,7 @@ const videoPoster = playfulVideoPlayer.querySelector('.video-poster')
 const currentTime = playfulVideoPlayer.querySelector('.current-time')
 const totalTime = playfulVideoPlayer.querySelector('.total-time')
 const durationContainer = playfulVideoPlayer.querySelector('.duration-container')
+const liveContainer = playfulVideoPlayer.querySelector('.live-container')
 const timeTooltip = playfulVideoPlayer.querySelector('.seeking-preview__time-tooltip')
 
 const EQswitchToggle = playfulVideoPlayer.querySelector('.eq-switch')
@@ -175,6 +176,10 @@ window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
     //For HLS container
     if (Hls.isSupported()) {
+        if (videoMetadata.HLS_live === true) {
+            durationContainer.setAttribute('hidden', '')
+            liveContainer.removeAttribute('hidden')
+        }
         hls.attachMedia(video)
         video.setAttribute('type', videoMetadata.HLS_codec)
         hls.loadSource(videoMetadata.HLS_src)
@@ -183,6 +188,10 @@ window.addEventListener('DOMContentLoaded', () => {
         })
 
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        if (videoMetadata.HLS_live === true) {
+            durationContainer.setAttribute('hidden', '')
+            liveContainer.removeAttribute('hidden')
+        }
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()
@@ -889,7 +898,11 @@ function activity() {
         !settingsContextMenu.classList.contains('pressed')
     ) {
         if (video.paused) {
-
+            window.cancelAnimationFrame(updatetime)
+            window.cancelAnimationFrame(updateMetadata)
+            videoContainer.classList.add('hovered')
+            videoControlsContainer.classList.remove('inactive')
+            video.classList.remove('inactive')
         } else {
             timeout = setTimeout(function () {
                 window.cancelAnimationFrame(updatetime)
@@ -1173,20 +1186,11 @@ function handleTimelineUpdate(e) {
 function loadedMetadata() {
     totalTime.innerText = formatDuration(video.duration)
     currentTime.innerText = formatDuration(video.currentTime)
-    qualityBadgeContainer.dataset.quality = new qualityCheckShort({
-        sizeWidth: video.videoWidth,
-        sizeHeight: video.videoHeight
-    }).label
+    qualityBadgeContainer.dataset.quality = qualityCheckShortLabel(video.videoWidth, video.videoHeight)
 
-    qualityBadgeContainer.setAttribute('title', new qualityCheckShort({
-        sizeWidth: video.videoWidth,
-        sizeHeight: video.videoHeight
-    }).fullLabel)
+    qualityBadgeContainer.setAttribute('title', qualityCheckLongLabel(video.videoWidth, video.videoHeight))
 
-    qualityBadgeText.innerText = qualityCheck({
-        sizeWidth: video.videoWidth,
-        sizeHeight: video.videoHeight
-    })
+    qualityBadgeText.innerText = qualityCheck(video.videoWidth, video.videoHeight)
 }
 
 function updatetime() {
@@ -1321,39 +1325,9 @@ function togglePlay() {
 
 const qualityLabels = [
     {
-        label: '8K',
-        size: 7860,
-        length: 4320
-    },
-    {
-        label: '6K',
-        size: 6144,
-        length: 3456
-    },
-    {
-        label: '5K',
-        size: 5120,
-        length: 2880
-    },
-    {
-        label: '4K',
-        size: 3840,
-        length: 2160
-    },
-    {
-        label: 'QHD',
-        size: 2560,
-        length: 1440
-    },
-    {
-        label: 'FHD',
-        size: 1920,
-        length: 1080
-    },
-    {
-        label: 'HD',
-        size: 1280,
-        length: 720
+        label: 'LD',
+        size: 320,
+        length: 180
     },
     {
         label: 'SD',
@@ -1361,39 +1335,64 @@ const qualityLabels = [
         length: 360
     },
     {
-        label: 'LD',
-        size: 320,
-        length: 180
-    }
+        label: 'HD',
+        size: 1280,
+        length: 720
+    },
+    {
+        label: 'FHD',
+        size: 1920,
+        length: 1080
+    },
+    {
+        label: 'QHD',
+        size: 2560,
+        length: 1440
+    },
+    {
+        label: '4K',
+        size: 3840,
+        length: 2160
+    },
+    {
+        label: '5K',
+        size: 5120,
+        length: 2880
+    },
+    {
+        label: '6K',
+        size: 6144,
+        length: 3456
+    },
+    {
+        label: '8K',
+        size: 7860,
+        length: 4320
+    },
+
 ]
 
-function qualityCheck({ sizeWidth, sizeHeight }) {
+function qualityCheck(sizeWidth, sizeHeight) {
     if (!sizeWidth && !sizeHeight || sizeWidth < 0 && sizeHeight < 0) return 'N/A'
     let label
     sizeWidth >= sizeHeight
-        ? label = qualityLabels.find((l) => l.size <= sizeWidth)
-        : label = qualityLabels.find((l) => l.length <= sizeHeight)
+        ? label = qualityLabels.find((l) => l.size >= sizeWidth)
+        : label = qualityLabels.find((l) => l.length >= sizeHeight)
     return label.label
 }
 
 const qualityLabelsShort = [
     {
-        label: 'UHD',
-        full_label: 'Ultra High Definition',
-        size: 3840,
-        length: 2160
+        label: 'LD',
+        full_label: 'Low Definition',
+        size: 320,
+        length: 180
     },
     {
-        label: 'QHD',
-        full_label: 'Quad High Definition',
-        size: 2560,
-        length: 1440
-    },
-    {
-        label: 'FHD',
-        full_label: 'Full High Definition',
-        size: 1920,
-        length: 1080
+        label: 'SD',
+        full_label: 'Standard Definition',
+        size: 640,
+        length: 360
     },
     {
         label: 'HD',
@@ -1402,38 +1401,45 @@ const qualityLabelsShort = [
         length: 720
     },
     {
-        label: 'SD',
-        full_label: 'Standard Definition',
-        size: 640,
-        length: 360
-    }
+        label: 'FHD',
+        full_label: 'Full High Definition',
+        size: 1920,
+        length: 1080
+    },
+    {
+        label: 'QHD',
+        full_label: 'Quad High Definition',
+        size: 2560,
+        length: 1440
+    },
+    {
+        label: 'UHD',
+        full_label: 'Ultra High Definition',
+        size: 3840,
+        length: 2160
+    },
 ]
 
-class qualityCheckShort {
-    constructor({ sizeWidth, sizeHeight }) {
-        this.sizeWidth = sizeWidth
-        this.sizeHeight = sizeHeight
-    }
-    get label() {
-        if (!this.sizeWidth && !this.sizeHeight ||
-            this.sizeWidth < 0 && this.sizeHeight < 0)
-            return 'N/A'
-        let label
-        this.sizeWidth >= this.sizeHeight
-            ? label = qualityLabelsShort.find((l) => l.size <= this.sizeWidth)
-            : label = qualityLabelsShort.find((l) => l.length <= this.sizeHeight)
-        return label.label
-    }
-    get fullLabel() {
-        if (!this.sizeWidth && !this.sizeHeight ||
-            this.sizeWidth < 0 && this.sizeHeight < 0)
-            return 'Not Available'
-        let label
-        this.sizeWidth >= this.sizeHeight
-            ? label = qualityLabelsShort.find((l) => l.size <= this.sizeWidth)
-            : label = qualityLabelsShort.find((l) => l.length <= this.sizeHeight)
-        return label.full_label
-    }
+function qualityCheckShortLabel(sizeWidth, sizeHeight) {
+    if (!sizeWidth && !sizeHeight ||
+        sizeWidth < 0 && sizeHeight < 0)
+        return 'N/A'
+    let label
+    sizeWidth >= sizeHeight
+        ? label = qualityLabelsShort.find((l) => l.size >= sizeWidth)
+        : label = qualityLabelsShort.find((l) => l.length >= sizeHeight)
+    return label.label
+}
+
+function qualityCheckLongLabel(sizeWidth, sizeHeight) {
+    if (!sizeWidth && !sizeHeight ||
+        sizeWidth < 0 && sizeHeight < 0)
+        return 'Not Available'
+    let label
+    sizeWidth >= sizeHeight
+        ? label = qualityLabelsShort.find((l) => l.size >= sizeWidth)
+        : label = qualityLabelsShort.find((l) => l.length >= sizeHeight)
+    return label.full_label
 }
 
 function updatePositionState() {
@@ -1975,7 +1981,7 @@ const eventListeners = [
         'seeked',
         () => {
             window.requestAnimationFrame(updatetime)
-            videoContainer.classList.add('played')
+            if (videoMetadata.HLS_live === false) videoContainer.classList.add('played')
             videoContainer.classList.remove('seeking')
             seekingPreview.classList.remove('loading')
             videoContainer.classList.remove('buffering-scrubbing')
@@ -1995,27 +2001,22 @@ const eventListeners = [
                     video.currentTime
                 )} elapsed of ${formatDurationARIA(video.duration)}`
             )
-            const updateThrottleQuality = throttle(() => {
-                qualityBadgeContainer.dataset.quality = new qualityCheckShort({
-                    sizeWidth: video.videoWidth,
-                    sizeHeight: video.videoHeight
-                }).label
 
-                qualityBadgeContainer.setAttribute('title', new qualityCheckShort({
-                    sizeWidth: video.videoWidth,
-                    sizeHeight: video.videoHeight
-                }).fullLabel)
+            qualityBadgeContainer.dataset.quality = qualityCheckShortLabel(video.videoWidth, video.videoHeight)
 
-                qualityBadgeText.innerText = qualityCheck({
-                    sizeWidth: video.videoWidth,
-                    sizeHeight: video.videoHeight
-                })
-            }, 5000)
+            qualityBadgeContainer.setAttribute('title', qualityCheckLongLabel(video.videoWidth, video.videoHeight))
 
-            updateThrottleQuality()
+            qualityBadgeText.innerText = qualityCheck(video.videoWidth, video.videoHeight)
+
             videoPercent = video.currentTime / video.duration
 
             if (video.currentTime >= video.duration - 1) timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
+
+            if (video.currentTime >= video.duration - 15) {
+                liveContainer.setAttribute('data-rewind', 'false')
+            } else {
+                liveContainer.setAttribute('data-rewind', 'true')
+            }
             videoContainer.classList[video.currentTime === video.duration ? 'add' : 'remove']('ended')
         }
     ],
@@ -2031,9 +2032,8 @@ const eventListeners = [
             videoPercent = video.currentTime / video.duration
             playfulVideoPlayer.classList.remove('loading')
             video.textTracks[0].mode = 'hidden'
-            if (isURL(videoMetadata.video_thumbs) === false) {
-                seekingThumbnail.setAttribute('hidden', '')
-            }
+            if (isURL(videoMetadata.video_thumbs) === false || videoMetadata.HLS_live === true) seekingThumbnail.setAttribute('hidden', '')
+
             seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
             videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
             durationContainer.setAttribute(

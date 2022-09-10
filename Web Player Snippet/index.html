@@ -43,7 +43,7 @@
     </style>
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' gstatic.com *.gstatic.com *.jsdelivr.net; connect-src 'self' 'unsafe-inline' 'unsafe-eval' *.storjshare.io *.cloudinary.com; img-src 'self' data: *.cloudinary.com; style-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; font-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; base-uri 'self'; form-action 'self'; media-src 'self' blob: *.storjshare.io *.cloudinary.com; worker-src 'self' blob: *.jsdelivr.net">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' gstatic.com *.gstatic.com *.jsdelivr.net; connect-src * 'self' 'unsafe-inline' 'unsafe-eval' *.storjshare.io *.cloudinary.com; img-src 'self' data: *.cloudinary.com; style-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; font-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; base-uri 'self'; form-action 'self'; media-src 'self' blob: *.storjshare.io *.cloudinary.com; worker-src 'self' blob: *.jsdelivr.net">
     <meta http-equiv="Access-Control-Allow-Headers" content="X-Requested-With" />
     <meta http-equiv="Access-Control-Allow-Credentials" content="true" />
 </head>
@@ -784,12 +784,15 @@
                                     <div class="timeline__progressbar"></div>
                                 </div>
                                 <div class="footer">
-                                    <div class="duration-container" role="text"
-                                        aria-label="Less than a second elapsed of 0 second">
+                                    <div class="duration-container" role="text" aria-label="No time is displayed">
                                         <div class="current-time span" aria-hidden="true">-:--</div>
                                         <div class="divider-time-copy span" aria-hidden="true">/</div>
                                         <div class="divider-time span" aria-hidden="true">/</div>
                                         <div class="total-time span" aria-hidden="true">-:--</div>
+                                    </div>
+                                    <div class="live-container" role="text" aria-label="Live" data-rewind="false" hidden>
+                                        <div class="live-dot"></div>
+                                        <div class="span" aria-hidden="true">Live</div>
                                     </div>
                                     <div class="badges-container">
                                         <div class="badge" data-badge="quality" data-quality="N/A"

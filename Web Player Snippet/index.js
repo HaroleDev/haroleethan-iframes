@@ -1,8 +1,9 @@
 'use strict'
 import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { videoMetadata, mediaSessionMetadata } from './metadata.js'
-import { debounce, throttle } from './debounceAndThrottle.js'
+import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './consoleLog.js'
+import './utils/reqAnimFrameWhenPageVisible.js'
 
 function loadScript(url) {
     return new Promise(function (resolve) {
@@ -178,19 +179,18 @@ window.addEventListener('DOMContentLoaded', () => {
         hls.on(Hls.Events.MANIFEST_LOADED, function () {
             loadedMetadata()
         })
-        video.addEventListener('durationchange', updatetime)
+
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()
-        video.addEventListener('durationchange', updatetime)
     } else {
         //For MP4 container
         source.setAttribute('src', videoMetadata.Fallback_src)
         source.setAttribute('type', videoMetadata.Fallback_codec)
         video.load()
-        video.addEventListener('durationchange', updatetime)
     }
+    video.addEventListener('durationchange', updatetime)
     rangeEQInputs.forEach(element => {
         element.disabled = true
         element.value = 0
@@ -835,7 +835,7 @@ let divide
 function intervalDivideWorker() {
     if (typeof (Worker) !== 'undefined') {
         if (typeof (divide) === 'undefined') {
-            divide = new Worker('timeDivider.js')
+            divide = new Worker('./utils/timeDivider.js')
         }
         divide.onmessage = function (e) {
             playfulVideoPlayer.querySelector('.divider-time').innerText = e.data
@@ -900,7 +900,7 @@ function activity() {
 
 // Full screen and picture-in-picture
 fullscreenButton.addEventListener('click', toggleFullScreen)
-video.addEventListener('dblclick', toggleFullScreen)
+videoFit.addEventListener('dblclick', toggleFullScreen)
 
 function fullscreenElement() {
     return document.fullscreenElement ||
@@ -1204,21 +1204,43 @@ function updateMetadata() {
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
 
+const [
+    SECONDS_PER_MINUTE,
+    MINUTES_PER_HOUR
+] = Array(2).fill(60)
+const HOURS_PER_DAY = 24
+let DATE = new Date()
+
+const GET_TIME = () => {  
+    return new Date(DATE.setTime(DATE.getTime() + Math.trunc(video.currentTime)));
+}
+const GET_FULL_YEAR = new Date(GET_TIME()).getFullYear()
+const GET_FULL_MONTH = new Date(GET_TIME()).getMonth()
+let DAYS_IN_MONTH = new Date(GET_FULL_YEAR, GET_FULL_MONTH, 0).getDate()
+
 class timeCode {
     constructor(time) {
         this.time = time
     }
 
     get seconds() {
-        return Math.trunc(this.time % 60, 0)
+        return Math.trunc(this.time % SECONDS_PER_MINUTE, 0)
     }
 
     get minutes() {
-        return Math.trunc((this.time / 60) % 60, 0)
+        return Math.trunc((this.time / SECONDS_PER_MINUTE) % MINUTES_PER_HOUR, 0)
     }
 
     get hours() {
-        return Math.trunc((this.time / 60 / 60) % 60, 0)
+        return Math.trunc(this.time / SECONDS_PER_MINUTE / MINUTES_PER_HOUR % HOURS_PER_DAY, 0)
+    }
+
+    get days() {
+        return Math.trunc(this.time / SECONDS_PER_MINUTE / MINUTES_PER_HOUR / HOURS_PER_DAY % DAYS_IN_MONTH, 0)
+    }
+
+    get months() {
+        return Math.trunc(this.time / SECONDS_PER_MINUTE / MINUTES_PER_HOUR / HOURS_PER_DAY / DAYS_IN_MONTH, 0)
     }
 }
 
@@ -1226,40 +1248,47 @@ function formatDuration(time) {
     const seconds = new timeCode(time).seconds
     const minutes = new timeCode(time).minutes
     const hours = new timeCode(time).hours
+    const days = new timeCode(time).days
+    const months = new timeCode(time).months
     const format = (time) => (`0${time}`).slice(-2)
 
-    return hours === 0
-        ? `${minutes}:${format(seconds)}`
-        : hours > 0
-            ? `${hours}:${format(minutes)}:${format(seconds)}`
-            : '-:--'
+    return months > 0
+        ? `${months}:${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`
+        : days > 0
+            ? `${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
+            : hours > 0
+                ? `${hours}:${format(minutes)}:${format(seconds)}`
+                : hours === 0
+                    ? `${minutes}:${format(seconds)}`
+                    : '-:--'
 }
 
-function formatDurationARIA(time) {
+function formatDurationARIA(time) { 
     const seconds = new timeCode(time).seconds
     const minutes = new timeCode(time).minutes
     const hours = new timeCode(time).hours
+    const days = new timeCode(time).days
+    const months = new timeCode(time).months
 
-    let secondsARIA = 0
+    let secondsARIA, minutesARIA, hoursARIA, daysARIA
     if (seconds < 1) secondsARIA = 'Less than a second'
-    if (seconds === 1) secondsARIA = `${seconds} second`
-    if (seconds > 1) secondsARIA = `${seconds} seconds`
+    if (seconds >= 1) secondsARIA = `${seconds} ${seconds > 1 ? 'seconds' : 'second'}`
+    if (minutes > 0) minutesARIA = `${seconds} ${minutes > 1 ? 'minutes' : 'minute'}`
+    if (hours > 0) hoursARIA = `${hours} ${hours > 1 ? 'hours' : 'hour'}`
+    if (days > 0) daysARIA = `${days} ${days > 1 ? 'days' : 'day'}`
+    if (months > 0) monthsARIA = `${months} ${months > 1 ? 'months' : 'month'}`
 
-    let minutesARIA = 0
-    if (minutes <= 1) minutesARIA = `${minutes} minute`
-    if (minutes > 1) minutesARIA = `${minutes} minutes`
-
-    let hoursARIA = 0
-    if (hours <= 1) hoursARIA = `${hours} hour`
-    if (hours > 1) hoursARIA = `${hours} hours`
-
-    return minutes === 0
-        ? `${secondsARIA}`
-        : minutes > 0
-            ? `${minutesARIA} ${secondsARIA}`
+    return months > 0
+        ? `${monthsARIA}, ${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
+        : days > 0
+            ? `${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
             : hours > 0
-                ? `${hoursARIA} ${minutesARIA} ${secondsARIA}`
-                : 'No time is displayed'
+                ? `${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
+                : minutes > 0
+                    ? `${minutesARIA} ${secondsARIA}`
+                    : minutes === 0
+                        ? `${secondsARIA}`
+                        : 'No time is displayed'
 }
 
 // Playback and Media Session
@@ -1974,6 +2003,8 @@ const eventListeners = [
 
             updateThrottleQuality()
             videoPercent = video.currentTime / video.duration
+            DATE = new Date()
+            DAYS_IN_MONTH = new Date(GET_FULL_YEAR, GET_FULL_MONTH, 0).getDate()
             if (video.currentTime >= video.duration - 1) timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
             videoContainer.classList[video.currentTime === video.duration ? 'add' : 'remove']('ended')
         }

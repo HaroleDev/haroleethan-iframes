@@ -1605,9 +1605,9 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
     }
 
     function mimeType() {
-        if ((video.currentSrc = videoMetadata.HLS_src)) {
+        if (video.currentSrc === videoMetadata.HLS_src) {
             return videoMetadata.HLS_codec
-        } else if ((video.currentSrc = videoMetadata.Fallback_src)) {
+        } else if (video.currentSrc === videoMetadata.Fallback_src) {
             return videoMetadata.Fallback_codec
         }
     }

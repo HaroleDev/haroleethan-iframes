@@ -3257,12 +3257,7 @@ screen and (max-height: 600px) {
         transition: var(--transition);
     }
 
-    .settings-context-menu .page .header .contents.back-page:hover {
-        text-decoration: underline;
-    }
-
     .settings-context-menu .page .header .contents.back-page:active {
-        text-decoration: underline;
         color: LinkText;
     }
 
@@ -3697,6 +3692,23 @@ screen and (max-height: 600px) {
     .live-dot:not([data-rewind="true"])::before {
         border: 1px Highlight;
         border-style: solid;
+    }
+
+    .settings-context-menu .page .header .contents.back-page .span::after {
+        background-color: CanvasText;
+        z-index: 2;
+        opacity: 0.6;
+        transition: var(--600ms-all-ease-out-expo-prop), background-color 0s;
+    }
+    
+    .settings-context-menu .page .header .contents.back-page:hover .span::after {
+        background-color: Highlight;
+        opacity: 0.6;
+    }
+
+    .settings-context-menu .page .header .contents.back-page:active .span::after {
+        background-color: LinkText;
+        opacity: 0.6;
     }
 }
 

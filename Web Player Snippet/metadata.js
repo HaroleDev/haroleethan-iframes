@@ -6,6 +6,7 @@ const videoMetadata = {
   HLS_src:
         './media/hls%20stream/playlist.m3u8',
   HLS_codec: 'application/x-mpegURL',
+  HLS_live: false,
   Fallback_src:
         '//link.storjshare.io/jwrbyl67eqxrubohnqibyqwsx75q/harole-video%2F2022%2FSample%20Videos%2FJuly%2022%202022%2FIMG_1175_FALLBACKSTREAM.mp4?wrap=0',
   Fallback_codec:

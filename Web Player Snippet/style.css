@@ -592,11 +592,50 @@
     }
 }
 
-.video-container:not(.paused) .play-pause-button .play-icon,
-.video-container.ended .play-pause-button .play-icon,
-.video-container:not(.ended) .play-pause-button .replay-icon,
-.video-container.paused .play-pause-button .pause-icon,
-.video-container.ended .play-pause-button .pause-icon {
+.video-container .play-pause-button .play-pause-icon {
+    position: relative;
+}
+
+.video-container:not(.paused) .play-pause-button .play-pause-icon path {
+    animation-name: play18;
+    animation-duration: 150ms;
+    animation-timing-function: steps(18, end);
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-play-state: running;
+}
+
+.video-container.paused .play-pause-button .play-pause-icon path {
+    animation-name: play18backwards;
+    animation-duration: 150ms;
+    animation-timing-function: steps(18, end);
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-play-state: running;
+}
+
+@keyframes play18 {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    100% {
+        transform: translate(-576px, 0px);
+    }
+}
+
+@keyframes play18backwards {
+    0% {
+        transform: translate(-576px, 0px);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+.video-container.ended .play-pause-button .play-pause-icon,
+.video-container:not(.ended) .play-pause-button .replay-icon {
     display: none;
 }
 

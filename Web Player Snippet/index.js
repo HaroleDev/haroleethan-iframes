@@ -134,9 +134,7 @@ const author = document.querySelector('meta[property="og:author"]') ? document.q
 const description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
-
-console.log(title, author)
-
+    
 consoleLog()
 
 function init() {

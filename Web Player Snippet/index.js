@@ -129,24 +129,24 @@ const CastTooltip = playfulVideoPlayer.querySelector('.gcast-tooltip')
 
 let orientationInfluence, videoPercent
 
-const title =
-    document
-        .querySelector('meta[property="og:title"]')
-        .getAttribute('content') ||
-    decodeURIComponent(videoMetadata.Fallback_src.substring(videoMetadata.Fallback_src.lastIndexOf('/') + 1))
-const author = document
-    .querySelector('meta[property="og:author"]')
-    .getAttribute('content')
+const title = document.querySelector('meta[property="og:title"]') ? document.querySelector('meta[property="og:title"]').getAttribute('content') : null
+const author = document.querySelector('meta[property="og:author"]') ? document.querySelector('meta[property="og:author"]').getAttribute('content') : null
 const description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
+
+console.log(title, author)
 
 consoleLog()
 
 function init() {
     if (video.hasAttribute('controls')) {
         videoControlsContainer.removeAttribute('hidden')
-        videoInformationOverlay.removeAttribute('hidden')
+        if (!title && !author) {
+            videoInformationOverlay.setAttribute('hidden', '')
+        } else {
+            videoInformationOverlay.removeAttribute('hidden')
+        }
         video.removeAttribute('controls')
     } else {
         videoControlsContainer.setAttribute('hidden', '')
@@ -176,7 +176,7 @@ window.addEventListener('DOMContentLoaded', () => {
     videoPoster.src = videoMetadata.video_poster
     //For HLS container
     if (Hls.isSupported()) {
-        if (videoMetadata.HLS_live === true) {
+        if (videoMetadata.is_live === true) {
             playfulVideoPlayer.setAttribute('data-live-stream', 'true')
             durationContainer.setAttribute('hidden', '')
             liveContainer.removeAttribute('hidden')
@@ -192,7 +192,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
 
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        if (videoMetadata.HLS_live === true) {
+        if (videoMetadata.is_live === true) {
             playfulVideoPlayer.setAttribute('data-live-stream', 'true')
             durationContainer.setAttribute('hidden', '')
             liveContainer.removeAttribute('hidden')
@@ -812,7 +812,11 @@ function checkElement() {
     })
     if (video.hasAttribute('controls')) {
         videoControlsContainer.setAttribute('hidden', '')
-        videoInformationOverlay.setAttribute('hidden', '')
+        if (!title && !author) {
+            videoInformationOverlay.setAttribute('hidden', '')
+        } else {
+            videoInformationOverlay.removeAttribute('hidden')
+        }
         video.removeAttribute('controls')
     } else {
         videoControlsContainer.removeAttribute('hidden')
@@ -854,7 +858,7 @@ class seekByTime {
 // Time divider animation
 let divide
 function intervalDivideWorker() {
-    if (typeof (Worker) !== 'undefined' && videoMetadata.HLS_live === false && playfulVideoPlayer.querySelector('.divider-time').innerText !== '/') {
+    if (typeof (Worker) !== 'undefined' && videoMetadata.is_live === false && playfulVideoPlayer.querySelector('.divider-time').innerText !== '/') {
         if (typeof (divide) === 'undefined') {
             divide = new Worker('./utils/timeDivider.js')
         }
@@ -1156,11 +1160,14 @@ function toggleScrubbing(e) {
     const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     isScrubbing = (e.buttons && 1) === 1
     let seekTime = parseFloat(percent * video.duration)
-
-    const delayPercent = percent - liveSettings.delay_compensation / video.duration
-
-    const checkInvertedTime = videoMetadata.HLS_live ? seekTime - video.duration : seekTime
-    const delaySeek = videoMetadata.HLS_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
+    const checkInvertedTime =
+        videoMetadata.is_live
+            ? seekTime - video.duration
+            : seekTime
+    const delaySeek =
+        videoMetadata.is_live
+            ? checkInvertedTime - liveSettings.delay_compensation
+            : checkInvertedTime
     timeTooltip.innerText = formatDuration(delaySeek)
     videoContainer.classList.toggle('scrubbing', isScrubbing)
     if (isScrubbing) {
@@ -1168,7 +1175,7 @@ function toggleScrubbing(e) {
         video.pause()
     } else {
         video.currentTime =
-            videoMetadata.HLS_live
+            videoMetadata.is_live
                 ? seekTime - liveSettings.delay_compensation
                 : seekTime
         if (!wasPaused) video.play()
@@ -1182,12 +1189,13 @@ function handleTimelineUpdate(e) {
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
     let seekTime = parseFloat(percent * video.duration)
     const thumbPosition = (Math.trunc(percent * video.duration) / videoMetadata.video_thumbs_count) * 100
-    const checkInvertedTime = videoMetadata.HLS_live ? seekTime - video.duration : seekTime
+    const checkInvertedTime = videoMetadata.is_live ? seekTime - video.duration : seekTime
     timelineInner.style.setProperty('--preview-position', percent)
-    const delaySeek = videoMetadata.HLS_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
+    const delaySeek = videoMetadata.is_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
     timeTooltip.innerText = formatDuration(delaySeek)
 
-    seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
+    if (videoMetadata.is_live === false) seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
+
     seekingPreviewPosition(e)
 
     if (seekTime < 0) seekTime = 0
@@ -1196,7 +1204,7 @@ function handleTimelineUpdate(e) {
     if (isScrubbing) {
         window.cancelAnimationFrame(updatetime)
         e.preventDefault()
-        videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
+        if (videoMetadata.is_live === false) videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
         timelineInner.style.setProperty('--progress-position', percent)
         timeTooltip.innerText = formatDuration(delaySeek)
         currentTime.innerText = formatDuration(delaySeek)
@@ -1217,14 +1225,14 @@ function loadedMetadata() {
 function updatetime() {
     videoPercent = video.currentTime / video.duration
     var liveCompensation =
-        videoMetadata.HLS_live && getComputedStyle(timelineInner).getPropertyValue('--progress-position') >= 1
+        videoMetadata.is_live && getComputedStyle(timelineInner).getPropertyValue('--progress-position') >= 1
             ? 1 - videoPercent
-            : videoMetadata.HLS_live
+            : videoMetadata.is_live
                 ? liveSettings.delay_compensation / video.duration
                 : 0
     if (!video.paused && videoContainer.classList.contains('hovered')) {
         timelineInner.style.setProperty('--progress-position', videoPercent + liveCompensation)
-        if (videoMetadata.HLS_live === false) currentTime.innerText = formatDuration(video.currentTime)
+        if (videoMetadata.is_live === false) currentTime.innerText = formatDuration(video.currentTime)
         window.requestAnimationFrame(updatetime)
     }
     window.cancelAnimationFrame(updatetime)
@@ -1293,7 +1301,7 @@ function formatDuration(time) {
             ? `${time < 0 ? '-' : ''}${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
             : hours > 0
                 ? `${time < 0 ? '-' : ''}${hours}:${format(minutes)}:${format(seconds)}`
-                : video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS && videoMetadata.HLS_live === false
+                : video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS && videoMetadata.is_live === false
                     ? `${time < 0 ? '-' : ''}${format(seconds)}.${format(frameSeconds)}`
                     : hours === 0
                         ? `${time < 0 ? '-' : ''}${minutes}:${format(seconds)}`
@@ -1329,7 +1337,7 @@ function formatDurationARIA(time) {
 }
 
 // Playback and Media Session
-playpauseButton.addEventListener('click', togglePlay, true)
+playpauseButton.addEventListener('click', togglePlay)
 videoFit.addEventListener('click', (e) => {
     if (e.pointerType === 'touch' &&
         videoContainer.classList.contains('hovered') &&
@@ -1338,14 +1346,14 @@ videoFit.addEventListener('click', (e) => {
 })
 
 function togglePlay() {
-    if (video.currentTime === video.duration && video.paused && !videoMetadata.HLS_live) {
+    if (video.currentTime === video.duration && video.paused && !videoMetadata.is_live) {
         if (contextMenu.classList.contains('show') || settingsContextMenu.classList.contains('pressed')) return
 
         videoContainer.classList.remove('ended')
         video.currentTime = 0
     }
 
-    video.paused || video.ended && !videoMetadata.HLS_live
+    video.paused || video.ended && !videoMetadata.is_live
         ? video.play()
         : video.pause()
     if (context.state === 'suspended') context.resume()
@@ -1876,6 +1884,7 @@ const eventListeners = [
     [
         'play',
         () => {
+            videoContainer.classList.remove('paused')
             videoContainer.classList.add('played')
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.playbackState = 'playing'
@@ -1921,7 +1930,7 @@ const eventListeners = [
                     window.requestAnimationFrame(updateMetadata)
                 }
             })
-            videoContainer.classList.remove('paused')
+
 
             if (playfulVideoPlayer.querySelector('.video-container').classList.contains('played')) {
                 playfulVideoPlayer.querySelectorAll(`
@@ -1946,6 +1955,7 @@ const eventListeners = [
     [
         'pause',
         () => {
+            videoContainer.classList.add('paused')
             stopIntervalDivideWorker()
             videoContainer.addEventListener('pointerleave', () => {
                 window.cancelAnimationFrame(updatetime)
@@ -1955,13 +1965,12 @@ const eventListeners = [
             playpauseTooltipContainer.setAttribute('data-tooltip-text', 'Play' + ' (k)')
             video.classList.remove('inactive')
             clearTimeout(timeout)
-            videoContainer.classList.add('paused')
         }
     ],
     [
         'ended',
         () => {
-            if (videoMetadata.HLS_live === false) videoContainer.classList.add('ended')
+            if (videoMetadata.is_live === false) videoContainer.classList.add('ended')
         }
     ],
     [
@@ -2002,7 +2011,7 @@ const eventListeners = [
     [
         'seeking',
         () => {
-            const checkInvertedTime = videoMetadata.HLS_live ? video.currentTime - video.duration : video.currentTime
+            const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
             currentTime.innerText = formatDuration(checkInvertedTime)
         }
     ],
@@ -2010,25 +2019,25 @@ const eventListeners = [
         'seeked',
         () => {
             window.requestAnimationFrame(updatetime)
-            if (videoMetadata.HLS_live === false) videoContainer.classList.add('played')
+            if (videoMetadata.is_live === false) videoContainer.classList.add('played')
             videoContainer.classList.remove('seeking')
             seekingPreview.classList.remove('loading')
             videoContainer.classList.remove('buffering-scrubbing')
             videoContainer.classList.remove('buffering')
             videoControls.removeAttribute('hidden')
             updatetime()
-            const checkInvertedTime = videoMetadata.HLS_live ? video.currentTime - video.duration : video.currentTime
+            const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
             currentTime.innerText = formatDuration(checkInvertedTime)
         }
     ],
     [
         'timeupdate',
         () => {
-            const checkInvertedTime = videoMetadata.HLS_live ? video.currentTime - video.duration : video.currentTime
-            if (videoMetadata.HLS_live === false) currentTime.innerText = formatDuration(checkInvertedTime)
+            const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
+            if (videoMetadata.is_live === false) currentTime.innerText = formatDuration(checkInvertedTime)
             durationContainer.setAttribute(
                 'aria-label',
-                `${videoMetadata.HLS_live ? 'Live stream. Delayed by ' : ''}${formatDurationARIA(videoMetadata.HLS_live ? video.duration - video.currentTime : video.currentTime)}${!videoMetadata.HLS_live ? ` elapsed of ${formatDurationARIA(video.duration)}` : ''}`
+                `${videoMetadata.is_live ? 'Live stream. Delayed by ' : ''}${formatDurationARIA(videoMetadata.is_live ? video.duration - video.currentTime : video.currentTime)}${!videoMetadata.is_live ? ` elapsed of ${formatDurationARIA(video.duration)}` : ''}`
             )
 
             qualityBadgeContainer.dataset.quality = qualityCheckShortLabel(video.videoWidth, video.videoHeight)
@@ -2061,7 +2070,7 @@ const eventListeners = [
             videoPercent = video.currentTime / video.duration
             playfulVideoPlayer.classList.remove('loading')
             video.textTracks[0].mode = 'hidden'
-            if (isURL(videoMetadata.video_thumbs) === false || videoMetadata.HLS_live === true) seekingThumbnail.setAttribute('hidden', '')
+            if (isURL(videoMetadata.video_thumbs) === false || videoMetadata.is_live === true) seekingThumbnail.setAttribute('hidden', '')
 
             seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
             videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`

@@ -635,21 +635,25 @@
                                     <div class="play-pause-tooltip-container" data-tooltip-text="Play (k)"
                                         data-tooltip="left">
                                         <button class="play-pause-button" aria-label="Play">
-                                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
+                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                                                 class="play-icon" xmlns="http://www.w3.org/2000/svg">
                                                 <path
-                                                    d="M34.9896 17.2668C36.3257 18.036 36.3257 19.964 34.9896 20.7332L7.99793 36.2739C6.6646 37.0416 5 36.0792 5 34.5407L5 3.45932C5 1.92079 6.6646 0.958404 7.99793 1.72608L34.9896 17.2668Z"
+                                                    d="M4 30.166V1.83392C4 0.629633 5.34761 -0.0836528 6.34347 0.593529L27.1759 14.7596C28.0513 15.3548 28.0513 16.6451 27.1759 17.2404L6.34347 31.4064C5.34761 32.0836 4 31.3703 4 30.166Z"
                                                     fill="var(--text-color)" />
                                             </svg>
-                                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
+                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                                                 class="pause-icon" xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="3" width="12" height="38" rx="2" fill="var(--text-color)" />
-                                                <rect x="23" width="12" height="38" rx="2" fill="var(--text-color)" />
+                                                <path
+                                                    d="M6.00009 0C4.89552 0 4.00009 0.895431 4.00009 2V30C4.00009 31.1046 4.89552 32 6.00009 32H10.0001C11.1047 32 12.0001 31.1046 12.0001 30V2C12.0001 0.895431 11.1047 0 10.0001 0H6.00009Z"
+                                                    fill="var(--text-color)" />
+                                                <path
+                                                    d="M20.0001 2C20.0001 0.895431 20.8955 0 22.0001 0H26.0001C27.1047 0 28.0001 0.895431 28.0001 2V30C28.0001 31.1046 27.1047 32 26.0001 32H22.0001C20.8955 32 20.0001 31.1046 20.0001 30V2Z"
+                                                    fill="var(--text-color)" />
                                             </svg>
-                                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
+                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                                                 class="replay-icon" xmlns="http://www.w3.org/2000/svg">
                                                 <path
-                                                    d="M20 4.8284L18.8284 5.99997H19C27.2843 5.99997 34 12.7157 34 21C34 29.2842 27.2843 36 19 36C10.7157 36 4 29.2842 4 21C4 19.3431 5.34315 18 7 18C8.65685 18 10 19.3431 10 21C10 25.9706 14.0294 30 19 30C23.9706 30 28 25.9705 28 21C28 16.0294 23.9706 12 19 12H18.8284L20 13.1715C20.7811 13.9526 20.781 15.2189 20 16C19.219 16.781 17.9526 16.781 17.1716 16L11.5858 10.4142C10.8047 9.63311 10.8047 8.36678 11.5858 7.58573L17.1716 1.99997C17.9526 1.21892 19.219 1.21892 20 1.99997C20.781 2.78102 20.781 4.04735 20 4.8284Z"
+                                                    d="M14.8284 5.99999L16.8535 3.97486C17.4393 3.38908 17.4393 2.43933 16.8535 1.85354L16.1464 1.14643C15.5607 0.560647 14.6109 0.560645 14.0251 1.14643L7.23223 7.93929C6.64644 8.52508 6.64644 9.47483 7.23222 10.0606L14.0251 16.8535C14.6109 17.4393 15.5607 17.4393 16.1464 16.8535L16.8535 16.1464C17.4393 15.5607 17.4393 14.6109 16.8536 14.0251L14.8284 12H16C19.866 12 23 15.134 23 19C23 22.866 19.866 26 16 26C12.645 26 9.84128 23.6397 9.15871 20.4891C8.98331 19.6794 8.32842 19 7.49999 19H4.49999C3.67157 19 2.99091 19.6744 3.08531 20.4975C3.82787 26.9718 9.32674 32 16 32C23.1797 32 29 26.1797 29 19C29 11.8203 23.1797 5.99999 16 5.99999H14.8284Z"
                                                     fill="var(--text-color)" />
                                             </svg>
                                         </button>
@@ -790,7 +794,8 @@
                                         <div class="divider-time span" aria-hidden="true">/</div>
                                         <div class="total-time span" aria-hidden="true">-:--</div>
                                     </div>
-                                    <div class="live-container" role="text" aria-label="Live" data-rewind="false" hidden>
+                                    <div class="live-container" role="text" aria-label="Live" data-rewind="false"
+                                        hidden>
                                         <div class="live-dot"></div>
                                         <div class="span" aria-hidden="true">Live</div>
                                     </div>
@@ -937,8 +942,8 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
     <script type="module" src="index.js"></script>
     <script type="text/javascript" defer>
-        var title = document.querySelector("meta[property=\"og:title\"]").getAttribute("content");
-        var author = document.head.querySelector("meta[property=\"og:author\"]").getAttribute("content");
+        var title = document.querySelector('meta[property="og:title"]') ? document.querySelector('meta[property="og:title"]').getAttribute('content') : null
+        var author = document.querySelector('meta[property="og:author"]') ? document.querySelector('meta[property="og:author"]').getAttribute('content') : null
         var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
 
         document.querySelector(".video-name h1").innerText = title;

@@ -957,13 +957,13 @@ const enterFullscreen =
 
 function toggleFullScreen() {
     if (fullscreenElement()) {
-        isiPhoneSafari()
+        isiPhoneSafari() && document.webkitCancelFullScreen
             ? document.webkitCancelFullScreen()
             : fullscreenElement()
             && exitFullscreen.call(window.document)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!fullscreenElement()) {
-        isiPhoneSafari()
+        isiPhoneSafari() && video.webkitEnterFullScreen
             ? video.webkitEnterFullScreen()
             : !fullscreenElement()
             && enterFullscreen.call(playfulVideoPlayer)

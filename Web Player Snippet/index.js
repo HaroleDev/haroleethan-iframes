@@ -169,6 +169,8 @@ function canFullscreenEnabled() {
         false
 }
 
+const isiPhoneSafari = () => /iPod|iPhone/i.test(navigator.userAgent)
+
 window.addEventListener('DOMContentLoaded', () => {
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = videoMetadata.video_poster
@@ -951,14 +953,16 @@ const enterFullscreen =
 
 function toggleFullScreen() {
     if (fullscreenElement()) {
-        fullscreenElement()
-            ? exitFullscreen.call(window.document)
-            : document.webkitCancelFullScreen()
+        isiPhoneSafari()
+            ? document.webkitCancelFullScreen()
+            : fullscreenElement()
+            && exitFullscreen.call(window.document)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!fullscreenElement()) {
-        !fullscreenElement()
-            ? enterFullscreen.call(playfulVideoPlayer)
-            : video.webkitEnterFullScreen()
+        isiPhoneSafari()
+            ? video.webkitEnterFullScreen()
+            : !fullscreenElement()
+            && enterFullscreen.call(playfulVideoPlayer)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {
         fullscreenButton.parentElement.setAttribute('unsupported', '')

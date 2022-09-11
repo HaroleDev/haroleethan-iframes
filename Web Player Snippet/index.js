@@ -976,15 +976,15 @@ const enterFullscreen =
 
 function toggleFullScreen() {
     if (fullscreenElement()) {
-        isOldSafari() && document.webkitCancelFullScreen && !isiPadOSSafari()
+        isOldSafari() && !isiPadOSSafari()
             ? document.webkitCancelFullScreen()
-            : fullscreenElement()
+            : fullscreenElement() || isiPadOSSafari()
             && exitFullscreen.call(window.document)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!fullscreenElement()) {
-        isOldSafari() && video.webkitEnterFullScreen && !isiPadOSSafari()
+        isOldSafari() && !isiPadOSSafari()
             ? video.webkitEnterFullScreen()
-            : !fullscreenElement()
+            : !fullscreenElement() || isiPadOSSafari()
             && enterFullscreen.call(playfulVideoPlayer)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {

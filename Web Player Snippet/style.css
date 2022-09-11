@@ -599,7 +599,7 @@
 .video-container:not(.paused) .play-pause-button .play-pause-icon path {
     animation-name: play18;
     animation-duration: 150ms;
-    animation-timing-function: steps(18, end);
+    animation-timing-function: steps(18);
     animation-fill-mode: both;
     animation-timing-function: linear;
     animation-play-state: running;
@@ -608,7 +608,7 @@
 .video-container.paused .play-pause-button .play-pause-icon path {
     animation-name: play18backwards;
     animation-duration: 150ms;
-    animation-timing-function: steps(18, end);
+    animation-timing-function: steps(18);
     animation-fill-mode: both;
     animation-timing-function: linear;
     animation-play-state: running;

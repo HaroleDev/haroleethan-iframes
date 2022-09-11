@@ -169,7 +169,11 @@ function canFullscreenEnabled() {
         false
 }
 
-const isiPhoneSafari = () => /iPod|iPhone/i.test(navigator.userAgent)
+const isiPhoneSafari = () =>
+    /iPod|iPhone/i.test(navigator.userAgent) ||
+    !navigator.userAgent.match(/Mac/) &&
+    !navigator.maxTouchPoints &&
+    !navigator.maxTouchPoints > 2
 
 window.addEventListener('DOMContentLoaded', () => {
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])

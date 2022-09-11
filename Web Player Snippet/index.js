@@ -177,8 +177,12 @@ window.addEventListener('DOMContentLoaded', () => {
     //For HLS container
     if (Hls.isSupported()) {
         if (videoMetadata.HLS_live === true) {
+            playfulVideoPlayer.setAttribute('data-live-stream', 'true')
             durationContainer.setAttribute('hidden', '')
             liveContainer.removeAttribute('hidden')
+            videoThumbPreview.setAttribute('hidden', '')
+        } else {
+            playfulVideoPlayer.setAttribute('data-live-stream', 'false')
         }
         hls.attachMedia(video)
         video.setAttribute('type', videoMetadata.HLS_codec)
@@ -189,8 +193,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         if (videoMetadata.HLS_live === true) {
+            playfulVideoPlayer.setAttribute('data-live-stream', 'true')
             durationContainer.setAttribute('hidden', '')
             liveContainer.removeAttribute('hidden')
+            videoThumbPreview.setAttribute('hidden', '')
+        } else {
+            playfulVideoPlayer.setAttribute('data-live-stream', 'false')
         }
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
@@ -1162,10 +1170,11 @@ function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
     let seekTime = parseFloat(percent * video.duration)
-    const thumbPosition = (Math.trunc(percent * video.duration) / Math.trunc(video.duration)) * 100
+    const thumbPosition = (Math.trunc(percent * video.duration) / videoMetadata.video_thumbs_count) * 100
 
+    const checkInvertedTime = videoMetadata.HLS_live ? seekTime - video.duration : seekTime
     timelineInner.style.setProperty('--preview-position', percent)
-    timeTooltip.innerText = formatDuration(seekTime)
+    timeTooltip.innerText = formatDuration(checkInvertedTime)
     seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
     seekingPreviewPosition(e)
 
@@ -1177,8 +1186,8 @@ function handleTimelineUpdate(e) {
         e.preventDefault()
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
         timelineInner.style.setProperty('--progress-position', percent)
-        timeTooltip.innerText = formatDuration(seekTime)
-        currentTime.innerText = formatDuration(seekTime)
+        timeTooltip.innerText = formatDuration(checkInvertedTime)
+        currentTime.innerText = formatDuration(checkInvertedTime)
     }
 }
 
@@ -1197,9 +1206,10 @@ function updatetime() {
     videoPercent = video.currentTime / video.duration
     if (!video.paused && videoContainer.classList.contains('hovered')) {
         timelineInner.style.setProperty('--progress-position', videoPercent)
-        currentTime.innerText = formatDuration(video.currentTime)
+        if (videoMetadata.HLS_live === false) currentTime.innerText = formatDuration(video.currentTime)
         window.requestAnimationFrame(updatetime)
     }
+    if (!video.paused && videoContainer.classList.contains('hovered')) timelineInner.style.setProperty('--progress-position', videoPercent)
     window.cancelAnimationFrame(updatetime)
 }
 
@@ -1251,24 +1261,25 @@ class timeCode {
 }
 
 function formatDuration(time) {
-    const frameSeconds = new timeCode(time).frameSeconds
-    const seconds = new timeCode(time).seconds
-    const minutes = new timeCode(time).minutes
-    const hours = new timeCode(time).hours
-    const days = new timeCode(time).days
-    const weeks = new timeCode(time).weeks
-    const format = (time) => (`0${time}`).slice(-2)
+    const timeSecs = time < 0 ? time * -1 : time
+    const frameSeconds = new timeCode(timeSecs).frameSeconds
+    const seconds = new timeCode(timeSecs).seconds
+    const minutes = new timeCode(timeSecs).minutes
+    const hours = new timeCode(timeSecs).hours
+    const days = new timeCode(timeSecs).days
+    const weeks = new timeCode().weeks
+    const format = (timeSecs) => `${timeSecs < 10 ? '0' : ''}${timeSecs}`
 
     return weeks > 0
-        ? `${weeks}:${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`
+        ? `${time < 0 ? '-' : ''}${weeks}:${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`
         : days > 0
-            ? `${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
+            ? `${time < 0 ? '-' : ''}${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
             : hours > 0
-                ? `${hours}:${format(minutes)}:${format(seconds)}`
+                ? `${time < 0 ? '-' : ''}${hours}:${format(minutes)}:${format(seconds)}`
                 : video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS
-                    ? `${format(seconds)}.${format(frameSeconds)}`
+                    ? `${time < 0 ? '-' : ''}${format(seconds)}.${format(frameSeconds)}`
                     : hours === 0
-                        ? `${minutes}:${format(seconds)}`
+                        ? `${time < 0 ? '-' : ''}${minutes}:${format(seconds)}`
                         : '-:--'
 }
 
@@ -1281,21 +1292,21 @@ function formatDurationARIA(time) {
 
     let secondsARIA, minutesARIA, hoursARIA, daysARIA
     if (seconds < 1) secondsARIA = 'Less than a second'
-    if (seconds >= 1) secondsARIA = `${seconds} ${seconds > 1 ? 'seconds' : 'second'}`
-    if (minutes > 0) minutesARIA = `${seconds} ${minutes > 1 ? 'minutes' : 'minute'}`
-    if (hours > 0) hoursARIA = `${hours} ${hours > 1 ? 'hours' : 'hour'}`
-    if (days > 0) daysARIA = `${days} ${days > 1 ? 'days' : 'day'}`
-    if (weeks > 0) weeksARIA = `${weeks} ${weeks > 1 ? 'weeks' : 'week'}`
+    if (seconds >= 1) secondsARIA = `${seconds} ${seconds > 1 || seconds < -1 ? 'seconds' : 'second'}`
+    if (minutes > 0) minutesARIA = `${seconds} ${minutes > 1 || minutes < -1 ? 'minutes' : 'minute'}`
+    if (hours > 0) hoursARIA = `${hours} ${hours > 1 || hours < -1 ? 'hours' : 'hour'}`
+    if (days > 0) daysARIA = `${days} ${days > 1 || days < -1 ? 'days' : 'day'}`
+    if (weeks > 0) weeksARIA = `${weeks} ${weeks > 1 || weeks < -1 ? 'weeks' : 'week'}`
 
-    return weeks > 0
+    return weeks > 0 || weeks < 0
         ? `${weeksARIA}, ${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
-        : days > 0
+        : days > 0 || days < 0
             ? `${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
-            : hours > 0
+            : hours > 0 || hours < 0
                 ? `${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
-                : minutes > 0
+                : minutes > 0 || minutes < 0
                     ? `${minutesARIA} ${secondsARIA}`
-                    : minutes === 0
+                    : minutes === 0 
                         ? `${secondsARIA}`
                         : 'No time is displayed'
 }
@@ -1310,14 +1321,14 @@ videoFit.addEventListener('click', (e) => {
 })
 
 function togglePlay() {
-    if (video.currentTime === video.duration && video.paused) {
+    if (video.currentTime === video.duration && video.paused && !videoMetadata.HLS_live) {
         if (contextMenu.classList.contains('show') || settingsContextMenu.classList.contains('pressed')) return
 
         videoContainer.classList.remove('ended')
         video.currentTime = 0
     }
 
-    video.paused || video.ended
+    video.paused || video.ended && !videoMetadata.HLS_live
         ? video.play()
         : video.pause()
     if (context.state === 'suspended') context.resume()
@@ -1933,7 +1944,7 @@ const eventListeners = [
     [
         'ended',
         () => {
-            videoContainer.classList.add('ended')
+            if (videoMetadata.HLS_live === false) videoContainer.classList.add('ended')
         }
     ],
     [
@@ -1974,7 +1985,8 @@ const eventListeners = [
     [
         'seeking',
         () => {
-            currentTime.innerText = formatDuration(video.currentTime)
+            const checkInvertedTime = videoMetadata.HLS_live ? video.currentTime - video.duration : video.currentTime
+            currentTime.innerText = formatDuration(checkInvertedTime)
         }
     ],
     [
@@ -1988,18 +2000,20 @@ const eventListeners = [
             videoContainer.classList.remove('buffering')
             videoControls.removeAttribute('hidden')
             updatetime()
-            currentTime.innerText = formatDuration(video.currentTime)
+            const checkInvertedTime = videoMetadata.HLS_live ? video.currentTime - video.duration : video.currentTime
+            currentTime.innerText = formatDuration(checkInvertedTime)
         }
     ],
     [
         'timeupdate',
         () => {
-            currentTime.innerText = formatDuration(video.currentTime)
+            const checkInvertedTime = videoMetadata.HLS_live ? video.currentTime - video.duration : video.currentTime
+            if (videoMetadata.HLS_live === false) currentTime.innerText = formatDuration(checkInvertedTime)
             durationContainer.setAttribute(
                 'aria-label',
                 `${formatDurationARIA(
                     video.currentTime
-                )} elapsed of ${formatDurationARIA(video.duration)}`
+                )}${!videoMetadata.HLS_live ? ` elapsed of ${formatDurationARIA(video.duration)}` : ''}`
             )
 
             qualityBadgeContainer.dataset.quality = qualityCheckShortLabel(video.videoWidth, video.videoHeight)
@@ -2045,8 +2059,7 @@ const eventListeners = [
 
             orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
 
-            if (video.videoWidth > video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'landscape')
-            if (video.videoWidth < video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', 'portait')
+            if (video.videoWidth > video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', video.videoWidth > video.videoHeight ? 'landscape' : video.videoWidth < video.videoHeight && 'portait')
 
             playfulVideoPlayerContainer.style.setProperty(
                 '--aspect-ratio-size',
@@ -2083,12 +2096,16 @@ const eventListeners = [
         () => {
             let volumeLevel
             video.muted || video.volume === 0
-                ? (volumeLevel = 'mute', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute (m)'))
+                ? (volumeLevel = 'mute',
+                    volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute (m)'))
                 : video.volume >= 0.6
-                    ? (volumeLevel = 'full', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                    ? (volumeLevel = 'full',
+                        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
                     : video.volume >= 0.3
-                        ? (volumeLevel = 'mid', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
-                        : (volumeLevel = 'low', volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                        ? (volumeLevel = 'mid',
+                            volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                        : (volumeLevel = 'low',
+                            volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
             videoContainer.dataset.volumeLevel = volumeLevel
         }
     ]

@@ -134,7 +134,7 @@ const author = document.querySelector('meta[property="og:author"]') ? document.q
 const description = document
     .querySelector('meta[property="og:description"]')
     .getAttribute('content')
-    
+
 consoleLog()
 
 function init() {
@@ -1131,7 +1131,7 @@ timelineInner.addEventListener('pointermove', (e) => {
             settingsTooltipContainer.setAttribute('data-tooltip', 'right')
             seekingPreview.removeAttribute('hidden')
             showContextMenu(false)
-            toggleScrubbing(e)
+            if (!isScrubbing) toggleScrubbing(e)
         }
     }, true)
     if (isScrubbing) {
@@ -1155,9 +1155,9 @@ const LIVE_WINDOW = liveSettings.live_interval + liveSettings.delay_compensation
 
 function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect()
-    const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
     isScrubbing = (e.buttons && 1) === 1
-    let seekTime = parseFloat(percent * video.duration)
+    let seekTime = percent * video.duration
     const checkInvertedTime =
         videoMetadata.is_live
             ? seekTime - video.duration
@@ -1166,16 +1166,17 @@ function toggleScrubbing(e) {
         videoMetadata.is_live
             ? checkInvertedTime - liveSettings.delay_compensation
             : checkInvertedTime
+    const seekingTime = videoMetadata.is_live
+        ? seekTime - liveSettings.delay_compensation
+        : seekTime
     timeTooltip.innerText = formatDuration(delaySeek)
     videoContainer.classList.toggle('scrubbing', isScrubbing)
+
     if (isScrubbing) {
         wasPaused = video.paused
         video.pause()
     } else {
-        video.currentTime =
-            videoMetadata.is_live
-                ? seekTime - liveSettings.delay_compensation
-                : seekTime
+        video.currentTime = seekingTime
         if (!wasPaused) video.play()
     }
 
@@ -1185,7 +1186,7 @@ function toggleScrubbing(e) {
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
-    let seekTime = parseFloat(percent * video.duration)
+    let seekTime = percent * video.duration
     const thumbPosition = (Math.trunc(percent * video.duration) / videoMetadata.video_thumbs_count) * 100
     const checkInvertedTime = videoMetadata.is_live ? seekTime - video.duration : seekTime
     timelineInner.style.setProperty('--preview-position', percent)
@@ -2026,6 +2027,41 @@ const eventListeners = [
             updatetime()
             const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
             currentTime.innerText = formatDuration(checkInvertedTime)
+
+            videoContainer.addEventListener('pointerover', () => {
+                activity()
+                checkElement()
+                if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
+            })
+            videoContainer.addEventListener('pointerup', (e) => {
+                if (e.pointerType === 'touch' && !videoContainer.classList.contains('hovered')) {
+                    activity()
+                    checkElement()
+                    if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
+                } else if (e.pointerType === 'touch' && videoContainer.classList.contains('hovered')) {
+                    window.cancelAnimationFrame(updatetime)
+                    window.requestAnimationFrame(updateMetadata)
+                    videoContainer.classList.remove('hovered')
+                    videoControlsContainer.classList.add('inactive')
+                    video.classList.add('inactive')
+                }
+            })
+            videoContainer.addEventListener('pointermove', () => {
+                activity()
+                checkElement()
+                if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
+            })
+            videoContainer.addEventListener('pointerleave', (e) => {
+                if (settingsContextMenu.classList.contains('pressed')) return
+                if (e.pointerType === 'touch' &&
+                    videoContainer.classList.contains('hovered')) return
+                if (!video.paused) {
+                    videoContainer.classList.remove('hovered')
+                    video.classList.add('inactive')
+                    window.cancelAnimationFrame(updatetime)
+                    window.requestAnimationFrame(updateMetadata)
+                }
+            })
         }
     ],
     [

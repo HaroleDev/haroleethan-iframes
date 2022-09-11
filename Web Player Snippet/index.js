@@ -964,13 +964,11 @@ function fullscreenElement() {
 
 const exitFullscreen =
     document.exitFullscreen ||
-    document.webkitExitFullscreen ||
     document.mozCancelFullScreen ||
     document.msExitFullscreen
 
 const enterFullscreen =
     playfulVideoPlayer.requestFullscreen ||
-    playfulVideoPlayer.webkitRequestFullScreen ||
     playfulVideoPlayer.mozRequestFullScreen ||
     playfulVideoPlayer.msRequestFullscreen
 
@@ -978,14 +976,18 @@ function toggleFullScreen() {
     if (fullscreenElement()) {
         isOldSafari() && !isiPadOSSafari()
             ? document.webkitCancelFullScreen()
-            : fullscreenElement() || isiPadOSSafari()
-            && exitFullscreen.call(window.document)
+            : document.webkitExitFullscreen
+                ? document.webkitExitFullscreen()
+                : fullscreenElement()
+                && exitFullscreen.call(window.document)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!fullscreenElement()) {
         isOldSafari() && !isiPadOSSafari()
             ? video.webkitEnterFullScreen()
-            : !fullscreenElement() || isiPadOSSafari()
-            && enterFullscreen.call(playfulVideoPlayer)
+            : playfulVideoPlayer.webkitRequestFullScreen
+                ? playfulVideoPlayer.webkitRequestFullScreen()
+                : !fullscreenElement() || isiPadOSSafari()
+                && enterFullscreen.call(playfulVideoPlayer)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
     } else {
         fullscreenButton.parentElement.setAttribute('unsupported', '')

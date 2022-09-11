@@ -251,19 +251,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="dialog-container eq-dialog-container">
-                    <div class="equalizer-dialog dialog">
+                <div class="dialog-container eq-dialog-container" aria-labelledby="dialogEQTitle" aria-describedby="dialogEQDescription">
+                    <div class="equalizer-dialog dialog" role="dialog">
                         <div class="contents">
                             <div style="width: 100%; margin-bottom: 8px;">
-                                <h2>Equalizer</h2>
+                                <h2 id="dialogEQTitle">Equalizer</h2>
                                 <svg width="50" height="32" viewBox="0 0 50 32" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="switch eq-switch">
+                                    xmlns="http://www.w3.org/2000/svg" class="switch eq-switch" role="switch" aria-checked="false">
                                     <rect x="2" y="2" width="46" height="28" rx="14" stroke-width="4"
                                         class="switch-bg" />
                                     <rect x="8" y="8" width="16" height="16" rx="8" class="switch-knob" />
                                 </svg>
                             </div>
-                            <p>So, you wanted to fine tune the sound from the video you're playing? Great!<br>In
+                            <p id="dialogEQDescription">So, you wanted to fine tune the sound from the video you're playing? Great!<br>In
                                 layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of
                                 a
                                 specific
@@ -339,11 +339,11 @@
                     </div>
                     <div class="dialog-overlay"></div>
                 </div>
-                <div class="dialog-container about-player-dialog-container">
-                    <div class="dialog">
+                <div class="dialog-container about-player-dialog-container" aria-labelledby="dialogAboutTitle">
+                    <div class="dialog" role="dialog">
                         <div class="contents">
                             <div style="width: 100%; margin-bottom: 8px;">
-                                <h2>About Playful Video Player</h2>
+                                <h2 id="dialogAboutTitle">About Playful Video Player</h2>
                             </div>
                             <p>AirPlay® and AirPlay Logo™ are trademarks of Apple Inc., registered in the U.S. and other
                                 countries.</p>

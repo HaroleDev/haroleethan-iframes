@@ -854,7 +854,7 @@ class seekByTime {
 // Time divider animation
 let divide
 function intervalDivideWorker() {
-    if (typeof (Worker) !== 'undefined') {
+    if (typeof (Worker) !== 'undefined' && videoMetadata.HLS_live === false && playfulVideoPlayer.querySelector('.divider-time').innerText !== '/') {
         if (typeof (divide) === 'undefined') {
             divide = new Worker('./utils/timeDivider.js')
         }
@@ -867,7 +867,7 @@ function intervalDivideWorker() {
 }
 
 function stopIntervalDivideWorker() {
-    if (typeof (Worker) === 'undefined') return
+    if (typeof (Worker) === 'undefined' || typeof (divide) === 'undefined') return
     divide.terminate()
     divide = undefined
 }
@@ -1156,7 +1156,9 @@ function toggleScrubbing(e) {
     const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     isScrubbing = (e.buttons && 1) === 1
     let seekTime = parseFloat(percent * video.duration)
-    const delayPercent = percent + liveSettings.delay_compensation / video.duration
+
+    const delayPercent = percent - liveSettings.delay_compensation / video.duration
+
     const checkInvertedTime = videoMetadata.HLS_live ? seekTime - video.duration : seekTime
     const delaySeek = videoMetadata.HLS_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
     timeTooltip.innerText = formatDuration(delaySeek)
@@ -1165,7 +1167,10 @@ function toggleScrubbing(e) {
         wasPaused = video.paused
         video.pause()
     } else {
-        video.currentTime = videoMetadata.HLS_live && seekTime >= video.duration - liveSettings.delay_compensation ? video.duration - liveSettings.delay_compensation : seekTime
+        video.currentTime =
+            videoMetadata.HLS_live
+                ? seekTime - liveSettings.delay_compensation
+                : seekTime
         if (!wasPaused) video.play()
     }
 
@@ -1177,7 +1182,6 @@ function handleTimelineUpdate(e) {
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
     let seekTime = parseFloat(percent * video.duration)
     const thumbPosition = (Math.trunc(percent * video.duration) / videoMetadata.video_thumbs_count) * 100
-
     const checkInvertedTime = videoMetadata.HLS_live ? seekTime - video.duration : seekTime
     timelineInner.style.setProperty('--preview-position', percent)
     const delaySeek = videoMetadata.HLS_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
@@ -1215,7 +1219,9 @@ function updatetime() {
     var liveCompensation =
         videoMetadata.HLS_live && getComputedStyle(timelineInner).getPropertyValue('--progress-position') >= 1
             ? 1 - videoPercent
-            : 0
+            : videoMetadata.HLS_live
+                ? liveSettings.delay_compensation / video.duration
+                : 0
     if (!video.paused && videoContainer.classList.contains('hovered')) {
         timelineInner.style.setProperty('--progress-position', videoPercent + liveCompensation)
         if (videoMetadata.HLS_live === false) currentTime.innerText = formatDuration(video.currentTime)

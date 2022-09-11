@@ -1286,12 +1286,12 @@ class timeCode {
 
 function formatDuration(time) {
     const timeSecs = time < 0 ? time * -1 : time
-    const frameSeconds = new timeCode(timeSecs).frameSeconds
-    const seconds = new timeCode(timeSecs).seconds
-    const minutes = new timeCode(timeSecs).minutes
-    const hours = new timeCode(timeSecs).hours
-    const days = new timeCode(timeSecs).days
-    const weeks = new timeCode().weeks
+    const frameSeconds = new timeCode(timeSecs).frameSeconds,
+        seconds = new timeCode(timeSecs).seconds,
+        minutes = new timeCode(timeSecs).minutes,
+        hours = new timeCode(timeSecs).hours,
+        days = new timeCode(timeSecs).days,
+        weeks = new timeCode(timeSecs).weeks
     const format = (timeSecs) => `0${timeSecs}`.slice(-2)
 
     return weeks > 0
@@ -1308,11 +1308,11 @@ function formatDuration(time) {
 }
 
 function formatDurationARIA(time) {
-    const seconds = new timeCode(time).seconds
-    const minutes = new timeCode(time).minutes
-    const hours = new timeCode(time).hours
-    const days = new timeCode(time).days
-    const weeks = new timeCode(time).weeks
+    const seconds = new timeCode(time).seconds,
+        minutes = new timeCode(time).minutes,
+        hours = new timeCode(time).hours,
+        days = new timeCode(time).days,
+        weeks = new timeCode(time).weeks
 
     let secondsARIA, minutesARIA, hoursARIA, daysARIA
     if (seconds < 1) secondsARIA = 'Less than a second'
@@ -1806,8 +1806,8 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
             case 'home':
             case 'end':
                 videoContainer.classList.add('seeking')
-                if (e.key === 'home') video.currentTime = 0
-                if (e.key === 'end') video.currentTime = video.duration
+                if (e.key.toLowerCase() === 'home') video.currentTime = 0
+                if (e.key.toLowerCase() === 'end') video.currentTime = video.duration
                 checkActive()
                 break
             case 'k':
@@ -1873,7 +1873,7 @@ mediaQuery.addEventListener('change', () => {
 
 const isURL = str => {
     try {
-        return Boolean(new URL(`https://${str}`))
+        return Boolean(new URL(`https://${str}`)) || Boolean(new URL(`http://${str}`))
     } catch (e) {
         return false
     }
@@ -2010,7 +2010,10 @@ const eventListeners = [
     [
         'seeking',
         () => {
-            const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
+            const checkInvertedTime =
+                videoMetadata.is_live
+                    ? video.currentTime - video.duration
+                    : video.currentTime
             currentTime.innerText = formatDuration(checkInvertedTime)
         }
     ],
@@ -2025,7 +2028,10 @@ const eventListeners = [
             videoContainer.classList.remove('buffering')
             videoControls.removeAttribute('hidden')
             updatetime()
-            const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
+            const checkInvertedTime =
+                videoMetadata.is_live
+                    ? video.currentTime - video.duration
+                    : video.currentTime
             currentTime.innerText = formatDuration(checkInvertedTime)
 
             videoContainer.addEventListener('pointerover', () => {
@@ -2052,9 +2058,9 @@ const eventListeners = [
                 if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
             })
             videoContainer.addEventListener('pointerleave', (e) => {
-                if (settingsContextMenu.classList.contains('pressed')) return
-                if (e.pointerType === 'touch' &&
-                    videoContainer.classList.contains('hovered')) return
+                if (settingsContextMenu.classList.contains('pressed') ||
+                    e.pointerType === 'touch'
+                    && videoContainer.classList.contains('hovered')) return
                 if (!video.paused) {
                     videoContainer.classList.remove('hovered')
                     video.classList.add('inactive')

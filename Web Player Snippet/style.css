@@ -549,7 +549,7 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 75%);
+    background-image: radial-gradient(center at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.297406) 6.67%, rgba(0, 0, 0, 0.289347) 13.33%, rgba(0, 0, 0, 0.275502) 20%, rgba(0, 0, 0, 0.255777) 26.67%, rgba(0, 0, 0, 0.230468) 33.33%, rgba(0, 0, 0, 0.200435) 40%, rgba(0, 0, 0, 0.167193) 46.67%, rgba(0, 0, 0, 0.132807) 53.33%, rgba(0, 0, 0, 0.0995652) 60%, rgba(0, 0, 0, 0.0695324) 66.67%, rgba(0, 0, 0, 0.0442234) 73.33%, rgba(0, 0, 0, 0.024498) 80%, rgba(0, 0, 0, 0.010653) 86.67%, rgba(0, 0, 0, 0.00259416) 93.33%, rgba(0, 0, 0, 0) 100%);
 }
 
 .transcript-panel button path,
@@ -715,7 +715,7 @@
     user-select: none;
 }
 
-.duration-container {
+.playful-video-player[data-live-stream="false"] .duration-container {
     display: block;
     height: fit-content;
     font-variation-settings: "wght" 500;
@@ -729,7 +729,7 @@
     cursor: text;
 }
 
-.live-container {
+.playful-video-player[data-live-stream="true"] .live-container {
     display: block;
     height: fit-content;
     font-variation-settings: "wght" 800;
@@ -767,7 +767,8 @@
     opacity: 0.6;
 }
 
-.live-dot:not([data-rewind="true"])::before {
+.video-container.paused .live-dot:not([data-rewind="true"])::before,
+.video-container.paused .live-dot:not([data-rewind="true"])::after {
     content: "";
     position: absolute;
     top: 0;
@@ -782,12 +783,22 @@
     border-radius: 50%;
     opacity: 0;
     animation: livePulse 2s infinite var(--ease-out-expo);
+    animation-fill-mode: backwards;
+    transition: var(--300ms-all-ease-out-expo-prop);
     animation-play-state: paused;
 }
 
 .video-container:not(.paused) .live-container:not([data-rewind="true"]) .live-dot::before {
     opacity: 1;
+    animation-fill-mode: forwards;
     animation-play-state: running;
+}
+
+.video-container:not(.paused) .live-container:not([data-rewind="true"]) .live-dot::after {
+    opacity: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+    animation-delay: 0.6s;
 }
 
 @keyframes livePulse {
@@ -889,7 +900,7 @@
 }
 
 [data-quality="UHD"][data-badge="quality"] {
-    background-image: linear-gradient(135deg, var(--mid-blue-color), var(--dark-blue-color));
+    background-image: linear-gradient(180deg, var(--mid-blue-color), var(--dark-blue-color));
 }
 
 [data-quality="HD"][data-badge="quality"] .span.quality,
@@ -913,7 +924,8 @@
         0 1.6px 0 var(--blue-color),
         0 1.8px 0 var(--blue-color),
         0 2px 0 var(--blue-color);
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
+    filter:
+        drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15)) drop-shadow(0 3px 3px rgba(0, 0, 0, 0.15)) drop-shadow(0 5px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 7px 10px rgba(0, 0, 0, 0.15)) drop-shadow(0 9px 15px rgba(0, 0, 0, 0.15));
 }
 
 .badge {
@@ -3314,14 +3326,21 @@ screen and (max-height: 600px) {
 
     .duration-container,
     .live-container {
-        padding: 3px 12px;
-        margin: -3px 0px;
-        margin-top: 0px;
+        margin: -3px 0;
+        margin-top: 0;
         margin-bottom: -6px;
         border-radius: 16px;
         background-color: Canvas;
         color: CanvasText;
         outline: 2px solid CanvasText;
+    }
+
+    .duration-container {
+        padding: 3px 12px;
+    }
+
+    .live-container {
+        padding: 0 12px;
     }
 
     .seeking-preview__time-tooltip {
@@ -3535,7 +3554,7 @@ screen and (max-height: 600px) {
     .cue-container {
         --transition: var(--300ms-all-ease-out-expo-prop), outline-color 0s, outline-width 0s, color 0s, background-color 0s;
         background-color: Canvas;
-        outline-width: 0px;
+        outline-width: 0;
         outline-style: solid;
         outline-color: CanvasText;
         transition: var(--transition);
@@ -3683,12 +3702,12 @@ screen and (max-height: 600px) {
     .live-dot {
         background-color: Highlight;
     }
-    
+
     .live-container[data-rewind="true"] .live-dot {
         background-color: ButtonText;
         opacity: 0.6;
     }
-    
+
     .live-dot:not([data-rewind="true"])::before {
         border: 1px Highlight;
         border-style: solid;
@@ -3700,15 +3719,13 @@ screen and (max-height: 600px) {
         opacity: 0.6;
         transition: var(--600ms-all-ease-out-expo-prop), background-color 0s;
     }
-    
+
     .settings-context-menu .page .header .contents.back-page:hover .span::after {
         background-color: Highlight;
-        opacity: 0.6;
     }
 
     .settings-context-menu .page .header .contents.back-page:active .span::after {
         background-color: LinkText;
-        opacity: 0.6;
     }
 }
 
@@ -3734,6 +3751,7 @@ screen and (max-height: 600px) {
             --mid-blue-color: color(display-p3 calc(39/255) calc(113/255) calc(215/255));
             --dark-blue-color: color(display-p3 calc(0/255) calc(71/255) calc(187/255));
             --link-and-focus-color: color(display-p3 calc(75/255) calc(153/255) calc(231/255));
+            --red-color: color(display-p3 calc(255/255) calc(51/255) calc(119/255));
         }
     }
 }

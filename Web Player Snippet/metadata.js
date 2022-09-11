@@ -32,4 +32,10 @@ const mediaSessionMetadata = {
         '//res.cloudinary.com/harole/video/upload/s--d8U6mcP6--/c_fill,h_96,q_auto:eco,w_96/v1658949913/Harole%27s%20Videos/Sample%20Videos/Feeding%20fish%20in%20Hue/IMG_1175_H264STREAM_vfelcj.jpg',
     type: 'image/jpeg'
 }
-export { videoMetadata, mediaSessionMetadata }
+const liveSettings = {
+    delay_compensation:
+        10,
+    live_interval:
+        15,
+}
+export { videoMetadata, mediaSessionMetadata, liveSettings }

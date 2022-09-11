@@ -1,6 +1,6 @@
 'use strict'
 import 'https://cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
-import { videoMetadata, mediaSessionMetadata } from './metadata.js'
+import { videoMetadata, mediaSessionMetadata, liveSettings } from './metadata.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
@@ -1149,17 +1149,23 @@ timelineInner.addEventListener('pointermove', (e) => {
 let isScrubbing = false
 let wasPaused
 
+const LIVE_WINDOW = liveSettings.live_interval + liveSettings.delay_compensation
+
 function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = parseFloat(Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width)
     isScrubbing = (e.buttons && 1) === 1
-    const seekTime = parseFloat(percent * video.duration)
+    let seekTime = parseFloat(percent * video.duration)
+    const delayPercent = percent + liveSettings.delay_compensation / video.duration
+    const checkInvertedTime = videoMetadata.HLS_live ? seekTime - video.duration : seekTime
+    const delaySeek = videoMetadata.HLS_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
+    timeTooltip.innerText = formatDuration(delaySeek)
     videoContainer.classList.toggle('scrubbing', isScrubbing)
     if (isScrubbing) {
         wasPaused = video.paused
         video.pause()
     } else {
-        video.currentTime = seekTime
+        video.currentTime = videoMetadata.HLS_live && seekTime >= video.duration - liveSettings.delay_compensation ? video.duration - liveSettings.delay_compensation : seekTime
         if (!wasPaused) video.play()
     }
 
@@ -1174,7 +1180,9 @@ function handleTimelineUpdate(e) {
 
     const checkInvertedTime = videoMetadata.HLS_live ? seekTime - video.duration : seekTime
     timelineInner.style.setProperty('--preview-position', percent)
-    timeTooltip.innerText = formatDuration(checkInvertedTime)
+    const delaySeek = videoMetadata.HLS_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
+    timeTooltip.innerText = formatDuration(delaySeek)
+
     seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
     seekingPreviewPosition(e)
 
@@ -1186,8 +1194,8 @@ function handleTimelineUpdate(e) {
         e.preventDefault()
         videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
         timelineInner.style.setProperty('--progress-position', percent)
-        timeTooltip.innerText = formatDuration(checkInvertedTime)
-        currentTime.innerText = formatDuration(checkInvertedTime)
+        timeTooltip.innerText = formatDuration(delaySeek)
+        currentTime.innerText = formatDuration(delaySeek)
     }
 }
 
@@ -1204,12 +1212,15 @@ function loadedMetadata() {
 
 function updatetime() {
     videoPercent = video.currentTime / video.duration
+    var liveCompensation =
+        videoMetadata.HLS_live && getComputedStyle(timelineInner).getPropertyValue('--progress-position') >= 1
+            ? 1 - videoPercent
+            : 0
     if (!video.paused && videoContainer.classList.contains('hovered')) {
-        timelineInner.style.setProperty('--progress-position', videoPercent)
+        timelineInner.style.setProperty('--progress-position', videoPercent + liveCompensation)
         if (videoMetadata.HLS_live === false) currentTime.innerText = formatDuration(video.currentTime)
         window.requestAnimationFrame(updatetime)
     }
-    if (!video.paused && videoContainer.classList.contains('hovered')) timelineInner.style.setProperty('--progress-position', videoPercent)
     window.cancelAnimationFrame(updatetime)
 }
 
@@ -1268,7 +1279,7 @@ function formatDuration(time) {
     const hours = new timeCode(timeSecs).hours
     const days = new timeCode(timeSecs).days
     const weeks = new timeCode().weeks
-    const format = (timeSecs) => `${timeSecs < 10 ? '0' : ''}${timeSecs}`
+    const format = (timeSecs) => `0${timeSecs}`.slice(-2)
 
     return weeks > 0
         ? `${time < 0 ? '-' : ''}${weeks}:${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`
@@ -1276,7 +1287,7 @@ function formatDuration(time) {
             ? `${time < 0 ? '-' : ''}${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
             : hours > 0
                 ? `${time < 0 ? '-' : ''}${hours}:${format(minutes)}:${format(seconds)}`
-                : video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS
+                : video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS && videoMetadata.HLS_live === false
                     ? `${time < 0 ? '-' : ''}${format(seconds)}.${format(frameSeconds)}`
                     : hours === 0
                         ? `${time < 0 ? '-' : ''}${minutes}:${format(seconds)}`
@@ -1306,7 +1317,7 @@ function formatDurationARIA(time) {
                 ? `${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
                 : minutes > 0 || minutes < 0
                     ? `${minutesARIA} ${secondsARIA}`
-                    : minutes === 0 
+                    : minutes === 0
                         ? `${secondsARIA}`
                         : 'No time is displayed'
 }
@@ -1479,32 +1490,32 @@ async function mediaSessionToggle() {
                 artwork: [{
                     src: mediaSessionMetadata.thumb_96,
                     sizes: '96x96',
-                    type: mediaSessionMetadata.type
+                    type: mediaSessionMetadata.type,
                 },
                 {
                     src: mediaSessionMetadata.thumb_128,
                     sizes: '128x128',
-                    type: mediaSessionMetadata.type
+                    type: mediaSessionMetadata.type,
                 },
                 {
                     src: mediaSessionMetadata.thumb_192,
                     sizes: '192x192',
-                    type: mediaSessionMetadata.type
+                    type: mediaSessionMetadata.type,
                 },
                 {
                     src: mediaSessionMetadata.thumb_256,
                     sizes: '256x256',
-                    type: mediaSessionMetadata.type
+                    type: mediaSessionMetadata.type,
                 },
                 {
                     src: mediaSessionMetadata.thumb_384,
                     sizes: '384x384',
-                    type: mediaSessionMetadata.type
+                    type: mediaSessionMetadata.type,
                 },
                 {
                     src: mediaSessionMetadata.thumb_512,
                     sizes: '512x512',
-                    type: mediaSessionMetadata.type
+                    type: mediaSessionMetadata.type,
                 }
                 ]
             })
@@ -2011,9 +2022,7 @@ const eventListeners = [
             if (videoMetadata.HLS_live === false) currentTime.innerText = formatDuration(checkInvertedTime)
             durationContainer.setAttribute(
                 'aria-label',
-                `${formatDurationARIA(
-                    video.currentTime
-                )}${!videoMetadata.HLS_live ? ` elapsed of ${formatDurationARIA(video.duration)}` : ''}`
+                `${videoMetadata.HLS_live ? 'Live stream. Delayed by ' : ''}${formatDurationARIA(videoMetadata.HLS_live ? video.duration - video.currentTime : video.currentTime)}${!videoMetadata.HLS_live ? ` elapsed of ${formatDurationARIA(video.duration)}` : ''}`
             )
 
             qualityBadgeContainer.dataset.quality = qualityCheckShortLabel(video.videoWidth, video.videoHeight)
@@ -2026,7 +2035,7 @@ const eventListeners = [
 
             if (video.currentTime >= video.duration - 1) timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 
-            if (video.currentTime >= video.duration - 15) {
+            if (video.currentTime >= video.duration - LIVE_WINDOW) {
                 liveContainer.setAttribute('data-rewind', 'false')
             } else {
                 liveContainer.setAttribute('data-rewind', 'true')

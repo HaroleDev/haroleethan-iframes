@@ -169,11 +169,34 @@ function canFullscreenEnabled() {
         false
 }
 
-const isiPhoneSafari = () =>
-    /iPod|iPhone/i.test(navigator.userAgent) ||
-    !navigator.userAgent.match(/Mac/) &&
-    !navigator.maxTouchPoints &&
-    !navigator.maxTouchPoints > 2
+const isOldSafari = () =>
+    [
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad Simulator',
+        'iPhone',
+        'iPod',
+        'iPad'
+    ].includes(navigator.platform) ||
+    userAgent.match(/(iPad)/) ||
+    /iPod|iPad|iPhone/i.test(navigator.userAgent)
+
+const isiPadOSSafari = () => {
+    window.AuthenticatorAssertionResponse === undefined
+        && window.AuthenticatorAttestationResponse === undefined
+        && window.AuthenticatorResponse === undefined
+        && window.Credential === undefined
+        && window.CredentialsContainer === undefined
+        && window.DeviceMotionEvent !== undefined
+        && window.DeviceOrientationEvent !== undefined
+        && navigator.maxTouchPoints === 5
+        && navigator.platform !== "iPhone" ||
+
+        (navigator.userAgent.match(/Mac/) || navigator.platform === 'MacIntel') &&
+        navigator.maxTouchPoints &&
+        navigator.maxTouchPoints > 2
+}
+
 
 window.addEventListener('DOMContentLoaded', () => {
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
@@ -236,11 +259,7 @@ window.addEventListener('DOMContentLoaded', () => {
         volumeTooltipContainer.setAttribute('hidden', '')
     }
 
-    if (
-        navigator.userAgent.match(/Mac/) &&
-        navigator.maxTouchPoints &&
-        navigator.maxTouchPoints > 2
-    ) {
+    if (isiPadOSSafari()) {
         playfulVideoPlayer.dataset.device = 'iPadOS'
         volumeTooltipContainer.setAttribute('hidden', '')
     }
@@ -957,13 +976,13 @@ const enterFullscreen =
 
 function toggleFullScreen() {
     if (fullscreenElement()) {
-        isiPhoneSafari() && document.webkitCancelFullScreen
+        isOldSafari() && document.webkitCancelFullScreen && !isiPadOSSafari()
             ? document.webkitCancelFullScreen()
             : fullscreenElement()
             && exitFullscreen.call(window.document)
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
     } else if (!fullscreenElement()) {
-        isiPhoneSafari() && video.webkitEnterFullScreen
+        isOldSafari() && video.webkitEnterFullScreen && !isiPadOSSafari()
             ? video.webkitEnterFullScreen()
             : !fullscreenElement()
             && enterFullscreen.call(playfulVideoPlayer)

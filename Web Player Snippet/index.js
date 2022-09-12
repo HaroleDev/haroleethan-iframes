@@ -1,5 +1,5 @@
 'use strict'
-import 'https://cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
+import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { videoMetadata, mediaSessionMetadata, liveSettings } from './metadata.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './utils/consoleLog.js'
@@ -178,7 +178,7 @@ const isOldSafari = () =>
         'iPod',
         'iPad'
     ].includes(navigator.platform) ||
-    userAgent.match(/(iPad)/) ||
+    navigator.userAgent.match(/(iPad)/) ||
     /iPod|iPad|iPhone/i.test(navigator.userAgent)
 
 const isiPadOSSafari = () => {

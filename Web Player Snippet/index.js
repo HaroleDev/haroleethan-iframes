@@ -43,6 +43,12 @@ const config = {
     startPosition: -1
 }
 
+const PLAY_BUTTON_KEY = 'k',
+    FULLSCREEN_BUTTON_KEY = 'f',
+    PICTUREINPICTURE_TOGGLE_KEY = 'i',
+    MUTE_TOGGLE_KEY = 'm',
+    SUBTITLES_CLOSEDCAPTION_TOGGLE_KEY = 'c'
+
 const hls = new Hls(config)
 
 const playfulVideoPlayerContainer = document.querySelector('.playful-video-player-container')
@@ -230,13 +236,13 @@ window.addEventListener('DOMContentLoaded', () => {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()
-        qualityItem.setAttribute('unsupported', '')
+        qualityItem.setAttribute('pfv-unsupported', '')
     } else {
         //For MP4 container
         source.setAttribute('src', videoMetadata.Fallback_src)
         source.setAttribute('type', videoMetadata.Fallback_codec)
         video.load()
-        qualityItem.setAttribute('unsupported', '')
+        qualityItem.setAttribute('pfv-unsupported', '')
     }
     video.addEventListener('durationchange', updatetime)
     rangeEQInputs.forEach(element => {
@@ -249,7 +255,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if (canFullscreenEnabled === false) {
-        fullscreenButton.parentElement.setAttribute('unsupported', '')
+        fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }
 
@@ -285,8 +291,7 @@ const srcEventListeners = [
                     break
 
                 case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
-                    s +=
-                        'The video is missing or is in a format not supported by your browser.'
+                    s += 'The video is missing or is in a format not supported by your browser.'
                     break
 
                 default:
@@ -369,13 +374,10 @@ function ctxmenuPosition(eventPos) {
     const cmWidth = contextMenu.offsetWidth
     const cmHeight = contextMenu.offsetHeight
 
-    if (x + cmWidth > winWidth - 8) {
-        x = eventPos.offsetX - cmWidth
-    }
+    if (x + cmWidth > winWidth - 8) x = eventPos.offsetX - cmWidth
 
-    if (y + cmHeight > winHeight - 8) {
-        y = winHeight - cmHeight - 8
-    }
+    if (y + cmHeight > winHeight - 8) y = winHeight - cmHeight - 8
+
 
     return {
         x,
@@ -514,7 +516,7 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     playfulVideoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
 
     playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
-    playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed='${playfulVideoPlayer.getAttribute('data-speed')}']`).setAttribute('aria-checked', 'true')
+    playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed='${playfulVideoPlayer.getAttribute('data-speed')}']`).setAttribute('aria-checked', true)
 };
 
 playbackSpeedItemControls.forEach(element => {
@@ -526,7 +528,7 @@ playbackSpeedItemControls.forEach(element => {
             video.playbackRate = element.getAttribute('data-speed')
             playfulVideoPlayer.setAttribute('data-speed', video.playbackRate)
             playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
-            element.setAttribute('aria-checked', 'true')
+            element.setAttribute('aria-checked', true)
             !element.getAttribute('data-speed') >= '1.25' && !element.getAttribute('data-speed') < playbackSpeedItemControls.lastChild.getAttribute('data-speed') ? timelineProgressbar.style.filter = 'none' : timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`
         }
         backPageSettingsFn()
@@ -544,7 +546,7 @@ const ctx =
 if (ctx) {
     var context = new ctx()
 } else {
-    eqItem.setAttribute('unsupported', '')
+    eqItem.setAttribute('pfv-unsupported', '')
 }
 const sourceNode = context.createMediaElementSource(video)
 // EQ
@@ -980,7 +982,7 @@ function toggleFullScreen() {
                 ? document.webkitExitFullscreen()
                 : fullscreenElement()
                 && exitFullscreen.call(window.document)
-        fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
+        fullscreenTooltip.setAttribute('data-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else if (!fullscreenElement()) {
         isOldSafari() && !isiPadOSSafari()
             ? video.webkitEnterFullScreen()
@@ -988,9 +990,9 @@ function toggleFullScreen() {
                 ? playfulVideoPlayer.webkitRequestFullScreen()
                 : !fullscreenElement() || isiPadOSSafari()
                 && enterFullscreen.call(playfulVideoPlayer)
-        fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
+        fullscreenTooltip.setAttribute('data-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else {
-        fullscreenButton.parentElement.setAttribute('unsupported', '')
+        fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
     }
     if (context.state === 'suspended') context.resume()
@@ -1004,13 +1006,13 @@ function togglePIPPlayerMode() {
                 !video.pictureInPictureElement
             ) {
                 document.exitPictureInPicture()
-                pipTooltip.setAttribute('data-tooltip-text', 'Picture in picture' + ' (i)')
+                pipTooltip.setAttribute('data-tooltip-text', `Picture in picture (${PICTUREINPICTURE_TOGGLE_KEY})`)
             } else {
                 video.requestPictureInPicture()
-                pipTooltip.setAttribute('data-tooltip-text', 'Exit picture in picture' + ' (i)')
+                pipTooltip.setAttribute('data-tooltip-text', `Exit picture in picture (${PICTUREINPICTURE_TOGGLE_KEY})`)
             }
         } else {
-            pipPlayerButton.setAttribute('unsupported', '')
+            pipPlayerButton.setAttribute('pfv-unsupported', '')
             pipTooltip.setAttribute('data-tooltip-text', 'Picture in picture is unavailable.')
         }
     } catch (error) {
@@ -1029,18 +1031,18 @@ document.addEventListener('msfullscreenchange', fullScreenToggleChange, fullscre
 
 video.addEventListener('webkitenterfullscreen', () => {
     playfulVideoPlayer.classList.add('full-screen')
-    fullscreenTooltip.setAttribute('data-tooltip-text', 'Exit full screen' + ' (f)')
+    fullscreenTooltip.setAttribute('data-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
 })
 
 video.addEventListener('webkitendfullscreen', () => {
     playfulVideoPlayer.classList.remove('full-screen')
-    fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
+    fullscreenTooltip.setAttribute('data-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
 })
 
 function togglePIPClass() {
     if (videoContainer.classList.contains('pip-player')) {
         videoContainer.classList.remove('pip-player')
-        fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen' + ' (f)')
+        fullscreenTooltip.setAttribute('data-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else {
         videoContainer.classList.add('pip-player')
         fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
@@ -1110,8 +1112,8 @@ function toggleVolume() {
     video.muted = !video.muted
     return volumeTooltipContainer.setAttribute('data-tooltip-text',
         video.muted
-            ? 'Unmute (m)'
-            : 'Mute (m)')
+            ? `Unmute (${MUTE_TOGGLE_KEY})`
+            : `Mute (${MUTE_TOGGLE_KEY})`)
 }
 
 function volumeControlKeyboard(key, value) {
@@ -1780,6 +1782,8 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
         function (e) {
             switch (e.sessionState) {
                 case cast.framework.SessionState.SESSION_STARTED:
+                    videoContainer.classList.add('casted-session')
+                    break
                 case cast.framework.SessionState.SESSION_RESUMED:
                     break
                 case cast.framework.SessionState.SESSION_ENDED:
@@ -1794,6 +1798,7 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
         function () {
             if (!player.isConnected) {
                 console.log('RemotePlayerController: Player disconnected')
+                videoContainer.classList.remove('casted-session')
             }
         }
     )
@@ -1816,21 +1821,13 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
             videoContainer.classList.add('hovered')
             activity()
         }
+        const percentNumbers = (typeof Number(e.key) === 'number' && e.key < 10 && e.key >= 0) && e.key
         switch (e.key.toLowerCase()) {
             case '':
                 if (tagName === 'button') break
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
+            case percentNumbers:
                 checkActive()
-                new seekByTime.skipPercent(e.key / 10)
+                new seekByTime().skipPercent(e.key / 10)
                 break
             case 'home':
             case 'end':
@@ -1839,27 +1836,27 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
                 if (e.key.toLowerCase() === 'end') video.currentTime = video.duration
                 checkActive()
                 break
-            case 'k':
+            case PLAY_BUTTON_KEY:
             case ' ':
                 checkActive()
                 e.preventDefault()
                 togglePlay()
                 break
-            case 'f':
-                if (fullscreenButton.hasAttribute('unsupported')) break
+            case FULLSCREEN_BUTTON_KEY:
+                if (fullscreenButton.hasAttribute('pfv-unsupported')) break
                 checkActive()
                 toggleFullScreen()
                 break
-            case 'c':
+            case SUBTITLES_CLOSEDCAPTION_TOGGLE_KEY:
                 checkActive()
                 toggleCaptions()
                 break
-            case 'i':
-                if (pipPlayerButton.hasAttribute('unsupported')) break
+            case PICTUREINPICTURE_TOGGLE_KEY:
+                if (pipPlayerButton.hasAttribute('pfv-unsupported')) break
                 checkActive()
                 togglePIPPlayerMode()
                 break
-            case 'm':
+            case MUTE_TOGGLE_KEY:
                 checkActive()
                 toggleVolume()
                 break
@@ -1902,7 +1899,8 @@ mediaQuery.addEventListener('change', () => {
 
 const isURL = str => {
     try {
-        return Boolean(new URL(`https://${str}`)) || Boolean(new URL(`http://${str}`))
+        return Boolean(new URL(`https://${str}`)) ||
+            Boolean(new URL(`http://${str}`))
     } catch (e) {
         return false
     }
@@ -1918,7 +1916,7 @@ const eventListeners = [
                 navigator.mediaSession.playbackState = 'playing'
                 video.addEventListener('timeupdate', mediaSessionToggle())
             }
-            playpauseTooltipContainer.setAttribute('data-tooltip-text', 'Pause' + ' (k)')
+            playpauseTooltipContainer.setAttribute('data-tooltip-text', `Pause (${PLAY_BUTTON_KEY})`)
             intervalDivideWorker()
 
             if (Hls.isSupported() && video.currentTime === 0) hls.startLoad()
@@ -1990,7 +1988,7 @@ const eventListeners = [
                 window.cancelAnimationFrame(updateMetadata)
             })
             if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'
-            playpauseTooltipContainer.setAttribute('data-tooltip-text', 'Play' + ' (k)')
+            playpauseTooltipContainer.setAttribute('data-tooltip-text', `Play (${PLAY_BUTTON_KEY})`)
             video.classList.remove('inactive')
             clearTimeout(timeout)
         }
@@ -2190,15 +2188,15 @@ const eventListeners = [
             let volumeLevel
             video.muted || video.volume === 0
                 ? (volumeLevel = 'mute',
-                    volumeTooltipContainer.setAttribute('data-tooltip-text', 'Unmute (m)'))
+                    volumeTooltipContainer.setAttribute('data-tooltip-text', `Unmute (${MUTE_TOGGLE_KEY})`))
                 : video.volume >= 0.6
                     ? (volumeLevel = 'full',
-                        volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                        volumeTooltipContainer.setAttribute('data-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
                     : video.volume >= 0.3
                         ? (volumeLevel = 'mid',
-                            volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                            volumeTooltipContainer.setAttribute('data-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
                         : (volumeLevel = 'low',
-                            volumeTooltipContainer.setAttribute('data-tooltip-text', 'Mute (m)'))
+                            volumeTooltipContainer.setAttribute('data-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
             videoContainer.dataset.volumeLevel = volumeLevel
         }
     ]

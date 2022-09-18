@@ -1964,8 +1964,11 @@ const eventListeners = [
                 }
             })
 
-
             if (playfulVideoPlayer.querySelector('.video-container').classList.contains('played')) {
+                rightVideoControls.querySelectorAll('button svg').forEach(element => {
+                    element.style.animationDelay = '0s'
+                })
+            } else {
                 playfulVideoPlayer.querySelectorAll(`
                 .right-side button svg, .video-container:not(.caption) .caption-button svg, 
                 .video-container:not(.pip-player) .pip-button svg, 
@@ -2157,7 +2160,7 @@ const eventListeners = [
 
             orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
 
-            if (video.videoWidth > video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', video.videoWidth > video.videoHeight ? 'landscape' : video.videoWidth < video.videoHeight && 'portait')
+            playfulVideoPlayerContainer.setAttribute('aria-orientation', video.videoWidth > video.videoHeight ? 'landscape' : video.videoWidth < video.videoHeight && 'portait')
 
             playfulVideoPlayerAspectRatio.style.setProperty(
                 '--aspect-ratio-size',

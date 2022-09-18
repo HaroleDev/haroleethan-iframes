@@ -195,718 +195,725 @@
                         fill="var(--text-color)" />
                 </symbol>
             </svg>
-            <div class="playful-video-player loading" data-device="" data-speed="1">
-                <div class="video-context-menu">
-                    <div class="contents">
-                        <div class="item loop-item">
-                            <div class="item-content">
-                                <svg class="icon">
-                                    <use xlink:href="#loop-icon-24px" />
+            <div class="playful-video-player-aspect-ratio">
+                <div class="playful-video-player loading" pfv-device="" pfv-speed="1">
+                    <div class="video-context-menu">
+                        <div class="contents">
+                            <div class="item loop-item">
+                                <div class="item-content">
+                                    <svg class="icon">
+                                        <use xlink:href="#loop-icon-24px" />
+                                    </svg>
+                                    <div class="span">Loop</div>
+                                </div>
+                                <svg class="check">
+                                    <use xlink:href="#check-icon" />
                                 </svg>
-                                <div class="span">Loop</div>
                             </div>
-                            <svg class="check">
-                                <use xlink:href="#check-icon" />
+                            <div class="item eq-item">
+                                <div class="item-content">
+                                    <svg class="icon">
+                                        <use xlink:href="#eq-icon-24px" />
+                                    </svg>
+                                    <div class="span">Equalizer</div>
+                                </div>
+                            </div>
+                            <div class="item transcript-item">
+                                <div class="item-content">
+                                    <svg class="icon">
+                                        <use xlink:href="#transcript-icon-24px" />
+                                    </svg>
+                                    <div class="span">Transcript</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-content">
+                                    <svg class="icon">
+                                        <use xlink:href="#info-icon-24px" />
+                                    </svg>
+                                    <div class="span">Video Details</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-content">
+                                    <svg class="icon">
+                                        <use xlink:href="#nerd-stats-icon-24px" />
+                                    </svg>
+                                    <div class="span">Nerdy Stats</div>
+                                </div>
+                            </div>
+                            <div class="item about-player-item">
+                                <div class="item-content">
+                                    <svg class="icon">
+                                        <use xlink:href="#info-icon-24px" />
+                                    </svg>
+                                    <div class="span">About Playful Video</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dialog-container eq-dialog-container" aria-labelledby="dialogEQTitle"
+                        aria-describedby="dialogEQDescription">
+                        <div class="equalizer-dialog dialog" role="dialog">
+                            <div class="contents">
+                                <div style="width: 100%; margin-bottom: 8px;">
+                                    <h2 id="dialogEQTitle">Equalizer</h2>
+                                    <svg width="50" height="32" viewBox="0 0 50 32" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" class="switch eq-switch" role="switch"
+                                        aria-checked="false">
+                                        <rect x="2" y="2" width="46" height="28" rx="14" stroke-width="4"
+                                            class="switch-bg" />
+                                        <rect x="8" y="8" width="16" height="16" rx="8" class="switch-knob" />
+                                    </svg>
+                                </div>
+                                <p id="dialogEQDescription">So, you wanted to fine tune the sound from the video you're
+                                    playing? Great!<br>In
+                                    layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of
+                                    a
+                                    specific
+                                    frequency.</p>
+                                <div class="equalizers">
+                                    <div class="decibel-labels">
+                                        <div class="span">+12 dB</div>
+                                        <div class="span">+6 dB</div>
+                                        <div class="span">0 dB</div>
+                                        <div class="span">-6 dB</div>
+                                        <div class="span">-12 dB</div>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>30 Hz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>60 Hz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>125 Hz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>250 Hz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>500 Hz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>800 Hz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>1 kHz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>2 kHz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>4 kHz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>8 kHz</label>
+                                    </div>
+                                    <div class="eq-control">
+                                        <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
+                                            disabled />
+                                        <label>16 kHz</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-buttons">
+                                <button class="close-dialog">Close</button>
+                            </div>
+                        </div>
+                        <div class="dialog-overlay"></div>
+                    </div>
+                    <div class="dialog-container about-player-dialog-container" aria-labelledby="dialogAboutTitle">
+                        <div class="dialog" role="dialog">
+                            <div class="contents">
+                                <div style="width: 100%; margin-bottom: 8px;">
+                                    <h2 id="dialogAboutTitle">About Playful Video Player</h2>
+                                </div>
+                                <p>AirPlay® and AirPlay Logo™ are trademarks of Apple Inc., registered in the U.S. and
+                                    other
+                                    countries.</p>
+                                <p>Google Cast™ and Google® are trademarks of Google LLC.</p>
+                            </div>
+                            <div class="footer-buttons">
+                                <button class="close-dialog">Close</button>
+                            </div>
+                        </div>
+                        <div class="dialog-overlay"></div>
+                    </div>
+                    <div class="video-container paused" pfv-volume-level="full" pfv-start="0">
+                        <div class="error-dialog">
+                            <h2>Error</h2>
+                            <p id="error-log">An unknown error occurred.</p>
+                        </div>
+                        <div class="video-information-overlay">
+                            <div class="video-information-container">
+                                <div class="video-name">
+                                    <h1></h1>
+                                </div>
+                                <div class="author-name">
+                                    <div class="span"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buffering-container">
+                            <svg width="144" height="144" viewBox="0 0 144 144" fill="none" class="buffering-circle"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="72" cy="72" width="64" height="64" r="64" fill="none">
+                                </circle>
+                            </svg>
+                            <svg width="144" height="144" viewBox="0 0 144 144" fill="none"
+                                class="buffering-circle-stroke" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="72" cy="72" width="64" height="64" r="64" fill="none">
+                                </circle>
+                            </svg>
+                            <svg width="144" height="144" viewBox="0 0 144 144" fill="none"
+                                class="buffering-circle-track" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="72" cy="72" width="64" height="64" r="64" fill="none">
+                                </circle>
                             </svg>
                         </div>
-                        <div class="item eq-item">
-                            <div class="item-content">
-                                <svg class="icon">
-                                    <use xlink:href="#eq-icon-24px" />
-                                </svg>
-                                <div class="span">Equalizer</div>
-                            </div>
-                        </div>
-                        <div class="item transcript-item">
-                            <div class="item-content">
-                                <svg class="icon">
-                                    <use xlink:href="#transcript-icon-24px" />
-                                </svg>
-                                <div class="span">Transcript</div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-content">
-                                <svg class="icon">
-                                    <use xlink:href="#info-icon-24px" />
-                                </svg>
-                                <div class="span">Video Details</div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="item-content">
-                                <svg class="icon">
-                                    <use xlink:href="#nerd-stats-icon-24px" />
-                                </svg>
-                                <div class="span">Nerdy Stats</div>
-                            </div>
-                        </div>
-                        <div class="item about-player-item">
-                            <div class="item-content">
-                                <svg class="icon">
-                                    <use xlink:href="#info-icon-24px" />
-                                </svg>
-                                <div class="span">About Playful Video</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dialog-container eq-dialog-container" aria-labelledby="dialogEQTitle"
-                    aria-describedby="dialogEQDescription">
-                    <div class="equalizer-dialog dialog" role="dialog">
-                        <div class="contents">
-                            <div style="width: 100%; margin-bottom: 8px;">
-                                <h2 id="dialogEQTitle">Equalizer</h2>
-                                <svg width="50" height="32" viewBox="0 0 50 32" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="switch eq-switch" role="switch"
-                                    aria-checked="false">
-                                    <rect x="2" y="2" width="46" height="28" rx="14" stroke-width="4"
-                                        class="switch-bg" />
-                                    <rect x="8" y="8" width="16" height="16" rx="8" class="switch-knob" />
-                                </svg>
-                            </div>
-                            <p id="dialogEQDescription">So, you wanted to fine tune the sound from the video you're
-                                playing? Great!<br>In
-                                layman's terms, an equalizer (or EQ) is a filter that adjusts the loudness of
-                                a
-                                specific
-                                frequency.</p>
-                            <div class="equalizers">
-                                <div class="decibel-labels">
-                                    <div class="span">+12 dB</div>
-                                    <div class="span">+6 dB</div>
-                                    <div class="span">0 dB</div>
-                                    <div class="span">-6 dB</div>
-                                    <div class="span">-12 dB</div>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>30 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>60 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>125 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>250 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>500 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>800 Hz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>1 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>2 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>4 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>8 kHz</label>
-                                </div>
-                                <div class="eq-control">
-                                    <input type="range" class="eq-slider" min="-12" max="12" value="0" step="1"
-                                        disabled />
-                                    <label>16 kHz</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer-buttons">
-                            <button class="close-dialog">Close</button>
-                        </div>
-                    </div>
-                    <div class="dialog-overlay"></div>
-                </div>
-                <div class="dialog-container about-player-dialog-container" aria-labelledby="dialogAboutTitle">
-                    <div class="dialog" role="dialog">
-                        <div class="contents">
-                            <div style="width: 100%; margin-bottom: 8px;">
-                                <h2 id="dialogAboutTitle">About Playful Video Player</h2>
-                            </div>
-                            <p>AirPlay® and AirPlay Logo™ are trademarks of Apple Inc., registered in the U.S. and other
-                                countries.</p>
-                            <p>Google Cast™ and Google® are trademarks of Google LLC.</p>
-                        </div>
-                        <div class="footer-buttons">
-                            <button class="close-dialog">Close</button>
-                        </div>
-                    </div>
-                    <div class="dialog-overlay"></div>
-                </div>
-                <div class="video-container paused" data-volume-level="full" data-start="0">
-                    <div class="error-dialog">
-                        <h2>Error</h2>
-                        <p id="error-log">An unknown error occurred.</p>
-                    </div>
-                    <div class="video-information-overlay">
-                        <div class="video-information-container">
-                            <div class="video-name">
-                                <h1></h1>
-                            </div>
-                            <div class="author-name">
-                                <div class="span"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="buffering-container">
-                        <svg width="144" height="144" viewBox="0 0 144 144" fill="none" class="buffering-circle"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="72" cy="72" width="64" height="64" r="64" fill="none">
-                            </circle>
-                        </svg>
-                        <svg width="144" height="144" viewBox="0 0 144 144" fill="none" class="buffering-circle-stroke"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="72" cy="72" width="64" height="64" r="64" fill="none">
-                            </circle>
-                        </svg>
-                        <svg width="144" height="144" viewBox="0 0 144 144" fill="none" class="buffering-circle-track"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="72" cy="72" width="64" height="64" r="64" fill="none">
-                            </circle>
-                        </svg>
-                    </div>
-                    <div class="video-controls-container">
-                        <div class="controls-container">
-                            <div class="settings-context-menu">
-                                <div class="front-page page" data-page-type="list">
-                                    <div class="page-contents">
-                                        <div class="item">
-                                            <div class="item-content">
-                                                <svg class="icon">
-                                                    <use xlink:href="#annotations-icon-24px" />
+                        <div class="video-controls-container">
+                            <div class="controls-container">
+                                <div class="settings-context-menu">
+                                    <div class="front-page page" pfv-page-type="list">
+                                        <div class="page-contents">
+                                            <div class="item">
+                                                <div class="item-content">
+                                                    <svg class="icon">
+                                                        <use xlink:href="#annotations-icon-24px" />
+                                                    </svg>
+                                                    <div class="span">Annotations</div>
+                                                </div>
+                                            </div>
+                                            <div class="item loop-item">
+                                                <div class="item-content">
+                                                    <svg class="icon">
+                                                        <use xlink:href="#loop-icon-24px" />
+                                                    </svg>
+                                                    <div class="span">Loop</div>
+                                                </div>
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
                                                 </svg>
-                                                <div class="span">Annotations</div>
+                                            </div>
+                                            <div class="item download-item">
+                                                <div class="item-content">
+                                                    <svg class="icon">
+                                                        <use xlink:href="#download-icon-24px" />
+                                                    </svg>
+                                                    <div class="span">Download</div>
+                                                </div>
+                                            </div>
+                                            <div class="item playback-speed-item">
+                                                <div class="item-content">
+                                                    <svg class="icon">
+                                                        <use xlink:href="#playback-speed-icon-24px" />
+                                                    </svg>
+                                                    <div class="span">Playback Speed</div>
+                                                </div>
+                                                <div class="span current-speed"></div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="item-content">
+                                                    <svg class="icon">
+                                                        <use xlink:href="#subtitles-cc-icon-24px" />
+                                                    </svg>
+                                                    <div class="span">Subtitles/CC</div>
+                                                </div>
+                                            </div>
+                                            <div class="item quality-item">
+                                                <div class="item-content">
+                                                    <svg class="icon">
+                                                        <use xlink:href="#quality-icon-24px" />
+                                                    </svg>
+                                                    <div class="span">Quality</div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="item-content">
+                                                    <svg class="icon">
+                                                        <use xlink:href="#settings-icon-24px" />
+                                                    </svg>
+                                                    <div class="span">Advanced Settings</div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="item loop-item">
-                                            <div class="item-content">
-                                                <svg class="icon">
-                                                    <use xlink:href="#loop-icon-24px" />
-                                                </svg>
-                                                <div class="span">Loop</div>
-                                            </div>
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                        </div>
-                                        <div class="item download-item">
-                                            <div class="item-content">
-                                                <svg class="icon">
-                                                    <use xlink:href="#download-icon-24px" />
-                                                </svg>
-                                                <div class="span">Download</div>
-                                            </div>
-                                        </div>
-                                        <div class="item playback-speed-item">
-                                            <div class="item-content">
-                                                <svg class="icon">
-                                                    <use xlink:href="#playback-speed-icon-24px" />
+                                    </div>
+                                    <div class="playback-speed-settings page" pfv-page-type="toggle" hidden>
+                                        <div class="header">
+                                            <div class="contents back-page">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" class="back-arrow">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M14.7071 5.29289C15.0976 5.68342 15.0976 6.31658 14.7071 6.70711L9.41421 12L14.7071 17.2929C15.0976 17.6834 15.0976 18.3166 14.7071 18.7071C14.3166 19.0976 13.6834 19.0976 13.2929 18.7071L7.29289 12.7071C6.90237 12.3166 6.90237 11.6834 7.29289 11.2929L13.2929 5.29289C13.6834 4.90237 14.3166 4.90237 14.7071 5.29289Z"
+                                                        fill="var(--text-color)" />
                                                 </svg>
                                                 <div class="span">Playback Speed</div>
                                             </div>
-                                            <div class="span current-speed"></div>
                                         </div>
-                                        <div class="item">
-                                            <div class="item-content">
-                                                <svg class="icon">
-                                                    <use xlink:href="#subtitles-cc-icon-24px" />
+                                        <div class="page-contents playback-speed-settings">
+                                            <div class="item" pfv-speed="0.25">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
                                                 </svg>
-                                                <div class="span">Subtitles/CC</div>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="0.5">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="0.75">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="1">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span normal-speed"></div>
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="1.25">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="1.5">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="1.75">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="2">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item" pfv-speed="4">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="item quality-item">
-                                            <div class="item-content">
-                                                <svg class="icon">
-                                                    <use xlink:href="#quality-icon-24px" />
+                                    </div>
+                                    <div class="quality-settings page" pfv-page-type="toggle" hidden>
+                                        <div class="header">
+                                            <div class="contents back-page">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" class="back-arrow">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M14.7071 5.29289C15.0976 5.68342 15.0976 6.31658 14.7071 6.70711L9.41421 12L14.7071 17.2929C15.0976 17.6834 15.0976 18.3166 14.7071 18.7071C14.3166 19.0976 13.6834 19.0976 13.2929 18.7071L7.29289 12.7071C6.90237 12.3166 6.90237 11.6834 7.29289 11.2929L13.2929 5.29289C13.6834 4.90237 14.3166 4.90237 14.7071 5.29289Z"
+                                                        fill="var(--text-color)" />
                                                 </svg>
                                                 <div class="span">Quality</div>
                                             </div>
                                         </div>
-                                        <div class="item">
-                                            <div class="item-content">
-                                                <svg class="icon">
-                                                    <use xlink:href="#settings-icon-24px" />
+                                        <div class="page-contents quality-settings">
+                                            <div class="item" pfv-speed="0.25">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
                                                 </svg>
-                                                <div class="span">Advanced Settings</div>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <svg class="check">
+                                                    <use xlink:href="#check-icon" />
+                                                </svg>
+                                                <div class="item-content">
+                                                    <div class="span"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="playback-speed-settings page" data-page-type="toggle" hidden>
-                                    <div class="header">
-                                        <div class="contents back-page">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="back-arrow">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M14.7071 5.29289C15.0976 5.68342 15.0976 6.31658 14.7071 6.70711L9.41421 12L14.7071 17.2929C15.0976 17.6834 15.0976 18.3166 14.7071 18.7071C14.3166 19.0976 13.6834 19.0976 13.2929 18.7071L7.29289 12.7071C6.90237 12.3166 6.90237 11.6834 7.29289 11.2929L13.2929 5.29289C13.6834 4.90237 14.3166 4.90237 14.7071 5.29289Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                            <div class="span">Playback Speed</div>
-                                        </div>
-                                    </div>
-                                    <div class="page-contents playback-speed-settings">
-                                        <div class="item" data-speed="0.25">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="0.5">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="0.75">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="1">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span normal-speed"></div>
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="1.25">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="1.5">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="1.75">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="2">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item" data-speed="4">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="quality-settings page" data-page-type="toggle" hidden>
-                                    <div class="header">
-                                        <div class="contents back-page">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" class="back-arrow">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M14.7071 5.29289C15.0976 5.68342 15.0976 6.31658 14.7071 6.70711L9.41421 12L14.7071 17.2929C15.0976 17.6834 15.0976 18.3166 14.7071 18.7071C14.3166 19.0976 13.6834 19.0976 13.2929 18.7071L7.29289 12.7071C6.90237 12.3166 6.90237 11.6834 7.29289 11.2929L13.2929 5.29289C13.6834 4.90237 14.3166 4.90237 14.7071 5.29289Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                            <div class="span">Quality</div>
-                                        </div>
-                                    </div>
-                                    <div class="page-contents quality-settings">
-                                        <div class="item" data-speed="0.25">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <svg class="check">
-                                                <use xlink:href="#check-icon" />
-                                            </svg>
-                                            <div class="item-content">
-                                                <div class="span"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="controls">
-                                <div class="left-side">
-                                    <div class="play-pause-tooltip-container" data-tooltip-text="Play (k)"
-                                        data-tooltip="left">
-                                        <button class="play-pause-button" aria-label="Play">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32"
-                                                class="play-pause-icon" height="32">
-                                                <path
-                                                    d="M4 30.166V1.834C4 .63 5.348-.084 6.343.594l.052.035L27.176 14.76c.265.18.45.424.554.694.148.38.135.811-.038 1.183-.109.233-.281.443-.516.603L6.343 31.406C5.348 32.084 4 31.37 4 30.166M36 30.165V1.835C36 .632 37.345-.083 38.341.59l.051.035 20.66 14.029c.271.179.461.427.565.703.147.445.134.94-.038 1.376-.108.24-.285.455-.527.613L38.341 31.41c-.996.673-2.341-.042-2.341-1.245m19.971-14.266c0-.008.007-.014.015-.014h.028c.008 0 .015.006.015.014v.202c0 .008-.007.014-.015.014h-.028c-.008 0-.015-.006-.015-.014v-.202M68 30.161V1.839c0-1.2 1.333-1.92 2.332-1.264l.05.034 20.231 13.667c.292.174.5.44.601.736.143.675.131 1.397-.037 2.063-.105.262-.301.495-.564.649L70.332 31.425c-.999.656-2.332-.064-2.332-1.264m19.869-14.62c0-.036.029-.066.065-.066h.132c.036 0 .065.03.065.066v.918c0 .036-.029.066-.065.066h-.132c-.036 0-.065-.03-.065-.066v-.918M100 30.152V1.848c0-1.195 1.31-1.925 2.314-1.305l.048.033 19.352 12.928c.337.165.582.464.678.805.135 1.142.123 2.331-.036 3.465-.099.308-.333.576-.642.722l-19.4 12.961c-1.004.62-2.314-.11-2.314-1.305m19.66-15.343c0-.095.076-.171.17-.171h.34c.094 0 .17.076.17.171v2.382c0 .095-.076.171-.17.171h-.34c-.094 0-.17-.076-.17-.171v-2.382M132 30.137V1.863c0-1.187 1.269-1.932 2.283-1.373l.043.029 17.841 11.656c.413.148.722.506.808.922.122 1.949.111 3.939-.032 5.881-.09.386-.388.716-.776.847L134.283 31.51c-1.014.559-2.283-.186-2.283-1.373m19.299-16.589c0-.194.157-.351.351-.351h.7c.194 0 .351.157.351.351v4.904c0 .194-.157.351-.351.351h-.7c-.194 0-.351-.157-.351-.351v-4.904M164 30.115V1.885c0-1.174 1.209-1.943 2.238-1.473l.036.024 15.627 9.791c.523.125.926.569.998 1.095.102 3.13.093 6.295-.027 9.419-.075.501-.469.922-.971 1.032l-15.663 9.815c-1.029.47-2.238-.299-2.238-1.473M182.771 11.7c0-.339.275-.614.615-.614h1.228c.34 0 .615.275.615.614v8.6c0 .339-.275.614-.615.614h-1.228c-.34 0-.615-.275-.615-.614v-8.6M196 30.09V1.91c0-1.159 1.141-1.956 2.186-1.588l.028.02 13.108 7.669c.649.098 1.159.64 1.216 1.291.08 4.474.073 8.976-.021 13.445-.059.632-.562 1.155-1.195 1.242l-13.136 7.689c-1.045.368-2.186-.429-2.186-1.588m18.171-20.492c0-.505.409-.914.914-.914h1.83c.505 0 .914.409.914.914v12.804c0 .505-.409.914-.914.914h-1.83c-.505 0-.914-.409-.914-.914V9.598M228 30.068V1.932c0-1.146 1.081-1.966 2.14-1.689l.022.015 10.873 5.788c.761.074 1.366.702 1.408 1.465.061 5.666.056 11.353-.015 17.015-.045.748-.644 1.363-1.393 1.428l-10.895 5.803c-1.059.277-2.14-.543-2.14-1.689m17.638-22.333c0-.653.529-1.181 1.181-1.181h2.362c.652 0 1.181.528 1.181 1.181v16.53c0 .653-.529 1.181-1.181 1.181h-2.362c-.652 0-1.181-.528-1.181-1.181V7.735M260 30.051V1.949c0-1.135 1.034-1.975 2.105-1.768l.015.011 9.115 4.306c.849.055 1.527.752 1.559 1.602.045 6.605.041 13.225-.012 19.827-.033.84-.707 1.526-1.547 1.575l-9.13 4.317c-1.071.207-2.105-.633-2.105-1.768m17.219-23.784c0-.769.622-1.391 1.391-1.391h2.78c.769 0 1.391.622 1.391 1.391v19.466c0 .769-.622 1.391-1.391 1.391h-2.78c-.769 0-1.391-.622-1.391-1.391V6.267M292 30.037V1.963c0-1.127.997-1.982 2.077-1.83l.012.008 7.766 3.172c.916.04 1.652.789 1.676 1.707.033 7.324.03 14.659-.009 21.981-.025.909-.757 1.65-1.667 1.686l-7.778 3.18c-1.08.152-2.077-.703-2.077-1.83m16.898-24.895c0-.857.694-1.551 1.551-1.551h3.102c.857 0 1.551.694 1.551 1.551v21.716c0 .857-.694 1.551-1.551 1.551h-3.102c-.857 0-1.551-.694-1.551-1.551V5.142M324 30.027V1.973c0-1.121.97-1.987 2.056-1.876l.008.006 6.733 2.301c.969.029 1.748.818 1.765 1.787.024 7.875.022 15.759-.006 23.633-.018.963-.795 1.746-1.759 1.772l-6.741 2.307c-1.086.111-2.056-.755-2.056-1.876M340.651 4.28c0-.925.75-1.674 1.675-1.674h3.348c.925 0 1.675.749 1.675 1.674v23.44c0 .925-.75 1.674-1.675 1.674h-3.348c-.925 0-1.675-.749-1.675-1.674V4.28M356 30.019V1.981c0-1.117.948-1.991 2.04-1.912l.006.004 5.938 1.632c1.008.021 1.821.841 1.833 1.849.017 8.299.016 16.604-.004 24.902-.013 1.004-.824 1.82-1.829 1.839l-5.944 1.636c-1.092.079-2.04-.795-2.04-1.912m16.462-26.402c0-.977.792-1.768 1.769-1.768h3.538c.977 0 1.769.791 1.769 1.768v24.766c0 .977-.792 1.768-1.769 1.768h-3.538c-.977 0-1.769-.791-1.769-1.768V3.617M388 30.013V1.987c0-1.113.932-1.994 2.027-1.94l.004.003 5.33 1.119c1.038.015 1.877.858 1.885 1.897.012 8.624.011 17.252-.003 25.875-.008 1.036-.846 1.877-1.882 1.89l-5.334 1.122c-1.095.054-2.027-.827-2.027-1.94m16.317-26.904c0-1.017.824-1.841 1.841-1.841h3.684c1.017 0 1.841.824 1.841 1.841v25.782c0 1.017-.824 1.841-1.841 1.841h-3.684c-1.017 0-1.841-.824-1.841-1.841V3.109M420 30.009V1.991c0-1.11.919-1.995 2.018-1.96l.002.002 4.867.73c1.062.009 1.92.87 1.926 1.932.007 8.871.007 17.744-.002 26.615-.006 1.06-.864 1.919-1.924 1.927l-4.869.732c-1.099.035-2.018-.85-2.018-1.96m16.207-27.286c0-1.048.848-1.896 1.896-1.896h3.794c1.048 0 1.896.848 1.896 1.896v26.554c0 1.048-.848 1.896-1.896 1.896h-3.794c-1.048 0-1.896-.848-1.896-1.896V2.723M452 30.005V1.995c0-1.108.91-1.998 2.011-1.976l.001.001 4.524.441c1.079.005 1.952.88 1.955 1.959.005 9.054.004 18.109-.001 27.163-.004 1.078-.876 1.951-1.954 1.956l-4.525.442c-1.101.022-2.011-.868-2.011-1.976m16.125-27.568c0-1.071.867-1.938 1.937-1.938h3.876c1.07 0 1.937.867 1.937 1.938v27.126c0 1.071-.867 1.938-1.937 1.938h-3.876c-1.07 0-1.937-.867-1.937-1.938V2.437M484 30.003V1.997c0-1.106.904-1.998 2.006-1.987h.001l4.279.236c1.091.003 1.974.887 1.976 1.978.002 9.184.002 18.369-.001 27.554-.002 1.09-.885 1.974-1.975 1.976l-4.28.236c-1.102.011-2.006-.881-2.006-1.987m16.067-27.77c0-1.087.88-1.967 1.966-1.967h3.934c1.086 0 1.966.88 1.966 1.967v27.534c0 1.087-.88 1.967-1.966 1.967h-3.934c-1.086 0-1.966-.88-1.966-1.967V2.233M516 30.001V1.999c0-1.106.899-2 2.002-1.995h.001l4.118.1c1.099.001 1.989.892 1.99 1.991.001 9.27.001 18.541-.001 27.811 0 1.099-.89 1.989-1.989 1.99l-4.119.1c-1.103.005-2.002-.889-2.002-1.995m16.028-27.902c0-1.098.889-1.986 1.986-1.986h3.972c1.097 0 1.986.888 1.986 1.986v27.802c0 1.098-.889 1.986-1.986 1.986h-3.972c-1.097 0-1.986-.888-1.986-1.986V2.099M548 30V2c0-1.105.897-2 2.001-1.999l4.028.024c1.103 0 1.997.894 1.997 1.998.001 9.318.001 18.636 0 27.955 0 1.103-.894 1.997-1.997 1.997l-4.028.024C548.897 32 548 31.105 548 30m16.007-27.976c0-1.104.893-1.997 1.996-1.997h3.994c1.103 0 1.996.893 1.996 1.997v27.952c0 1.104-.893 1.997-1.996 1.997h-3.994c-1.103 0-1.996-.893-1.996-1.997V2.024M580 30V2c0-1.105.896-2 2-2h4c1.105 0 2 .895 2 2v28c0 1.105-.895 2-2 2h-4c-1.104 0-2-.895-2-2m16-28c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v28c0 1.105-.895 2-2 2h-4c-1.105 0-2-.895-2-2V2"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                class="replay-icon" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M14.8284 5.99999L16.8535 3.97486C17.4393 3.38908 17.4393 2.43933 16.8535 1.85354L16.1464 1.14643C15.5607 0.560647 14.6109 0.560645 14.0251 1.14643L7.23223 7.93929C6.64644 8.52508 6.64644 9.47483 7.23222 10.0606L14.0251 16.8535C14.6109 17.4393 15.5607 17.4393 16.1464 16.8535L16.8535 16.1464C17.4393 15.5607 17.4393 14.6109 16.8536 14.0251L14.8284 12H16C19.866 12 23 15.134 23 19C23 22.866 19.866 26 16 26C12.645 26 9.84128 23.6397 9.15871 20.4891C8.98331 19.6794 8.32842 19 7.49999 19H4.49999C3.67157 19 2.99091 19.6744 3.08531 20.4975C3.82787 26.9718 9.32674 32 16 32C23.1797 32 29 26.1797 29 19C29 11.8203 23.1797 5.99999 16 5.99999H14.8284Z"
-                                                    fill="var(--text-color)" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="right-side">
-                                    <div class="volume-tooltip-container" data-tooltip-text="Mute (m)"
-                                        data-tooltip="right">
-                                        <div class="volume-container">
-                                            <div class="volume-slider-container" aria-label="Control volume">
-                                                <div class="volume-slider"></div>
-                                            </div>
-                                            <button class="volume-button">
+                                <div class="controls">
+                                    <div class="left-side">
+                                        <div class="play-pause-tooltip-container" pfv-tooltip-text="Play (k)"
+                                            pfv-tooltip="left">
+                                            <button class="play-pause-button" aria-label="Play">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32"
+                                                    class="play-pause-icon" height="32">
+                                                    <path
+                                                        d="M4 30.166V1.834C4 .63 5.348-.084 6.343.594l.052.035L27.176 14.76c.265.18.45.424.554.694.148.38.135.811-.038 1.183-.109.233-.281.443-.516.603L6.343 31.406C5.348 32.084 4 31.37 4 30.166M36 30.165V1.835C36 .632 37.345-.083 38.341.59l.051.035 20.66 14.029c.271.179.461.427.565.703.147.445.134.94-.038 1.376-.108.24-.285.455-.527.613L38.341 31.41c-.996.673-2.341-.042-2.341-1.245m19.971-14.266c0-.008.007-.014.015-.014h.028c.008 0 .015.006.015.014v.202c0 .008-.007.014-.015.014h-.028c-.008 0-.015-.006-.015-.014v-.202M68 30.161V1.839c0-1.2 1.333-1.92 2.332-1.264l.05.034 20.231 13.667c.292.174.5.44.601.736.143.675.131 1.397-.037 2.063-.105.262-.301.495-.564.649L70.332 31.425c-.999.656-2.332-.064-2.332-1.264m19.869-14.62c0-.036.029-.066.065-.066h.132c.036 0 .065.03.065.066v.918c0 .036-.029.066-.065.066h-.132c-.036 0-.065-.03-.065-.066v-.918M100 30.152V1.848c0-1.195 1.31-1.925 2.314-1.305l.048.033 19.352 12.928c.337.165.582.464.678.805.135 1.142.123 2.331-.036 3.465-.099.308-.333.576-.642.722l-19.4 12.961c-1.004.62-2.314-.11-2.314-1.305m19.66-15.343c0-.095.076-.171.17-.171h.34c.094 0 .17.076.17.171v2.382c0 .095-.076.171-.17.171h-.34c-.094 0-.17-.076-.17-.171v-2.382M132 30.137V1.863c0-1.187 1.269-1.932 2.283-1.373l.043.029 17.841 11.656c.413.148.722.506.808.922.122 1.949.111 3.939-.032 5.881-.09.386-.388.716-.776.847L134.283 31.51c-1.014.559-2.283-.186-2.283-1.373m19.299-16.589c0-.194.157-.351.351-.351h.7c.194 0 .351.157.351.351v4.904c0 .194-.157.351-.351.351h-.7c-.194 0-.351-.157-.351-.351v-4.904M164 30.115V1.885c0-1.174 1.209-1.943 2.238-1.473l.036.024 15.627 9.791c.523.125.926.569.998 1.095.102 3.13.093 6.295-.027 9.419-.075.501-.469.922-.971 1.032l-15.663 9.815c-1.029.47-2.238-.299-2.238-1.473M182.771 11.7c0-.339.275-.614.615-.614h1.228c.34 0 .615.275.615.614v8.6c0 .339-.275.614-.615.614h-1.228c-.34 0-.615-.275-.615-.614v-8.6M196 30.09V1.91c0-1.159 1.141-1.956 2.186-1.588l.028.02 13.108 7.669c.649.098 1.159.64 1.216 1.291.08 4.474.073 8.976-.021 13.445-.059.632-.562 1.155-1.195 1.242l-13.136 7.689c-1.045.368-2.186-.429-2.186-1.588m18.171-20.492c0-.505.409-.914.914-.914h1.83c.505 0 .914.409.914.914v12.804c0 .505-.409.914-.914.914h-1.83c-.505 0-.914-.409-.914-.914V9.598M228 30.068V1.932c0-1.146 1.081-1.966 2.14-1.689l.022.015 10.873 5.788c.761.074 1.366.702 1.408 1.465.061 5.666.056 11.353-.015 17.015-.045.748-.644 1.363-1.393 1.428l-10.895 5.803c-1.059.277-2.14-.543-2.14-1.689m17.638-22.333c0-.653.529-1.181 1.181-1.181h2.362c.652 0 1.181.528 1.181 1.181v16.53c0 .653-.529 1.181-1.181 1.181h-2.362c-.652 0-1.181-.528-1.181-1.181V7.735M260 30.051V1.949c0-1.135 1.034-1.975 2.105-1.768l.015.011 9.115 4.306c.849.055 1.527.752 1.559 1.602.045 6.605.041 13.225-.012 19.827-.033.84-.707 1.526-1.547 1.575l-9.13 4.317c-1.071.207-2.105-.633-2.105-1.768m17.219-23.784c0-.769.622-1.391 1.391-1.391h2.78c.769 0 1.391.622 1.391 1.391v19.466c0 .769-.622 1.391-1.391 1.391h-2.78c-.769 0-1.391-.622-1.391-1.391V6.267M292 30.037V1.963c0-1.127.997-1.982 2.077-1.83l.012.008 7.766 3.172c.916.04 1.652.789 1.676 1.707.033 7.324.03 14.659-.009 21.981-.025.909-.757 1.65-1.667 1.686l-7.778 3.18c-1.08.152-2.077-.703-2.077-1.83m16.898-24.895c0-.857.694-1.551 1.551-1.551h3.102c.857 0 1.551.694 1.551 1.551v21.716c0 .857-.694 1.551-1.551 1.551h-3.102c-.857 0-1.551-.694-1.551-1.551V5.142M324 30.027V1.973c0-1.121.97-1.987 2.056-1.876l.008.006 6.733 2.301c.969.029 1.748.818 1.765 1.787.024 7.875.022 15.759-.006 23.633-.018.963-.795 1.746-1.759 1.772l-6.741 2.307c-1.086.111-2.056-.755-2.056-1.876M340.651 4.28c0-.925.75-1.674 1.675-1.674h3.348c.925 0 1.675.749 1.675 1.674v23.44c0 .925-.75 1.674-1.675 1.674h-3.348c-.925 0-1.675-.749-1.675-1.674V4.28M356 30.019V1.981c0-1.117.948-1.991 2.04-1.912l.006.004 5.938 1.632c1.008.021 1.821.841 1.833 1.849.017 8.299.016 16.604-.004 24.902-.013 1.004-.824 1.82-1.829 1.839l-5.944 1.636c-1.092.079-2.04-.795-2.04-1.912m16.462-26.402c0-.977.792-1.768 1.769-1.768h3.538c.977 0 1.769.791 1.769 1.768v24.766c0 .977-.792 1.768-1.769 1.768h-3.538c-.977 0-1.769-.791-1.769-1.768V3.617M388 30.013V1.987c0-1.113.932-1.994 2.027-1.94l.004.003 5.33 1.119c1.038.015 1.877.858 1.885 1.897.012 8.624.011 17.252-.003 25.875-.008 1.036-.846 1.877-1.882 1.89l-5.334 1.122c-1.095.054-2.027-.827-2.027-1.94m16.317-26.904c0-1.017.824-1.841 1.841-1.841h3.684c1.017 0 1.841.824 1.841 1.841v25.782c0 1.017-.824 1.841-1.841 1.841h-3.684c-1.017 0-1.841-.824-1.841-1.841V3.109M420 30.009V1.991c0-1.11.919-1.995 2.018-1.96l.002.002 4.867.73c1.062.009 1.92.87 1.926 1.932.007 8.871.007 17.744-.002 26.615-.006 1.06-.864 1.919-1.924 1.927l-4.869.732c-1.099.035-2.018-.85-2.018-1.96m16.207-27.286c0-1.048.848-1.896 1.896-1.896h3.794c1.048 0 1.896.848 1.896 1.896v26.554c0 1.048-.848 1.896-1.896 1.896h-3.794c-1.048 0-1.896-.848-1.896-1.896V2.723M452 30.005V1.995c0-1.108.91-1.998 2.011-1.976l.001.001 4.524.441c1.079.005 1.952.88 1.955 1.959.005 9.054.004 18.109-.001 27.163-.004 1.078-.876 1.951-1.954 1.956l-4.525.442c-1.101.022-2.011-.868-2.011-1.976m16.125-27.568c0-1.071.867-1.938 1.937-1.938h3.876c1.07 0 1.937.867 1.937 1.938v27.126c0 1.071-.867 1.938-1.937 1.938h-3.876c-1.07 0-1.937-.867-1.937-1.938V2.437M484 30.003V1.997c0-1.106.904-1.998 2.006-1.987h.001l4.279.236c1.091.003 1.974.887 1.976 1.978.002 9.184.002 18.369-.001 27.554-.002 1.09-.885 1.974-1.975 1.976l-4.28.236c-1.102.011-2.006-.881-2.006-1.987m16.067-27.77c0-1.087.88-1.967 1.966-1.967h3.934c1.086 0 1.966.88 1.966 1.967v27.534c0 1.087-.88 1.967-1.966 1.967h-3.934c-1.086 0-1.966-.88-1.966-1.967V2.233M516 30.001V1.999c0-1.106.899-2 2.002-1.995h.001l4.118.1c1.099.001 1.989.892 1.99 1.991.001 9.27.001 18.541-.001 27.811 0 1.099-.89 1.989-1.989 1.99l-4.119.1c-1.103.005-2.002-.889-2.002-1.995m16.028-27.902c0-1.098.889-1.986 1.986-1.986h3.972c1.097 0 1.986.888 1.986 1.986v27.802c0 1.098-.889 1.986-1.986 1.986h-3.972c-1.097 0-1.986-.888-1.986-1.986V2.099M548 30V2c0-1.105.897-2 2.001-1.999l4.028.024c1.103 0 1.997.894 1.997 1.998.001 9.318.001 18.636 0 27.955 0 1.103-.894 1.997-1.997 1.997l-4.028.024C548.897 32 548 31.105 548 30m16.007-27.976c0-1.104.893-1.997 1.996-1.997h3.994c1.103 0 1.996.893 1.996 1.997v27.952c0 1.104-.893 1.997-1.996 1.997h-3.994c-1.103 0-1.996-.893-1.996-1.997V2.024M580 30V2c0-1.105.896-2 2-2h4c1.105 0 2 .895 2 2v28c0 1.105-.895 2-2 2h-4c-1.104 0-2-.895-2-2m16-28c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v28c0 1.105-.895 2-2 2h-4c-1.105 0-2-.895-2-2V2"
+                                                        fill="var(--text-color)" />
+                                                </svg>
                                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg" style="--animation-order: 1;">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M16.2929 13.2929C16.6834 12.9024 17.3166 12.9024 17.7071 13.2929C19.7545 15.3403 19.7545 18.6597 17.7071 20.7071C17.3166 21.0976 16.6834 21.0976 16.2929 20.7071C15.9024 20.3166 15.9024 19.6834 16.2929 19.2929C17.5592 18.0266 17.5592 15.9734 16.2929 14.7071C15.9024 14.3166 15.9024 13.6834 16.2929 13.2929Z"
-                                                        class="low-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M19.2567 7.33104C19.6262 6.92053 20.2585 6.88726 20.669 7.25671C26.4547 12.4639 26.4547 21.5361 20.669 26.7433C20.2585 27.1128 19.6262 27.0795 19.2567 26.669C18.8873 26.2585 18.9205 25.6262 19.331 25.2567C24.234 20.844 24.234 13.156 19.331 8.7433C18.9205 8.37384 18.8873 7.74155 19.2567 7.33104Z"
-                                                        class="mid-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M23.2689 1.31769C23.6458 0.913935 24.2786 0.892115 24.6823 1.26895C33.2175 9.23515 33.2175 22.7649 24.6823 30.7311C24.2786 31.1079 23.6458 31.0861 23.2689 30.6823C22.8921 30.2786 22.9139 29.6458 23.3177 29.2689C31.0058 22.0934 31.0058 9.90659 23.3177 2.73106C22.9139 2.35422 22.8921 1.72144 23.2689 1.31769Z"
-                                                        class="full-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M17.2929 11.2929C17.6834 10.9024 18.3166 10.9024 18.7071 11.2929L22 14.5858L25.2929 11.2929C25.6834 10.9024 26.3166 10.9024 26.7071 11.2929C27.0976 11.6834 27.0976 12.3166 26.7071 12.7071L23.4142 16L26.7071 19.2929C27.0976 19.6834 27.0976 20.3166 26.7071 20.7071C26.3166 21.0976 25.6834 21.0976 25.2929 20.7071L22 17.4142L18.7071 20.7071C18.3166 21.0976 17.6834 21.0976 17.2929 20.7071C16.9024 20.3166 16.9024 19.6834 17.2929 19.2929L20.5858 16L17.2929 12.7071C16.9024 12.3166 16.9024 11.6834 17.2929 11.2929Z"
-                                                        class="mute-volume" />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M10.39 3.87193C11.5331 2.3132 14 3.12173 14 5.05466V26.9454C14 28.8783 11.5331 29.6868 10.39 28.1281L6.99 23.5H3C1.89543 23.5 1 22.6046 1 21.5V10.5C1 9.39545 1.89543 8.50002 3 8.50002L6.99 8.50002L10.39 3.87193ZM12 5.05466L8.61 9.68274C8.23325 10.1965 7.62709 10.5 6.99 10.5H3V21.5H6.99C7.62709 21.5 8.23325 21.8035 8.61 22.3173L12 26.9454V5.05466Z" />
+                                                    class="replay-icon" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M14.8284 5.99999L16.8535 3.97486C17.4393 3.38908 17.4393 2.43933 16.8535 1.85354L16.1464 1.14643C15.5607 0.560647 14.6109 0.560645 14.0251 1.14643L7.23223 7.93929C6.64644 8.52508 6.64644 9.47483 7.23222 10.0606L14.0251 16.8535C14.6109 17.4393 15.5607 17.4393 16.1464 16.8535L16.8535 16.1464C17.4393 15.5607 17.4393 14.6109 16.8536 14.0251L14.8284 12H16C19.866 12 23 15.134 23 19C23 22.866 19.866 26 16 26C12.645 26 9.84128 23.6397 9.15871 20.4891C8.98331 19.6794 8.32842 19 7.49999 19H4.49999C3.67157 19 2.99091 19.6744 3.08531 20.4975C3.82787 26.9718 9.32674 32 16 32C23.1797 32 29 26.1797 29 19C29 11.8203 23.1797 5.99999 16 5.99999H14.8284Z"
+                                                        fill="var(--text-color)" />
                                                 </svg>
                                             </button>
                                         </div>
                                     </div>
-                                    <div data-tooltip-text="Subtitles/closed captions (c)" data-tooltip="right">
-                                        <button class="caption-button" aria-label="Toggle subtitles or closed captions">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 2;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" class="stroke"
-                                                    d="M24.956 25.0984L26.2854 24.8491C27.9887 24.5298 29.2774 23.1255 29.4499 21.4012L29.6096 19.804C29.8626 17.2743 29.8626 14.7257 29.6096 12.1959L29.4499 10.5988C29.2774 8.87443 27.9887 7.47022 26.2854 7.15085L24.956 6.9016C18.4016 5.67265 11.6682 5.75933 5.14765 7.1566C3.77551 7.45063 2.75023 8.59703 2.6106 9.99335L2.39682 12.1311C2.13954 14.7039 2.13954 17.296 2.39682 19.8689L2.6106 22.0066C2.75023 23.403 3.77551 24.5493 5.14765 24.8434C11.6682 26.2406 18.4016 26.3273 24.956 25.0984ZM4.72859 5.201C2.50679 5.6771 0.846619 7.53338 0.620522 9.79435L0.406746 11.9321C0.136228 14.6373 0.136228 17.3627 0.406746 20.0679L0.620522 22.2056C0.846619 24.4666 2.50679 26.3229 4.72859 26.799C11.5085 28.2518 18.5096 28.3419 25.3246 27.0641L26.6539 26.8149C29.23 26.3319 31.1791 24.2081 31.4399 21.6002L31.5997 20.003C31.8659 17.341 31.8659 14.659 31.5997 11.9969L31.4399 10.3998C31.1791 7.79184 29.23 5.66812 26.6539 5.18511L25.3246 4.93586C18.5096 3.65804 11.5085 3.74817 4.72859 5.201Z" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd" class="c"
-                                                    style="--animation-delay: 2;"
-                                                    d="M9.7039 10.4567C10.8003 10.0026 12.0067 9.88378 13.1705 10.1153C13.7122 10.223 14.064 10.7495 13.9562 11.2912C13.8485 11.8328 13.322 12.1846 12.7804 12.0769C12.0044 11.9225 11.2002 12.0017 10.4693 12.3045C9.73836 12.6072 9.11365 13.1199 8.67412 13.7777C8.2346 14.4355 8 15.2089 8 16C8 16.7911 8.2346 17.5645 8.67412 18.2223C9.11365 18.8801 9.73836 19.3928 10.4693 19.6955C11.2002 19.9983 12.0044 20.0775 12.7804 19.9231C13.322 19.8154 13.8485 20.1672 13.9562 20.7088C14.064 21.2505 13.7122 21.777 13.1705 21.8847C12.0067 22.1162 10.8003 21.9974 9.7039 21.5433C8.60754 21.0892 7.67047 20.3201 7.01118 19.3334C6.35189 18.3467 6 17.1867 6 16C6 14.8133 6.35189 13.6533 7.01118 12.6666C7.67047 11.6799 8.60754 10.9109 9.7039 10.4567Z" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd" class="c"
-                                                    style="--animation-delay: 1;"
-                                                    d="M19.7039 10.4567C20.8003 10.0026 22.0067 9.88378 23.1705 10.1153C23.7122 10.223 24.064 10.7495 23.9562 11.2912C23.8485 11.8328 23.322 12.1846 22.7804 12.0769C22.0044 11.9225 21.2002 12.0017 20.4693 12.3045C19.7384 12.6072 19.1136 13.1199 18.6741 13.7777C18.2346 14.4355 18 15.2089 18 16C18 16.7911 18.2346 17.5645 18.6741 18.2223C19.1136 18.8801 19.7384 19.3928 20.4693 19.6955C21.2002 19.9983 22.0044 20.0775 22.7804 19.9231C23.322 19.8154 23.8485 20.1672 23.9562 20.7088C24.064 21.2505 23.7122 21.777 23.1705 21.8847C22.0067 22.1162 20.8003 21.9974 19.7039 21.5433C18.6075 21.0892 17.6705 20.3201 17.0112 19.3334C16.3519 18.3467 16 17.1867 16 16C16 14.8133 16.3519 13.6533 17.0112 12.6666C17.6705 11.6799 18.6075 10.9109 19.7039 10.4567Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="settings-tooltip-container" data-tooltip-text="Settings"
-                                        data-tooltip="right">
-                                        <button class="settings-button" aria-label="Video settings">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 3;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M16 6.00004C13.8254 6.00004 11.9475 4.93872 10.5994 3.40188C10.5434 3.33801 10.4835 3.28507 10.4268 3.24528C10.3911 3.22024 10.3607 3.20322 10.3372 3.192C9.41573 3.60009 8.54598 4.10507 7.74094 4.69431C7.73883 4.72048 7.73828 4.75582 7.74216 4.80003C7.74824 4.8691 7.76413 4.94744 7.79139 5.02791C8.44691 6.96275 8.42634 9.11805 7.33978 11C6.25309 12.8822 4.39652 13.9777 2.39288 14.3773C2.30946 14.394 2.23359 14.4194 2.17069 14.4487C2.13087 14.4673 2.10076 14.4853 2.07924 14.5001C2.02691 14.9923 2 15.4926 2 16C2 16.5074 2.02691 17.0078 2.07925 17.5C2.10077 17.5148 2.13087 17.5328 2.17069 17.5513C2.23359 17.5806 2.30946 17.6061 2.39288 17.6227C4.39651 18.0223 6.25306 19.1178 7.33975 21C8.4263 22.882 8.44688 25.0373 7.79138 26.9721C7.76412 27.0526 7.74823 27.1309 7.74215 27.2C7.73827 27.2442 7.73883 27.2795 7.74094 27.3057C8.546 27.8949 9.41576 28.3999 10.3372 28.808C10.3607 28.7968 10.3911 28.7798 10.4268 28.7547C10.4835 28.715 10.5434 28.662 10.5994 28.5981C11.9475 27.0613 13.8254 26 16 26C18.1746 26 20.0525 27.0613 21.4006 28.5981C21.4566 28.662 21.5165 28.7149 21.5732 28.7547C21.6089 28.7798 21.6393 28.7968 21.6628 28.808C22.5843 28.3999 23.454 27.8949 24.2591 27.3057C24.2612 27.2795 24.2618 27.2441 24.2579 27.1999C24.2518 27.1309 24.2359 27.0525 24.2087 26.9721C23.5532 25.0372 23.5738 22.882 24.6603 21C25.747 19.1178 27.6035 18.0224 29.6071 17.6227C29.6905 17.6061 29.7664 17.5807 29.8293 17.5513C29.8691 17.5328 29.8992 17.5148 29.9208 17.5C29.9731 17.0078 30 16.5074 30 16C30 15.4926 29.9731 14.9922 29.9208 14.5001C29.8992 14.4853 29.8691 14.4673 29.8293 14.4487C29.7664 14.4194 29.6905 14.394 29.6071 14.3773C27.6035 13.9777 25.747 12.8822 24.6603 11C23.5737 9.11806 23.5532 6.96278 24.2087 5.02795C24.2359 4.94748 24.2518 4.86914 24.2579 4.80007C24.2618 4.75586 24.2612 4.72051 24.2591 4.69435C23.4541 4.10509 22.5843 3.60011 21.6628 3.19201C21.6394 3.20323 21.609 3.22025 21.5733 3.24529C21.5165 3.28507 21.4567 3.33802 21.4006 3.40189C20.0525 4.93873 18.1747 6.00004 16 6.00004ZM5.60773 10C6.35099 8.71266 6.4069 7.17425 5.89716 5.66967C5.59168 4.76803 5.70279 3.7166 6.46693 3.14883C7.44324 2.4234 8.50508 1.8066 9.63455 1.31629C10.5082 0.937045 11.4749 1.36703 12.1029 2.08302C13.1513 3.27825 14.5125 4.00004 16 4.00004C17.4876 4.00004 18.8487 3.27826 19.8971 2.08303C20.5251 1.36704 21.4918 0.937052 22.3655 1.3163C23.495 1.80662 24.5568 2.42343 25.5331 3.14888C26.2973 3.71665 26.4084 4.76807 26.1029 5.6697C25.5932 7.17427 25.6491 8.71267 26.3923 10C27.1357 11.2875 28.4402 12.1052 29.9983 12.4159C30.9331 12.6024 31.7891 13.2257 31.8968 14.1729C31.965 14.7725 32 15.3821 32 16C32 16.6179 31.965 17.2276 31.8968 17.8272C31.7891 18.7743 30.9331 19.3976 29.9983 19.5841C28.4402 19.8949 27.1357 20.7125 26.3923 22C25.6491 23.2874 25.5932 24.8258 26.1029 26.3303C26.4084 27.2319 26.2972 28.2834 25.5331 28.8511C24.5568 29.5766 23.4949 30.1934 22.3654 30.6837C21.4918 31.063 20.5251 30.633 19.8971 29.917C18.8486 28.7218 17.4875 28 16 28C14.5125 28 13.1514 28.7218 12.103 29.917C11.4749 30.633 10.5082 31.063 9.6346 30.6837C8.5051 30.1934 7.44325 29.5766 6.46692 28.8512C5.70279 28.2834 5.59167 27.232 5.89714 26.3303C6.40687 24.8258 6.35095 23.2874 5.6077 22C4.86436 20.7125 3.5598 19.8948 2.00169 19.5841C1.06687 19.3976 0.210862 18.7743 0.103189 17.8272C0.035022 17.2275 0 16.6179 0 16C0 15.3822 0.0350197 14.7725 0.103183 14.1729C0.210853 13.2257 1.06687 12.6024 2.0017 12.416C3.55982 12.1052 4.86438 11.2875 5.60773 10ZM22 16.0001C22 19.3138 19.3137 22.0001 16 22.0001C12.6863 22.0001 10 19.3138 10 16.0001C10 12.6864 12.6863 10.0001 16 10.0001C19.3137 10.0001 22 12.6864 22 16.0001ZM20 16.0001C20 18.2092 18.2091 20.0001 16 20.0001C13.7909 20.0001 12 18.2092 12 16.0001C12 13.7909 13.7909 12.0001 16 12.0001C18.2091 12.0001 20 13.7909 20 16.0001Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="pip-tooltip" data-tooltip-text="Picture in picture (i)"
-                                        data-tooltip="right">
-                                        <button class="pip-button" aria-label="Toggle picture in picture">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 4;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M28 6H4C2.89543 6 2 6.89543 2 8V24C2 25.1046 2.89543 26 4 26H28C29.1046 26 30 25.1046 30 24V8C30 6.89543 29.1046 6 28 6ZM4 4C1.79086 4 0 5.79086 0 8V24C0 26.2091 1.79086 28 4 28H28C30.2091 28 32 26.2091 32 24V8C32 5.79086 30.2091 4 28 4H4Z" />
-                                                <path
-                                                    d="M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z"
-                                                    class="pip-enter" />
-                                                <path
-                                                    d="M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z"
-                                                    class="pip-exit" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="airplay-tooltip" data-tooltip-text="AirPlay" data-tooltip="right"
-                                        hidden>
-                                        <button class="airplay-button" aria-label="AirPlay">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_636_10)">
+                                    <div class="right-side">
+                                        <div class="volume-tooltip-container" pfv-tooltip-text="Mute (m)"
+                                            pfv-tooltip="right">
+                                            <div class="volume-container">
+                                                <div class="volume-slider-container" aria-label="Control volume">
+                                                    <div class="volume-slider"></div>
+                                                </div>
+                                                <button class="volume-button">
+                                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        style="--animation-order: 1;">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M16.2929 13.2929C16.6834 12.9024 17.3166 12.9024 17.7071 13.2929C19.7545 15.3403 19.7545 18.6597 17.7071 20.7071C17.3166 21.0976 16.6834 21.0976 16.2929 20.7071C15.9024 20.3166 15.9024 19.6834 16.2929 19.2929C17.5592 18.0266 17.5592 15.9734 16.2929 14.7071C15.9024 14.3166 15.9024 13.6834 16.2929 13.2929Z"
+                                                            class="low-volume" />
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M19.2567 7.33104C19.6262 6.92053 20.2585 6.88726 20.669 7.25671C26.4547 12.4639 26.4547 21.5361 20.669 26.7433C20.2585 27.1128 19.6262 27.0795 19.2567 26.669C18.8873 26.2585 18.9205 25.6262 19.331 25.2567C24.234 20.844 24.234 13.156 19.331 8.7433C18.9205 8.37384 18.8873 7.74155 19.2567 7.33104Z"
+                                                            class="mid-volume" />
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M23.2689 1.31769C23.6458 0.913935 24.2786 0.892115 24.6823 1.26895C33.2175 9.23515 33.2175 22.7649 24.6823 30.7311C24.2786 31.1079 23.6458 31.0861 23.2689 30.6823C22.8921 30.2786 22.9139 29.6458 23.3177 29.2689C31.0058 22.0934 31.0058 9.90659 23.3177 2.73106C22.9139 2.35422 22.8921 1.72144 23.2689 1.31769Z"
+                                                            class="full-volume" />
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M17.2929 11.2929C17.6834 10.9024 18.3166 10.9024 18.7071 11.2929L22 14.5858L25.2929 11.2929C25.6834 10.9024 26.3166 10.9024 26.7071 11.2929C27.0976 11.6834 27.0976 12.3166 26.7071 12.7071L23.4142 16L26.7071 19.2929C27.0976 19.6834 27.0976 20.3166 26.7071 20.7071C26.3166 21.0976 25.6834 21.0976 25.2929 20.7071L22 17.4142L18.7071 20.7071C18.3166 21.0976 17.6834 21.0976 17.2929 20.7071C16.9024 20.3166 16.9024 19.6834 17.2929 19.2929L20.5858 16L17.2929 12.7071C16.9024 12.3166 16.9024 11.6834 17.2929 11.2929Z"
+                                                            class="mute-volume" />
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M10.39 3.87193C11.5331 2.3132 14 3.12173 14 5.05466V26.9454C14 28.8783 11.5331 29.6868 10.39 28.1281L6.99 23.5H3C1.89543 23.5 1 22.6046 1 21.5V10.5C1 9.39545 1.89543 8.50002 3 8.50002L6.99 8.50002L10.39 3.87193ZM12 5.05466L8.61 9.68274C8.23325 10.1965 7.62709 10.5 6.99 10.5H3V21.5H6.99C7.62709 21.5 8.23325 21.8035 8.61 22.3173L12 26.9454V5.05466Z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div pfv-tooltip-text="Subtitles/closed captions (c)" pfv-tooltip="right">
+                                            <button class="caption-button"
+                                                aria-label="Toggle subtitles or closed captions">
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" style="--animation-order: 2;">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" class="stroke"
+                                                        d="M24.956 25.0984L26.2854 24.8491C27.9887 24.5298 29.2774 23.1255 29.4499 21.4012L29.6096 19.804C29.8626 17.2743 29.8626 14.7257 29.6096 12.1959L29.4499 10.5988C29.2774 8.87443 27.9887 7.47022 26.2854 7.15085L24.956 6.9016C18.4016 5.67265 11.6682 5.75933 5.14765 7.1566C3.77551 7.45063 2.75023 8.59703 2.6106 9.99335L2.39682 12.1311C2.13954 14.7039 2.13954 17.296 2.39682 19.8689L2.6106 22.0066C2.75023 23.403 3.77551 24.5493 5.14765 24.8434C11.6682 26.2406 18.4016 26.3273 24.956 25.0984ZM4.72859 5.201C2.50679 5.6771 0.846619 7.53338 0.620522 9.79435L0.406746 11.9321C0.136228 14.6373 0.136228 17.3627 0.406746 20.0679L0.620522 22.2056C0.846619 24.4666 2.50679 26.3229 4.72859 26.799C11.5085 28.2518 18.5096 28.3419 25.3246 27.0641L26.6539 26.8149C29.23 26.3319 31.1791 24.2081 31.4399 21.6002L31.5997 20.003C31.8659 17.341 31.8659 14.659 31.5997 11.9969L31.4399 10.3998C31.1791 7.79184 29.23 5.66812 26.6539 5.18511L25.3246 4.93586C18.5096 3.65804 11.5085 3.74817 4.72859 5.201Z" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" class="c"
+                                                        style="--animation-delay: 2;"
+                                                        d="M9.7039 10.4567C10.8003 10.0026 12.0067 9.88378 13.1705 10.1153C13.7122 10.223 14.064 10.7495 13.9562 11.2912C13.8485 11.8328 13.322 12.1846 12.7804 12.0769C12.0044 11.9225 11.2002 12.0017 10.4693 12.3045C9.73836 12.6072 9.11365 13.1199 8.67412 13.7777C8.2346 14.4355 8 15.2089 8 16C8 16.7911 8.2346 17.5645 8.67412 18.2223C9.11365 18.8801 9.73836 19.3928 10.4693 19.6955C11.2002 19.9983 12.0044 20.0775 12.7804 19.9231C13.322 19.8154 13.8485 20.1672 13.9562 20.7088C14.064 21.2505 13.7122 21.777 13.1705 21.8847C12.0067 22.1162 10.8003 21.9974 9.7039 21.5433C8.60754 21.0892 7.67047 20.3201 7.01118 19.3334C6.35189 18.3467 6 17.1867 6 16C6 14.8133 6.35189 13.6533 7.01118 12.6666C7.67047 11.6799 8.60754 10.9109 9.7039 10.4567Z" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" class="c"
+                                                        style="--animation-delay: 1;"
+                                                        d="M19.7039 10.4567C20.8003 10.0026 22.0067 9.88378 23.1705 10.1153C23.7122 10.223 24.064 10.7495 23.9562 11.2912C23.8485 11.8328 23.322 12.1846 22.7804 12.0769C22.0044 11.9225 21.2002 12.0017 20.4693 12.3045C19.7384 12.6072 19.1136 13.1199 18.6741 13.7777C18.2346 14.4355 18 15.2089 18 16C18 16.7911 18.2346 17.5645 18.6741 18.2223C19.1136 18.8801 19.7384 19.3928 20.4693 19.6955C21.2002 19.9983 22.0044 20.0775 22.7804 19.9231C23.322 19.8154 23.8485 20.1672 23.9562 20.7088C24.064 21.2505 23.7122 21.777 23.1705 21.8847C22.0067 22.1162 20.8003 21.9974 19.7039 21.5433C18.6075 21.0892 17.6705 20.3201 17.0112 19.3334C16.3519 18.3467 16 17.1867 16 16C16 14.8133 16.3519 13.6533 17.0112 12.6666C17.6705 11.6799 18.6075 10.9109 19.7039 10.4567Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="settings-tooltip-container" pfv-tooltip-text="Settings"
+                                            pfv-tooltip="right">
+                                            <button class="settings-button" aria-label="Video settings">
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" style="--animation-order: 3;">
                                                     <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M15.9996 18.0969C16.2025 18.0969 16.4062 18.1833 16.5532 18.3552L26.0145 29.4211C26.3758 29.8431 26.0853 30.5091 25.5388 30.5091H6.46041C5.91391 30.5091 5.62428 29.8431 5.98477 29.4211L15.4452 18.3552C15.5922 18.1833 15.7959 18.0969 15.9996 18.0969Z" />
+                                                        d="M16 6.00004C13.8254 6.00004 11.9475 4.93872 10.5994 3.40188C10.5434 3.33801 10.4835 3.28507 10.4268 3.24528C10.3911 3.22024 10.3607 3.20322 10.3372 3.192C9.41573 3.60009 8.54598 4.10507 7.74094 4.69431C7.73883 4.72048 7.73828 4.75582 7.74216 4.80003C7.74824 4.8691 7.76413 4.94744 7.79139 5.02791C8.44691 6.96275 8.42634 9.11805 7.33978 11C6.25309 12.8822 4.39652 13.9777 2.39288 14.3773C2.30946 14.394 2.23359 14.4194 2.17069 14.4487C2.13087 14.4673 2.10076 14.4853 2.07924 14.5001C2.02691 14.9923 2 15.4926 2 16C2 16.5074 2.02691 17.0078 2.07925 17.5C2.10077 17.5148 2.13087 17.5328 2.17069 17.5513C2.23359 17.5806 2.30946 17.6061 2.39288 17.6227C4.39651 18.0223 6.25306 19.1178 7.33975 21C8.4263 22.882 8.44688 25.0373 7.79138 26.9721C7.76412 27.0526 7.74823 27.1309 7.74215 27.2C7.73827 27.2442 7.73883 27.2795 7.74094 27.3057C8.546 27.8949 9.41576 28.3999 10.3372 28.808C10.3607 28.7968 10.3911 28.7798 10.4268 28.7547C10.4835 28.715 10.5434 28.662 10.5994 28.5981C11.9475 27.0613 13.8254 26 16 26C18.1746 26 20.0525 27.0613 21.4006 28.5981C21.4566 28.662 21.5165 28.7149 21.5732 28.7547C21.6089 28.7798 21.6393 28.7968 21.6628 28.808C22.5843 28.3999 23.454 27.8949 24.2591 27.3057C24.2612 27.2795 24.2618 27.2441 24.2579 27.1999C24.2518 27.1309 24.2359 27.0525 24.2087 26.9721C23.5532 25.0372 23.5738 22.882 24.6603 21C25.747 19.1178 27.6035 18.0224 29.6071 17.6227C29.6905 17.6061 29.7664 17.5807 29.8293 17.5513C29.8691 17.5328 29.8992 17.5148 29.9208 17.5C29.9731 17.0078 30 16.5074 30 16C30 15.4926 29.9731 14.9922 29.9208 14.5001C29.8992 14.4853 29.8691 14.4673 29.8293 14.4487C29.7664 14.4194 29.6905 14.394 29.6071 14.3773C27.6035 13.9777 25.747 12.8822 24.6603 11C23.5737 9.11806 23.5532 6.96278 24.2087 5.02795C24.2359 4.94748 24.2518 4.86914 24.2579 4.80007C24.2618 4.75586 24.2612 4.72051 24.2591 4.69435C23.4541 4.10509 22.5843 3.60011 21.6628 3.19201C21.6394 3.20323 21.609 3.22025 21.5733 3.24529C21.5165 3.28507 21.4567 3.33802 21.4006 3.40189C20.0525 4.93873 18.1747 6.00004 16 6.00004ZM5.60773 10C6.35099 8.71266 6.4069 7.17425 5.89716 5.66967C5.59168 4.76803 5.70279 3.7166 6.46693 3.14883C7.44324 2.4234 8.50508 1.8066 9.63455 1.31629C10.5082 0.937045 11.4749 1.36703 12.1029 2.08302C13.1513 3.27825 14.5125 4.00004 16 4.00004C17.4876 4.00004 18.8487 3.27826 19.8971 2.08303C20.5251 1.36704 21.4918 0.937052 22.3655 1.3163C23.495 1.80662 24.5568 2.42343 25.5331 3.14888C26.2973 3.71665 26.4084 4.76807 26.1029 5.6697C25.5932 7.17427 25.6491 8.71267 26.3923 10C27.1357 11.2875 28.4402 12.1052 29.9983 12.4159C30.9331 12.6024 31.7891 13.2257 31.8968 14.1729C31.965 14.7725 32 15.3821 32 16C32 16.6179 31.965 17.2276 31.8968 17.8272C31.7891 18.7743 30.9331 19.3976 29.9983 19.5841C28.4402 19.8949 27.1357 20.7125 26.3923 22C25.6491 23.2874 25.5932 24.8258 26.1029 26.3303C26.4084 27.2319 26.2972 28.2834 25.5331 28.8511C24.5568 29.5766 23.4949 30.1934 22.3654 30.6837C21.4918 31.063 20.5251 30.633 19.8971 29.917C18.8486 28.7218 17.4875 28 16 28C14.5125 28 13.1514 28.7218 12.103 29.917C11.4749 30.633 10.5082 31.063 9.6346 30.6837C8.5051 30.1934 7.44325 29.5766 6.46692 28.8512C5.70279 28.2834 5.59167 27.232 5.89714 26.3303C6.40687 24.8258 6.35095 23.2874 5.6077 22C4.86436 20.7125 3.5598 19.8948 2.00169 19.5841C1.06687 19.3976 0.210862 18.7743 0.103189 17.8272C0.035022 17.2275 0 16.6179 0 16C0 15.3822 0.0350197 14.7725 0.103183 14.1729C0.210853 13.2257 1.06687 12.6024 2.0017 12.416C3.55982 12.1052 4.86438 11.2875 5.60773 10ZM22 16.0001C22 19.3138 19.3137 22.0001 16 22.0001C12.6863 22.0001 10 19.3138 10 16.0001C10 12.6864 12.6863 10.0001 16 10.0001C19.3137 10.0001 22 12.6864 22 16.0001ZM20 16.0001C20 18.2092 18.2091 20.0001 16 20.0001C13.7909 20.0001 12 18.2092 12 16.0001C12 13.7909 13.7909 12.0001 16 12.0001C18.2091 12.0001 20 13.7909 20 16.0001Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="pip-tooltip" pfv-tooltip-text="Picture in picture (i)"
+                                            pfv-tooltip="right">
+                                            <button class="pip-button" aria-label="Toggle picture in picture">
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" style="--animation-order: 4;">
                                                     <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M4.55825 2H27.4418C29.0275 2 29.6017 2.16448 30.1814 2.47552C30.7609 2.78488 31.2151 3.24003 31.5252 3.81865C31.8348 4.39825 32 4.97245 32 6.55825V18.7751C32 20.36 31.8348 20.9351 31.5252 21.5148C31.2151 22.0933 30.7609 22.5485 30.1814 22.8586C29.6017 23.1689 29.0275 23.3333 27.4418 23.3333H23.7973L22.2747 21.5555H27.944C28.735 21.5555 29.0232 21.4729 29.313 21.3173C29.6027 21.1635 29.8294 20.936 29.985 20.6453C30.1395 20.3565 30.2222 20.0685 30.2222 19.2764V6.0569C30.2222 5.26487 30.1395 4.97687 29.985 4.68711C29.8294 4.39734 29.6027 4.17065 29.313 4.01513C29.0232 3.85953 28.735 3.77778 27.944 3.77778H4.0569C3.26487 3.77778 2.97687 3.85953 2.68711 4.01513C2.39734 4.17065 2.17065 4.39734 2.01513 4.68711C1.85953 4.97687 1.77778 5.26487 1.77778 6.0569V19.2764C1.77778 20.0685 1.85953 20.3565 2.01513 20.6453C2.17065 20.936 2.39734 21.1635 2.68711 21.3173C2.97687 21.4729 3.26487 21.5555 4.0569 21.5555H9.72536L8.20269 23.3333H4.55825C2.97245 23.3333 2.39825 23.1689 1.81865 22.8586C1.24003 22.5485 0.784882 22.0933 0.47552 21.5148C0.164479 20.9351 0 20.36 0 18.7751V6.55825C0 4.97245 0.164479 4.39825 0.47552 3.81865C0.784882 3.24003 1.24003 2.78488 1.81865 2.47552C2.39825 2.16448 2.97245 2 4.55825 2Z" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_636_10">
-                                                        <rect width="32" height="28.5091" transform="translate(0 2)" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="gcast-tooltip" data-tooltip-text="Cast to a device" data-tooltip="right"
-                                        hidden>
-                                        <button is="google-cast-button" class="gcast-button"
-                                            aria-label="Cast to a device">
-                                        </button>
-                                    </div>
-                                    <div class="full-screen-tooltip" data-tooltip-text="Full screen (f)"
-                                        data-tooltip="right">
-                                        <button class="full-screen-button" aria-label="Toggle full screen">
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="enter"
-                                                xmlns="http://www.w3.org/2000/svg" style="--animation-order: 5;">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M0 3V12H2V3C2 2.44771 2.44771 2 3 2H12V0H3C1.34315 0 0 1.34315 0 3Z"
-                                                    class="top-corner" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M32 20H30V29C30 29.5523 29.5523 30 29 30H20V32H29C30.6569 32 32 30.6569 32 29V20Z"
-                                                    class="bottom-corner" />
-                                            </svg>
-                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="exit"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M12 9V0H10V9C10 9.55229 9.55229 10 9 10H0V12H9C10.6569 12 12 10.6569 12 9Z"
-                                                    class="top-corner" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M20 32H22V23C22 22.4477 22.4477 22 23 22H32V20H23C21.3431 20 20 21.3431 20 23V32Z"
-                                                    class="bottom-corner" />
-                                            </svg>
-                                        </button>
+                                                        d="M28 6H4C2.89543 6 2 6.89543 2 8V24C2 25.1046 2.89543 26 4 26H28C29.1046 26 30 25.1046 30 24V8C30 6.89543 29.1046 6 28 6ZM4 4C1.79086 4 0 5.79086 0 8V24C0 26.2091 1.79086 28 4 28H28C30.2091 28 32 26.2091 32 24V8C32 5.79086 30.2091 4 28 4H4Z" />
+                                                    <path
+                                                        d="M12 13C12 12.4477 12.4477 12 13 12H27C27.5523 12 28 12.4477 28 13V23C28 23.5523 27.5523 24 27 24H13C12.4477 24 12 23.5523 12 23V13Z"
+                                                        class="pip-enter" />
+                                                    <path
+                                                        d="M4 9C4 8.44772 4.44772 8 5 8H27C27.5523 8 28 8.44772 28 9V23C28 23.5523 27.5523 24 27 24H5C4.44772 24 4 23.5523 4 23V9Z"
+                                                        class="pip-exit" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="airplay-tooltip" pfv-tooltip-text="AirPlay" pfv-tooltip="right"
+                                            hidden>
+                                            <button class="airplay-button" aria-label="AirPlay">
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0_636_10)">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M15.9996 18.0969C16.2025 18.0969 16.4062 18.1833 16.5532 18.3552L26.0145 29.4211C26.3758 29.8431 26.0853 30.5091 25.5388 30.5091H6.46041C5.91391 30.5091 5.62428 29.8431 5.98477 29.4211L15.4452 18.3552C15.5922 18.1833 15.7959 18.0969 15.9996 18.0969Z" />
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                            d="M4.55825 2H27.4418C29.0275 2 29.6017 2.16448 30.1814 2.47552C30.7609 2.78488 31.2151 3.24003 31.5252 3.81865C31.8348 4.39825 32 4.97245 32 6.55825V18.7751C32 20.36 31.8348 20.9351 31.5252 21.5148C31.2151 22.0933 30.7609 22.5485 30.1814 22.8586C29.6017 23.1689 29.0275 23.3333 27.4418 23.3333H23.7973L22.2747 21.5555H27.944C28.735 21.5555 29.0232 21.4729 29.313 21.3173C29.6027 21.1635 29.8294 20.936 29.985 20.6453C30.1395 20.3565 30.2222 20.0685 30.2222 19.2764V6.0569C30.2222 5.26487 30.1395 4.97687 29.985 4.68711C29.8294 4.39734 29.6027 4.17065 29.313 4.01513C29.0232 3.85953 28.735 3.77778 27.944 3.77778H4.0569C3.26487 3.77778 2.97687 3.85953 2.68711 4.01513C2.39734 4.17065 2.17065 4.39734 2.01513 4.68711C1.85953 4.97687 1.77778 5.26487 1.77778 6.0569V19.2764C1.77778 20.0685 1.85953 20.3565 2.01513 20.6453C2.17065 20.936 2.39734 21.1635 2.68711 21.3173C2.97687 21.4729 3.26487 21.5555 4.0569 21.5555H9.72536L8.20269 23.3333H4.55825C2.97245 23.3333 2.39825 23.1689 1.81865 22.8586C1.24003 22.5485 0.784882 22.0933 0.47552 21.5148C0.164479 20.9351 0 20.36 0 18.7751V6.55825C0 4.97245 0.164479 4.39825 0.47552 3.81865C0.784882 3.24003 1.24003 2.78488 1.81865 2.47552C2.39825 2.16448 2.97245 2 4.55825 2Z" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_636_10">
+                                                            <rect width="32" height="28.5091"
+                                                                transform="translate(0 2)" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="gcast-tooltip" pfv-tooltip-text="Cast to a device"
+                                            pfv-tooltip="right" hidden>
+                                            <button is="google-cast-button" class="gcast-button"
+                                                aria-label="Cast to a device">
+                                            </button>
+                                        </div>
+                                        <div class="full-screen-tooltip" pfv-tooltip-text="Full screen (f)"
+                                            pfv-tooltip="right">
+                                            <button class="full-screen-button" aria-label="Toggle full screen">
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                                    class="enter" xmlns="http://www.w3.org/2000/svg"
+                                                    style="--animation-order: 5;">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M0 3V12H2V3C2 2.44771 2.44771 2 3 2H12V0H3C1.34315 0 0 1.34315 0 3Z"
+                                                        class="top-corner" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M32 20H30V29C30 29.5523 29.5523 30 29 30H20V32H29C30.6569 32 32 30.6569 32 29V20Z"
+                                                        class="bottom-corner" />
+                                                </svg>
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="exit"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M12 9V0H10V9C10 9.55229 9.55229 10 9 10H0V12H9C10.6569 12 12 10.6569 12 9Z"
+                                                        class="top-corner" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M20 32H22V23C22 22.4477 22.4477 22 23 22H32V20H23C21.3431 20 20 21.3431 20 23V32Z"
+                                                        class="bottom-corner" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="timeline-container">
-                                <div class="seeking-preview">
-                                    <img class="seeking-preview__thumbnail">
-                                    <div class="seeking-preview__time-tooltip">-:--</div>
-                                </div>
-                                <div class="timeline">
-                                    <div class="seek-filler"></div>
-                                    <div class="timeline__progressbar"></div>
-                                </div>
-                                <div class="footer">
-                                    <div class="duration-container" role="text" aria-label="No time is displayed">
-                                        <div class="current-time span" aria-hidden="true">-:--</div>
-                                        <div class="divider-time-copy span" aria-hidden="true">/</div>
-                                        <div class="divider-time span" aria-hidden="true">/</div>
-                                        <div class="total-time span" aria-hidden="true">-:--</div>
+                                <div class="timeline-container">
+                                    <div class="seeking-preview">
+                                        <img class="seeking-preview__thumbnail">
+                                        <div class="seeking-preview__time-tooltip">-:--</div>
                                     </div>
-                                    <div class="live-container" role="text" aria-label="Live" data-rewind="false"
-                                        hidden>
-                                        <div class="live-dot"></div>
-                                        <div class="span" aria-hidden="true">Live</div>
+                                    <div class="timeline">
+                                        <div class="seek-filler"></div>
+                                        <div class="timeline__progressbar"></div>
                                     </div>
-                                    <div class="badges-container">
-                                        <div class="badge" data-badge="quality" data-quality="N/A"
-                                            title="Not Available">
-                                            <abbr class="span quality">N/A</abbr>
+                                    <div class="footer">
+                                        <div class="duration-container" role="text" aria-label="No time is displayed">
+                                            <div class="current-time span" aria-hidden="true">-:--</div>
+                                            <div class="divider-time-copy span" aria-hidden="true">/</div>
+                                            <div class="divider-time span" aria-hidden="true">/</div>
+                                            <div class="total-time span" aria-hidden="true">-:--</div>
+                                        </div>
+                                        <div class="live-container" role="text" aria-label="Live" pfv-rewind="false"
+                                            hidden>
+                                            <div class="live-dot"></div>
+                                            <div class="span" aria-hidden="true">Live</div>
+                                        </div>
+                                        <div class="badges-container">
+                                            <div class="badge" pfv-badge="quality" pfv-quality="N/A"
+                                                title="Not Available">
+                                                <abbr class="span quality">N/A</abbr>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="video-fit-contain">
-                        <div class="video-fit-content">
-                            <div class="aspect-ratio-response">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="video-filters"
-                                    color-interpolation-filters="sRGB">
-                                    <defs>
-                                        <filter id="blur">
-                                            <feGaussianBlur in="SourceGraphic" stdDeviation="12,0" />
-                                        </filter>
-                                        <filter id="gamma">
-                                            <feComponentTransfer>
-                                                <feFuncR type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
-                                                <feFuncG type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
-                                                <feFuncB type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
-                                            </feComponentTransfer>
-                                        </filter>
-                                        <filter id="mosaic" x="0" y="0">
-                                            <feFlood x="4" y="4" height="2" width="2" />
-                                            <feComposite width="8" class="comp" />
-                                            <feTile result="a" />
-                                            <feComposite in="SourceGraphic" in2="a" operator="in" />
-                                            <feMorphology operator="dilate" class="dilate" />
-                                        </filter>
+                        <div class="video-fit-contain">
+                            <div class="video-fit-content">
+                                <div class="aspect-ratio-response">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="video-filters"
+                                        color-interpolation-filters="sRGB">
+                                        <defs>
+                                            <filter id="blur">
+                                                <feGaussianBlur in="SourceGraphic" stdDeviation="12,0" />
+                                            </filter>
+                                            <filter id="gamma">
+                                                <feComponentTransfer>
+                                                    <feFuncR type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                                                    <feFuncG type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                                                    <feFuncB type="gamma" exponent="1.9" amplitude="1.9" offset="0" />
+                                                </feComponentTransfer>
+                                            </filter>
+                                            <filter id="mosaic" x="0" y="0">
+                                                <feFlood x="4" y="4" height="2" width="2" />
+                                                <feComposite width="8" class="comp" />
+                                                <feTile result="a" />
+                                                <feComposite in="SourceGraphic" in2="a" operator="in" />
+                                                <feMorphology operator="dilate" class="dilate" />
+                                            </filter>
 
-                                        <g>
-                                            <filter id="1.25x-speed">
-                                                <feGaussianBlur in="SourceGraphic" stdDeviation="0.5,0" />
-                                            </filter>
-                                            <filter id="1.5x-speed">
-                                                <feGaussianBlur in="SourceGraphic" stdDeviation="1,0" />
-                                            </filter>
-                                            <filter id="1.75x-speed">
-                                                <feGaussianBlur in="SourceGraphic" stdDeviation="1.5,0" />
-                                            </filter>
-                                            <filter id="2x-speed">
-                                                <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
-                                            </filter>
-                                            <filter id="4x-speed">
-                                                <feGaussianBlur in="SourceGraphic" stdDeviation="4,0" />
-                                            </filter>
-                                        </g>
-                                    </defs>
-                                </svg>
-                                <div class="video-play-container">
-                                    <svg width="96" height="96" viewBox="0 0 96 96" fill="none" class="play-btn-poster"
+                                            <g>
+                                                <filter id="1.25x-speed">
+                                                    <feGaussianBlur in="SourceGraphic" stdDeviation="0.5,0" />
+                                                </filter>
+                                                <filter id="1.5x-speed">
+                                                    <feGaussianBlur in="SourceGraphic" stdDeviation="1,0" />
+                                                </filter>
+                                                <filter id="1.75x-speed">
+                                                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.5,0" />
+                                                </filter>
+                                                <filter id="2x-speed">
+                                                    <feGaussianBlur in="SourceGraphic" stdDeviation="2,0" />
+                                                </filter>
+                                                <filter id="4x-speed">
+                                                    <feGaussianBlur in="SourceGraphic" stdDeviation="4,0" />
+                                                </filter>
+                                            </g>
+                                        </defs>
+                                    </svg>
+                                    <div class="video-play-container">
+                                        <svg width="96" height="96" viewBox="0 0 96 96" fill="none"
+                                            class="play-btn-poster" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M0 48C0 21.4903 21.4903 0 48 0V0C74.5097 0 96 21.4903 96 48V48C96 74.5097 74.5097 96 48 96V96C21.4903 96 0 74.5097 0 48V48Z"
+                                                fill="black" fill-opacity="0.6" class="circle" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M2 48C2 73.4051 22.5949 94 48 94C73.4051 94 94 73.4051 94 48C94 22.5949 73.4051 2 48 2C22.5949 2 2 22.5949 2 48ZM48 0C21.4903 0 0 21.4903 0 48C0 74.5097 21.4903 96 48 96C74.5097 96 96 74.5097 96 48C96 21.4903 74.5097 0 48 0Z"
+                                                fill="black" fill-opacity="0.3" class="stroke" />
+                                            <path
+                                                d="M63.9896 46.2668C65.3257 47.036 65.3257 48.964 63.9896 49.7333L36.9979 65.2739C35.6646 66.0416 34 65.0792 34 63.5407L34 32.4593C34 30.9208 35.6646 29.9584 36.9979 30.7261L63.9896 46.2668Z"
+                                                fill="var(--text-color)" class="symbol" />
+                                        </svg>
+                                    </div>
+                                    <div class="video-backdrop-seeking"></div>
+                                    <img class="video-thumb-preview" alt="">
+                                    <img class="video-poster" alt="">
+                                </div>
+                                <video controls tabindex="-1" playsinline class="video" preload="metadata"
+                                    crossorigin="anonymous" webkit-playsinline="true" x5-playsinline="true"
+                                    x5-video-player-type="h5" x5-video-player-fullscreen="true"
+                                    x5-video-orientation="landscape|portrait" poster="data:image/svg+xml,%3Csvg xmlns='
+                                http://www.w3.org/2000/svg'/%3E">
+                                    <source>
+                                    <track id="default-track" label="English" kind="captions" srclang="en"
+                                        src="./sample.vtt" default>
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transcript-panel">
+                        <div class="header">
+                            <div class="title">
+                                <h1>Transcript</h1>
+                                <div class="transcript-language"></div>
+                            </div>
+                            <div class="header-buttons">
+                                <button>
+                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
-                                            d="M0 48C0 21.4903 21.4903 0 48 0V0C74.5097 0 96 21.4903 96 48V48C96 74.5097 74.5097 96 48 96V96C21.4903 96 0 74.5097 0 48V48Z"
-                                            fill="black" fill-opacity="0.6" class="circle" />
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M2 48C2 73.4051 22.5949 94 48 94C73.4051 94 94 73.4051 94 48C94 22.5949 73.4051 2 48 2C22.5949 2 2 22.5949 2 48ZM48 0C21.4903 0 0 21.4903 0 48C0 74.5097 21.4903 96 48 96C74.5097 96 96 74.5097 96 48C96 21.4903 74.5097 0 48 0Z"
-                                            fill="black" fill-opacity="0.3" class="stroke" />
+                                            d="M18 24C18 25.1046 17.1046 26 16 26C14.8954 26 14 25.1046 14 24C14 22.8954 14.8954 22 16 22C17.1046 22 18 22.8954 18 24Z" />
                                         <path
-                                            d="M63.9896 46.2668C65.3257 47.036 65.3257 48.964 63.9896 49.7333L36.9979 65.2739C35.6646 66.0416 34 65.0792 34 63.5407L34 32.4593C34 30.9208 35.6646 29.9584 36.9979 30.7261L63.9896 46.2668Z"
-                                            fill="var(--text-color)" class="symbol" />
+                                            d="M26 24C26 25.1046 25.1046 26 24 26C22.8954 26 22 25.1046 22 24C22 22.8954 22.8954 22 24 22C25.1046 22 26 22.8954 26 24Z" />
+                                        <path
+                                            d="M34 24C34 25.1046 33.1046 26 32 26C30.8954 26 30 25.1046 30 24C30 22.8954 30.8954 22 32 22C33.1046 22 34 22.8954 34 24Z" />
                                     </svg>
-                                </div>
-                                <div class="video-backdrop-seeking"></div>
-                                <img class="video-thumb-preview" alt="">
-                                <img class="video-poster" alt="">
+                                </button>
+                                <button class="close-transcript-panel">
+                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M30.2929 16.2929C30.6834 15.9024 31.3166 15.9024 31.7071 16.2929C32.0976 16.6834 32.0976 17.3166 31.7071 17.7071L25.4142 24L31.7071 30.2929C32.0976 30.6834 32.0976 31.3166 31.7071 31.7071C31.3166 32.0977 30.6834 32.0977 30.2929 31.7071L24 25.4142L17.7071 31.7071C17.3166 32.0977 16.6834 32.0977 16.2929 31.7071C15.9024 31.3166 15.9024 30.6834 16.2929 30.2929L22.5858 24L16.2929 17.7071C15.9024 17.3166 15.9024 16.6834 16.2929 16.2929C16.6834 15.9024 17.3166 15.9024 17.7071 16.2929L24 22.5858L30.2929 16.2929Z" />
+                                    </svg>
+                                </button>
                             </div>
-                            <video controls tabindex="-1" playsinline class="video" preload="metadata"
-                                crossorigin="anonymous" webkit-playsinline="true" x5-playsinline="true"
-                                x5-video-player-type="h5" x5-video-player-fullscreen="true"
-                                x5-video-orientation="landscape|portrait" poster="data:image/svg+xml,%3Csvg xmlns='
-                                http://www.w3.org/2000/svg'/%3E">
-                                <source>
-                                <track id="default-track" label="English" kind="captions" srclang="en"
-                                    src="./sample.vtt" default>
-                            </video>
                         </div>
-                    </div>
-                </div>
-                <div class="transcript-panel">
-                    <div class="header">
-                        <div class="title">
-                            <h1>Transcript</h1>
-                            <div class="transcript-language"></div>
-                        </div>
-                        <div class="header-buttons">
-                            <button>
-                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M18 24C18 25.1046 17.1046 26 16 26C14.8954 26 14 25.1046 14 24C14 22.8954 14.8954 22 16 22C17.1046 22 18 22.8954 18 24Z" />
-                                    <path
-                                        d="M26 24C26 25.1046 25.1046 26 24 26C22.8954 26 22 25.1046 22 24C22 22.8954 22.8954 22 24 22C25.1046 22 26 22.8954 26 24Z" />
-                                    <path
-                                        d="M34 24C34 25.1046 33.1046 26 32 26C30.8954 26 30 25.1046 30 24C30 22.8954 30.8954 22 32 22C33.1046 22 34 22.8954 34 24Z" />
-                                </svg>
-                            </button>
-                            <button class="close-transcript-panel">
-                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M30.2929 16.2929C30.6834 15.9024 31.3166 15.9024 31.7071 16.2929C32.0976 16.6834 32.0976 17.3166 31.7071 17.7071L25.4142 24L31.7071 30.2929C32.0976 30.6834 32.0976 31.3166 31.7071 31.7071C31.3166 32.0977 30.6834 32.0977 30.2929 31.7071L24 25.4142L17.7071 31.7071C17.3166 32.0977 16.6834 32.0977 16.2929 31.7071C15.9024 31.3166 15.9024 30.6834 16.2929 30.2929L22.5858 24L16.2929 17.7071C15.9024 17.3166 15.9024 16.6834 16.2929 16.2929C16.6834 15.9024 17.3166 15.9024 17.7071 16.2929L24 22.5858L30.2929 16.2929Z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="contents">
-                        <div class="captions-contents"></div>
-                        <div class="snackbar-sync-time">
-                            <button tabindex="-1" class="sync-to-time">Sync to current video time</button>
+                        <div class="contents">
+                            <div class="captions-contents"></div>
+                            <div class="snackbar-sync-time">
+                                <button tabindex="-1" class="sync-to-time">Sync to current video time</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -53,6 +53,7 @@ const hls = new Hls(config)
 
 const playfulVideoPlayerContainer = document.querySelector('.playful-video-player-container')
 const playfulVideoPlayer = playfulVideoPlayerContainer.querySelector('.playful-video-player')
+const playfulVideoPlayerAspectRatio = playfulVideoPlayerContainer.querySelector('.playful-video-player-aspect-ratio')
 
 const video = playfulVideoPlayer.querySelector('.video')
 const videoFit = playfulVideoPlayer.querySelector('.video-fit-contain')
@@ -126,8 +127,8 @@ const rightVideoControls = playfulVideoPlayer.querySelector('.right-side')
 const seekingPreview = playfulVideoPlayer.querySelector('.seeking-preview')
 const seekingThumbnail = playfulVideoPlayer.querySelector('.seeking-preview__thumbnail')
 const videoThumbPreview = playfulVideoPlayer.querySelector('.video-thumb-preview')
-const qualityBadgeContainer = playfulVideoPlayer.querySelector('[data-badge="quality"]')
-const qualityBadgeText = playfulVideoPlayer.querySelector('[data-badge="quality"] .quality')
+const qualityBadgeContainer = playfulVideoPlayer.querySelector('[pfv-badge="quality"]')
+const qualityBadgeText = playfulVideoPlayer.querySelector('[pfv-badge="quality"] .quality')
 const AirPlayTooltip = playfulVideoPlayer.querySelector('.airplay-tooltip')
 const AirPlayButton = playfulVideoPlayer.querySelector('.airplay-button')
 const CastButton = playfulVideoPlayer.querySelector('.gcast-button')
@@ -210,12 +211,12 @@ window.addEventListener('DOMContentLoaded', () => {
     //For HLS container
     if (Hls.isSupported()) {
         if (videoMetadata.is_live === true) {
-            playfulVideoPlayer.setAttribute('data-live-stream', 'true')
+            playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
             durationContainer.setAttribute('hidden', '')
             liveContainer.removeAttribute('hidden')
             videoThumbPreview.setAttribute('hidden', '')
         } else {
-            playfulVideoPlayer.setAttribute('data-live-stream', 'false')
+            playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
         }
         hls.attachMedia(video)
         video.setAttribute('type', videoMetadata.HLS_codec)
@@ -226,12 +227,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         if (videoMetadata.is_live === true) {
-            playfulVideoPlayer.setAttribute('data-live-stream', 'true')
+            playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
             durationContainer.setAttribute('hidden', '')
             liveContainer.removeAttribute('hidden')
             videoThumbPreview.setAttribute('hidden', '')
         } else {
-            playfulVideoPlayer.setAttribute('data-live-stream', 'false')
+            playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
         }
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
@@ -256,7 +257,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (canFullscreenEnabled === false) {
         fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')
-        fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
+        fullscreenTooltip.setAttribute('pfv-tooltip-text', 'Full screen is unavailable')
     }
 
     // Disable features for mobile users
@@ -266,7 +267,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isiPadOSSafari()) {
-        playfulVideoPlayer.dataset.device = 'iPadOS'
+        playfulVideoPlayer.setAttribute('pfv-device', 'iPadOS')
         volumeTooltipContainer.setAttribute('hidden', '')
     }
 })
@@ -345,7 +346,7 @@ videoContainer.addEventListener('contextmenu', (e) => {
     ) {
         settingsButton.classList.remove('pressed')
         settingsContextMenu.classList.remove('pressed')
-        settingsTooltipContainer.setAttribute('data-tooltip', 'right')
+        settingsTooltipContainer.setAttribute('pfv-tooltip', 'right')
         seekingPreview.removeAttribute('hidden')
         closedDialog(e.target)
     }
@@ -392,7 +393,7 @@ function closeSettingsMenu(e) {
     ) {
         settingsButton.classList.remove('pressed')
         settingsContextMenu.classList.remove('pressed')
-        settingsTooltipContainer.setAttribute('data-tooltip', 'right')
+        settingsTooltipContainer.setAttribute('pfv-tooltip', 'right')
         seekingPreview.removeAttribute('hidden')
         closedDialog(e.target)
     }
@@ -404,11 +405,11 @@ function showSettingsMenu(show) {
         ? (settingsButton.classList.add('pressed'),
             settingsContextMenu.classList.add('pressed'),
             seekingPreview.setAttribute('hidden', ''),
-            settingsTooltipContainer.removeAttribute('data-tooltip'))
+            settingsTooltipContainer.removeAttribute('pfv-tooltip'))
         : (settingsButton.classList.remove('pressed'),
             settingsContextMenu.classList.remove('pressed'),
             seekingPreview.removeAttribute('hidden'),
-            settingsTooltipContainer.setAttribute('data-tooltip', 'right'))
+            settingsTooltipContainer.setAttribute('pfv-tooltip', 'right'))
 }
 
 document.addEventListener('click', (e) => {
@@ -489,7 +490,7 @@ downloadItem.addEventListener('click', () => {
     )
     settingsButton.classList.remove('pressed')
     settingsContextMenu.classList.remove('pressed')
-    settingsTooltipContainer.setAttribute('data-tooltip', 'right')
+    settingsTooltipContainer.setAttribute('pfv-tooltip', 'right')
 })
 
 playbackSpeedItem.addEventListener('click', () => {
@@ -507,16 +508,16 @@ qualityItem.addEventListener('click', () => {
 })
 
 for (var i = 0; i < playbackSpeedItemControls.length; i++) {
-    const dataSpeed = playbackSpeedItemControls[i].getAttribute('data-speed')
+    const dataSpeed = playbackSpeedItemControls[i].getAttribute('pfv-speed')
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
     playbackSpeedItemControls[i].querySelector('.span:last-child').innerHTML = `${dataSpeed} &times;`
-    video.playbackRate = playfulVideoPlayer.getAttribute('data-speed')
+    video.playbackRate = playfulVideoPlayer.getAttribute('pfv-speed')
 
-    playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"] .span:last-child').innerHTML = `(${playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[data-speed="1"]').getAttribute('data-speed')} &times;)`
+    playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[pfv-speed="1"] .span:last-child').innerHTML = `(${playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[pfv-speed="1"]').getAttribute('pfv-speed')} &times;)`
     playfulVideoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
 
     playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
-    playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[data-speed='${playfulVideoPlayer.getAttribute('data-speed')}']`).setAttribute('aria-checked', true)
+    playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[pfv-speed='${playfulVideoPlayer.getAttribute('pfv-speed')}']`).setAttribute('aria-checked', true)
 };
 
 playbackSpeedItemControls.forEach(element => {
@@ -525,11 +526,11 @@ playbackSpeedItemControls.forEach(element => {
             element.removeAttribute('aria-checked')
         })
         if (playfulVideoPlayer.querySelector('.page-contents.playback-speed-settings .item[class*="speed__"]')) {
-            video.playbackRate = element.getAttribute('data-speed')
-            playfulVideoPlayer.setAttribute('data-speed', video.playbackRate)
+            video.playbackRate = element.getAttribute('pfv-speed')
+            playfulVideoPlayer.setAttribute('pfv-speed', video.playbackRate)
             playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
             element.setAttribute('aria-checked', true)
-            !element.getAttribute('data-speed') >= '1.25' && !element.getAttribute('data-speed') < playbackSpeedItemControls.lastChild.getAttribute('data-speed') ? timelineProgressbar.style.filter = 'none' : timelineProgressbar.style.filter = `url(#${element.getAttribute('data-speed')}x-speed)`
+            !element.getAttribute('pfv-speed') >= '1.25' && !element.getAttribute('pfv-speed') < playbackSpeedItemControls.lastChild.getAttribute('pfv-speed') ? timelineProgressbar.style.filter = 'none' : timelineProgressbar.style.filter = `url(#${element.getAttribute('pfv-speed')}x-speed)`
         }
         backPageSettingsFn()
     })
@@ -595,12 +596,12 @@ EQswitchToggle.addEventListener('click', () => {
 })
 
 for (var i = 0; i < rangeEQInputs.length; i++) {
-    rangeEQInputs[i].setAttribute('data-input', i)
+    rangeEQInputs[i].setAttribute('pfv-input', i)
 }
 
 rangeEQInputs.forEach(element => {
     element.addEventListener('input', () => {
-        changeGain(element.value, element.getAttribute('data-input'))
+        changeGain(element.value, element.getAttribute('pfv-input'))
     })
 })
 
@@ -982,7 +983,7 @@ function toggleFullScreen() {
                 ? document.webkitExitFullscreen()
                 : fullscreenElement()
                 && exitFullscreen.call(window.document)
-        fullscreenTooltip.setAttribute('data-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
+        fullscreenTooltip.setAttribute('pfv-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else if (!fullscreenElement()) {
         isOldSafari() && !isiPadOSSafari()
             ? video.webkitEnterFullScreen()
@@ -990,10 +991,10 @@ function toggleFullScreen() {
                 ? playfulVideoPlayer.webkitRequestFullScreen()
                 : !fullscreenElement() || isiPadOSSafari()
                 && enterFullscreen.call(playfulVideoPlayer)
-        fullscreenTooltip.setAttribute('data-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
+        fullscreenTooltip.setAttribute('pfv-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else {
         fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')
-        fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
+        fullscreenTooltip.setAttribute('pfv-tooltip-text', 'Full screen is unavailable')
     }
     if (context.state === 'suspended') context.resume()
 }
@@ -1006,14 +1007,14 @@ function togglePIPPlayerMode() {
                 !video.pictureInPictureElement
             ) {
                 document.exitPictureInPicture()
-                pipTooltip.setAttribute('data-tooltip-text', `Picture in picture (${PICTUREINPICTURE_TOGGLE_KEY})`)
+                pipTooltip.setAttribute('pfv-tooltip-text', `Picture in picture (${PICTUREINPICTURE_TOGGLE_KEY})`)
             } else {
                 video.requestPictureInPicture()
-                pipTooltip.setAttribute('data-tooltip-text', `Exit picture in picture (${PICTUREINPICTURE_TOGGLE_KEY})`)
+                pipTooltip.setAttribute('pfv-tooltip-text', `Exit picture in picture (${PICTUREINPICTURE_TOGGLE_KEY})`)
             }
         } else {
             pipPlayerButton.setAttribute('pfv-unsupported', '')
-            pipTooltip.setAttribute('data-tooltip-text', 'Picture in picture is unavailable.')
+            pipTooltip.setAttribute('pfv-tooltip-text', 'Picture in picture is unavailable.')
         }
     } catch (error) {
         console.error(error)
@@ -1031,21 +1032,21 @@ document.addEventListener('msfullscreenchange', fullScreenToggleChange, fullscre
 
 video.addEventListener('webkitenterfullscreen', () => {
     playfulVideoPlayer.classList.add('full-screen')
-    fullscreenTooltip.setAttribute('data-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
+    fullscreenTooltip.setAttribute('pfv-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
 })
 
 video.addEventListener('webkitendfullscreen', () => {
     playfulVideoPlayer.classList.remove('full-screen')
-    fullscreenTooltip.setAttribute('data-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
+    fullscreenTooltip.setAttribute('pfv-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
 })
 
 function togglePIPClass() {
     if (videoContainer.classList.contains('pip-player')) {
         videoContainer.classList.remove('pip-player')
-        fullscreenTooltip.setAttribute('data-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
+        fullscreenTooltip.setAttribute('pfv-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else {
         videoContainer.classList.add('pip-player')
-        fullscreenTooltip.setAttribute('data-tooltip-text', 'Full screen is unavailable')
+        fullscreenTooltip.setAttribute('pfv-tooltip-text', 'Full screen is unavailable')
     }
 }
 
@@ -1065,7 +1066,7 @@ volumeSliderContainer.addEventListener('pointermove', (e) => {
         volumeSliderContainer.setPointerCapture(e.pointerId)
         settingsButton.classList.remove('pressed')
         settingsContextMenu.classList.remove('pressed')
-        settingsTooltipContainer.setAttribute('data-tooltip', 'right')
+        settingsTooltipContainer.setAttribute('pfv-tooltip', 'right')
         seekingPreview.removeAttribute('hidden')
         showContextMenu(false)
         if (e.button === 0) volumeUpdate(e)
@@ -1110,7 +1111,7 @@ volumeButton.addEventListener('click', toggleVolume)
 
 function toggleVolume() {
     video.muted = !video.muted
-    return volumeTooltipContainer.setAttribute('data-tooltip-text',
+    return volumeTooltipContainer.setAttribute('pfv-tooltip-text',
         video.muted
             ? `Unmute (${MUTE_TOGGLE_KEY})`
             : `Mute (${MUTE_TOGGLE_KEY})`)
@@ -1159,7 +1160,7 @@ timelineInner.addEventListener('pointermove', (e) => {
         if (e.button === 0) {
             settingsButton.classList.remove('pressed')
             settingsContextMenu.classList.remove('pressed')
-            settingsTooltipContainer.setAttribute('data-tooltip', 'right')
+            settingsTooltipContainer.setAttribute('pfv-tooltip', 'right')
             seekingPreview.removeAttribute('hidden')
             showContextMenu(false)
             if (!isScrubbing) toggleScrubbing(e)
@@ -1245,7 +1246,7 @@ function handleTimelineUpdate(e) {
 function loadedMetadata() {
     totalTime.innerText = formatDuration(video.duration)
     currentTime.innerText = formatDuration(video.currentTime)
-    qualityBadgeContainer.dataset.quality = qualityCheckShortLabel(video.videoWidth, video.videoHeight)
+    qualityBadgeContainer.setAttribute('pfv-quality', qualityCheckShortLabel(video.videoWidth, video.videoHeight))
 
     qualityBadgeContainer.setAttribute('title', qualityCheckLongLabel(video.videoWidth, video.videoHeight))
 
@@ -1271,8 +1272,14 @@ function updatetime() {
 function updateMetadata() {
     const updateThrottleMetadata = throttle(() => {
         orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
-        playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size', orientationInfluence)
-        playfulVideoPlayerContainer.style.setProperty('--aspect-ratio-size-inverse', video.videoHeight / video.videoWidth || 9 / 16)
+        playfulVideoPlayerAspectRatio.style.setProperty(
+            '--aspect-ratio-size',
+            orientationInfluence
+        )
+        playfulVideoPlayerAspectRatio.style.setProperty(
+            '--aspect-ratio-size-inverse',
+            video.videoHeight / video.videoWidth || 9 / 16
+        )
     }, 10000)
     updateThrottleMetadata()
     window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
@@ -1916,7 +1923,7 @@ const eventListeners = [
                 navigator.mediaSession.playbackState = 'playing'
                 video.addEventListener('timeupdate', mediaSessionToggle())
             }
-            playpauseTooltipContainer.setAttribute('data-tooltip-text', `Pause (${PLAY_BUTTON_KEY})`)
+            playpauseTooltipContainer.setAttribute('pfv-tooltip-text', `Pause (${PLAY_BUTTON_KEY})`)
             intervalDivideWorker()
 
             if (Hls.isSupported() && video.currentTime === 0) hls.startLoad()
@@ -1988,7 +1995,7 @@ const eventListeners = [
                 window.cancelAnimationFrame(updateMetadata)
             })
             if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'
-            playpauseTooltipContainer.setAttribute('data-tooltip-text', `Play (${PLAY_BUTTON_KEY})`)
+            playpauseTooltipContainer.setAttribute('pfv-tooltip-text', `Play (${PLAY_BUTTON_KEY})`)
             video.classList.remove('inactive')
             clearTimeout(timeout)
         }
@@ -2107,7 +2114,7 @@ const eventListeners = [
                 `${videoMetadata.is_live ? 'Live stream. Delayed by ' : ''}${formatDurationARIA(videoMetadata.is_live ? video.duration - video.currentTime : video.currentTime)}${!videoMetadata.is_live ? ` elapsed of ${formatDurationARIA(video.duration)}` : ''}`
             )
 
-            qualityBadgeContainer.dataset.quality = qualityCheckShortLabel(video.videoWidth, video.videoHeight)
+            qualityBadgeContainer.setAttribute('pfv-quality', qualityCheckShortLabel(video.videoWidth, video.videoHeight))
 
             qualityBadgeContainer.setAttribute('title', qualityCheckLongLabel(video.videoWidth, video.videoHeight))
 
@@ -2118,9 +2125,9 @@ const eventListeners = [
             if (video.currentTime >= video.duration - 1) timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 
             if (video.currentTime >= video.duration - LIVE_WINDOW) {
-                liveContainer.setAttribute('data-rewind', 'false')
+                liveContainer.setAttribute('pfv-rewind', 'false')
             } else {
-                liveContainer.setAttribute('data-rewind', 'true')
+                liveContainer.setAttribute('pfv-rewind', 'true')
             }
             videoContainer.classList[video.currentTime === video.duration ? 'add' : 'remove']('ended')
         }
@@ -2152,11 +2159,11 @@ const eventListeners = [
 
             if (video.videoWidth > video.videoHeight) playfulVideoPlayerContainer.setAttribute('aria-orientation', video.videoWidth > video.videoHeight ? 'landscape' : video.videoWidth < video.videoHeight && 'portait')
 
-            playfulVideoPlayerContainer.style.setProperty(
+            playfulVideoPlayerAspectRatio.style.setProperty(
                 '--aspect-ratio-size',
                 orientationInfluence
             )
-            playfulVideoPlayerContainer.style.setProperty(
+            playfulVideoPlayerAspectRatio.style.setProperty(
                 '--aspect-ratio-size-inverse',
                 video.videoHeight / video.videoWidth || 9 / 16
             )
@@ -2188,16 +2195,16 @@ const eventListeners = [
             let volumeLevel
             video.muted || video.volume === 0
                 ? (volumeLevel = 'mute',
-                    volumeTooltipContainer.setAttribute('data-tooltip-text', `Unmute (${MUTE_TOGGLE_KEY})`))
+                    volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Unmute (${MUTE_TOGGLE_KEY})`))
                 : video.volume >= 0.6
                     ? (volumeLevel = 'full',
-                        volumeTooltipContainer.setAttribute('data-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
+                        volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
                     : video.volume >= 0.3
                         ? (volumeLevel = 'mid',
-                            volumeTooltipContainer.setAttribute('data-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
+                            volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
                         : (volumeLevel = 'low',
-                            volumeTooltipContainer.setAttribute('data-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
-            videoContainer.dataset.volumeLevel = volumeLevel
+                            volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
+            videoContainer.setAttribute('pfv-volume-level', volumeLevel)
         }
     ]
 ]

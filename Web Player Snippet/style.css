@@ -21,7 +21,7 @@
         --chrome-overlay: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.693947) 6.67%, rgba(0, 0, 0, 0.675143) 13.33%, rgba(0, 0, 0, 0.642838) 20%, rgba(0, 0, 0, 0.596812) 26.67%, rgba(0, 0, 0, 0.537758) 33.33%, rgba(0, 0, 0, 0.467681) 40%, rgba(0, 0, 0, 0.390116) 46.67%, rgba(0, 0, 0, 0.309884) 53.33%, rgba(0, 0, 0, 0.232319) 60%, rgba(0, 0, 0, 0.162242) 66.67%, rgba(0, 0, 0, 0.103188) 73.33%, rgba(0, 0, 0, 0.0571619) 80%, rgba(0, 0, 0, 0.024857) 86.67%, rgba(0, 0, 0, 0.00605304) 93.33%, rgba(0, 0, 0, 0) 100%);
         --chrome-overlay-inverse: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.693947) 6.67%, rgba(0, 0, 0, 0.675143) 13.33%, rgba(0, 0, 0, 0.642838) 20%, rgba(0, 0, 0, 0.596812) 26.67%, rgba(0, 0, 0, 0.537758) 33.33%, rgba(0, 0, 0, 0.467681) 40%, rgba(0, 0, 0, 0.390116) 46.67%, rgba(0, 0, 0, 0.309884) 53.33%, rgba(0, 0, 0, 0.232319) 60%, rgba(0, 0, 0, 0.162242) 66.67%, rgba(0, 0, 0, 0.103188) 73.33%, rgba(0, 0, 0, 0.0571619) 80%, rgba(0, 0, 0, 0.024857) 86.67%, rgba(0, 0, 0, 0.00605304) 93.33%, rgba(0, 0, 0, 0) 100%);
         --page-background: #E7FEF7;
-        --flyout-bg: rgba(8, 43, 33, 0.961);
+        --flyout-bg: rgba(8, 43, 33, 0.9);
         --light-blue-color: #CCE7FF;
         --blue-color: #4B99E7;
         --mid-blue-color: #2771D7;
@@ -50,12 +50,15 @@
                 --tooltip-bg: color(display-p3 calc(1/255) calc(111/255) calc(78/255));
                 --stroke-accent-color: color(display-p3 calc(22/255) calc(82/255) calc(72/255));
                 --page-background: color(display-p3 calc(231/255) calc(254/255) calc(247/255));
-                --flyout-bg: color(display-p3 calc(8/255) calc(43/255) calc(33/255) / 0.961);
+                --flyout-bg: color(display-p3 calc(8/255) calc(43/255) calc(33/255) / 0.9);
                 --blue-color: color(display-p3 calc(75/255) calc(153/255) calc(231/255));
                 --mid-blue-color: color(display-p3 calc(39/255) calc(113/255) calc(215/255));
                 --dark-blue-color: color(display-p3 calc(0/255) calc(71/255) calc(187/255));
                 --link-and-focus-color: color(display-p3 calc(75/255) calc(153/255) calc(231/255));
                 --red-color: color(display-p3 calc(255/255) calc(51/255) calc(119/255));
+                --timeline-bg: color(display-p3 calc(28/255) calc(89/255) calc(71/255) / 0.6);
+                --timeline-buffer: color(display-p3 calc(1/255) calc(165/255) calc(115/255) / 0.3);
+                --timeline-preview-hover: color(display-p3 calc(209/255) calc(239/255) calc(230/255) / 0.2);
             }
         }
     }
@@ -604,7 +607,7 @@
 }
 
 .video-controls-container .right-side button::before,
-.video-controls-container .left-side button::before  {
+.video-controls-container .left-side button::before {
     content: "";
     position: absolute;
     top: 0;

@@ -13,6 +13,7 @@
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     -webkit-font-kerning: normal;
+    -webkit-text-size-adjust: 100%;
     font-kerning: normal;
     accent-color: var(--accent-color);
     color-scheme: light dark;

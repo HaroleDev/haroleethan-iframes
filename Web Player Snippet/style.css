@@ -603,7 +603,8 @@
     margin-right: 0;
 }
 
-.video-controls-container .right-side button::before {
+.video-controls-container .right-side button::before,
+.video-controls-container .left-side button::before  {
     content: "";
     position: absolute;
     top: 0;
@@ -611,7 +612,7 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    background-image: radial-gradient(center at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.297406) 6.67%, rgba(0, 0, 0, 0.289347) 13.33%, rgba(0, 0, 0, 0.275502) 20%, rgba(0, 0, 0, 0.255777) 26.67%, rgba(0, 0, 0, 0.230468) 33.33%, rgba(0, 0, 0, 0.200435) 40%, rgba(0, 0, 0, 0.167193) 46.67%, rgba(0, 0, 0, 0.132807) 53.33%, rgba(0, 0, 0, 0.0995652) 60%, rgba(0, 0, 0, 0.0695324) 66.67%, rgba(0, 0, 0, 0.0442234) 73.33%, rgba(0, 0, 0, 0.024498) 80%, rgba(0, 0, 0, 0.010653) 86.67%, rgba(0, 0, 0, 0.00259416) 93.33%, rgba(0, 0, 0, 0) 100%);
+    background-image: radial-gradient(at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.297406) 6.67%, rgba(0, 0, 0, 0.289347) 13.33%, rgba(0, 0, 0, 0.275502) 20%, rgba(0, 0, 0, 0.255777) 26.67%, rgba(0, 0, 0, 0.230468) 33.33%, rgba(0, 0, 0, 0.200435) 40%, rgba(0, 0, 0, 0.167193) 46.67%, rgba(0, 0, 0, 0.132807) 53.33%, rgba(0, 0, 0, 0.0995652) 60%, rgba(0, 0, 0, 0.0695324) 66.67%, rgba(0, 0, 0, 0.0442234) 73.33%, rgba(0, 0, 0, 0.024498) 80%, rgba(0, 0, 0, 0.010653) 86.67%, rgba(0, 0, 0, 0.00259416) 93.33%, rgba(0, 0, 0, 0) 100%);
 }
 
 .transcript-panel button path,

@@ -965,32 +965,30 @@ function fullscreenElement() {
         false
 }
 
-const exitFullscreen =
-    document.exitFullscreen ||
-    document.mozCancelFullScreen ||
-    document.msExitFullscreen
-
-const enterFullscreen =
-    playfulVideoPlayer.requestFullscreen ||
-    playfulVideoPlayer.mozRequestFullScreen ||
-    playfulVideoPlayer.msRequestFullscreen
-
 function toggleFullScreen() {
     if (fullscreenElement()) {
-        isOldSafari() && !isiPadOSSafari()
-            ? document.webkitCancelFullScreen()
-            : document.webkitExitFullscreen
-                ? document.webkitExitFullscreen()
-                : fullscreenElement()
-                && exitFullscreen.call(window.document)
+        document.exitFullscreen
+            ? document.exitFullscreen()
+            : isOldSafari() && !isiPadOSSafari()
+                ? document.webkitCancelFullScreen()
+                : document.webkitExitFullscreen
+                    ? document.webkitExitFullscreen()
+                    : document.mozCancelFullScreen
+                        ? document.mozCancelFullScreen()
+                        : document.msExitFullscreen
+                        && document.msExitFullscreen()
         fullscreenTooltip.setAttribute('pfv-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else if (!fullscreenElement()) {
-        isOldSafari() && !isiPadOSSafari()
-            ? video.webkitEnterFullScreen()
-            : playfulVideoPlayer.webkitRequestFullScreen
-                ? playfulVideoPlayer.webkitRequestFullScreen()
-                : !fullscreenElement() || isiPadOSSafari()
-                && enterFullscreen.call(playfulVideoPlayer)
+        playfulVideoPlayer.requestFullscreen
+            ? playfulVideoPlayer.requestFullscreen()
+            : isOldSafari() && !isiPadOSSafari()
+                ? video.webkitEnterFullScreen()
+                : playfulVideoPlayer.webkitRequestFullScreen
+                    ? playfulVideoPlayer.webkitRequestFullScreen()
+                    : playfulVideoPlayer.mozRequestFullScreen
+                        ? playfulVideoPlayer.mozRequestFullScreen()
+                        : playfulVideoPlayer.msRequestFullscreen
+                        && playfulVideoPlayer.msRequestFullscreen()
         fullscreenTooltip.setAttribute('pfv-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else {
         fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')

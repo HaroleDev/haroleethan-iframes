@@ -1256,10 +1256,12 @@
 }
 
 .pip-player .video-backdrop-seeking {
+    --backdrop-filter: blur(1vh) saturate(100%);
     opacity: 1;
-    backdrop-filter: blur(1vh) saturate(100%);
+    -webkit-backdrop-filter: var(--backdrop-filter);
+    backdrop-filter: var(--backdrop-filter);
     background-color: rgba(0, 0, 0, 0.7);
-    transition: opacity 300ms var(--ease-out-expo), backdrop-filter 0s;
+    transition: opacity 300ms var(--ease-out-expo), backdrop-filter 0s, -webkit-backdrop-filter 0s;
 }
 
 .loading .video-poster {
@@ -1284,7 +1286,9 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
-    backdrop-filter: blur(0vh) saturate(100%);
+    --backdrop-filter: blur(0vh) saturate(100%);
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--backdrop-filter);
 }
 
 .video-container.scrubbing .video-backdrop-seeking,
@@ -1297,10 +1301,12 @@
 
 .video-container.scrubbing .video-backdrop-seeking,
 .video-container.buffering-scrubbing .video-backdrop-seeking {
-    backdrop-filter: blur(1vh) saturate(150%);
+    --backdrop-filter: blur(1vh) saturate(150%);
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--backdrop-filter);
 }
 
-@supports not (backdrop-filter: blur(1vh)) {
+@supports (not (backdrop-filter: blur(1vh))) or (not (-webkit-backdrop-filter: blur(1vh))) {
     .video-backdrop-seeking {
         background-color: #000000cc;
     }
@@ -3040,6 +3046,7 @@ screen and (max-height: 600px) {
 
     .video-container.scrubbing .video-backdrop-seeking,
     .video-container.buffering-scrubbing .video-backdrop-seeking {
+        -webkit-backdrop-filter: none;
         backdrop-filter: none;
     }
 
@@ -3669,7 +3676,9 @@ screen and (max-height: 600px) {
 
     .video-container.scrubbing .video-backdrop-seeking,
     .video-container.buffering-scrubbing .video-backdrop-seeking {
-        backdrop-filter: brightness(30%);
+        --backdrop-filter: brightness(30%);
+        -webkit-backdrop-filter: var(--backdrop-filter);
+        backdrop-filter: var(--backdrop-filter);
         opacity: 1 !important;
     }
 

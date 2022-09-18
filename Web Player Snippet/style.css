@@ -1220,109 +1220,130 @@
     position: absolute;
 }
 
-.video-play-container {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    cursor: pointer;
-    pointer-events: auto;
-}
+@layer videoPoster {
+    .video-poster {
+        z-index: -1;
+        opacity: 1;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        top: 0;
+        left: 0;
+        transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
+        position: absolute;
+        display: block;
+    }
 
-.play-btn-poster,
-.play-btn-poster .symbol,
-.play-btn-poster .stroke,
-.play-btn-poster .circle {
-    transition: var(--300ms-all-ease-out-expo-prop);
-    z-index: 3;
-    pointer-events: none;
-}
+    .loading .video-poster {
+        opacity: 0;
+        transition: opacity 300ms var(--ease-out-expo);
+    }
 
-.video-play-container:hover .play-btn-poster .symbol {
-    fill: var(--dark-text-color);
-}
+    .video-container.played:not(.pip-player) .video-poster {
+        opacity: 0;
+        transition: opacity 300ms var(--ease-out-expo);
+    }
 
-.video-play-container:hover .play-btn-poster .circle {
-    fill: var(--bright-accent-color);
-    fill-opacity: 1;
-}
+    .video-play-container {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        cursor: pointer;
+        pointer-events: auto;
+    }
 
-.video-play-container:hover .play-btn-poster .stroke {
-    fill: var(--accent-color);
-    fill-opacity: 1;
-}
+    .play-btn-poster,
+    .play-btn-poster .symbol,
+    .play-btn-poster .stroke,
+    .play-btn-poster .circle {
+        transition: var(--300ms-all-ease-out-expo-prop);
+        z-index: 3;
+        pointer-events: none;
+    }
 
-.video-play-container:active .play-btn-poster {
-    transform: scale(0.96);
-}
+    .video-play-container:hover .play-btn-poster .symbol {
+        fill: var(--dark-text-color);
+    }
 
-.video-play-container:active .play-btn-poster .symbol {
-    fill: var(--dark-text-color);
-}
+    .video-play-container:hover .play-btn-poster .circle {
+        fill: var(--bright-accent-color);
+        fill-opacity: 1;
+    }
 
-.video-play-container:active .play-btn-poster .circle {
-    fill: var(--accent-color);
-    fill-opacity: 1;
-}
+    .video-play-container:hover .play-btn-poster .stroke {
+        fill: var(--accent-color);
+        fill-opacity: 1;
+    }
 
-.video-play-container:active .play-btn-poster .stroke {
-    fill: var(--dark-accent-color);
-    fill-opacity: 1;
-}
+    @supports (hover: none) {
 
-.video-container.played .video-play-container {
-    pointer-events: none;
-}
+        .video-play-container:hover .play-btn-poster .symbol,
+        .video-play-container:hover .play-btn-poster .circle,
+        .video-play-container:hover .play-btn-poster .stroke {
+            fill: initial;
+        }
+    }
 
-.video-container.played .play-btn-poster {
-    opacity: 0;
-    transform: scale(1.96);
-    pointer-events: none;
-    transition: transform 600ms var(--ease-out-expo), opacity 600ms var(--ease-out-expo);
-}
+    .video-play-container:active .play-btn-poster {
+        transform: scale(0.96);
+    }
 
-.video-container.played .play-btn-poster .stroke {
-    opacity: 0;
-    transition: opacity 300ms var(--ease-out-expo);
-}
+    .video-play-container:active .play-btn-poster .symbol {
+        fill: var(--dark-text-color);
+    }
 
-.video-container:not(.played) .video-controls-container .controls,
-.video-container:not(.played) .video-controls-container .timeline-container .timeline {
-    opacity: 0.1;
-}
+    .video-play-container:active .play-btn-poster .circle {
+        fill: var(--accent-color);
+        fill-opacity: 1;
+    }
 
-.video-container:not(.played).pip-player .video-controls-container .controls,
-.video-container:not(.played) .video-controls-container:hover .controls-container .controls,
-.video-container:not(.played) .video-controls-container:hover .controls-container .timeline-container .timeline {
-    opacity: 0.9;
-}
+    .video-play-container:active .play-btn-poster .stroke {
+        fill: var(--dark-accent-color);
+        fill-opacity: 1;
+    }
 
-.video-container:not(.played) .video-controls-container::before {
-    opacity: 0.7;
-    transition: opacity 300ms var(--ease-out-expo);
-}
+    .video-container.played .video-play-container {
+        pointer-events: none;
+    }
 
-.video-container:not(.played) .video-controls-container:hover::before {
-    opacity: 1;
-}
+    .video-container.played .play-btn-poster {
+        opacity: 0;
+        transform: scale(1.96);
+        pointer-events: none;
+        transition: transform 600ms var(--ease-out-expo), opacity 600ms var(--ease-out-expo);
+    }
 
-.video-poster {
-    z-index: -1;
-    opacity: 1;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    top: 0;
-    left: 0;
-    transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
-    position: absolute;
-    display: block;
+    .video-container.played .play-btn-poster .stroke {
+        opacity: 0;
+        transition: opacity 300ms var(--ease-out-expo);
+    }
+
+    .video-container:not(.played) .video-controls-container .controls,
+    .video-container:not(.played) .video-controls-container .timeline-container .timeline {
+        opacity: 0.1;
+    }
+
+    .video-container:not(.played).pip-player .video-controls-container .controls,
+    .video-container:not(.played) .video-controls-container:hover .controls-container .controls,
+    .video-container:not(.played) .video-controls-container:hover .controls-container .timeline-container .timeline {
+        opacity: 0.9;
+    }
+
+    .video-container:not(.played) .video-controls-container::before {
+        opacity: 0.7;
+        transition: opacity 300ms var(--ease-out-expo);
+    }
+
+    .video-container:not(.played) .video-controls-container:hover::before {
+        opacity: 1;
+    }
 }
 
 .pip-player .video-backdrop-seeking {
@@ -1332,16 +1353,6 @@
     backdrop-filter: var(--backdrop-filter);
     background-color: rgba(0, 0, 0, 0.7);
     transition: opacity 300ms var(--ease-out-expo), backdrop-filter 0s, -webkit-backdrop-filter 0s;
-}
-
-.loading .video-poster {
-    opacity: 0;
-    transition: opacity 300ms var(--ease-out-expo);
-}
-
-.video-container.played:not(.pip-player) .video-poster {
-    opacity: 0;
-    transition: opacity 300ms var(--ease-out-expo);
 }
 
 .video-backdrop-seeking {

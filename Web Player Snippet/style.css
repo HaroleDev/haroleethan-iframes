@@ -148,6 +148,10 @@
         display: block;
         position: relative;
         width: 100%;
+    }
+
+    .playful-video-player-container[aria-orientation="landscape"] .playful-video-player-aspect-ratio,
+    .playful-video-player-container[aria-orientation="landscape"] {
         padding-top: calc(var(--aspect-ratio-size-inverse) * 100%);
     }
 
@@ -155,7 +159,6 @@
         display: block;
         position: relative;
         width: 100%;
-        padding-top: calc(1 * 100%);
     }
 
     .playful-video-player-container[aria-orientation="landscape"] .video-container .video-fit-contain {
@@ -175,8 +178,17 @@
             min-height: calc(var(--aspect-ratio-size-inverse) * 40vh);
         }
 
-        .playful-video-player-container[aria-orientation="portait"] .playful-video-player-aspect-ratio {
+        .playful-video-player-container[aria-orientation="portait"] .playful-video-player-aspect-ratio,
+        .playful-video-player-container[aria-orientation="portait"] {
             padding-top: min(var(--aspect-ratio-size-inverse) * 100%, var(--aspect-ratio-size-inverse) * 40vh);
+        }
+    }
+
+    @supports not (padding-top: min(100%, 40vh)) {
+
+        .playful-video-player-container[aria-orientation="portait"] .playful-video-player-aspect-ratio,
+        .playful-video-player-container[aria-orientation="portait"] {
+            padding-top: calc(1 * 100%);
         }
     }
 

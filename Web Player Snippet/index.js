@@ -185,7 +185,6 @@ const isOldSafari = () =>
         'iPod',
         'iPad'
     ].includes(navigator.platform) ||
-    navigator.userAgent.match(/(iPad)/) ||
     /iPod|iPad|iPhone/i.test(navigator.userAgent)
 
 const isiPadOSSafari = () => {
@@ -209,35 +208,28 @@ window.addEventListener('DOMContentLoaded', () => {
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = videoMetadata.video_poster
     //For HLS container
-    if (Hls.isSupported()) {
-        if (videoMetadata.is_live === true) {
-            playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
-            durationContainer.setAttribute('hidden', '')
-            liveContainer.removeAttribute('hidden')
-            videoThumbPreview.setAttribute('hidden', '')
-        } else {
-            playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
-        }
-        hls.attachMedia(video)
-        video.setAttribute('type', videoMetadata.HLS_codec)
-        hls.loadSource(videoMetadata.HLS_src)
-        hls.on(Hls.Events.MANIFEST_LOADED, function () {
-            loadedMetadata()
-        })
-
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        if (videoMetadata.is_live === true) {
-            playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
-            durationContainer.setAttribute('hidden', '')
-            liveContainer.removeAttribute('hidden')
-            videoThumbPreview.setAttribute('hidden', '')
-        } else {
-            playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
-        }
+    if (videoMetadata.is_live === true && (video.canPlayType('application/vnd.apple.mpegurl') || Hls.isSupported())) {
+        playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
+        durationContainer.setAttribute('hidden', '')
+        liveContainer.removeAttribute('hidden')
+        videoThumbPreview.setAttribute('hidden', '')
+    } else {
+        playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
+    }
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()
         qualityItem.setAttribute('pfv-unsupported', '')
+    } else if (Hls.isSupported()) {
+        hls.attachMedia(video)
+        video.setAttribute('type', videoMetadata.HLS_codec)
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+            hls.loadSource(videoMetadata.HLS_src)
+            hls.on(Hls.Events.MANIFEST_LOADED, function () {
+                loadedMetadata()
+            })
+        })
     } else {
         //For MP4 container
         source.setAttribute('src', videoMetadata.Fallback_src)

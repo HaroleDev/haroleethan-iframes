@@ -42,7 +42,7 @@
     </style>
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' gstatic.com *.gstatic.com *.jsdelivr.net; connect-src * 'self' 'unsafe-inline' 'unsafe-eval' *.storjshare.io *.cloudinary.com; img-src 'self' data: *.cloudinary.com; style-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; font-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; base-uri 'self'; form-action 'self'; media-src 'self' blob: *.storjshare.io *.cloudinary.com; worker-src 'self' blob: *.jsdelivr.net">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' gstatic.com *.gstatic.com *.jsdelivr.net; connect-src * 'self' 'unsafe-inline' 'unsafe-eval' *.storjshare.io *.cloudinary.com; img-src 'self' data: gstatic.com *.gstatic.com *.cloudinary.com; style-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; font-src 'self' 'unsafe-inline' *.gstatic.com *.googleapis.com; base-uri 'self'; form-action 'self'; media-src 'self' blob: *.storjshare.io *.cloudinary.com; worker-src 'self' blob: *.jsdelivr.net">
     <meta http-equiv="Access-Control-Allow-Headers" content="X-Requested-With" />
     <meta http-equiv="Access-Control-Allow-Credentials" content="true" />
 </head>
@@ -246,7 +246,7 @@
                                     <svg class="icon">
                                         <use xlink:href="#info-icon-24px" />
                                     </svg>
-                                    <div class="span">About Playful Video</div>
+                                    <div class="span">About&nbsp;<span translate="no">Playful Video</span></div>
                                 </div>
                             </div>
                         </div>
@@ -348,10 +348,14 @@
                                 <div style="width: 100%; margin-bottom: 8px;">
                                     <h2 id="dialogAboutTitle">About Playful Video Player</h2>
                                 </div>
-                                <p>AirPlay® and AirPlay Logo™ are trademarks of Apple Inc., registered in the U.S. and
+                                <p><span translate="no">AirPlay®</span>&nbsp;and&nbsp;<span translate="no">AirPlay
+                                        Logo™</span>&nbsp;are trademarks of&nbsp;<span translate="no">Apple Inc.</span>,
+                                    registered in the U.S. and
                                     other
                                     countries.</p>
-                                <p>Google Cast™ and Google® are trademarks of Google LLC.</p>
+                                <p><span translate="no">Google Cast™</span>&nbsp;and&nbsp;<span
+                                        translate="no">Google®</span>&nbsp;are trademarks of&nbsp;<span
+                                        translate="no">Google LLC</span>.</p>
                             </div>
                             <div class="footer-buttons">
                                 <button class="close-dialog">Close</button>
@@ -782,7 +786,7 @@
                                         <img class="seeking-preview__thumbnail">
                                         <div class="seeking-preview__time-tooltip">-:--</div>
                                     </div>
-                                    <div class="timeline">
+                                    <div class="timeline" role="slider" draggable="true" aria-label="Seek slider">
                                         <div class="seek-filler"></div>
                                         <div class="timeline__progressbar"></div>
                                     </div>
@@ -865,7 +869,7 @@
                                                 fill="var(--text-color)" class="symbol" />
                                         </svg>
                                     </div>
-                                    <div class="video-subtitles-cc-container"></div>
+                                    <div class="video-subtitles-cc-container" translate="no"></div>
                                     <div class="video-backdrop-seeking"></div>
                                     <img class="video-thumb-preview" alt="">
                                     <img class="video-poster" alt="">
@@ -875,7 +879,7 @@
                                     x5-video-player-type="h5" x5-video-player-fullscreen="true"
                                     x5-video-orientation="landscape|portrait" poster="data:image/svg+xml,%3Csvg xmlns='
                                 http://www.w3.org/2000/svg'/%3E">
-                                    <source>
+                                    <source src="" type="">
                                     <track id="default-track" label="English" kind="captions" srclang="en"
                                         src="./sample.vtt" default>
                                 </video>

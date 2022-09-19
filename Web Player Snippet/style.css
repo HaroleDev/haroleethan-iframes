@@ -836,6 +836,10 @@
     pointer-events: none;
 }
 
+.span>.span {
+    padding: 0 0 0 0 !important;
+}
+
 @layer liveBadge {
 
     .playful-video-player .live-container {
@@ -1010,50 +1014,47 @@
         cursor: text;
     }
 
-    @layer quality {
-
-        [pfv-quality="HD"][pfv-badge="quality"],
-        [pfv-quality="FHD"][pfv-badge="quality"],
-        [pfv-quality="QHD"][pfv-badge="quality"],
-        [pfv-quality="UHD"][pfv-badge="quality"] {
-            background-color: var(--mid-blue-color);
-        }
-
-        [pfv-quality="UHD"][pfv-badge="quality"] {
-            background-image: linear-gradient(180deg, var(--mid-blue-color), var(--dark-blue-color));
-        }
-
-        [pfv-quality="HD"][pfv-badge="quality"] .span.quality,
-        [pfv-quality="FHD"][pfv-badge="quality"] .span.quality,
-        [pfv-quality="QHD"][pfv-badge="quality"] .span.quality,
-        [pfv-quality="UHD"][pfv-badge="quality"] .span.quality {
-            color: var(--text-color);
-        }
-
-        [pfv-quality="UHD"][pfv-badge="quality"] .span.quality {
-            color: var(--text-color);
-            --text-shadow-color: var(--blue-color);
-            --dark-text-shadow-color: rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
-            text-shadow:
-                0 0.2px 0 var(--text-shadow-color),
-                0 0.4px 0 var(--text-shadow-color),
-                0 0.6px 0 var(--text-shadow-color),
-                0 0.8px 0 var(--text-shadow-color),
-                0 1px 0 var(--text-shadow-color),
-                0 1.2px 0 var(--text-shadow-color),
-                0 1.4px 0 var(--text-shadow-color),
-                0 1.6px 0 var(--text-shadow-color),
-                0 1.8px 0 var(--text-shadow-color),
-                0 2px 0 var(--text-shadow-color);
-            filter:
-                drop-shadow(0 1px 1px var(--dark-text-shadow-color)) drop-shadow(0 3px 3px var(--dark-text-shadow-color)) drop-shadow(0 5px 6px var(--dark-text-shadow-color)) drop-shadow(0 7px 10px var(--dark-text-shadow-color)) drop-shadow(0 9px 15px var(--dark-text-shadow-color));
-        }
-    }
-
     .badge {
         color: var(--text-color);
         background-color: var(--background);
+    }
+
+    [pfv-quality="HD"][pfv-badge="quality"],
+    [pfv-quality="FHD"][pfv-badge="quality"],
+    [pfv-quality="QHD"][pfv-badge="quality"],
+    [pfv-quality="UHD"][pfv-badge="quality"] {
+        background-color: var(--mid-blue-color);
+    }
+
+    [pfv-quality="UHD"][pfv-badge="quality"] {
+        background-image: linear-gradient(180deg, var(--mid-blue-color), var(--dark-blue-color));
+    }
+
+    [pfv-quality="HD"][pfv-badge="quality"] .span.quality,
+    [pfv-quality="FHD"][pfv-badge="quality"] .span.quality,
+    [pfv-quality="QHD"][pfv-badge="quality"] .span.quality,
+    [pfv-quality="UHD"][pfv-badge="quality"] .span.quality {
+        color: var(--text-color);
+    }
+
+    [pfv-quality="UHD"][pfv-badge="quality"] .span.quality {
+        color: var(--text-color);
+        --text-shadow-color: var(--blue-color);
+        --dark-text-shadow-color: rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+        text-shadow:
+            0 0.2px 0 var(--text-shadow-color),
+            0 0.4px 0 var(--text-shadow-color),
+            0 0.6px 0 var(--text-shadow-color),
+            0 0.8px 0 var(--text-shadow-color),
+            0 1px 0 var(--text-shadow-color),
+            0 1.2px 0 var(--text-shadow-color),
+            0 1.4px 0 var(--text-shadow-color),
+            0 1.6px 0 var(--text-shadow-color),
+            0 1.8px 0 var(--text-shadow-color),
+            0 2px 0 var(--text-shadow-color);
+        filter:
+            drop-shadow(0 1px 1px var(--dark-text-shadow-color)) drop-shadow(0 3px 3px var(--dark-text-shadow-color)) drop-shadow(0 5px 6px var(--dark-text-shadow-color)) drop-shadow(0 7px 10px var(--dark-text-shadow-color)) drop-shadow(0 9px 15px var(--dark-text-shadow-color));
     }
 }
 

@@ -1,4 +1,3 @@
-'use strict'
 import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { videoMetadata, mediaSessionMetadata, liveSettings } from './metadata.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
@@ -40,7 +39,8 @@ function loadScriptsInOrder(arrayOfJS) {
 }
 
 const config = {
-    startPosition: -1
+    startPosition: -1,
+    debug: true,
 }
 
 const PLAY_BUTTON_KEY = 'k',

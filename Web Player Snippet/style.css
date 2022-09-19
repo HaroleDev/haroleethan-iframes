@@ -1707,31 +1707,33 @@
     margin-top: 1px;
 }
 
-.video-container .settings-button path {
-    transition: var(--300ms-all-ease-out-expo-prop);
-    transform-origin: 50% 50%;
-    will-change: transform;
-}
+@layer settingsButton {
+    .video-container .settings-button path {
+        transition: var(--300ms-all-ease-out-expo-prop);
+        transform-origin: 50% 50%;
+        will-change: transform;
+    }
 
-.video-container .settings-button:hover path {
-    --transform: rotate(10deg);
-    transform: var(--transform);
-}
+    .video-container .settings-button:hover path {
+        --transform: rotate(10deg);
+        transform: var(--transform);
+    }
 
-.video-container .settings-button:active path {
-    --transform: rotate(-30deg) scale(0.9);
-    transform: var(--transform);
-}
+    .video-container .settings-button:active path {
+        --transform: rotate(-30deg) scale(0.9);
+        transform: var(--transform);
+    }
 
-.video-container .settings-button.pressed path {
-    --transform: rotate(90deg);
-    transform: var(--transform);
-    fill: var(--bright-accent-color);
-}
+    .video-container .settings-button.pressed path {
+        --transform: rotate(90deg);
+        transform: var(--transform);
+        fill: var(--bright-accent-color);
+    }
 
-.video-container .settings-button.pressed:active path {
-    --transform: rotate(120deg) scale(0.9);
-    transform: var(--transform);
+    .video-container .settings-button.pressed:active path {
+        --transform: rotate(120deg) scale(0.9);
+        transform: var(--transform);
+    }
 }
 
 .video-context-menu {

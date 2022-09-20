@@ -6,7 +6,7 @@ import './utils/reqAnimFrameWhenPageVisible.js'
 
 const deviceMem = 'deviceMemory' in navigator && navigator.deviceMemory
 const isLowEnd = deviceMem < 4 ? true : false
-const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true || false;
+const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true || false
 
 function loadScript(url) {
     return new Promise(function (resolve) {
@@ -545,7 +545,7 @@ if (ctx) {
 }
 const sourceNode = context.createMediaElementSource(video)
 // EQ
-const filters = [];
+const filters = []
 [30, 60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].map(function (
     freq,
     i
@@ -1890,9 +1890,9 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
     }
 })
 
-const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const reducedMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-mediaQuery.addEventListener('change', () => {
+reducedMediaQuery.addEventListener('change', () => {
     isMotionReduced() ? totalTime.innerText = formatDuration(video.duration) : totalTime.innerText = formatDuration(video.duration)
 })
 

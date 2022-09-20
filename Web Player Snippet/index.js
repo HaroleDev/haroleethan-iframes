@@ -6,7 +6,7 @@ import './utils/reqAnimFrameWhenPageVisible.js'
 
 const deviceMem = 'deviceMemory' in navigator && navigator.deviceMemory
 const isLowEnd = deviceMem < 4 ? true : false
-const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true || false;
 
 function loadScript(url) {
     return new Promise(function (resolve) {

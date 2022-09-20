@@ -878,7 +878,7 @@ class seekByTime {
 // Time divider animation
 let divide
 function intervalDivideWorker() {
-    if (typeof (Worker) !== 'undefined' && videoMetadata.is_live === false && playfulVideoPlayer.querySelector('.divider-time').innerText !== '/') {
+    if (typeof (Worker) !== 'undefined' && videoMetadata.is_live === false) {
         if (typeof (divide) === 'undefined') {
             divide = new Worker('./utils/timeDivider.js')
         }

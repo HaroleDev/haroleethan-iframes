@@ -545,7 +545,8 @@ if (ctx) {
 }
 const sourceNode = context.createMediaElementSource(video)
 // EQ
-const filters = []
+const filters = [];
+
 [30, 60, 125, 250, 500, 800, 1000, 2000, 4000, 8000, 16000].map(function (
     freq,
     i

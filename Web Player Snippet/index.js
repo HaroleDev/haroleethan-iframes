@@ -4,6 +4,8 @@ import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
 
+const deviceMem = 'deviceMemory' in navigator && navigator.deviceMemory
+const isLowEnd = deviceMem < 4 ? true : false
 const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
 function loadScript(url) {
@@ -1328,7 +1330,7 @@ function formatDuration(time) {
             ? `${time < 0 ? '-' : ''}${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
             : hours > 0
                 ? `${time < 0 ? '-' : ''}${hours}:${format(minutes)}:${format(seconds)}`
-                : video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS && videoMetadata.is_live === false
+                : isLowEnd === true || video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS && videoMetadata.is_live === false
                     ? `${time < 0 ? '-' : ''}${format(seconds)}.${format(frameSeconds)}`
                     : hours === 0
                         ? `${time < 0 ? '-' : ''}${minutes}:${format(seconds)}`

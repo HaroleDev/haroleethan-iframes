@@ -1497,57 +1497,62 @@
 }
 
 @layer fullScreenButton {
+    @layer enter {
 
-    .full-screen-button .enter .top-corner,
-    .full-screen-button:active .enter .top-corner {
-        --transform: translate(2px, 2px);
-        transform: var(--transform);
-        transition: var(--300ms-all-ease-out-expo-prop);
+        .full-screen-button .enter .top-corner,
+        .full-screen-button:active .enter .top-corner {
+            --transform: translate(2px, 2px);
+            transform: var(--transform);
+            transition: var(--300ms-all-ease-out-expo-prop);
+        }
+
+        .full-screen-button .enter .bottom-corner {
+            --transform: translate(-2px, -2px);
+            transform: var(--transform);
+            transition: var(--300ms-all-ease-out-expo-prop);
+        }
+
+        .full-screen-button:hover .enter .top-corner,
+        .full-screen-button:hover .enter .bottom-corner {
+            --transform: translate(0px, 0px);
+            transform: var(--transform);
+        }
+
+        .full-screen-button:active .enter .bottom-corner {
+            --transform: translate(-3px, -3px);
+            transform: var(--transform);
+        }
+
+        .full-screen-button:active .enter .top-corner {
+            --transform: translate(3px, 3px);
+            transform: var(--transform);
+        }
+
+        .full-screen-button .exit .bottom-corner,
+        .full-screen-button .exit .top-corner {
+            --transform: translate(0px, 0px);
+            transform: var(--transform);
+            transition: var(--300ms-all-ease-out-expo-prop);
+        }
+
     }
 
-    .full-screen-button .enter .bottom-corner {
-        --transform: translate(-2px, -2px);
-        transform: var(--transform);
-        transition: var(--300ms-all-ease-out-expo-prop);
-    }
+    @layer exit {
+        .full-screen-button:hover .exit .bottom-corner {
+            --transform: translate(-2px, -2px);
+            transform: var(--transform);
+        }
 
-    .full-screen-button:hover .enter .top-corner,
-    .full-screen-button:hover .enter .bottom-corner {
-        --transform: translate(0px, 0px);
-        transform: var(--transform);
-    }
+        .full-screen-button:hover .exit .top-corner {
+            --transform: translate(2px, 2px);
+            transform: var(--transform);
+        }
 
-    .full-screen-button:active .enter .bottom-corner {
-        --transform: translate(-3px, -3px);
-        transform: var(--transform);
-    }
-
-    .full-screen-button:active .enter .top-corner {
-        --transform: translate(3px, 3px);
-        transform: var(--transform);
-    }
-
-    .full-screen-button .exit .bottom-corner,
-    .full-screen-button .exit .top-corner {
-        --transform: translate(0px, 0px);
-        transform: var(--transform);
-        transition: var(--300ms-all-ease-out-expo-prop);
-    }
-
-    .full-screen-button:hover .exit .bottom-corner {
-        --transform: translate(-2px, -2px);
-        transform: var(--transform);
-    }
-
-    .full-screen-button:hover .exit .top-corner {
-        --transform: translate(2px, 2px);
-        transform: var(--transform);
-    }
-
-    .full-screen-button:active .exit .top-corner,
-    .full-screen-button:active .exit .bottom-corner {
-        --transform: translate(0px, 0px);
-        transform: var(--transform);
+        .full-screen-button:active .exit .top-corner,
+        .full-screen-button:active .exit .bottom-corner {
+            --transform: translate(0px, 0px);
+            transform: var(--transform);
+        }
     }
 }
 

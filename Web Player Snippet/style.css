@@ -3926,7 +3926,7 @@ screen and (max-height: 600px) {
         padding: 8px 28px 12px 28px;
         margin: 0px -28px;
         border-top: 2px solid CanvasText;
-        margin-top: -2px;
+        margin-top: calc(-28px - 2px);
         margin-bottom: 2px;
     }
 

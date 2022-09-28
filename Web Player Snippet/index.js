@@ -970,14 +970,6 @@ function activity() {
 fullscreenButton.addEventListener('click', toggleFullScreen)
 videoFit.addEventListener('dblclick', toggleFullScreen)
 
-function fullscreenElement() {
-    return document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement ||
-        false
-}
-
 const Fullscreen = {
      fullscreenElement: function () {
         return document.fullscreenElement ||

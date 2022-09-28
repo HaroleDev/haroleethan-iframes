@@ -1007,10 +1007,10 @@ const Fullscreen = {
     }
 }
 function toggleFullScreen() {
-    if (fullscreenElement()) {
+    if (Fullscreen.fullscreenElement()) {
         Fullscreen.exitFullscreen()
         fullscreenTooltip.setAttribute('pfv-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
-    } else if (!fullscreenElement()) {
+    } else if (!Fullscreen.fullscreenElement()) {
         Fullscreen.requestFullscreen(playfulVideoPlayer)
         fullscreenTooltip.setAttribute('pfv-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else {
@@ -1043,13 +1043,13 @@ function togglePIPPlayerMode() {
 }
 
 function fullScreenToggleChange() {
-    playfulVideoPlayer.classList.toggle('full-screen', fullscreenElement())
+    playfulVideoPlayer.classList.toggle('full-screen', Fullscreen.fullscreenElement())
 }
 
-document.addEventListener('fullscreenchange', fullScreenToggleChange, fullscreenElement())
-document.addEventListener('mozfullscreenchange', fullScreenToggleChange, fullscreenElement())
-document.addEventListener('webkitfullscreenchange', fullScreenToggleChange, fullscreenElement())
-document.addEventListener('msfullscreenchange', fullScreenToggleChange, fullscreenElement())
+document.addEventListener('fullscreenchange', fullScreenToggleChange, Fullscreen.fullscreenElement())
+document.addEventListener('mozfullscreenchange', fullScreenToggleChange, Fullscreen.fullscreenElement())
+document.addEventListener('webkitfullscreenchange', fullScreenToggleChange, Fullscreen.fullscreenElement())
+document.addEventListener('msfullscreenchange', fullScreenToggleChange, Fullscreen.fullscreenElement())
 
 video.addEventListener('webkitenterfullscreen', () => {
     playfulVideoPlayer.classList.add('full-screen')

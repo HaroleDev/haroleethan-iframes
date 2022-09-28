@@ -347,7 +347,7 @@ videoContainer.addEventListener('contextmenu', (e) => {
         settingsContextMenu.classList.remove('pressed')
         settingsTooltipContainer.setAttribute('pfv-tooltip', 'right')
         seekingPreview.removeAttribute('hidden')
-        closedDialog(e.target)
+        closeDialog(e.target)
     }
 
     if (contextMenu.classList.contains('show')) {
@@ -392,7 +392,7 @@ function closeSettingsMenu(e) {
         settingsContextMenu.classList.remove('pressed')
         settingsTooltipContainer.setAttribute('pfv-tooltip', 'right')
         seekingPreview.removeAttribute('hidden')
-        closedDialog(e.target)
+        closeDialog(e.target)
     }
 }
 
@@ -604,19 +604,19 @@ rangeEQInputs.forEach(element => {
 })
 
 // Dialog
-function closedDialog(e) {
+function closeDialog(e) {
     if (e.classList.contains('opened')) e.classList.remove('opened')
 }
 
 dialogOverlay.forEach(element => {
     element.addEventListener('click', (e) => {
-        closedDialog(e.target.parentElement)
+        closeDialog(e.target.parentElement)
     })
 })
 
 closeDialogBtn.forEach(element => {
     element.addEventListener('click', (e) => {
-        closedDialog(e.target.parentElement.parentElement.parentElement)
+        closeDialog(e.target.parentElement.parentElement.parentElement)
     })
 })
 

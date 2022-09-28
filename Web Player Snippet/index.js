@@ -195,17 +195,6 @@ function canFullscreenEnabled() {
         false
 }
 
-const isOldSafari = () =>
-    [
-        'iPhone Simulator',
-        'iPod Simulator',
-        'iPad Simulator',
-        'iPhone',
-        'iPod',
-        'iPad'
-    ].includes(navigator.platform) ||
-    /iPod|iPad|iPhone/i.test(navigator.userAgent)
-
 const isiPadOSSafari = () => {
     window.AuthenticatorAssertionResponse === undefined
         && window.AuthenticatorAttestationResponse === undefined
@@ -222,13 +211,11 @@ const isiPadOSSafari = () => {
         navigator.maxTouchPoints > 2
 }
 
-
 window.addEventListener('DOMContentLoaded', () => {
     if (typeof window != 'object' && typeof document != 'object') return
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = videoMetadata.video_poster
-    //For HLS container
-    if (videoMetadata.is_live === true && (video.canPlayType('application/vnd.apple.mpegurl') || Hls.isSupported())) {
+    if (videoMetadata.is_live === true && ((video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL') || Hls.isSupported()))) {
         playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
         durationContainer.setAttribute('hidden', '')
         liveContainer.removeAttribute('hidden')
@@ -236,20 +223,20 @@ window.addEventListener('DOMContentLoaded', () => {
     } else {
         playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
     }
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+
+    if (Hls.isSupported()) {
+        //For HLS container
+        hls.attachMedia(video)
+        hls.loadSource(videoMetadata.HLS_src)
+        video.setAttribute('type', videoMetadata.HLS_codec)
+        hls.on(Hls.Events.MANIFEST_LOADED, function () {
+            loadedMetadata()
+        })
+    } else if (video.canPlayType('application/vnd.apple.mpegurl') || video.canPlayType('application/x-mpegURL')) {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()
         qualityItem.setAttribute('pfv-unsupported', '')
-    } else if (Hls.isSupported()) {
-        hls.attachMedia(video)
-        video.setAttribute('type', videoMetadata.HLS_codec)
-        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-            hls.loadSource(videoMetadata.HLS_src)
-            hls.on(Hls.Events.MANIFEST_LOADED, function () {
-                loadedMetadata()
-            })
-        })
     } else {
         //For MP4 container
         source.setAttribute('src', videoMetadata.Fallback_src)
@@ -257,6 +244,7 @@ window.addEventListener('DOMContentLoaded', () => {
         video.load()
         qualityItem.setAttribute('pfv-unsupported', '')
     }
+
     video.addEventListener('durationchange', updatetime)
     rangeEQInputs.forEach(element => {
         element.disabled = true
@@ -267,7 +255,7 @@ window.addEventListener('DOMContentLoaded', () => {
         pipPlayerButton.parentElement.setAttribute('hidden', '')
     }
 
-    if (canFullscreenEnabled === false) {
+    if (canFullscreenEnabled() === false) {
         fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')
         fullscreenTooltip.setAttribute('pfv-tooltip-text', 'Full screen is unavailable')
     }
@@ -1959,6 +1947,22 @@ const isURL = str => {
 
 const cancelAnimationUpdateTime = () => debounce(window.cancelAnimationFrame(updatetime), 600)
 
+hls.on(Hls.Events.ERROR, function (event, data) {
+    if (data.fatal) {
+        switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+                hls.startLoad()
+                break
+            case Hls.ErrorTypes.MEDIA_ERROR:
+                hls.recoverMediaError()
+                break
+            default:
+                hls.destroy()
+                break
+        }
+    }
+})
+
 const eventListeners = [
     [
         'play',
@@ -1972,7 +1976,6 @@ const eventListeners = [
             playpauseTooltipContainer.setAttribute('pfv-tooltip-text', `Pause (${PLAY_BUTTON_KEY})`)
             intervalDivideWorker()
 
-            if (Hls.isSupported() && video.currentTime === 0) hls.startLoad()
             hls.on(Hls.Events.LEVEL_SWITCHED, updateMetadata)
             window.requestAnimationFrame(updateMetadata)
             videoContainer.addEventListener('pointerover', () => {

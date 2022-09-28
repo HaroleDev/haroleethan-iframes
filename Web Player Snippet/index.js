@@ -261,8 +261,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // Disable features for mobile users
-    const isMobile = /Mobi/.test(window.navigator.userAgent)
-    if (isMobile) {
+    if (/Mobi/.test(window.navigator.userAgent)) {
         volumeTooltipContainer.setAttribute('hidden', '')
     }
 
@@ -518,7 +517,7 @@ for (var i = 0; i < playbackSpeedItemControls.length; i++) {
 
     playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
     playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[pfv-speed='${playfulVideoPlayer.getAttribute('pfv-speed')}']`).setAttribute('aria-checked', true)
-};
+}
 
 playbackSpeedItemControls.forEach(element => {
     element.addEventListener('click', () => {

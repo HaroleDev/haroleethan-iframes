@@ -232,11 +232,11 @@ window.addEventListener('DOMContentLoaded', () => {
         hls.on(Hls.Events.MANIFEST_LOADED, function () {
             loadedMetadata()
         })
-    /*} else if (!video.canPlayType('application/vnd.apple.mpegurl') || !video.canPlayType('application/x-mpegURL')) {
-        source.setAttribute('src', videoMetadata.HLS_src)
-        source.setAttribute('type', videoMetadata.HLS_codec)
-        video.load()
-        qualityItem.setAttribute('pfv-unsupported', '')*/
+        /*} else if (!video.canPlayType('application/vnd.apple.mpegurl') || !video.canPlayType('application/x-mpegURL')) {
+            source.setAttribute('src', videoMetadata.HLS_src)
+            source.setAttribute('type', videoMetadata.HLS_codec)
+            video.load()
+            qualityItem.setAttribute('pfv-unsupported', '')*/
     } else {
         //For MP4 container
         source.setAttribute('src', videoMetadata.Fallback_src)
@@ -375,9 +375,7 @@ function ctxmenuPosition(eventPos) {
     const cmHeight = contextMenu.offsetHeight
 
     if (x + cmWidth > winWidth - 8) x = eventPos.offsetX - cmWidth
-
     if (y + cmHeight > winHeight - 8) y = winHeight - cmHeight - 8
-
 
     return {
         x,
@@ -1377,8 +1375,7 @@ function formatDurationARIA(time) {
     if (!isFinite(time)) return 'No time is displayed'
     time = Number(time)
     const code = new timeCode(time)
-    const frameSeconds = code.frameSeconds,
-        seconds = code.seconds,
+    const seconds = code.seconds,
         minutes = code.minutes,
         hours = code.hours,
         days = code.days,

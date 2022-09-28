@@ -232,11 +232,11 @@ window.addEventListener('DOMContentLoaded', () => {
         hls.on(Hls.Events.MANIFEST_LOADED, function () {
             loadedMetadata()
         })
-    } else if (video.canPlayType('application/vnd.apple.mpegurl') || video.canPlayType('application/x-mpegURL')) {
+    /*} else if (!video.canPlayType('application/vnd.apple.mpegurl') || !video.canPlayType('application/x-mpegURL')) {
         source.setAttribute('src', videoMetadata.HLS_src)
         source.setAttribute('type', videoMetadata.HLS_codec)
         video.load()
-        qualityItem.setAttribute('pfv-unsupported', '')
+        qualityItem.setAttribute('pfv-unsupported', '')*/
     } else {
         //For MP4 container
         source.setAttribute('src', videoMetadata.Fallback_src)

@@ -40,7 +40,24 @@ function loadScriptsInOrder(arrayOfJS) {
     return waterfall(promises)
 }
 
-const config = {
+const generateUUID = () => {
+    let
+        d = new Date().getTime(),
+        d2 = (performance && performance.now && (performance.now() * 1000)) || 0
+    return ('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx').replace(/[xy]/g, c => {
+        let r = Math.random() * 16
+        if (d > 0) {
+            r = (d + r) % 16 | 0
+            d = Math.floor(d / 16)
+        } else {
+            r = (d2 + r) % 16 | 0
+            d2 = Math.floor(d2 / 16)
+        }
+        return (c == 'x' ? r : (r & 0x7 | 0x8)).toString(16)
+    })
+}
+
+const HLSconfig = {
     startPosition: -1,
     debug: true,
 }
@@ -51,7 +68,7 @@ const PLAY_BUTTON_KEY = 'k',
     MUTE_TOGGLE_KEY = 'm',
     SUBTITLES_CLOSEDCAPTION_TOGGLE_KEY = 'c'
 
-const hls = new Hls(config)
+const hls = new Hls(HLSconfig)
 
 const playfulVideoPlayerContainer = document.querySelector('.playful-video-player-container')
 const playfulVideoPlayer = playfulVideoPlayerContainer.querySelector('.playful-video-player')
@@ -207,6 +224,7 @@ const isiPadOSSafari = () => {
 
 
 window.addEventListener('DOMContentLoaded', () => {
+    if (typeof window != 'object' && typeof document != 'object') return
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = videoMetadata.video_poster
     //For HLS container
@@ -931,14 +949,14 @@ function activity() {
         !settingsContextMenu.classList.contains('pressed')
     ) {
         if (video.paused) {
-            window.cancelAnimationFrame(updatetime)
+            cancelAnimationUpdateTime()
             window.cancelAnimationFrame(updateMetadata)
             videoContainer.classList.add('hovered')
             videoControlsContainer.classList.remove('inactive')
             video.classList.remove('inactive')
         } else {
             timeout = setTimeout(function () {
-                window.cancelAnimationFrame(updatetime)
+                cancelAnimationUpdateTime()
                 window.requestAnimationFrame(updateMetadata)
                 videoContainer.classList.remove('hovered')
                 videoControlsContainer.classList.add('inactive')
@@ -960,30 +978,49 @@ function fullscreenElement() {
         false
 }
 
+const Fullscreen = {
+     fullscreenElement: function () {
+        return document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement ||
+            document.msFullscreenElement ||
+            false
+    },
+    requestFullscreen: function (element) {
+        if (element.requestFullscreen) {
+            return element.requestFullscreen()
+        } else if (element.webkitRequestFullscreen) {
+            if (typeof element.then === 'function') return element.webkitRequestFullscreen()
+            element.webkitRequestFullscreen()
+        } else if (element.mozRequestFullScreen) {
+            return element.mozRequestFullScreen()
+        } else if (element.msRequestFullscreen) {
+            return element.msRequestFullscreen()
+        } else if (element.querySelector && video && video.webkitEnterFullScreen) {
+            video.webkitEnterFullScreen()
+        } else if (element.webkitEnterFullScreen) {
+            element.webkitEnterFullScreen()
+        }
+    },
+    exitFullscreen: function (element = document) {
+        if (element.exitFullscreen)
+            element.exitFullscreen()
+        else if (element.webkitCancelFullScreen)
+            element.webkitCancelFullScreen()
+        else if (element.webkitExitFullscreen)
+            element.webkitExitFullscreen()
+        else if (element.mozCancelFullScreen)
+            element.mozCancelFullScreen()
+        else if (element.msExitFullscreen)
+            element.msExitFullscreen()
+    }
+}
 function toggleFullScreen() {
     if (fullscreenElement()) {
-        document.exitFullscreen
-            ? document.exitFullscreen()
-            : isOldSafari() && !isiPadOSSafari()
-                ? document.webkitCancelFullScreen()
-                : document.webkitExitFullscreen
-                    ? document.webkitExitFullscreen()
-                    : document.mozCancelFullScreen
-                        ? document.mozCancelFullScreen()
-                        : document.msExitFullscreen
-                        && document.msExitFullscreen()
+        Fullscreen.exitFullscreen()
         fullscreenTooltip.setAttribute('pfv-tooltip-text', `Full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else if (!fullscreenElement()) {
-        playfulVideoPlayer.requestFullscreen
-            ? playfulVideoPlayer.requestFullscreen()
-            : isOldSafari() && !isiPadOSSafari()
-                ? video.webkitEnterFullScreen()
-                : playfulVideoPlayer.webkitRequestFullScreen
-                    ? playfulVideoPlayer.webkitRequestFullScreen()
-                    : playfulVideoPlayer.mozRequestFullScreen
-                        ? playfulVideoPlayer.mozRequestFullScreen()
-                        : playfulVideoPlayer.msRequestFullscreen
-                        && playfulVideoPlayer.msRequestFullscreen()
+        Fullscreen.requestFullscreen(playfulVideoPlayer)
         fullscreenTooltip.setAttribute('pfv-tooltip-text', `Exit full screen (${FULLSCREEN_BUTTON_KEY})`)
     } else {
         fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')
@@ -1208,6 +1245,14 @@ function toggleScrubbing(e) {
     handleTimelineUpdate(e)
 }
 
+function getThumbCanvas() {
+    var canvas = document.createElement('canvas')
+    canvas.height = 144
+    canvas.width = canvas.height * orientationInfluence
+    var canctx = canvas.getContext('2d')
+    canctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+}
+
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
@@ -1226,7 +1271,7 @@ function handleTimelineUpdate(e) {
     if (seekTime > video.duration - 1) seekTime = parseFloat(video.duration - 1)
 
     if (isScrubbing) {
-        window.cancelAnimationFrame(updatetime)
+        cancelAnimationUpdateTime()
         e.preventDefault()
         if (videoMetadata.is_live === false) videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
         timelineInner.style.setProperty('--progress-position', percent)
@@ -1259,7 +1304,7 @@ function updatetime() {
         if (videoMetadata.is_live === false) currentTime.innerText = formatDuration(video.currentTime)
         window.requestAnimationFrame(updatetime)
     }
-    window.cancelAnimationFrame(updatetime)
+    cancelAnimationUpdateTime()
 }
 
 function updateMetadata() {
@@ -1282,8 +1327,8 @@ const
     SECONDS_PER_MINUTE = 60,
     MINUTES_PER_HOUR = 60,
     HOURS_PER_DAY = 24,
-    DAYS_PER_WEEK = 7,
-    FRAMES_PER_SECOND = videoMetadata.video_FPS || 30
+    DAYS_PER_WEEK = 7
+const FRAMES_PER_SECOND = videoMetadata.video_FPS || 30
 
 class timeCode {
     constructor(time) {
@@ -1316,7 +1361,9 @@ class timeCode {
 }
 
 function formatDuration(time) {
-    const timeSecs = time < 0 ? time * -1 : time
+    if (!isFinite(time)) return '-:--'
+
+    const timeSecs = Math.abs(time)
     const frameSeconds = new timeCode(timeSecs).frameSeconds,
         seconds = new timeCode(timeSecs).seconds,
         minutes = new timeCode(timeSecs).minutes,
@@ -1325,20 +1372,30 @@ function formatDuration(time) {
         weeks = new timeCode(timeSecs).weeks
     const format = (timeSecs) => `0${timeSecs}`.slice(-2)
 
-    return weeks > 0
-        ? `${time < 0 ? '-' : ''}${weeks}:${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`
-        : days > 0
-            ? `${time < 0 ? '-' : ''}${days}:${format(hours)}:${format(minutes)}:${format(seconds)}`
-            : hours > 0
-                ? `${time < 0 ? '-' : ''}${hours}:${format(minutes)}:${format(seconds)}`
-                : isLowEnd === true || video.duration < 60 && isMotionReduced() === false && videoMetadata.video_FPS && videoMetadata.is_live === false
-                    ? `${time < 0 ? '-' : ''}${format(seconds)}.${format(frameSeconds)}`
-                    : hours === 0
-                        ? `${time < 0 ? '-' : ''}${minutes}:${format(seconds)}`
-                        : '-:--'
+    return isLowEnd === true ||
+        video.duration < 60 &&
+        isMotionReduced() === false &&
+        videoMetadata.video_FPS &&
+        videoMetadata.is_live === false
+        ? `${time < 0 ? '-' : ''}${[
+            (format(seconds)),
+            (frameSeconds > 9
+                ? frameSeconds
+                : format(frameSeconds))].join('.')
+        }`
+        : `${time < 0 ? '-' : ''}
+            ${[
+            [(weeks > 0 ? weeks : ''),
+            (weeks > 0 ? format(days) : days > 0 ? days : ''),
+            (days > 0 ? format(hours) : days > 0 ? hours : '')]
+                .filter(Boolean).join(':'),
+            [(hours > 0 ? format(minutes) : minutes),
+            (format(seconds))].join(':')
+        ].filter(Boolean).join(':')}`
 }
 
 function formatDurationARIA(time) {
+    if (!isFinite(time)) return 'No time is displayed'
     const seconds = new timeCode(time).seconds,
         minutes = new timeCode(time).minutes,
         hours = new timeCode(time).hours,
@@ -1362,8 +1419,7 @@ function formatDurationARIA(time) {
                 : minutes > 0 || minutes < 0
                     ? `${minutesARIA} ${secondsARIA}`
                     : minutes === 0
-                        ? `${secondsARIA}`
-                        : 'No time is displayed'
+                    && `${secondsARIA}`
 }
 
 // Playback and Media Session
@@ -1906,6 +1962,8 @@ const isURL = str => {
     }
 }
 
+const cancelAnimationUpdateTime = () => debounce(window.cancelAnimationFrame(updatetime), 600)
+
 const eventListeners = [
     [
         'play',
@@ -1933,7 +1991,7 @@ const eventListeners = [
                     checkElement()
                     if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
                 } else if (e.pointerType === 'touch' && videoContainer.classList.contains('hovered')) {
-                    window.cancelAnimationFrame(updatetime)
+                    debounce(cancelAnimationUpdateTime(), 600)
                     window.requestAnimationFrame(updateMetadata)
                     videoContainer.classList.remove('hovered')
                     videoControlsContainer.classList.add('inactive')
@@ -1952,7 +2010,7 @@ const eventListeners = [
                 if (!video.paused) {
                     videoContainer.classList.remove('hovered')
                     video.classList.add('inactive')
-                    window.cancelAnimationFrame(updatetime)
+                    debounce(cancelAnimationUpdateTime(), 600)
                     window.requestAnimationFrame(updateMetadata)
                 }
             })
@@ -1987,7 +2045,7 @@ const eventListeners = [
             videoContainer.classList.add('paused')
             stopIntervalDivideWorker()
             videoContainer.addEventListener('pointerleave', () => {
-                window.cancelAnimationFrame(updatetime)
+                cancelAnimationUpdateTime()
                 window.cancelAnimationFrame(updateMetadata)
             })
             if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'
@@ -2075,7 +2133,7 @@ const eventListeners = [
                     checkElement()
                     if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
                 } else if (e.pointerType === 'touch' && videoContainer.classList.contains('hovered')) {
-                    window.cancelAnimationFrame(updatetime)
+                    cancelAnimationUpdateTime()
                     window.requestAnimationFrame(updateMetadata)
                     videoContainer.classList.remove('hovered')
                     videoControlsContainer.classList.add('inactive')
@@ -2094,7 +2152,7 @@ const eventListeners = [
                 if (!video.paused) {
                     videoContainer.classList.remove('hovered')
                     video.classList.add('inactive')
-                    window.cancelAnimationFrame(updatetime)
+                    cancelAnimationUpdateTime()
                     window.requestAnimationFrame(updateMetadata)
                 }
             })

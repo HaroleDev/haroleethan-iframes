@@ -35,7 +35,7 @@
         @supports (font-variation-settings: normal) {
             @font-face {
                 font-family: "Manrope Variable";
-                src: url("//github.com/sharanda/manrope/raw/master/fonts/variable/Manrope%5Bwght%5D.woff2") format("woff2 supports variations") url("//github.com/sharanda/manrope/raw/master/fonts/variable/Manrope%5Bwght%5D.woff2") format("woff2 variations");
+                src: url(Manrope[wght].woff2) format("woff2 supports variations") url(Manrope[wght].woff2) format("woff2 variations");
                 font-display: optional;
             }
         }
@@ -350,17 +350,19 @@
                                     <div style="width: 100%; margin-bottom: 8px;">
                                         <h2 id="dialogAboutTitle">About Playful Video Player</h2>
                                     </div>
-                                    <p>Playful Video Player is a component that integrates with your website to create a video player for your liking.</p>
+                                    <p>Playful Video Player is a component that integrates with your website to create a
+                                        video player for your liking.</p>
                                     <footer role="contentinfo">
-                                        <p><span translate="no">AirPlay®</span>&nbsp;and&nbsp;<span translate="no">AirPlay
-                                            Logo™</span>&nbsp;are trademarks of&nbsp;<span translate="no">Apple
-                                            Inc.</span>,
-                                        registered in the U.S. and
-                                        other
-                                        countries.</p>
-                                    <p><span translate="no">Google Cast™</span>&nbsp;and&nbsp;<span
-                                            translate="no">Google®</span>&nbsp;are trademarks of&nbsp;<span
-                                            translate="no">Google LLC</span>.</p>
+                                        <p><span translate="no">AirPlay®</span>&nbsp;and&nbsp;<span
+                                                translate="no">AirPlay
+                                                Logo™</span>&nbsp;are trademarks of&nbsp;<span translate="no">Apple
+                                                Inc.</span>,
+                                            registered in the U.S. and
+                                            other
+                                            countries.</p>
+                                        <p><span translate="no">Google Cast™</span>&nbsp;and&nbsp;<span
+                                                translate="no">Google®</span>&nbsp;are trademarks of&nbsp;<span
+                                                translate="no">Google LLC</span>.</p>
                                     </footer>
                                 </div>
                                 <div class="footer-buttons">
@@ -888,13 +890,17 @@
                                         <img class="video-poster" alt="">
                                     </div>
                                     <video controls tabindex="-1" playsinline class="video" preload="metadata"
-                                        crossorigin="anonymous" webkit-playsinline="true" x5-playsinline="true"
-                                        x5-video-player-type="h5" x5-video-player-fullscreen="true"
-                                        x5-video-orientation="landscape|portrait" poster="data:image/svg+xml,%3Csvg xmlns='
+                                        crossorigin="anonymous" webkit-playsinline="true" poster="data:image/svg+xml,%3Csvg xmlns='
                                 http://www.w3.org/2000/svg'/%3E">
-                                        <source src="" type="">
+                                        <source src="" type="" />
                                         <track id="default-track" label="English" kind="captions" srclang="en"
                                             src="./sample.vtt" default>
+                                        <div class="err">
+                                            <p>
+                                                Sorry, it appears your system
+                                                does not support video playback.
+                                            </p>
+                                        </div>
                                     </video>
                                 </div>
                             </div>

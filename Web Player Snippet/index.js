@@ -1247,10 +1247,11 @@ function getThumbCanvas() {
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
-    let seekTime = percent * video.duration
     const thumbPosition = (Math.trunc(percent * video.duration) / videoMetadata.video_thumbs_count) * 100
-    const checkInvertedTime = videoMetadata.is_live ? seekTime - video.duration : seekTime
     timelineInner.style.setProperty('--preview-position', percent)
+
+    let seekTime = percent * video.duration
+    const checkInvertedTime = videoMetadata.is_live ? seekTime - video.duration : seekTime
     const delaySeek = videoMetadata.is_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
     timeTooltip.innerText = formatDuration(delaySeek)
 
@@ -1335,7 +1336,7 @@ class timeCode {
     }
 
     get minutes() {
-        return Math.trunc((this.time / SECONDS_PER_MINUTE) % MINUTES_PER_HOUR, 0)
+        return Math.trunc(this.time / SECONDS_PER_MINUTE % MINUTES_PER_HOUR, 0)
     }
 
     get hours() {
@@ -1374,8 +1375,7 @@ function formatDuration(time) {
                 ? frameSeconds
                 : format(frameSeconds))].join('.')
         }`
-        : `${time < 0 ? '-' : ''}
-            ${[
+        : `${time < 0 ? '-' : ''}${[
             [(weeks > 0 ? weeks : ''),
             (weeks > 0 ? format(days) : days > 0 ? days : ''),
             (days > 0 ? format(hours) : days > 0 ? hours : '')]

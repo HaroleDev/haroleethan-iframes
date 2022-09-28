@@ -1356,12 +1356,13 @@ function formatDuration(time) {
     if (!isFinite(time)) return '-:--'
     time = Number(time)
     const timeSecs = Math.abs(time)
-    const frameSeconds = new timeCode(timeSecs).frameSeconds,
-        seconds = new timeCode(timeSecs).seconds,
-        minutes = new timeCode(timeSecs).minutes,
-        hours = new timeCode(timeSecs).hours,
-        days = new timeCode(timeSecs).days,
-        weeks = new timeCode(timeSecs).weeks
+    const code = new timeCode(timeSecs)
+    const frameSeconds = code.frameSeconds,
+        seconds = code.seconds,
+        minutes = code.minutes,
+        hours = code.hours,
+        days = code.days,
+        weeks = code.weeks
     const format = (timeSecs) => `0${timeSecs}`.slice(-2)
 
     return isLowEnd === true ||
@@ -1388,11 +1389,13 @@ function formatDuration(time) {
 function formatDurationARIA(time) {
     if (!isFinite(time)) return 'No time is displayed'
     time = Number(time)
-    const seconds = new timeCode(time).seconds,
-        minutes = new timeCode(time).minutes,
-        hours = new timeCode(time).hours,
-        days = new timeCode(time).days,
-        weeks = new timeCode(time).weeks
+    const code = new timeCode(time)
+    const frameSeconds = code.frameSeconds,
+        seconds = code.seconds,
+        minutes = code.minutes,
+        hours = code.hours,
+        days = code.days,
+        weeks = code.weeks
 
     let secondsARIA, minutesARIA, hoursARIA, daysARIA
     if (seconds < 1) secondsARIA = 'Less than a second'

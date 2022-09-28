@@ -971,7 +971,7 @@ fullscreenButton.addEventListener('click', toggleFullScreen)
 videoFit.addEventListener('dblclick', toggleFullScreen)
 
 const Fullscreen = {
-     fullscreenElement: function () {
+    fullscreenElement: function () {
         return document.fullscreenElement ||
             document.webkitFullscreenElement ||
             document.mozFullScreenElement ||
@@ -979,32 +979,31 @@ const Fullscreen = {
             false
     },
     requestFullscreen: function (element) {
-        if (element.requestFullscreen) {
-            return element.requestFullscreen()
-        } else if (element.webkitRequestFullscreen) {
-            if (typeof element.then === 'function') return element.webkitRequestFullscreen()
-            element.webkitRequestFullscreen()
-        } else if (element.mozRequestFullScreen) {
-            return element.mozRequestFullScreen()
-        } else if (element.msRequestFullscreen) {
-            return element.msRequestFullscreen()
-        } else if (element.querySelector && video && video.webkitEnterFullScreen) {
-            video.webkitEnterFullScreen()
-        } else if (element.webkitEnterFullScreen) {
-            element.webkitEnterFullScreen()
-        }
+        return element.requestFullscreen
+            ? element.requestFullscreen()
+            : element.webkitRequestFullscreen
+                ? ("function" == typeof element.then && element.webkitRequestFullscreen(),
+                    element.webkitRequestFullscreen())
+                : element.mozRequestFullScreen
+                    ? element.mozRequestFullScreen()
+                    : element.msRequestFullscreen
+                        ? element.msRequestFullscreen()
+                        : element.querySelector && video && video.webkitEnterFullScreen
+                            ? video.webkitEnterFullScreen()
+                            : element.webkitEnterFullScreen
+                            && element.webkitEnterFullScreen()
     },
     exitFullscreen: function (element = document) {
-        if (element.exitFullscreen)
-            element.exitFullscreen()
-        else if (element.webkitCancelFullScreen)
-            element.webkitCancelFullScreen()
-        else if (element.webkitExitFullscreen)
-            element.webkitExitFullscreen()
-        else if (element.mozCancelFullScreen)
-            element.mozCancelFullScreen()
-        else if (element.msExitFullscreen)
-            element.msExitFullscreen()
+        element.exitFullscreen
+            ? element.exitFullscreen()
+            : element.webkitCancelFullScreen
+                ? element.webkitCancelFullScreen()
+                : element.webkitExitFullscreen
+                    ? element.webkitExitFullscreen()
+                    : element.mozCancelFullScreen
+                        ? element.mozCancelFullScreen()
+                        : element.msExitFullscreen
+                        && element.msExitFullscreen()
     }
 }
 function toggleFullScreen() {
@@ -1354,7 +1353,7 @@ class timeCode {
 
 function formatDuration(time) {
     if (!isFinite(time)) return '-:--'
-
+    time = Number(time)
     const timeSecs = Math.abs(time)
     const frameSeconds = new timeCode(timeSecs).frameSeconds,
         seconds = new timeCode(timeSecs).seconds,
@@ -1388,6 +1387,7 @@ function formatDuration(time) {
 
 function formatDurationARIA(time) {
     if (!isFinite(time)) return 'No time is displayed'
+    time = Number(time)
     const seconds = new timeCode(time).seconds,
         minutes = new timeCode(time).minutes,
         hours = new timeCode(time).hours,

@@ -263,7 +263,9 @@
 }
 
 .video-container.paused .video-information-overlay,
-.video-container.paused .video-information-container {
+.video-container.paused .video-information-container,
+.video-container.pip-player .video-information-overlay,
+.video-container.pip-player .video-information-container {
     opacity: 1 !important;
     visibility: visible !important;
 }

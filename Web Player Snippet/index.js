@@ -1348,7 +1348,9 @@ function formatDuration(time) {
         hours = code.hours,
         days = code.days,
         weeks = code.weeks
-    const format = (timeSecs) => `0${timeSecs}`.slice(-2)
+    const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
+        minimumIntegerDigits: 2,
+    })
 
     return isLowEnd === true ||
         video.duration < 60 &&
@@ -1356,18 +1358,18 @@ function formatDuration(time) {
         videoMetadata.video_FPS &&
         videoMetadata.is_live === false
         ? `${time < 0 ? '-' : ''}${[
-            (format(seconds)),
+            (leadingZeroFormatter.format(seconds)),
             (frameSeconds > 9
                 ? frameSeconds
-                : format(frameSeconds))].join('.')
+                : leadingZeroFormatter.format(frameSeconds))].join('.')
         }`
         : `${time < 0 ? '-' : ''}${[
             [(weeks > 0 ? weeks : ''),
-            (weeks > 0 ? format(days) : days > 0 ? days : ''),
-            (days > 0 ? format(hours) : days > 0 ? hours : '')]
+            (weeks > 0 ? leadingZeroFormatter.format(days) : days > 0 ? days : ''),
+            (days > 0 ? leadingZeroFormatter.format(hours) : days > 0 ? hours : '')]
                 .filter(Boolean).join(':'),
-            [(hours > 0 ? format(minutes) : minutes),
-            (format(seconds))].join(':')
+            [(hours > 0 ? leadingZeroFormatter.format(minutes) : minutes),
+            (leadingZeroFormatter.format(seconds))].join(':')
         ].filter(Boolean).join(':')}`
 }
 

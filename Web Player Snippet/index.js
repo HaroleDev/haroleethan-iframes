@@ -5,9 +5,8 @@ import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
 
 const deviceMem = 'deviceMemory' in navigator && navigator.deviceMemory
-const isLowEnd = deviceMem < 4 ? true : false
 const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true || false
-
+const isLowEnd = deviceMem < 4 ? true : false
 function loadScript(url) {
     return new Promise(function (resolve) {
         const script = document.createElement('script')
@@ -69,6 +68,8 @@ const PLAY_BUTTON_KEY = 'k',
     SUBTITLES_CLOSEDCAPTION_TOGGLE_KEY = 'c'
 
 const hls = new Hls(HLSconfig)
+
+const FRAMES_PER_SECOND = videoMetadata.video_FPS || 30
 
 const playfulVideoPlayerContainer = document.querySelector('.playful-video-player-container')
 const playfulVideoPlayer = playfulVideoPlayerContainer.querySelector('.playful-video-player')
@@ -260,13 +261,12 @@ window.addEventListener('DOMContentLoaded', () => {
         fullscreenTooltip.setAttribute('pfv-tooltip-text', 'Full screen is unavailable')
     }
 
-    // Disable features for mobile users
-    if (/Mobi/.test(window.navigator.userAgent)) {
-        volumeTooltipContainer.setAttribute('hidden', '')
-    }
+    playfulVideoPlayer.setAttribute('pfv-device', 'Desktop')
+    if (/Mobi/.test(window.navigator.userAgent)) playfulVideoPlayer.setAttribute('pfv-device', 'Mobile')
+    if (isiPadOSSafari()) playfulVideoPlayer.setAttribute('pfv-device', 'iPadOS')
 
-    if (isiPadOSSafari()) {
-        playfulVideoPlayer.setAttribute('pfv-device', 'iPadOS')
+    // Disable features for mobile users
+    if (playfulVideoPlayer.getAttribute('pfv-device') === ('Mobile' || 'iPadOS')) {
         volumeTooltipContainer.setAttribute('hidden', '')
     }
 })
@@ -942,7 +942,7 @@ function activity() {
         } else {
             timeout = setTimeout(function () {
                 cancelAnimationUpdateTime()
-                window.requestAnimationFrame(updateMetadata)
+                reqAnimFrameMetadata()
                 videoContainer.classList.remove('hovered')
                 videoControlsContainer.classList.add('inactive')
                 video.classList.add('inactive')
@@ -1297,7 +1297,7 @@ function updateMetadata() {
         )
     }, 10000)
     updateThrottleMetadata()
-    window[videoContainer.classList.contains('hovered') ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
+    window[videoContainer.classList.contains('hovered') && !isLowEnd ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
 
 const
@@ -1305,15 +1305,10 @@ const
     MINUTES_PER_HOUR = 60,
     HOURS_PER_DAY = 24,
     DAYS_PER_WEEK = 7
-const FRAMES_PER_SECOND = videoMetadata.video_FPS || 30
 
 class timeCode {
     constructor(time) {
         this.time = time
-    }
-
-    get frameSeconds() {
-        return Math.trunc(this.time * FRAMES_PER_SECOND % FRAMES_PER_SECOND, 0)
     }
 
     get seconds() {
@@ -1342,7 +1337,7 @@ function formatDuration(time) {
     time = Number(time)
     const timeSecs = Math.abs(time)
     const code = new timeCode(timeSecs)
-    const frameSeconds = code.frameSeconds,
+    const
         seconds = code.seconds,
         minutes = code.minutes,
         hours = code.hours,
@@ -1352,32 +1347,22 @@ function formatDuration(time) {
         minimumIntegerDigits: 2,
     })
 
-    return isLowEnd === true ||
-        video.duration < 60 &&
-        isMotionReduced() === false &&
-        videoMetadata.video_FPS &&
-        videoMetadata.is_live === false
-        ? `${time < 0 ? '-' : ''}${[
-            (leadingZeroFormatter.format(seconds)),
-            (frameSeconds > 9
-                ? frameSeconds
-                : leadingZeroFormatter.format(frameSeconds))].join('.')
-        }`
-        : `${time < 0 ? '-' : ''}${[
-            [(weeks > 0 ? weeks : ''),
-            (weeks > 0 ? leadingZeroFormatter.format(days) : days > 0 ? days : ''),
-            (days > 0 ? leadingZeroFormatter.format(hours) : days > 0 ? hours : '')]
-                .filter(Boolean).join(':'),
-            [(hours > 0 ? leadingZeroFormatter.format(minutes) : minutes),
-            (leadingZeroFormatter.format(seconds))].join(':')
-        ].filter(Boolean).join(':')}`
+    return `${time < 0 ? '-' : ''}${[
+        [(weeks > 0 ? weeks : ''),
+        (weeks > 0 ? leadingZeroFormatter.format(days) : days > 0 ? days : ''),
+        (days > 0 ? leadingZeroFormatter.format(hours) : days > 0 ? hours : '')]
+            .filter(Boolean).join(':'),
+        [(hours > 0 ? leadingZeroFormatter.format(minutes) : minutes),
+        (leadingZeroFormatter.format(seconds))].join(':')
+    ].filter(Boolean).join(':')}`
 }
 
 function formatDurationARIA(time) {
     if (!isFinite(time)) return 'No time is displayed'
     time = Number(time)
     const code = new timeCode(time)
-    const seconds = code.seconds,
+    const
+        seconds = code.seconds,
         minutes = code.minutes,
         hours = code.hours,
         days = code.days,
@@ -1852,7 +1837,7 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
     const tagName = document.activeElement.tagName.toLowerCase()
 
     if (tagName === 'input') {
-
+        return
     } else {
         function checkActive() {
             videoContainer.classList.add('hovered')
@@ -1920,8 +1905,8 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
             case ',':
             case '.':
                 videoContainer.classList.add('seeking')
-                if (e.key === ',') new seekByTime().frameSeeking((videoMetadata.video_FPS || 30) * -1)
-                if (e.key === '.') new seekByTime().frameSeeking((videoMetadata.video_FPS || 30))
+                if (e.key === ',') new seekByTime().frameSeeking((FRAMES_PER_SECOND) * -1)
+                if (e.key === '.') new seekByTime().frameSeeking((FRAMES_PER_SECOND))
                 checkActive()
                 break
         }
@@ -1961,6 +1946,8 @@ hls.on(Hls.Events.ERROR, function (event, data) {
     }
 })
 
+const reqAnimFrameMetadata = () => !isLowEnd || isMotionReduced() && window.requestAnimationFrame(updateMetadata)
+
 const eventListeners = [
     [
         'play',
@@ -1975,7 +1962,7 @@ const eventListeners = [
             intervalDivideWorker()
 
             hls.on(Hls.Events.LEVEL_SWITCHED, updateMetadata)
-            window.requestAnimationFrame(updateMetadata)
+            reqAnimFrameMetadata()
             videoContainer.addEventListener('pointerover', () => {
                 activity()
                 checkElement()
@@ -1988,7 +1975,7 @@ const eventListeners = [
                     if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
                 } else if (e.pointerType === 'touch' && videoContainer.classList.contains('hovered')) {
                     debounce(cancelAnimationUpdateTime(), 600)
-                    window.requestAnimationFrame(updateMetadata)
+                    reqAnimFrameMetadata()
                     videoContainer.classList.remove('hovered')
                     videoControlsContainer.classList.add('inactive')
                     video.classList.add('inactive')
@@ -2007,7 +1994,7 @@ const eventListeners = [
                     videoContainer.classList.remove('hovered')
                     video.classList.add('inactive')
                     debounce(cancelAnimationUpdateTime(), 600)
-                    window.requestAnimationFrame(updateMetadata)
+                    reqAnimFrameMetadata()
                 }
             })
 
@@ -2039,6 +2026,7 @@ const eventListeners = [
         'pause',
         () => {
             videoContainer.classList.add('paused')
+            videoContainer.classList.add('hovered')
             stopIntervalDivideWorker()
             videoContainer.addEventListener('pointerleave', () => {
                 cancelAnimationUpdateTime()
@@ -2130,7 +2118,7 @@ const eventListeners = [
                     if (videoContainer.classList.contains('hovered')) window.cancelAnimationFrame(updateMetadata)
                 } else if (e.pointerType === 'touch' && videoContainer.classList.contains('hovered')) {
                     cancelAnimationUpdateTime()
-                    window.requestAnimationFrame(updateMetadata)
+                    reqAnimFrameMetadata()
                     videoContainer.classList.remove('hovered')
                     videoControlsContainer.classList.add('inactive')
                     video.classList.add('inactive')
@@ -2149,7 +2137,7 @@ const eventListeners = [
                     videoContainer.classList.remove('hovered')
                     video.classList.add('inactive')
                     cancelAnimationUpdateTime()
-                    window.requestAnimationFrame(updateMetadata)
+                    reqAnimFrameMetadata()
                 }
             })
         }
@@ -2186,6 +2174,7 @@ const eventListeners = [
         'loadstart',
         () => {
             playfulVideoPlayerContainer.classList.remove('preload')
+            video.playbackRate = playfulVideoPlayer.getAttribute('pfv-speed')
         }
     ],
     [
@@ -2244,16 +2233,16 @@ const eventListeners = [
         () => {
             let volumeLevel
             video.muted || video.volume === 0
-                ? (volumeLevel = 'mute',
-                    volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Unmute (${MUTE_TOGGLE_KEY})`))
+                ? (volumeLevel = 'mute')
                 : video.volume >= 0.6
-                    ? (volumeLevel = 'full',
-                        volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
+                    ? (volumeLevel = 'full')
                     : video.volume >= 0.3
-                        ? (volumeLevel = 'mid',
-                            volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
-                        : (volumeLevel = 'low',
-                            volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`))
+                        ? (volumeLevel = 'mid')
+                        : video.volume > 0
+                        && (volumeLevel = 'low')
+            video.muted || video.volume === 0
+                ? volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Unmute (${MUTE_TOGGLE_KEY})`)
+                : volumeTooltipContainer.setAttribute('pfv-tooltip-text', `Mute (${MUTE_TOGGLE_KEY})`)
             videoContainer.setAttribute('pfv-volume-level', volumeLevel)
         }
     ]

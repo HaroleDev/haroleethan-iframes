@@ -2,7 +2,6 @@
 @import "./playful_vp_normalize.css";
 
 /* Colors */
-
 .playful-video-player,
 .playful-video-player *::before,
 .playful-video-player *::after {
@@ -79,7 +78,6 @@
 }
 
 /* Preload */
-
 .playful-video-player-container.preload *,
 .playful-video-player-container.preload *::before,
 .playful-video-player-container.preload *::after {
@@ -140,7 +138,6 @@
 }
 
 /* LandscapePortaitSizing */
-
 .playful-video-player-container[aria-orientation="landscape"],
 .playful-video-player-container[aria-orientation="portait"] {
     position: relative;
@@ -237,10 +234,38 @@
     filter: brightness(60%);
 }
 
+.playful-video-player:not(.full-screen) .video-container .video-information-overlay,
+.playful-video-player:not(.full-screen) .video-container .video-information-container {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+}
+
+.playful-video-player:not(.full-screen) .video-container .video-information-overlay,
+.playful-video-player:not(.full-screen) .video-container .video-information-container {
+    transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-end);
+}
+
+.playful-video-player:not(.full-screen) .video-container.paused .video-information-overlay,
+.playful-video-player:not(.full-screen) .video-container.paused .video-information-container {
+    transition: opacity 300ms var(--ease-out-expo), var(--300ms-visibility-step-start);
+}
+
 .playful-video-player.loading .video-controls-container,
 .playful-video-player.loading .video-information-overlay {
-    opacity: 0.6 !important;
+    opacity: 0.7 !important;
     visibility: visible;
+}
+
+.playful-video-player .video-container:not(.played) .video-information-overlay::before {
+    opacity: 0.7 !important;
+}
+
+.video-container.paused .video-information-overlay,
+.video-container.paused .video-information-container {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .loading .seeking-preview {
@@ -675,7 +700,6 @@
 }
 
 /* PlayButton */
-
 .video-container .play-pause-button .play-pause-icon {
     position: relative;
 }
@@ -765,8 +789,8 @@
     visibility: hidden;
 }
 
-.playful-video-player[pfv-device="iPadOS"] .video-information-overlay,
-.playful-video-player[pfv-device="iPadOS"] .video-information-container {
+.playful-video-player[pfv-device="iPadOS"].full-screen .video-information-overlay,
+.playful-video-player[pfv-device="iPadOS"].full-screen .video-information-container {
     justify-content: flex-end;
     text-align: right;
 }
@@ -821,14 +845,6 @@
 
 .playful-video-player[pfv-live-stream="true"] .duration-container {
     display: none;
-}
-
-.playful-video-player:not(.full-screen) .video-information-overlay,
-.playful-video-player:not(.full-screen) .video-information-container {
-    opacity: 0 !important;
-    visibility: hidden;
-    pointer-events: none;
-    user-select: none;
 }
 
 .duration-container .span {
@@ -2188,7 +2204,7 @@
     background-color: var(--background-color);
     box-shadow: 0 0 0 100vmax var(--background-color);
     clip-path: inset(0 -100vmax);
-    padding: 8px 0 12px 0;
+    padding: 12px 0 14px 0;
     margin-top: -28px;
     top: 28px;
 }

@@ -777,7 +777,7 @@
     display: flex;
     justify-content: flex-start;
     top: 0;
-    z-index: 2;
+    z-index: 1;
     width: 100%;
     height: fit-content;
     padding: 28px;

@@ -225,7 +225,7 @@ window.addEventListener('DOMContentLoaded', () => {
         playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
     }
 
-    if (Hls.isSupported()) {
+    if (!Hls.isSupported()) {
         //For HLS container
         hls.attachMedia(video)
         hls.loadSource(videoMetadata.HLS_src)
@@ -504,16 +504,24 @@ qualityItem.addEventListener('click', () => {
     content.removeAttribute('hidden')
 })
 
+var BY_MULTIPLY = '&#160;&#215;'
+function decodeHTMLCharCodes(str) {
+    return str.replace(/(&#(\d+);)/g, function (_match, _capture, charCode) {
+        return String.fromCharCode(charCode)
+    })
+}
+BY_MULTIPLY = decodeHTMLCharCodes(BY_MULTIPLY)
+
 for (var i = 0; i < playbackSpeedItemControls.length; i++) {
     const dataSpeed = playbackSpeedItemControls[i].getAttribute('pfv-speed')
     playbackSpeedItemControls[i].classList.add(`speed__${dataSpeed}`)
-    playbackSpeedItemControls[i].querySelector('.span:last-child').innerHTML = `${dataSpeed} &times;`
+    playbackSpeedItemControls[i].querySelector('.span:last-child').innerText = `${dataSpeed}${BY_MULTIPLY}`
     video.playbackRate = playfulVideoPlayer.getAttribute('pfv-speed')
 
-    playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[pfv-speed="1"] .span:last-child').innerHTML = `(${playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[pfv-speed="1"]').getAttribute('pfv-speed')} &times;)`
+    playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[pfv-speed="1"] .span:last-child').innerText = `(${playfulVideoPlayer.querySelector('.page.playback-speed-settings .item[pfv-speed="1"]').getAttribute('pfv-speed')}${BY_MULTIPLY})`
     playfulVideoPlayer.querySelector('.page.playback-speed-settings .item .span.normal-speed').innerText = 'Normal'
 
-    playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
+    playbackSpeedItem.querySelector('.span.current-speed').innerText = `${video.playbackRate}${BY_MULTIPLY}`
     playfulVideoPlayer.querySelector(`.page.playback-speed-settings .item[pfv-speed='${playfulVideoPlayer.getAttribute('pfv-speed')}']`).setAttribute('aria-checked', true)
 }
 
@@ -525,7 +533,7 @@ playbackSpeedItemControls.forEach(element => {
         if (playfulVideoPlayer.querySelector('.page-contents.playback-speed-settings .item[class*="speed__"]')) {
             video.playbackRate = element.getAttribute('pfv-speed')
             playfulVideoPlayer.setAttribute('pfv-speed', video.playbackRate)
-            playbackSpeedItem.querySelector('.span.current-speed').innerHTML = `${video.playbackRate} &times;`
+            playbackSpeedItem.querySelector('.span.current-speed').innerText = `${video.playbackRate}${BY_MULTIPLY}`
             element.setAttribute('aria-checked', true)
             !element.getAttribute('pfv-speed') >= '1.25' && !element.getAttribute('pfv-speed') < playbackSpeedItemControls.lastChild.getAttribute('pfv-speed') ? timelineProgressbar.style.filter = 'none' : timelineProgressbar.style.filter = `url(#${element.getAttribute('pfv-speed')}x-speed)`
         }
@@ -644,6 +652,15 @@ function toggleCaptions() {
     videoContainer.classList.toggle('caption', isHidden)
 }
 
+HTMLElement.prototype.htmlContent = function (html) {
+    var dom = new DOMParser().parseFromString(html, 'text/html').body;
+    while (dom.hasChildNodes()) this.appendChild(dom.firstChild);
+}
+
+HTMLElement.prototype.clearContent = function () {
+    while (this.hasChildNodes()) this.removeChild(this.lastChild);
+}
+
 // Transcript
 let tracks
 let trackElements
@@ -702,7 +719,11 @@ function displayCues(track) {
         } else {
             transcriptText = cue.text
         }
-        const clickableTranscriptText = `<div class='cue-container' start-time='${cue.startTime}' role='button' aria-pressed='false' tabindex='0'><div class='cue-time span'>${formatDuration(cue.startTime)}</div><div class='cues span'>${transcriptText}</div></div>`
+        const clickableTranscriptText =
+        `<div class="cue-container" pfv-start-time="${cue.startTime}" role="button" aria-pressed="false" tabindex="0">
+            <div class="cue-time span">${formatTime.format(cue.startTime)}</div>
+            <div class="cues span">${transcriptText}</div>
+        </div>`
         addToTranscript(clickableTranscriptText)
         cueContainers = playfulVideoPlayer.querySelectorAll('.cue-container')
     }
@@ -728,34 +749,34 @@ function getVoices(speech) {
 
 function removeHTML(text) {
     const div = document.createElement('div')
-    div.textContent = text
+    div.innerText = text
     return div.innerText || div.innerText || ''
 }
 
 function jumpToTranscript(time) {
     video.currentTime = time
     playfulVideoPlayer.querySelector('.cue-container').classList.remove('current')
-    playfulVideoPlayer.querySelector(`.cue-container[start-time='${time}']`).classList.add('current')
+    playfulVideoPlayer.querySelector(`.cue-container[pfv-start-time="${time}"]`).classList.add('current')
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
 }
 
 function clearTranscriptDiv() {
-    transcriptDiv.innerHTML = ''
+    transcriptDiv.clearContent()
 }
 
 function addToTranscript(htmlText) {
-    transcriptDiv.innerHTML += htmlText
+    transcriptDiv.htmlContent(htmlText)
 }
 
 function addCueListeners(cue) {
     cue.addEventListener('enter', function () {
-        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time='${this.startTime}']`)
+        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[pfv-start-time='${this.startTime}']`)
         transcriptText.classList.add('current')
         transcriptText.parentElement.scrollTop =
             transcriptText.offsetTop - transcriptText.parentElement.offsetTop
     })
     cue.addEventListener('exit', function () {
-        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[start-time='${this.startTime}']`)
+        const transcriptText = playfulVideoPlayer.querySelector(`.cue-container[pfv-start-time='${this.startTime}']`)
         transcriptText.classList.remove('current')
     })
 }
@@ -768,7 +789,7 @@ transcriptDiv.addEventListener('keydown', (e) => {
 
 transcriptDiv.addEventListener('click', (e) => {
     cueContainers.forEach(element => {
-        if (element.contains(e.target)) jumpToTranscript(element.getAttribute('start-time'))
+        if (element.contains(e.target)) jumpToTranscript(element.getAttribute('pfv-start-time'))
     })
 })
 
@@ -874,7 +895,7 @@ class seekByTime {
     }
 
     update() {
-        currentTime.innerText = formatDuration(videoPercent * video.duration)
+        currentTime.innerText = formatTime.format(videoPercent * video.duration)
         timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
     }
 }
@@ -1154,12 +1175,12 @@ function seekingPreviewPosition(e) {
 
 timelineInner.addEventListener('pointermove', (e) => {
     seekingPreview.classList.add('hovered')
-    videoControls.setAttribute('hidden', '')
+    videoControls.setAttribute('pfv-underlay', '')
     handleTimelineUpdate(e)
     timelineInner.addEventListener('pointerleave', () => {
         timelineInner.releasePointerCapture(e.pointerId)
         seekingPreview.classList.remove('hovered')
-        videoControls.removeAttribute('hidden')
+        videoControls.removeAttribute('pfv-underlay')
     })
     timelineInner.addEventListener('pointerdown', (e) => {
         timelineInner.setPointerCapture(e.pointerId)
@@ -1173,14 +1194,14 @@ timelineInner.addEventListener('pointermove', (e) => {
         }
     }, true)
     if (isScrubbing) {
-        videoControls.setAttribute('hidden', '')
+        videoControls.setAttribute('pfv-underlay', '')
     }
     timelineInner.addEventListener('pointerup', (e) => {
         timelineInner.releasePointerCapture(e.pointerId)
         if (isScrubbing) {
             toggleScrubbing(e)
             seekingPreview.classList.remove('hovered')
-            videoControls.removeAttribute('hidden')
+            videoControls.removeAttribute('pfv-underlay')
             videoContainer.classList.add('buffering-scrubbing')
         }
     })
@@ -1207,7 +1228,7 @@ function toggleScrubbing(e) {
     const seekingTime = videoMetadata.is_live
         ? seekTime - liveSettings.delay_compensation
         : seekTime
-    timeTooltip.innerText = formatDuration(delaySeek)
+    timeTooltip.innerText = formatTime.format(delaySeek)
     videoContainer.classList.toggle('scrubbing', isScrubbing)
 
     if (isScrubbing) {
@@ -1238,7 +1259,7 @@ function handleTimelineUpdate(e) {
     let seekTime = percent * video.duration
     const checkInvertedTime = videoMetadata.is_live ? seekTime - video.duration : seekTime
     const delaySeek = videoMetadata.is_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
-    timeTooltip.innerText = formatDuration(delaySeek)
+    timeTooltip.innerText = formatTime.format(delaySeek)
 
     if (videoMetadata.is_live === false) seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
 
@@ -1252,15 +1273,15 @@ function handleTimelineUpdate(e) {
         e.preventDefault()
         if (videoMetadata.is_live === false) videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
         timelineInner.style.setProperty('--progress-position', percent)
-        timeTooltip.innerText = formatDuration(delaySeek)
-        currentTime.innerText = formatDuration(delaySeek)
+        timeTooltip.innerText = formatTime.format(delaySeek)
+        currentTime.innerText = formatTime.format(delaySeek)
     }
 }
 
 // Load and update data
 function loadedMetadata() {
-    totalTime.innerText = formatDuration(video.duration)
-    currentTime.innerText = formatDuration(video.currentTime)
+    totalTime.innerText = formatTime.format(video.duration)
+    currentTime.innerText = formatTime.format(video.currentTime)
     qualityBadgeContainer.setAttribute('pfv-quality', qualityCheckShortLabel(video.videoWidth, video.videoHeight))
 
     qualityBadgeContainer.setAttribute('title', qualityCheckLongLabel(video.videoWidth, video.videoHeight))
@@ -1278,7 +1299,7 @@ function updatetime() {
                 : 0
     if (!video.paused && videoContainer.classList.contains('hovered')) {
         timelineInner.style.setProperty('--progress-position', videoPercent + liveCompensation)
-        if (videoMetadata.is_live === false) currentTime.innerText = formatDuration(video.currentTime)
+        if (videoMetadata.is_live === false) currentTime.innerText = formatTime.format(video.currentTime)
         window.requestAnimationFrame(updatetime)
     }
     cancelAnimationUpdateTime()
@@ -1300,6 +1321,7 @@ function updateMetadata() {
     window[videoContainer.classList.contains('hovered') && !isLowEnd ? 'cancelAnimationFrame' : 'requestAnimationFrame'](updateMetadata)
 }
 
+// Formatting time
 const
     SECONDS_PER_MINUTE = 60,
     MINUTES_PER_HOUR = 60,
@@ -1332,60 +1354,70 @@ class timeCode {
     }
 }
 
-function formatDuration(time) {
-    if (!isFinite(time)) return '-:--'
-    time = Number(time)
-    const timeSecs = Math.abs(time)
-    const code = new timeCode(timeSecs)
-    const
-        seconds = code.seconds,
-        minutes = code.minutes,
-        hours = code.hours,
-        days = code.days,
-        weeks = code.weeks
-    const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
-        minimumIntegerDigits: 2,
-    })
+const formatTime = {
+    format: function (time) {
+        if (!isFinite(time)) return '-:--'
+        const timeSecs = Number(Math.abs(time))
+        const code = new timeCode(timeSecs)
+        const
+            seconds = code.seconds,
+            minutes = code.minutes,
+            hours = code.hours,
+            days = code.days,
+            weeks = code.weeks
+        const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
+            minimumIntegerDigits: 2,
+        })
 
-    return `${time < 0 ? '-' : ''}${[
-        [(weeks > 0 ? weeks : ''),
-        (weeks > 0 ? leadingZeroFormatter.format(days) : days > 0 ? days : ''),
-        (days > 0 ? leadingZeroFormatter.format(hours) : days > 0 ? hours : '')]
-            .filter(Boolean).join(':'),
-        [(hours > 0 ? leadingZeroFormatter.format(minutes) : minutes),
-        (leadingZeroFormatter.format(seconds))].join(':')
-    ].filter(Boolean).join(':')}`
-}
+        return `${time < 0 ? '-' : ''}${[
+            [(weeks > 0 ? weeks : ''),
+            (weeks > 0 ? leadingZeroFormatter.format(days) : days > 0 ? days : ''),
+            (days > 0 ? leadingZeroFormatter.format(hours) : days > 0 ? hours : '')]
+                .filter(Boolean).join(':'),
+            [(hours > 0 ? leadingZeroFormatter.format(minutes) : minutes),
+            (leadingZeroFormatter.format(seconds))].join(':')
+        ].filter(Boolean).join(':')}`
+    },
+    dateTime: function (time) {
+        if (!isFinite(time)) return '0s'
+        const timeSecs = Number(Math.abs(time))
+        const code = new timeCode(timeSecs)
+        const
+            seconds = code.seconds,
+            minutes = code.minutes,
+            hours = code.hours,
+            days = code.days,
+            weeks = code.weeks
 
-function formatDurationARIA(time) {
-    if (!isFinite(time)) return 'No time is displayed'
-    time = Number(time)
-    const code = new timeCode(time)
-    const
-        seconds = code.seconds,
-        minutes = code.minutes,
-        hours = code.hours,
-        days = code.days,
-        weeks = code.weeks
+        return `${[
+            [(weeks > 0 ? `${weeks}w` : ''),
+            (days > 0 ? `${days}d` : ''),
+            (hours > 0 ? `${hours}h` : '')]
+                .filter(Boolean).join(':'),
+            [(minutes > 0 ? `${minutes}m` : ''),
+            (`${seconds}s`)].filter(Boolean).join(' ')
+        ].filter(Boolean).join(' ')}`
+    },
+    ARIA: function (time) {
+        if (!isFinite(time)) return '0s'
+        const timeSecs = Number(Math.abs(time))
+        const code = new timeCode(timeSecs)
+        const
+            seconds = code.seconds,
+            minutes = code.minutes,
+            hours = code.hours,
+            days = code.days,
+            weeks = code.weeks
 
-    let secondsARIA, minutesARIA, hoursARIA, daysARIA
-    if (seconds < 1) secondsARIA = 'Less than a second'
-    if (seconds >= 1) secondsARIA = `${seconds} ${seconds > 1 || seconds < -1 ? 'seconds' : 'second'}`
-    if (minutes > 0) minutesARIA = `${seconds} ${minutes > 1 || minutes < -1 ? 'minutes' : 'minute'}`
-    if (hours > 0) hoursARIA = `${hours} ${hours > 1 || hours < -1 ? 'hours' : 'hour'}`
-    if (days > 0) daysARIA = `${days} ${days > 1 || days < -1 ? 'days' : 'day'}`
-    if (weeks > 0) weeksARIA = `${weeks} ${weeks > 1 || weeks < -1 ? 'weeks' : 'week'}`
-
-    return weeks > 0 || weeks < 0
-        ? `${weeksARIA}, ${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
-        : days > 0 || days < 0
-            ? `${daysARIA}, ${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
-            : hours > 0 || hours < 0
-                ? `${hoursARIA}, ${minutesARIA}, ${secondsARIA}`
-                : minutes > 0 || minutes < 0
-                    ? `${minutesARIA} ${secondsARIA}`
-                    : minutes === 0
-                    && `${secondsARIA}`
+        return `${[
+            [(weeks > 0 ? `${weeks}w` : ''),
+            (days > 0 ? `${days}d` : ''),
+            (hours > 0 ? `${hours}h` : '')]
+                .filter(Boolean).join(':'),
+            [(minutes > 0 ? `${minutes}m` : ''),
+            (`${seconds}s`)].filter(Boolean).join(' ')
+        ].filter(Boolean).join(' ')}`
+    },
 }
 
 // Playback and Media Session
@@ -1615,7 +1647,7 @@ async function mediaSessionToggle() {
             (d) => {
                 video.currentTime -= d.seekOffset || 10
                 timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
-                currentTime.innerText = formatDuration(video.currentTime)
+                currentTime.innerText = formatTime.format(video.currentTime)
             }
         ],
         [
@@ -1623,7 +1655,7 @@ async function mediaSessionToggle() {
             (d) => {
                 video.currentTime += d.seekOffset || 10
                 timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
-                currentTime.innerText = formatDuration(video.currentTime)
+                currentTime.innerText = formatTime.format(video.currentTime)
             }
         ],
         [
@@ -1916,7 +1948,7 @@ playfulVideoPlayer.addEventListener('keydown', (e) => {
 const reducedMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 reducedMediaQuery.addEventListener('change', () => {
-    isMotionReduced() ? totalTime.innerText = formatDuration(video.duration) : totalTime.innerText = formatDuration(video.duration)
+    isMotionReduced() ? totalTime.innerText = formatTime.format(video.duration) : totalTime.innerText = formatTime.format(video.duration)
 })
 
 const isURL = str => {
@@ -2086,7 +2118,7 @@ const eventListeners = [
                 videoMetadata.is_live
                     ? video.currentTime - video.duration
                     : video.currentTime
-            currentTime.innerText = formatDuration(checkInvertedTime)
+            currentTime.innerText = formatTime.format(checkInvertedTime)
         }
     ],
     [
@@ -2104,7 +2136,7 @@ const eventListeners = [
                 videoMetadata.is_live
                     ? video.currentTime - video.duration
                     : video.currentTime
-            currentTime.innerText = formatDuration(checkInvertedTime)
+            currentTime.innerText = formatTime.format(checkInvertedTime)
 
             videoContainer.addEventListener('pointerover', () => {
                 activity()
@@ -2146,10 +2178,15 @@ const eventListeners = [
         'timeupdate',
         () => {
             const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
-            if (videoMetadata.is_live === false) currentTime.innerText = formatDuration(checkInvertedTime)
+            if (videoMetadata.is_live === false) currentTime.innerText = formatTime.format(checkInvertedTime)
             durationContainer.setAttribute(
                 'aria-label',
-                `${videoMetadata.is_live ? 'Live stream. Delayed by ' : ''}${formatDurationARIA(videoMetadata.is_live ? video.duration - video.currentTime : video.currentTime)}${!videoMetadata.is_live ? ` elapsed of ${formatDurationARIA(video.duration)}` : ''}`
+                `${videoMetadata.is_live ? 'Live stream. Delayed by ' : ''}${formatTime.ARIA(videoMetadata.is_live ? video.duration - video.currentTime : video.currentTime)}${!videoMetadata.is_live ? ` elapsed of ${formatTime.ARIA(video.duration)}` : ''}`
+            )
+
+            currentTime.setAttribute(
+                'datetime',
+                formatTime.dateTime(video.currentTime)
             )
 
             qualityBadgeContainer.setAttribute('pfv-quality', qualityCheckShortLabel(video.videoWidth, video.videoHeight))
@@ -2189,9 +2226,14 @@ const eventListeners = [
             videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
             durationContainer.setAttribute(
                 'aria-label',
-                `${formatDurationARIA(
+                `${formatTime.ARIA(
                     video.currentTime
-                )} elapsed of ${formatDurationARIA(video.duration)}`
+                )} elapsed of ${formatTime.ARIA(video.duration)}`
+            )
+
+            totalTime.setAttribute(
+                'datetime',
+                formatTime.dateTime(video.duration)
             )
 
             orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9

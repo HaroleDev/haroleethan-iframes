@@ -760,8 +760,7 @@
     pointer-events: none;
 }
 
-.controls[hidden] {
-    display: flex !important;
+.controls[pfv-underlay] {
     opacity: 0.3 !important;
     transition: opacity 300ms 100ms var(--ease-out-expo);
 }
@@ -3200,7 +3199,35 @@ screen and (max-height: 600px) {
     }
 }
 
+@media (pointer: coarse) {
+    @media screen and (max-width: 640px) {
+
+        .video-controls-container .right-side button,
+        .video-controls-container .left-side button {
+            padding: 4px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .video-controls-container .right-side button svg,
+        .video-controls-container .left-side button svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    .timeline__progressbar {
+        border-radius: 32px 32px 8px 8px;
+        height: 16px;
+        transform: translateY(0px);
+    }
+}
+
 @media screen and (max-width: 640px) {
+    .video-information-container .author-name {
+        display: none;
+    }
+
     .video-controls-container .controls-container .controls {
         margin: 18px 30px;
     }

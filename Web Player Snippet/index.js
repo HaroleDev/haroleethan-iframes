@@ -677,15 +677,6 @@ function toggleCaptions() {
     videoContainer.classList.toggle('caption', isHidden)
 }
 
-HTMLElement.prototype.htmlContent = function (html) {
-    var dom = new DOMParser().parseFromString(html, 'text/html').body
-    while (dom.hasChildNodes()) this.appendChild(dom.firstChild)
-}
-
-HTMLElement.prototype.clearContent = function () {
-    while (this.hasChildNodes()) this.removeChild(this.lastChild)
-}
-
 // Transcript
 let tracks
 let trackElements
@@ -747,7 +738,7 @@ function displayCues(track) {
         const clickableTranscriptText =
             `<div class="cue-container" pfv-start-time="${cue.startTime}" role="button" aria-pressed="false" tabindex="0">
             <div class="cue-time span">${formatTime.format(cue.startTime)}</div>
-            <div class="cues span">${cleanHTML(transcriptText)}</div>
+            <div class="cues span">${cleanHTML(transcriptText, '<div><p><span>')}</div>
         </div>`
         addToTranscript(clickableTranscriptText)
         cueContainers = playfulVideoPlayer.querySelectorAll('.cue-container')
@@ -780,17 +771,18 @@ function removeHTML(text) {
 
 function jumpToTranscript(time) {
     video.currentTime = time
-    playfulVideoPlayer.querySelector('.cue-container').classList.remove('current')
-    playfulVideoPlayer.querySelector(`.cue-container[pfv-start-time="${time}"]`).classList.add('current')
     timelineInner.style.setProperty('--progress-position', video.currentTime / video.duration)
+    playfulVideoPlayer.querySelectorAll('.cue-container').forEach(element => element.classList.remove('current'))
+    playfulVideoPlayer.querySelector(`.cue-container[pfv-start-time="${time}"]`).classList.add('current')
 }
 
 function clearTranscriptDiv() {
-    transcriptDiv.clearContent()
+    transcriptDiv.innerHTML = ''
 }
 
 function addToTranscript(htmlText) {
-    transcriptDiv.htmlContent(htmlText)
+    cleanHTML(htmlText, '')
+    transcriptDiv.innerHTML += htmlText
 }
 
 function addCueListeners(cue) {

@@ -1,6 +1,6 @@
 import '//cdn.jsdelivr.net/npm/core-js-bundle@latest/index.min.js'
 import { cleanHTML } from './utils/html-cleanser.min.js'
-import { videoMetadata, mediaSessionMetadata, liveSettings } from './metadata.js'
+import metaVideo from './metadata.config.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
@@ -57,10 +57,31 @@ const generateUUID = () => {
     })
 }
 
-const HLSconfig = {
+var HLSconfig = {
     startPosition: -1,
     debug: true,
+    backBufferLength: 90,
+    enableWorker: true,
+    enableWebVTT: true,
+    enableWorker: false,
+    minAutoBitrate: 1000,
+    maxBufferHole: 1,
 }
+
+var HLSOptimalconfig = {
+    abrEwmaDefaultEstimate: Number(metaVideo.videoSettings.bandwidth_default_estimate),
+    lowLatencyMode: true,
+    liveSyncDurationCount: Number(metaVideo.videoMetadata.delay_compensation),
+    liveMaxLatencyDurationCount: Number(metaVideo.videoMetadata.live_interval),
+    maxLiveSyncPlaybackRate: {
+        default: 1,
+        min: 0.25,
+        max: 4,
+    },
+    maxBufferSize: Number(metaVideo.videoSettings.bandwidth_default_estimate / 1000 / metaVideo.videoSettings.fragment_duration),
+}
+
+var pfvConfiguration = Object.assign({}, HLSconfig, HLSOptimalconfig)
 
 const PLAY_BUTTON_KEY = 'k',
     FULLSCREEN_BUTTON_KEY = 'f',
@@ -68,9 +89,9 @@ const PLAY_BUTTON_KEY = 'k',
     MUTE_TOGGLE_KEY = 'm',
     SUBTITLES_CLOSEDCAPTION_TOGGLE_KEY = 'c'
 
-const hls = new Hls(HLSconfig)
+const hls = new Hls(pfvConfiguration)
 
-const FRAMES_PER_SECOND = videoMetadata.video_FPS || 30
+const FRAMES_PER_SECOND = metaVideo.videoMetadata.video_FPS || 30
 
 const playfulVideoPlayerContainer = document.querySelector('.playful-video-player-container')
 const playfulVideoPlayer = playfulVideoPlayerContainer.querySelector('.playful-video-player')
@@ -216,8 +237,8 @@ const isiPadOSSafari = () => {
 window.addEventListener('DOMContentLoaded', () => {
     if (typeof window != 'object' && typeof document != 'object') return
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
-    videoPoster.src = videoMetadata.video_poster
-    if (videoMetadata.is_live === true && ((video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL') || Hls.isSupported()))) {
+    videoPoster.src = metaVideo.videoMetadata.video_poster
+    if (metaVideo.videoMetadata.is_live === true && ((video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL') || Hls.isSupported()))) {
         playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
         durationContainer.setAttribute('hidden', '')
         liveContainer.removeAttribute('hidden')
@@ -229,20 +250,23 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!Hls.isSupported()) {
         //For HLS container
         hls.attachMedia(video)
-        hls.loadSource(videoMetadata.HLS_src)
-        video.setAttribute('type', videoMetadata.HLS_codec)
+        hls.loadSource(metaVideo.videoMetadata.HLS_src)
+        video.setAttribute('type', metaVideo.videoMetadata.HLS_codec)
         hls.on(Hls.Events.MANIFEST_LOADED, function () {
             loadedMetadata()
         })
+        playfulVideoPlayer.querySelectorAll('track').forEach(element => {
+            element.setAttribute('type', 'application/octet-stream')
+        })
         /*} else if (!video.canPlayType('application/vnd.apple.mpegurl') || !video.canPlayType('application/x-mpegURL')) {
-            source.setAttribute('src', videoMetadata.HLS_src)
-            source.setAttribute('type', videoMetadata.HLS_codec)
+            source.setAttribute('src', metaVideo.videoMetadata.HLS_src)
+            source.setAttribute('type', metaVideo.videoMetadata.HLS_codec)
             video.load()
             qualityItem.setAttribute('pfv-unsupported', '')*/
     } else {
         //For MP4 container
-        source.setAttribute('src', videoMetadata.Fallback_src)
-        source.setAttribute('type', videoMetadata.Fallback_codec)
+        source.setAttribute('src', metaVideo.videoMetadata.Fallback_src)
+        source.setAttribute('type', metaVideo.videoMetadata.Fallback_codec)
         video.load()
         qualityItem.setAttribute('pfv-unsupported', '')
     }
@@ -481,9 +505,9 @@ function downloadFile(url, fileName) {
 }
 
 downloadItem.addEventListener('click', () => {
-    const fileType = videoMetadata.Fallback_codec.split('/')[1].split(';')[0]
+    const fileType = metaVideo.videoMetadata.Fallback_codec.split('/')[1].split(';')[0]
     downloadFile(
-        videoMetadata.Fallback_src,
+        metaVideo.videoMetadata.Fallback_src,
         `${title || 'download'}.${fileType}`
     )
     settingsButton.classList.remove('pressed')
@@ -536,7 +560,6 @@ playbackSpeedItemControls.forEach(element => {
             playfulVideoPlayer.setAttribute('pfv-speed', video.playbackRate)
             playbackSpeedItem.querySelector('.span.current-speed').innerText = `${video.playbackRate}${BY_MULTIPLY}`
             element.setAttribute('aria-checked', true)
-            !element.getAttribute('pfv-speed') >= '1.25' && !element.getAttribute('pfv-speed') < playbackSpeedItemControls.lastChild.getAttribute('pfv-speed') ? timelineProgressbar.style.filter = 'none' : timelineProgressbar.style.filter = `url(#${element.getAttribute('pfv-speed')}x-speed)`
         }
         backPageSettingsFn()
     })
@@ -650,6 +673,7 @@ captionButton.addEventListener('click', toggleCaptions)
 function toggleCaptions() {
     const isHidden = captions.mode === 'hidden'
     captions.mode = isHidden ? 'showing' : 'hidden'
+    hls.subtitleDisplay = hls.subtitleDisplay === false ? 'true' : 'false'
     videoContainer.classList.toggle('caption', isHidden)
 }
 
@@ -904,7 +928,7 @@ class seekByTime {
 // Time divider animation
 let divide
 function intervalDivideWorker() {
-    if (typeof (Worker) !== 'undefined' && videoMetadata.is_live === false) {
+    if (typeof (Worker) !== 'undefined' && metaVideo.videoMetadata.is_live === false) {
         if (typeof (divide) === 'undefined') {
             divide = new Worker('./utils/timeDivider.js')
         }
@@ -1211,7 +1235,7 @@ timelineInner.addEventListener('pointermove', (e) => {
 let isScrubbing = false
 let wasPaused
 
-const LIVE_WINDOW = liveSettings.live_interval + liveSettings.delay_compensation
+const LIVE_WINDOW = metaVideo.liveSettings.live_interval + metaVideo.liveSettings.delay_compensation
 
 function toggleScrubbing(e) {
     const rect = timelineInner.getBoundingClientRect()
@@ -1219,15 +1243,15 @@ function toggleScrubbing(e) {
     isScrubbing = (e.buttons && 1) === 1
     let seekTime = percent * video.duration
     const checkInvertedTime =
-        videoMetadata.is_live
+        metaVideo.videoMetadata.is_live
             ? seekTime - video.duration
             : seekTime
     const delaySeek =
-        videoMetadata.is_live
-            ? checkInvertedTime - liveSettings.delay_compensation
+        metaVideo.videoMetadata.is_live
+            ? checkInvertedTime - metaVideo.liveSettings.delay_compensation
             : checkInvertedTime
-    const seekingTime = videoMetadata.is_live
-        ? seekTime - liveSettings.delay_compensation
+    const seekingTime = metaVideo.videoMetadata.is_live
+        ? seekTime - metaVideo.liveSettings.delay_compensation
         : seekTime
     timeTooltip.innerText = formatTime.format(delaySeek)
     videoContainer.classList.toggle('scrubbing', isScrubbing)
@@ -1254,15 +1278,15 @@ function getThumbCanvas() {
 function handleTimelineUpdate(e) {
     const rect = timelineInner.getBoundingClientRect()
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width
-    const thumbPosition = (Math.trunc(percent * video.duration) / videoMetadata.video_thumbs_count) * 100
+    const thumbPosition = (Math.trunc(percent * video.duration) / metaVideo.videoMetadata.video_thumbs_count) * 100
     timelineInner.style.setProperty('--preview-position', percent)
 
     let seekTime = percent * video.duration
-    const checkInvertedTime = videoMetadata.is_live ? seekTime - video.duration : seekTime
-    const delaySeek = videoMetadata.is_live ? checkInvertedTime - liveSettings.delay_compensation : checkInvertedTime
+    const checkInvertedTime = metaVideo.videoMetadata.is_live ? seekTime - video.duration : seekTime
+    const delaySeek = metaVideo.videoMetadata.is_live ? checkInvertedTime - metaVideo.liveSettings.delay_compensation : checkInvertedTime
     timeTooltip.innerText = formatTime.format(delaySeek)
 
-    if (videoMetadata.is_live === false) seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
+    if (metaVideo.videoMetadata.is_live === false) seekingThumbnail.style.backgroundPositionY = `${thumbPosition}%`
 
     seekingPreviewPosition(e)
 
@@ -1272,7 +1296,7 @@ function handleTimelineUpdate(e) {
     if (isScrubbing) {
         cancelAnimationUpdateTime()
         e.preventDefault()
-        if (videoMetadata.is_live === false) videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
+        if (metaVideo.videoMetadata.is_live === false) videoThumbPreview.style.backgroundPositionY = `${thumbPosition}%`
         timelineInner.style.setProperty('--progress-position', percent)
         timeTooltip.innerText = formatTime.format(delaySeek)
         currentTime.innerText = formatTime.format(delaySeek)
@@ -1293,14 +1317,14 @@ function loadedMetadata() {
 function updatetime() {
     videoPercent = video.currentTime / video.duration
     var liveCompensation =
-        videoMetadata.is_live && getComputedStyle(timelineInner).getPropertyValue('--progress-position') >= 1
+        metaVideo.videoMetadata.is_live && getComputedStyle(timelineInner).getPropertyValue('--progress-position') >= 1
             ? 1 - videoPercent
-            : videoMetadata.is_live
-                ? liveSettings.delay_compensation / video.duration
+            : metaVideo.videoMetadata.is_live
+                ? metaVideo.liveSettings.delay_compensation / video.duration
                 : 0
     if (!video.paused && videoContainer.classList.contains('hovered')) {
         timelineInner.style.setProperty('--progress-position', videoPercent + liveCompensation)
-        if (videoMetadata.is_live === false) currentTime.innerText = formatTime.format(video.currentTime)
+        if (metaVideo.videoMetadata.is_live === false) currentTime.innerText = formatTime.format(video.currentTime)
         window.requestAnimationFrame(updatetime)
     }
     cancelAnimationUpdateTime()
@@ -1431,14 +1455,14 @@ videoFit.addEventListener('click', (e) => {
 })
 
 function togglePlay() {
-    if (video.currentTime === video.duration && video.paused && !videoMetadata.is_live) {
+    if (video.currentTime === video.duration && video.paused && !metaVideo.videoMetadata.is_live) {
         if (contextMenu.classList.contains('show') || settingsContextMenu.classList.contains('pressed')) return
 
         videoContainer.classList.remove('ended')
         video.currentTime = 0
     }
 
-    video.paused || video.ended && !videoMetadata.is_live
+    video.paused || video.ended && !metaVideo.videoMetadata.is_live
         ? video.play()
         : video.pause()
     if (context.state === 'suspended') context.resume()
@@ -1587,34 +1611,34 @@ async function mediaSessionToggle() {
                 title,
                 artist: author,
                 artwork: [{
-                    src: mediaSessionMetadata.thumb_96,
+                    src: metaVideo.mediaSessionMetadata.thumb_96,
                     sizes: '96x96',
-                    type: mediaSessionMetadata.type,
+                    type: metaVideo.mediaSessionMetadata.type,
                 },
                 {
-                    src: mediaSessionMetadata.thumb_128,
+                    src: metaVideo.mediaSessionMetadata.thumb_128,
                     sizes: '128x128',
-                    type: mediaSessionMetadata.type,
+                    type: metaVideo.mediaSessionMetadata.type,
                 },
                 {
-                    src: mediaSessionMetadata.thumb_192,
+                    src: metaVideo.mediaSessionMetadata.thumb_192,
                     sizes: '192x192',
-                    type: mediaSessionMetadata.type,
+                    type: metaVideo.mediaSessionMetadata.type,
                 },
                 {
-                    src: mediaSessionMetadata.thumb_256,
+                    src: metaVideo.mediaSessionMetadata.thumb_256,
                     sizes: '256x256',
-                    type: mediaSessionMetadata.type,
+                    type: metaVideo.mediaSessionMetadata.type,
                 },
                 {
-                    src: mediaSessionMetadata.thumb_384,
+                    src: metaVideo.mediaSessionMetadata.thumb_384,
                     sizes: '384x384',
-                    type: mediaSessionMetadata.type,
+                    type: metaVideo.mediaSessionMetadata.type,
                 },
                 {
-                    src: mediaSessionMetadata.thumb_512,
+                    src: metaVideo.mediaSessionMetadata.thumb_512,
                     sizes: '512x512',
-                    type: mediaSessionMetadata.type,
+                    type: metaVideo.mediaSessionMetadata.type,
                 }
                 ]
             })
@@ -1726,10 +1750,10 @@ if (window.chrome && !window.chrome.cast && video.readyState > 0) {
     }
 
     function mimeType() {
-        if (video.currentSrc === videoMetadata.HLS_src) {
-            return videoMetadata.HLS_codec
-        } else if (video.currentSrc === videoMetadata.Fallback_src) {
-            return videoMetadata.Fallback_codec
+        if (video.currentSrc === metaVideo.videoMetadata.HLS_src) {
+            return metaVideo.videoMetadata.HLS_codec
+        } else if (video.currentSrc === metaVideo.videoMetadata.Fallback_src) {
+            return metaVideo.videoMetadata.Fallback_codec
         }
     }
 
@@ -2074,7 +2098,7 @@ const eventListeners = [
     [
         'ended',
         () => {
-            if (videoMetadata.is_live === false) videoContainer.classList.add('ended')
+            if (metaVideo.videoMetadata.is_live === false) videoContainer.classList.add('ended')
         }
     ],
     [
@@ -2116,7 +2140,7 @@ const eventListeners = [
         'seeking',
         () => {
             const checkInvertedTime =
-                videoMetadata.is_live
+                metaVideo.videoMetadata.is_live
                     ? video.currentTime - video.duration
                     : video.currentTime
             currentTime.innerText = formatTime.format(checkInvertedTime)
@@ -2126,7 +2150,7 @@ const eventListeners = [
         'seeked',
         () => {
             window.requestAnimationFrame(updatetime)
-            if (videoMetadata.is_live === false) videoContainer.classList.add('played')
+            if (metaVideo.videoMetadata.is_live === false) videoContainer.classList.add('played')
             videoContainer.classList.remove('seeking')
             seekingPreview.classList.remove('loading')
             videoContainer.classList.remove('buffering-scrubbing')
@@ -2134,7 +2158,7 @@ const eventListeners = [
             videoControls.removeAttribute('hidden')
             updatetime()
             const checkInvertedTime =
-                videoMetadata.is_live
+                metaVideo.videoMetadata.is_live
                     ? video.currentTime - video.duration
                     : video.currentTime
             currentTime.innerText = formatTime.format(checkInvertedTime)
@@ -2178,11 +2202,11 @@ const eventListeners = [
     [
         'timeupdate',
         () => {
-            const checkInvertedTime = videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
-            if (videoMetadata.is_live === false) currentTime.innerText = formatTime.format(checkInvertedTime)
+            const checkInvertedTime = metaVideo.videoMetadata.is_live ? video.currentTime - video.duration : video.currentTime
+            if (metaVideo.videoMetadata.is_live === false) currentTime.innerText = formatTime.format(checkInvertedTime)
             durationContainer.setAttribute(
                 'aria-label',
-                `${videoMetadata.is_live ? 'Live stream. Delayed by ' : ''}${formatTime.ARIA(videoMetadata.is_live ? video.duration - video.currentTime : video.currentTime)}${!videoMetadata.is_live ? ` elapsed of ${formatTime.ARIA(video.duration)}` : ''}`
+                `${metaVideo.videoMetadata.is_live ? 'Live stream. Delayed by ' : ''}${formatTime.ARIA(metaVideo.videoMetadata.is_live ? video.duration - video.currentTime : video.currentTime)}${!metaVideo.videoMetadata.is_live ? ` elapsed of ${formatTime.ARIA(video.duration)}` : ''}`
             )
 
             currentTime.setAttribute(
@@ -2221,10 +2245,10 @@ const eventListeners = [
             videoPercent = video.currentTime / video.duration
             playfulVideoPlayer.classList.remove('loading')
             video.textTracks[0].mode = 'hidden'
-            if (isURL(videoMetadata.video_thumbs) === false || videoMetadata.is_live === true) seekingThumbnail.setAttribute('hidden', '')
+            if (isURL(metaVideo.videoMetadata.video_thumbs) === false || metaVideo.videoMetadata.is_live === true) seekingThumbnail.setAttribute('hidden', '')
 
-            seekingThumbnail.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
-            videoThumbPreview.style.backgroundImage = `url('${videoMetadata.video_thumbs}')`
+            seekingThumbnail.style.backgroundImage = `url('${metaVideo.videoMetadata.video_thumbs}')`
+            videoThumbPreview.style.backgroundImage = `url('${metaVideo.videoMetadata.video_thumbs}')`
             durationContainer.setAttribute(
                 'aria-label',
                 `${formatTime.ARIA(

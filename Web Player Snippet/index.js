@@ -653,12 +653,12 @@ function toggleCaptions() {
 }
 
 HTMLElement.prototype.htmlContent = function (html) {
-    var dom = new DOMParser().parseFromString(html, 'text/html').body;
-    while (dom.hasChildNodes()) this.appendChild(dom.firstChild);
+    var dom = new DOMParser().parseFromString(html, 'text/html').body
+    while (dom.hasChildNodes()) this.appendChild(dom.firstChild)
 }
 
 HTMLElement.prototype.clearContent = function () {
-    while (this.hasChildNodes()) this.removeChild(this.lastChild);
+    while (this.hasChildNodes()) this.removeChild(this.lastChild)
 }
 
 // Transcript

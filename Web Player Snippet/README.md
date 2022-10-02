@@ -13,3 +13,5 @@ A HTML5-based video player created by myself with some features you wouldn't nor
 [A player with a clickable transcript](http://masf-html5.blogspot.com/2016/04/html5-player-with-clickable-transcript.html)
 
 [Plyr](https://github.com/sampotts/plyr)
+
+[WebVTT parser and validator](https://github.com/w3c/webvtt.js) & [WebVTT Parser with Regions](https://github.com/silviapfeiffer/WebVTT-with-regions)

@@ -6,7 +6,7 @@ import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
 import { WebVTTParser } from './utils/vttparser/vtt-parser.js'
 import { WebVTT2DocumentFragment } from './utils/vttparser/vtt-dom-construct.js'
-import { WebVTT } from './utils/vttjs/vtt.min.js'
+
 const deviceMem = 'deviceMemory' in navigator && navigator.deviceMemory
 const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true || false
 const isLowEnd = deviceMem < 4 ? true : false

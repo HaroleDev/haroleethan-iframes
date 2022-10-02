@@ -4,7 +4,9 @@ import metaVideo from './metadata.config.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
-
+import { WebVTTParser } from './utils/vttparser/vtt-parser.js'
+import { WebVTT2DocumentFragment } from './utils/vttparser/vtt-dom-construct.js'
+import { WebVTT } from './utils/vttjs/vtt.min.js'
 const deviceMem = 'deviceMemory' in navigator && navigator.deviceMemory
 const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true || false
 const isLowEnd = deviceMem < 4 ? true : false
@@ -124,6 +126,8 @@ const aboutPlayerContainer = playfulVideoPlayer.querySelector('.about-player-dia
 const dialogContainer = playfulVideoPlayer.querySelectorAll('.dialog-container')
 
 const captionButton = playfulVideoPlayer.querySelector('.caption-button')
+const captionContainer = playfulVideoPlayer.querySelector('.caption-cc-container')
+
 const settingsButton = playfulVideoPlayer.querySelector('.settings-button')
 const settingsContextMenu = playfulVideoPlayer.querySelector('.settings-context-menu')
 const settingsTooltipContainer = playfulVideoPlayer.querySelector('.settings-tooltip-container')
@@ -178,13 +182,62 @@ const CastTooltip = playfulVideoPlayer.querySelector('.gcast-tooltip')
 
 let orientationInfluence, videoPercent
 
-const title = document.querySelector('meta[property="og:title"]') ? document.querySelector('meta[property="og:title"]').getAttribute('content') : null
-const author = document.querySelector('meta[property="og:author"]') ? document.querySelector('meta[property="og:author"]').getAttribute('content') : null
+const title = document.querySelector('meta[property=\"og:title\"]') ? document.querySelector('meta[property="og:title"]').getAttribute('content') : null
+const author = document.querySelector('meta[property=\"og:author\"]') ? document.querySelector('meta[property="og:author"]').getAttribute('content') : null
 const description = document
-    .querySelector('meta[property="og:description"]')
+    .querySelector('meta[property=\"og:description\"]')
     .getAttribute('content')
 
 consoleLog()
+
+var parser, parsedData, dom
+var captionWidth = captionContainer.offsetWidth, captionHeight = captionContainer.offsetHeight
+var vttTrack, i
+var caption = video.querySelector('track[kind=captions]') || video.querySelector('track[kind=subtitles]')
+var xhReq = new XMLHttpRequest()
+xhReq.open('GET', caption.src, true)
+xhReq.onreadystatechange = onResponse
+xhReq.send(null)
+function onResponse() {
+    if (xhReq.readyState != 4) return
+    var serverResponse = xhReq.responseText
+    parser = new WebVTTParser()
+    parsedData = parser.parse(serverResponse)
+
+    dom = new WebVTT2DocumentFragment()
+    dom.prepareRegions(parsedData.metadatas, captionWidth, captionHeight)
+    dom.appendRegions(captionContainer)
+
+    vttTrack = video.addTextTrack('captions', 'English', 'en')
+    for (i = 0; i < parsedData.cues.length; i++) {
+        var cueCap
+        cueCap = new VTTCue(parsedData.cues[i].startTime, parsedData.cues[i].endTime, i)
+        vttTrack.addCue(cueCap)
+        cueCap.addEventListener('enter', captionShow, false)
+        cueCap.addEventListener('exit', captionRemove, false)
+    }
+}
+
+function captionShow(_e) {
+    var cueCap
+    cueCap = parsedData.cues[this.text]
+    dom.captionShow(cueCap, this.text, captionWidth, captionHeight, captionContainer)
+}
+
+function captionRemove(_e) {
+    var cueCap
+    cueCap = parsedData.cues[this.text]
+    dom.captionRemove(cueCap, this.text)
+}
+
+function outputsize() {
+    captionWidth = captionContainer.offsetWidth
+    captionHeight = captionContainer.offsetHeight
+    captionContainer.innerHTML = ''
+    onResponse()
+}
+
+new ResizeObserver(outputsize).observe(captionContainer)
 
 function init() {
     if (video.hasAttribute('controls')) {
@@ -238,7 +291,10 @@ window.addEventListener('DOMContentLoaded', () => {
     if (typeof window != 'object' && typeof document != 'object') return
     if (window.chrome && !window.chrome.cast) loadScriptsInOrder(['//gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1'])
     videoPoster.src = metaVideo.videoMetadata.video_poster
-    if (metaVideo.videoMetadata.is_live === true && ((video.canPlayType('application/x-mpegURL') || video.canPlayType('application/vnd.apple.mpegURL') || Hls.isSupported()))) {
+    if (metaVideo.videoMetadata.is_live === true
+        && ((video.canPlayType('application/x-mpegURL')
+            || video.canPlayType('application/vnd.apple.mpegURL')
+            || Hls.isSupported()))) {
         playfulVideoPlayer.setAttribute('pfv-live-stream', 'true')
         durationContainer.setAttribute('hidden', '')
         liveContainer.removeAttribute('hidden')
@@ -281,10 +337,12 @@ window.addEventListener('DOMContentLoaded', () => {
         pipPlayerButton.parentElement.setAttribute('hidden', '')
     }
 
-    if (canFullscreenEnabled() === false) {
+    if (!canFullscreenEnabled()) {
         fullscreenButton.parentElement.setAttribute('pfv-unsupported', '')
         fullscreenTooltip.setAttribute('pfv-tooltip-text', 'Full screen is unavailable')
     }
+
+    if (WebVTTParser) transcriptItem.setAttribute('pfv-unsupported', '')
 
     playfulVideoPlayer.setAttribute('pfv-device', 'Desktop')
     if (/Mobi/.test(window.navigator.userAgent)) playfulVideoPlayer.setAttribute('pfv-device', 'Mobile')
@@ -446,9 +504,22 @@ document.addEventListener('click', (e) => {
     }
 })
 
+// Captions
+const captions = video.textTracks[0]
+captions.mode = 'hidden'
+captionButton.addEventListener('click', toggleCaptions)
+captionContainer.setAttribute('hidden', '')
+function toggleCaptions() {
+    const isHidden = WebVTTParser ? captionContainer.hasAttribute('hidden') : captions.mode === 'hidden'
+    videoContainer.classList.toggle('caption', isHidden)
+    if (WebVTTParser) isHidden ? captionContainer.removeAttribute('hidden') : captionContainer.setAttribute('hidden', '')
+    else captions.mode = isHidden ? 'showing' : 'hidden'
+}
+
 // Context menu items
 eqItem.addEventListener('click', () => eqContainer.classList.add('opened'))
 transcriptItem.addEventListener('click', () => {
+    if (WebVTTParser) captions.mode = 'hidden'
     loadTranscript(
         playfulVideoPlayer.querySelector('#default-track').getAttribute('srclang')
     )
@@ -665,18 +736,6 @@ closeTranscriptPanelBtn.addEventListener('click', () => {
     playfulVideoPlayer.classList.remove('transcript-opened')
 })
 
-// Captions
-const captions = video.textTracks[0]
-captions.mode = 'hidden'
-captionButton.addEventListener('click', toggleCaptions)
-
-function toggleCaptions() {
-    const isHidden = captions.mode === 'hidden'
-    captions.mode = isHidden ? 'showing' : 'hidden'
-    hls.subtitleDisplay = hls.subtitleDisplay === false ? 'true' : 'false'
-    videoContainer.classList.toggle('caption', isHidden)
-}
-
 // Transcript
 let tracks
 let trackElements
@@ -738,7 +797,7 @@ function displayCues(track) {
         const clickableTranscriptText =
             `<div class="cue-container" pfv-start-time="${cue.startTime}" role="button" aria-pressed="false" tabindex="0">
             <div class="cue-time span">${formatTime.format(cue.startTime)}</div>
-            <div class="cues span">${cleanHTML(transcriptText, '<div><p><span>')}</div>
+            <div class="cues span">${cleanHTML(transcriptText, '<c><i><b><u><ruby><rt><v>')}</div>
         </div>`
         addToTranscript(clickableTranscriptText)
         cueContainers = playfulVideoPlayer.querySelectorAll('.cue-container')
@@ -2255,7 +2314,13 @@ const eventListeners = [
 
             orientationInfluence = video.videoWidth / video.videoHeight || 16 / 9
 
-            playfulVideoPlayerContainer.setAttribute('aria-orientation', video.videoWidth > video.videoHeight ? 'landscape' : video.videoWidth < video.videoHeight && 'portait')
+            playfulVideoPlayerContainer.setAttribute(
+                'aria-orientation',
+                video.videoWidth > video.videoHeight
+                    ? 'landscape'
+                    : video.videoWidth < video.videoHeight
+                    && 'portait'
+            )
 
             playfulVideoPlayerAspectRatio.style.setProperty(
                 '--aspect-ratio-size',

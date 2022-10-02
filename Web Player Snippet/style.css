@@ -137,6 +137,30 @@
     will-change: width, height, max-width, max-height, filter, transform, animation;
 }
 
+.caption-cc-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: all 300ms var(--ease-out-expo);
+}
+
+.video-container.hovered .caption-cc-container {
+    bottom: 150px;
+}
+
+.video-container.paused .caption-cc-container {
+    top: 215px;
+    bottom: 150px;
+}
+
+.transcript-opened .caption-cc-container {
+    right: 400px;
+}
+
 /* LandscapePortaitSizing */
 .playful-video-player-container[aria-orientation="landscape"],
 .playful-video-player-container[aria-orientation="portait"] {
@@ -781,7 +805,7 @@
     z-index: 1;
     width: 100%;
     height: fit-content;
-    padding: 28px;
+    padding: 40px;
     padding-bottom: calc(28px * 4);
     opacity: 0;
     transition: all 600ms var(--ease-out-expo), visibility 600ms step-end;
@@ -821,7 +845,6 @@
     justify-content: flex-start;
     z-index: 0;
     top: 0;
-    padding: 8px 12px;
     height: fit-content;
     width: fit-content;
     user-select: auto;

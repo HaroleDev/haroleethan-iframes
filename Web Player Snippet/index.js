@@ -303,7 +303,7 @@ window.addEventListener('DOMContentLoaded', () => {
         playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
     }
 
-    if (!Hls.isSupported()) {
+    if (Hls.isSupported()) {
         //For HLS container
         hls.attachMedia(video)
         hls.loadSource(metaVideo.videoMetadata.HLS_src)

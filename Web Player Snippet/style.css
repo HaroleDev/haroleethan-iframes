@@ -1428,6 +1428,10 @@
     transition: opacity 300ms var(--ease-out-expo), filter 300ms var(--ease-out-expo);
 }
 
+.video-container.scrubbing .caption-cc-container {
+    filter: blur(1vh) brightness(60%);
+}
+
 .video-container.scrubbing .video-backdrop-seeking,
 .video-container.scrubbing .video-thumb-preview,
 .video-container.buffering-scrubbing .video-backdrop-seeking,
@@ -3563,6 +3567,7 @@ screen and (max-height: 600px) {
         border-radius: 8px;
         outline: 2px solid CanvasText;
         margin-left: 12px;
+        padding: 8px 12px;
     }
 
     .duration-container,

@@ -209,6 +209,7 @@ function onResponse() {
     dom.appendRegions(captionContainer)
 
     vttTrack = video.addTextTrack('captions', 'English', 'en')
+    if (captionContainer.hasAttribute('hidden')) return
     for (i = 0; i < parsedData.cues.length; i++) {
         var cueCap
         cueCap = new VTTCue(parsedData.cues[i].startTime, parsedData.cues[i].endTime, i)

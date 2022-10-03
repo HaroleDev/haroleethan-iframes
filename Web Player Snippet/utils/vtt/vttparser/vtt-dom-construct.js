@@ -134,13 +134,9 @@ var WebVTT2DocumentFragment = function () {
             maxsize = cue.textPosition
         } else if (cue.alignment === 'middle' && cue.textPosition <= 50) {
             cssCue += ' text-align:center;'
-            cssCue += ' right:50%;'
-            cssCue += ' transform:translateY(50%);'
             maxsize = cue.textPosition * 2
         } else if (cue.alignment === 'middle' && cue.textPosition > 50) {
             cssCue += ' text-align:center;'
-            cssCue += ' right:50%;'
-            cssCue += ' transform:translateY(50%);'
             maxsize = (100 - cue.textPosition) * 2
         } else if (cue.alignment === 'left') {
             cssCue += ' text-align:left;'
@@ -206,8 +202,8 @@ var WebVTT2DocumentFragment = function () {
         height = 'auto'
         cssCue += ' height:auto;'
 
-        xpadding = ((videoWidth / 500) * 5) / 2
-        ypadding = ((videoWidth / 1000) * 5) / 2
+        xpadding = videoWidth / 500 * 5 / 2
+        ypadding = videoWidth / 1000 * 5 / 2
         cssCue += ` padding:${ypadding}px ${xpadding}px;`
 
         // 11. set left and top

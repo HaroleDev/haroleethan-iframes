@@ -213,25 +213,21 @@ function onResponse() {
         var cueCap
         cueCap = new VTTCue(parsedData.cues[i].startTime, parsedData.cues[i].endTime, i)
         vttTrack.addCue(cueCap)
-        if (captionContainer.hasChildNodes) cueCap.addEventListener('enter', captionShow, false)
-        if (captionContainer.hasChildNodes) cueCap.addEventListener('exit', captionRemove, false)
+        cueCap.addEventListener('enter', captionShow, false)
+        cueCap.addEventListener('exit', captionRemove, false)
     }
 }
 
 function captionShow() {
-    if (captionContainer.hasChildNodes) {
-        var cueCap
-        cueCap = parsedData.cues[this.text]
-        dom.captionShow(cueCap, this.text, captionWidth, captionHeight, captionContainer)
-    }
+    var cueCap
+    cueCap = parsedData.cues[this.text]
+    dom.captionShow(cueCap, this.text, captionWidth, captionHeight, captionContainer)
 }
 
 function captionRemove() {
-    if (captionContainer.hasChildNodes) {
-        var cueCap
-        cueCap = parsedData.cues[this.text]
-        dom.captionRemove(cueCap, this.text)
-    }
+    var cueCap
+    cueCap = parsedData.cues[this.text]
+    dom.captionRemove(cueCap, this.text)
 }
 
 function outputsize() {
@@ -307,7 +303,7 @@ window.addEventListener('DOMContentLoaded', () => {
         playfulVideoPlayer.setAttribute('pfv-live-stream', 'false')
     }
 
-    if (Hls.isSupported()) {
+    if (!Hls.isSupported()) {
         //For HLS container
         hls.attachMedia(video)
         hls.loadSource(metaVideo.videoMetadata.HLS_src)

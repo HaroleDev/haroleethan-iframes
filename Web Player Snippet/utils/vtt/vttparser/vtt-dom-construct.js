@@ -74,6 +74,8 @@ var WebVTT2DocumentFragment = function () {
             height = 0,
             xposition = 0,
             yposition = 0,
+            xpadding = 0,
+            ypadding = 0,
             rightmarginedge = 0,
             left = 0,
             top = 0,
@@ -101,12 +103,12 @@ var WebVTT2DocumentFragment = function () {
         cssCue = 'position:absolute;'
         cssCue += ' display:inline;'
         cssCue += ' unicode-bidi:-webkit-plaintext; unicode-bidi:-moz-plaintext; unicode-bidi:plaintext;'
-        cssCue += ' background:rgba(0,0,0,0.8);'
+        cssCue += ' background:rgba(0,0,0,0.7);'
         cssCue += ' word-wrap:break-word; overflow-wrap:break-word;'
         cssCue += ` font-size:${fontSize}px;`
-        cssCue += ' font-family:\'Manrope Variable\',Manrope,Arial,Helvetica,sans-serif;'
+        cssCue += ' font-family:Manrope,Arial,Helvetica,sans-serif;'
         cssCue += ` line-height:${lineHeight}px;`
-        cssCue += ' color:rgba(255,255,255,1);'
+        cssCue += ' color:var(--text-color);'
         cssCue += ' border-radius:0.2em;'
 
         // 3. determine direction (FIXME: rtl support)
@@ -204,6 +206,10 @@ var WebVTT2DocumentFragment = function () {
         height = 'auto'
         cssCue += ' height:auto;'
 
+        xpadding = ((videoWidth / 500) * 5) / 2
+        ypadding = ((videoWidth / 1000) * 5) / 2
+        cssCue += ` padding:${ypadding}px ${xpadding}px;`
+
         // 11. set left and top
         left = xposition * videoWidth / 100
         cssCue += ` left:${left}px;`
@@ -273,9 +279,9 @@ var WebVTT2DocumentFragment = function () {
         cssRegion += ' direction:ltr;'
         cssRegion += ' word-wrap:break-word; overflow-wrap:break-word;'
         cssRegion += ` font-size:${fontSize}px;`
-        cssRegion += ' font-family:\'Manrope Variable\',Manrope,Arial,Helvetica,sans-serif;'
+        cssRegion += ' font-family:Manrope,Arial,Helvetica,sans-serif;'
         cssRegion += ` line-height:${lineHeight}px;`
-        cssRegion += ' color: rgba(255, 255, 255, 1);'
+        cssRegion += ' color:var(--text-color);'
 
         cssRegion += ' overflow:hidden;'
 
@@ -306,7 +312,7 @@ var WebVTT2DocumentFragment = function () {
         domContainer.style.height = 'auto'
         domContainer.style.bottom = 0
         domContainer.style.width = '100%'
-        domContainer.style.backgroundColor = 'rgba(0,0,0,0.8)'
+        domContainer.style.backgroundColor = 'rgba(0,0,0,0.7)'
         domContainer.style.borderRadius = '0.2em'
         domContainer.style.transition = '450ms'
         domFragment.appendChild(domContainer)
@@ -368,9 +374,9 @@ var WebVTT2DocumentFragment = function () {
 
         // set the CSS for the child
         cssCueText += `font-size:${fontSize}px;`
-        cssCueText += ' font-family:\'Manrope Variable\',Manrope,Arial,Helvetica,sans-serif;'
+        cssCueText += ' font-family:Manrope,Arial,Helvetica,sans-serif;'
         cssCueText += ` line-height:${lineHeight}px;`
-        cssCueText += ' color: rgba(255, 255, 255, 1);'
+        cssCueText += ' color:var(--text-color);'
         //    cssCueText += ' -webkit-transition-duration: 0.433s;';
 
         if (cue.alignment === 'middle') {

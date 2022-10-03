@@ -513,6 +513,7 @@ function toggleCaptions() {
     const isHidden = WebVTTParser ? captionContainer.hasAttribute('hidden') : captions.mode === 'hidden'
     videoContainer.classList.toggle('caption', isHidden)
     if (WebVTTParser) isHidden ? cancelAnimationUpdateTime() : window.requestAnimationFrame(updatetime)
+    if (WebVTTParser) isHidden ? captionContainer.innerHTML = '' : onResponse()
     if (WebVTTParser) isHidden ? captionContainer.removeAttribute('hidden') : captionContainer.setAttribute('hidden', '')
     else captions.mode = isHidden ? 'showing' : 'hidden'
 }

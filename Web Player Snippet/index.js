@@ -4,8 +4,8 @@ import metaVideo from './metadata.config.js'
 import { debounce, throttle } from './utils/debounceAndThrottle.js'
 import consoleLog from './utils/consoleLog.js'
 import './utils/reqAnimFrameWhenPageVisible.js'
-import { WebVTTParser } from './utils/vttparser/vtt-parser.js'
-import { WebVTT2DocumentFragment } from './utils/vttparser/vtt-dom-construct.js'
+import { WebVTTParser } from './utils/vtt/vttparser/vtt-parser.js'
+import { WebVTT2DocumentFragment } from './utils/vtt/vttparser/vtt-dom-construct.js'
 
 const deviceMem = 'deviceMemory' in navigator && navigator.deviceMemory
 const isMotionReduced = () => window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true || false
@@ -83,7 +83,7 @@ var HLSOptimalconfig = {
     maxBufferSize: Number(metaVideo.videoSettings.bandwidth_default_estimate / 1000 / metaVideo.videoSettings.fragment_duration),
 }
 
-var pfvConfiguration = Object.assign({}, HLSconfig, HLSOptimalconfig)
+const pfvConfiguration = Object.assign({}, HLSconfig, HLSOptimalconfig)
 
 const PLAY_BUTTON_KEY = 'k',
     FULLSCREEN_BUTTON_KEY = 'f',
@@ -213,21 +213,25 @@ function onResponse() {
         var cueCap
         cueCap = new VTTCue(parsedData.cues[i].startTime, parsedData.cues[i].endTime, i)
         vttTrack.addCue(cueCap)
-        cueCap.addEventListener('enter', captionShow, false)
-        cueCap.addEventListener('exit', captionRemove, false)
+        if (captionContainer.hasChildNodes) cueCap.addEventListener('enter', captionShow, false)
+        if (captionContainer.hasChildNodes) cueCap.addEventListener('exit', captionRemove, false)
     }
 }
 
-function captionShow(_e) {
-    var cueCap
-    cueCap = parsedData.cues[this.text]
-    dom.captionShow(cueCap, this.text, captionWidth, captionHeight, captionContainer)
+function captionShow() {
+    if (captionContainer.hasChildNodes) {
+        var cueCap
+        cueCap = parsedData.cues[this.text]
+        dom.captionShow(cueCap, this.text, captionWidth, captionHeight, captionContainer)
+    }
 }
 
-function captionRemove(_e) {
-    var cueCap
-    cueCap = parsedData.cues[this.text]
-    dom.captionRemove(cueCap, this.text)
+function captionRemove() {
+    if (captionContainer.hasChildNodes) {
+        var cueCap
+        cueCap = parsedData.cues[this.text]
+        dom.captionRemove(cueCap, this.text)
+    }
 }
 
 function outputsize() {
@@ -512,6 +516,7 @@ captionContainer.setAttribute('hidden', '')
 function toggleCaptions() {
     const isHidden = WebVTTParser ? captionContainer.hasAttribute('hidden') : captions.mode === 'hidden'
     videoContainer.classList.toggle('caption', isHidden)
+    if (WebVTTParser) isHidden ? cancelAnimationUpdateTime() : window.requestAnimationFrame(updatetime)
     if (WebVTTParser) isHidden ? captionContainer.removeAttribute('hidden') : captionContainer.setAttribute('hidden', '')
     else captions.mode = isHidden ? 'showing' : 'hidden'
 }

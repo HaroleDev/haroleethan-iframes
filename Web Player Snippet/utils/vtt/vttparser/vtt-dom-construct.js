@@ -4,7 +4,7 @@
 import { printTimestamp } from './vtt-helper.js'
 
 var EDGEMARGIN = 0 /* % */
-
+var fontWeight = 500
 var WebVTT2DocumentFragment = function () {
     var regions = []
 
@@ -34,15 +34,14 @@ var WebVTT2DocumentFragment = function () {
                     }
                     result += '>';
                 } else if (node.name === 'v') {
-                    result += '<span';
-                    if (node.value) {
+                    result += '<span'
+                    if (node.value)
                         result += ` title="${node.value}"`
-                    }
                     result += '>'
                 } else
                     result += `<${node.name}>`
                 if (node.children)
-                    result += tree2HTML(node.children);
+                    result += tree2HTML(node.children)
                 if (node.name === ('c' || 'v'))
                     result += '</span>'
                 else
@@ -98,7 +97,6 @@ var WebVTT2DocumentFragment = function () {
         /* set defaults */
         lineHeight = 0.0533 * videoHeight
         fontSize = lineHeight / 1.3
-
         // 12. apply css
         cssCue = 'position:absolute;'
         cssCue += ' display:inline;'
@@ -106,6 +104,7 @@ var WebVTT2DocumentFragment = function () {
         cssCue += ' background:rgba(0,0,0,0.7);'
         cssCue += ' word-wrap:break-word; overflow-wrap:break-word;'
         cssCue += ` font-size:${fontSize}px;`
+        cssCue += ` font-weight:${fontWeight};`
         cssCue += ' font-family:Manrope,Arial,Helvetica,sans-serif;'
         cssCue += ` line-height:${lineHeight}px;`
         cssCue += ' color:var(--text-color);'
@@ -275,6 +274,7 @@ var WebVTT2DocumentFragment = function () {
         cssRegion += ' direction:ltr;'
         cssRegion += ' word-wrap:break-word; overflow-wrap:break-word;'
         cssRegion += ` font-size:${fontSize}px;`
+        cssRegion += ` font-weight:${fontWeight};`
         cssRegion += ' font-family:Manrope,Arial,Helvetica,sans-serif;'
         cssRegion += ` line-height:${lineHeight}px;`
         cssRegion += ' color:var(--text-color);'
@@ -369,7 +369,8 @@ var WebVTT2DocumentFragment = function () {
         cueText.appendChild(cueTextContent)
 
         // set the CSS for the child
-        cssCueText += `font-size:${fontSize}px;`
+        cssCueText += ` font-size:${fontSize}px;`
+        cssCueText += ` font-weight:${fontWeight};`
         cssCueText += ' font-family:Manrope,Arial,Helvetica,sans-serif;'
         cssCueText += ` line-height:${lineHeight}px;`
         cssCueText += ' color:var(--text-color);'

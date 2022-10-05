@@ -182,8 +182,8 @@ const CastTooltip = playfulVideoPlayer.querySelector('.gcast-tooltip')
 
 let orientationInfluence, videoPercent
 
-const title = document.querySelector('meta[property=\"og:title\"]') ? document.querySelector('meta[property="og:title"]').getAttribute('content') : null
-const author = document.querySelector('meta[property=\"og:author\"]') ? document.querySelector('meta[property="og:author"]').getAttribute('content') : null
+const title = document.querySelector('meta[property="og:title"]').getAttribute('content') || undefined
+const author = document.querySelector('meta[property="og:author"]').getAttribute('content') || undefined
 const description = document
     .querySelector('meta[property=\"og:description\"]')
     .getAttribute('content')

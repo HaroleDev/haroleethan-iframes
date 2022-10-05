@@ -950,8 +950,8 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
     <script type="module" src="index.js" defer></script>
     <script type="text/javascript" defer>
-        var title = document.querySelector('meta[property="og:title"]') ? document.querySelector('meta[property="og:title"]').getAttribute('content') : null
-        var author = document.querySelector('meta[property="og:author"]') ? document.querySelector('meta[property="og:author"]').getAttribute('content') : null
+        var title = document.querySelector('meta[property="og:title"]').getAttribute('content') || undefined
+        var author = document.querySelector('meta[property="og:author"]').getAttribute('content') || undefined
         var description = document.head.querySelector("meta[property=\"og:description\"]").getAttribute("content");
 
         document.querySelector(".video-name h1").innerText = title;

@@ -64,7 +64,7 @@ var WebVTT2DocumentFragment = function () {
 
     function isNumber(n) { return !isNaN(parseFloat(n)) && isFinite(n) }
 
-    /* convert cue settings to CSS for cue div */
+    /* convert cue settings to CSS for cue span */
     /* TODO: vertical settings; rtl text */
     function renderNormalCue(cue, videoWidth, videoHeight, parent) {
         var maxsize = 0,
@@ -86,11 +86,11 @@ var WebVTT2DocumentFragment = function () {
             step = 0,
             linePosition = 0,
             position = 0,
-            divHeight = 0,
+            spanHeight = 0,
             cssCue = ''
 
         // 1. create nodes
-        var domFragment = document.createElement('div')
+        var domFragment = document.createElement('span')
         if (cue.id)
             domFragment.setAttribute('id', cue.id)
 
@@ -102,13 +102,14 @@ var WebVTT2DocumentFragment = function () {
         cssCue += ' display:inline;'
         cssCue += ' unicode-bidi:-webkit-plaintext; unicode-bidi:-moz-plaintext; unicode-bidi:plaintext;'
         cssCue += ' background:rgba(0,0,0,0.7);'
+        cssCue += ' backdrop-filter:blur(0.2em);'
         cssCue += ' word-wrap:break-word; overflow-wrap:break-word;'
         cssCue += ` font-size:${fontSize}px;`
         cssCue += ` font-weight:${fontWeight};`
         cssCue += ' font-family:Manrope,Arial,Helvetica,sans-serif;'
         cssCue += ` line-height:${lineHeight}px;`
         cssCue += ' color:var(--text-color);'
-        cssCue += ' border-radius:0.2em;'
+        cssCue += ' border-radius:0.3em;'
 
         // 3. determine direction (FIXME: rtl support)
         cssCue += ' direction:ltr;'
@@ -201,8 +202,8 @@ var WebVTT2DocumentFragment = function () {
         height = 'auto'
         cssCue += ' height:auto;'
 
-        xpadding = videoWidth / 500 * 5 / 2
-        ypadding = videoWidth / 1000 * 5 / 2
+        xpadding = videoWidth / 500 * 5
+        ypadding = videoWidth / 1000 * 5
         cssCue += ` padding:${ypadding}px ${xpadding}px;`
 
         // 11. set left and top
@@ -213,7 +214,7 @@ var WebVTT2DocumentFragment = function () {
 
         // attach the innerHTML so we can measure the height for adjustments.
         domFragment.innerHTML = tree2HTML(cue.tree.children)
-        divHeight = getTextHeight(domFragment, parent, cssCue)
+        spanHeight = getTextHeight(domFragment, parent, cssCue)
 
         // 14. adjust positions of boxes
         if (cue.snapToLines === true) {
@@ -231,10 +232,10 @@ var WebVTT2DocumentFragment = function () {
 
             // FIXME: adjustment not according to spec
             // calculate how much of the cue is outside the video viewport
-            var score = maxdimension - top - divHeight;
+            var score = maxdimension - top - spanHeight;
             while (top > 0 && score < 0 && top < maxdimension) {
                 top += step
-                score = maxdimension - top - divHeight
+                score = maxdimension - top - spanHeight
             }
 
         } else {
@@ -244,7 +245,7 @@ var WebVTT2DocumentFragment = function () {
             var boxPositionX = x * width / 100
             left = left - boxPositionX
             var y = linePosition
-            var boxPositionY = y * divHeight / 100
+            var boxPositionY = y * spanHeight / 100
             top = top - boxPositionY
         }
 
@@ -260,7 +261,7 @@ var WebVTT2DocumentFragment = function () {
     }
 
     function setupRegion(regionAttributes, videoWidth, videoHeight) {
-        var domFragment = document.createElement('div')
+        var domFragment = document.createElement('span')
         var lineHeight = 0,
             fontSize = 0,
             cssRegion = ''
@@ -303,13 +304,13 @@ var WebVTT2DocumentFragment = function () {
         domFragment.setAttribute('style', cssRegion)
         domFragment.setAttribute('id', 'region_' + regionAttributes.id)
 
-        var domContainer = document.createElement('div')
+        var domContainer = document.createElement('span')
         domContainer.style.position = 'absolute'
         domContainer.style.height = 'auto'
         domContainer.style.bottom = 0
         domContainer.style.width = '100%'
         domContainer.style.backgroundColor = 'rgba(0,0,0,0.7)'
-        domContainer.style.borderRadius = '0.2em'
+        domContainer.style.borderRadius = '0.3em'
         domContainer.style.transition = '450ms'
         domFragment.appendChild(domContainer)
         return {
@@ -360,7 +361,7 @@ var WebVTT2DocumentFragment = function () {
         fontSize = lineHeight / 1.3
 
         // append a child to domFragment with adequate positioning, alignment and text
-        var cueText = document.createElement('div')
+        var cueText = document.createElement('span')
         if (cue.id) cueText.setAttribute('id', cue.id)
 
         var cueTextContent = document.createElement('span')

@@ -5,7 +5,7 @@
         <source media="(-ms-high-contrast: active), (forced-colors: active)" srcset="./media/Playful%20Video_HighContrast.svg">
         <img src="./media/Playful%20Video_Light.svg" alt="Playful Video Player" width="300">
     </picture>
-    <h1 align="center">Playful Video</h1>
+    <h1 align="center">Playful Video Player</h1>
     <p align="center">A HTML5-based video player created by myself with some features you wouldn't normally see online.</p>
 </p>
 

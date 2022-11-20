@@ -1,55 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta name="robots" content="noindex">
-    <meta name="viewport" content="width=device-width">
-    <title>Harole's iFrame Content</title>
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' 'unsafe-inline'; script-src 'unsafe-inline' 'unsafe-eval'; script-src-elem * 'unsafe-inline' 'unsafe-eval'; connect-src  * data:;">
+	<meta name="robots" content="noindex">
+	<meta name="viewport" content="width=device-width">
+	<title>Harole's iFrame Content</title>
+	<meta http-equiv="Content-Security-Policy"
+		content="default-src 'self' 'unsafe-inline'; script-src 'unsafe-inline' 'unsafe-eval'; script-src-elem * 'unsafe-inline' 'unsafe-eval'; connect-src  * data:;">
+	<script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas-single@1.0.84/rive.min.js"></script>
+	<style type="text/css">
+		html,
+		body,
+		div {
+			margin: 0;
+			overflow: hidden;
+		}
+
+		body {
+			min-height: 100vh;
+			background-color: transparent;
+		}
+
+		#container {
+			width: 100%;
+			height: 100vh;
+		}
+	</style>
 </head>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    html,
-    body {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    #canvas {
-        display: block;
-        outline: none;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-    }
-</style>
 
 <body>
-    <canvas id="canvas" width="2560" height="1148"></canvas>
-    <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas-single@1.0.84/rive.min.js"></script>
-    <script>
-        new rive.Rive({
-            src: "https://res.cloudinary.com/harole/raw/upload/v1665773706/Harole%27s%20Portfolio%20Site/Harole_Character_Illustration_gka1qq.riv",
-            canvas: document.getElementById("canvas"),
-            layout: new rive.Layout({
-                fit: "Contain",
-                alignment: "Center",
-            }),
-            stateMachines: 'Landing',
-            autoplay: true,
-        });
-    </script>
+	<div id="container">
+		<canvas id="canvas"></canvas>
+	</div>
+	<script>
+		const fileUrl = "https://res.cloudinary.com/harole/raw/upload/v1665773706/Harole%27s%20Portfolio%20Site/Harole_Character_Illustration_gka1qq.riv"
+		const artboard = decodeURIComponent("HaroleLandingIllustration")
+		const animation = decodeURIComponent("Landing")
+		const isStateMachine = true
+		const container = document.getElementById('container')
+		const canvas = document.getElementById('canvas')
+
+		const params = {
+			src: fileUrl,
+			canvas: canvas,
+			artboard: artboard,
+			autoplay: true,
+		}
+
+		isStateMachine ? params['stateMachines'] = animation : params['animations'] = animation
+
+		const riveAnimation = new rive.Rive(params)
+
+		class FakeResizeObserver {
+			observe() { }
+			unobserve() { }
+			disconnect() { }
+		}
+
+		function throttle(cb, delay = 1000) {
+			let timer = 0
+			return (...args) => {
+				clearTimeout(timer)
+				timer = setTimeout(() => cb.apply(this, args), delay)
+			}
+		}
+
+		const MyResizeObserver = ResizeObserver || FakeResizeObserver
+		const resizeObserver = new MyResizeObserver(throttle((entries) => {
+			const width = entries[entries.length - 1].contentRect.width
+			const height = entries[entries.length - 1].contentRect.height
+			const dpr = window.devicePixelRatio || 1
+
+			canvas.width = dpr * width
+			canvas.height = dpr * height
+			canvas.style.width = width + 'px'
+			canvas.style.height = height + 'px'
+
+			riveAnimation.startRendering()
+			riveAnimation.resizeToCanvas()
+		}, 16))
+
+		resizeObserver.observe(container)
+	</script>
 </body>
 
 </html>
